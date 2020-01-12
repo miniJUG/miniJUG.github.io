@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title>В Java появятся компактные тела методов</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+<h3>В Java появятся компактные тела методов</h3>
+<p class="text-secondary">21 сентября, 2018</p>
+<p>Недавно на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/8209434">новый черновик JEP</a>, в котором предлагается позволить в Java писать методы в более компактной форме. Сейчас в Java для объявления методов есть только одна форма, в которой даже для простейших методов приходится писать фигурные скобки и ключевое слово <code class="text-body text-nowrap">return</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) {
+    <span style="color: blue">return</span> s.length();
+}</pre>
+<p>Компактная форма будет существенно короче:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) -> s.length();</pre>
+<p>Кроме того, если методы являются просто обёртками над существующими методами, то предлагается также ещё форма через ссылку на метод:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) = String::length;</pre>
+<p>Таким образом, новые компактные тела методов будут полностью аналогичны лямбда выражениям в Java, у которых тоже есть две формы: через оператор <code class="text-body text-nowrap">-&gt;</code> и через ссылку на метод.</p>
+<p>Если этот JEP будет реализован, то это позволит в будущем писать более короткий и читаемый Java-код без лишнего шума, особенно в ситуациях, когда в проекте много классов с большим количеством геттеров и сеттеров.</p>
+<p>Компактные тела методов уже существуют во многих языках, например, <a href="https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members">C#</a>, <a href="https://kotlinlang.org/docs/reference/functions.html#single-expression-functions">Kotlin</a>, <a href="https://docs.scala-lang.org/style/declarations.html#methods">Scala</a>. Примечательно, что в C# с помощью краткой формы можно писать не только методы, но и конструкторы. Однако Java-proposal специфицирует, что данная форма будет доступна только для методов.</p>
+  <p class="pt-4 font-italic">РџРѕРґРїРёСЃС‹РІР°Р№С‚РµСЃСЊ РЅР° <a href="https://t.me/miniJUG">РєР°РЅР°Р» РІ Telegram</a>, С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРїСѓСЃРєР°С‚СЊ РЅРѕРІРѕСЃС‚Рё.</p>
+</div>
+<div class="pl-4 pt-5 col-lg-4">
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <ul class="collapse" id="year2019">
+<li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
+<li class="text-secondary"><a href="escape_sequences_for_line_continuation_and_whitespace.html" class="text-secondary">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</a></li>
+<li class="text-secondary"><a href="scala_2_13_is_out.html" class="text-secondary">Вышла Scala 2.13</a></li>
+<li class="text-secondary"><a href="yield_in_switch.html" class="text-secondary">В <code>switch</code>-выражениях <code>break</code> будет заменён на <code>yield</code></a></li>
+<li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
+<li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
+<li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
+<li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
+<li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="true" aria-controls="year2018">2018</a>
+  <ul class="collapse show" id="year2018">
+<li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
+<li>В Java появятся компактные тела методов</li>
+<li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
+<li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
+<li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
+<li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
+<li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
+<li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
+<li class="text-secondary"><a href="code_before_this_super.html" class="text-secondary">В конструкторах классов можно будет писать код перед <code>this()</code> и <code>super()</code></a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
+<li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
+<li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
+<li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
+<li class="text-secondary"><a href="remove_java_ee_and_corba_modules.html" class="text-secondary">Модули Java EE и CORBA исчезнут из Java</a></li>
+<li class="text-secondary"><a href="kotlin_1_2_is_out.html" class="text-secondary">Вышел Kotlin 1.2</a></li>
+<li class="text-secondary"><a href="epsilon_gc.html" class="text-secondary">В Java появится сборщик мусора, который не будет собирать мусор</a></li>
+<li class="text-secondary"><a href="java_10_release_date.html" class="text-secondary">Стала известна дата выхода Java 10</a></li>
+<li class="text-secondary"><a href="pattern_matching.html" class="text-secondary">В Java появится паттерн-матчинг</a></li>
+<li class="text-secondary"><a href="yegor256_data_classes.html" class="text-secondary">Егор Бугаенко раскритиковал идею введения data-классов в Java</a></li>
+<li class="text-secondary"><a href="new_integer_is_deprecated.html" class="text-secondary">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</a></li>
+<li class="text-secondary"><a href="jdk_10_early_access.html" class="text-secondary">Ранние сборки JDK 10 уже доступны для скачивания</a></li>
+<li class="text-secondary"><a href="data_classes.html" class="text-secondary">В Java появятся data-классы</a></li>
+<li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
+<li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
+<li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
+<li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
+  </ul>
+</div>
+</div>
+      </div>
+    </div>
+    <div class="container d-md-flex flex-row">
+      <div class="p-lg-4 p-3 text-secondary">Р’СЃРµ РјР°С‚РµСЂРёР°Р»С‹ РЅР° СЌС‚РѕРј СЃР°Р№С‚Рµ РІС‹Р»РѕР¶РµРЅС‹ РїРѕРґ Р»РёС†РµРЅР·РёРµР№ <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/ZhekaKozlov">Р•РІРіРµРЅРёР№ РљРѕР·Р»РѕРІ</a>, 2017-2020</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

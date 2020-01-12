@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+    <title>В Java появятся записи и запечатанные типы</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+<h3>В Java появятся записи и запечатанные типы</h3>
+<p class="text-secondary">23 апреля, 2019</p>
+<p>В багтрекере OpenJDK появился <a href="https://bugs.openjdk.java.net/browse/JDK-8222777">новый черновик JEP</a>, в котором специфицируются новые языковые конструкции Java: записи и запечатанные типы. Идея их введения <a href="https://telegra.ph/Data-Classes-11-03">была предложена</a> полтора года назад и была описана в исследовательском документе. Наконец, после долгих дискуссий и экспериментов она достигла достаточного уровня зрелости для того, чтобы с большой уверенностью сказать, что она будет реализована в одной из будущих версий Java.</p>
+<p>Записи (records) позволят очень компактно объявлять классы, которые являются простыми носителями данных:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Range(<span style="color: blue">int</span> lo, <span style="color: blue">int</span> hi) {
+    <span style="color: blue">public</span> Range {
+        <span style="color: blue">if</span> (lo > hi) {
+            <span style="color: blue">throw new</span> IllegalArgumentException(
+                String.format(<span style="color: darkred">"(%d,%d)"</span>, lo, hi));
+        }
+    }
+}</pre>
+<p>Сейчас такой класс Range реализуется чрезвычайно многословно, поскольку автору кода необходимо самому написать конструктор, методы доступа к полям, <code class="text-body text-nowrap">equals()</code>, <code class="text-body text-nowrap">hashCode()</code> и <code class="text-body text-nowrap">toString()</code>. Это может раздражать и читателя, ведь эти члены не содержат в себе никакой особо полезной смысловой нагрузки. В записях же все эти члены генерируются компилятором автоматически и поэтому экономят время и строки кода.</p>
+<p>Записи имеют следующие особенности:</p>
+<ul>
+  <li>Они иммутабельны (все поля становятся <code class="text-body text-nowrap">final</code>).</li>
+  <li>От них нельзя отнаследоваться (они являются <code class="text-body text-nowrap">final</code>).</li>
+  <li>Они сами не могут отнаследоваться от классов.</li>
+  <li>Если записи являются вложенными, то они являются <code class="text-body text-nowrap">static</code>.</li>
+  <li>Они не могут содержать дополнительных полей.</li>
+  <li>Они могут содержать явный конструктор по умолчанию (в котором можно, например, сделать валидацию полей).</li>
+</ul>
+<p>В остальном записи ничем не отличаются от обычных классов: они могут наследоваться от интерфейсов, содержать методы, конструкторы, статические инициализаторы, вложенные типы, иметь аннотации и т.д.</p>
+<p class="pt-2">Вторая конструкция, тесно связанная с записями – это запечатанные типы (sealed types). Такие типы накладывают ограничение на типы, которые могут от них наследоваться. Делается это одним из двух способов. Первый способ – с помощью ключевого слова <code class="text-body text-nowrap">permits</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">sealed interface</span> Node <span style="color: blue">permits</span> A, B, C { ... }</pre>
+<p>В этом случае от интерфейса Node не могут быть отнаследованы никакие другие типы кроме A, B и C.</p>
+<p>Второй способ – без использования ключевого слова permits. Тогда список наследников будет ограничен только теми типами, которые находятся в той же единице компиляции.</p>
+<p>Запечатанные типы имеют следующие особенности: </p>
+<ul>
+  <li>От них не могут быть отнаследованы анонимые классы и лямбды.</li>
+  <li>Их абстрактные подтипы неявно являются запечатанными (но можно переопределить с помощью ключевого слова <code class="text-body text-nowrap">non-sealed</code>).</li>
+  <li>Их конкретные подтипы неявно являются <code class="text-body text-nowrap">final</code>.</li>
+</ul>
+<p>Записи и запечатанные типы вместе являются реализацией концепции <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%82%D0%B8%D0%BF_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85">алгебраических типов данных</a> в Java. Поскольку для комфортной работы с алгебраическими типами данных также нужен паттерн-матчинг, то в будущем записи предлагается снабдить деконструирующими паттернами, а для запечатанных типов разработать механизм проверки exhaustiveness в <code class="text-body text-nowrap">switch</code>-выражениях.</p>
+  <p class="pt-4 font-italic">РџРѕРґРїРёСЃС‹РІР°Р№С‚РµСЃСЊ РЅР° <a href="https://t.me/miniJUG">РєР°РЅР°Р» РІ Telegram</a>, С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРїСѓСЃРєР°С‚СЊ РЅРѕРІРѕСЃС‚Рё.</p>
+</div>
+<div class="pl-4 pt-5 col-lg-4">
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
+  <ul class="collapse show" id="year2019">
+<li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
+<li class="text-secondary"><a href="escape_sequences_for_line_continuation_and_whitespace.html" class="text-secondary">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</a></li>
+<li class="text-secondary"><a href="scala_2_13_is_out.html" class="text-secondary">Вышла Scala 2.13</a></li>
+<li class="text-secondary"><a href="yield_in_switch.html" class="text-secondary">В <code>switch</code>-выражениях <code>break</code> будет заменён на <code>yield</code></a></li>
+<li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
+<li>В Java появятся записи и запечатанные типы</li>
+<li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
+<li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
+<li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
+<li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
+<li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
+<li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
+<li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
+<li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
+<li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
+<li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
+<li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
+<li class="text-secondary"><a href="code_before_this_super.html" class="text-secondary">В конструкторах классов можно будет писать код перед <code>this()</code> и <code>super()</code></a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
+<li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
+<li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
+<li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
+<li class="text-secondary"><a href="remove_java_ee_and_corba_modules.html" class="text-secondary">Модули Java EE и CORBA исчезнут из Java</a></li>
+<li class="text-secondary"><a href="kotlin_1_2_is_out.html" class="text-secondary">Вышел Kotlin 1.2</a></li>
+<li class="text-secondary"><a href="epsilon_gc.html" class="text-secondary">В Java появится сборщик мусора, который не будет собирать мусор</a></li>
+<li class="text-secondary"><a href="java_10_release_date.html" class="text-secondary">Стала известна дата выхода Java 10</a></li>
+<li class="text-secondary"><a href="pattern_matching.html" class="text-secondary">В Java появится паттерн-матчинг</a></li>
+<li class="text-secondary"><a href="yegor256_data_classes.html" class="text-secondary">Егор Бугаенко раскритиковал идею введения data-классов в Java</a></li>
+<li class="text-secondary"><a href="new_integer_is_deprecated.html" class="text-secondary">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</a></li>
+<li class="text-secondary"><a href="jdk_10_early_access.html" class="text-secondary">Ранние сборки JDK 10 уже доступны для скачивания</a></li>
+<li class="text-secondary"><a href="data_classes.html" class="text-secondary">В Java появятся data-классы</a></li>
+<li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
+<li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
+<li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
+<li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
+  </ul>
+</div>
+</div>
+      </div>
+    </div>
+    <div class="container d-md-flex flex-row">
+      <div class="p-lg-4 p-3 text-secondary">Р’СЃРµ РјР°С‚РµСЂРёР°Р»С‹ РЅР° СЌС‚РѕРј СЃР°Р№С‚Рµ РІС‹Р»РѕР¶РµРЅС‹ РїРѕРґ Р»РёС†РµРЅР·РёРµР№ <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/ZhekaKozlov">Р•РІРіРµРЅРёР№ РљРѕР·Р»РѕРІ</a>, 2017-2020</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Вышла Java 13</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+<h3>Вышла Java 13</h3>
+<p class="text-secondary">18 сентября, 2019</p>
+<p>Прошли очередные 6 месяцев, и в строгом соответствии с <a href="https://telegra.ph/Java-183-11-01">расписанием</a> вышла новая, <a href="https://openjdk.java.net/projects/jdk/13/">13-я версия платформы Java</a>. Как обычно, доступны для скачивания сборки <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html">Oracle JDK</a> и <a href="http://jdk.java.net/13/">OpenJDK</a>.</p>
+<p>Исчерпывающий список изменений, который можно посмотреть на <a href="https://builds.shipilev.net/backports-monitor/release-notes-13.txt">сайте Алексея Шипилёва</a>, содержит более 2 тысяч закрытых задач. Так как перечислить все их здесь невозможно, рассмотрим только некоторые из них.</p>
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/355">Блоки текста (JEP-355)</a> – новая возможность в языке, доступная только в <a href="https://openjdk.java.net/jeps/12">preview-режиме</a>. Это многострочные литералы, которые заключаются в тройные кавычки и имеют предсказуемое форматирование. Про них мы <a href="https://telegra.ph/Text-Blocks-05-30">писали ранее</a>. В дополнение к блокам текста также появились три новых метода в классе <code class="text-body text-nowrap">java.lang.String</code>: <code class="text-body text-nowrap">formatted()</code>, <code class="text-body text-nowrap">stripIndent()</code> и <code class="text-body text-nowrap">translateEscapes()</code>.</li>
+  <li><a href="https://openjdk.java.net/jeps/354">Выражения switch (JEP-354)</a> – языковая возможность, которая <a href="https://openjdk.java.net/jeps/325">появилась в Java 12</a>, но немного изменённая: оператор <code class="text-body text-nowrap">break</code> <a href="https://telegra.ph/yield-in-switch-06-01">заменён на <code class="text-body text-nowrap">yield</code></a>. Новый <code class="text-body text-nowrap">switch</code> по-прежнему доступен только в preview-режиме.</li>
+  <li><a href="https://openjdk.java.net/jeps/350">Динамические CDS-архивы (JEP-350)</a> – очередное улучшение технологии Class Data Sharing. Впервые CDS появился в JDK 1.5 с большими ограничениями (только Client VM, Serial GC и системные классы). В JDK 9 добавилась поддержка Server VM, других сборщиков мусора и классов приложения (коммерческая возможность). В JDK 10 поддержка классов приложения <a href="https://openjdk.java.net/jeps/310">стала бесплатной</a>. В JDK 12 архивы с системными классами стали присутствовать по умолчанию в JDK на <a href="https://openjdk.java.net/jeps/341">всех платформах</a>. И, наконец, в JDK 13 упрощена процедура генерации CDS-архива: убрана необходимость в предварительной генерации списка классов и добавлена поддержка пользовательских загрузчиков классов. Теперь для работы с CDS достаточно только одной опции и одного запуска приложения: <code class="text-body text-nowrap">-XX:ArchiveClassesAtExit</code>.</li>
+  <li><a href="https://openjdk.java.net/jeps/351">Выгрузка неиспользуемой памяти в ZGC (JEP-351)</a> – теперь ZGC умеет отдавать неиспользуемую память обратно системе, как это уже умеют делать <a href="https://openjdk.java.net/jeps/346">G1</a> и Shenandoah.</li>
+  <li><a href="https://openjdk.java.net/jeps/353">Реимплементация старого Socket API (JEP-353)</a> – сокеты из JDK 1.0 были переписаны, чтобы в будущем быть совместимыми с волокнами, которые появятся в рамках <a href="https://telegra.ph/Loom-10-28">проекта Loom</a>.</li>
+</ul>
+<p class="pt-2">Как и <a href="java_12_is_out.html">Java 12</a>, Java 13 не будет LTS-релизом, то есть у него выйдет только два обновления.</p>
+  <p class="pt-4 font-italic">РџРѕРґРїРёСЃС‹РІР°Р№С‚РµСЃСЊ РЅР° <a href="https://t.me/miniJUG">РєР°РЅР°Р» РІ Telegram</a>, С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРїСѓСЃРєР°С‚СЊ РЅРѕРІРѕСЃС‚Рё.</p>
+</div>
+<div class="pl-4 pt-5 col-lg-4">
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
+  <ul class="collapse show" id="year2019">
+<li>Вышла Java 13</li>
+<li class="text-secondary"><a href="escape_sequences_for_line_continuation_and_whitespace.html" class="text-secondary">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</a></li>
+<li class="text-secondary"><a href="scala_2_13_is_out.html" class="text-secondary">Вышла Scala 2.13</a></li>
+<li class="text-secondary"><a href="yield_in_switch.html" class="text-secondary">В <code>switch</code>-выражениях <code>break</code> будет заменён на <code>yield</code></a></li>
+<li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
+<li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
+<li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
+<li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
+<li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
+<li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
+<li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
+<li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
+<li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
+<li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
+<li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
+<li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
+<li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
+<li class="text-secondary"><a href="code_before_this_super.html" class="text-secondary">В конструкторах классов можно будет писать код перед <code>this()</code> и <code>super()</code></a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
+<li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
+<li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
+<li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
+<li class="text-secondary"><a href="remove_java_ee_and_corba_modules.html" class="text-secondary">Модули Java EE и CORBA исчезнут из Java</a></li>
+<li class="text-secondary"><a href="kotlin_1_2_is_out.html" class="text-secondary">Вышел Kotlin 1.2</a></li>
+<li class="text-secondary"><a href="epsilon_gc.html" class="text-secondary">В Java появится сборщик мусора, который не будет собирать мусор</a></li>
+<li class="text-secondary"><a href="java_10_release_date.html" class="text-secondary">Стала известна дата выхода Java 10</a></li>
+<li class="text-secondary"><a href="pattern_matching.html" class="text-secondary">В Java появится паттерн-матчинг</a></li>
+<li class="text-secondary"><a href="yegor256_data_classes.html" class="text-secondary">Егор Бугаенко раскритиковал идею введения data-классов в Java</a></li>
+<li class="text-secondary"><a href="new_integer_is_deprecated.html" class="text-secondary">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</a></li>
+<li class="text-secondary"><a href="jdk_10_early_access.html" class="text-secondary">Ранние сборки JDK 10 уже доступны для скачивания</a></li>
+<li class="text-secondary"><a href="data_classes.html" class="text-secondary">В Java появятся data-классы</a></li>
+<li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
+<li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
+<li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
+<li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
+  </ul>
+</div>
+</div>
+      </div>
+    </div>
+    <div class="container d-md-flex flex-row">
+      <div class="p-lg-4 p-3 text-secondary">Р’СЃРµ РјР°С‚РµСЂРёР°Р»С‹ РЅР° СЌС‚РѕРј СЃР°Р№С‚Рµ РІС‹Р»РѕР¶РµРЅС‹ РїРѕРґ Р»РёС†РµРЅР·РёРµР№ <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/ZhekaKozlov">Р•РІРіРµРЅРёР№ РљРѕР·Р»РѕРІ</a>, 2017-2020</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
