@@ -9,9 +9,10 @@
   <body class="bg-light">
     <div class="container">
       <div class="row">
-        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</h3>
 <p id="subtitle" class="text-secondary">7 ноября, 2017</p>
+<div id="body">
 <p>Пожалуй, большинство людей хотя бы раз в жизни использовало конструктор <code class="text-body text-nowrap">new Integer(int)</code>. Это могло случиться либо по незнанию, либо по той причине, что до Java 1.5 это было единственным способом оборачивания <code class="text-body text-nowrap">int</code> в <code class="text-body text-nowrap">Integer</code>. Однако, начиная с Java 1.5, этот вызов стал в большинстве случаев необязательным, и вместо него рекомендованным и более эффективным способом обёртки стали метод <code class="text-body text-nowrap">Integer.valueOf()</code> и автобоксинг:</p>
 <pre class="border p-lg-2 p-1">intList.add(<span style="color: blue">new</span> Integer(5)); <span style="color: darkorange">// Bad</span>
 intList.remove(<span style="color: blue">new</span> Integer(6)); <span style="color: darkorange">// Bad</span>
@@ -19,6 +20,7 @@ intList.remove(<span style="color: blue">new</span> Integer(6)); <span style="co
 intList.add(5); <span style="color: darkorange">// Good</span>
 intList.remove(Integer.valueOf(6)); <span style="color: darkorange">// Good</span></pre>
 <p>Однако до недавнего времени такая рекомендация никак не подкреплялась компилятором. И, наконец, в Java 9 конструкторы <code class="text-body text-nowrap">Integer</code> пометили аннотацией <code class="text-body text-nowrap">@Deprecated</code>, а также конструкторы всех остальных обёрнутых примитивных типов: <code class="text-body text-nowrap">Long</code>, <code class="text-body text-nowrap">Float</code>, <code class="text-body text-nowrap">Double</code>, <code class="text-body text-nowrap">Boolean</code>, <code class="text-body text-nowrap">Byte</code>, <code class="text-body text-nowrap">Short</code>, <code class="text-body text-nowrap">Character</code>. В список deprecated конструкторов также вошли конструкторы, принимающие <code class="text-body text-nowrap">String</code>: вместо них рекомендуется использовать методы <code class="text-body text-nowrap">valueOf(String)</code> или <code class="text-body text-nowrap">parseInt()</code> / <code class="text-body text-nowrap">parseLong()</code> и т.д.</p>
+</div>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

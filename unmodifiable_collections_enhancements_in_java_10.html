@@ -9,9 +9,10 @@
   <body class="bg-light">
     <div class="container">
       <div class="row">
-        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">В Java 10 будет улучшена поддержка неизменяемых коллекций</h3>
 <p id="subtitle" class="text-secondary">25 января, 2018</p>
+<div id="body">
 <p>В Java 10, которая выйдет уже в <a href="https://telegra.ph/Java-10-Release-Date-11-12">марте этого года</a>, появятся несколько новых методов, благодаря которым будет легче работать с неизменяемыми коллекциями.</p>
 <p><a href="https://bugs.openjdk.java.net/browse/JDK-8177290">Во-первых</a>, это методы, создающие неизменяемую копию другой коллекции: <code class="text-body text-nowrap">List.copyOf()</code>, <code class="text-body text-nowrap">Set.copyOf()</code> и <code class="text-body text-nowrap">Map.copyOf()</code>. Это является полезным дополнением, потому что в Java 9, чтобы создать, например, неизменяемую копию списка, нужно вызвать <code class="text-body text-nowrap">List.of(list.toArray())</code>, что выглядит довольно неуклюже.</p>
 <p><a href="https://bugs.openjdk.java.net/browse/JDK-8184690">Во-вторых</a>, это методы <code class="text-body text-nowrap">Collectors.toUnmodifiableList()</code>, <code class="text-body text-nowrap">Collectors.toUnmodifiableSet()</code> и <code class="text-body text-nowrap">Collectors.toUnmodifiableMap()</code>. Они позволяют свернуть <code class="text-body text-nowrap">Stream</code> и вернуть соответствующую неизменяемую коллекцию:</p>
@@ -22,6 +23,7 @@ Stream
     .collect(toUnmodifiableList());
 <span style="color: darkorange">// [1, 2, 4, 8, 16, 32, 64]</span></pre>
 <p>Напомним, что неизменяемые коллекции впервые появились в Java 9 с введением методов-фабрик: <code class="text-body text-nowrap">List.of()</code>, <code class="text-body text-nowrap">Set.of()</code>, <code class="text-body text-nowrap">Map.of()</code> и <code class="text-body text-nowrap">Map.ofEntries()</code>. До Java 9 поддержки неизменяемых коллекций не было, а были только неизменяемые view коллекций: <code class="text-body text-nowrap">Collections.unmodifiableCollection()</code>, <code class="text-body text-nowrap">Collections.unmodifiableList()</code> и т.д.</p>
+</div>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

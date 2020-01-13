@@ -9,9 +9,10 @@
   <body class="bg-light">
     <div class="container">
       <div class="row">
-        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</h3>
 <p id="subtitle" class="text-secondary">3 ноября, 2017</p>
+<div id="body">
 <p>Только что Mark Reinhold отправил <a href="http://mail.openjdk.java.net/pipermail/jdk-dev/2017-November/000089.html">письмо с новым предложением</a> относительно схемы версионирования Java. Части версий будут внешне похожи на то, что мы имеем сейчас в Java 9, но будут иметь несколько другой смысл. Версии будут иметь формат <code class="text-body text-nowrap">$FEATURE.$INTERIM.$UPDATE(.$EMERG)</code>, где:</p>
 <p>$FEATURE – старшая часть версии, которая будет увеличиваться на единицу каждые 6 месяцев (10 – март 2018, 11 – сентябрь 2018 и т.д.)</p>
 <p>$INTERIM – всегда равна 0 (зарезервирована на будущее).</p>
@@ -24,6 +25,7 @@
 </ul>
 <p>(Java 11 будет LTS-релизом)</p>
 <p>Таким образом, новая схема выглядит более привычной для пользователей, но при этом привязывается к рамкам времени, как и <a href="http://mail.openjdk.java.net/pipermail/jdk-dev/2017-October/000007.html">предложенная ранее</a> схема <code class="text-body text-nowrap">$YY.$MM</code>.</p>
+</div>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

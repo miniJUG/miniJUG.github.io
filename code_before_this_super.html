@@ -9,9 +9,10 @@
   <body class="bg-light">
     <div class="container">
       <div class="row">
-        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">В конструкторах классов можно будет писать код перед <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code></h3>
 <p id="subtitle" class="text-secondary">8 января, 2018</p>
+<div id="body">
 <p>Недавно в репозитории проекта Amber появился <a href="http://mail.openjdk.java.net/pipermail/amber-dev/2018-January/002482.html">коммит</a>, который позволит писать инструкции кода выше вызовов <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code> в конструкторах. Сейчас <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code> обязательно должны быть первыми вызовами в конструкторах, что часто создаёт неудобства при написании кода, например, если необходимо сделать какую-то нетривиальную валидацию входных аргументов или просто вынести в переменные слишком длинные выражения:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> TxtFile <span style="color: blue">extends</span> File {
     <span style="color: blue">public</span> TxtFile(String path) {
@@ -23,6 +24,7 @@
 }</pre>
 <p>Кроме того, возможность писать код перед вызовом конструктора также сильно поможет при написании <a href="https://telegra.ph/Data-Classes-11-03">data-классов</a>. При компиляции data-класса компилятор будет создавать конструктор по умолчанию, который не будет делать никакой другой работы кроме инициализации полей. Чтобы добавить в инициализацию класса какую-то более сложную логику, нужно будет объявить свой конструктор, в котором необходимо вызвать конструктор по умолчанию посредством ключевого слова <code class="text-body text-nowrap">default()</code> (аналогично <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code>).</p>
 <p>Так как объект до вызова <code class="text-body text-nowrap">this()</code> / <code class="text-body text-nowrap">super()</code> / <code class="text-body text-nowrap">default()</code> ещё неявляется проинициализированным, на код будут накладываться некоторые ограничения. Например, этот код не сможет использовать поля класса и нестатические методы.</p>
+</div>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

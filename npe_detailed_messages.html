@@ -9,9 +9,10 @@
   <body class="bg-light">
     <div class="container">
       <div class="row">
-        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">В Java у <code class="text-body text-nowrap">NullPointerException</code> могут появиться детальные сообщения</h3>
 <p id="subtitle" class="text-secondary">26 марта, 2019</p>
+<div id="body">
 <p>Вышел <a href="https://openjdk.java.net/jeps/358">новый черновик JEP</a>, в котором предлагается улучшить <code class="text-body text-nowrap">java.lang.NullPointerException</code>, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация о том, что именно было <code class="text-body text-nowrap">null</code> и какое действие вызвало ошибку.</p>
 <p>Например, если в выражении <code class="text-body text-nowrap">a.b.c.d</code> поле <code class="text-body text-nowrap">b</code> было <code class="text-body text-nowrap">null</code>, то сообщение будет примерно следующим:</p>
 <pre class="border p-lg-2 p-1">'a.b' is null. Can not read field 'c'.</pre>
@@ -20,6 +21,7 @@
 <p>Генерацию сообщения предлагается сделать с помощью поля <code class="text-body text-nowrap">backtrace</code> в объекте исключения, которое является приватным для JVM. Также необходим анализ потока байткода, чтобы восстановить цепочку вызовов, приведших к нулевому объекту. Так как генерация сообщения является недешёвой операцией, то предлагается сделать её ленивой, иначе при каждом выбрасывании <code class="text-body text-nowrap">NullPointerException</code> будет выполняться лишняя работа.</p>
 <p>Детальные сообщения в <code class="text-body text-nowrap">NullPointerException</code> будут чрезвычайно полезными и могут значительно упростить диагностику, особенно в тех случаях, когда цепочки вызовов методов длинные и непонятно, какой именно объект был <code class="text-body text-nowrap">null</code>.</p>
 <p>Интересно, что такие сообщения могут быть реализованы и без изменений исходного кода JDK. Андрей Паньгин <a href="https://twitter.com/AndreiPangin/status/1110282466668003335">утверждает</a>, что детальные сообщения NPE у них уже есть и они делают это всего лишь в ~100 строк кода.</p>
+</div>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

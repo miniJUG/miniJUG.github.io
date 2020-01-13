@@ -9,9 +9,10 @@
   <body class="bg-light">
     <div class="container">
       <div class="row">
-        <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
+        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</h3>
 <p id="subtitle" class="text-secondary">15 августа, 2019</p>
+<div id="body">
 <p>Вышел <a href="https://openjdk.java.net/jeps/8227870">новый черновик</a> JEP, в котором предлагается ввести в язык Java две новые экранирующие последовательности: <code class="text-body text-nowrap">\&lt;line-terminator&gt;</code> и <code class="text-body text-nowrap">\s</code>.</p>
 <p class="pt-2">Первая последовательность позволит писать длинные однострочные литералы без использования конкатенации. Например, вместо</p>
 <pre class="border p-lg-2 p-1">String str = <span style="color: darkred">"A line that may need to "</span> +
@@ -35,6 +36,7 @@
         """</span>;</pre>
 <p>В данном случае <code class="text-body text-nowrap">\s</code> является барьером, сигнализирующим компилятору, что пробелы после <code class="text-body text-nowrap">red</code>, <code class="text-body text-nowrap">green</code> и <code class="text-body text-nowrap">blue</code> &laquo;съедать&raquo; не надо. В противном случае получилась бы строка <code class="text-body text-nowrap">"red\ngreen\nblue\n"</code>.</p>
 <p>Новые последовательности предполагается реализовать в статусе Preview.</p>
+</div>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
