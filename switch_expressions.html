@@ -12,7 +12,7 @@
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title"><code class="text-body text-nowrap">switch</code> в Java сможет возвращать значения</h3>
 <p id="subtitle" class="text-secondary">20 января, 2018</p>
-<div id="body">
+<article>
 <p>Вчера на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/325">новый JEP 325</a>, в котором предлагается ввести в язык улучшенный оператор <code class="text-body text-nowrap">switch</code>. Мотивацией для введения является то, что старый <code class="text-body text-nowrap">switch</code> имеет несколько фундаментальных изъянов, которые нельзя исправить, не нарушив обратную совместимость. Во-первых, старый <code class="text-body text-nowrap">switch</code> является императивной конструкцией, которая не может возвращать выражения и заставляет писать большое количество повторяющегося кода. Во-вторых, старый <code class="text-body text-nowrap">switch</code> всегда являлся большим источником ошибок из-за своей необходимости явно завершать ветви оператором <code class="text-body text-nowrap">break</code>, отсутствие которого приводит к &laquo;проваливанию&raquo; (fall-through). Кроме того, старый <code class="text-body text-nowrap">switch</code> не имеет возможности обработать случай, когда аргумент является <code class="text-body text-nowrap">null</code>.</p>
 <p>Новый <code class="text-body text-nowrap">switch</code> решает все вышеописанные проблемы: он может возвращать значения, сокращает объём необходимого кода, меньше провоцирует на ошибки и позволяет обрабатывать <code class="text-body text-nowrap">null</code>.</p>
 <p>В новом <code class="text-body text-nowrap">switch</code> оператор <code class="text-body text-nowrap">break</code> сможет возвращать значения:</p>
@@ -31,7 +31,7 @@
     <span style="color: blue">case</span> WEDNESDAY -> 9;
 }</pre>
 <p>JEP 325 является только началом, и в дальнейшем планируется добавить в <code class="text-body text-nowrap">switch</code> поддержку полноценного <a href="https://telegra.ph/Java-Pattern-Matching-11-10">паттерн-матчинга</a>.</p>
-</div>
+</article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

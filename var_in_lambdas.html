@@ -12,7 +12,7 @@
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">В лямбдах можно будет использовать <code class="text-body text-nowrap">var</code></h3>
 <p id="subtitle" class="text-secondary">23 декабря, 2017</p>
-<div id="body">
+<article>
 <p>В Java 10 появится <a href="http://openjdk.java.net/jeps/286">локальный вывод типов</a>, который позволит не указывать типы локальных переменных, разрешив заменить их ключевым словом <code class="text-body text-nowrap">var</code>. Недавно вышел новый <a href="http://openjdk.java.net/jeps/323">JEP 323</a>, который предлагает распространить область применения <code class="text-body text-nowrap">var</code> также на параметры лямбда-выражений. Если раньше можно было писать <code class="text-body text-nowrap">(x, y) -> x + y</code> или <code class="text-body text-nowrap">(int x, int y) -> x + y</code>, то сейчас будет доступна третья форма <code class="text-body text-nowrap">(var x, var y) -> x + y</code>. То есть неявно типизированную лямбду можно будет писать двумя способами: с <code class="text-body text-nowrap">var</code> и без <code class="text-body text-nowrap">var</code>. Обе они будут логически эквивалентными.</p>
 <p>На новую форму будет наложены следующие ограничения:</p>
 <ul>
@@ -24,7 +24,7 @@
 <pre class="border p-lg-2 p-1">(<span style="color: blue">final var</span> x) -> x + 1;</pre>
 <pre class="border p-lg-2 p-1">(@Nonnull <span style="color: blue">var</span> x) -> x + 1;</pre>
 <p>На текущий момент неизвестно, попадёт ли JEP-323 в Java 10.</p>
-</div>
+</article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">

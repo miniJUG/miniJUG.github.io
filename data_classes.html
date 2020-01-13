@@ -12,7 +12,7 @@
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
 <h3 id="title">В Java появятся data-классы</h3>
 <p id="subtitle" class="text-secondary">3 ноября, 2017</p>
-<div id="body">
+<article>
 <p>Вчера Brian Goetz из Oracle написал <a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000099.html">письмо</a> со ссылкой на <a href="http://cr.openjdk.java.net/~briangoetz/amber/datum.html">документ</a>, в котором описывается идея введения в Java классов-данных (data-классов). Data-класс – это класс, единственной целью которого является держание некоторого набора данных.</p>
 <p>Канонический пример такого прозрачного носителя данных – это класс <code class="text-body text-nowrap">Point</code>, содержащего в себе два поля <code class="text-body text-nowrap">int x</code> и <code class="text-body text-nowrap">int y</code>. Сейчас корректная реализация <code class="text-body text-nowrap">Point</code> занимает несколько десятков строк кода. Она включает в себя объявление полей, конструктора, методов <code class="text-body text-nowrap">hashCode()</code>, <code class="text-body text-nowrap">equals()</code>, <code class="text-body text-nowrap">toString()</code> и методов доступа к полям. В типичном приложении таких классов может быть большое количество, а значит, программистам приходится вновь и вновь писать однотипные фрагменты кода, что отнимает время, порождает ошибки, ну и просто захламляет проект конструкциями, не имеющими большой смысловой нагрузки. В предложенном в документе варианте такой класс пишется в одну строчку:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">__data class</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) { }</pre>
@@ -26,7 +26,7 @@
   <li>Как data-классы будут сочетаться с value-типами из <a href="http://openjdk.java.net/projects/valhalla/">проекта Valhalla</a>?</li>
 </ol>
 <p>Над всеми этими непростыми вопросами архитекторам языка предстоит хорошо поработать и, в конце концов, дать на них точный ответ, однако уже скоро Brian Goetz обещает выложить рабочий прототип.</p>
-</div>
+</article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
