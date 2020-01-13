@@ -10,8 +10,8 @@
     <div class="container">
       <div class="row">
         <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
-<h3>В <code class="text-body text-nowrap">switch</code>-выражениях <code class="text-body text-nowrap">break</code> будет заменён на <code class="text-body text-nowrap">yield</code></h3>
-<p class="text-secondary">1 июня, 2019</p>
+<h3 id="title">В <code class="text-body text-nowrap">switch</code>-выражениях <code class="text-body text-nowrap">break</code> будет заменён на <code class="text-body text-nowrap">yield</code></h3>
+<p id="subtitle" class="text-secondary">1 июня, 2019</p>
 <p>Улучшенный оператор <code class="text-body text-nowrap">switch</code>, который <a href="https://telegra.ph/Switch-Expressions-01-20">появился в Java 12</a> в статусе Preview, будет слегка <a href="https://openjdk.java.net/jeps/354">изменён в Java 13</a> и будет продолжать оставаться в статусе Preview. Единственным изменением будет замена оператора <code class="text-body text-nowrap">break</code>, служащего для возврата значения из блока, на <code class="text-body text-nowrap">yield</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">int</span> j = <span style="color: blue">switch</span> (day) {
     <span style="color: blue">case</span> MONDAY -&gt; 0;

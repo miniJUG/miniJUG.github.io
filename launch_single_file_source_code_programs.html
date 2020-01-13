@@ -10,8 +10,8 @@
     <div class="container">
       <div class="row">
         <div id="main" class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
-<h3>В Java можно будет исполнять исходные файлы напрямую</h3>
-<p class="text-secondary">11 февраля, 2018</p>
+<h3 id="title">В Java можно будет исполнять исходные файлы напрямую</h3>
+<p id="subtitle" class="text-secondary">11 февраля, 2018</p>
 <p>Позавчера на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/8192920">новый черновик JEP</a>, в котором предлагается наделить лаунчер java способностью запускать исходные файлы Java напрямую без необходимости предварительной компиляции. Например, программу <code class="text-body text-nowrap">HelloWorld.java</code> можно будет запустить, просто исполнив команду <code class="text-body text-nowrap">java HelloWorld.java</code>. Это будет эквивалентом к компиляции <code class="text-body text-nowrap">HelloWorld.java</code> через <code class="text-body text-nowrap">javac</code> и последующим запуском Main-класса через java-лаунчер. Таким образом, запуск исходных файлов будет четвёртым способом запуска Java-программ. Первые три – это запуск class-файлов, JAR-файлов и модулей (<code class="text-body text-nowrap">java --module &lt;module&gt;[/mainclass]</code>).</p>
 <p>Исполнение java-файлов напрямую будет весьма полезной возможностью, которая может пригодиться, например, при обучении программированию на Java, для запуска скриптов, тестирования и т.д.</p>
 <p>Перечислим основные пункты JEP:</p>
