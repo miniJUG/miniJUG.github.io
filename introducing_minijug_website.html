@@ -1,20 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java у NullPointerException могут появиться детальные сообщения</title>
+    <title>У miniJUG появился сайт</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java у NullPointerException могут появиться детальные сообщения">
-    <meta property="og:description" content="Вышел новый черновик JEP, в котором предлагается улучшить java.lang.NullPointerException, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация&hellip;">
+    <meta property="og:title" content="У miniJUG появился сайт">
+    <meta property="og:description" content="Друзья, хорошие новости! Теперь у miniJUG появился свой веб-сайт minijug.ru, куда были старательно перенесены все публикации с telegra.ph и Хабра с момента создания нашего Телеграм-канала. Таким&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2019-03-26">
+    <meta property="article:published_time" content="2020-01-19">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="В Java у NullPointerException могут появиться детальные сообщения">
-    <meta name="twitter:description" content="Вышел новый черновик JEP, в котором предлагается улучшить java.lang.NullPointerException, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация&hellip;">
+    <meta name="twitter:title" content="У miniJUG появился сайт">
+    <meta name="twitter:description" content="Друзья, хорошие новости! Теперь у miniJUG появился свой веб-сайт minijug.ru, куда были старательно перенесены все публикации с telegra.ph и Хабра с момента создания нашего Телеграм-канала. Таким&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -27,30 +27,32 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
-<h3 id="title">В Java у <code class="text-body text-nowrap">NullPointerException</code> могут появиться детальные сообщения</h3>
-<p class="text-secondary"><time datetime="2019-03-26">26 марта, 2019</time></p>
+<h3 id="title">У miniJUG появился сайт</h3>
+<p class="text-secondary"><time datetime="2020-01-19">19 января, 2020</time></p>
 <article>
-<p>Вышел <a href="https://openjdk.java.net/jeps/358">новый черновик JEP</a>, в котором предлагается улучшить <code class="text-body text-nowrap">java.lang.NullPointerException</code>, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация о том, что именно было <code class="text-body text-nowrap">null</code> и какое действие вызвало ошибку.</p>
-<p>Например, если в выражении <code class="text-body text-nowrap">a.b.c.d</code> поле <code class="text-body text-nowrap">b</code> было <code class="text-body text-nowrap">null</code>, то сообщение будет примерно следующим:</p>
-<pre class="border p-lg-2 p-1">'a.b' is null. Can not read field 'c'.</pre>
-<p>Другой пример: выражение – <code class="text-body text-nowrap">obj.hashCode()</code>, сообщение:</p>
-<pre class="border p-lg-2 p-1">'obj' is null. Can not invoke method 'java.lang.Object.hashCode()I'.</pre>
-<p>Генерацию сообщения предлагается сделать с помощью поля <code class="text-body text-nowrap">backtrace</code> в объекте исключения, которое является приватным для JVM. Также необходим анализ потока байткода, чтобы восстановить цепочку вызовов, приведших к нулевому объекту. Так как генерация сообщения является недешёвой операцией, то предлагается сделать её ленивой, иначе при каждом выбрасывании <code class="text-body text-nowrap">NullPointerException</code> будет выполняться лишняя работа.</p>
-<p>Детальные сообщения в <code class="text-body text-nowrap">NullPointerException</code> будут чрезвычайно полезными и могут значительно упростить диагностику, особенно в тех случаях, когда цепочки вызовов методов длинные и непонятно, какой именно объект был <code class="text-body text-nowrap">null</code>.</p>
-<p>Интересно, что такие сообщения могут быть реализованы и без изменений исходного кода JDK. Андрей Паньгин <a href="https://twitter.com/AndreiPangin/status/1110282466668003335">утверждает</a>, что детальные сообщения NPE у них уже есть и они делают это всего лишь в ~100 строк кода.</p>
+<p>Друзья, хорошие новости! Теперь у miniJUG появился свой веб-сайт <a href="https://minijug.ru">minijug.ru</a>, куда были старательно перенесены все публикации с telegra.ph и Хабра с момента создания <a href="https://t.me/miniJUG">нашего Телеграм-канала</a>. Таким образом, весь контент за два с лишним года года теперь присутствует здесь для вашего удобства. Если вдруг вы хотите перечитать какую-то статью или новость, то можете легко её найти с помощью карты сайта.</p>
+<p>Почему было решено создать сайт? У этого есть несколько причин:</p>
+<ul>
+  <li>Во-первых, это <del>красиво</del> интересно. Когда создаёшь сайт, то узнаёшь много полезного. Например, я раньше никогда не имел дела с GitHub Pages, которые используются в качестве бесплатного хостинга <a href="https://github.com/miniJUG/miniJUG.github.io">для этого сайта</a>. Новые статьи добавляются просто через <code class="text-body text-nowrap">git commit</code> и <code class="text-body text-nowrap">git push</code> в репозиторий.</li>
+  <li><a href="https://telegra.ph">telegra.ph</a> отличная штука, но её возможности в редактировании крайне ограничены. Например, форматирование и подсветка кода там полностью отсутствуют. Чтобы это обойти, мне приходилось делать скриншоты кода и вставлять их туда в качестве картинок. В итоге, такой код нельзя скопировать. Теперь же у меня есть все возможности HTML, поэтому я могу делать всё что угодно.</li>
+  <li>Также telegra.ph не поддерживает редактирование статей спустя время. Это очень плохо, потому что если я спустя какое-то время нахожу ошибки в публикациях, то я уже не могу их исправить.</li>
+  <li>А ещё telegra.ph заблокирован в России (вместе с Telegram). В большинстве случаев это не является проблемой, так как я знаю, что мои читатели легко обходят блокировки, но всё же иногда это вызывает некоторые неудобства. Свой же сайт никогда не забанят, а если и забанят, то это будет делом пары часов перенести его на другой домен.</li>
+</ul>
+<p>Таким образом, отныне все новости будут публиковаться на этом сайте, а большие развёрнутые статьи будут выкладываться также и на Хабр.</p>
+<p class="pt-1">Если у вас есть какие-то замечания по поводу работы сайта (опечатки, ошибки, некорректное отображение и т.д.), то напишите мне, пожалуйста, в <a href="https://t.me/ZhekaKozlov">Telegram</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
-  <ul class="collapse" id="year2020">
-<li class="text-secondary"><a href="introducing_minijug_website.html" class="text-secondary">У miniJUG появился сайт</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
+  <ul class="collapse show" id="year2020">
+<li>У miniJUG появился сайт</li>
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
-  <ul class="collapse show" id="year2019">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <ul class="collapse" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
 <li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
 <li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
@@ -61,7 +63,7 @@
 <li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
 <li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
 <li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
-<li>В Java у <code class="text-body text-nowrap">NullPointerException</code> могут появиться детальные сообщения</li>
+<li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
 <li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
   </ul>
 </div>
