@@ -42,7 +42,7 @@ intList.add(5); <span style="color: darkorange">// Good</span>
 intList.remove(Integer.valueOf(6)); <span style="color: darkorange">// Good</span></pre>
 <p>Однако до недавнего времени такая рекомендация никак не подкреплялась компилятором. И, наконец, в Java 9 конструкторы <code class="text-body text-nowrap">Integer</code> пометили аннотацией <code class="text-body text-nowrap">@Deprecated</code>, а также конструкторы всех остальных обёрнутых примитивных типов: <code class="text-body text-nowrap">Long</code>, <code class="text-body text-nowrap">Float</code>, <code class="text-body text-nowrap">Double</code>, <code class="text-body text-nowrap">Boolean</code>, <code class="text-body text-nowrap">Byte</code>, <code class="text-body text-nowrap">Short</code>, <code class="text-body text-nowrap">Character</code>. В список deprecated конструкторов также вошли конструкторы, принимающие <code class="text-body text-nowrap">String</code>: вместо них рекомендуется использовать методы <code class="text-body text-nowrap">valueOf(String)</code> или <code class="text-body text-nowrap">parseInt()</code> / <code class="text-body text-nowrap">parseLong()</code> и т.д.</p>
 </article>
-  <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
+  <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
