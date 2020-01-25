@@ -34,7 +34,7 @@
 <h3 id="title">В Java появятся скрытые классы</h3>
 <p class="text-secondary"><time datetime="2020-01-25">25 января, 2020</time></p>
 <article>
-<p>На сайте OpenJDK появился новый <a href="https://openjdk.java.net/jeps/371">JEP 371</a>, в котором предлагает ввести в язык специальный тип классов, называемых <i>скрытыми</i>. Скрытые классы будут стандартной заменой существующего метода <code class="text-body text-nowrap">sun.misc.Unsafe.defineAnonymousClass()</code>, который станет deprecated for removal. Скрытый класс &ndash; это класс, который обладает следующими характеристиками:</p>
+<p>На сайте OpenJDK появился новый <a href="https://openjdk.java.net/jeps/371">JEP 371</a>, в котором предлагается ввести в язык специальный тип классов, называемых <i>скрытыми</i>. Скрытые классы будут стандартной заменой существующего метода <code class="text-body text-nowrap">sun.misc.Unsafe.defineAnonymousClass()</code>, который станет deprecated for removal. Скрытый класс &ndash; это класс, который обладает следующими характеристиками:</p>
 <ul>
   <li>Скрытый класс создаётся во время выполнения с помощью нового метода <code class="text-body text-nowrap">Lookup.defineHiddenClass()</code>.</li>
   <li>На такой класс не могут прямо ссылаться другие классы. Всё его использование может осуществляться исключительно через рефлексию.</li>
