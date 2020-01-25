@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2020-01-20">
+    <meta property="article:published_time" content="2020-01-25">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
@@ -31,19 +31,19 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.2rem">
-<h3 id="title">У miniJUG появился сайт</h3>
-<p class="text-secondary"><time datetime="2020-01-20">20 января, 2020</time></p>
+<h3 id="title">В Java появятся скрытые классы</h3>
+<p class="text-secondary"><time datetime="2020-01-25">25 января, 2020</time></p>
 <article>
-<p>Друзья, хорошие новости! Теперь у miniJUG появился свой веб-сайт <a href="https://minijug.ru">minijug.ru</a>, куда были старательно перенесены все публикации с telegra.ph и Хабра с момента создания <a href="https://tlg.name/miniJUG">нашего Телеграм-канала</a>. Таким образом, весь контент за два с лишним года года теперь присутствует здесь для вашего удобства. Если вдруг вы хотите перечитать какую-то статью или новость, то можете легко её найти с помощью карты сайта.</p>
-<p>Почему было решено создать сайт? У этого есть несколько причин:</p>
+<p>На сайте OpenJDK появился новый <a href="https://openjdk.java.net/jeps/371">JEP 371</a>, в котором предлагает ввести в язык специальный тип классов, называемых <i>скрытыми</i>. Скрытые классы будут стандартной заменой существующего метода <code class="text-body text-nowrap">sun.misc.Unsafe.defineAnonymousClass()</code>, который станет deprecated for removal. Скрытый класс &ndash; это класс, который обладает следующими характеристиками:</p>
 <ul>
-  <li>Во-первых, это <del>красиво</del> интересно. Когда создаёшь сайт, то узнаёшь много полезного. Например, я раньше никогда не имел дела с GitHub Pages, которые используются в качестве бесплатного хостинга <a href="https://github.com/miniJUG/miniJUG.github.io">для этого сайта</a>. Новые статьи добавляются просто через <code class="text-body text-nowrap">git commit</code> и <code class="text-body text-nowrap">git push</code> в репозиторий.</li>
-  <li><a href="https://telegra.ph">telegra.ph</a> отличная штука, но её возможности в редактировании крайне ограничены. Например, форматирование и подсветка кода там полностью отсутствуют. Чтобы это обойти, мне приходилось делать скриншоты кода и вставлять их туда в качестве картинок. В итоге, такой код нельзя скопировать. Теперь же у меня есть все возможности HTML, поэтому я могу делать всё что угодно.</li>
-  <li>Также telegra.ph не поддерживает редактирование статей спустя время. Это очень плохо, потому что если я спустя какое-то время нахожу ошибки в публикациях, то я уже не могу их исправить.</li>
-  <li>А ещё telegra.ph заблокирован в России (вместе с Telegram). В большинстве случаев это не является проблемой, так как я знаю, что мои читатели легко обходят блокировки, но всё же иногда это вызывает некоторые неудобства. Свой же сайт никогда не забанят, а если и забанят, то это будет делом пары часов перенести его на другой домен.</li>
+  <li>Скрытый класс создаётся во время выполнения с помощью нового метода <code class="text-body text-nowrap">Lookup.defineHiddenClass()</code>.</li>
+  <li>На такой класс не могут прямо ссылаться другие классы. Всё его использование может осуществляться исключительно через рефлексию.</li>
+  <li>Такой класс является необнаружимым: его нельзя найти ни по имени, ни обнаружить с помощью загрузчиков классов (через <code class="text-body text-nowrap">Class.forName()</code>, <code class="text-body text-nowrap">ClassLoader.loadClass()</code>, <code class="text-body text-nowrap">ClassLoader.findLoadedClass()</code> и т.д.)</li>
+  <li>Имя скрытого класса получается конкатенацией его имени в байт-коде, символа <code class="text-body text-nowrap">'/'</code> и суффикса, который зависит от реализации JVM. Например, <code class="text-body text-nowrap">com.example.Foo/1234</code>.</li>
+  <li>Методы скрытых классов не появляются в стек-трейсах, если не включить опции <code class="text-body text-nowrap">-XX:+UnlockDiagnosticVMOptions</code> и <code class="text-body text-nowrap">-XX:+ShowHiddenFrames</code>.</li>
 </ul>
-<p>Таким образом, отныне все новости будут публиковаться на этом сайте, а большие развёрнутые статьи будут выкладываться также и на Хабр.</p>
-<p class="pt-1">Если у вас есть какие-то замечания по поводу работы сайта (опечатки, ошибки, некорректное отображение и т.д.), то напишите мне, пожалуйста, в <a href="https://t.me/ZhekaKozlov">Telegram</a>.</p>
+<p>Основной мотиватор введения в язык скрытых классов &ndash; предоставить надёжный и гибкий инструмент для фреймворков, динамически генерирующих классы во время выполнения. Скрытые классы смогут генерироваться фреймворком в любом количестве, а детали генерации будут надёжно скрыты от пользователя. За примером далеко ходить не надо: сама Java генерирует множество классов во время выполнения, которые было бы неплохо сделать скрытыми (<a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/reflect/Proxy.html">прокси-классы</a>, <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/invoke/LambdaMetafactory.html">тела лямбд</a>, классы после трансляции из JavaScript и т.д.)</p>
+<p><code class="text-body text-nowrap">Lookup.defineHiddenClass()</code> также будет поддерживать агрессивную выгрузку посредством <i>слабых</i> скрытых классов, которые можно будет создавать, указав опцию <code class="text-body text-nowrap">WEAK</code>. На такие классы не будет сильной ссылки со стороны загрузчика класса, а значит, он не будет мешать его утилизации сборщиком мусора. Это предотвратит неконтролируемый рост скрытых классов в памяти.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -51,6 +51,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
   <ul class="collapse show" id="year2020">
+<li class="text-secondary"><a href="hidden_classes.html" class="text-secondary">В Java появятся скрытые классы</a></li>
 <li class="text-secondary"><a href="introducing_minijug_website.html" class="text-secondary">У miniJUG появился сайт</a></li>
   </ul>
 </div>
