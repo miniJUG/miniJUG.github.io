@@ -66,7 +66,7 @@
     }
 
     <span style="color: blue">private static</span> Charset defaultCharset() {
-        <span style="color: darkorange">// long operation...</span>
+        <span style="color: green">// long operation...</span>
     }
 }</pre>
 <p>Да, конечно же в обоих случаях можно было бы легко обойтись и без этих функций, например, использовать обычный тернарный оператор или <code class="text-body text-nowrap">Optional</code>, но всё же использование специальной функции делает код немножко короче и чище. А если использовать статический импорт и писать просто <code class="text-body text-nowrap">requireNonNullElse()</code> вместо <code class="text-body text-nowrap">Objects.requireNonNullElse()</code>, то код код можно сократить ещё сильнее.</p>
@@ -203,16 +203,16 @@ Total Time = Optional[PT1.56S]</pre>
 <h5>Появились в: Java 11</h5>
 <p>Целая гора полезных методов для строк появилась в Java 11.</p>
 <p>Метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#isBlank()">String.isBlank()</a></code> позволяет узнать, является ли строка состоящей исключительно из whitespace:</p>
-<pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"</span> <span style="color: darkblue">\n</span><span style="color: darkblue">\r</span><span style="color: darkblue">\t</span><span style="color: darkred">"</span>.isBlank()); <span style="color: darkorange">// true</span></pre>
+<pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"</span> <span style="color: darkblue">\n</span><span style="color: darkblue">\r</span><span style="color: darkblue">\t</span><span style="color: darkred">"</span>.isBlank()); <span style="color: green">// true</span></pre>
 <p>Методы <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#stripLeading()">String.stripLeading()</a></code>, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#stripTrailing()">String.stripTrailing()</a></code> и <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#strip()">String.strip()</a></code> удаляют символы whitespace в начале строки, в конце строки или с обоих концов:</p>
 <pre class="border p-lg-2 p-1">String str = <span style="color: darkred">"</span> <span style="color: darkblue">\t</span><span style="color: darkred">Hello, world!</span><span style="color: darkblue">\t</span><span style="color: darkblue">\n</span><span style="color: darkred">"</span>;
 
-String str1 = str.stripLeading(); <span style="color: darkorange">// "Hello, world!\t\n"</span>
-String str2 = str.stripTrailing(); <span style="color: darkorange">// " \tHello, world!"</span>
-String str3 = str.strip(); // <span style="color: darkorange">"Hello, world!"</span></pre>
+String str1 = str.stripLeading(); <span style="color: green">// "Hello, world!\t\n"</span>
+String str2 = str.stripTrailing(); <span style="color: green">// " \tHello, world!"</span>
+String str3 = str.strip(); // <span style="color: green">"Hello, world!"</span></pre>
 <p>Заметьте, что <code class="text-body text-nowrap">String.strip()</code> не то же самое, что <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#trim()">String.trim()</a></code>: второй удаляет только символы, чей код меньше или равен U+0020, а первый удаляет также пробелы из Юникода:</p>
-<pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"str</span><span style="color: darkblue">\u2000</span><span style="color: darkred">"</span>.strip()); <span style="color: darkorange">// "str"</span>
-System.out.println(<span style="color: darkred">"str</span><span style="color: darkblue">\u2000</span><span style="color: darkred">"</span>.trim()); <span style="color: darkorange">// "str\u2000"</span></pre>
+<pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"str</span><span style="color: darkblue">\u2000</span><span style="color: darkred">"</span>.strip()); <span style="color: green">// "str"</span>
+System.out.println(<span style="color: darkred">"str</span><span style="color: darkblue">\u2000</span><span style="color: darkred">"</span>.trim()); <span style="color: green">// "str\u2000"</span></pre>
 
 <p>Метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#repeat(int)">String.repeat()</a></code> конкатенирует строку саму с собой <code class="text-body text-nowrap">n</code> раз:</p>
 <pre class="border p-lg-2 p-1">System.out.print(<span style="color: darkred">"Hello, world!</span><span style="color: darkblue">\n</span><span style="color: darkred">"</span>.repeat(3));</pre>
@@ -273,11 +273,11 @@ System.out.println(<span style="color: darkred">"&lt;html&gt;</span><span style=
     .dropWhile(note -> note.getDate().getYear() == 2020)
     .takeWhile(note -> note.getDate().getYear() == 2019);</pre>
 <p>В Java 8 <code class="text-body text-nowrap">Stream.iterate()</code> мог генерировать только бесконечный <code class="text-body text-nowrap">Stream</code>. Но в Java 9 у этого метода появилась <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#iterate(T,java.util.function.Predicate,java.util.function.UnaryOperator)">перегрузка</a></code>, которая принимает предикат. Благодаря этому многие циклы <code class="text-body text-nowrap">for</code> теперь можно заменить на <code class="text-body text-nowrap">Stream</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: darkorange">// Java 8</span>
+<pre class="border p-lg-2 p-1"><span style="color: green">// Java 8</span>
 <span style="color: blue">for</span> (<span style="color: blue">int</span> i = 1; i < 100; i *= 2) {
     System.out.println(i);
 }</pre>
-<pre class="border p-lg-2 p-1"><span style="color: darkorange">// Java 9+</span>
+<pre class="border p-lg-2 p-1"><span style="color: green">// Java 9+</span>
 IntStream
     .iterate(1, i -> i < 100, i -> i * 2)
     .forEach(System.out::println);</pre>
@@ -337,8 +337,8 @@ IntStream
     <span style="color: blue">private final</span> Cleaner.Cleanable cleanable;
     <span style="color: blue">public</span> Resource() {
         cleanable = CLEANER.register(<span style="color: blue">this</span>, () -> {
-            <span style="color: darkorange">// Очищающее действие</span>
-            <span style="color: darkorange">// (например, закрытие соединения)</span>
+            <span style="color: green">// Очищающее действие</span>
+            <span style="color: green">// (например, закрытие соединения)</span>
         });
     }
 
@@ -349,14 +349,14 @@ IntStream
 }</pre>
 <p>По-хорошему, такой ресурс пользователи должны создавать в блоке <code class="text-body text-nowrap">try</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">try</span> (<span style="color: blue">var</span> resource = <span style="color: blue">new</span> Resource()) {
-    <span style="color: darkorange">// Используем ресурс</span>
+    <span style="color: green">// Используем ресурс</span>
 }</pre>
 <p>Однако могут найтись пользователи, которые забудут это делать и будут писать просто <code class="text-body text-nowrap">var resource = new Resource()</code>. В таких случаях очистка выполнится не сразу, а позовётся позже в одном из следующих циклов сборки мусора. Это всё же лучше, чем ничего.</p>
 <p>Если вы хотите изучить <code class="text-body text-nowrap">Cleaner</code> получше и узнать, почему никогда не стоит использовать <code class="text-body text-nowrap">finalize()</code>, то рекомендую вам послушать <a href="https://www.youtube.com/watch?v=K5IctLPem0c">мой доклад</a> на эту тему.</p>
 
 <h4>Заключение</h4>
 <p>Java не стоит на месте и постепенно развивается. Пока вы сидите на Java 8, с каждым релизом появляется всё больше и больше новых интересных API. Сегодня мы рассмотрели 10 таких API. И вы сможете использовать их все, если наконец решитесь мигрировать с Java 8.</p>
-<p>В следующий раз мы рассмотрим ещё 10 новых API.</p>
+<p><a href="api_to_upgrade_from_java_8_part_2.html">В следующий раз</a> мы рассмотрим ещё 10 новых API.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -364,6 +364,7 @@ IntStream
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
   <ul class="collapse show" id="year2020">
+<li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_2.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</a></li>
 <li>API, ради которых наконец-то стоит обновиться с Java 8. Часть 1</li>
 <li class="text-secondary"><a href="hidden_classes.html" class="text-secondary">В Java появятся скрытые классы</a></li>
 <li class="text-secondary"><a href="introducing_minijug_website.html" class="text-secondary">У miniJUG появился сайт</a></li>

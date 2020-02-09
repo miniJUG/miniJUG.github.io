@@ -35,11 +35,11 @@
 <p class="text-secondary"><time datetime="2017-11-07">7 ноября, 2017</time></p>
 <article>
 <p>Пожалуй, большинство людей хотя бы раз в жизни использовало конструктор <code class="text-body text-nowrap">new Integer(int)</code>. Это могло случиться либо по незнанию, либо по той причине, что до Java 1.5 это было единственным способом оборачивания <code class="text-body text-nowrap">int</code> в <code class="text-body text-nowrap">Integer</code>. Однако, начиная с Java 1.5, этот вызов стал в большинстве случаев необязательным, и вместо него рекомендованным и более эффективным способом обёртки стали метод <code class="text-body text-nowrap">Integer.valueOf()</code> и автобоксинг:</p>
-<pre class="border p-lg-2 p-1">intList.add(<span style="color: blue">new</span> Integer(5)); <span style="color: darkorange">// Bad</span>
-intList.remove(<span style="color: blue">new</span> Integer(6)); <span style="color: darkorange">// Bad</span>
+<pre class="border p-lg-2 p-1">intList.add(<span style="color: blue">new</span> Integer(5)); <span style="color: green">// Bad</span>
+intList.remove(<span style="color: blue">new</span> Integer(6)); <span style="color: green">// Bad</span>
 
-intList.add(5); <span style="color: darkorange">// Good</span>
-intList.remove(Integer.valueOf(6)); <span style="color: darkorange">// Good</span></pre>
+intList.add(5); <span style="color: green">// Good</span>
+intList.remove(Integer.valueOf(6)); <span style="color: green">// Good</span></pre>
 <p>Однако до недавнего времени такая рекомендация никак не подкреплялась компилятором. И, наконец, в Java 9 конструкторы <code class="text-body text-nowrap">Integer</code> пометили аннотацией <code class="text-body text-nowrap">@Deprecated</code>, а также конструкторы всех остальных обёрнутых примитивных типов: <code class="text-body text-nowrap">Long</code>, <code class="text-body text-nowrap">Float</code>, <code class="text-body text-nowrap">Double</code>, <code class="text-body text-nowrap">Boolean</code>, <code class="text-body text-nowrap">Byte</code>, <code class="text-body text-nowrap">Short</code>, <code class="text-body text-nowrap">Character</code>. В список deprecated конструкторов также вошли конструкторы, принимающие <code class="text-body text-nowrap">String</code>: вместо них рекомендуется использовать методы <code class="text-body text-nowrap">valueOf(String)</code> или <code class="text-body text-nowrap">parseInt()</code> / <code class="text-body text-nowrap">parseLong()</code> и т.д.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
@@ -48,6 +48,7 @@ intList.remove(Integer.valueOf(6)); <span style="color: darkorange">// Good</spa
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
   <ul class="collapse" id="year2020">
+<li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_2.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</a></li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 1</a></li>
 <li class="text-secondary"><a href="hidden_classes.html" class="text-secondary">В Java появятся скрытые классы</a></li>
 <li class="text-secondary"><a href="introducing_minijug_website.html" class="text-secondary">У miniJUG появился сайт</a></li>
