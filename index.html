@@ -43,20 +43,21 @@
 <pre class="border p-lg-2 p-1"><span style="color: blue">public static void</span> syncDirs(Path srcDir, Path dstDir)
         <span style="color: blue">throws</span> IOException {
     <span style="color: green">// Для простоты демонстрации считаем, что поддиректорий нет</span>
-    List&lt;Path&gt; srcFiles = Files.list(srcDir).collect(toList());
-    <span style="color: blue">for</span> (Path src : srcFiles) {
-        Path dst = dstDir.resolve(src.getFileName());
-        <span style="color: blue">if</span> (!Files.exists(dst)) {
-            System.out.println(<span style="color: darkred">"Copying file "</span> + dst);
-            Files.copy(src, dst);
-        } <span style="color: blue">else if</span> (Files.mismatch(src, dst) >= 0) {
-            System.out.println(<span style="color: darkred">"Overwriting file "</span> + dst);
-            Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
+    <span style="color: blue">try</span> (Stream&lt;Path&gt; stream = Files.list(srcDir)) {
+        <span style="color: blue">for</span> (Path src : stream.collect(toList())) {
+            Path dst = dstDir.resolve(src.getFileName());
+            <span style="color: blue">if</span> (!Files.exists(dst)) {
+                System.out.println(<span style="color: darkred">"Copying file "</span> + dst);
+                Files.copy(src, dst);
+            } <span style="color: blue">else if</span> (Files.mismatch(src, dst) >= 0) {
+                System.out.println(<span style="color: darkred">"Overwriting file "</span> + dst);
+                Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
+            }
         }
     }
 }</pre>
 <!-- cut -->
-<p>(Кстати, когда уже наконец <code class="text-body text-nowrap">Stream</code> отнаследуют от <code class="text-body text-nowrap">Iterable</code>? Хочется просто писать <code class="text-body text-nowrap">for (Path file : Files.list(dir))</code>, а не возиться с промежуточными списками.)</p>
+<p>(Кстати, когда уже наконец <code class="text-body text-nowrap">Stream</code> отнаследуют от <code class="text-body text-nowrap">Iterable</code>? Хочется просто писать <code class="text-body text-nowrap">for (Path file : stream)</code>, а не возиться с промежуточными списками.)</p>
 
 <h4>2. Новые методы в <code class="text-body text-nowrap">java.time</code></h4>
 <h5>Появились в: Java 9</h5>
