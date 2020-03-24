@@ -27,16 +27,16 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java у <code class="text-body text-nowrap">NullPointerException</code> могут появиться детальные сообщения</h3>
+<h3 id="title">В Java у <code class="text-nowrap">NullPointerException</code> могут появиться детальные сообщения</h3>
 <p class="text-secondary"><time datetime="2019-03-26">26 марта, 2019</time></p>
 <article>
-<p>Вышел <a href="https://openjdk.java.net/jeps/358">новый черновик JEP</a>, в котором предлагается улучшить <code class="text-body text-nowrap">java.lang.NullPointerException</code>, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация о том, что именно было <code class="text-body text-nowrap">null</code> и какое действие вызвало ошибку.</p>
-<p>Например, если в выражении <code class="text-body text-nowrap">a.b.c.d</code> поле <code class="text-body text-nowrap">b</code> было <code class="text-body text-nowrap">null</code>, то сообщение будет примерно следующим:</p>
+<p>Вышел <a href="https://openjdk.java.net/jeps/358">новый черновик JEP</a>, в котором предлагается улучшить <code class="text-nowrap">java.lang.NullPointerException</code>, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация о том, что именно было <code class="text-nowrap">null</code> и какое действие вызвало ошибку.</p>
+<p>Например, если в выражении <code class="text-nowrap">a.b.c.d</code> поле <code class="text-nowrap">b</code> было <code class="text-nowrap">null</code>, то сообщение будет примерно следующим:</p>
 <pre class="border p-lg-2 p-1">'a.b' is null. Can not read field 'c'.</pre>
-<p>Другой пример: выражение – <code class="text-body text-nowrap">obj.hashCode()</code>, сообщение:</p>
+<p>Другой пример: выражение – <code class="text-nowrap">obj.hashCode()</code>, сообщение:</p>
 <pre class="border p-lg-2 p-1">'obj' is null. Can not invoke method 'java.lang.Object.hashCode()I'.</pre>
-<p>Генерацию сообщения предлагается сделать с помощью поля <code class="text-body text-nowrap">backtrace</code> в объекте исключения, которое является приватным для JVM. Также необходим анализ потока байткода, чтобы восстановить цепочку вызовов, приведших к нулевому объекту. Так как генерация сообщения является недешёвой операцией, то предлагается сделать её ленивой, иначе при каждом выбрасывании <code class="text-body text-nowrap">NullPointerException</code> будет выполняться лишняя работа.</p>
-<p>Детальные сообщения в <code class="text-body text-nowrap">NullPointerException</code> будут чрезвычайно полезными и могут значительно упростить диагностику, особенно в тех случаях, когда цепочки вызовов методов длинные и непонятно, какой именно объект был <code class="text-body text-nowrap">null</code>.</p>
+<p>Генерацию сообщения предлагается сделать с помощью поля <code class="text-nowrap">backtrace</code> в объекте исключения, которое является приватным для JVM. Также необходим анализ потока байткода, чтобы восстановить цепочку вызовов, приведших к нулевому объекту. Так как генерация сообщения является недешёвой операцией, то предлагается сделать её ленивой, иначе при каждом выбрасывании <code class="text-nowrap">NullPointerException</code> будет выполняться лишняя работа.</p>
+<p>Детальные сообщения в <code class="text-nowrap">NullPointerException</code> будут чрезвычайно полезными и могут значительно упростить диагностику, особенно в тех случаях, когда цепочки вызовов методов длинные и непонятно, какой именно объект был <code class="text-nowrap">null</code>.</p>
 <p>Интересно, что такие сообщения могут быть реализованы и без изменений исходного кода JDK. Андрей Паньгин <a href="https://twitter.com/AndreiPangin/status/1110282466668003335">утверждает</a>, что детальные сообщения NPE у них уже есть и они делают это всего лишь в ~100 строк кода.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
@@ -65,7 +65,7 @@
 <li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
 <li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
 <li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
-<li>В Java у <code class="text-body text-nowrap">NullPointerException</code> могут появиться детальные сообщения</li>
+<li>В Java у <code class="text-nowrap">NullPointerException</code> могут появиться детальные сообщения</li>
 <li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
   </ul>
 </div>

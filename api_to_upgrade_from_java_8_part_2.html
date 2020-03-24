@@ -36,9 +36,9 @@
 <article>
 <p><a href="api_to_upgrade_from_java_8.html">Продолжаем</a> рассказ про API, которые появились в новых версиях Java.</p>
 
-<h4>1. <code class="text-body text-nowrap">Files.mismatch()</code></h4>
+<h4>1. <code class="text-nowrap">Files.mismatch()</code></h4>
 <h5>Появился в: Java 12</h5>
-<p>На практике довольно часто возникает необходимость проверить, являются ли два файла в точности одинаковыми или нет. С помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#mismatch(java.nio.file.Path,java.nio.file.Path)">Files.mismatch()</a></code>, появившегося в Java 12, это наконец-то можно сделать. Этот метод возвращает позицию первого несовпадающего байта в двух файлах или <code class="text-body text-nowrap">-1</code>, если файлы идентичны.</p>
+<p>На практике довольно часто возникает необходимость проверить, являются ли два файла в точности одинаковыми или нет. С помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#mismatch(java.nio.file.Path,java.nio.file.Path)">Files.mismatch()</a></code>, появившегося в Java 12, это наконец-то можно сделать. Этот метод возвращает позицию первого несовпадающего байта в двух файлах или <code class="text-nowrap">-1</code>, если файлы идентичны.</p>
 <p>Это может быть полезно, например, когда синхронизируешь содержимое двух директорий. Чтобы не перезаписывать файл при копировании тем же самым содержимым и лишний раз не нагружать диск, можно сначала проверить, идентичны файлы или нет:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public static void</span> syncDirs(Path srcDir, Path dstDir)
         <span style="color: blue">throws</span> IOException {
@@ -57,12 +57,12 @@
     }
 }</pre>
 <!-- cut -->
-<p>(Кстати, когда уже наконец <code class="text-body text-nowrap">Stream</code> отнаследуют от <code class="text-body text-nowrap">Iterable</code>? Хочется просто писать <code class="text-body text-nowrap">for (Path file : stream)</code>, а не возиться с промежуточными списками.)</p>
+<p>(Кстати, когда уже наконец <code class="text-nowrap">Stream</code> отнаследуют от <code class="text-nowrap">Iterable</code>? Хочется просто писать <code class="text-nowrap">for (Path file : stream)</code>, а не возиться с промежуточными списками.)</p>
 
-<h4>2. Новые методы в <code class="text-body text-nowrap">java.time</code></h4>
+<h4>2. Новые методы в <code class="text-nowrap">java.time</code></h4>
 <h5>Появились в: Java 9</h5>
-<p>В Java почти 20 лет не было нормального API для работы с датами и временем. Эту проблему решили лишь в Java 8, когда ввели новый пакет <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/package-summary.html">java.time</a></code> под руководством небезызвестного <a href="https://blog.joda.org/">Стивена Колборна</a>, создателя библиотеки <a href="https://www.joda.org/joda-time/">Joda Time</a>. А в девятой версии <code class="text-body text-nowrap">java.time</code> добавили множество интересных методов.</p>
-<p>В Java 8 <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html">Duration</a></code> нельзя просто разбить на составляющие (например, прошло 2 дня, 7 часов, 15 минут, 12 секунд). В Java 9 для этого появились методы <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toDaysPart()">toDaysPart()</a></code>, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toHoursPart()">toHoursPart()</a></code>, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toMinutesPart()">toMinutesPart()</a></code>, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toSecondsPart()">toSecondsPart()</a></code> и т.д. Пример:</p>
+<p>В Java почти 20 лет не было нормального API для работы с датами и временем. Эту проблему решили лишь в Java 8, когда ввели новый пакет <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/package-summary.html">java.time</a></code> под руководством небезызвестного <a href="https://blog.joda.org/">Стивена Колборна</a>, создателя библиотеки <a href="https://www.joda.org/joda-time/">Joda Time</a>. А в девятой версии <code class="text-nowrap">java.time</code> добавили множество интересных методов.</p>
+<p>В Java 8 <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html">Duration</a></code> нельзя просто разбить на составляющие (например, прошло 2 дня, 7 часов, 15 минут, 12 секунд). В Java 9 для этого появились методы <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toDaysPart()">toDaysPart()</a></code>, <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toHoursPart()">toHoursPart()</a></code>, <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toMinutesPart()">toMinutesPart()</a></code>, <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toSecondsPart()">toSecondsPart()</a></code> и т.д. Пример:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public static</span> String modifiedAgo(Path path) <span style="color: blue">throws</span> IOException {
     FileTime time = Files.getLastModifiedTime(path);
     Instant to = Instant.now();
@@ -73,7 +73,7 @@
         d.toDaysPart(), d.toHoursPart(),
         d.toMinutesPart(), d.toSecondsPart());
 }</pre>
-<p>А что если нам надо узнать, сколько <i>месяцев</i> назад был изменён файл? Элегантного способа на Java 8, насколько мне известно, нет. А в Java 9 для этого можно использовать новый метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#dividedBy(java.time.Duration)">Duration.dividedBy()</a></code>:</p>
+<p>А что если нам надо узнать, сколько <i>месяцев</i> назад был изменён файл? Элегантного способа на Java 8, насколько мне известно, нет. А в Java 9 для этого можно использовать новый метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#dividedBy(java.time.Duration)">Duration.dividedBy()</a></code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public static long</span> modifiedAgo(Path path, ChronoUnit unit)
         <span style="color: blue">throws</span> IOException {
     FileTime time = Files.getLastModifiedTime(path);
@@ -89,11 +89,11 @@
         modifiedAgo(path, ChronoUnit.MONTHS));
 }
 </pre>
-<p>Нововведения коснулись также класса <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html">LocalDate</a></code>. С помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#ofInstant(java.time.Instant,java.time.ZoneId)">LocalDate.ofInstant()</a></code> можно сконвертировать <code class="text-body text-nowrap">Instant</code> в <code class="text-body text-nowrap">LocalDate</code>:</p>
+<p>Нововведения коснулись также класса <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html">LocalDate</a></code>. С помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#ofInstant(java.time.Instant,java.time.ZoneId)">LocalDate.ofInstant()</a></code> можно сконвертировать <code class="text-nowrap">Instant</code> в <code class="text-nowrap">LocalDate</code>:</p>
 <pre class="border p-lg-2 p-1">LocalDate date = LocalDate.ofInstant(
     Instant.now(), ZoneId.systemDefault());
 System.out.println(date);</pre>
-<p>А используя новый метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#datesUntil(java.time.LocalDate)">LocalDate.datesUntil()</a></code>, наконец-то можно легко получить <code class="text-body text-nowrap">Stream</code> всех дат в интервале между двумя датами:</p>
+<p>А используя новый метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#datesUntil(java.time.LocalDate)">LocalDate.datesUntil()</a></code>, наконец-то можно легко получить <code class="text-nowrap">Stream</code> всех дат в интервале между двумя датами:</p>
 <pre class="border p-lg-2 p-1">LocalDate from = LocalDate.of(2020, 1, 1);
 LocalDate to = LocalDate.of(2020, 1, 9);
 from.datesUntil(to)
@@ -120,40 +120,40 @@ from.datesUntil(to, Period.ofWeeks(1))
 2020-01-29</pre>
 <p>Остальные методы:</p>
 <ul>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Clock.html#tickMillis(java.time.ZoneId)">Clock.tickMillis()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#truncatedTo(java.time.temporal.TemporalUnit)">Duration.truncatedTo()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#toEpochSecond(java.time.LocalTime,java.time.ZoneOffset)">LocalDate.toEpochSecond()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalTime.html#ofInstant(java.time.Instant,java.time.ZoneId)">LocalTime.ofInstant()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalTime.html#toEpochSecond(java.time.LocalDate,java.time.ZoneOffset)">LocalTime.toEpochSecond()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/OffsetTime.html#toEpochSecond(java.time.LocalDate)">OffsetTime.toEpochSecond()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/chrono/Chronology.html#epochSecond(int,int,int,int,int,int,java.time.ZoneOffset)">Chronology.epochSecond()</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/format/DateTimeFormatterBuilder.html#appendGenericZoneText(java.time.format.TextStyle)">DateTimeFormatterBuilder.appendGenericZoneText()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Clock.html#tickMillis(java.time.ZoneId)">Clock.tickMillis()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#truncatedTo(java.time.temporal.TemporalUnit)">Duration.truncatedTo()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#toEpochSecond(java.time.LocalTime,java.time.ZoneOffset)">LocalDate.toEpochSecond()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalTime.html#ofInstant(java.time.Instant,java.time.ZoneId)">LocalTime.ofInstant()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalTime.html#toEpochSecond(java.time.LocalDate,java.time.ZoneOffset)">LocalTime.toEpochSecond()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/OffsetTime.html#toEpochSecond(java.time.LocalDate)">OffsetTime.toEpochSecond()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/chrono/Chronology.html#epochSecond(int,int,int,int,int,int,java.time.ZoneOffset)">Chronology.epochSecond()</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/format/DateTimeFormatterBuilder.html#appendGenericZoneText(java.time.format.TextStyle)">DateTimeFormatterBuilder.appendGenericZoneText()</a></code></li>
 </ul>
 
-<h4>3. <code class="text-body text-nowrap">Collection.toArray()</code> с функцией-генератором</h4>
+<h4>3. <code class="text-nowrap">Collection.toArray()</code> с функцией-генератором</h4>
 <h5>Появился в: Java 11</h5>
-<p>С конвертацией коллекций в массивы у Java была непростая история. С момента появления <code class="text-body text-nowrap">Collection</code> в Java 1.2 было два способа создания массива на основе коллекции:</p>
+<p>С конвертацией коллекций в массивы у Java была непростая история. С момента появления <code class="text-nowrap">Collection</code> в Java 1.2 было два способа создания массива на основе коллекции:</p>
 <ul>
-  <li>Использовать метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray()">Collection.toArray()</a></code>, который возвращает <code class="text-body text-nowrap">Object[]</code>.</li>
-  <li>Использовать метод <code class="text-body text-nowrap">Collection.toArray(Object[])</code>, который принимает уже созданный массив и заполняет его. Если переданный массив недостаточной длины, то создаётся новый массив нужной длины того же типа и возвращается. С появлением дженериков в Java 1.5 метод логичным образом поменял свою сигнатуру на <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray(T%5B%5D)">Collection.toArray(T[])</a></code>.</li>
+  <li>Использовать метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray()">Collection.toArray()</a></code>, который возвращает <code class="text-nowrap">Object[]</code>.</li>
+  <li>Использовать метод <code class="text-nowrap">Collection.toArray(Object[])</code>, который принимает уже созданный массив и заполняет его. Если переданный массив недостаточной длины, то создаётся новый массив нужной длины того же типа и возвращается. С появлением дженериков в Java 1.5 метод логичным образом поменял свою сигнатуру на <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray(T%5B%5D)">Collection.toArray(T[])</a></code>.</li>
 </ul>
-<p>Загвоздка в том, что если нужен массив конкретного типа (допустим <code class="text-body text-nowrap">String[]</code>), второй метод можно использовать двумя способами:</p>
+<p>Загвоздка в том, что если нужен массив конкретного типа (допустим <code class="text-nowrap">String[]</code>), второй метод можно использовать двумя способами:</p>
 <ul>
-  <li>Использовать конструкцию <code class="text-body text-nowrap">collection.toArray(new String[0])</code>. Тем самым, мы сознательно почти всегда отбрасываем массив, а передаём его туда, чтобы метод узнал тип массива.</li>
-  <li>Использовать конструкцию <code class="text-body text-nowrap">collection.toArray(new String[collection.size()])</code>. В этом случае массив передаётся нужной длины, а значит ничего зря не отбрасывается, и код по идее работает быстрее. К тому же здесь не нужен рефлективный вызов.</li>
+  <li>Использовать конструкцию <code class="text-nowrap">collection.toArray(new String[0])</code>. Тем самым, мы сознательно почти всегда отбрасываем массив, а передаём его туда, чтобы метод узнал тип массива.</li>
+  <li>Использовать конструкцию <code class="text-nowrap">collection.toArray(new String[collection.size()])</code>. В этом случае массив передаётся нужной длины, а значит ничего зря не отбрасывается, и код по идее работает быстрее. К тому же здесь не нужен рефлективный вызов.</li>
 </ul>
 <p>Таким образом, второй вариант долгое время считался основным, и в IntelliJ IDEA даже была инспекция, которая подсвечивала первый вариант и предлагала конвертировать его во второй, более эффективный.</p>
 <p>Однако в 2016 году вышла <a href="https://shipilev.net/blog/2016/arrays-wisdom-ancients/">статья Алексея Шипилёва</a>, где он решил досконально разобраться в этом вопросе и пришёл к выводу, что не-а: первый вариант всё-таки быстрее (по крайней мере в версиях JDK 6+). Эта статья получила большой <a href="https://twitter.com/shipilev/status/689211445142228992">резонанс</a>, и в IDEA решили изменить инспекцию, сделав у неё три опции: предпочитать пустой массив (default), предпочитать преаллоцированный массив или предпочитать то или иное в зависимости от версии Java.</p>
-<p>Но история на этом не закончилась, потому что некоторые программисты принципиально не желали использовать эти хаки с пустыми массивами и хотели писать код "элегантно". Поэтому они вспомнили про <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#toArray(java.util.function.IntFunction)">Stream.toArray(IntFunction[])</a></code> и стали писать <code class="text-body text-nowrap">collection.stream().toArray(String[]::new)</code>. Медленно? Ну и что, зато красиво.</p>
-<p>Программисты из Oracle посмотрели на всё это безобразие и подумали: а давайте уже сделаем один нормальный способ, который и будет рекомендованным? И в Java 11 добавили долгожданный метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray(java.util.function.IntFunction)">Collection.toArray(IntFunction[])</a></code>, <del>тем самым запутав людей ещё сильнее</del>.</p>
+<p>Но история на этом не закончилась, потому что некоторые программисты принципиально не желали использовать эти хаки с пустыми массивами и хотели писать код "элегантно". Поэтому они вспомнили про <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#toArray(java.util.function.IntFunction)">Stream.toArray(IntFunction[])</a></code> и стали писать <code class="text-nowrap">collection.stream().toArray(String[]::new)</code>. Медленно? Ну и что, зато красиво.</p>
+<p>Программисты из Oracle посмотрели на всё это безобразие и подумали: а давайте уже сделаем один нормальный способ, который и будет рекомендованным? И в Java 11 добавили долгожданный метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray(java.util.function.IntFunction)">Collection.toArray(IntFunction[])</a></code>, <del>тем самым запутав людей ещё сильнее</del>.</p>
 <p>Но на самом деле никакой путаницы нет. Да, теперь есть 4 варианта, но если вы не выжимаете такты из своего процессора, то вам следует просто использовать новый метод:</p>
 <pre class="border p-lg-2 p-1">List&lt;Integer&gt; list = ...;
 Integer[] array = list.toArray(Integer[]::<span style="color: blue">new</span>);</pre>
 
-<h4>4. Методы <code class="text-body text-nowrap">InputStream</code>: <code class="text-body text-nowrap">readNBytes()</code>, <code class="text-body text-nowrap">readAllBytes()</code>, <code class="text-body text-nowrap">transferTo()</code></h4>
+<h4>4. Методы <code class="text-nowrap">InputStream</code>: <code class="text-nowrap">readNBytes()</code>, <code class="text-nowrap">readAllBytes()</code>, <code class="text-nowrap">transferTo()</code></h4>
 <h5>Появились в: Java 9 / Java 11</h5>
-<p>Ещё одно неудобство, которое существовало в Java долгие годы &ndash; отсутствие стандартного короткого способа считать все данные из <code class="text-body text-nowrap">InputStream</code>. Если не прибегать к библиотекам, то в Java 8 решить такую задачу довольно нетривиально: нужно завести список буферов, заполнять их, пока данные не кончатся, потом слить в один большой массив, учесть, что последний буфер заполнен лишь частично и т.д. Короче, нюансов хватает.</p>
-<p>В Java 9 добавили метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#readAllBytes()">InputStream.readAllBytes()</a></code>, который берёт всю эту работу на себя и возвращает заполненный массив байтов точной длины. Например, прочитать <code class="text-body text-nowrap">stdout</code>/<code class="text-body text-nowrap">stderr</code> процесса теперь очень легко:</p>
+<p>Ещё одно неудобство, которое существовало в Java долгие годы &ndash; отсутствие стандартного короткого способа считать все данные из <code class="text-nowrap">InputStream</code>. Если не прибегать к библиотекам, то в Java 8 решить такую задачу довольно нетривиально: нужно завести список буферов, заполнять их, пока данные не кончатся, потом слить в один большой массив, учесть, что последний буфер заполнен лишь частично и т.д. Короче, нюансов хватает.</p>
+<p>В Java 9 добавили метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#readAllBytes()">InputStream.readAllBytes()</a></code>, который берёт всю эту работу на себя и возвращает заполненный массив байтов точной длины. Например, прочитать <code class="text-nowrap">stdout</code>/<code class="text-nowrap">stderr</code> процесса теперь очень легко:</p>
 <pre class="border p-lg-2 p-1">Process proc = Runtime.getRuntime().exec(<span style="color: darkred">"java -version"</span>);
 <span style="color: blue">try</span> (InputStream inputStream = proc.getErrorStream()) {
     <span style="color: blue">byte</span>[] bytes = inputStream.readAllBytes();
@@ -163,25 +163,25 @@ Integer[] array = list.toArray(Integer[]::<span style="color: blue">new</span>);
 <pre class="border p-lg-2 p-1">openjdk version "14-ea" 2020-03-17
 OpenJDK Runtime Environment (build 14-ea+33-1439)
 OpenJDK 64-Bit Server VM (build 14-ea+33-1439, mixed mode, sharing)</pre>
-<p>Также если надо прочитать только <code class="text-body text-nowrap">N</code> байтов, то можно использовать метод из Java 11 <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#readNBytes(int)">InputStream.readNBytes()</a></code>.</p>
-<p>Если же надо легко и эффективно (без промежуточного массива) перенаправить <code class="text-body text-nowrap">InputStream</code> в <code class="text-body text-nowrap">OutputStream</code>, то можно использовать <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#transferTo(java.io.OutputStream)">InputStream.transferTo()</a></code>. Например, для вывода версии Java в файл код будет выглядеть примерно так:</p>
+<p>Также если надо прочитать только <code class="text-nowrap">N</code> байтов, то можно использовать метод из Java 11 <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#readNBytes(int)">InputStream.readNBytes()</a></code>.</p>
+<p>Если же надо легко и эффективно (без промежуточного массива) перенаправить <code class="text-nowrap">InputStream</code> в <code class="text-nowrap">OutputStream</code>, то можно использовать <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#transferTo(java.io.OutputStream)">InputStream.transferTo()</a></code>. Например, для вывода версии Java в файл код будет выглядеть примерно так:</p>
 <pre class="border p-lg-2 p-1">Process proc = Runtime.getRuntime().exec(<span style="color: darkred">"java -version"</span>);
 Path path = Path.of(<span style="color: darkred">"out.txt"</span>);
 <span style="color: blue">try</span> (InputStream inputStream = proc.getErrorStream();
      OutputStream outputStream = Files.newOutputStream(path)) {
     inputStream.transferTo(outputStream);
 }</pre>
-<p>Кстати, перенаправить <code class="text-body text-nowrap">Reader</code> во <code class="text-body text-nowrap">Writer</code> теперь тоже можно: с помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/Reader.html#transferTo(java.io.Writer)">Reader.transferTo()</a></code>, появившегося в Java 10.</p>
+<p>Кстати, перенаправить <code class="text-nowrap">Reader</code> во <code class="text-nowrap">Writer</code> теперь тоже можно: с помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/Reader.html#transferTo(java.io.Writer)">Reader.transferTo()</a></code>, появившегося в Java 10.</p>
 
-<h4>5. <code class="text-body text-nowrap">Collectors.teeing()</code></h4>
+<h4>5. <code class="text-nowrap">Collectors.teeing()</code></h4>
 <h5>Появился в: Java 12</h5>
-<p>При использовании <code class="text-body text-nowrap">Stream</code> часто возникает необходимость собрать элементы в два коллектора. Допустим, у нас есть <code class="text-body text-nowrap">Stream</code> из <code class="text-body text-nowrap">Employee</code>, и нужно узнать:</p>
+<p>При использовании <code class="text-nowrap">Stream</code> часто возникает необходимость собрать элементы в два коллектора. Допустим, у нас есть <code class="text-nowrap">Stream</code> из <code class="text-nowrap">Employee</code>, и нужно узнать:</p>
 <ul>
   <li>Сколько всего сотрудников в Stream.</li>
   <li>Сколько сотрудников, у которых есть телефонный номер.</li>
 </ul>
-<p>Как это сделать в Java 8? Первое, что приходит в голову: сначала позвать <code class="text-body text-nowrap">Stream.count()</code>, а потом <code class="text-body text-nowrap">Stream.filter()</code> и <code class="text-body text-nowrap">Stream.count()</code>. Однако это не сработает, потому что <code class="text-body text-nowrap">Stream</code> является одноразовым и второй вызов выбросит исключение.</p>
-<p>Второй вариант &ndash; завести два счётчика и увеличивать их внутри <code class="text-body text-nowrap">Stream.forEach()</code>:</p>
+<p>Как это сделать в Java 8? Первое, что приходит в голову: сначала позвать <code class="text-nowrap">Stream.count()</code>, а потом <code class="text-nowrap">Stream.filter()</code> и <code class="text-nowrap">Stream.count()</code>. Однако это не сработает, потому что <code class="text-nowrap">Stream</code> является одноразовым и второй вызов выбросит исключение.</p>
+<p>Второй вариант &ndash; завести два счётчика и увеличивать их внутри <code class="text-nowrap">Stream.forEach()</code>:</p>
 <pre class="border p-lg-2 p-1">Stream&lt;Employee&gt; employees = ...
 <span style="color: blue">int</span>[] countWithPhoneAndTotal = {0, 0};
 employees
@@ -196,8 +196,8 @@ System.out.println(<span style="color: darkred">"Employees with phone number: "<
 System.out.println(<span style="color: darkred">"Total employees: "</span>
     + countWithPhoneAndTotal[1]);
 </pre>
-<p>В принципе, это работает, но это императивный подход, который плохо переносится на другие виды коллекторов. <code class="text-body text-nowrap">Stream.peek()</code> плох по той же причине.</p>
-<p>Ещё есть идея использовать <code class="text-body text-nowrap">Stream.reduce()</code>:</p>
+<p>В принципе, это работает, но это императивный подход, который плохо переносится на другие виды коллекторов. <code class="text-nowrap">Stream.peek()</code> плох по той же причине.</p>
+<p>Ещё есть идея использовать <code class="text-nowrap">Stream.reduce()</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">class</span> CountWithPhoneAndTotal {
     <span style="color: blue">final int</span> withPhone;
     <span style="color: blue">final int</span> total;
@@ -223,8 +223,8 @@ System.out.println(<span style="color: darkred">"Employees with phone number: "<
     + countWithPhoneAndTotal.withPhone);
 System.out.println(<span style="color: darkred">"Total employees: "</span>
     + countWithPhoneAndTotal.total);</pre>
-<p>Этот вариант, конечно же, кошмар. Во-первых, он слишком огромный, во-вторых, неэффективный, так как на каждом шагу создаётся новый экземпляр <code class="text-body text-nowrap">CountWithPhoneAndTotal</code>. Если когда-нибудь доделают <a href="http://cr.openjdk.java.net/~briangoetz/valhalla/sov/02-object-model.html">Валгаллу</a>, то можно будет пометить класс <code class="text-body text-nowrap">CountWithPhoneAndTotal</code> как <code class="text-body text-nowrap">inline</code>, но первая проблема всё равно останется.</p>
-<p>На этом мои идеи закончились. Если вдруг кто-то придумает, как сделать такой подсчёт в Java 8 коротким и эффективным, то напишите в комментариях. А я расскажу, как это можно сделать в Java 12 с помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Collectors.html#teeing(java.util.stream.Collector,java.util.stream.Collector,java.util.function.BiFunction)">Collectors.teeing()</a></code>:</p>
+<p>Этот вариант, конечно же, кошмар. Во-первых, он слишком огромный, во-вторых, неэффективный, так как на каждом шагу создаётся новый экземпляр <code class="text-nowrap">CountWithPhoneAndTotal</code>. Если когда-нибудь доделают <a href="http://cr.openjdk.java.net/~briangoetz/valhalla/sov/02-object-model.html">Валгаллу</a>, то можно будет пометить класс <code class="text-nowrap">CountWithPhoneAndTotal</code> как <code class="text-nowrap">inline</code>, но первая проблема всё равно останется.</p>
+<p>На этом мои идеи закончились. Если вдруг кто-то придумает, как сделать такой подсчёт в Java 8 коротким и эффективным, то напишите в комментариях. А я расскажу, как это можно сделать в Java 12 с помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Collectors.html#teeing(java.util.stream.Collector,java.util.stream.Collector,java.util.function.BiFunction)">Collectors.teeing()</a></code>:</p>
 <pre class="border p-lg-2 p-1">Entry&lt;Long, Long&gt; countWithPhoneAndTotal = employees
     .collect(teeing(
         filtering(employee -> employee.getPhoneNumber() != <span style="color: blue">null</span>, counting()),
@@ -232,11 +232,11 @@ System.out.println(<span style="color: darkred">"Total employees: "</span>
         Map::entry
     ));</pre>
 <p>И всё.</p>
-<p>С методом <code class="text-body text-nowrap">Collectors.teeing()</code> была очень интересная история: когда ему придумывали имя, то долго не могли <a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2018-June/053718.html">прийти к консенсусу</a> из-за огромного количество предложенных вариантов. Чего там только не было: <code class="text-body text-nowrap">toBoth</code>, <code class="text-body text-nowrap">collectingToBoth</code>, <code class="text-body text-nowrap">collectingToBothAndThen</code>, <code class="text-body text-nowrap">pairing</code>, <code class="text-body text-nowrap">bifurcate</code>, <code class="text-body text-nowrap">distributing</code>, <code class="text-body text-nowrap">unzipping</code>, <code class="text-body text-nowrap">forking</code>, ... В итоге его назвали <code class="text-body text-nowrap">teeing</code> от английского слова tee, которое само произошло от буквы <b>T</b>, напоминающую по форме раздваиватель. В этом и есть суть имени метода: он <i>раздваивает</i> поток на две части.</p>
+<p>С методом <code class="text-nowrap">Collectors.teeing()</code> была очень интересная история: когда ему придумывали имя, то долго не могли <a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2018-June/053718.html">прийти к консенсусу</a> из-за огромного количество предложенных вариантов. Чего там только не было: <code class="text-nowrap">toBoth</code>, <code class="text-nowrap">collectingToBoth</code>, <code class="text-nowrap">collectingToBothAndThen</code>, <code class="text-nowrap">pairing</code>, <code class="text-nowrap">bifurcate</code>, <code class="text-nowrap">distributing</code>, <code class="text-nowrap">unzipping</code>, <code class="text-nowrap">forking</code>, ... В итоге его назвали <code class="text-nowrap">teeing</code> от английского слова tee, которое само произошло от буквы <b>T</b>, напоминающую по форме раздваиватель. В этом и есть суть имени метода: он <i>раздваивает</i> поток на две части.</p>
 
-<h4>6. <code class="text-body text-nowrap">Runtime.version()</code></h4>
+<h4>6. <code class="text-nowrap">Runtime.version()</code></h4>
 <h5>Появился в: Java 9</h5>
-<p>Иногда нужно узнать версию Java во время выполнения. Помните ли вы, как это сделать? Скорее всего, вы полезете искать название нужного свойства в интернете. Возможно некоторые вспомнят, что оно называется <code class="text-body text-nowrap">java.version</code>. А ещё вроде бы есть <code class="text-body text-nowrap">java.specification.version</code>... На самом деле, таких свойств как минимум пять:</p>
+<p>Иногда нужно узнать версию Java во время выполнения. Помните ли вы, как это сделать? Скорее всего, вы полезете искать название нужного свойства в интернете. Возможно некоторые вспомнят, что оно называется <code class="text-nowrap">java.version</code>. А ещё вроде бы есть <code class="text-nowrap">java.specification.version</code>... На самом деле, таких свойств как минимум пять:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">for</span> (String key : Arrays.asList(
         <span style="color: darkred">"java.version"</span>,
         <span style="color: darkred">"java.runtime.version"</span>,
@@ -251,13 +251,13 @@ java.runtime.version = 1.8.0_192-b12
 java.specification.version = 1.8
 java.vm.version = 25.192-b12
 java.vm.specification.version = 1.8</pre>
-<p>Как отсюда вытащить цифру 8? Наверное, надо взять <code class="text-body text-nowrap">java.specification.version</code>, отбросить <code class="text-body text-nowrap">1.</code>, потом сконвертировать строку в число... Но не торопитесь, потому что на Java 9 это всё сломается:</p>
+<p>Как отсюда вытащить цифру 8? Наверное, надо взять <code class="text-nowrap">java.specification.version</code>, отбросить <code class="text-nowrap">1.</code>, потом сконвертировать строку в число... Но не торопитесь, потому что на Java 9 это всё сломается:</p>
 <pre class="border p-lg-2 p-1">java.version = 9.0.1
 java.runtime.version = 9.0.1+11
 java.specification.version = 9
 java.vm.version = 9.0.1+11
 java.vm.specification.version = 9</pre>
-<p>Однако не печальтесь, потому что в Java 9 <a href="https://openjdk.java.net/jeps/223">появилось</a> нормальное API для получения версий и было <a href="https://openjdk.java.net/jeps/322">немного допилено</a> в Java 10. С этим API больше не нужно ничего &laquo;вытаскивать&raquo; и парсить, а можно просто позвать метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Runtime.html#version()">Runtime.version()</a></code>. Этот метод возвращает объект типа <code class="text-body text-nowrap">Runtime.Version</code>, у которого можно запросить все нужные части версии:</p>
+<p>Однако не печальтесь, потому что в Java 9 <a href="https://openjdk.java.net/jeps/223">появилось</a> нормальное API для получения версий и было <a href="https://openjdk.java.net/jeps/322">немного допилено</a> в Java 10. С этим API больше не нужно ничего &laquo;вытаскивать&raquo; и парсить, а можно просто позвать метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Runtime.html#version()">Runtime.version()</a></code>. Этот метод возвращает объект типа <code class="text-nowrap">Runtime.Version</code>, у которого можно запросить все нужные части версии:</p>
 <pre class="border p-lg-2 p-1">Runtime.Version version = Runtime.version();
 System.out.println(<span style="color: darkred">"Feature = "</span> + version.feature());
 System.out.println(<span style="color: darkred">"Interim = "</span> + version.interim());
@@ -269,13 +269,13 @@ Interim = 0
 Update = 5
 Patch = 0</pre>
 
-<h4>7. <code class="text-body text-nowrap">Optional.isEmpty()</code></h4>
+<h4>7. <code class="text-nowrap">Optional.isEmpty()</code></h4>
 <h5>Появился в: Java 11</h5>
 <p>Я не стану утверждать, что этот метод изменит вашу жизнь радикальным образом, но всё же в некоторых случаях он сможет избавить вас от ненужных отрицаний:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (!stream.findAny().isPresent()) {
     System.out.println(<span style="color: darkred">"Stream is empty"</span>);
 }</pre>
-<p>Используя метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#isEmpty()">Optional.isEmpty()</a></code>, код можно немножко упростить:</p>
+<p>Используя метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#isEmpty()">Optional.isEmpty()</a></code>, код можно немножко упростить:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (stream.findAny().isEmpty()) {
     System.out.println(<span style="color: darkred">"Stream is empty"</span>);
 }</pre>
@@ -291,8 +291,8 @@ Patch = 0</pre>
 
 <h4>8. HTTP-клиент</h4>
 <h5>Появился в: Java 11</h5>
-<p>Долгое время единственным API для клиентского HTTP был класс <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/net/HttpURLConnection.html">HttpURLConnection</a></code>, который существовал в Java практически с момента её появления. Спустя два десятилетия стало очевидно, что он больше не отвечает современным требованиям: он неудобен в использовании, не поддерживает HTTP/2 и веб-сокеты, работает только в блокирующем режиме, а ещё его очень трудно поддерживать. Поэтому было принятое решение создать новый HTTP Client, который <a href="http://openjdk.java.net/jeps/110">попал в Java 9</a> в качестве <a href="http://openjdk.java.net/jeps/11">инкубационного</a> модуля, а позже был <a href="http://openjdk.java.net/jeps/321">стандартизован в Java 11</a>.</p>
-<p>Новый клиент находится в модуле <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.net.http/java/net/http/package-summary.html">java.net.http</a></code>, и его использование осуществляется через главный класс <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.net.http/java/net/http/HttpClient.html">HttpClient</a></code>. Приведём пример, как можно сделать простой HTTP-запрос с сайта и получить содержимое страницы с кодом ответа:</p>
+<p>Долгое время единственным API для клиентского HTTP был класс <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/net/HttpURLConnection.html">HttpURLConnection</a></code>, который существовал в Java практически с момента её появления. Спустя два десятилетия стало очевидно, что он больше не отвечает современным требованиям: он неудобен в использовании, не поддерживает HTTP/2 и веб-сокеты, работает только в блокирующем режиме, а ещё его очень трудно поддерживать. Поэтому было принятое решение создать новый HTTP Client, который <a href="http://openjdk.java.net/jeps/110">попал в Java 9</a> в качестве <a href="http://openjdk.java.net/jeps/11">инкубационного</a> модуля, а позже был <a href="http://openjdk.java.net/jeps/321">стандартизован в Java 11</a>.</p>
+<p>Новый клиент находится в модуле <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.net.http/java/net/http/package-summary.html">java.net.http</a></code>, и его использование осуществляется через главный класс <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.net.http/java/net/http/HttpClient.html">HttpClient</a></code>. Приведём пример, как можно сделать простой HTTP-запрос с сайта и получить содержимое страницы с кодом ответа:</p>
 <pre class="border p-lg-2 p-1">HttpClient client = HttpClient.newHttpClient();
 
 HttpRequest request = HttpRequest
@@ -313,12 +313,12 @@ Body =
 &lt;html&gt;
   &lt;head&gt;
     &lt;title>miniJUG&lt;/title&gt;</pre>
-<p>В модуле <code class="text-body text-nowrap">java.net.http</code> большое количество возможностей, и на их описание уйдёт много времени, поэтому сегодня мы ограничимся только примером выше.</p>
+<p>В модуле <code class="text-nowrap">java.net.http</code> большое количество возможностей, и на их описание уйдёт много времени, поэтому сегодня мы ограничимся только примером выше.</p>
 
-<h4>9. <code class="text-body text-nowrap">Lookup.defineClass()</code></h4>
+<h4>9. <code class="text-nowrap">Lookup.defineClass()</code></h4>
 <h5>Появился в: Java 9</h5>
-<p>Приходилось ли вам загружать классы во время выполнения? Если да, вы наверняка знаете, что в Java 8 без нового загрузчика класса это сделать нельзя. Ну или ещё можно использовать <code class="text-body text-nowrap">Unsafe.defineClass()</code> или <code class="text-body text-nowrap">Unsafe.defineAnonymousClass()</code>, но это нестандартное API, которое крайне не рекомендуется использовать.</p>
-<p>Однако есть хорошая новость: если вам нужно загрузить класс в том же пакете, не создавая новый загрузчик класса, то для этого можно использовать стандартный метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/invoke/MethodHandles.Lookup.html#defineClass(byte%5B%5D)">MethodHandles.Lookup.defineClass()</a></code>, который появился в Java 9. Этому методу достаточно передать массив байтов класса:</p>
+<p>Приходилось ли вам загружать классы во время выполнения? Если да, вы наверняка знаете, что в Java 8 без нового загрузчика класса это сделать нельзя. Ну или ещё можно использовать <code class="text-nowrap">Unsafe.defineClass()</code> или <code class="text-nowrap">Unsafe.defineAnonymousClass()</code>, но это нестандартное API, которое крайне не рекомендуется использовать.</p>
+<p>Однако есть хорошая новость: если вам нужно загрузить класс в том же пакете, не создавая новый загрузчик класса, то для этого можно использовать стандартный метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/invoke/MethodHandles.Lookup.html#defineClass(byte%5B%5D)">MethodHandles.Lookup.defineClass()</a></code>, который появился в Java 9. Этому методу достаточно передать массив байтов класса:</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">// Main.java</span>
 <span style="color: blue">import</span> java.lang.invoke.MethodHandles;
 <span style="color: blue">import</span> java.nio.file.Files;
@@ -339,7 +339,7 @@ Body =
         <span style="color: blue">return</span> <span style="color: darkred">"Hello from Temp!"</span>;
     }
 }</pre>
-<p>Теперь скомпилируем класс <code class="text-body text-nowrap">Temp</code>, а затем скомпилируем и запустим класс <code class="text-body text-nowrap">Main</code></p>
+<p>Теперь скомпилируем класс <code class="text-nowrap">Temp</code>, а затем скомпилируем и запустим класс <code class="text-nowrap">Main</code></p>
 <pre class="border p-lg-2 p-1">&gt; javac Temp.java
 
 &gt; javac Main.java
@@ -347,12 +347,12 @@ Body =
 &gt; java Main
 Hello from Temp!</pre>
 
-<p>Повторюсь, чтобы это сработало, класс <code class="text-body text-nowrap">Temp</code> и класс <code class="text-body text-nowrap">Main</code> должны находиться в одном пакете (в данном случае они оба находятся в дефолтном пакете, поэтому всё хорошо). Если класс <code class="text-body text-nowrap">Temp</code> будет находиться в другом пакете, то понадобится завести специальный класс-делегат в том же пакете, что и <code class="text-body text-nowrap">Temp</code>, и осуществлять загрузку через него.</p>
-<p>Да, пример выше совсем простой, но это сделано исключительно для краткости и простоты демонстрации. Так как <code class="text-body text-nowrap">defineClass()</code> принимает массив байтов, то загружать класс можно откуда угодно, а не только с файловой системы. Можно даже загрузить класс, скомпилированный в память во время исполнения. Для этого можно использовать <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.compiler/javax/tools/ToolProvider.html#getSystemJavaCompiler()">ToolProvider.getSystemJavaCompiler()</a></code>, который находится в модуле <code class="text-body text-nowrap">java.compiler</code> (конкретную реализацию я оставлю в качестве упражнения для читателя).</p>
+<p>Повторюсь, чтобы это сработало, класс <code class="text-nowrap">Temp</code> и класс <code class="text-nowrap">Main</code> должны находиться в одном пакете (в данном случае они оба находятся в дефолтном пакете, поэтому всё хорошо). Если класс <code class="text-nowrap">Temp</code> будет находиться в другом пакете, то понадобится завести специальный класс-делегат в том же пакете, что и <code class="text-nowrap">Temp</code>, и осуществлять загрузку через него.</p>
+<p>Да, пример выше совсем простой, но это сделано исключительно для краткости и простоты демонстрации. Так как <code class="text-nowrap">defineClass()</code> принимает массив байтов, то загружать класс можно откуда угодно, а не только с файловой системы. Можно даже загрузить класс, скомпилированный в память во время исполнения. Для этого можно использовать <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.compiler/javax/tools/ToolProvider.html#getSystemJavaCompiler()">ToolProvider.getSystemJavaCompiler()</a></code>, который находится в модуле <code class="text-nowrap">java.compiler</code> (конкретную реализацию я оставлю в качестве упражнения для читателя).</p>
 
-<h4>10. <code class="text-body text-nowrap">ByteArrayOutputStream.writeBytes()</code></h4>
+<h4>10. <code class="text-nowrap">ByteArrayOutputStream.writeBytes()</code></h4>
 <h5>Появился в: Java 11</h5>
-<p>Метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/ByteArrayOutputStream.html#writeBytes(byte%5B%5D)">ByteArrayOutputStream.writeBytes()</a></code> &ndash; это дублёр метода <code class="text-body text-nowrap">ByteArrayOutputStream.write()</code> с одним важным отличием: в сигнатуре <code class="text-body text-nowrap">write()</code> есть <code class="text-body text-nowrap">throws IOException</code>, а в сигнатуре <code class="text-body text-nowrap">writeBytes()</code> &ndash; нету (<code class="text-body text-nowrap">IOException</code> есть во <code class="text-body text-nowrap">write()</code>, потому что этот метод наследуется от <code class="text-body text-nowrap">OutputStream</code>). Это значит, что <a href="https://bugs.openjdk.java.net/browse/JDK-8199713">начиная</a> с Java 11, использование <code class="text-body text-nowrap">ByteArrayOutputStream</code> становится немножко проще:</p>
+<p>Метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/ByteArrayOutputStream.html#writeBytes(byte%5B%5D)">ByteArrayOutputStream.writeBytes()</a></code> &ndash; это дублёр метода <code class="text-nowrap">ByteArrayOutputStream.write()</code> с одним важным отличием: в сигнатуре <code class="text-nowrap">write()</code> есть <code class="text-nowrap">throws IOException</code>, а в сигнатуре <code class="text-nowrap">writeBytes()</code> &ndash; нету (<code class="text-nowrap">IOException</code> есть во <code class="text-nowrap">write()</code>, потому что этот метод наследуется от <code class="text-nowrap">OutputStream</code>). Это значит, что <a href="https://bugs.openjdk.java.net/browse/JDK-8199713">начиная</a> с Java 11, использование <code class="text-nowrap">ByteArrayOutputStream</code> становится немножко проще:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">private static byte</span>[] concat(Stream&lt;<span style="color: blue">byte</span>[]&gt; stream) {
     ByteArrayOutputStream out = <span style="color: blue">new</span> ByteArrayOutputStream();
     <span style="color: green">// stream.forEach(out::write); (Не скомпилируется)</span>
@@ -360,9 +360,9 @@ Hello from Temp!</pre>
     <span style="color: blue">return</span> out.toByteArray();
 }</pre>
 
-<h4>Бонус: конструктор <code class="text-body text-nowrap">IndexOutOfBoundsException(int)</code></h4>
+<h4>Бонус: конструктор <code class="text-nowrap">IndexOutOfBoundsException(int)</code></h4>
 <h5>Появился в: Java 9</h5>
-<p>Сегодняшний рассказ хочу завершить мелким улучшением в Java 9: если вам надо выбросить <code class="text-body text-nowrap">IndexOutOfBoundsException</code> с указанием неправильного индекса, то теперь можно просто передать этот индекс в <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/IndexOutOfBoundsException.html#%3Cinit%3E(int)">конструктор</a>, и он сам сгенерирует сообщение:</p>
+<p>Сегодняшний рассказ хочу завершить мелким улучшением в Java 9: если вам надо выбросить <code class="text-nowrap">IndexOutOfBoundsException</code> с указанием неправильного индекса, то теперь можно просто передать этот индекс в <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/IndexOutOfBoundsException.html#%3Cinit%3E(int)">конструктор</a>, и он сам сгенерирует сообщение:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">private static void</span> doAtIndex(<span style="color: blue">int</span> index) {
     <span style="color: blue">if</span> (index < 0) {
         <span style="color: blue">throw new</span> IndexOutOfBoundsException(index);

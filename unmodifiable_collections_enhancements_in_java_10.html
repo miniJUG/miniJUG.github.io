@@ -35,15 +35,15 @@
 <p class="text-secondary"><time datetime="2018-01-25">25 января, 2018</time></p>
 <article>
 <p>В Java 10, которая выйдет уже в <a href="java_10_release_date.html">марте этого года</a>, появятся несколько новых методов, благодаря которым будет легче работать с неизменяемыми коллекциями.</p>
-<p><a href="https://bugs.openjdk.java.net/browse/JDK-8177290">Во-первых</a>, это методы, создающие неизменяемую копию другой коллекции: <code class="text-body text-nowrap">List.copyOf()</code>, <code class="text-body text-nowrap">Set.copyOf()</code> и <code class="text-body text-nowrap">Map.copyOf()</code>. Это является полезным дополнением, потому что в Java 9, чтобы создать, например, неизменяемую копию списка, нужно вызвать <code class="text-body text-nowrap">List.of(list.toArray())</code>, что выглядит довольно неуклюже.</p>
-<p><a href="https://bugs.openjdk.java.net/browse/JDK-8184690">Во-вторых</a>, это методы <code class="text-body text-nowrap">Collectors.toUnmodifiableList()</code>, <code class="text-body text-nowrap">Collectors.toUnmodifiableSet()</code> и <code class="text-body text-nowrap">Collectors.toUnmodifiableMap()</code>. Они позволяют свернуть <code class="text-body text-nowrap">Stream</code> и вернуть соответствующую неизменяемую коллекцию:</p>
+<p><a href="https://bugs.openjdk.java.net/browse/JDK-8177290">Во-первых</a>, это методы, создающие неизменяемую копию другой коллекции: <code class="text-nowrap">List.copyOf()</code>, <code class="text-nowrap">Set.copyOf()</code> и <code class="text-nowrap">Map.copyOf()</code>. Это является полезным дополнением, потому что в Java 9, чтобы создать, например, неизменяемую копию списка, нужно вызвать <code class="text-nowrap">List.of(list.toArray())</code>, что выглядит довольно неуклюже.</p>
+<p><a href="https://bugs.openjdk.java.net/browse/JDK-8184690">Во-вторых</a>, это методы <code class="text-nowrap">Collectors.toUnmodifiableList()</code>, <code class="text-nowrap">Collectors.toUnmodifiableSet()</code> и <code class="text-nowrap">Collectors.toUnmodifiableMap()</code>. Они позволяют свернуть <code class="text-nowrap">Stream</code> и вернуть соответствующую неизменяемую коллекцию:</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">// Generate all powers of 2 less than 100</span>
 <span style="color: green">// and return an unmodifiable List</span>
 Stream
     .iterate(1, i -> i &lt; 100, i -> i * 2)
     .collect(toUnmodifiableList());
 <span style="color: green">// [1, 2, 4, 8, 16, 32, 64]</span></pre>
-<p>Напомним, что неизменяемые коллекции впервые появились в Java 9 с введением методов-фабрик: <code class="text-body text-nowrap">List.of()</code>, <code class="text-body text-nowrap">Set.of()</code>, <code class="text-body text-nowrap">Map.of()</code> и <code class="text-body text-nowrap">Map.ofEntries()</code>. До Java 9 поддержки неизменяемых коллекций не было, а были только неизменяемые view коллекций: <code class="text-body text-nowrap">Collections.unmodifiableCollection()</code>, <code class="text-body text-nowrap">Collections.unmodifiableList()</code> и т.д.</p>
+<p>Напомним, что неизменяемые коллекции впервые появились в Java 9 с введением методов-фабрик: <code class="text-nowrap">List.of()</code>, <code class="text-nowrap">Set.of()</code>, <code class="text-nowrap">Map.of()</code> и <code class="text-nowrap">Map.ofEntries()</code>. До Java 9 поддержки неизменяемых коллекций не было, а были только неизменяемые view коллекций: <code class="text-nowrap">Collections.unmodifiableCollection()</code>, <code class="text-nowrap">Collections.unmodifiableList()</code> и т.д.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>

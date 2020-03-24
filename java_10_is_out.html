@@ -33,10 +33,10 @@
 <p>Только что на сайте Oracle <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">стала доступна</a> для скачивания новая, десятая версия Java SE. Java 10 – это первая версия Java, вышедшая в соответствии с новым полугодовым релизным циклом, т.е. не через несколько лет после выхода Java 9, а всего через полгода. Это значит, что в Java 10 не так много изменений по сравнению с Java 9, чем в Java 9 по сравнению с Java 8 (<a href="http://openjdk.java.net/projects/jdk/10/">12 JEP'ов</a> в Java 10 против <a href="http://openjdk.java.net/projects/jdk9/">99</a> в Java 9).</p>
 <p>Вот список главных изменений в Java 10:</p>
 <ul>
-  <li><a href="http://openjdk.java.net/jeps/286">JEP 286: Local-Variable Type Inference</a>. Теперь можно не писать тип локальных переменных, а вместо этого использовать ключевое слово <code class="text-body text-nowrap">var</code>.</li>
+  <li><a href="http://openjdk.java.net/jeps/286">JEP 286: Local-Variable Type Inference</a>. Теперь можно не писать тип локальных переменных, а вместо этого использовать ключевое слово <code class="text-nowrap">var</code>.</li>
   <li><a href="http://openjdk.java.net/jeps/307">JEP 307: Parallel Full GC for G1</a>. G1, который стал сборщиком мусора по умолчанию начиная с Java 9, теперь поддерживает параллельную полную сборку мусора. До этого полная сборка мусора была однопоточной.</li>
   <li><a href="http://openjdk.java.net/jeps/310">JEP 310: Application Class-Data Sharing</a>. Class-Data Sharing теперь поддерживает не только системные классы, но и классы приложения.</li>
-  <li><a href="http://openjdk.java.net/jeps/313">JEP 313: Remove the Native-Header Generation Tool</a>. Утилита <code class="text-body text-nowrap">javah</code> для генерации нативных заголовков была удалена. Вместо неё нужно использовать javac.</li>
+  <li><a href="http://openjdk.java.net/jeps/313">JEP 313: Remove the Native-Header Generation Tool</a>. Утилита <code class="text-nowrap">javah</code> для генерации нативных заголовков была удалена. Вместо неё нужно использовать javac.</li>
   <li><a href="http://openjdk.java.net/jeps/317">JEP 317: Experimental Java-Based JIT Compiler</a>. Теперь в Java есть новый экспериментальный JIT-компилятор Graal, написанный полностью на Java. Graal использует интерфейс компилятора JVM (JVMCI), который появился в Java 9. Graal уже был включён в Java 9, но только на Linux. Теперь же он есть на всех платформах.</li>
   <li><a href="http://openjdk.java.net/jeps/322">JEP 322: Time-Based Release Versioning</a>. Java 10 теперь будет использовать <a href="new_java_version_proposal.html">новую схему версионирования</a>, которая очень близка к предыдущей схеме, специфицированной в <a href="http://openjdk.java.net/jeps/223">JEP 223</a>, но с небольшими различиями, которые упрощают версионирование при новом релизном цикле.</li>
 </ul>
@@ -51,12 +51,12 @@
 </ul>
 <p>Список наиболее значимых изменений в API:</p>
 <ul>
-  <li>Новые методы <code class="text-body text-nowrap">List.copyOf()</code>, <code class="text-body text-nowrap">Set.copyOf()</code> и <code class="text-body text-nowrap">Map.copyOf()</code>.</li>
-  <li>Новые методы <code class="text-body text-nowrap">Collectors.toUnmodifiableList()</code>, <code class="text-body text-nowrap">Collectors.toUnmodifiableSet()</code>, <code class="text-body text-nowrap">Collectors.toUnmodifiableMap()</code>.</li>
-  <li>Новый метод <code class="text-body text-nowrap">Optional.orElseThrow()</code>, который делает то же самое, что и <code class="text-body text-nowrap">Optional.get()</code>, но который более точно отражает его суть.</li>
-  <li>Новые методы в <code class="text-body text-nowrap">JarFile</code> и <code class="text-body text-nowrap">JarEntry</code>, упрощающие работу с мультирелизными JAR-файлами.</li>
-  <li>Новый метод <code class="text-body text-nowrap">Reader.transferTo(Writer)</code>.</li>
-  <li>Новый конструктор <code class="text-body text-nowrap">PrintWriter</code>, который принимает <code class="text-body text-nowrap">Charset</code>.</li>
+  <li>Новые методы <code class="text-nowrap">List.copyOf()</code>, <code class="text-nowrap">Set.copyOf()</code> и <code class="text-nowrap">Map.copyOf()</code>.</li>
+  <li>Новые методы <code class="text-nowrap">Collectors.toUnmodifiableList()</code>, <code class="text-nowrap">Collectors.toUnmodifiableSet()</code>, <code class="text-nowrap">Collectors.toUnmodifiableMap()</code>.</li>
+  <li>Новый метод <code class="text-nowrap">Optional.orElseThrow()</code>, который делает то же самое, что и <code class="text-nowrap">Optional.get()</code>, но который более точно отражает его суть.</li>
+  <li>Новые методы в <code class="text-nowrap">JarFile</code> и <code class="text-nowrap">JarEntry</code>, упрощающие работу с мультирелизными JAR-файлами.</li>
+  <li>Новый метод <code class="text-nowrap">Reader.transferTo(Writer)</code>.</li>
+  <li>Новый конструктор <code class="text-nowrap">PrintWriter</code>, который принимает <code class="text-nowrap">Charset</code>.</li>
 </ul>
 <p>Важно знать, что Java 10 не является LTS-релизом. Это означает, что у него выйдет всего два обновления 10.0.1 и 10.0.2, а потом для обновления ничего не останется, кроме как перейти на Java 11. Кроме того, Java 10 будет <a href="no_more_free_oracle_jdk.html">последней бесплатной версией</a> Oracle JDK. Следующая версия Oracle JDK будет доступна только за деньги, а бесплатно можно будет скачать только OpenJDK.</p>
 </article>

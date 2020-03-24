@@ -34,7 +34,7 @@
 <h3 id="title">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</h3>
 <p class="text-secondary"><time datetime="2019-08-15">15 августа, 2019</time></p>
 <article>
-<p>Вышел <a href="https://openjdk.java.net/jeps/8227870">новый черновик</a> JEP, в котором предлагается ввести в язык Java две новые экранирующие последовательности: <code class="text-body text-nowrap">\&lt;line-terminator&gt;</code> и <code class="text-body text-nowrap">\s</code>.</p>
+<p>Вышел <a href="https://openjdk.java.net/jeps/8227870">новый черновик</a> JEP, в котором предлагается ввести в язык Java две новые экранирующие последовательности: <code class="text-nowrap">\&lt;line-terminator&gt;</code> и <code class="text-nowrap">\s</code>.</p>
 <p class="pt-2">Первая последовательность позволит писать длинные однострочные литералы без использования конкатенации. Например, вместо</p>
 <pre class="border p-lg-2 p-1">String str = <span style="color: darkred">"A line that may need to "</span> +
         <span style="color: darkred">"continue on the next line."</span>;</pre>
@@ -45,17 +45,17 @@
 <pre class="border p-lg-2 p-1">String str = <span style="color: darkred">"""
         A line that may need to
         continue on the next line."""</span>;</pre>
-<p>Такая строка транслируется в <code class="text-body text-nowrap">"A line that may need to\ncontinue on the next line."</code>, поэтому в этом случае всё равно придётся использовать символ <code class="text-body text-nowrap">\</code> на конце, чтобы подавить неявный перенос строки:</p>
+<p>Такая строка транслируется в <code class="text-nowrap">"A line that may need to\ncontinue on the next line."</code>, поэтому в этом случае всё равно придётся использовать символ <code class="text-nowrap">\</code> на конце, чтобы подавить неявный перенос строки:</p>
           <pre class="border p-lg-2 p-1">String str = <span style="color: darkred">"""
         A line that may need to \
         continue on the next line."""</span>;</pre>
-<p class="pt-2">Вторая последовательность (<code class="text-body text-nowrap">\s</code>) является ничем иным как просто символом пробела (U+0020), но записанным в экранирующей форме. В текущих версиях Java экранировать пробел можно писать с помощью октальной последовательности <code class="text-body text-nowrap">\040</code> или кода <code class="text-body text-nowrap">\u0020</code>. Однако <code class="text-body text-nowrap">\s</code> будет короче и проще для читателя. Нужен же такой явный пробел, чтобы избежать удаления компилятором лидирующих пробельных символов на концах строк в блоках текста:</p>
+<p class="pt-2">Вторая последовательность (<code class="text-nowrap">\s</code>) является ничем иным как просто символом пробела (U+0020), но записанным в экранирующей форме. В текущих версиях Java экранировать пробел можно писать с помощью октальной последовательности <code class="text-nowrap">\040</code> или кода <code class="text-nowrap">\u0020</code>. Однако <code class="text-nowrap">\s</code> будет короче и проще для читателя. Нужен же такой явный пробел, чтобы избежать удаления компилятором лидирующих пробельных символов на концах строк в блоках текста:</p>
 <pre class="border p-lg-2 p-1">String colors = <span style="color: darkred">"""
         <span style="background-color: lightgray">red     <span style="color: darkblue">\s</span></span>
         <span style="background-color: lightgray">green   <span style="color: darkblue">\s</span></span>
         <span style="background-color: lightgray">blue    <span style="color: darkblue">\s</span></span>
         """</span>;</pre>
-<p>В данном случае <code class="text-body text-nowrap">\s</code> является барьером, сигнализирующим компилятору, что пробелы после <code class="text-body text-nowrap">red</code>, <code class="text-body text-nowrap">green</code> и <code class="text-body text-nowrap">blue</code> &laquo;съедать&raquo; не надо. В противном случае получилась бы строка <code class="text-body text-nowrap">"red\ngreen\nblue\n"</code>.</p>
+<p>В данном случае <code class="text-nowrap">\s</code> является барьером, сигнализирующим компилятору, что пробелы после <code class="text-nowrap">red</code>, <code class="text-nowrap">green</code> и <code class="text-nowrap">blue</code> &laquo;съедать&raquo; не надо. В противном случае получилась бы строка <code class="text-nowrap">"red\ngreen\nblue\n"</code>.</p>
 <p>Новые последовательности предполагается реализовать в статусе Preview.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>

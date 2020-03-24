@@ -31,10 +31,10 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В конструкторах классов можно будет писать код перед <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code></h3>
+<h3 id="title">В конструкторах классов можно будет писать код перед <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code></h3>
 <p class="text-secondary"><time datetime="2018-01-08">8 января, 2018</time></p>
 <article>
-<p>Недавно в репозитории проекта Amber появился <a href="http://mail.openjdk.java.net/pipermail/amber-dev/2018-January/002482.html">коммит</a>, который позволит писать инструкции кода выше вызовов <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code> в конструкторах. Сейчас <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code> обязательно должны быть первыми вызовами в конструкторах, что часто создаёт неудобства при написании кода, например, если необходимо сделать какую-то нетривиальную валидацию входных аргументов или просто вынести в переменные слишком длинные выражения:</p>
+<p>Недавно в репозитории проекта Amber появился <a href="http://mail.openjdk.java.net/pipermail/amber-dev/2018-January/002482.html">коммит</a>, который позволит писать инструкции кода выше вызовов <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code> в конструкторах. Сейчас <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code> обязательно должны быть первыми вызовами в конструкторах, что часто создаёт неудобства при написании кода, например, если необходимо сделать какую-то нетривиальную валидацию входных аргументов или просто вынести в переменные слишком длинные выражения:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> TxtFile <span style="color: blue">extends</span> File {
     <span style="color: blue">public</span> TxtFile(String path) {
         <span style="color: blue">if</span> (!path.endsWith(<span style="color: darkred">".txt"</span>)) {
@@ -43,8 +43,8 @@
         <span style="color: blue">super</span>(path);
     }
 }</pre>
-<p>Кроме того, возможность писать код перед вызовом конструктора также сильно поможет при написании <a href="data_classes.html">data-классов</a>. При компиляции data-класса компилятор будет создавать конструктор по умолчанию, который не будет делать никакой другой работы кроме инициализации полей. Чтобы добавить в инициализацию класса какую-то более сложную логику, нужно будет объявить свой конструктор, в котором необходимо вызвать конструктор по умолчанию посредством ключевого слова <code class="text-body text-nowrap">default()</code> (аналогично <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code>).</p>
-<p>Так как объект до вызова <code class="text-body text-nowrap">this()</code> / <code class="text-body text-nowrap">super()</code> / <code class="text-body text-nowrap">default()</code> ещё неявляется проинициализированным, на код будут накладываться некоторые ограничения. Например, этот код не сможет использовать поля класса и нестатические методы.</p>
+<p>Кроме того, возможность писать код перед вызовом конструктора также сильно поможет при написании <a href="data_classes.html">data-классов</a>. При компиляции data-класса компилятор будет создавать конструктор по умолчанию, который не будет делать никакой другой работы кроме инициализации полей. Чтобы добавить в инициализацию класса какую-то более сложную логику, нужно будет объявить свой конструктор, в котором необходимо вызвать конструктор по умолчанию посредством ключевого слова <code class="text-nowrap">default()</code> (аналогично <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code>).</p>
+<p>Так как объект до вызова <code class="text-nowrap">this()</code> / <code class="text-nowrap">super()</code> / <code class="text-nowrap">default()</code> ещё неявляется проинициализированным, на код будут накладываться некоторые ограничения. Например, этот код не сможет использовать поля класса и нестатические методы.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -87,7 +87,7 @@
 <li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
 <li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
 <li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
-<li>В конструкторах классов можно будет писать код перед <code class="text-body text-nowrap">this()</code> и <code class="text-body text-nowrap">super()</code></li>
+<li>В конструкторах классов можно будет писать код перед <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code></li>
   </ul>
 </div>
 <div class="mt-3">

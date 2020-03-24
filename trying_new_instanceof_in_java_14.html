@@ -31,10 +31,10 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Пробуем улучшенный оператор <code class="text-body text-nowrap">instanceof</code> в Java 14</h3>
+<h3 id="title">Пробуем улучшенный оператор <code class="text-nowrap">instanceof</code> в Java 14</h3>
 <p class="text-secondary"><time datetime="2019-11-27">27 ноября, 2019</time></p>
 <article>
-<p>Не за горами новая, <a href="http://openjdk.java.net/projects/jdk/14/">14-я версия</a> Java, а значит самое время посмотреть, какие новые синтаксические возможности будет содержать эта версия Java. Одной из таких синтаксических возможностей является <a href="https://openjdk.java.net/jeps/305">паттерн-матчинг по типу</a>, который будет осуществляться посредством улучшенного (расширенного) оператора <code class="text-body text-nowrap">instanceof</code>.</p>
+<p>Не за горами новая, <a href="http://openjdk.java.net/projects/jdk/14/">14-я версия</a> Java, а значит самое время посмотреть, какие новые синтаксические возможности будет содержать эта версия Java. Одной из таких синтаксических возможностей является <a href="https://openjdk.java.net/jeps/305">паттерн-матчинг по типу</a>, который будет осуществляться посредством улучшенного (расширенного) оператора <code class="text-nowrap">instanceof</code>.</p>
 <p>Сегодня я хотел бы поиграться с этим новым оператором и рассмотреть особенности его работы более детально. Так как паттерн-матчинг по типу ещё не вошёл в главный репозиторий JDK, мне пришлось скачать репозиторий <a href="https://openjdk.java.net/projects/amber/">проекта Amber</a>, в котором ведётся разработка новых синтаксических конструкций Java, и <a href="https://builds.shipilev.net/workspaces/">собрать JDK</a> из этого репозитория.</p>
 <p>Итак, первое, что мы сделаем – проверим версию Java, чтобы убедиться, что мы действительно используем JDK 14:</p>
 <pre class="border p-lg-2 p-1">&gt; java -version
@@ -58,13 +58,13 @@ OpenJDK 64-Bit Server VM (build 14-internal+0-adhoc.osboxes.amber-amber, mixed m
 <pre class="border p-lg-2 p-1">&gt; java A.java
 Hello, world!</pre>
 <p>Работает. Это стандартная проверка на тип с последующим приведением. Подобные конструкции мы пишем изо дня в день, какую бы версию Java мы бы не использовали, хоть 1.0, хоть 13.</p>
-<p>Но теперь у нас в руках Java 14, и давайте перепишем код с использованием улучшенного оператора <code class="text-body text-nowrap">instanceof</code> (повторяющиеся строки кода в дальнейшем буду опускать):</p>
+<p>Но теперь у нас в руках Java 14, и давайте перепишем код с использованием улучшенного оператора <code class="text-nowrap">instanceof</code> (повторяющиеся строки кода в дальнейшем буду опускать):</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str) {
     System.out.println(str.toLowerCase());
 }</pre>
 <pre class="border p-lg-2 p-1">&gt; java --enable-preview --source 14 A.java
 Hello, world!</pre>
-<p>Прекрасно. Код стал чище, короче, безопаснее и читабельнее. Было три повторения слова <code class="text-body text-nowrap">String</code>, стало одно. Заметьте, что мы не забыли указать аргументы <code class="text-body text-nowrap">--enable-preview --source 14</code>, т.к. новый оператор является <a href="https://openjdk.java.net/jeps/12">preview feature</a>. Кроме того, внимательный читатель, наверное, заметил, что мы запустили исходный файл <code class="text-body text-nowrap">A.java</code> напрямую, без компиляции. Такая возможность <a href="launch_single_file_source_code_programs.html">появилась в Java 11</a>.</p>
+<p>Прекрасно. Код стал чище, короче, безопаснее и читабельнее. Было три повторения слова <code class="text-nowrap">String</code>, стало одно. Заметьте, что мы не забыли указать аргументы <code class="text-nowrap">--enable-preview --source 14</code>, т.к. новый оператор является <a href="https://openjdk.java.net/jeps/12">preview feature</a>. Кроме того, внимательный читатель, наверное, заметил, что мы запустили исходный файл <code class="text-nowrap">A.java</code> напрямую, без компиляции. Такая возможность <a href="launch_single_file_source_code_programs.html">появилась в Java 11</a>.</p>
 <p>Давайте попробуем написать что-нибудь более навороченное и добавим второе условие, которое использует только что объявленную переменную:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str && str.length() > 5) {
     System.out.println(str.toLowerCase());
@@ -76,8 +76,8 @@ Hello, world!</pre>
 <pre class="border p-lg-2 p-1">A.java:7: error: cannot find symbol
         if (str.length() > 5 && obj instanceof String str) {
             ^</pre>
-<p>Ошибка компиляции. Чего и следовало ожидать: переменная <code class="text-body text-nowrap">str</code> ещё не объявлена, а значит не может быть использована.</p>
-<p>Кстати, что с мутабельностью? Переменная <code class="text-body text-nowrap">final</code> или нет? Пробуем:</p>
+<p>Ошибка компиляции. Чего и следовало ожидать: переменная <code class="text-nowrap">str</code> ещё не объявлена, а значит не может быть использована.</p>
+<p>Кстати, что с мутабельностью? Переменная <code class="text-nowrap">final</code> или нет? Пробуем:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str) {
     str = <span style="color: darkred">"World, hello!"</span>;
     System.out.println(str.toLowerCase());
@@ -85,7 +85,7 @@ Hello, world!</pre>
 <pre class="border p-lg-2 p-1">A.java:8: error: pattern binding str may not be assigned
     str = "World, hello!";
     ^</pre>
-<p>Ага, переменная <code class="text-body text-nowrap">final</code>. Это значит, что слово &laquo;переменная&raquo; здесь вообще не совсем корректно. Да и компилятор использует специальный термин &laquo;pattern binding&raquo;. Поэтому предлагаю отныне говорить не &laquo;переменная&raquo;, а &laquo;биндинг паттерна&raquo; (к сожалению, слово &laquo;binding&raquo; не очень хорошо переводится на русский).
+<p>Ага, переменная <code class="text-nowrap">final</code>. Это значит, что слово &laquo;переменная&raquo; здесь вообще не совсем корректно. Да и компилятор использует специальный термин &laquo;pattern binding&raquo;. Поэтому предлагаю отныне говорить не &laquo;переменная&raquo;, а &laquo;биндинг паттерна&raquo; (к сожалению, слово &laquo;binding&raquo; не очень хорошо переводится на русский).
 </p>
 <p>С мутабельностью и терминологией разобрались. Поехали экспериментировать дальше. Вдруг у нас получится &laquo;сломать&raquo; компилятор?</p>
 <p>Что если назвать переменную и биндинг паттерна одним и тем же именем?</p>
@@ -95,7 +95,7 @@ Hello, world!</pre>
 <pre class="border p-lg-2 p-1">A.java:7: error: variable obj is already defined in method f(Object)
 if (obj instanceof String obj) {
                           ^</pre>
-<p>Логично. Перекрытие переменной из внешней области видимости не работает. Это эквивалентно тому, как если бы мы просто завели переменную <code class="text-body text-nowrap">obj</code> второй раз в той же области видимости.</p>
+<p>Логично. Перекрытие переменной из внешней области видимости не работает. Это эквивалентно тому, как если бы мы просто завели переменную <code class="text-nowrap">obj</code> второй раз в той же области видимости.</p>
 <p>А если так:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str && obj <span style="color: blue">instanceof</span> String str) {
     System.out.println(str.toLowerCase());
@@ -104,7 +104,7 @@ if (obj instanceof String obj) {
 if (obj instanceof String str && obj instanceof String str) {
                               ^</pre>
 <p>Компилятор надёжен, как бетон.</p>
-<p>Что ещё можно попробовать? Давайте поиграемся с областями видимости. Если в ветке <code class="text-body text-nowrap">if</code> определён биндинг, то будет ли он определён в ветке <code class="text-body text-nowrap">else</code>, если инвертировать условие?</p>
+<p>Что ещё можно попробовать? Давайте поиграемся с областями видимости. Если в ветке <code class="text-nowrap">if</code> определён биндинг, то будет ли он определён в ветке <code class="text-nowrap">else</code>, если инвертировать условие?</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (!(obj <span style="color: blue">instanceof</span> String str)) {
     System.out.println(<span style="color: darkred">"not a string"</span>);
 } else {
@@ -115,7 +115,7 @@ if (obj instanceof String str && obj instanceof String str) {
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str && <span style="color: blue">true</span>) {
     System.out.println(str.toLowerCase());
 }</pre>
-<p>Опять сработало. Компилятор корректно понимает, что условие сводится к простому <code class="text-body text-nowrap">obj instanceof String str</code>.</p>
+<p>Опять сработало. Компилятор корректно понимает, что условие сводится к простому <code class="text-nowrap">obj instanceof String str</code>.</p>
 <p>Неужели не удастся &laquo;сломать&raquo; компилятор?</p>
 <p>Может, так?</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str || <span style="color: blue">false</span>) {
@@ -126,9 +126,9 @@ if (obj instanceof String str && obj instanceof String str) {
                        ^</pre>
 <p>Ага! Вот это уже похоже на баг. Ведь все три условия абсолютно эквивалентны:</p>
 <ul>
-  <li><code class="text-body text-nowrap">obj instanceof String str</code></li>
-  <li><code class="text-body text-nowrap">obj instanceof String str && true</code></li>
-  <li><code class="text-body text-nowrap">obj instanceof String str || false</code></li>
+  <li><code class="text-nowrap">obj instanceof String str</code></li>
+  <li><code class="text-nowrap">obj instanceof String str && true</code></li>
+  <li><code class="text-nowrap">obj instanceof String str || false</code></li>
 </ul>
 <p>С другой стороны, правила flow scoping довольно <a href="http://cr.openjdk.java.net/~briangoetz/amber/pattern-semantics.html#scoping-of-pattern-variables">нетривиальны</a>, и возможно такой случай действительно не должен работать. Но если смотреть чисто с человеческой точки зрения, то я считаю, что это баг.</p>
 <p>Но да ладно, давайте попробуем ещё что-нибудь. Будет ли работать такое:</p>
@@ -155,7 +155,7 @@ System.out.println(str.toLowerCase());</pre>
         }
     }
 }</pre>
-<p>Компилятор не заругался. Это вполне логично, потому что локальные переменные всегда могли перекрывать поля. Для биндингов паттернов, видимо, тоже решили не делать исключения. С другой стороны, такой код довольно хрупок. Одно неосторожное движение, и вы можете не заметить, как ваша ветка <code class="text-body text-nowrap">if</code> &laquo;сломалась&raquo;:</p>
+<p>Компилятор не заругался. Это вполне логично, потому что локальные переменные всегда могли перекрывать поля. Для биндингов паттернов, видимо, тоже решили не делать исключения. С другой стороны, такой код довольно хрупок. Одно неосторожное движение, и вы можете не заметить, как ваша ветка <code class="text-nowrap">if</code> &laquo;сломалась&raquo;:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">private boolean</span> isOK() {
     <span style="color: blue">return false</span>;
 }
@@ -167,8 +167,8 @@ System.out.println(str.toLowerCase());</pre>
         System.out.println(str.toLowerCase());
     }
 }</pre>
-<p>В обеих ветвях теперь используется поле str, чего может не ожидать невнимательный программист. Чтобы как можно раньше обнаруживать подобные ошибки, используйте инспекции в IDE и разную подсветку синтаксиса для полей и переменных. А ещё я рекомендую всегда использовать квалификатор <code class="text-body text-nowrap">this</code> для полей. Это добавит ещё больше надёжности.</p>
-<p>Что ещё интересного? Как и &laquo;старый&raquo; <code class="text-body text-nowrap">instanceof</code>, новый никогда не матчит <code class="text-body text-nowrap">null</code>. Это значит, что можно всегда полагаться на то, что биндинги паттернов никогда не могут быть <code class="text-body text-nowrap">null</code>:</p>
+<p>В обеих ветвях теперь используется поле str, чего может не ожидать невнимательный программист. Чтобы как можно раньше обнаруживать подобные ошибки, используйте инспекции в IDE и разную подсветку синтаксиса для полей и переменных. А ещё я рекомендую всегда использовать квалификатор <code class="text-nowrap">this</code> для полей. Это добавит ещё больше надёжности.</p>
+<p>Что ещё интересного? Как и &laquo;старый&raquo; <code class="text-nowrap">instanceof</code>, новый никогда не матчит <code class="text-nowrap">null</code>. Это значит, что можно всегда полагаться на то, что биндинги паттернов никогда не могут быть <code class="text-nowrap">null</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> String str) {
     System.out.println(str.toLowerCase());
     <span style="color: green">// Никогда не выбросит NullPointerException</span>
@@ -183,7 +183,7 @@ System.out.println(str.toLowerCase());</pre>
         }
     }
 }</pre>
-<p>Если использовать <code class="text-body text-nowrap">instanceof</code>, то код выше можно переписать так:</p>
+<p>Если использовать <code class="text-nowrap">instanceof</code>, то код выше можно переписать так:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (a != <span style="color: blue">null</span>
     && a.getB() <span style="color: blue">instanceof</span> B b
     && b.getC() <span style="color: blue">instanceof</span> C c) {
@@ -208,7 +208,7 @@ System.out.println(str.toLowerCase());</pre>
 Note: A.java uses unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 3</pre>
-<p>Очень интересно. Если &laquo;старый&raquo; <code class="text-body text-nowrap">instanceof</code> поддерживает только <code class="text-body text-nowrap">instanceof List</code> или <code class="text-body text-nowrap">instanceof List&lt;?&gt;</code>, то новый работает с любым конкретным типом. Ждём первого человека, который попадётся вот в такую ловушку:</p>
+<p>Очень интересно. Если &laquo;старый&raquo; <code class="text-nowrap">instanceof</code> поддерживает только <code class="text-nowrap">instanceof List</code> или <code class="text-nowrap">instanceof List&lt;?&gt;</code>, то новый работает с любым конкретным типом. Ждём первого человека, который попадётся вот в такую ловушку:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> List&lt;Integer&gt; list) {
     System.out.println(<span style="color: darkred">"Int list of size "</span> + list.size());
 } <span style="color: blue">else if</span> (obj <span style="color: blue">instanceof</span> List&lt;String&gt; list) {
@@ -218,7 +218,7 @@ Note: Recompile with -Xlint:unchecked for details.
 <br/>
 <p>ИМХО, это довольно серьёзная проблема. С другой стороны, я не знаю, как можно было бы её исправить. Похоже, опять придётся полагаться на инспекции в IDE.</p>
 <h4>Выводы</h4>
-<p>В целом, новый паттерн-матчинг по типу работает очень круто. Улучшенный оператор <code class="text-body text-nowrap">instanceof</code> позволяет делать не только тест на тип, но ещё и объявлять готовый биндинг этого типа, избавляя от необходимости ручного приведения. Это означает, что в коде будет меньше шума, и читателю будет гораздо проще разглядеть полезную логику. Например, большинство реализаций <code class="text-body text-nowrap">equals()</code> можно будет писать в одну строчку:</p>
+<p>В целом, новый паттерн-матчинг по типу работает очень круто. Улучшенный оператор <code class="text-nowrap">instanceof</code> позволяет делать не только тест на тип, но ещё и объявлять готовый биндинг этого типа, избавляя от необходимости ручного приведения. Это означает, что в коде будет меньше шума, и читателю будет гораздо проще разглядеть полезную логику. Например, большинство реализаций <code class="text-nowrap">equals()</code> можно будет писать в одну строчку:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> Point {
     <span style="color: blue">private final int</span> x, y;
     …
@@ -239,11 +239,11 @@ Note: Recompile with -Xlint:unchecked for details.
 <br/>
 <p>С другой стороны, вызывают небольшие вопросы несколько спорных моментов:</p>
 <ul>
-  <li>Не полностью прозрачные правила области видимости (пример с <code class="text-body text-nowrap">instanceof || false</code>).</li>
+  <li>Не полностью прозрачные правила области видимости (пример с <code class="text-nowrap">instanceof || false</code>).</li>
   <li>Перекрытие полей.</li>
-  <li><code class="text-body text-nowrap">instanceof</code> и дженерики.</li>
+  <li><code class="text-nowrap">instanceof</code> и дженерики.</li>
 </ul>
-<p>Однако это скорее мелкие придирки, нежели серьёзные претензии. В целом, огромные преимущества нового оператора <code class="text-body text-nowrap">instanceof</code> определённо стоят его добавления язык. А если он ещё выйдет из состояния preview и станет стабильной синтаксической конструкцией, то это будет большой мотивацией наконец-то уйти с Java 8 на новую версию Java.</p>
+<p>Однако это скорее мелкие придирки, нежели серьёзные претензии. В целом, огромные преимущества нового оператора <code class="text-nowrap">instanceof</code> определённо стоят его добавления язык. А если он ещё выйдет из состояния preview и станет стабильной синтаксической конструкцией, то это будет большой мотивацией наконец-то уйти с Java 8 на новую версию Java.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -262,7 +262,7 @@ Note: Recompile with -Xlint:unchecked for details.
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
   <ul class="collapse show" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
-<li>Пробуем улучшенный оператор <code class="text-body text-nowrap">instanceof</code> в Java 14</li>
+<li>Пробуем улучшенный оператор <code class="text-nowrap">instanceof</code> в Java 14</li>
 <li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
 <li class="text-secondary"><a href="escape_sequences_for_line_continuation_and_whitespace.html" class="text-secondary">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</a></li>
 <li class="text-secondary"><a href="towards_better_serialization.html" class="text-secondary">В Java может появиться новая сериализация</a></li>

@@ -30,7 +30,7 @@
 <h3 id="title">В Java появятся компактные тела методов</h3>
 <p class="text-secondary"><time datetime="2018-09-21">21 сентября, 2018</time></p>
 <article>
-<p>Недавно на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/8209434">новый черновик JEP</a>, в котором предлагается позволить в Java писать методы в более компактной форме. Сейчас в Java для объявления методов есть только одна форма, в которой даже для простейших методов приходится писать фигурные скобки и ключевое слово <code class="text-body text-nowrap">return</code>:</p>
+<p>Недавно на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/8209434">новый черновик JEP</a>, в котором предлагается позволить в Java писать методы в более компактной форме. Сейчас в Java для объявления методов есть только одна форма, в которой даже для простейших методов приходится писать фигурные скобки и ключевое слово <code class="text-nowrap">return</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) {
     <span style="color: blue">return</span> s.length();
 }</pre>
@@ -38,7 +38,7 @@
 <pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) -> s.length();</pre>
 <p>Кроме того, если методы являются просто обёртками над существующими методами, то предлагается также ещё форма через ссылку на метод:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) = String::length;</pre>
-<p>Таким образом, новые компактные тела методов будут полностью аналогичны лямбда выражениям в Java, у которых тоже есть две формы: через оператор <code class="text-body text-nowrap">-&gt;</code> и через ссылку на метод.</p>
+<p>Таким образом, новые компактные тела методов будут полностью аналогичны лямбда выражениям в Java, у которых тоже есть две формы: через оператор <code class="text-nowrap">-&gt;</code> и через ссылку на метод.</p>
 <p>Если этот JEP будет реализован, то это позволит в будущем писать более короткий и читаемый Java-код без лишнего шума, особенно в ситуациях, когда в проекте много классов с большим количеством геттеров и сеттеров.</p>
 <p>Компактные тела методов уже существуют во многих языках, например, <a href="https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members">C#</a>, <a href="https://kotlinlang.org/docs/reference/functions.html#single-expression-functions">Kotlin</a>, <a href="https://docs.scala-lang.org/style/declarations.html#methods">Scala</a>. Примечательно, что в C# с помощью краткой формы можно писать не только методы, но и конструкторы. Однако Java-proposal специфицирует, что данная форма будет доступна только для методов.</p>
 </article>

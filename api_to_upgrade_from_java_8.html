@@ -45,9 +45,9 @@
 </ul>
 <p>Однако в этом цикле статей не будет никакого сухого перечисления JEP'ов. Вместо этого я хочу просто рассказать об интересных API, которые появились в новых версиях. Каждая статья будет содержать по 10 API. В выборе и порядке этих API не будет какой-то определённой логики и закономерности. Это будет просто 10 случайных API, не ТОП 10 и без сортировки от наиболее важного API к наименее важному. Давайте начнём.</p>
 <!-- cut -->
-<h4>1. Методы <code class="text-body text-nowrap">Objects.requireNonNullElse()</code> и <code class="text-body text-nowrap">Objects.requireNonNullElseGet()</code></h4>
+<h4>1. Методы <code class="text-nowrap">Objects.requireNonNullElse()</code> и <code class="text-nowrap">Objects.requireNonNullElseGet()</code></h4>
 <h5>Появились в: Java 9</h5>
-<p>Начнём мы наш список с двух очень простеньких, но очень полезных методов в классе <code class="text-body text-nowrap">java.util.Objects</code>: <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Objects.html#requireNonNullElse(T,T)">requireNonNullElse()</a></code> и <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Objects.html#requireNonNullElseGet(T,java.util.function.Supplier)">requireNonNullElseGet()</a></code>. Эти методы позволяют вернуть передаваемый объект, если он не <code class="text-body text-nowrap">null</code>, а если он <code class="text-body text-nowrap">null</code>, то вернуть объект по умолчанию. Например:</p>
+<p>Начнём мы наш список с двух очень простеньких, но очень полезных методов в классе <code class="text-nowrap">java.util.Objects</code>: <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Objects.html#requireNonNullElse(T,T)">requireNonNullElse()</a></code> и <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Objects.html#requireNonNullElseGet(T,java.util.function.Supplier)">requireNonNullElseGet()</a></code>. Эти методы позволяют вернуть передаваемый объект, если он не <code class="text-nowrap">null</code>, а если он <code class="text-nowrap">null</code>, то вернуть объект по умолчанию. Например:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">class</span> MyCoder {
     <span style="color: blue">private final</span> Charset charset;
 
@@ -56,7 +56,7 @@
                 charset, StandardCharsets.UTF_8);
     }
 }</pre>
-<p><code class="text-body text-nowrap">requireNonNullElseGet()</code> &ndash; это не что иное, как просто ленивая версия <code class="text-body text-nowrap">requireNonNullElse()</code>. Она может пригодиться, если вычисление аргумента по умолчанию является затратным:</p>
+<p><code class="text-nowrap">requireNonNullElseGet()</code> &ndash; это не что иное, как просто ленивая версия <code class="text-nowrap">requireNonNullElse()</code>. Она может пригодиться, если вычисление аргумента по умолчанию является затратным:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">class</span> MyCoder {
     <span style="color: blue">private final</span> Charset charset;
 
@@ -69,38 +69,38 @@
         <span style="color: green">// long operation...</span>
     }
 }</pre>
-<p>Да, конечно же в обоих случаях можно было бы легко обойтись и без этих функций, например, использовать обычный тернарный оператор или <code class="text-body text-nowrap">Optional</code>, но всё же использование специальной функции делает код немножко короче и чище. А если использовать статический импорт и писать просто <code class="text-body text-nowrap">requireNonNullElse()</code> вместо <code class="text-body text-nowrap">Objects.requireNonNullElse()</code>, то код код можно сократить ещё сильнее.</p>
+<p>Да, конечно же в обоих случаях можно было бы легко обойтись и без этих функций, например, использовать обычный тернарный оператор или <code class="text-nowrap">Optional</code>, но всё же использование специальной функции делает код немножко короче и чище. А если использовать статический импорт и писать просто <code class="text-nowrap">requireNonNullElse()</code> вместо <code class="text-nowrap">Objects.requireNonNullElse()</code>, то код код можно сократить ещё сильнее.</p>
 
 <h4>2. Методы-фабрики, возвращающие неизменяемые коллекции</h4>
 <h5>Появились в: Java 9</h5>
 <p>Если предыдущие два метода – это просто косметика, то статические методы-фабрики коллекций позволяют действительно сильно сократить код и даже улучшить его безопасность. Речь о следующих методах, <a href="https://openjdk.java.net/jeps/269">появившихся</a> в Java 9:</p>
 <ul>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/List.html#of(E...)">List.of(E... elements)</a></code> (и перегрузки)</li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Set.html#of(E...)">Set.of(E... elements)</a></code> (и перегрузки)</li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#of(K,V,K,V)">Map.of(K k1, V v1, K k2, V v2, ...)</a></code> (и перегрузки)</li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#ofEntries(java.util.Map.Entry...)">Map.ofEntries(Entry&lt;? extends K, ? extends V&gt;... entries)</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/List.html#of(E...)">List.of(E... elements)</a></code> (и перегрузки)</li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Set.html#of(E...)">Set.of(E... elements)</a></code> (и перегрузки)</li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#of(K,V,K,V)">Map.of(K k1, V v1, K k2, V v2, ...)</a></code> (и перегрузки)</li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#ofEntries(java.util.Map.Entry...)">Map.ofEntries(Entry&lt;? extends K, ? extends V&gt;... entries)</a></code></li>
 </ul>
-<p>К этому же списку можно добавить сопутствующий метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#entry(K,V)">Map.entry(K k, V v)</a></code>, создающий <code class="text-body text-nowrap">Entry</code> из ключа и значения, а также методы копирования коллекций, которые <a href="unmodifiable_collections_enhancements_in_java_10.html">появились</a> в Java 10:</p>
+<p>К этому же списку можно добавить сопутствующий метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#entry(K,V)">Map.entry(K k, V v)</a></code>, создающий <code class="text-nowrap">Entry</code> из ключа и значения, а также методы копирования коллекций, которые <a href="unmodifiable_collections_enhancements_in_java_10.html">появились</a> в Java 10:</p>
 <ul>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/List.html#copyOf(java.util.Collection)">List.copyOf(Collection&lt;? extends E&gt; coll)</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Set.html#copyOf(java.util.Collection)">Set.copyOf(Collection&lt;? extends E&gt; coll)</a></code></li>
-  <li><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#copyOf(java.util.Map)">Map.copyOf(Map&lt;? extends K,​? extends V&gt; map)</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/List.html#copyOf(java.util.Collection)">List.copyOf(Collection&lt;? extends E&gt; coll)</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Set.html#copyOf(java.util.Collection)">Set.copyOf(Collection&lt;? extends E&gt; coll)</a></code></li>
+  <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Map.html#copyOf(java.util.Map)">Map.copyOf(Map&lt;? extends K,​? extends V&gt; map)</a></code></li>
 </ul>
 <p>Статические методы-фабрики позволяют создать неизменяемую коллекцию и инициализировать её в одно действие:</p>
 <pre class="border p-lg-2 p-1">List&lt;String&gt; imageExtensions = List.of(<span style="color: darkred">"bmp"</span>, <span style="color: darkred">"jpg"</span>, <span style="color: darkred">"png"</span>, <span style="color: darkred">"gif"</span>);</pre>
 <p>Если не пользоваться сторонними библиотеками, то аналогичный код на Java 8 выглядит гораздо более громоздким:</p>
 <pre class="border p-lg-2 p-1">List&lt;String&gt; imageExtensions = Collections.unmodifiableList(
         Arrays.asList(<span style="color: darkred">"bmp"</span>, <span style="color: darkred">"jpg"</span>, <span style="color: darkred">"png"</span>, <span style="color: darkred">"gif"</span>));</pre>
-<p>А в случае с <code class="text-body text-nowrap">Set</code> или <code class="text-body text-nowrap">Map</code> всё ещё печальнее, потому что аналогов <code class="text-body text-nowrap">Arrays.asList()</code> для <code class="text-body text-nowrap">Set</code> и <code class="text-body text-nowrap">Map</code> не существует.</p>
-<p>Такая громоздкость провоцирует многих людей, пишуших на Java 8, вообще отказываться от неизменяемых коллекций и всегда использовать обычные <code class="text-body text-nowrap">ArrayList</code>, <code class="text-body text-nowrap">HashSet</code> и <code class="text-body text-nowrap">HashMap</code>, причём даже там, где по смыслу нужны неизменяемые коллекции. В результате это ломает концепцию immutable-by-default и снижает безопасность кода.</p>
+<p>А в случае с <code class="text-nowrap">Set</code> или <code class="text-nowrap">Map</code> всё ещё печальнее, потому что аналогов <code class="text-nowrap">Arrays.asList()</code> для <code class="text-nowrap">Set</code> и <code class="text-nowrap">Map</code> не существует.</p>
+<p>Такая громоздкость провоцирует многих людей, пишуших на Java 8, вообще отказываться от неизменяемых коллекций и всегда использовать обычные <code class="text-nowrap">ArrayList</code>, <code class="text-nowrap">HashSet</code> и <code class="text-nowrap">HashMap</code>, причём даже там, где по смыслу нужны неизменяемые коллекции. В результате это ломает концепцию immutable-by-default и снижает безопасность кода.</p>
 <p>Если же наконец обновиться с Java 8, то работать с неизменяемыми коллекциями становится намного проще и приятнее благодаря методам-фабрикам.</p>
 
-<h4>3. <code class="text-body text-nowrap">Files.readString()</code> и <code class="text-body text-nowrap">Files.writeString()</code></h4>
+<h4>3. <code class="text-nowrap">Files.readString()</code> и <code class="text-nowrap">Files.writeString()</code></h4>
 <h5>Появились в: Java 11</h5>
-<p>Java всегда была известна своей неспешностью вводить готовые методы для частых операций. Например, для одной из самых востребованных операций в программировании, чтения файла, очень долго не было готового метода. Лишь спустя 15 лет после выхода Java 1.0 появилось NIO, где был введён метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#readAllBytes(java.nio.file.Path)">Files.readAllBytes()</a></code> для чтения файла в массив байтов.</p>
-<p>Но этого всё ещё не хватало, потому что людям часто приходится работать с текстовыми файлами и для этого нужно читать из файла строки, а не байты. Поэтому в Java 8 добавили метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#readAllLines(java.nio.file.Path)">Files.readAllLines()</a></code>, возвращающий <code class="text-body text-nowrap">List&lt;String&gt;</code>.</p>
-<p>Однако и этого было недостаточно, так как люди спрашивали, как просто прочитать весь файл в виде одной строки. В итоге, для полноты картины в Java 11 добавили долгожданный метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#readString(java.nio.file.Path)">Files.readString()</a></code>, тем самым окончательно закрыв этот вопрос. Удивительно, что если аналогичный метод присутствовал во многих других языках с самого начала, то Java для этого потребовалось больше 20 лет.</p>
-<p>Вместе с <code class="text-body text-nowrap">readString()</code> конечно же ввели и симметричный метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#writeString(java.nio.file.Path,java.lang.CharSequence,java.nio.file.OpenOption...)">writeString()</a></code>. Также у этих методов есть перегрузки, позволяющие указать <code class="text-body text-nowrap">Charset</code>. В совокупности всё это делает работу с текстовыми файлами чрезвычайно удобной. Пример:</p>
+<p>Java всегда была известна своей неспешностью вводить готовые методы для частых операций. Например, для одной из самых востребованных операций в программировании, чтения файла, очень долго не было готового метода. Лишь спустя 15 лет после выхода Java 1.0 появилось NIO, где был введён метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#readAllBytes(java.nio.file.Path)">Files.readAllBytes()</a></code> для чтения файла в массив байтов.</p>
+<p>Но этого всё ещё не хватало, потому что людям часто приходится работать с текстовыми файлами и для этого нужно читать из файла строки, а не байты. Поэтому в Java 8 добавили метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#readAllLines(java.nio.file.Path)">Files.readAllLines()</a></code>, возвращающий <code class="text-nowrap">List&lt;String&gt;</code>.</p>
+<p>Однако и этого было недостаточно, так как люди спрашивали, как просто прочитать весь файл в виде одной строки. В итоге, для полноты картины в Java 11 добавили долгожданный метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#readString(java.nio.file.Path)">Files.readString()</a></code>, тем самым окончательно закрыв этот вопрос. Удивительно, что если аналогичный метод присутствовал во многих других языках с самого начала, то Java для этого потребовалось больше 20 лет.</p>
+<p>Вместе с <code class="text-nowrap">readString()</code> конечно же ввели и симметричный метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#writeString(java.nio.file.Path,java.lang.CharSequence,java.nio.file.OpenOption...)">writeString()</a></code>. Также у этих методов есть перегрузки, позволяющие указать <code class="text-nowrap">Charset</code>. В совокупности всё это делает работу с текстовыми файлами чрезвычайно удобной. Пример:</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">/** Перекодировать файл из одной кодировки в другую */</span>
 <span style="color: blue">private void</span> reencodeFile(Path path,
                           Charset from,
@@ -109,9 +109,9 @@
     Files.writeString(path, content, to);
 }</pre>
 
-<h4>4. <code class="text-body text-nowrap">Optional.ifPresentOrElse()</code> и <code class="text-body text-nowrap">Optional.stream()</code></h4>
+<h4>4. <code class="text-nowrap">Optional.ifPresentOrElse()</code> и <code class="text-nowrap">Optional.stream()</code></h4>
 <h5>Появились в: Java 9</h5>
-<p>Когда <code class="text-body text-nowrap">Optional</code> появился в Java 8, для него не сделали удобного способа выполнить два разных действия в зависимости от того, есть ли в нём значение или нет. В итоге людям приходится прибегать к обычной цепочке <code class="text-body text-nowrap">isPresent()</code> и <code class="text-body text-nowrap">get()</code>:</p>
+<p>Когда <code class="text-nowrap">Optional</code> появился в Java 8, для него не сделали удобного способа выполнить два разных действия в зависимости от того, есть ли в нём значение или нет. В итоге людям приходится прибегать к обычной цепочке <code class="text-nowrap">isPresent()</code> и <code class="text-nowrap">get()</code>:</p>
 <pre class="border p-lg-2 p-1">Optional&lt;String&gt; opt = ...
 <span style="color: blue">if</span> (opt.isPresent()) {
     log.info(<span style="color: darkred">"Value = "</span> + opt.get());
@@ -125,12 +125,12 @@ opt.ifPresent(str ->
 <span style="color: blue">if</span> (opt.isEmpty()) {
     log.error(<span style="color: darkred">"Empty"</span>);
 }</pre>
-<p>Оба варианта не идеальны. Но, начиная с Java 9, такое можно сделать элегантно с помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#ifPresentOrElse(java.util.function.Consumer,java.lang.Runnable)">Optional.ifPresentOrElse()</a></code>:</p>
+<p>Оба варианта не идеальны. Но, начиная с Java 9, такое можно сделать элегантно с помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#ifPresentOrElse(java.util.function.Consumer,java.lang.Runnable)">Optional.ifPresentOrElse()</a></code>:</p>
 <pre class="border p-lg-2 p-1">Optional&lt;String&gt; opt = ...
 opt.ifPresentOrElse(
     str -> log.info(<span style="color: darkred">"Value = "</span> + str),
     () -> log.error(<span style="color: darkred">"Empty"</span>));</pre>
-<p>Ещё одним новым интересным методом в Java 9 стал <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#stream()">Optional.stream()</a></code>, который возвращает <code class="text-body text-nowrap">Stream</code> из одного элемента, если значение присутствует, и пустой <code class="text-body text-nowrap">Stream</code>, если отсутствует. Такой метод может быть очень полезен в цепочках с <code class="text-body text-nowrap">flatMap()</code>. Например, в этом примере очень просто получить список всех телефонных номеров компании:</p>
+<p>Ещё одним новым интересным методом в Java 9 стал <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#stream()">Optional.stream()</a></code>, который возвращает <code class="text-nowrap">Stream</code> из одного элемента, если значение присутствует, и пустой <code class="text-nowrap">Stream</code>, если отсутствует. Такой метод может быть очень полезен в цепочках с <code class="text-nowrap">flatMap()</code>. Например, в этом примере очень просто получить список всех телефонных номеров компании:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">class</span> Employee {
     Optional&lt;String&gt; getPhoneNumber() { ... }
 }
@@ -154,12 +154,12 @@ opt.ifPresentOrElse(
 <pre class="border p-lg-2 p-1">e -> e.getPhoneNumber().map(Stream::of).orElse(Stream.empty())</pre>
 <p>Это выглядит громоздко и не очень читабельно.</p>
 
-<h4>5. <code class="text-body text-nowrap">Process.pid()</code>, <code class="text-body text-nowrap">Process.info()</code> и <code class="text-body text-nowrap">ProcessHandle</code></h4>
+<h4>5. <code class="text-nowrap">Process.pid()</code>, <code class="text-nowrap">Process.info()</code> и <code class="text-nowrap">ProcessHandle</code></h4>
 <h5>Появились в: Java 9</h5>
-<p>Если без предыдущих API обойтись худо-бедно ещё можно, то вот замену метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Process.html#pid()">Process.pid()</a></code> в Java 8 найти будет довольно проблематично, особенно кроссплатформенную. Этот метод возвращает нативный ID процесса:</p>
+<p>Если без предыдущих API обойтись худо-бедно ещё можно, то вот замену метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Process.html#pid()">Process.pid()</a></code> в Java 8 найти будет довольно проблематично, особенно кроссплатформенную. Этот метод возвращает нативный ID процесса:</p>
 <pre class="border p-lg-2 p-1">Process process = Runtime.getRuntime().exec(<span style="color: darkred">"java -version"</span>);
 System.out.println(process.pid());</pre>
-<p>Также с помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Process.html#info()">Process.info()</a></code> можно узнать дополнительную полезную информацию о процессе. Он возвращает объект типа <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.Info.html">ProcessHandle.Info</a></code>. Давайте посмотрим, что он вернёт нам для процесса выше:</p>
+<p>Также с помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Process.html#info()">Process.info()</a></code> можно узнать дополнительную полезную информацию о процессе. Он возвращает объект типа <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.Info.html">ProcessHandle.Info</a></code>. Давайте посмотрим, что он вернёт нам для процесса выше:</p>
 <pre class="border p-lg-2 p-1">Process process = Runtime.getRuntime().exec(<span style="color: darkred">"java -version"</span>);
 ProcessHandle.Info info = process.info();
 System.out.println(<span style="color: darkred">"PID = "</span> + process.pid());
@@ -177,7 +177,7 @@ Args = Optional[[-version]]
 Command Line = Optional[/usr/lib/jvm/java-13-openjdk-amd64/bin/java -version]
 Start Time = Optional[2020-01-24T05:54:25.680Z]
 Total Time = Optional[PT0.01S]</pre>
-<p>Что делать, если процесс был запущен не из текущего Java-процесса? Для этого на помощь приходит <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html">ProcessHandle</a></code>. Например, давайте достанем всю ту же самую информацию для текущего процесса с помощью метода <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html#current()">ProcessHandle.current()</a></code>:</p>
+<p>Что делать, если процесс был запущен не из текущего Java-процесса? Для этого на помощь приходит <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html">ProcessHandle</a></code>. Например, давайте достанем всю ту же самую информацию для текущего процесса с помощью метода <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html#current()">ProcessHandle.current()</a></code>:</p>
 <pre class="border p-lg-2 p-1">ProcessHandle handle = ProcessHandle.current();
 ProcessHandle.Info info = handle.info();
 
@@ -196,31 +196,31 @@ Args = Optional[[Main.java]]
 Command Line = Optional[/usr/lib/jvm/java-13-openjdk-amd64/bin/java Main.java]
 Start Time = Optional[2020-01-24T05:59:17.060Z]
 Total Time = Optional[PT1.56S]</pre>
-<p>Чтобы получить <code class="text-body text-nowrap">ProcessHandle</code> для любого процесса по его PID, можно использовать метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html#of(long)">ProcessHandle.of()</a></code> (он вернёт <code class="text-body text-nowrap">Optional.empty</code>, если процесса не существует).</p>
-<p>Также в <code class="text-body text-nowrap">ProcessHandle</code> есть много других интересных методов, например, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html#allProcesses()">ProcessHandle.allProcesses()</a></code>.</p>
+<p>Чтобы получить <code class="text-nowrap">ProcessHandle</code> для любого процесса по его PID, можно использовать метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html#of(long)">ProcessHandle.of()</a></code> (он вернёт <code class="text-nowrap">Optional.empty</code>, если процесса не существует).</p>
+<p>Также в <code class="text-nowrap">ProcessHandle</code> есть много других интересных методов, например, <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ProcessHandle.html#allProcesses()">ProcessHandle.allProcesses()</a></code>.</p>
 
-<h4>6. Методы <code class="text-body text-nowrap">String</code>: <code class="text-body text-nowrap">isBlank()</code>, <code class="text-body text-nowrap">strip()</code>, <code class="text-body text-nowrap">stripLeading()</code>, <code class="text-body text-nowrap">stripTrailing()</code>, <code class="text-body text-nowrap">repeat()</code> и <code class="text-body text-nowrap">lines()</code></h4>
+<h4>6. Методы <code class="text-nowrap">String</code>: <code class="text-nowrap">isBlank()</code>, <code class="text-nowrap">strip()</code>, <code class="text-nowrap">stripLeading()</code>, <code class="text-nowrap">stripTrailing()</code>, <code class="text-nowrap">repeat()</code> и <code class="text-nowrap">lines()</code></h4>
 <h5>Появились в: Java 11</h5>
 <p>Целая гора полезных методов для строк появилась в Java 11.</p>
-<p>Метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#isBlank()">String.isBlank()</a></code> позволяет узнать, является ли строка состоящей исключительно из whitespace:</p>
+<p>Метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#isBlank()">String.isBlank()</a></code> позволяет узнать, является ли строка состоящей исключительно из whitespace:</p>
 <pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"</span> <span style="color: darkblue">\n</span><span style="color: darkblue">\r</span><span style="color: darkblue">\t</span><span style="color: darkred">"</span>.isBlank()); <span style="color: green">// true</span></pre>
-<p>Методы <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#stripLeading()">String.stripLeading()</a></code>, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#stripTrailing()">String.stripTrailing()</a></code> и <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#strip()">String.strip()</a></code> удаляют символы whitespace в начале строки, в конце строки или с обоих концов:</p>
+<p>Методы <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#stripLeading()">String.stripLeading()</a></code>, <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#stripTrailing()">String.stripTrailing()</a></code> и <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#strip()">String.strip()</a></code> удаляют символы whitespace в начале строки, в конце строки или с обоих концов:</p>
 <pre class="border p-lg-2 p-1">String str = <span style="color: darkred">"</span> <span style="color: darkblue">\t</span><span style="color: darkred">Hello, world!</span><span style="color: darkblue">\t</span><span style="color: darkblue">\n</span><span style="color: darkred">"</span>;
 
 String str1 = str.stripLeading(); <span style="color: green">// "Hello, world!\t\n"</span>
 String str2 = str.stripTrailing(); <span style="color: green">// " \tHello, world!"</span>
 String str3 = str.strip(); // <span style="color: green">"Hello, world!"</span></pre>
-<p>Заметьте, что <code class="text-body text-nowrap">String.strip()</code> не то же самое, что <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#trim()">String.trim()</a></code>: второй удаляет только символы, чей код меньше или равен U+0020, а первый удаляет также пробелы из Юникода:</p>
+<p>Заметьте, что <code class="text-nowrap">String.strip()</code> не то же самое, что <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#trim()">String.trim()</a></code>: второй удаляет только символы, чей код меньше или равен U+0020, а первый удаляет также пробелы из Юникода:</p>
 <pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"str</span><span style="color: darkblue">\u2000</span><span style="color: darkred">"</span>.strip()); <span style="color: green">// "str"</span>
 System.out.println(<span style="color: darkred">"str</span><span style="color: darkblue">\u2000</span><span style="color: darkred">"</span>.trim()); <span style="color: green">// "str\u2000"</span></pre>
 
-<p>Метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#repeat(int)">String.repeat()</a></code> конкатенирует строку саму с собой <code class="text-body text-nowrap">n</code> раз:</p>
+<p>Метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#repeat(int)">String.repeat()</a></code> конкатенирует строку саму с собой <code class="text-nowrap">n</code> раз:</p>
 <pre class="border p-lg-2 p-1">System.out.print(<span style="color: darkred">"Hello, world!</span><span style="color: darkblue">\n</span><span style="color: darkred">"</span>.repeat(3));</pre>
 <p>Вывод:</p>
 <pre class="border p-lg-2 p-1">Hello, world!
 Hello, world!
 Hello, world!</pre>
-<p>Наконец, метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#lines()">String.lines()</a></code> разбивает строку на линии. До свидания <code class="text-body text-nowrap">String.split()</code>, с которым люди постоянно путают, какой аргумент для него использовать, то ли <code class="text-body text-nowrap">"\n"</code>, то ли <code class="text-body text-nowrap">"\r"</code> то ли <code class="text-body text-nowrap">"\n\r"</code> (на самом деле, лучше всего использовать регулярное выражение <code class="text-body text-nowrap">"\R"</code>, которое покрывает все комбинации). Кроме того, <code class="text-body text-nowrap">String.lines()</code> зачастую может быть более эффективен, поскольку он возвращает линии лениво.</p>
+<p>Наконец, метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#lines()">String.lines()</a></code> разбивает строку на линии. До свидания <code class="text-nowrap">String.split()</code>, с которым люди постоянно путают, какой аргумент для него использовать, то ли <code class="text-nowrap">"\n"</code>, то ли <code class="text-nowrap">"\r"</code> то ли <code class="text-nowrap">"\n\r"</code> (на самом деле, лучше всего использовать регулярное выражение <code class="text-nowrap">"\R"</code>, которое покрывает все комбинации). Кроме того, <code class="text-nowrap">String.lines()</code> зачастую может быть более эффективен, поскольку он возвращает линии лениво.</p>
 <pre class="border p-lg-2 p-1">System.out.println(<span style="color: darkred">"line1</span><span style="color: darkblue">\n</span><span style="color: darkred">line2</span><span style="color: darkblue">\n</span><span style="color: darkred">line3</span><span style="color: darkblue">\n</span><span style="color: darkred">"</span>
     .lines()
     .map(String::toUpperCase)
@@ -230,9 +230,9 @@ Hello, world!</pre>
 LINE2
 LINE3</pre>
 
-<h4>7. <code class="text-body text-nowrap">String.indent()</code></h4>
+<h4>7. <code class="text-nowrap">String.indent()</code></h4>
 <h5>Появился в: Java 12</h5>
-<p>Давайте разбавим наш рассказ чем-нибудь свежим, что появилось совсем недавно. Встречайте: метод <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#indent(int)">String.indent()</a></code>, который увеличивает (или уменьшает) отступ каждой линии в данной строке на указанную величину. Например:</p>
+<p>Давайте разбавим наш рассказ чем-нибудь свежим, что появилось совсем недавно. Встречайте: метод <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/String.html#indent(int)">String.indent()</a></code>, который увеличивает (или уменьшает) отступ каждой линии в данной строке на указанную величину. Например:</p>
 <pre class="border p-lg-2 p-1">String body = <span style="color: darkred">"&lt;h1&gt;Title&lt;/h1&gt;</span><span style="color: darkblue">\n</span><span style="color: darkred">"</span> +
               <span style="color: darkred">"&lt;p&gt;Hello, world!&lt;/p&gt;"</span>;
 
@@ -248,12 +248,12 @@ System.out.println(<span style="color: darkred">"&lt;html&gt;</span><span style=
     &lt;p&gt;Hello, world!&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;</pre>
-<p>Заметьте, что для последней линии <code class="text-body text-nowrap">String.indent()</code> сам вставил перевод строки, поэтому нам не пришлось добавлять <code class="text-body text-nowrap">'\n'</code> после <code class="text-body text-nowrap">body.indent(4)</code>.</p>
+<p>Заметьте, что для последней линии <code class="text-nowrap">String.indent()</code> сам вставил перевод строки, поэтому нам не пришлось добавлять <code class="text-nowrap">'\n'</code> после <code class="text-nowrap">body.indent(4)</code>.</p>
 <p>Конечно, наибольшый интерес такой метод будет представлять в сочетании с <a href="text_blocks.html">блоками текста</a>, когда они станут стабильными, но ничто не мешает использовать его уже прямо сейчас без всяких блоков текста.</p>
 
-<h4>8. Методы <code class="text-body text-nowrap">Stream</code>: <code class="text-body text-nowrap">takeWhile()</code>, <code class="text-body text-nowrap">dropWhile()</code>, <code class="text-body text-nowrap">iterate()</code> с предикатом и <code class="text-body text-nowrap">ofNullable()</code></h4>
+<h4>8. Методы <code class="text-nowrap">Stream</code>: <code class="text-nowrap">takeWhile()</code>, <code class="text-nowrap">dropWhile()</code>, <code class="text-nowrap">iterate()</code> с предикатом и <code class="text-nowrap">ofNullable()</code></h4>
 <h5>Появились в: Java 9</h5>
-<p><code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#takeWhile(java.util.function.Predicate)">Stream.takeWhile()</a></code> похож на <code class="text-body text-nowrap">Stream.limit()</code>, но ограничивает <code class="text-body text-nowrap">Stream</code> не по количеству, а по предикату. Такая необходимость в программировании возникает очень часто. Например, если нам надо получить все записи в дневнике за текущий год:</p>
+<p><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#takeWhile(java.util.function.Predicate)">Stream.takeWhile()</a></code> похож на <code class="text-nowrap">Stream.limit()</code>, но ограничивает <code class="text-nowrap">Stream</code> не по количеству, а по предикату. Такая необходимость в программировании возникает очень часто. Например, если нам надо получить все записи в дневнике за текущий год:</p>
 <pre class="border p-lg-2 p-1">[
   { "date" : "2020-01-27", "text" : "..." },
   { "date" : "2020-01-25", "text" : "..." },
@@ -265,14 +265,14 @@ System.out.println(<span style="color: darkred">"&lt;html&gt;</span><span style=
   { "date" : "2019-12-27", "text" : "..." },
   ...
 ]</pre>
-<p><code class="text-body text-nowrap">Stream</code> записей является почти бесконечным, поэтому <code class="text-body text-nowrap">filter()</code> использовать не получится. Тогда на помощь приходит <code class="text-body text-nowrap">takeWhile()</code>:</p>
+<p><code class="text-nowrap">Stream</code> записей является почти бесконечным, поэтому <code class="text-nowrap">filter()</code> использовать не получится. Тогда на помощь приходит <code class="text-nowrap">takeWhile()</code>:</p>
 <pre class="border p-lg-2 p-1">getNotesStream()
     .takeWhile(note -> note.getDate().getYear() == 2020);</pre>
-<p>А если мы хотим получить записи за 2019 год, то можно использовать <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#dropWhile(java.util.function.Predicate)">dropWhile()</a></code>:</p>
+<p>А если мы хотим получить записи за 2019 год, то можно использовать <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#dropWhile(java.util.function.Predicate)">dropWhile()</a></code>:</p>
 <pre class="border p-lg-2 p-1">getNotesStream()
     .dropWhile(note -> note.getDate().getYear() == 2020)
     .takeWhile(note -> note.getDate().getYear() == 2019);</pre>
-<p>В Java 8 <code class="text-body text-nowrap">Stream.iterate()</code> мог генерировать только бесконечный <code class="text-body text-nowrap">Stream</code>. Но в Java 9 у этого метода появилась <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#iterate(T,java.util.function.Predicate,java.util.function.UnaryOperator)">перегрузка</a></code>, которая принимает предикат. Благодаря этому многие циклы <code class="text-body text-nowrap">for</code> теперь можно заменить на <code class="text-body text-nowrap">Stream</code>:</p>
+<p>В Java 8 <code class="text-nowrap">Stream.iterate()</code> мог генерировать только бесконечный <code class="text-nowrap">Stream</code>. Но в Java 9 у этого метода появилась <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#iterate(T,java.util.function.Predicate,java.util.function.UnaryOperator)">перегрузка</a></code>, которая принимает предикат. Благодаря этому многие циклы <code class="text-nowrap">for</code> теперь можно заменить на <code class="text-nowrap">Stream</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">// Java 8</span>
 <span style="color: blue">for</span> (<span style="color: blue">int</span> i = 1; i < 100; i *= 2) {
     System.out.println(i);
@@ -281,7 +281,7 @@ System.out.println(<span style="color: darkred">"&lt;html&gt;</span><span style=
 IntStream
     .iterate(1, i -> i < 100, i -> i * 2)
     .forEach(System.out::println);</pre>
-<p>Обе этих версии печатают все степени двойки, которые не превышают <code class="text-body text-nowrap">100</code>:</p>
+<p>Обе этих версии печатают все степени двойки, которые не превышают <code class="text-nowrap">100</code>:</p>
 <pre class="border p-lg-2 p-1">1
 2
 4
@@ -289,13 +289,13 @@ IntStream
 16
 32
 64</pre>
-<p>Кстати, последний код можно было бы переписать с использованием <code class="text-body text-nowrap">takeWhile()</code>:</p>
+<p>Кстати, последний код можно было бы переписать с использованием <code class="text-nowrap">takeWhile()</code>:</p>
 <pre class="border p-lg-2 p-1">IntStream
     .iterate(1, i -> i * 2)
     .takeWhile(i -> i < 100)
     .forEach(System.out::println);</pre>
-<p>Однако вариант с трёхаргументным <code class="text-body text-nowrap">iterate()</code> всё-таки чище (и IntelliJ IDEA <a href="https://youtrack.jetbrains.com/issue/IDEA-214960">предлагает</a> его исправить обратно).</p>
-<p>Наконец, <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#ofNullable(T)">Stream.ofNullable()</a></code> возвращает <code class="text-body text-nowrap">Stream</code> с одним элементом, если он не <code class="text-body text-nowrap">null</code>, и пустой <code class="text-body text-nowrap">Stream</code>, если он <code class="text-body text-nowrap">null</code>. Этот метод отлично подойдёт в примере выше с телефонами компании, если <code class="text-body text-nowrap">getPhoneNumber()</code> будет возвращать nullable <code class="text-body text-nowrap">String</code> вместо <code class="text-body text-nowrap">Optional&lt;String&gt;</code>:</p>
+<p>Однако вариант с трёхаргументным <code class="text-nowrap">iterate()</code> всё-таки чище (и IntelliJ IDEA <a href="https://youtrack.jetbrains.com/issue/IDEA-214960">предлагает</a> его исправить обратно).</p>
+<p>Наконец, <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#ofNullable(T)">Stream.ofNullable()</a></code> возвращает <code class="text-nowrap">Stream</code> с одним элементом, если он не <code class="text-nowrap">null</code>, и пустой <code class="text-nowrap">Stream</code>, если он <code class="text-nowrap">null</code>. Этот метод отлично подойдёт в примере выше с телефонами компании, если <code class="text-nowrap">getPhoneNumber()</code> будет возвращать nullable <code class="text-nowrap">String</code> вместо <code class="text-nowrap">Optional&lt;String&gt;</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">class</span> Employee {
     <b>String</b> getPhoneNumber() { ... }
 }
@@ -316,22 +316,22 @@ IntStream
     }
 }</pre>
 
-<h4>9. <code class="text-body text-nowrap">Predicate.not()</code></h4>
+<h4>9. <code class="text-nowrap">Predicate.not()</code></h4>
 <h5>Появился в: Java 11</h5>
-<p>Этот метод не вносит ничего принципиально нового и носит скорее косметический, нежели фундаментальный характер. И всё же возможность немного подсократить код всегда очень приятна. С помощью <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/function/Predicate.html#not(java.util.function.Predicate)">Predicate.not()</a></code> лямбды, в которых есть отрицание, можно заменить на ссылки на методы:</p>
+<p>Этот метод не вносит ничего принципиально нового и носит скорее косметический, нежели фундаментальный характер. И всё же возможность немного подсократить код всегда очень приятна. С помощью <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/function/Predicate.html#not(java.util.function.Predicate)">Predicate.not()</a></code> лямбды, в которых есть отрицание, можно заменить на ссылки на методы:</p>
 <pre class="border p-lg-2 p-1">Files.lines(path)
      .filter(str -> !str.isEmpty())
      .forEach(System.out::println);</pre>
-<p>А теперь используя <code class="text-body text-nowrap">not()</code>:</p>
+<p>А теперь используя <code class="text-nowrap">not()</code>:</p>
 <pre class="border p-lg-2 p-1">Files.lines(path)
      .filter(not(String::isEmpty))
      .forEach(System.out::println);</pre>
-<p>Да, экономия не такая уж и огромная, а если использовать <code class="text-body text-nowrap">s -> !s.isEmpty()</code>, то количество символов, наоборот, становится больше. Но даже в этом случае я всё равно предпочту второй вариант, так как он более декларативен и в нём не используется переменная, а значит не захламляется пространство имён.</p>
+<p>Да, экономия не такая уж и огромная, а если использовать <code class="text-nowrap">s -> !s.isEmpty()</code>, то количество символов, наоборот, становится больше. Но даже в этом случае я всё равно предпочту второй вариант, так как он более декларативен и в нём не используется переменная, а значит не захламляется пространство имён.</p>
 
 <h4>10. Cleaner</h4>
 <h5>Появился в: Java 9</h5>
-<p>Сегодняшний рассказ я хочу завершить новым интересным API, появившимся в Java 9 и служащим для очистки ресурсов перед их утилизацией сборщиком мусора. <code class="text-body text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ref/Cleaner.html">Cleaner</a></code> является безопасной заменой метода <code class="text-body text-nowrap">Object.finalize()</code>, который сам стал deprecated в Java 9.</p>
-<p>С помощью <code class="text-body text-nowrap">Cleaner</code> можно зарегистрировать очистку ресурса, которая произойдёт, если её забыли сделать явно (например, забыли вызвать метод <code class="text-body text-nowrap">close()</code> или не использовали <code class="text-body text-nowrap">try-with-resources</code>). Вот пример абстрактного ресурса, для которого в конструкторе регистрируется очищающее действие:</p>
+<p>Сегодняшний рассказ я хочу завершить новым интересным API, появившимся в Java 9 и служащим для очистки ресурсов перед их утилизацией сборщиком мусора. <code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/ref/Cleaner.html">Cleaner</a></code> является безопасной заменой метода <code class="text-nowrap">Object.finalize()</code>, который сам стал deprecated в Java 9.</p>
+<p>С помощью <code class="text-nowrap">Cleaner</code> можно зарегистрировать очистку ресурса, которая произойдёт, если её забыли сделать явно (например, забыли вызвать метод <code class="text-nowrap">close()</code> или не использовали <code class="text-nowrap">try-with-resources</code>). Вот пример абстрактного ресурса, для которого в конструкторе регистрируется очищающее действие:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> Resource <span style="color: blue">implements</span> Closeable {
     <span style="color: blue">private static final</span> Cleaner CLEANER = Cleaner.create();
     <span style="color: blue">private final</span> Cleaner.Cleanable cleanable;
@@ -347,12 +347,12 @@ IntStream
         cleanable.clean();
     }
 }</pre>
-<p>По-хорошему, такой ресурс пользователи должны создавать в блоке <code class="text-body text-nowrap">try</code>:</p>
+<p>По-хорошему, такой ресурс пользователи должны создавать в блоке <code class="text-nowrap">try</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">try</span> (<span style="color: blue">var</span> resource = <span style="color: blue">new</span> Resource()) {
     <span style="color: green">// Используем ресурс</span>
 }</pre>
-<p>Однако могут найтись пользователи, которые забудут это делать и будут писать просто <code class="text-body text-nowrap">var resource = new Resource()</code>. В таких случаях очистка выполнится не сразу, а позовётся позже в одном из следующих циклов сборки мусора. Это всё же лучше, чем ничего.</p>
-<p>Если вы хотите изучить <code class="text-body text-nowrap">Cleaner</code> получше и узнать, почему никогда не стоит использовать <code class="text-body text-nowrap">finalize()</code>, то рекомендую вам послушать <a href="https://www.youtube.com/watch?v=K5IctLPem0c">мой доклад</a> на эту тему.</p>
+<p>Однако могут найтись пользователи, которые забудут это делать и будут писать просто <code class="text-nowrap">var resource = new Resource()</code>. В таких случаях очистка выполнится не сразу, а позовётся позже в одном из следующих циклов сборки мусора. Это всё же лучше, чем ничего.</p>
+<p>Если вы хотите изучить <code class="text-nowrap">Cleaner</code> получше и узнать, почему никогда не стоит использовать <code class="text-nowrap">finalize()</code>, то рекомендую вам послушать <a href="https://www.youtube.com/watch?v=K5IctLPem0c">мой доклад</a> на эту тему.</p>
 
 <h4>Заключение</h4>
 <p>Java не стоит на месте и постепенно развивается. Пока вы сидите на Java 8, с каждым релизом появляется всё больше и больше новых интересных API. Сегодня мы рассмотрели 10 таких API. И вы сможете использовать их все, если наконец решитесь мигрировать с Java 8.</p>
