@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2020-02-27">
+    <meta property="article:published_time" content="2020-03-18">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
@@ -31,12 +31,33 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Из Java исчезнет Nashorn</h3>
-<p class="text-secondary"><time datetime="2020-02-27">27 февраля, 2020</time></p>
+<h3 id="title">Вышла Java 14</h3>
+<p class="text-secondary"><time datetime="2020-03-18">18 марта, 2020</time></p>
 <article>
-<p>На сайте OpenJDK вышел <a href="https://openjdk.java.net/jeps/372">новый JEP</a>, в котором предлагается убрать из JDK движок JavaScript Nashorn и инструмент <code class="text-nowrap">jjs</code>.</p>
-<p>Nashorn <a href="https://openjdk.java.net/jeps/174">появился в Java 8</a> в качестве более современной и производительной замены Rhino, предыдущего движка JavaScript в JDK. Когда Nashorn был выпущен, он был полной реализацией стандарта ECMAScript-262 5.1. Но шли годы, и ECMAScript ушёл сильно дальше в своём развитии, а у разработчиков OpenJDK не оказалось ресурсов, чтобы поспеть за таким темпом выхода новых версий. В итоге, в Java 11 <a href="https://openjdk.java.net/jeps/335">было решено</a> пометить Nashorn как deprecated for removal. Сейчас же предлагается его полностью удалить.</p>
-<p>Так как огромное количество Java-приложений использует JavaScript, то такое удаление станет довольно неприятным препятствием для миграции на новые версии Java. Однако ситуация не будет полностью безвыходной: в качестве замены Nashorn можно, например, <a href="https://twitter.com/ChrisGSeaton/status/1232823291146113025">использовать Graal.js</a>, который можно использовать как в связке с GraalVM, так и отдельно как <a href="https://search.maven.org/search?q=graalvm-js">Maven-артефакт</a>.</p>
+<p>Вышла общедоступная <a href="https://openjdk.java.net/projects/jdk/14/">версия Java 14</a>. Ссылки на скачивание:</p>
+<ul>
+  <li><a href="https://www.oracle.com/java/technologies/javase-jdk14-downloads.html">Oracle JDK</a></li>
+  <li><a href="https://jdk.java.net/14/">OpenJDK</a></li>
+</ul>
+<p>В этот релиз попало 16 JEP'ов, а также <a href="https://jdk.java.net/14/release-notes">сотни более мелких улучшений</a> и <a href="https://builds.shipilev.net/backports-monitor/release-notes-14.txt">тысячи исправлений багов</a>. Список JEP'ов:</p>
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/305">Паттерн-матчинг для оператора <code class="text-nowrap">instanceof</code> (JEP 305)</a> &ndash; улучшение оператора <code class="text-nowrap">instanceof</code> для поддержки паттерн-матчинга по типу. Его мы подробно рассматривали в <a href="trying_new_instanceof_in_java_14.html">этой статье</a>.</li>
+  <li><a href="https://openjdk.java.net/jeps/359">Записи (Preview) (JEP 359)</a> &ndash; новая синтаксическая конструкция в языке, которая позволяет объвлять классы-носители данных намного более компактно посредством нового ключевого слова <code class="text-nowrap">record</code>. Записи мы также рассматривали в <a href="trying_records_in_java14.html">отдельной статье</a>.</li>
+  <li><a href="https://openjdk.java.net/jeps/361">Выражения <code class="text-nowrap">switch</code> (JEP 361)</a> &ndash; улучшенный оператор <code class="text-nowrap">switch</code>, который <a href="switch_expressions.html">появился</a> в Java 12 и был <a href="yield_in_switch.html">немного изменён</a> в Java 13, теперь стал стабильной конструкцией и больше не требует preview-режима.</li>
+  <li><a href="https://openjdk.java.net/jeps/368">Блоки текста (второе Preview) (JEP 368)</a> &ndash; новый вид строковых литералов, который <a href="text_blocks.html">появился</a> в Java 13, теперь <a href="escape_sequences_for_line_continuation_and_whitespace.html">дополнен</a> двумя новыми экранирующими последовательностями для продолжения строки и пробела. Конструкция пока ещё остаётся в preview-режиме.</li>
+  <li><a href="https://openjdk.java.net/jeps/358">Полезные <code class="text-nowrap">NullPointerException</code>'ы (JEP 358)</a> &ndash; улучшение <code class="text-nowrap">NullPointerException</code>, которое детально сообщает, что именно было <code class="text-nowrap">null</code>. Включается с помощью ключа <code class="text-nowrap">-XX:+ShowCodeDetailsInExceptionMessages</code>.</li>
+  <li><a href="https://openjdk.java.net/jeps/343">Инструмент упаковки (JEP 343)</a> &ndash; новый инструмент <code class="text-nowrap">jpackage</code> для создания самодостаточных Java-приложений, который поддерживает нативные форматы упаковки. Пока предоставляется как инкубационный модуль.</li>
+  <li>ZGC на <a href="https://openjdk.java.net/jeps/364">macos</a> и <a href="https://openjdk.java.net/jeps/365">Windows</a> (JEP 364 и 365) &ndash; порт сборщика мусора ZGC, который был доступен <a href="https://openjdk.java.net/jeps/333">только на Linux</a>, на другие операционные системы. Сборщик мусора всё ещё находится в экспериментальном статусе.</li>
+  <li><a href="https://openjdk.java.net/jeps/363">Удаление сборщика мусора CMS (JEP 363)</a> &ndash; сборщик мусора Concurrent Mark Sweep, который <a href="https://openjdk.java.net/jeps/291">стал deprecated</a> в Java 9, теперь окончательно удалён.</li>
+  <li><a href="https://openjdk.java.net/jeps/366">Deprecate the ParallelScavenge + SerialOld GC Combination (JEP 366)</a> &ndash; комбинация флагов <code class="text-nowrap">-XX:+UseParallelGC -XX:-UseParallelOldGC</code> теперь стала deprecated.</li>
+  <li><a href="https://openjdk.java.net/jeps/345">NUMA-Aware Memory Allocation for G1 (JEP 345)</a> &ndash; неравномерный доступ к памяти теперь поддерживается не только в ParallelGC, но и в G1.</li>
+  <li><a href="https://openjdk.java.net/jeps/349">JFR Event Streaming (JEP 349)</a> &ndash; предоставление возможности поглощения данных JDK Flight Recorder в непрерывном режиме. Это может быть полезно, например, в целях непрерывного мониторинга Java-процесса. Раньше данные можно было считывать только путём остановки записи, сохранения файла на диск и его последующего чтения.</li>
+  <li><a href="https://openjdk.java.net/jeps/352">Non-Volatile Mapped Byte Buffers (JEP 352)</a> &ndash; поддержка неволатильной памяти в <code class="text-nowrap">MappedByteBuffer</code>. Ранее в Java это было возможно лишь посредством внешних вызовов к системной библиотеке, написанной на C (например, <a href="https://pmem.io/pmdk/libpmem/">libpmem</a>). Однако такие вызовы стоят очень дорого, что делает Java плохо пригодной для написания транзакционных программ с персистестным состоянием. Новый же режим отображения в <code class="text-nowrap">MappedByteBuffer</code> решает эту проблему.</li>
+  <li><a href="https://openjdk.java.net/jeps/362">Deprecate the Solaris and SPARC Ports (JEP 362)</a> &ndash; порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC стали deprected for removal. Когда порты исчезнут окончательно, это упростит и ускорит разработку JDK.</li>
+  <li><a href="https://openjdk.java.net/jeps/367">Remove the Pack200 Tools and API (JEP 367)</a> &ndash; инструменты <code class="text-nowrap">pack200</code> и <code class="text-nowrap">unpack200</code>, которые <a href="https://openjdk.java.net/jeps/336">стали deprecated</a> в Java 11, теперь удалены окончательно.</li>
+  <li><a href="https://openjdk.java.net/jeps/370">Foreign-Memory Access API (Incubator) (JEP 370)</a> &ndash; долгожданное стандартное API для доступа к памяти вне кучи Java, которое разрабатывается в рамках проекта <a href="https://openjdk.java.net/projects/panama/">Panama</a>. Это новое API не имеет ограничений, которые есть у direct <code class="text-nowrap">ByteBuffer</code>, более безопасно, чем нестандартный <code class="text-nowrap">sun.misc.Unsafe</code> и более эффективно, чем JNI (и без возни с кодом на C). Однако новое API ещё имеет экспериментальном статус, и поэтому находится в инкубационном модуле.</li>
+</ul>
+<p>Java 14 не является LTS-релизом.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -44,6 +65,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
   <ul class="collapse show" id="year2020">
+<li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
 <li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_2.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</a></li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 1</a></li>

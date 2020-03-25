@@ -1,20 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <title>Oracle JDK станет платным</title>
+    <title>Вышла Java 14</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Oracle JDK станет платным">
-    <meta property="og:description" content="Java 10 станет последним свободным релизом Oracle JDK. Так написал у себя в новостной рассылке Николай Парлог, сославшись на презентацию Шарата Чандера, директора по управлению продукцией Java в&hellip;">
+    <meta property="og:title" content="Вышла Java 14">
+    <meta property="og:description" content="Вышла общедоступная версия Java 14. Ссылки на скачивание&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2018-02-17">
+    <meta property="article:published_time" content="2020-03-18">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="Oracle JDK станет платным">
-    <meta name="twitter:description" content="Java 10 станет последним свободным релизом Oracle JDK. Так написал у себя в новостной рассылке Николай Парлог, сославшись на презентацию Шарата Чандера, директора по управлению продукцией Java в&hellip;">
+    <meta name="twitter:title" content="Вышла Java 14">
+    <meta name="twitter:description" content="Вышла общедоступная версия Java 14. Ссылки на скачивание&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -27,21 +27,41 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Oracle JDK станет платным</h3>
-<p class="text-secondary"><time datetime="2018-02-17">17 февраля, 2018</time></p>
+<h3 id="title">Вышла Java 14</h3>
+<p class="text-secondary"><time datetime="2020-03-18">18 марта, 2020</time></p>
 <article>
-<p>Java 10 станет последним свободным релизом Oracle JDK. Так написал у себя в новостной рассылке Николай Парлог, сославшись на <a href="https://www.youtube.com/watch?v=YauqubC8FKM&t=1287">презентацию Шарата Чандера</a>, директора по управлению продукцией Java в Oracle, а также на слова главного архитектора Java-платформы Марка Рейнхолда, с которым он лично общался на конференции Jfokus в начале февраля в Стокгольме.</p>
-<p>Как известно, начиная с сентября 2017 года, Oracle <a href="java_18_3.html">переключил</a> модель поддержки Java SE на <a href="http://www.oracle.com/technetwork/java/eol-135779.html">Long Term Support</a> (LTS). В этой модели релизы будут выходить каждые полгода, и раз в три года будет выходить LTS-релиз. То есть Java 11, 17, 23, 29 будут LTS-релизами с первичной поддержкой в 5 лет, а остальные полугодовые релизы (10, 12, 13, 14, 16, 16, 18…) будут Short Term и будут иметь только два обновления (раз в квартал, x.0.1 и x.0.2).</p>
-<p>Однако вместе с изменением цикла выхода Java теперь, похоже, изменится и её базовая ценовая политика. Если раньше Oracle JDK и его обновления были бесплатными, то, начиная с сентября 2018 года, за всё это придётся заплатить. При этом у пользователей останется возможность использовать бесплатный OpenJDK, который также можно будет скачать с сайта Oracle, однако Oracle не будет предоставлять для него LTS-обновлений. Кроме того, к концу 2018 года Oracle <a href="https://blogs.oracle.com/java-platform-group/faster-and-easier-use-and-redistribution-of-java-se">обещает полностью устранить</a> различия между бинарниками OpenJDK и Oracle JDK, тем самым подготовив сообщество к свободному переключению с Oracle JDK на OpenJDK.</p>
-<p>Во всей этой истории вырисовывается одна важная проблема. Раньше после выхода релиза был, как минимум, годовой временной запас для миграции с предыдущей версии. Например, после выхода Java SE 8 бесплатные обновления для Java SE 7 выходили ещё в течение года. Сейчас же такого временного запаса не будет, так как Oracle не будет выпускать обновлений для OpenJDK после выхода следующей версии. Однако эту проблему обещает решить сообщество <a href="https://adoptopenjdk.net/">AdoptOpenJDK</a>, которое <a href="https://twitter.com/stevewallin/status/964515481003667456">планирует</a> портировать LTS-обновления в течение следующих 4 лет после выхода релиза. Первоначально версии LTS Adopt OpenJDK будут совпадать с Oracle JDK, то есть 11 и 17 версии также будут LTS и для Adopt, однако это может измениться, если сообщество найдёт хороший повод для включения какого-то не-LTS релиза в LTS. Например, если (гипотетически) в OpenJDK 14 найдётся какая-нибудь &laquo;киллер-фича&raquo;, то 14 версию могут сделать тоже LTS.</p>
+<p>Вышла общедоступная <a href="https://openjdk.java.net/projects/jdk/14/">версия Java 14</a>. Ссылки на скачивание:</p>
+<ul>
+  <li><a href="https://www.oracle.com/java/technologies/javase-jdk14-downloads.html">Oracle JDK</a></li>
+  <li><a href="https://jdk.java.net/14/">OpenJDK</a></li>
+</ul>
+<p>В этот релиз попало 16 JEP'ов, а также <a href="https://jdk.java.net/14/release-notes">сотни более мелких улучшений</a> и <a href="https://builds.shipilev.net/backports-monitor/release-notes-14.txt">тысячи исправлений багов</a>. Список JEP'ов:</p>
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/305">Паттерн-матчинг для оператора <code class="text-nowrap">instanceof</code> (JEP 305)</a> &ndash; улучшение оператора <code class="text-nowrap">instanceof</code> для поддержки паттерн-матчинга по типу. Его мы подробно рассматривали в <a href="trying_new_instanceof_in_java_14.html">этой статье</a>.</li>
+  <li><a href="https://openjdk.java.net/jeps/359">Записи (Preview) (JEP 359)</a> &ndash; новая синтаксическая конструкция в языке, которая позволяет объвлять классы-носители данных намного более компактно посредством нового ключевого слова <code class="text-nowrap">record</code>. Записи мы также рассматривали в <a href="trying_records_in_java14.html">отдельной статье</a>.</li>
+  <li><a href="https://openjdk.java.net/jeps/361">Выражения <code class="text-nowrap">switch</code> (JEP 361)</a> &ndash; улучшенный оператор <code class="text-nowrap">switch</code>, который <a href="switch_expressions.html">появился</a> в Java 12 и был <a href="yield_in_switch.html">немного изменён</a> в Java 13, теперь стал стабильной конструкцией и больше не требует preview-режима.</li>
+  <li><a href="https://openjdk.java.net/jeps/368">Блоки текста (второе Preview) (JEP 368)</a> &ndash; новый вид строковых литералов, который <a href="text_blocks.html">появился</a> в Java 13, теперь <a href="escape_sequences_for_line_continuation_and_whitespace.html">дополнен</a> двумя новыми экранирующими последовательностями для продолжения строки и пробела. Конструкция пока ещё остаётся в preview-режиме.</li>
+  <li><a href="https://openjdk.java.net/jeps/358">Полезные <code class="text-nowrap">NullPointerException</code>'ы (JEP 358)</a> &ndash; улучшение <code class="text-nowrap">NullPointerException</code>, которое детально сообщает, что именно было <code class="text-nowrap">null</code>. Включается с помощью ключа <code class="text-nowrap">-XX:+ShowCodeDetailsInExceptionMessages</code>.</li>
+  <li><a href="https://openjdk.java.net/jeps/343">Инструмент упаковки (JEP 343)</a> &ndash; новый инструмент <code class="text-nowrap">jpackage</code> для создания самодостаточных Java-приложений, который поддерживает нативные форматы упаковки. Пока предоставляется как инкубационный модуль.</li>
+  <li>ZGC на <a href="https://openjdk.java.net/jeps/364">macos</a> и <a href="https://openjdk.java.net/jeps/365">Windows</a> (JEP 364 и 365) &ndash; порт сборщика мусора ZGC, который был доступен <a href="https://openjdk.java.net/jeps/333">только на Linux</a>, на другие операционные системы. Сборщик мусора всё ещё находится в экспериментальном статусе.</li>
+  <li><a href="https://openjdk.java.net/jeps/363">Удаление сборщика мусора CMS (JEP 363)</a> &ndash; сборщик мусора Concurrent Mark Sweep, который <a href="https://openjdk.java.net/jeps/291">стал deprecated</a> в Java 9, теперь окончательно удалён.</li>
+  <li><a href="https://openjdk.java.net/jeps/366">Deprecate the ParallelScavenge + SerialOld GC Combination (JEP 366)</a> &ndash; комбинация флагов <code class="text-nowrap">-XX:+UseParallelGC -XX:-UseParallelOldGC</code> теперь стала deprecated.</li>
+  <li><a href="https://openjdk.java.net/jeps/345">NUMA-Aware Memory Allocation for G1 (JEP 345)</a> &ndash; неравномерный доступ к памяти теперь поддерживается не только в ParallelGC, но и в G1.</li>
+  <li><a href="https://openjdk.java.net/jeps/349">JFR Event Streaming (JEP 349)</a> &ndash; предоставление возможности поглощения данных JDK Flight Recorder в непрерывном режиме. Это может быть полезно, например, в целях непрерывного мониторинга Java-процесса. Раньше данные можно было считывать только путём остановки записи, сохранения файла на диск и его последующего чтения.</li>
+  <li><a href="https://openjdk.java.net/jeps/352">Non-Volatile Mapped Byte Buffers (JEP 352)</a> &ndash; поддержка неволатильной памяти в <code class="text-nowrap">MappedByteBuffer</code>. Ранее в Java это было возможно лишь посредством внешних вызовов к системной библиотеке, написанной на C (например, <a href="https://pmem.io/pmdk/libpmem/">libpmem</a>). Однако такие вызовы стоят очень дорого, что делает Java плохо пригодной для написания транзакционных программ с персистестным состоянием. Новый же режим отображения в <code class="text-nowrap">MappedByteBuffer</code> решает эту проблему.</li>
+  <li><a href="https://openjdk.java.net/jeps/362">Deprecate the Solaris and SPARC Ports (JEP 362)</a> &ndash; порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC стали deprected for removal. Когда порты исчезнут окончательно, это упростит и ускорит разработку JDK.</li>
+  <li><a href="https://openjdk.java.net/jeps/367">Remove the Pack200 Tools and API (JEP 367)</a> &ndash; инструменты <code class="text-nowrap">pack200</code> и <code class="text-nowrap">unpack200</code>, которые <a href="https://openjdk.java.net/jeps/336">стали deprecated</a> в Java 11, теперь удалены окончательно.</li>
+  <li><a href="https://openjdk.java.net/jeps/370">Foreign-Memory Access API (Incubator) (JEP 370)</a> &ndash; долгожданное стандартное API для доступа к памяти вне кучи Java, которое разрабатывается в рамках проекта <a href="https://openjdk.java.net/projects/panama/">Panama</a>. Это новое API не имеет ограничений, которые есть у direct <code class="text-nowrap">ByteBuffer</code>, более безопасно, чем нестандартный <code class="text-nowrap">sun.misc.Unsafe</code> и более эффективно, чем JNI (и без возни с кодом на C). Однако новое API ещё имеет экспериментальном статус, и поэтому находится в инкубационном модуле.</li>
+</ul>
+<p>Java 14 не является LTS-релизом.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
-  <ul class="collapse" id="year2020">
-<li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
+  <ul class="collapse show" id="year2020">
+<li>Вышла Java 14</li>
 <li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_2.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</a></li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 1</a></li>
@@ -67,12 +87,12 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="true" aria-controls="year2018">2018</a>
-  <ul class="collapse show" id="year2018">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
 <li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
 <li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
-<li>Oracle JDK станет платным</li>
+<li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
 <li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
 <li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
 <li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
