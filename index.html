@@ -40,11 +40,11 @@
 <span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point(<span style="color: blue">var</span> a, <span style="color: blue">var</span> b)) {
     System.out.println(a + b);
 }</pre>
-<p>В примере выше сначала проверяется, является ли <code class="text-nowrap">obj</code> объектом типа <code class="text-nowrap">Point</code>, а затем происходит "привязка" новых переменных <code class="text-nowrap">a</code> и <code class="text-nowrap">b</code> типа <code class="text-nowrap">int</code> к полям <code class="text-nowrap">Point.a</code> и <code class="text-nowrap">Point.b</code> соответственно. Использование ключевого слово <code class="text-nowrap">var</code> в паттерне является обязательным: чтобы нельзя было <a href="https://mail.openjdk.java.net/pipermail/amber-dev/2020-March/005645.html">перепутать</a> привязки переменных с константами с тем же именем, которые случайно могут оказаться в той же области видимости (хотя константы пока что не могут использоваться в паттернах, однако в будущем это может измениться).</p>
+<p>В примере выше сначала проверяется, является ли <code class="text-nowrap">obj</code> объектом типа <code class="text-nowrap">Point</code>, а затем происходит "привязка" новых переменных <code class="text-nowrap">a</code> и <code class="text-nowrap">b</code> типа <code class="text-nowrap">int</code> к полям <code class="text-nowrap">Point.x</code> и <code class="text-nowrap">Point.y</code> соответственно. Использование ключевого слово <code class="text-nowrap">var</code> в паттерне является обязательным: чтобы нельзя было <a href="https://mail.openjdk.java.net/pipermail/amber-dev/2020-March/005645.html">перепутать</a> привязки переменных с константами с тем же именем, которые случайно могут оказаться в той же области видимости (хотя константы пока что не могут использоваться в паттернах, однако в будущем это может измениться).</p>
 <p>Код выше семантически эквивалентен следующему более громоздкому коду:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point) {
-    <span style="color: blue">var</span> a = ((Point) obj).a;
-    <span style="color: blue">var</span> b = ((Point) obj).b;
+    <span style="color: blue">var</span> a = ((Point) obj).x;
+    <span style="color: blue">var</span> b = ((Point) obj).y;
     System.out.println(a + b);
 }</pre>
 <p>Как видно, новый подход является более компактным, декларативным и более типобезопасным.</p>
