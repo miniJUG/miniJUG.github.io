@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>switch в Java сможет возвращать значения</title>
+    <title>В Java появятся паттерны деконструкции</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="switch в Java сможет возвращать значения">
-    <meta property="og:description" content="Вчера на сайте OpenJDK появился новый JEP 325, в котором предлагается ввести в язык улучшенный оператор switch. Мотивацией для введения является то, что старый switch имеет несколько фундаментальных&hellip;">
+    <meta property="og:title" content="В Java появятся паттерны деконструкции">
+    <meta property="og:description" content="В недавно вышедшем JEP 375 появилась информация о введении в язык так называемых паттернов деконструкции. Такие паттерны позволят применять оператор instanceof не просто для теста по типу, но и для&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2018-01-20">
+    <meta property="article:published_time" content="2020-03-30">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="switch в Java сможет возвращать значения">
-    <meta name="twitter:description" content="Вчера на сайте OpenJDK появился новый JEP 325, в котором предлагается ввести в язык улучшенный оператор switch. Мотивацией для введения является то, что старый switch имеет несколько фундаментальных&hellip;">
+    <meta name="twitter:title" content="В Java появятся паттерны деконструкции">
+    <meta name="twitter:description" content="В недавно вышедшем JEP 375 появилась информация о введении в язык так называемых паттернов деконструкции. Такие паттерны позволят применять оператор instanceof не просто для теста по типу, но и для&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/switch_expressions.png">
-    <meta property="og:image:width" content="808">
-    <meta property="og:image:height" content="373">
-    <meta name="twitter:image" content="https://minijug.ru/switch_expressions.png">
+    <meta property="og:image" content="https://minijug.ru/deconstruction_patterns.png">
+    <meta property="og:image:width" content="1153">
+    <meta property="og:image:height" content="507">
+    <meta name="twitter:image" content="https://minijug.ru/deconstruction_patterns.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,35 +31,40 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title"><code class="text-nowrap">switch</code> в Java сможет возвращать значения</h3>
-<p class="text-secondary"><time datetime="2018-01-20">20 января, 2018</time></p>
+<h3 id="title">В Java появятся паттерны деконструкции</h3>
+<p class="text-secondary"><time datetime="2020-03-30">30 марта, 2020</time></p>
 <article>
-<p>Вчера на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/325">новый JEP 325</a>, в котором предлагается ввести в язык улучшенный оператор <code class="text-nowrap">switch</code>. Мотивацией для введения является то, что старый <code class="text-nowrap">switch</code> имеет несколько фундаментальных изъянов, которые нельзя исправить, не нарушив обратную совместимость. Во-первых, старый <code class="text-nowrap">switch</code> является императивной конструкцией, которая не может возвращать выражения и заставляет писать большое количество повторяющегося кода. Во-вторых, старый <code class="text-nowrap">switch</code> всегда являлся большим источником ошибок из-за своей необходимости явно завершать ветви оператором <code class="text-nowrap">break</code>, отсутствие которого приводит к &laquo;проваливанию&raquo; (fall-through). Кроме того, старый <code class="text-nowrap">switch</code> не имеет возможности обработать случай, когда аргумент является <code class="text-nowrap">null</code>.</p>
-<p>Новый <code class="text-nowrap">switch</code> решает все вышеописанные проблемы: он может возвращать значения, сокращает объём необходимого кода, меньше провоцирует на ошибки и позволяет обрабатывать <code class="text-nowrap">null</code>.</p>
-<p>В новом <code class="text-nowrap">switch</code> оператор <code class="text-nowrap">break</code> сможет возвращать значения:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">case</span> LABEL: <span style="color: blue">break</span> expression;</pre>
-<p>Того же самого эффекта также можно достигнуть с использованием более короткой формы:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">case</span> LABEL -> expression;</pre>
-<p>Ветви <code class="text-nowrap">switch</code> будут поддерживать множественные варианты: </p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">case</span> SATURDAY, SUNDAY -> <span style="color: darkred">"weekend"</span>;</pre>
-<p>Обработка <code class="text-nowrap">null</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">case null</span> -> expression;</pre>
-<p>Кроме всего прочего, новый <code class="text-nowrap">switch</code> упразднит необходимость явного написания ветви <code class="text-nowrap">default</code>, если он покрывает все возможные значения перечисления:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> numLetters = <span style="color: blue">switch</span> (day) { <span style="color: green">// DayOfWeek day</span>
-    <span style="color: blue">case</span> MONDAY, FRIDAY, SUNDAY -> 6;
-    <span style="color: blue">case</span> TUESDAY -> 7;
-    <span style="color: blue">case</span> THURSDAY, SATURDAY -> 8;
-    <span style="color: blue">case</span> WEDNESDAY -> 9;
+<p>В недавно вышедшем <a href="https://openjdk.java.net/jeps/375">JEP 375</a> появилась информация о введении в язык так называемых <i>паттернов деконструкции</i>. Такие паттерны позволят применять оператор <code class="text-nowrap">instanceof</code> не просто для теста по типу, но и для извлечения компонентов этого типа. В первой реализации можно будет извлекать только компоненты <a href="trying_records_in_java14.html">записей</a>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Point (<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) {}
+
+<span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point(<span style="color: blue">var</span> a, <span style="color: blue">var</span> b)) {
+    System.out.println(a + b);
 }</pre>
-<p>JEP 325 является только началом, и в дальнейшем планируется добавить в <code class="text-nowrap">switch</code> поддержку полноценного <a href="pattern_matching.html">паттерн-матчинга</a>.</p>
+<p>В примере выше сначала проверяется, является ли <code class="text-nowrap">obj</code> объектом типа <code class="text-nowrap">Point</code>, а затем происходит "привязка" новых переменных <code class="text-nowrap">a</code> и <code class="text-nowrap">b</code> типа <code class="text-nowrap">int</code> к полям <code class="text-nowrap">Point.a</code> и <code class="text-nowrap">Point.b</code> соответственно. Использование ключевого слово <code class="text-nowrap">var</code> в паттерне является обязательным: чтобы нельзя было <a href="https://mail.openjdk.java.net/pipermail/amber-dev/2020-March/005645.html">перепутать</a> привязки переменных с константами с тем же именем, которые случайно могут оказаться в той же области видимости (хотя константы пока что не могут использоваться в паттернах, однако в будущем это может измениться).</p>
+<p>Код выше семантически эквивалентен следующему более громоздкому коду:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point) {
+    <span style="color: blue">var</span> a = ((Point) obj).a;
+    <span style="color: blue">var</span> b = ((Point) obj).b;
+    System.out.println(a + b);
+}</pre>
+<p>Как видно, новый подход является более компактным, декларативным и более типобезопасным.</p>
+<p>Новый паттерн-матчинг также будет поддерживать вложенные паттерны:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Circle(Point origin, <span style="color: blue">int</span> radius) {}
+
+<span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Circle(Point(<span style="color: blue">var</span> a, <span style="color: blue">var</span> b), <span style="color: blue">var</span> r)) {
+    System.out.println(<span style="color: darkred">"Circle centered at ("</span> + a + <span style="color: darkred">", "</span> + b + <span style="color: darkred">")"</span>);
+    System.out.println(<span style="color: darkred">"Area is: "</span> + Math.PI*r*r);
+}</pre>
+<p>Во вложенных паттернах весь матчинг будет являться успешным только в том случае, если все его компоненты прошли соответственные тесты типа.</p>
+<p>На текущий момент неизвестно, успеют ли деконструкционные паттерны попасть в Java 15 (но с большой вероятностью это будет так).</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
-  <ul class="collapse" id="year2020">
-<li class="text-secondary"><a href="deconstruction_patterns.html" class="text-secondary">В Java появятся паттерны деконструкции</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
+  <ul class="collapse show" id="year2020">
+<li>В Java появятся паттерны деконструкции</li>
 <li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
 <li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_2.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</a></li>
@@ -86,8 +91,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="true" aria-controls="year2018">2018</a>
-  <ul class="collapse show" id="year2018">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
 <li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
 <li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
@@ -95,7 +100,7 @@
 <li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
 <li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
 <li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
-<li><code class="text-nowrap">switch</code> в Java сможет возвращать значения</li>
+<li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
 <li class="text-secondary"><a href="code_before_this_super.html" class="text-secondary">В конструкторах классов можно будет писать код перед <code>this()</code> и <code>super()</code></a></li>
   </ul>
 </div>
