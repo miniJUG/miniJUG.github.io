@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2020-03-30">
+    <meta property="article:published_time" content="2020-05-01">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
@@ -31,32 +31,29 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java появятся паттерны деконструкции</h3>
-<p class="text-secondary"><time datetime="2020-03-30">30 марта, 2020</time></p>
+<h3 id="title">В Java можно будет объявлять локальные интерфейсы и перечисления</h3>
+<p class="text-secondary"><time datetime="2020-05-01">1 мая, 2020</time></p>
 <article>
-<p>В недавно вышедшем <a href="https://openjdk.java.net/jeps/375">JEP 375</a> появилась информация о введении в язык так называемых <i>паттернов деконструкции</i>. Такие паттерны позволят применять оператор <code class="text-nowrap">instanceof</code> не просто для теста по типу, но и для извлечения компонентов этого типа. В первой реализации можно будет извлекать только компоненты <a href="trying_records_in_java14.html">записей</a>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Point (<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) {}
+<p>На сайте OpenJDK вышел <a href="http://openjdk.java.net/jeps/8242303">новый черновик</a> JEP с заголовком "Records (Second Preview)". В нём специфицируются некоторые изменения в записях по сравнению с <a href="http://openjdk.java.net/jeps/359">первым preview</a>, а также возможность объявлять в методах интерфейсы и перечисления.</p>
+<p>Напомним, что в Java есть возможность объявлять классы внутри методов. Такие классы называются <i>локальными</i>. Локальные классы очень похожи на внутренние классы, но они ещё могут захватывать effectively final переменные, объявленные выше в этом же методе. На практике чаще всего используются анонимные локальные классы, но именованные локальные классы также возможны:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> m() {
+    <span style="color: blue">class</span> Foo {
+        …
+    }
+}</pre>
+<p>С <a href="java_14_is_out.html">Java 14</a> появилась возможность также объявлять локальные записи. Особенность локальных записей заключается в том, что они неявно являются <i>статическими</i> в отличие от локальных классов, которые могут быть только <i>нестатическими</i>. Таким образом, локальные записи стали первым историческим примером статических деклараций внутри метода, которые до этого в Java были запрещены (локальные классы и переменные не могут быть статическими). Пример стал успешным: локальные записи ничему не противоречат и не нарушают никакую семантику. Такой успешный пример навёл на мысль о том, что нужно расширить поле возможных локальных статических деклараций на интерфейсы и перечисления:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> m() {
+    <span style="color: blue">enum</span> Foo {
+        A, B
+    }
 
-<span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point(<span style="color: blue">var</span> a, <span style="color: blue">var</span> b)) {
-    System.out.println(a + b);
+    <span style="color: blue">interface</span> Bar {
+         Foo getFoo();
+    }
 }</pre>
-<p>В примере выше сначала проверяется, является ли <code class="text-nowrap">obj</code> объектом типа <code class="text-nowrap">Point</code>, а затем происходит "привязка" новых переменных <code class="text-nowrap">a</code> и <code class="text-nowrap">b</code> типа <code class="text-nowrap">int</code> к полям <code class="text-nowrap">Point.x</code> и <code class="text-nowrap">Point.y</code> соответственно. Использование ключевого слово <code class="text-nowrap">var</code> в паттерне является обязательным: чтобы нельзя было <a href="https://mail.openjdk.java.net/pipermail/amber-dev/2020-March/005645.html">перепутать</a> привязки переменных с константами с тем же именем, которые случайно могут оказаться в той же области видимости (хотя константы пока что не могут использоваться в паттернах, однако в будущем это может измениться).</p>
-<p>Код выше семантически эквивалентен следующему более громоздкому коду:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point) {
-    <span style="color: blue">var</span> a = ((Point) obj).x;
-    <span style="color: blue">var</span> b = ((Point) obj).y;
-    System.out.println(a + b);
-}</pre>
-<p>Как видно, новый подход является более компактным, декларативным и более типобезопасным.</p>
-<p>Новый паттерн-матчинг также будет поддерживать вложенные паттерны:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Circle(Point origin, <span style="color: blue">int</span> radius) {}
-
-<span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Circle(Point(<span style="color: blue">var</span> a, <span style="color: blue">var</span> b), <span style="color: blue">var</span> r)) {
-    System.out.println(<span style="color: darkred">"Circle centered at ("</span> + a + <span style="color: darkred">", "</span> + b + <span style="color: darkred">")"</span>);
-    System.out.println(<span style="color: darkred">"Area is: "</span> + Math.PI*r*r);
-}</pre>
-<p>Во вложенных паттернах весь матчинг будет являться успешным только в том случае, если все его компоненты прошли соответственные тесты типа.</p>
-<p>На текущий момент неизвестно, успеют ли деконструкционные паттерны попасть в Java 15 (но с большой вероятностью это будет так).</p>
+<p>По аналогии с локальными записями локальные интерфейсы и перечисления могут ссылаться только на объявленные выше локальные записи, интерфейсы и перечисления, но не на те, которые объявлены ниже. Также они могут ссылаться на самих себя.</p>
+<p>Про возможность объявлять локальные статические классы пока ничего не сказано, однако в январе Brian Goetz <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-January/001904.html">написал письмо</a> в рассылку, в котором он сказал, что конечной целью должна быть возможность вкладывать всё что угодно во всё что угодно. Это значит, что локальные статические классы могут появиться позже.</p>
+<p>Остальные изменения в JEP'е относятся к самим записям. Их мало, и они незначительны. Например, в новой версии убрано ограничение, что канонический конструктор записи обязательно должен быть публичным.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -64,6 +61,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
   <ul class="collapse show" id="year2020">
+<li class="text-secondary"><a href="local_interfaces_and_enums.html" class="text-secondary">В Java можно будет объявлять локальные интерфейсы и перечисления</a></li>
 <li class="text-secondary"><a href="deconstruction_patterns.html" class="text-secondary">В Java появятся паттерны деконструкции</a></li>
 <li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
 <li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>

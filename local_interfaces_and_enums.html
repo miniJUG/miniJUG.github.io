@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java появятся записи и запечатанные типы</title>
+    <title>В Java можно будет объявлять локальные интерфейсы и перечисления</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java появятся записи и запечатанные типы">
-    <meta property="og:description" content="В багтрекере OpenJDK появился новый черновик JEP, в котором специфицируются новые языковые конструкции Java: записи и запечатанные типы. Идея их введения была предложена полтора года назад и была&hellip;">
+    <meta property="og:title" content="В Java можно будет объявлять локальные интерфейсы и перечисления">
+    <meta property="og:description" content="На сайте OpenJDK вышел новый черновик JEP с заголовком &quot;Records (Second Preview)&quot;. В нём специфицируются некоторые изменения в записях по сравнению с первым preview, а также возможность объявлять в&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2019-04-23">
+    <meta property="article:published_time" content="2020-05-01">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="В Java появятся записи и запечатанные типы">
-    <meta name="twitter:description" content="В багтрекере OpenJDK появился новый черновик JEP, в котором специфицируются новые языковые конструкции Java: записи и запечатанные типы. Идея их введения была предложена полтора года назад и была&hellip;">
+    <meta name="twitter:title" content="В Java можно будет объявлять локальные интерфейсы и перечисления">
+    <meta name="twitter:description" content="На сайте OpenJDK вышел новый черновик JEP с заголовком &quot;Records (Second Preview)&quot;. В нём специфицируются некоторые изменения в записях по сравнению с первым preview, а также возможность объявлять в&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/records_and_sealed_types.png">
-    <meta property="og:image:width" content="1032">
-    <meta property="og:image:height" content="500">
-    <meta name="twitter:image" content="https://minijug.ru/records_and_sealed_types.png">
+    <meta property="og:image" content="https://minijug.ru/local_interfaces_and_enums.png">
+    <meta property="og:image:width" content="1091">
+    <meta property="og:image:height" content="654">
+    <meta name="twitter:image" content="https://minijug.ru/local_interfaces_and_enums.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,49 +31,37 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java появятся записи и запечатанные типы</h3>
-<p class="text-secondary"><time datetime="2019-04-23">23 апреля, 2019</time></p>
+<h3 id="title">В Java можно будет объявлять локальные интерфейсы и перечисления</h3>
+<p class="text-secondary"><time datetime="2020-05-01">1 мая, 2020</time></p>
 <article>
-<p>В багтрекере OpenJDK появился <a href="https://bugs.openjdk.java.net/browse/JDK-8222777">новый черновик JEP</a>, в котором специфицируются новые языковые конструкции Java: записи и запечатанные типы. Идея их введения <a href="data_classes.html">была предложена</a> полтора года назад и была описана в исследовательском документе. Наконец, после долгих дискуссий и экспериментов она достигла достаточного уровня зрелости для того, чтобы с большой уверенностью сказать, что она будет реализована в одной из будущих версий Java.</p>
-<p>Записи (records) позволят очень компактно объявлять классы, которые являются простыми носителями данных:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Range(<span style="color: blue">int</span> lo, <span style="color: blue">int</span> hi) {
-    <span style="color: blue">public</span> Range {
-        <span style="color: blue">if</span> (lo > hi) {
-            <span style="color: blue">throw new</span> IllegalArgumentException(
-                String.format(<span style="color: darkred">"(%d,%d)"</span>, lo, hi));
-        }
+<p>На сайте OpenJDK вышел <a href="http://openjdk.java.net/jeps/8242303">новый черновик</a> JEP с заголовком "Records (Second Preview)". В нём специфицируются некоторые изменения в записях по сравнению с <a href="http://openjdk.java.net/jeps/359">первым preview</a>, а также возможность объявлять в методах интерфейсы и перечисления.</p>
+<p>Напомним, что в Java есть возможность объявлять классы внутри методов. Такие классы называются <i>локальными</i>. Локальные классы очень похожи на внутренние классы, но они ещё могут захватывать effectively final переменные, объявленные выше в этом же методе. На практике чаще всего используются анонимные локальные классы, но именованные локальные классы также возможны:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> m() {
+    <span style="color: blue">class</span> Foo {
+        …
     }
 }</pre>
-<p>Сейчас такой класс Range реализуется чрезвычайно многословно, поскольку автору кода необходимо самому написать конструктор, методы доступа к полям, <code class="text-nowrap">equals()</code>, <code class="text-nowrap">hashCode()</code> и <code class="text-nowrap">toString()</code>. Это может раздражать и читателя, ведь эти члены не содержат в себе никакой особо полезной смысловой нагрузки. В записях же все эти члены генерируются компилятором автоматически и поэтому экономят время и строки кода.</p>
-<p>Записи имеют следующие особенности:</p>
-<ul>
-  <li>Они иммутабельны (все поля становятся <code class="text-nowrap">final</code>).</li>
-  <li>От них нельзя отнаследоваться (они являются <code class="text-nowrap">final</code>).</li>
-  <li>Они сами не могут отнаследоваться от классов.</li>
-  <li>Если записи являются вложенными, то они являются <code class="text-nowrap">static</code>.</li>
-  <li>Они не могут содержать дополнительных полей.</li>
-  <li>Они могут содержать явный конструктор по умолчанию (в котором можно, например, сделать валидацию полей).</li>
-</ul>
-<p>В остальном записи ничем не отличаются от обычных классов: они могут наследоваться от интерфейсов, содержать методы, конструкторы, статические инициализаторы, вложенные типы, иметь аннотации и т.д.</p>
-<p class="pt-2">Вторая конструкция, тесно связанная с записями – это запечатанные типы (sealed types). Такие типы накладывают ограничение на типы, которые могут от них наследоваться. Делается это одним из двух способов. Первый способ – с помощью ключевого слова <code class="text-nowrap">permits</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">sealed interface</span> Node <span style="color: blue">permits</span> A, B, C { ... }</pre>
-<p>В этом случае от интерфейса Node не могут быть отнаследованы никакие другие типы кроме A, B и C.</p>
-<p>Второй способ – без использования ключевого слова permits. Тогда список наследников будет ограничен только теми типами, которые находятся в той же единице компиляции.</p>
-<p>Запечатанные типы имеют следующие особенности: </p>
-<ul>
-  <li>От них не могут быть отнаследованы анонимые классы и лямбды.</li>
-  <li>Их абстрактные подтипы неявно являются запечатанными (но можно переопределить с помощью ключевого слова <code class="text-nowrap">non-sealed</code>).</li>
-  <li>Их конкретные подтипы неявно являются <code class="text-nowrap">final</code>.</li>
-</ul>
-<p>Записи и запечатанные типы вместе являются реализацией концепции <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%82%D0%B8%D0%BF_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85">алгебраических типов данных</a> в Java. Поскольку для комфортной работы с алгебраическими типами данных также нужен паттерн-матчинг, то в будущем записи предлагается снабдить деконструирующими паттернами, а для запечатанных типов разработать механизм проверки exhaustiveness в <code class="text-nowrap">switch</code>-выражениях.</p>
+<p>С <a href="java_14_is_out.html">Java 14</a> появилась возможность также объявлять локальные записи. Особенность локальных записей заключается в том, что они неявно являются <i>статическими</i> в отличие от локальных классов, которые могут быть только <i>нестатическими</i>. Таким образом, локальные записи стали первым историческим примером статических деклараций внутри метода, которые до этого в Java были запрещены (локальные классы и переменные не могут быть статическими). Пример стал успешным: локальные записи ничему не противоречат и не нарушают никакую семантику. Такой успешный пример навёл на мысль о том, что нужно расширить поле возможных локальных статических деклараций на интерфейсы и перечисления:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> m() {
+    <span style="color: blue">enum</span> Foo {
+        A, B
+    }
+
+    <span style="color: blue">interface</span> Bar {
+         Foo getFoo();
+    }
+}</pre>
+<p>По аналогии с локальными записями локальные интерфейсы и перечисления могут ссылаться только на объявленные выше локальные записи, интерфейсы и перечисления, но не на те, которые объявлены ниже. Также они могут ссылаться на самих себя.</p>
+<p>Про возможность объявлять локальные статические классы пока ничего не сказано, однако в январе Brian Goetz <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-January/001904.html">написал письмо</a> в рассылку, в котором он сказал, что конечной целью должна быть возможность вкладывать всё что угодно во всё что угодно. Это значит, что локальные статические классы могут появиться позже.</p>
+<p>Остальные изменения в JEP'е относятся к самим записям. Их мало, и они незначительны. Например, в новой версии убрано ограничение, что канонический конструктор записи обязательно должен быть публичным.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://tlg.name/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
-  <ul class="collapse" id="year2020">
-<li class="text-secondary"><a href="local_interfaces_and_enums.html" class="text-secondary">В Java можно будет объявлять локальные интерфейсы и перечисления</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
+  <ul class="collapse show" id="year2020">
+<li>В Java можно будет объявлять локальные интерфейсы и перечисления</li>
 <li class="text-secondary"><a href="deconstruction_patterns.html" class="text-secondary">В Java появятся паттерны деконструкции</a></li>
 <li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
 <li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>
@@ -84,8 +72,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
-  <ul class="collapse show" id="year2019">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <ul class="collapse" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
 <li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
 <li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
@@ -94,7 +82,7 @@
 <li class="text-secondary"><a href="scala_2_13_is_out.html" class="text-secondary">Вышла Scala 2.13</a></li>
 <li class="text-secondary"><a href="yield_in_switch.html" class="text-secondary">В <code>switch</code>-выражениях <code>break</code> будет заменён на <code>yield</code></a></li>
 <li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
-<li>В Java появятся записи и запечатанные типы</li>
+<li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
 <li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
 <li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
 <li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
