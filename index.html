@@ -53,7 +53,7 @@
 <h5><a href="https://openjdk.java.net/jeps/360"><code class="text-nowrap">sealed</code> классы (preview) (JEP 360)</a></h5>
 <p>В Java появилось языковое нововведение: &laquo;запечатанные&raquo; классы. Помечаются такие классы модификатором <code class="text-nowrap">sealed</code>, после чего круг классов, которые могут наследоваться от данного класса, становится ограниченным. <code class="text-nowrap">sealed</code> классы мы подробно рассматривали в <a href="trying_sealed_classes_in_java_15.html">этой статье</a>.</p>
 <h4>JVM</h4>
-<h5><a href="https://minijug.ru/local_interfaces_and_enums.html">ZGC (JEP 377)</a></h5>
+<h5><a href="https://openjdk.java.net/jeps/377">ZGC (JEP 377)</a></h5>
 <p>ZGC, который <a href="https://openjdk.java.net/jeps/333">появился</a> в Java 11 в экспериментальном статусе, теперь официально готов к продуктовой разработке. Напомним, что ZGC &ndash; это сборщик мусора, который нацелен на маленькие паузы (< 10мс) и готовность работать в условиях огромных куч (> 1TB).</p>
 <h5><a href="https://openjdk.java.net/jeps/379">Shenandoah (JEP 379)</a></h5>
 <p>Shenandoah, ещё один низкопаузный сборщик мусора и <a href="zgc.html">конкурент</a> ZGC, теперь также имеет статус готового к продуктовой разработке. Shenandoah впервые <a href="https://openjdk.java.net/jeps/189">появился</a> в Java 12. Также недавно стало известно, что Shenandoah был <a href="https://twitter.com/rkennke/status/1288530745179463680">бэкпортирован в JDK 11</a>, который является текущим LTS-релизом Java. Это значит, что чтобы его использовать, необязательно обновляться до JDK 15, а достаточно обновиться до JDK 11.0.9, которая <a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u">выйдет</a> 20 октября 2020 года.</p>
