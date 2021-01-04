@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2020-09-15">
+    <meta property="article:published_time" content="2021-01-04">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary">
@@ -31,57 +31,29 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Вышла Java 15</h3>
-<p class="text-secondary"><time datetime="2020-09-15">15 сентября, 2020</time></p>
+<h3 id="title">Новости Java #1</h3>
+<p class="text-secondary"><time datetime="2021-01-04">4 января, 2021</time></p>
 <article>
-<p>Сегодня в свет вышла новая, <a href="http://openjdk.java.net/projects/jdk/15/">15-я версия платформы Java</a>.</p>
-<p>Скачать JDK 15 можно по следующим ссылкам:</p>
-<ul>
-  <li><a href="https://www.oracle.com/java/technologies/javase-jdk15-downloads.html">Oracle JDK</a> (проприетарная версия, обратите внимание на ограничения в использовании).</li>
-  <li><a href="http://jdk.java.net/15/">OpenJDK</a> (бесплатная версия)</li>
-</ul>
-<p>В новый релиз попало 14 JEP'ов и <a href="http://jdk.java.net/15/release-notes">сотни более мелких улучшений</a>. Если хочется ознакомиться с полным списком изменений с точностью до всех JIRA-тикетов, то их можно посмотреть на <a href="https://builds.shipilev.net/backports-monitor/release-notes-15.txt">сайте Алексея Шипилёва</a>. Также если интересны все изменения API, то их можно посмотреть <a href="https://javaalmanac.io/jdk/15/apidiff/14/">здесь</a>.</p>
-<!-- cut -->
-<p>Перечислим JEP'ы, которые попали в Java 15:</p>
-<h4>Язык</h4>
-<h5><a href="https://openjdk.java.net/jeps/378">Блоки текста (JEP 378)</a></h5>
-<p>Блоки текста, которые <a href="text_blocks.html">появились</a> в Java 13 и прошли два preview, теперь стали стабильной синтаксической конструкцией. Это значит, что в Java теперь две постоянные конструкции, которые появились с выхода Java 11: <a href="https://openjdk.java.net/jeps/361">выражения <code class="text-nowrap">switch</code></a> и блоки текста.</p>
-<h5><a href="https://openjdk.java.net/jeps/375">Паттерн-матчинг для оператора <code class="text-nowrap">instanceof</code> (второе preview) (JEP 375)</a></h5>
-<p>Улучшенный оператор <code class="text-nowrap">instanceof</code>, который <a href="https://openjdk.java.net/jeps/305">появился</a> в Java 14, перешёл во второе preview без изменений. Напомним, что <a href="https://openjdk.java.net/jeps/12">режим preview</a> существует в Java для нововведений, которые находятся в предварительном статусе, т.е. могут измениться несовместимым образом или даже совсем исчезнуть, и для их включения необходим специальный флаг <code class="text-nowrap">--enable-preview</code>. Паттерн-матчинг для <code class="text-nowrap">instanceof</code> мы подробно рассматривали в <a href="trying_new_instanceof_in_java_14.html">этой статье</a>.</p>
-<h5><a href="https://openjdk.java.net/jeps/384">Записи (второе preview) (JEP 384)</a></h5>
-<p>Записи, которые также <a href="https://openjdk.java.net/jeps/359">появились</a> в Java 14, тоже остались в режиме preview. Изменений по сравнению с прошлой версией немного: убрано ограничение, что канонический конструктор должен быть <code class="text-nowrap">public</code>, а также разрешены <a href="local_interfaces_and_enums.html">локальные перечисления и интерфейсы</a>.</p>
-<h5><a href="https://openjdk.java.net/jeps/360"><code class="text-nowrap">sealed</code> классы (preview) (JEP 360)</a></h5>
-<p>В Java появилось языковое нововведение: &laquo;запечатанные&raquo; классы. Помечаются такие классы модификатором <code class="text-nowrap">sealed</code>, после чего круг классов, которые могут наследоваться от данного класса, становится ограниченным. <code class="text-nowrap">sealed</code> классы мы подробно рассматривали в <a href="trying_sealed_classes_in_java_15.html">этой статье</a>.</p>
-<h4>JVM</h4>
-<h5><a href="https://openjdk.java.net/jeps/377">ZGC (JEP 377)</a></h5>
-<p>ZGC, который <a href="https://openjdk.java.net/jeps/333">появился</a> в Java 11 в экспериментальном статусе, теперь официально готов к продуктовой разработке. Напомним, что ZGC &ndash; это сборщик мусора, который нацелен на маленькие паузы (< 10мс) и готовность работать в условиях огромных куч (> 1TB).</p>
-<h5><a href="https://openjdk.java.net/jeps/379">Shenandoah (JEP 379)</a></h5>
-<p>Shenandoah, ещё один низкопаузный сборщик мусора и <a href="zgc.html">конкурент</a> ZGC, теперь также имеет статус готового к продуктовой разработке. Shenandoah впервые <a href="https://openjdk.java.net/jeps/189">появился</a> в Java 12. Также недавно стало известно, что Shenandoah был <a href="https://twitter.com/rkennke/status/1288530745179463680">бэкпортирован в JDK 11</a>, который является текущим LTS-релизом Java. Это значит, что чтобы его использовать, необязательно обновляться до JDK 15, а достаточно обновиться до JDK 11.0.9, которая <a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u">выйдет</a> 20 октября 2020 года.</p>
-<h5><a href="https://openjdk.java.net/jeps/374">Disable and Deprecate Biased Locking (JEP 374)</a></h5>
-<p>Biased Locking, который много лет существовал в JDK, было решено убрать из-за сложности поддержки и "неочевидных преимуществ" этой оптимизации. Начиная с этого релиза, опция <code class="text-nowrap">-XX:+UseBiasedLocking</code> отключена по умолчанию, а при её использовании и всех её связанных опций будет выдаваться предупреждение. Про мотивы отключения Biased Locking рассказал Сергей Куксенко в <a href="https://www.youtube.com/watch?v=v3oK5_docYE">подкасте Hydra</a>.</p>
-<h5><a href="https://openjdk.java.net/jeps/381">Удаление портов Solaris и SPARC (JEP 381)</a></h5>
-<p>Порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC, которые <a href="https://openjdk.java.net/jeps/362">стали</a> deprecated for removal в Java 14, теперь удалены окончательно. Удаление этих портов упростит и ускорит разработку JDK.</p>
-<h4>API</h4>
-<h5><a href="https://openjdk.java.net/jeps/371">Скрытые классы (JEP 371)</a></h5>
-<p>Появился новый тип классов, называемых <a href="hidden_classes.html">скрытыми</a>. На скрытые классы не могут прямо ссылаться другие классы, и всё их использование может осуществляться только через рефлексию. Также их нельзя обнаружить по имени, и их методы не появляются в стек-трейсах. Создаются такие классы с помощью нового метода <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/invoke/MethodHandles.Lookup.html#defineHiddenClass(byte%5B%5D,boolean,java.lang.invoke.MethodHandles.Lookup.ClassOption...)"><code class="text-nowrap">Lookup.defineHiddenClass()</code></a>.</p>
-<h5><a href="https://openjdk.java.net/jeps/372">Удаление движка JavaScript Nashorn (JEP 372)</a></h5>
-<p>Движок Nashorn, который <a href="https://openjdk.java.net/jeps/335">стал</a> deprecated for removal в Java 11, теперь удалён <a href="remove_nashorn.html">окончательно</a>. В качестве замены Nashorn теперь придётся искать другой движок JavaScript, например, <a href="https://github.com/graalvm/graaljs">GraalVM JavaScript</a> или <a href="https://github.com/mozilla/rhino">Rhino</a>.</p>
-<h5><a href="https://openjdk.java.net/jeps/373">Reimplement the Legacy DatagramSocket API (JEP 373)</a></h5>
-<p>Реализации старых сокетов из JDK 1.0 <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/DatagramSocket.html"><code class="text-nowrap">java.net.DatagramSocket</code></a> and <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/MulticastSocket.html"><code class="text-nowrap">java.net.MulticastSocket</code></a> были полностью заменены на более простые, современные и легкоадаптируемые к виртуальным нитям, которые планируется ввести в язык в рамках <a href="https://openjdk.java.net/projects/loom/">проекта Loom</a>. Ранее в Java 13 <a href="https://openjdk.java.net/jeps/353">были переписаны</a> <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/Socket.html"><code class="text-nowrap">java.net.Socket</code></a> и <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/ServerSocket.html"><code class="text-nowrap">java.net.ServerSocket</code></a>.</p>
-<h5><a href="https://openjdk.java.net/jeps/383">Foreign-Memory Access API (Second Incubator) (JEP 383)</a></h5>
-<p>API для доступа вне кучи Java, которое <a href="https://openjdk.java.net/jeps/370">появилось</a> в Java 14 в статусе модуля-<a href="https://openjdk.java.net/jeps/11">инкубатора</a>, остаётся в этом статусе.</p>
-<h5><a href="https://openjdk.java.net/jeps/385">Deprecate RMI Activation for Removal (JEP 385)</a></h5>
-<p>Устаревшая и малоиспользуемая часть RMI, которая называется RMI Activation, стала deprecated for removal.</p>
-<h5><a href="https://openjdk.java.net/jeps/339">Edwards-Curve Digital Signature Algorithm (EdDSA) (JEP 339)</a></h5>
-<p>Современный алгоритм с открытым ключом для создания цифровой подписи EdDSA реализован в Java.</p>
-<p class="pt-3">Java 15, как и 12, 13, 14, является STS-релизом, и у неё выйдет только два обновления.</p>
+<p>Всех с Новым 2021 Годом!</p>
+<p>&bull; В компиляторе javac <a href="https://bugs.openjdk.java.net/browse/JDK-8259025">нашли баг</a>, который не позволяет использовать лямбды в компактных конструкторах записей при определённых обстоятельствах. Баг был обнаружен пользователем @skohlman <a href="https://twitter.com/skohlmann/status/1344684426836500480">в Твиттере</a>.</p>
+<p>&bull; <a href="https://youtrack.jetbrains.com/issue/JBR-2526#focus=Comments-27-4620322.0-0">Вышла</a> стабильная версия JetBrains Runtime под Apple M1. Теперь она включена почти во все IDE компании, начиная с версии 2020.3.1. Пользователи уже доложили о нескольких ошибках, которые проявляются в различных IDE.</p>
+<p>&bull; Разработчики обнаружили новый класс <a href="https://download.java.net/java/early_access/jdk17/docs/api/java.base/java/util/HexFormat.html">HexFormat</a>, который появится в Java 17. С помощью этого класса можно будет конвертировать строки с шестнадцатеричными символами в массивы байтов и обратно.</p>
+<p>&bull; Huawei реализовал <a href="https://gitee.com/openeuler/bishengjdk-11/tree/risc-v/">свой порт</a> OpenJDK 11 под архитектуру Linux/RISC-V и <a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html">спрашивает</a>, заинтересовано ли сообщество во включении этого порта в jdk-master. Alibaba изъявили желание помочь и сделать вклад в разработку.</p>
+<p>&bull; Команда Jetty <a href="https://mail.openjdk.java.net/pipermail/loom-dev/2020-December/001974.html">рассказала</a> об опыте перехода веб-сервера на виртуальные нити из проекта Loom. Они сделали вывод, что количество нитей &ndash; это не всегда главный лимитирующий фактор, и правило &laquo;просто всегда создавай виртуальную нить&raquo; может не сработать, если каждая нить имеет глубокий стек или держит какие-то большие ресурсы.</p>
+<p>&bull; Разработчик из Oracle <a href="https://cl4es.github.io/2021/01/04/Investigating-MD5-Overheads.html">рассказал</a> о том, как ускорил MD5 в OpenJDK.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
-  <ul class="collapse show" id="year2020">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_1.html" class="text-secondary">Новости Java #1</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
+  <ul class="collapse" id="year2020">
 <li class="text-secondary"><a href="java_15_is_out.html" class="text-secondary">Вышла Java 15</a></li>
 <li class="text-secondary"><a href="trying_sealed_classes_in_java_15.html" class="text-secondary">Исследуем <code>sealed</code> классы в Java 15</a></li>
 <li class="text-secondary"><a href="java_celebrates_25_years.html" class="text-secondary">Java исполняется 25 лет</a></li>
