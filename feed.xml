@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>miniJUG</title>
+  <link rel="alternate" type="text/html" href="https://minijug.ru" />
+  <subtitle type="text">Новости Java</subtitle>
+  <id>https://minijug.ru/feed.xml</id>
+  <updated>2021-01-10T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #2</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_2.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_2.html</id>
+    <updated>2021-01-10T17:00:00Z</updated>
+    <published>2021-01-10T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Стал известен первый JEP, который попадёт в Java 17. Это &lt;a href="https://openjdk.java.net/jeps/356"&gt;JEP 356: Enhanced Pseudo-Random Number Generators&lt;/a&gt;. В рамках этого JEP'а будет добавлен интерфейс &lt;code&gt;RandomGenerator&lt;/code&gt; с четырьмя его специализациями: &lt;code&gt;SplittableRandomGenerator&lt;/code&gt;, &lt;code&gt;JumpableRandomGenerator&lt;/code&gt;, &lt;code&gt;LeapableRandomGenerator&lt;/code&gt; и &lt;code&gt;ArbitrarilyJumpableRandomGenerator&lt;/code&gt;. Кроме того, будет добавлен класс &lt;code&gt;RandomGeneratorFactory&lt;/code&gt;, который будет возвращать конкретные реализации &lt;code&gt;RandomGenerator&lt;/code&gt;. Старые классы &lt;code&gt;Random&lt;/code&gt;, &lt;code&gt;ThreadLocalRandom&lt;/code&gt; и &lt;code&gt;SplittableRandom&lt;/code&gt; будут отрефакторены и станут одними из реализаций &lt;code&gt;RandomGenerator&lt;/code&gt;. Также будут реализованы новые алгоритмы генерации псевдослучайных чисел.&lt;/p&gt;
+&lt;p class="pt-3"&gt;&amp;bull; Брайан Гетц опубликовал &lt;a href="https://github.com/openjdk/amber-docs/blob/master/site/design-notes/pattern-match-object-model.md"&gt;новый документ&lt;/a&gt; &amp;laquo;Паттерн-матчинг в объектной модели Java&amp;raquo;. В нём описывается возможный подход внедрения паттерн-матчинга в язык. Документ довольно большой, поэтому попробуем выделить основные моменты:&lt;/p&gt;
+&lt;p&gt;&amp;ndash; Если язык предоставляет возможноть агрегации посредством конструкторов/фабричных методов, то он должен предоставлять и обратный механизм деконструкции:&lt;/p&gt;
+&lt;pre&gt;Object x = &lt;span style="color: blue"&gt;new&lt;/span&gt; Foo(a, b); &lt;span style="color: green"&gt;// конструкция&lt;/span&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b): ... &lt;span style="color: green"&gt;// деконструкция&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;ndash; Если конструирование объекта поддерживает композицию, то и деконструирование тоже должно её поддерживать:&lt;/p&gt;
+&lt;pre&gt;Optional.of(Shape.redBall(1));&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Optional.of(Shape.redBall(&lt;span style="color: blue"&gt;var&lt;/span&gt; size)): ...&lt;/pre&gt;
+&lt;p&gt;&amp;ndash; Паттерны деконструкции являются точно такими же членами класса, как и конструкторы/методы. Паттерны имеют тело, в котором описывается всё необходимое поведение.&lt;/p&gt;
+&lt;p&gt;&amp;ndash; Раз паттерны являются членами класса, то они поддерживают все их атрибуты: модификаторы доступа, перегрузка, переопределение, static/instance, параметрический полиморфизм, делегирование к другим паттернам, varargs и т.д.&lt;/p&gt;
+&lt;p&gt;&amp;ndash; Паттерны также имеют дополнительные уникальные атрибуты: наличие целевого операнда, тип которого должен быть совместим с целевым типом, полнота/частичность, исчерпываемость, разделение аргументов на входные и выходные.&lt;/p&gt;
+&lt;p&gt;&amp;ndash; В конце документа описываются также другие идеи вроде комбинирования паттернов с помощью булевых операторов (AND/OR), структурные паттерны и т.д.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Также Брайн Гетц предложил в рассылке Amber несколько идей относительно паттерн-матчинга:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002688.html"&gt;Оператор алмаза в паттернах&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Было&lt;/span&gt;:
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (m &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; EnumMap&amp;lt;K, ? extends V&amp;gt; em) { ... }
+
+&lt;span style="color: green"&gt;// Стало&lt;/span&gt;:
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (m &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; EnumMap&amp;lt;&amp;gt; em) { ... }&lt;/pre&gt;
+&lt;p&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002695.html"&gt;Паттерны массивов&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (arr &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; String[] { &lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b }) { ... }&lt;/pre&gt;
+&lt;p&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002710.html"&gt;Охранные паттерны&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; P(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) __AND &lt;span style="color: blue"&gt;true&lt;/span&gt;(x &gt; 0) __AND Q(&lt;span style="color: blue"&gt;var&lt;/span&gt; y):&lt;/pre&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Джонатан Гиббонс (Oracle) &lt;a href="https://mail.openjdk.java.net/pipermail/code-tools-dev/2021-January/000625.html"&gt;предложил&lt;/a&gt; добавить в JDK утилиту &lt;code&gt;apidiff&lt;/code&gt; для сравнения нескольких версий API. Утилита сможет анализировать class-файлы, исходные файлы Java и файлы документации и генерировать HTML-отчёт о различиях в API. Внутри она будет использовать фронтенд &lt;code&gt;javac&lt;/code&gt; и модули &lt;code&gt;java.compiler&lt;/code&gt;/&lt;code&gt;jdk.compiler&lt;/code&gt; для чтения исходных и класс-файлов, а значит не будет проблем с поддержкой в утилите последних языковых изменений. Джонатан пишет, что у него уже есть продвинутый прототип утилиты и он надеется в скором времени опубликовать его на GitHub.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Американские новостные агентства &lt;a href="https://www.wsj.com/articles/solarwinds-hack-breached-justice-department-systems-11609958761"&gt;написали&lt;/a&gt; о взломе нескольких министерств США через программное обеспечение компании SolarWinds и о возможной организации этих кибератак хакерами, связанными с Россией. В статьях написано, что хакеры могли это сделать, получив доступ к билд-серверу TeamCity, развёрнутому в компании для сборки ПО. Далее сообщается, что американские спецслужбы и специалисты по кибербезопасности начали исследование возможной роли JetBrains в атаке.&lt;/p&gt;
+&lt;p&gt;При этом авторы не объясняют, почему такой негативный акцент в статьях сделан именно на JetBrains, ведь кроме TeamCity в SolarWinds должно использоваться множество других программ и инструментов для разработки. New York Times вообще &lt;a href="https://web.archive.org/web/20210106195835/https://www.nytimes.com/2021/01/06/us/politics/russia-cyber-hack.html"&gt;назвал&lt;/a&gt; JetBrains &amp;laquo;obscure software company&amp;raquo; (&amp;laquo;тёмная&amp;raquo;, &amp;laquo;неясная&amp;raquo;), но позже изменил эту фразу в статье на &amp;laquo;widely used software company&amp;raquo;, и вообще в течение последующих дней множество раз изменял статью, постоянно внося туда правки и уточнения. Многие программисты в Твиттере довольно резко отреагировали на &lt;a href="https://twitter.com/nicoleperlroth/status/1346909580219936769"&gt;твит&lt;/a&gt; редактора New York Times и одной из авторов статьи, делая &lt;a href="https://twitter.com/nikitonsky/status/1347004468966141954"&gt;ретвиты&lt;/a&gt; с саркастическими шутками.&lt;/p&gt;
+&lt;p&gt;Максим Шафиров, CEO JetBrains, после выхода новостей, сразу написал &lt;a href="https://blog.jetbrains.com/blog/2021/01/06/statement-on-the-story-from-the-new-york-times-regarding-jetbrains-and-solarwinds/"&gt;официальный ответ&lt;/a&gt;, что JetBrains никак не может быть причастен к атаке и компания не была извещена о расследовании, но полностью готова к сотрудничеству. На следующий день он выложил &lt;a href="https://blog.jetbrains.com/blog/2021/01/07/an-update-on-solarwinds/"&gt;более подробный пост&lt;/a&gt;, в котором более подробно описал ситуацию. Он написал, что компании неизвестно об уязвимостях в TeamCity, которые могли бы быть эксплуатированы для организации подобных атак, и компания проводит регулярный аудит своих инструментов и систем.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Брюс Эккель, автор &amp;laquo;Философия Java&amp;raquo; и многих других книг о Java, C++ и JVM языках, &lt;a href="https://www.bruceeckel.com/2021/01/02/the-problem-with-gradle/"&gt;написал пост&lt;/a&gt; &amp;laquo;The Problem with Gradle&amp;raquo;, где рассказал свою историю использования Gradle и перечислил его проблемы.&lt;/p&gt;
+&lt;p class="pt-3"&gt;&amp;bull; &lt;a href="https://docs.gradle.org/6.8/release-notes.html"&gt;Вышел Gradle 6.8&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Новости Java #1</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_1.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_1.html</id>
+    <updated>2021-01-03T17:00:00Z</updated>
+    <published>2021-01-03T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Всех с Новым 2021 Годом!&lt;/p&gt;
+&lt;p&gt;&amp;bull; В компиляторе javac &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8259025"&gt;нашли баг&lt;/a&gt;, который не позволяет использовать лямбды в компактных конструкторах записей при определённых обстоятельствах. Баг был обнаружен пользователем @skohlman &lt;a href="https://twitter.com/skohlmann/status/1344684426836500480"&gt;в Твиттере&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&amp;bull; &lt;a href="https://youtrack.jetbrains.com/issue/JBR-2526#focus=Comments-27-4620322.0-0"&gt;Вышла&lt;/a&gt; стабильная версия JetBrains Runtime под Apple M1. Теперь она включена почти во все IDE компании, начиная с версии 2020.3.1. Пользователи уже доложили о нескольких ошибках, которые проявляются в различных IDE.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Разработчики обнаружили новый класс &lt;a href="https://download.java.net/java/early_access/jdk17/docs/api/java.base/java/util/HexFormat.html"&gt;HexFormat&lt;/a&gt;, который появится в Java 17. С помощью этого класса можно будет конвертировать строки с шестнадцатеричными символами в массивы байтов и обратно.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Huawei реализовал &lt;a href="https://gitee.com/openeuler/bishengjdk-11/tree/risc-v/"&gt;свой порт&lt;/a&gt; OpenJDK 11 под архитектуру Linux/RISC-V и &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html"&gt;спрашивает&lt;/a&gt;, заинтересовано ли сообщество во включении этого порта в jdk-master. Alibaba изъявили желание помочь и сделать вклад в разработку.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Команда Jetty &lt;a href="https://mail.openjdk.java.net/pipermail/loom-dev/2020-December/001974.html"&gt;рассказала&lt;/a&gt; об опыте перехода веб-сервера на виртуальные нити из проекта Loom. Они сделали вывод, что количество нитей &amp;ndash; это не всегда главный лимитирующий фактор, и правило &amp;laquo;просто всегда создавай виртуальную нить&amp;raquo; может не сработать, если каждая нить имеет глубокий стек или держит какие-то большие ресурсы.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Разработчик из Oracle &lt;a href="https://cl4es.github.io/2021/01/04/Investigating-MD5-Overheads.html"&gt;рассказал&lt;/a&gt; о том, как ускорил MD5 в OpenJDK.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Вышла Java 15</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_15_is_out.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_15_is_out.html</id>
+    <updated>2020-09-14T17:00:00Z</updated>
+    <published>2020-09-14T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Сегодня в свет вышла новая, &lt;a href="http://openjdk.java.net/projects/jdk/15/"&gt;15-я версия платформы Java&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Скачать JDK 15 можно по следующим ссылкам:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase-jdk15-downloads.html"&gt;Oracle JDK&lt;/a&gt; (проприетарная версия, обратите внимание на ограничения в использовании).&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/15/"&gt;OpenJDK&lt;/a&gt; (бесплатная версия)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В новый релиз попало 14 JEP'ов и &lt;a href="http://jdk.java.net/15/release-notes"&gt;сотни более мелких улучшений&lt;/a&gt;. Если хочется ознакомиться с полным списком изменений с точностью до всех JIRA-тикетов, то их можно посмотреть на &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-15.txt"&gt;сайте Алексея Шипилёва&lt;/a&gt;. Также если интересны все изменения API, то их можно посмотреть &lt;a href="https://javaalmanac.io/jdk/15/apidiff/14/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Перечислим JEP'ы, которые попали в Java 15:&lt;/p&gt;
+&lt;h4&gt;Язык&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/378"&gt;Блоки текста (JEP 378)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Блоки текста, которые &lt;a href="text_blocks.html"&gt;появились&lt;/a&gt; в Java 13 и прошли два preview, теперь стали стабильной синтаксической конструкцией. Это значит, что в Java теперь две постоянные конструкции, которые появились с выхода Java 11: &lt;a href="https://openjdk.java.net/jeps/361"&gt;выражения &lt;code&gt;switch&lt;/code&gt;&lt;/a&gt; и блоки текста.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/375"&gt;Паттерн-матчинг для оператора &lt;code&gt;instanceof&lt;/code&gt; (второе preview) (JEP 375)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Улучшенный оператор &lt;code&gt;instanceof&lt;/code&gt;, который &lt;a href="https://openjdk.java.net/jeps/305"&gt;появился&lt;/a&gt; в Java 14, перешёл во второе preview без изменений. Напомним, что &lt;a href="https://openjdk.java.net/jeps/12"&gt;режим preview&lt;/a&gt; существует в Java для нововведений, которые находятся в предварительном статусе, т.е. могут измениться несовместимым образом или даже совсем исчезнуть, и для их включения необходим специальный флаг &lt;code&gt;--enable-preview&lt;/code&gt;. Паттерн-матчинг для &lt;code&gt;instanceof&lt;/code&gt; мы подробно рассматривали в &lt;a href="trying_new_instanceof_in_java_14.html"&gt;этой статье&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/384"&gt;Записи (второе preview) (JEP 384)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Записи, которые также &lt;a href="https://openjdk.java.net/jeps/359"&gt;появились&lt;/a&gt; в Java 14, тоже остались в режиме preview. Изменений по сравнению с прошлой версией немного: убрано ограничение, что канонический конструктор должен быть &lt;code&gt;public&lt;/code&gt;, а также разрешены &lt;a href="local_interfaces_and_enums.html"&gt;локальные перечисления и интерфейсы&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/360"&gt;&lt;code&gt;sealed&lt;/code&gt; классы (preview) (JEP 360)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В Java появилось языковое нововведение: &amp;laquo;запечатанные&amp;raquo; классы. Помечаются такие классы модификатором &lt;code&gt;sealed&lt;/code&gt;, после чего круг классов, которые могут наследоваться от данного класса, становится ограниченным. &lt;code&gt;sealed&lt;/code&gt; классы мы подробно рассматривали в &lt;a href="trying_sealed_classes_in_java_15.html"&gt;этой статье&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;JVM&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/377"&gt;ZGC (JEP 377)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;ZGC, который &lt;a href="https://openjdk.java.net/jeps/333"&gt;появился&lt;/a&gt; в Java 11 в экспериментальном статусе, теперь официально готов к продуктовой разработке. Напомним, что ZGC &amp;ndash; это сборщик мусора, который нацелен на маленькие паузы (&lt; 10мс) и готовность работать в условиях огромных куч (&gt; 1TB).&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/379"&gt;Shenandoah (JEP 379)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Shenandoah, ещё один низкопаузный сборщик мусора и &lt;a href="zgc.html"&gt;конкурент&lt;/a&gt; ZGC, теперь также имеет статус готового к продуктовой разработке. Shenandoah впервые &lt;a href="https://openjdk.java.net/jeps/189"&gt;появился&lt;/a&gt; в Java 12. Также недавно стало известно, что Shenandoah был &lt;a href="https://twitter.com/rkennke/status/1288530745179463680"&gt;бэкпортирован в JDK 11&lt;/a&gt;, который является текущим LTS-релизом Java. Это значит, что чтобы его использовать, необязательно обновляться до JDK 15, а достаточно обновиться до JDK 11.0.9, которая &lt;a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u"&gt;выйдет&lt;/a&gt; 20 октября 2020 года.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/374"&gt;Disable and Deprecate Biased Locking (JEP 374)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Biased Locking, который много лет существовал в JDK, было решено убрать из-за сложности поддержки и "неочевидных преимуществ" этой оптимизации. Начиная с этого релиза, опция &lt;code&gt;-XX:+UseBiasedLocking&lt;/code&gt; отключена по умолчанию, а при её использовании и всех её связанных опций будет выдаваться предупреждение. Про мотивы отключения Biased Locking рассказал Сергей Куксенко в &lt;a href="https://www.youtube.com/watch?v=v3oK5_docYE"&gt;подкасте Hydra&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/381"&gt;Удаление портов Solaris и SPARC (JEP 381)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC, которые &lt;a href="https://openjdk.java.net/jeps/362"&gt;стали&lt;/a&gt; deprecated for removal в Java 14, теперь удалены окончательно. Удаление этих портов упростит и ускорит разработку JDK.&lt;/p&gt;
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/371"&gt;Скрытые классы (JEP 371)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появился новый тип классов, называемых &lt;a href="hidden_classes.html"&gt;скрытыми&lt;/a&gt;. На скрытые классы не могут прямо ссылаться другие классы, и всё их использование может осуществляться только через рефлексию. Также их нельзя обнаружить по имени, и их методы не появляются в стек-трейсах. Создаются такие классы с помощью нового метода &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/invoke/MethodHandles.Lookup.html#defineHiddenClass(byte%5B%5D,boolean,java.lang.invoke.MethodHandles.Lookup.ClassOption...)"&gt;&lt;code&gt;Lookup.defineHiddenClass()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/372"&gt;Удаление движка JavaScript Nashorn (JEP 372)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Движок Nashorn, который &lt;a href="https://openjdk.java.net/jeps/335"&gt;стал&lt;/a&gt; deprecated for removal в Java 11, теперь удалён &lt;a href="remove_nashorn.html"&gt;окончательно&lt;/a&gt;. В качестве замены Nashorn теперь придётся искать другой движок JavaScript, например, &lt;a href="https://github.com/graalvm/graaljs"&gt;GraalVM JavaScript&lt;/a&gt; или &lt;a href="https://github.com/mozilla/rhino"&gt;Rhino&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/373"&gt;Reimplement the Legacy DatagramSocket API (JEP 373)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Реализации старых сокетов из JDK 1.0 &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/DatagramSocket.html"&gt;&lt;code&gt;java.net.DatagramSocket&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/MulticastSocket.html"&gt;&lt;code&gt;java.net.MulticastSocket&lt;/code&gt;&lt;/a&gt; были полностью заменены на более простые, современные и легкоадаптируемые к виртуальным нитям, которые планируется ввести в язык в рамках &lt;a href="https://openjdk.java.net/projects/loom/"&gt;проекта Loom&lt;/a&gt;. Ранее в Java 13 &lt;a href="https://openjdk.java.net/jeps/353"&gt;были переписаны&lt;/a&gt; &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/Socket.html"&gt;&lt;code&gt;java.net.Socket&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/ServerSocket.html"&gt;&lt;code&gt;java.net.ServerSocket&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/383"&gt;Foreign-Memory Access API (Second Incubator) (JEP 383)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;API для доступа вне кучи Java, которое &lt;a href="https://openjdk.java.net/jeps/370"&gt;появилось&lt;/a&gt; в Java 14 в статусе модуля-&lt;a href="https://openjdk.java.net/jeps/11"&gt;инкубатора&lt;/a&gt;, остаётся в этом статусе.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/385"&gt;Deprecate RMI Activation for Removal (JEP 385)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Устаревшая и малоиспользуемая часть RMI, которая называется RMI Activation, стала deprecated for removal.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/339"&gt;Edwards-Curve Digital Signature Algorithm (EdDSA) (JEP 339)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Современный алгоритм с открытым ключом для создания цифровой подписи EdDSA реализован в Java.&lt;/p&gt;
+&lt;p class="pt-3"&gt;Java 15, как и 12, 13, 14, является STS-релизом, и у неё выйдет только два обновления.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Исследуем sealed классы в Java 15</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/trying_sealed_classes_in_java_15.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/trying_sealed_classes_in_java_15.html</id>
+    <updated>2020-06-06T17:00:00Z</updated>
+    <published>2020-06-06T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Продолжаем исследовать новые возможности, которые появляются в Java. В прошлые разы мы подробно рассматривали &lt;a href="trying_new_instanceof_in_java_14.html"&gt;улучшенный оператор &lt;code&gt;instanceof&lt;/code&gt;&lt;/a&gt; и &lt;a href="trying_records_in_java14.html"&gt;записи&lt;/a&gt;, а сегодня объектом исследования будут &lt;code&gt;sealed&lt;/code&gt; классы, которые запланированы к выходу в &lt;a href="https://openjdk.java.net/projects/jdk/15/"&gt;пятнадцатой версии&lt;/a&gt; Java.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Идея введения в язык &amp;laquo;запечатанных&amp;raquo; типов впервые была подробно описана в феврале 2019 года в документе &lt;a href="http://cr.openjdk.java.net/~briangoetz/amber/datum.html"&gt;"Data Classes and Sealed Types for Java"&lt;/a&gt;, и в июле того же года получила свой &lt;a href="https://openjdk.java.net/jeps/360"&gt;JEP 360&lt;/a&gt;, который был любезно &lt;a href="https://habr.com/ru/company/jugru/blog/498494/"&gt;переведён на Хабре&lt;/a&gt; Олегом Чирухиным. Стоит отметить, что версия JEP'а, которую перевёл Олег, немного устарела и отличается от актуальной. В частности, в новой версии &lt;code&gt;sealed&lt;/code&gt; типы больше не типы, а классы и интерфейсы. Связано это переименование с тем, что термин &amp;laquo;тип&amp;raquo; слишком перегружен и может означать не только классы и интерфейсы, но и их производные вроде массивов (&lt;code&gt;Object[]&lt;/code&gt;, &lt;code&gt;String[]&lt;/code&gt;) и параметризацией дженериков (&lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;, &lt;code&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;). Подробнее про это переименование можно прочитать &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-May/002175.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Впрочем, довольно лирики, и давайте перейдём непосредственно к нашим &lt;code&gt;sealed&lt;/code&gt; классам. Программистам, знакомым со Scala и Kotlin, такой вид классов должен быть знаком. В Java он означает в точности то же самое, что и там: модификатор &lt;code&gt;sealed&lt;/code&gt; ограничивает круг классов, которые могут наследоваться от данного класса. А вот в C# &lt;code&gt;sealed&lt;/code&gt; означает &lt;a href="https://docs.microsoft.com/ru-ru/dotnet/csharp/language-reference/keywords/sealed"&gt;совсем другое&lt;/a&gt;. Так что если вы пришли из C#, то будьте осторожнее: аналог ключевого слова &lt;code&gt;sealed&lt;/code&gt; в Java &amp;ndash; это &lt;code&gt;final&lt;/code&gt;, а не &lt;code&gt;sealed&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Давайте же наконец играться с &lt;code&gt;sealed&lt;/code&gt; классами. Но для начала проверим нашу версию Java:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; java --version
+openjdk 15-ea 2020-09-15
+OpenJDK Runtime Environment (build 15-ea+26-1287)
+OpenJDK 64-Bit Server VM (build 15-ea+26-1287, mixed mode, sharing)&lt;/pre&gt;
+&lt;p&gt;Как видите, я запустил &lt;a href="http://jdk.java.net/15/"&gt;раннюю сборку&lt;/a&gt; JDK 15. В ней &lt;code&gt;sealed&lt;/code&gt; классы уже присутствуют.&lt;/p&gt;
+&lt;p&gt;Напишем и запустим какой-нибудь простой код:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        Shape rectangle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle(1, 2);
+        Shape circle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Circle(3);
+        System.out.println(rectangle);
+        System.out.println(circle);
+    }
+}
+
+&lt;span style="color: blue"&gt;sealed abstract class&lt;/span&gt; Shape {
+}
+
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; Rectangle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
+    &lt;span style="color: blue"&gt;final int&lt;/span&gt; width, height;
+
+    Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.width = width;
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.height = height;
+    }
+}
+
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; Circle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
+    &lt;span style="color: blue"&gt;final int&lt;/span&gt; radius;
+
+    Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.radius = radius;
+    }
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+&lt;span style="color: grey"&gt;Note: Main.java uses preview language features.
+Note: Recompile with -Xlint:preview for details.&lt;/span&gt;
+Rectangle@11e21d0e
+Circle@1dd02175&lt;/pre&gt;
+&lt;p&gt;В коде выше особо ничего интересного, но заметьте, что мне пришлось сделать классы &lt;code&gt;Rectangle&lt;/code&gt; и &lt;code&gt;Shape&lt;/code&gt; &lt;code&gt;final&lt;/code&gt;, иначе бы код не скомпилировался:&lt;/p&gt;
+&lt;pre&gt;&amp;hellip;
+
+&lt;span style="color: blue"&gt;class&lt;/span&gt; Rectangle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
+    &amp;hellip;
+}
+
+&lt;span style="color: blue"&gt;class&lt;/span&gt; Circle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
+    &amp;hellip;
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+&lt;span style="color: red"&gt;Main.java:13: error: sealed, non-sealed or final modifiers expected
+class Rectangle extends Shape {
+^
+Main.java:22: error: sealed, non-sealed or final modifiers expected
+class Circle extends Shape {
+^&lt;/span&gt;
+&amp;hellip;&lt;/pre&gt;
+&lt;p&gt;Таким образом, подклассы &lt;code&gt;sealed&lt;/code&gt; классов могут быть либо &lt;code&gt;sealed&lt;/code&gt;, либо &lt;code&gt;non-sealed&lt;/code&gt;, либо &lt;code&gt;final&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Кстати, у нас же есть записи. Может, перепишем код, используя их, чтобы стало короче?&lt;/p&gt;
+&lt;pre&gt;&amp;hellip;
+
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
+}
+
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}
+
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+Rectangle[width=1, height=2]
+Circle[radius=3]&lt;/pre&gt;
+&lt;p&gt;Так гораздо лучше. Но пришлось сделать &lt;code&gt;Shape&lt;/code&gt; интерфейсом, потому что записи не могут наследоваться от классов.&lt;/p&gt;
+&lt;p&gt;Однако мы так и не проверили, что модификатор &lt;code&gt;sealed&lt;/code&gt; действительно работает. Давайте перенесём один из классов в другой файл:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Main.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        Shape rectangle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle(1, 2);
+        Shape circle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Circle(3);
+        System.out.println(rectangle);
+        System.out.println(circle);
+    }
+}
+
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
+}
+
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Circle.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Main.java Circle.java
+&lt;span style="color: red"&gt;Circle.java:1: error: class is not allowed to extend sealed class: Shape
+record Circle(int radius) implements Shape {
+^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Чего и следовало ожидать: компилятор разрешает наследоваться от &lt;code&gt;sealed&lt;/code&gt; интерфейса только тем классам, которые находятся в том же файле. Но что если мне нужно, чтобы мои классы были в разных файлах? Например, я хочу сделать все классы публичными, а значит они должны находиться в отдельных файлах, но при этом я не хочу терять преимущества &lt;code&gt;sealed&lt;/code&gt;. На помощь приходит ключевое слово &lt;code&gt;permits&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle, Circle {
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Rectangle.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Circle.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public record&lt;/span&gt; Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;p&gt;Теперь всё успешно компилируется. С помощью &lt;code&gt;permits&lt;/code&gt; мы указали явно все классы, которые будут наследоваться от &lt;code&gt;Shape&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Давайте попробуем сделать что-нибудь нелегальное. Например, укажем в &lt;code&gt;permits&lt;/code&gt; класс, но &amp;laquo;забудем&amp;raquo; его отнаследовать:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle {
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Rectangle.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) {
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java Rectangle.java
+&lt;span style="color: red"&gt;Shape.java:1: error: invalid permits clause
+public sealed interface Shape permits Rectangle {
+                                      ^
+  (subclass Rectangle must extend sealed class)&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Это явно ошибочная ситуация, и компилятор надёжно её перехватывает, сообщая нам об ошибке.&lt;/p&gt;
+&lt;p&gt;А если попробовать вписать в &lt;code&gt;permits&lt;/code&gt; класс, который не является прямым наследником?&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; RectangleShape, Rectangle {
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// RectangleShape.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; RectangleShape &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle {
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Rectangle.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; RectangleShape {
+}&lt;/pre&gt;
+&lt;p&gt;Заметьте, что в данной иерархии &lt;code&gt;Rectangle&lt;/code&gt; наследуется от &lt;code&gt;RectangleShape&lt;/code&gt;, а &lt;code&gt;RectangleShape&lt;/code&gt; &amp;ndash; от &lt;code&gt;Shape&lt;/code&gt;. Но при этом в &lt;code&gt;Shape permits&lt;/code&gt; указан &lt;code&gt;Rectangle&lt;/code&gt;. Попробуем скомпилировать это:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java RectangleShape.java Rectangle.java
+&lt;span style="color: red"&gt;Shape.java:1: error: invalid permits clause
+public sealed interface Shape permits RectangleShape, Rectangle {
+                                                      ^
+  (subclass Rectangle must extend sealed class)&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Получили в общем-то ту же самую ошибку, что и выше: если указываешь в &lt;code&gt;permits&lt;/code&gt; класс, то это класс должен быть отнаследован напрямую.&lt;/p&gt;
+&lt;p&gt;Интересно, что будет, если указать в &lt;code&gt;permits&lt;/code&gt; какой-нибудь совершенно левый класс?&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; &lt;b&gt;Integer&lt;/b&gt;, Rectangle, Circle {
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java Rectangle.java Circle.java
+&lt;span style="color: red"&gt;Shape.java:1: error: class is not allowed to extend sealed class: Shape
+public sealed interface Shape permits Integer, Rectangle, Circle {
+                                      ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Здесь мы тоже совершенно ожидаемо получили ошибку: Java разрешает указывать в &lt;code&gt;permits&lt;/code&gt; только классы из того же модуля. Класс &lt;code&gt;java.lang.Integer&lt;/code&gt; находится в модуле &lt;code&gt;java.base&lt;/code&gt;, поэтому код не компилируется.&lt;/p&gt;
+&lt;p&gt;Что если сделать &lt;code&gt;sealed&lt;/code&gt; без единого наследника?&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java
+&lt;span style="color: red"&gt;Shape.java:1: error: sealed class must have subclasses
+public sealed interface Shape {
+              ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;И здесь компилятор надёжен. Если класс &lt;code&gt;sealed&lt;/code&gt;, то он должен иметь хотя бы один подкласс, иначе какой тогда смысл в &lt;code&gt;sealed&lt;/code&gt;? (Хотя это могло бы быть полезным для возможности объявления &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2019-October/001719.html"&gt;утилитных интерфейсов&lt;/a&gt;, но тут скорее нужно позволить объявлять &lt;code&gt;final&lt;/code&gt; интерфейсы, нежели &lt;code&gt;sealed&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;Было бы ещё интересно проверить вот что. Java на этапе компиляции умеет делать проверки совместимости типов. Если она сможет доказать, что два типа не могут быть приведены друг к другу, то будет ошибка компиляции. Например:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        Rectangle rect = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle();
+        System.out.println(rect &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Runnable);
+    }
+}
+
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; Rectangle {
+}&lt;/pre&gt;
+&lt;p&gt;Такой код ожидаемо не скомпилируется, ведь совершенно точно известно, что никакой объект &lt;code&gt;Rectangle&lt;/code&gt; не может быть &lt;code&gt;Runnable&lt;/code&gt;, потому что &lt;code&gt;Rectangle&lt;/code&gt; объявлен как &lt;code&gt;final&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; java Main.java
+&lt;span style="color: red"&gt;Main.java:4: error: incompatible types: Rectangle cannot be converted to Runnable
+        System.out.println(rect instanceof Runnable);
+                           ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;А теперь вопрос: будет ли ошибка компиляции, если усложнить наш пример, введя промежуточный &lt;code&gt;sealed&lt;/code&gt; класс? Давайте проверим:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        Shape rect = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle();
+        System.out.println(rect &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Runnable);
+    }
+}
+
+&lt;span style="color: blue"&gt;sealed class&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle {
+}
+
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; Rectangle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;p&gt;В данном примере объект &lt;code&gt;rect&lt;/code&gt; тоже абсолютно точно не может быть &lt;code&gt;Runnable&lt;/code&gt;, потому что иерархия &lt;code&gt;Shape&lt;/code&gt; закрытая, и ни &lt;code&gt;Shape&lt;/code&gt;, ни &lt;code&gt;Rectangle&lt;/code&gt; не реализуют &lt;code&gt;Runnable&lt;/code&gt;. Хватит ли компилятору ума, чтобы обнаружить ошибку?&lt;/p&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+false&lt;/pre&gt;
+&lt;p&gt;К сожалению, не хватило. Вообще это довольно странно, потому что это было бы совершенно логичным поведением компилятора. Я решил задать про это вопрос в рассылке OpenJDK, и &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-observers/2020-June/002344.html"&gt;мне ответили&lt;/a&gt;, что решили эту возможность пока не реализовывать и отложить её до следующего релиза. Ну что ж, тогда будем ждать.&lt;/p&gt;
+&lt;p&gt;Что мы ещё не попробовали? Что насчёт анонимных классов? Могут ли они наследоваться от sealed классов?&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        Shape shape = &lt;span style="color: blue"&gt;new&lt;/span&gt; Shape() {};
+    }
+}
+
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
+}
+
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+&lt;span style="color: red"&gt;Main.java:3: error: local classes must not extend sealed classes
+        Shape shape = new Shape() {};
+                                  ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Ага, значит наследоваться не могут не только анонимные, но и вообще любые локальные классы. Ну и, конечно же, логично было бы запретить лямбды:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        Shape shape = () -&gt; {};
+    }
+}
+
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; f();
+}
+
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
+    &lt;span style="color: blue"&gt;public void&lt;/span&gt; f() {
+    }
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+&lt;span style="color: red"&gt;Main.java:3: error: incompatible types: Shape is not a functional interface
+        Shape shape = () -&gt; {};
+                      ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Интересное сообщение об ошибке. То есть sealed интерфейс не может быть функциональным интерфейсом. И если просто попытаться использовать аннотацию &lt;code&gt;@FunctionalInterface&lt;/code&gt;, то будет ошибка:&lt;/p&gt;
+&lt;pre&gt;&amp;hellip;
+
+@FunctionalInterface
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; f();
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
+&lt;span style="color: red"&gt;Main.java:6: error: Unexpected @FunctionalInterface annotation
+@FunctionalInterface
+^
+  Shape is not a functional interface&lt;/span&gt;&lt;/pre&gt;
+&lt;h4&gt;Заключение&lt;/h4&gt;
+&lt;p&gt;Далеко не всегда иерархии классов должны быть открыты для расширения неограниченным кругом лиц. Часто встречается необходимость смоделировать такую иерархию, которая будет открыта для использования, но закрыта для расширения. &amp;laquo;Запечатанные&amp;raquo; классы и интерфейсы в Java 15, наконец, сделают такое возможным. Особенно хорошо &lt;code&gt;sealed&lt;/code&gt; классы будут взаимодействовать с записями, позволив легко моделировать алгебраические типы данных.&lt;/p&gt;
+&lt;p&gt;Но ещё более эффектной эта возможность будет, когда реализуют полноценный &lt;a href="https://openjdk.java.net/jeps/8213076"&gt;паттерн-матчинг для оператора &lt;code&gt;switch&lt;/code&gt;&lt;/a&gt;, и компилятор, работая с &lt;code&gt;sealed&lt;/code&gt; иерархией, сможет делать проверки исчерпываемости (exhaustiveness). Это поможет разработчику сделать код ещё более безопасным.&lt;/p&gt;
+&lt;p&gt;Сейчас &lt;code&gt;sealed&lt;/code&gt; классы некоторое время будут находиться в режиме preview, но к следующему LTS релизу Java 17 они, скорее всего, станут стабильными. Это даст неплохую мотивацию перейти на последнюю версию Java.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Java исполняется 25 лет</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_celebrates_25_years.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_celebrates_25_years.html</id>
+    <updated>2020-05-22T17:00:00Z</updated>
+    <published>2020-05-22T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Друзья, сегодня у нас знаменательная дата. 23 мая 1995 года, ровно 25 лет назад, вышла первая публичная версия языка программирования Java. Новый язык мгновенно завоевал огромную популярность: благодаря простоте, кроссплатформенности, отсутствию необходимости вручную освобождать память и при этом довольно неплохой производительности разработчики получили огромный прирост в скорости написания программ. Java быстро стала стандартом де-факто для написания корпоративных веб-приложений. Сегодня по самым скромным оценкам порядка 15% всего Интернета работает на JVM.&lt;/p&gt;
+&lt;p&gt;С момента выхода первой версии язык и платформа кардинально эволюционировали. JDK стала полностью открытым и свободным ПО. JIT-компилятор был усовершенствован настолько, что программы на Java по скорости хорошо приблизились к C++. Появилось несметное количество инструментов и библиотек, решающих самый большой спектр задач. С возможностями IntelliJ IDEA не может соревноваться ни одна другая среда разработки. Новые сборщики мусора Shenandoah и ZGC сделали возможным писать приложения, чувствительные к миллисекундным временам отклика. Сам язык значительно изменился: появились дженерики, аннотации, лямбда-выражения, модули. Были созданы другие популярные языки на основе JVM, такие как Scala, Kotlin, Groovy.&lt;/p&gt;
+&lt;p&gt;Сегодня Java продолжает развиваться огромными темпами. Версии Java стали выходить раз в полгода, что теперь позволяет разработчикам начать пользоваться нововведениями намного раньше. В рамках проекта Amber в языке появляются всё новые и новые синтаксические изменения, которые позволят сделать код ещё выразительнее и безопаснее. Проекты Valhalla и Graal позволят ещё сильнее увеличить производительность Java-программ, сократив разницу с нативными языками до минимума. Проект Panama ликвидирует брешь в возможностях взаимодействия JVM с нативным кодом. Проект Loom позволит писать многопоточные конкурентные приложения так же просто, как в Erlang и Go. Проект Leyden поможет в решении проблемы медленного старта Java-приложений.&lt;/p&gt;
+&lt;p&gt;25 лет – это немалый возраст для языка, но Java ни в коем случае не устарела. Наоборот, сегодня она находится на самом пике своего цветения и продолжает уверенно укреплять свои позиции на рынке. Эти 25 лет были прекрасным временем, но будущее будет ещё более светлым и захватывающим.&lt;/p&gt;
+&lt;p&gt;Всех с праздником!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>В Java можно будет объявлять локальные интерфейсы и перечисления</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/local_interfaces_and_enums.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/local_interfaces_and_enums.html</id>
+    <updated>2020-04-30T17:00:00Z</updated>
+    <published>2020-04-30T17:00:00Z</published>
+    <content type="html">&lt;p&gt;На сайте OpenJDK вышел &lt;a href="http://openjdk.java.net/jeps/8242303"&gt;новый черновик&lt;/a&gt; JEP с заголовком "Records (Second Preview)". В нём специфицируются некоторые изменения в записях по сравнению с &lt;a href="http://openjdk.java.net/jeps/359"&gt;первым preview&lt;/a&gt;, а также возможность объявлять в методах интерфейсы и перечисления.&lt;/p&gt;
+&lt;p&gt;Напомним, что в Java есть возможность объявлять классы прямо внутри методов и блоков. Такие классы называются &lt;i&gt;локальными&lt;/i&gt;, и они могут захватывать effectively final переменные, объявленные выше в этом же методе или блоке. Пример объявления локального класса:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; m() {
+    &lt;span style="color: blue"&gt;class&lt;/span&gt; Foo {
+        …
+    }
+}&lt;/pre&gt;
+&lt;p&gt;С &lt;a href="java_14_is_out.html"&gt;Java 14&lt;/a&gt; появилась возможность также объявлять локальные записи. Особенность локальных записей заключается в том, что они неявно являются &lt;i&gt;статическими&lt;/i&gt; в отличие от локальных классов, которые могут быть только &lt;i&gt;нестатическими&lt;/i&gt;. Таким образом, локальные записи стали первым историческим примером статических деклараций внутри метода, которые до этого в Java были запрещены (локальные классы и переменные не могут быть статическими). Пример стал успешным: локальные записи ничему не противоречат и не нарушают никакую семантику. Такой успешный пример навёл на мысль о том, что нужно расширить поле возможных локальных статических деклараций на интерфейсы и перечисления:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; m() {
+    &lt;span style="color: blue"&gt;enum&lt;/span&gt; Foo {
+        A, B
+    }
+
+    &lt;span style="color: blue"&gt;interface&lt;/span&gt; Bar {
+         Foo getFoo();
+    }
+}&lt;/pre&gt;
+&lt;p&gt;По аналогии с локальными записями локальные интерфейсы и перечисления могут ссылаться только на объявленные выше локальные записи, интерфейсы и перечисления, но не на те, которые объявлены ниже. Также они могут ссылаться на самих себя.&lt;/p&gt;
+&lt;p&gt;Про возможность объявлять локальные статические классы пока ничего не сказано, однако в январе Brian Goetz &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-January/001904.html"&gt;написал письмо&lt;/a&gt; в рассылку, в котором он сказал, что конечной целью должна быть возможность вкладывать всё что угодно во всё что угодно. Это значит, что локальные статические классы могут появиться позже.&lt;/p&gt;
+&lt;p&gt;Остальные изменения в JEP'е относятся к самим записям. Их мало, и они незначительны. Например, в новой версии убрано ограничение, что канонический конструктор записи обязательно должен быть публичным.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>В Java появятся паттерны деконструкции</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/deconstruction_patterns.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/deconstruction_patterns.html</id>
+    <updated>2020-03-29T17:00:00Z</updated>
+    <published>2020-03-29T17:00:00Z</published>
+    <content type="html">&lt;p&gt;В недавно вышедшем &lt;a href="https://openjdk.java.net/jeps/375"&gt;JEP 375&lt;/a&gt; появилась информация о введении в язык так называемых &lt;i&gt;паттернов деконструкции&lt;/i&gt;. Такие паттерны позволят применять оператор &lt;code&gt;instanceof&lt;/code&gt; не просто для теста по типу, но и для извлечения компонентов этого типа. В первой реализации можно будет извлекать только компоненты &lt;a href="trying_records_in_java14.html"&gt;записей&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point (&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b)) {
+    System.out.println(a + b);
+}&lt;/pre&gt;
+&lt;p&gt;В примере выше сначала проверяется, является ли &lt;code&gt;obj&lt;/code&gt; объектом типа &lt;code&gt;Point&lt;/code&gt;, а затем происходит "привязка" новых переменных &lt;code&gt;a&lt;/code&gt; и &lt;code&gt;b&lt;/code&gt; типа &lt;code&gt;int&lt;/code&gt; к полям &lt;code&gt;Point.x&lt;/code&gt; и &lt;code&gt;Point.y&lt;/code&gt; соответственно. Использование ключевого слово &lt;code&gt;var&lt;/code&gt; в паттерне является обязательным: чтобы нельзя было &lt;a href="https://mail.openjdk.java.net/pipermail/amber-dev/2020-March/005645.html"&gt;перепутать&lt;/a&gt; привязки переменных с константами с тем же именем, которые случайно могут оказаться в той же области видимости (хотя константы пока что не могут использоваться в паттернах, однако в будущем это может измениться).&lt;/p&gt;
+&lt;p&gt;Код выше семантически эквивалентен следующему более громоздкому коду:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point) {
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; a = ((Point) obj).x;
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; b = ((Point) obj).y;
+    System.out.println(a + b);
+}&lt;/pre&gt;
+&lt;p&gt;Как видно, новый подход является более компактным, декларативным и более типобезопасным.&lt;/p&gt;
+&lt;p&gt;Новый паттерн-матчинг также будет поддерживать вложенные паттерны:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Circle(Point origin, &lt;span style="color: blue"&gt;int&lt;/span&gt; radius) {}
+
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Circle(Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b), &lt;span style="color: blue"&gt;var&lt;/span&gt; r)) {
+    System.out.println(&lt;span style="color: darkred"&gt;"Circle centered at ("&lt;/span&gt; + a + &lt;span style="color: darkred"&gt;", "&lt;/span&gt; + b + &lt;span style="color: darkred"&gt;")"&lt;/span&gt;);
+    System.out.println(&lt;span style="color: darkred"&gt;"Area is: "&lt;/span&gt; + Math.PI*r*r);
+}&lt;/pre&gt;
+&lt;p&gt;Во вложенных паттернах весь матчинг будет являться успешным только в том случае, если все его компоненты прошли соответственные тесты типа.&lt;/p&gt;
+&lt;p&gt;На текущий момент неизвестно, успеют ли деконструкционные паттерны попасть в Java 15 (но с большой вероятностью это будет так).&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Вышла Java 14</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_14_is_out.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_14_is_out.html</id>
+    <updated>2020-03-17T17:00:00Z</updated>
+    <published>2020-03-17T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная &lt;a href="https://openjdk.java.net/projects/jdk/14/"&gt;версия Java 14&lt;/a&gt;. Ссылки на скачивание:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase-jdk14-downloads.html"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://jdk.java.net/14/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В этот релиз попало 16 JEP'ов, а также &lt;a href="https://jdk.java.net/14/release-notes"&gt;сотни более мелких улучшений&lt;/a&gt; и &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-14.txt"&gt;тысячи исправлений багов&lt;/a&gt;. Список JEP'ов:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/305"&gt;Паттерн-матчинг для оператора &lt;code&gt;instanceof&lt;/code&gt; (JEP 305)&lt;/a&gt; &amp;ndash; улучшение оператора &lt;code&gt;instanceof&lt;/code&gt; для поддержки паттерн-матчинга по типу. Его мы подробно рассматривали в &lt;a href="trying_new_instanceof_in_java_14.html"&gt;этой статье&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/359"&gt;Записи (Preview) (JEP 359)&lt;/a&gt; &amp;ndash; новая синтаксическая конструкция в языке, которая позволяет объвлять классы-носители данных намного более компактно посредством нового ключевого слова &lt;code&gt;record&lt;/code&gt;. Записи мы также рассматривали в &lt;a href="trying_records_in_java14.html"&gt;отдельной статье&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/361"&gt;Выражения &lt;code&gt;switch&lt;/code&gt; (JEP 361)&lt;/a&gt; &amp;ndash; улучшенный оператор &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="switch_expressions.html"&gt;появился&lt;/a&gt; в Java 12 и был &lt;a href="yield_in_switch.html"&gt;немного изменён&lt;/a&gt; в Java 13, теперь стал стабильной конструкцией и больше не требует preview-режима.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/368"&gt;Блоки текста (второе Preview) (JEP 368)&lt;/a&gt; &amp;ndash; новый вид строковых литералов, который &lt;a href="text_blocks.html"&gt;появился&lt;/a&gt; в Java 13, теперь &lt;a href="escape_sequences_for_line_continuation_and_whitespace.html"&gt;дополнен&lt;/a&gt; двумя новыми экранирующими последовательностями для продолжения строки и пробела. Конструкция пока ещё остаётся в preview-режиме.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/358"&gt;Полезные &lt;code&gt;NullPointerException&lt;/code&gt;'ы (JEP 358)&lt;/a&gt; &amp;ndash; улучшение &lt;code&gt;NullPointerException&lt;/code&gt;, которое детально сообщает, что именно было &lt;code&gt;null&lt;/code&gt;. Включается с помощью ключа &lt;code&gt;-XX:+ShowCodeDetailsInExceptionMessages&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/343"&gt;Инструмент упаковки (JEP 343)&lt;/a&gt; &amp;ndash; новый инструмент &lt;code&gt;jpackage&lt;/code&gt; для создания самодостаточных Java-приложений, который поддерживает нативные форматы упаковки. Пока предоставляется как инкубационный модуль.&lt;/li&gt;
+  &lt;li&gt;ZGC на &lt;a href="https://openjdk.java.net/jeps/364"&gt;macos&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/365"&gt;Windows&lt;/a&gt; (JEP 364 и 365) &amp;ndash; порт сборщика мусора ZGC, который был доступен &lt;a href="https://openjdk.java.net/jeps/333"&gt;только на Linux&lt;/a&gt;, на другие операционные системы. Сборщик мусора всё ещё находится в экспериментальном статусе.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/363"&gt;Удаление сборщика мусора CMS (JEP 363)&lt;/a&gt; &amp;ndash; сборщик мусора Concurrent Mark Sweep, который &lt;a href="https://openjdk.java.net/jeps/291"&gt;стал deprecated&lt;/a&gt; в Java 9, теперь окончательно удалён.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/366"&gt;Deprecate the ParallelScavenge + SerialOld GC Combination (JEP 366)&lt;/a&gt; &amp;ndash; комбинация флагов &lt;code&gt;-XX:+UseParallelGC -XX:-UseParallelOldGC&lt;/code&gt; теперь стала deprecated.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/345"&gt;NUMA-Aware Memory Allocation for G1 (JEP 345)&lt;/a&gt; &amp;ndash; неравномерный доступ к памяти теперь поддерживается не только в ParallelGC, но и в G1.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/349"&gt;JFR Event Streaming (JEP 349)&lt;/a&gt; &amp;ndash; предоставление возможности поглощения данных JDK Flight Recorder в непрерывном режиме. Это может быть полезно, например, в целях непрерывного мониторинга Java-процесса. Раньше данные можно было считывать только путём остановки записи, сохранения файла на диск и его последующего чтения.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/352"&gt;Non-Volatile Mapped Byte Buffers (JEP 352)&lt;/a&gt; &amp;ndash; поддержка неволатильной памяти в &lt;code&gt;MappedByteBuffer&lt;/code&gt;. Ранее в Java это было возможно лишь посредством внешних вызовов к системной библиотеке, написанной на C (например, &lt;a href="https://pmem.io/pmdk/libpmem/"&gt;libpmem&lt;/a&gt;). Однако такие вызовы стоят очень дорого, что делает Java плохо пригодной для написания транзакционных программ с персистестным состоянием. Новый же режим отображения в &lt;code&gt;MappedByteBuffer&lt;/code&gt; решает эту проблему.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/362"&gt;Deprecate the Solaris and SPARC Ports (JEP 362)&lt;/a&gt; &amp;ndash; порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC стали deprected for removal. Когда порты исчезнут окончательно, это упростит и ускорит разработку JDK.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/367"&gt;Remove the Pack200 Tools and API (JEP 367)&lt;/a&gt; &amp;ndash; инструменты &lt;code&gt;pack200&lt;/code&gt; и &lt;code&gt;unpack200&lt;/code&gt;, которые &lt;a href="https://openjdk.java.net/jeps/336"&gt;стали deprecated&lt;/a&gt; в Java 11, теперь удалены окончательно.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/370"&gt;Foreign-Memory Access API (Incubator) (JEP 370)&lt;/a&gt; &amp;ndash; долгожданное стандартное API для доступа к памяти вне кучи Java, которое разрабатывается в рамках проекта &lt;a href="https://openjdk.java.net/projects/panama/"&gt;Panama&lt;/a&gt;. Это новое API не имеет ограничений, которые есть у direct &lt;code&gt;ByteBuffer&lt;/code&gt;, более безопасно, чем нестандартный &lt;code&gt;sun.misc.Unsafe&lt;/code&gt; и более эффективно, чем JNI (и без возни с кодом на C). Однако новое API ещё имеет экспериментальном статус, и поэтому находится в инкубационном модуле.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Java 14 не является LTS-релизом.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Из Java исчезнет Nashorn</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/remove_nashorn.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/remove_nashorn.html</id>
+    <updated>2020-02-26T17:00:00Z</updated>
+    <published>2020-02-26T17:00:00Z</published>
+    <content type="html">&lt;p&gt;На сайте OpenJDK вышел &lt;a href="https://openjdk.java.net/jeps/372"&gt;новый JEP&lt;/a&gt;, в котором предлагается убрать из JDK движок JavaScript Nashorn и инструмент &lt;code&gt;jjs&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Nashorn &lt;a href="https://openjdk.java.net/jeps/174"&gt;появился в Java 8&lt;/a&gt; в качестве более современной и производительной замены Rhino, предыдущего движка JavaScript в JDK. Когда Nashorn был выпущен, он был полной реализацией стандарта ECMAScript-262 5.1. Но шли годы, и ECMAScript ушёл сильно дальше в своём развитии, а у разработчиков OpenJDK не оказалось ресурсов, чтобы поспеть за таким темпом выхода новых версий. В итоге, в Java 11 &lt;a href="https://openjdk.java.net/jeps/335"&gt;было решено&lt;/a&gt; пометить Nashorn как deprecated for removal. Сейчас же предлагается его полностью удалить.&lt;/p&gt;
+&lt;p&gt;Так как огромное количество Java-приложений использует JavaScript, то такое удаление станет довольно неприятным препятствием для миграции на новые версии Java. Однако ситуация не будет полностью безвыходной: в качестве замены Nashorn можно, например, &lt;a href="https://twitter.com/ChrisGSeaton/status/1232823291146113025"&gt;использовать Graal.js&lt;/a&gt;, который можно использовать как в связке с GraalVM, так и отдельно как &lt;a href="https://search.maven.org/search?q=graalvm-js"&gt;Maven-артефакт&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/api_to_upgrade_from_java_8_part_2.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/api_to_upgrade_from_java_8_part_2.html</id>
+    <updated>2020-02-08T17:00:00Z</updated>
+    <published>2020-02-08T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&lt;a href="api_to_upgrade_from_java_8.html"&gt;Продолжаем&lt;/a&gt; рассказ про API, которые появились в новых версиях Java.&lt;/p&gt;
+
+&lt;h4&gt;1. &lt;code&gt;Files.mismatch()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 12&lt;/h5&gt;
+&lt;p&gt;На практике довольно часто возникает необходимость проверить, являются ли два файла в точности одинаковыми или нет. С помощью метода &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/nio/file/Files.html#mismatch(java.nio.file.Path,java.nio.file.Path)"&gt;Files.mismatch()&lt;/a&gt;&lt;/code&gt;, появившегося в Java 12, это наконец-то можно сделать. Этот метод возвращает позицию первого несовпадающего байта в двух файлах или &lt;code&gt;-1&lt;/code&gt;, если файлы идентичны.&lt;/p&gt;
+&lt;p&gt;Это может быть полезно, например, когда синхронизируешь содержимое двух директорий. Чтобы не перезаписывать файл при копировании тем же самым содержимым и лишний раз не нагружать диск, можно сначала проверить, идентичны файлы или нет:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public static void&lt;/span&gt; syncDirs(Path srcDir, Path dstDir)
+        &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException {
+    &lt;span style="color: green"&gt;// Для простоты демонстрации считаем, что поддиректорий нет&lt;/span&gt;
+    &lt;span style="color: blue"&gt;try&lt;/span&gt; (Stream&amp;lt;Path&amp;gt; stream = Files.list(srcDir)) {
+        &lt;span style="color: blue"&gt;for&lt;/span&gt; (Path src : stream.collect(toList())) {
+            Path dst = dstDir.resolve(src.getFileName());
+            &lt;span style="color: blue"&gt;if&lt;/span&gt; (!Files.exists(dst)) {
+                System.out.println(&lt;span style="color: darkred"&gt;"Copying file "&lt;/span&gt; + dst);
+                Files.copy(src, dst);
+            } &lt;span style="color: blue"&gt;else if&lt;/span&gt; (Files.mismatch(src, dst) &gt;= 0) {
+                System.out.println(&lt;span style="color: darkred"&gt;"Overwriting file "&lt;/span&gt; + dst);
+                Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
+            }
+        }
+    }
+}&lt;/pre&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;(Кстати, когда уже наконец &lt;code&gt;Stream&lt;/code&gt; отнаследуют от &lt;code&gt;Iterable&lt;/code&gt;? Хочется просто писать &lt;code&gt;for (Path file : stream)&lt;/code&gt;, а не возиться с промежуточными списками.)&lt;/p&gt;
+
+&lt;h4&gt;2. Новые методы в &lt;code&gt;java.time&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появились в: Java 9&lt;/h5&gt;
+&lt;p&gt;В Java почти 20 лет не было нормального API для работы с датами и временем. Эту проблему решили лишь в Java 8, когда ввели новый пакет &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/package-summary.html"&gt;java.time&lt;/a&gt;&lt;/code&gt; под руководством небезызвестного &lt;a href="https://blog.joda.org/"&gt;Стивена Колборна&lt;/a&gt;, создателя библиотеки &lt;a href="https://www.joda.org/joda-time/"&gt;Joda Time&lt;/a&gt;. А в девятой версии &lt;code&gt;java.time&lt;/code&gt; добавили множество интересных методов.&lt;/p&gt;
+&lt;p&gt;В Java 8 &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html"&gt;Duration&lt;/a&gt;&lt;/code&gt; нельзя просто разбить на составляющие (например, прошло 2 дня, 7 часов, 15 минут, 12 секунд). В Java 9 для этого появились методы &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toDaysPart()"&gt;toDaysPart()&lt;/a&gt;&lt;/code&gt;, &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toHoursPart()"&gt;toHoursPart()&lt;/a&gt;&lt;/code&gt;, &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toMinutesPart()"&gt;toMinutesPart()&lt;/a&gt;&lt;/code&gt;, &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#toSecondsPart()"&gt;toSecondsPart()&lt;/a&gt;&lt;/code&gt; и т.д. Пример:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public static&lt;/span&gt; String modifiedAgo(Path path) &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException {
+    FileTime time = Files.getLastModifiedTime(path);
+    Instant to = Instant.now();
+    Instant from = time.toInstant();
+    Duration d = Duration.between(from, to);
+    &lt;span style="color: blue"&gt;return&lt;/span&gt; String.format(
+        &lt;span style="color: darkred"&gt;"Файл был изменён %d дней, %d часов, %d минут, %d секунд назад"&lt;/span&gt;,
+        d.toDaysPart(), d.toHoursPart(),
+        d.toMinutesPart(), d.toSecondsPart());
+}&lt;/pre&gt;
+&lt;p&gt;А что если нам надо узнать, сколько &lt;i&gt;месяцев&lt;/i&gt; назад был изменён файл? Элегантного способа на Java 8, насколько мне известно, нет. А в Java 9 для этого можно использовать новый метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#dividedBy(java.time.Duration)"&gt;Duration.dividedBy()&lt;/a&gt;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public static long&lt;/span&gt; modifiedAgo(Path path, ChronoUnit unit)
+        &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException {
+    FileTime time = Files.getLastModifiedTime(path);
+    Instant to = Instant.now();
+    Instant from = time.toInstant();
+    Duration d = Duration.between(from, to);
+    &lt;span style="color: blue"&gt;return&lt;/span&gt; d.dividedBy(unit.getDuration());
+}
+
+&lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) &lt;span style="color: blue"&gt;throws&lt;/span&gt; Exception {
+    Path path = ...
+    System.out.printf(&lt;span style="color: darkred"&gt;"Файл был изменён %d месяцев назад%n"&lt;/span&gt;,
+        modifiedAgo(path, ChronoUnit.MONTHS));
+}
+&lt;/pre&gt;
+&lt;p&gt;Нововведения коснулись также класса &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html"&gt;LocalDate&lt;/a&gt;&lt;/code&gt;. С помощью метода &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#ofInstant(java.time.Instant,java.time.ZoneId)"&gt;LocalDate.ofInstant()&lt;/a&gt;&lt;/code&gt; можно сконвертировать &lt;code&gt;Instant&lt;/code&gt; в &lt;code&gt;LocalDate&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;LocalDate date = LocalDate.ofInstant(
+    Instant.now(), ZoneId.systemDefault());
+System.out.println(date);&lt;/pre&gt;
+&lt;p&gt;А используя новый метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#datesUntil(java.time.LocalDate)"&gt;LocalDate.datesUntil()&lt;/a&gt;&lt;/code&gt;, наконец-то можно легко получить &lt;code&gt;Stream&lt;/code&gt; всех дат в интервале между двумя датами:&lt;/p&gt;
+&lt;pre&gt;LocalDate from = LocalDate.of(2020, 1, 1);
+LocalDate to = LocalDate.of(2020, 1, 9);
+from.datesUntil(to)
+    .forEach(System.out::println);&lt;/pre&gt;
+&lt;p&gt;Вывод:&lt;/p&gt;
+&lt;pre&gt;2020-01-01
+2020-01-02
+2020-01-03
+2020-01-04
+2020-01-05
+2020-01-06
+2020-01-07
+2020-01-08&lt;/pre&gt;
+&lt;p&gt;Также есть &lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#datesUntil(java.time.LocalDate,java.time.Period)"&gt;перегрузка&lt;/a&gt;, где можно указать период:&lt;/p&gt;
+&lt;pre&gt;LocalDate from = LocalDate.of(2020, 1, 1);
+LocalDate to = LocalDate.of(2020, 1, 31);
+from.datesUntil(to, Period.ofWeeks(1))
+    .forEach(System.out::println);&lt;/pre&gt;
+&lt;p&gt;Вывод:&lt;/p&gt;
+&lt;pre&gt;2020-01-01
+2020-01-08
+2020-01-15
+2020-01-22
+2020-01-29&lt;/pre&gt;
+&lt;p&gt;Остальные методы:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Clock.html#tickMillis(java.time.ZoneId)"&gt;Clock.tickMillis()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/Duration.html#truncatedTo(java.time.temporal.TemporalUnit)"&gt;Duration.truncatedTo()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalDate.html#toEpochSecond(java.time.LocalTime,java.time.ZoneOffset)"&gt;LocalDate.toEpochSecond()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalTime.html#ofInstant(java.time.Instant,java.time.ZoneId)"&gt;LocalTime.ofInstant()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/LocalTime.html#toEpochSecond(java.time.LocalDate,java.time.ZoneOffset)"&gt;LocalTime.toEpochSecond()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/OffsetTime.html#toEpochSecond(java.time.LocalDate)"&gt;OffsetTime.toEpochSecond()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/chrono/Chronology.html#epochSecond(int,int,int,int,int,int,java.time.ZoneOffset)"&gt;Chronology.epochSecond()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/time/format/DateTimeFormatterBuilder.html#appendGenericZoneText(java.time.format.TextStyle)"&gt;DateTimeFormatterBuilder.appendGenericZoneText()&lt;/a&gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;3. &lt;code&gt;Collection.toArray()&lt;/code&gt; с функцией-генератором&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 11&lt;/h5&gt;
+&lt;p&gt;С конвертацией коллекций в массивы у Java была непростая история. С момента появления &lt;code&gt;Collection&lt;/code&gt; в Java 1.2 было два способа создания массива на основе коллекции:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Использовать метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray()"&gt;Collection.toArray()&lt;/a&gt;&lt;/code&gt;, который возвращает &lt;code&gt;Object[]&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Использовать метод &lt;code&gt;Collection.toArray(Object[])&lt;/code&gt;, который принимает уже созданный массив и заполняет его. Если переданный массив недостаточной длины, то создаётся новый массив нужной длины того же типа и возвращается. С появлением дженериков в Java 1.5 метод логичным образом поменял свою сигнатуру на &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray(T%5B%5D)"&gt;Collection.toArray(T[])&lt;/a&gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Загвоздка в том, что если нужен массив конкретного типа (допустим &lt;code&gt;String[]&lt;/code&gt;), второй метод можно использовать двумя способами:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Использовать конструкцию &lt;code&gt;collection.toArray(new String[0])&lt;/code&gt;. Тем самым, мы сознательно почти всегда отбрасываем массив, а передаём его туда, чтобы метод узнал тип массива.&lt;/li&gt;
+  &lt;li&gt;Использовать конструкцию &lt;code&gt;collection.toArray(new String[collection.size()])&lt;/code&gt;. В этом случае массив передаётся нужной длины, а значит ничего зря не отбрасывается, и код по идее работает быстрее. К тому же здесь не нужен рефлективный вызов.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Таким образом, второй вариант долгое время считался основным, и в IntelliJ IDEA даже была инспекция, которая подсвечивала первый вариант и предлагала конвертировать его во второй, более эффективный.&lt;/p&gt;
+&lt;p&gt;Однако в 2016 году вышла &lt;a href="https://shipilev.net/blog/2016/arrays-wisdom-ancients/"&gt;статья Алексея Шипилёва&lt;/a&gt;, где он решил досконально разобраться в этом вопросе и пришёл к выводу, что не-а: первый вариант всё-таки быстрее (по крайней мере в версиях JDK 6+). Эта статья получила большой &lt;a href="https://twitter.com/shipilev/status/689211445142228992"&gt;резонанс&lt;/a&gt;, и в IDEA решили изменить инспекцию, сделав у неё три опции: предпочитать пустой массив (default), предпочитать преаллоцированный массив или предпочитать то или иное в зависимости от версии Java.&lt;/p&gt;
+&lt;p&gt;Но история на этом не закончилась, потому что некоторые программисты принципиально не желали использовать эти хаки с пустыми массивами и хотели писать код "элегантно". Поэтому они вспомнили про &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Stream.html#toArray(java.util.function.IntFunction)"&gt;Stream.toArray(IntFunction[])&lt;/a&gt;&lt;/code&gt; и стали писать &lt;code&gt;collection.stream().toArray(String[]::new)&lt;/code&gt;. Медленно? Ну и что, зато красиво.&lt;/p&gt;
+&lt;p&gt;Программисты из Oracle посмотрели на всё это безобразие и подумали: а давайте уже сделаем один нормальный способ, который и будет рекомендованным? И в Java 11 добавили долгожданный метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Collection.html#toArray(java.util.function.IntFunction)"&gt;Collection.toArray(IntFunction[])&lt;/a&gt;&lt;/code&gt;, &lt;del&gt;тем самым запутав людей ещё сильнее&lt;/del&gt;.&lt;/p&gt;
+&lt;p&gt;Но на самом деле никакой путаницы нет. Да, теперь есть 4 варианта, но если вы не выжимаете такты из своего процессора, то вам следует просто использовать новый метод:&lt;/p&gt;
+&lt;pre&gt;List&amp;lt;Integer&amp;gt; list = ...;
+Integer[] array = list.toArray(Integer[]::&lt;span style="color: blue"&gt;new&lt;/span&gt;);&lt;/pre&gt;
+
+&lt;h4&gt;4. Методы &lt;code&gt;InputStream&lt;/code&gt;: &lt;code&gt;readNBytes()&lt;/code&gt;, &lt;code&gt;readAllBytes()&lt;/code&gt;, &lt;code&gt;transferTo()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появились в: Java 9 / Java 11&lt;/h5&gt;
+&lt;p&gt;Ещё одно неудобство, которое существовало в Java долгие годы &amp;ndash; отсутствие стандартного короткого способа считать все данные из &lt;code&gt;InputStream&lt;/code&gt;. Если не прибегать к библиотекам, то в Java 8 решить такую задачу довольно нетривиально: нужно завести список буферов, заполнять их, пока данные не кончатся, потом слить в один большой массив, учесть, что последний буфер заполнен лишь частично и т.д. Короче, нюансов хватает.&lt;/p&gt;
+&lt;p&gt;В Java 9 добавили метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#readAllBytes()"&gt;InputStream.readAllBytes()&lt;/a&gt;&lt;/code&gt;, который берёт всю эту работу на себя и возвращает заполненный массив байтов точной длины. Например, прочитать &lt;code&gt;stdout&lt;/code&gt;/&lt;code&gt;stderr&lt;/code&gt; процесса теперь очень легко:&lt;/p&gt;
+&lt;pre&gt;Process proc = Runtime.getRuntime().exec(&lt;span style="color: darkred"&gt;"java -version"&lt;/span&gt;);
+&lt;span style="color: blue"&gt;try&lt;/span&gt; (InputStream inputStream = proc.getErrorStream()) {
+    &lt;span style="color: blue"&gt;byte&lt;/span&gt;[] bytes = inputStream.readAllBytes();
+    System.out.print(&lt;span style="color: blue"&gt;new&lt;/span&gt; String(bytes));
+}&lt;/pre&gt;
+&lt;p&gt;Вывод:&lt;/p&gt;
+&lt;pre&gt;openjdk version "14-ea" 2020-03-17
+OpenJDK Runtime Environment (build 14-ea+33-1439)
+OpenJDK 64-Bit Server VM (build 14-ea+33-1439, mixed mode, sharing)&lt;/pre&gt;
+&lt;p&gt;Также если надо прочитать только &lt;code&gt;N&lt;/code&gt; байтов, то можно использовать метод из Java 11 &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#readNBytes(int)"&gt;InputStream.readNBytes()&lt;/a&gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Если же надо легко и эффективно (без промежуточного массива) перенаправить &lt;code&gt;InputStream&lt;/code&gt; в &lt;code&gt;OutputStream&lt;/code&gt;, то можно использовать &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/InputStream.html#transferTo(java.io.OutputStream)"&gt;InputStream.transferTo()&lt;/a&gt;&lt;/code&gt;. Например, для вывода версии Java в файл код будет выглядеть примерно так:&lt;/p&gt;
+&lt;pre&gt;Process proc = Runtime.getRuntime().exec(&lt;span style="color: darkred"&gt;"java -version"&lt;/span&gt;);
+Path path = Path.of(&lt;span style="color: darkred"&gt;"out.txt"&lt;/span&gt;);
+&lt;span style="color: blue"&gt;try&lt;/span&gt; (InputStream inputStream = proc.getErrorStream();
+     OutputStream outputStream = Files.newOutputStream(path)) {
+    inputStream.transferTo(outputStream);
+}&lt;/pre&gt;
+&lt;p&gt;Кстати, перенаправить &lt;code&gt;Reader&lt;/code&gt; во &lt;code&gt;Writer&lt;/code&gt; теперь тоже можно: с помощью метода &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/Reader.html#transferTo(java.io.Writer)"&gt;Reader.transferTo()&lt;/a&gt;&lt;/code&gt;, появившегося в Java 10.&lt;/p&gt;
+
+&lt;h4&gt;5. &lt;code&gt;Collectors.teeing()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 12&lt;/h5&gt;
+&lt;p&gt;При использовании &lt;code&gt;Stream&lt;/code&gt; часто возникает необходимость собрать элементы в два коллектора. Допустим, у нас есть &lt;code&gt;Stream&lt;/code&gt; из &lt;code&gt;Employee&lt;/code&gt;, и нужно узнать:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Сколько всего сотрудников в Stream.&lt;/li&gt;
+  &lt;li&gt;Сколько сотрудников, у которых есть телефонный номер.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Как это сделать в Java 8? Первое, что приходит в голову: сначала позвать &lt;code&gt;Stream.count()&lt;/code&gt;, а потом &lt;code&gt;Stream.filter()&lt;/code&gt; и &lt;code&gt;Stream.count()&lt;/code&gt;. Однако это не сработает, потому что &lt;code&gt;Stream&lt;/code&gt; является одноразовым и второй вызов выбросит исключение.&lt;/p&gt;
+&lt;p&gt;Второй вариант &amp;ndash; завести два счётчика и увеличивать их внутри &lt;code&gt;Stream.forEach()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;Stream&amp;lt;Employee&amp;gt; employees = ...
+&lt;span style="color: blue"&gt;int&lt;/span&gt;[] countWithPhoneAndTotal = {0, 0};
+employees
+    .forEach(emp -&gt; {
+        if (emp.getPhoneNumber() != &lt;span style="color: blue"&gt;null&lt;/span&gt;) {
+            countWithPhoneAndTotal[0]++;
+        }
+        countWithPhoneAndTotal[1]++;
+    });
+System.out.println(&lt;span style="color: darkred"&gt;"Employees with phone number: "&lt;/span&gt;
+    + countWithPhoneAndTotal[0]);
+System.out.println(&lt;span style="color: darkred"&gt;"Total employees: "&lt;/span&gt;
+    + countWithPhoneAndTotal[1]);
+&lt;/pre&gt;
+&lt;p&gt;В принципе, это работает, но это императивный подход, который плохо переносится на другие виды коллекторов. &lt;code&gt;Stream.peek()&lt;/code&gt; плох по той же причине.&lt;/p&gt;
+&lt;p&gt;Ещё есть идея использовать &lt;code&gt;Stream.reduce()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; CountWithPhoneAndTotal {
+    &lt;span style="color: blue"&gt;final int&lt;/span&gt; withPhone;
+    &lt;span style="color: blue"&gt;final int&lt;/span&gt; total;
+
+    CountWithPhoneAndTotal(&lt;span style="color: blue"&gt;int&lt;/span&gt; withPhone, &lt;span style="color: blue"&gt;int&lt;/span&gt; total) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.withPhone = withPhone;
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.total = total;
+    }
+}
+
+CountWithPhoneAndTotal countWithPhoneAndTotal = employees
+    .reduce(
+        &lt;span style="color: blue"&gt;new&lt;/span&gt; CountWithPhoneAndTotal(0, 0),
+        (count, employee) -&gt; &lt;span style="color: blue"&gt;new&lt;/span&gt; CountWithPhoneAndTotal(
+            employee.getPhoneNumber() != &lt;span style="color: blue"&gt;null&lt;/span&gt;
+                ? count.withPhone + 1
+                : count.withPhone,
+            count.total + 1),
+        (count1, count2) -&gt; &lt;span style="color: blue"&gt;new&lt;/span&gt; CountWithPhoneAndTotal(
+            count1.withPhone + count2.withPhone,
+            count1.total + count2.total));
+System.out.println(&lt;span style="color: darkred"&gt;"Employees with phone number: "&lt;/span&gt;
+    + countWithPhoneAndTotal.withPhone);
+System.out.println(&lt;span style="color: darkred"&gt;"Total employees: "&lt;/span&gt;
+    + countWithPhoneAndTotal.total);&lt;/pre&gt;
+&lt;p&gt;Этот вариант, конечно же, кошмар. Во-первых, он слишком огромный, во-вторых, неэффективный, так как на каждом шагу создаётся новый экземпляр &lt;code&gt;CountWithPhoneAndTotal&lt;/code&gt;. Если когда-нибудь доделают &lt;a href="http://cr.openjdk.java.net/~briangoetz/valhalla/sov/02-object-model.html"&gt;Валгаллу&lt;/a&gt;, то можно будет пометить класс &lt;code&gt;CountWithPhoneAndTotal&lt;/code&gt; как &lt;code&gt;inline&lt;/code&gt;, но первая проблема всё равно останется.&lt;/p&gt;
+&lt;p&gt;На этом мои идеи закончились. Если вдруг кто-то придумает, как сделать такой подсчёт в Java 8 коротким и эффективным, то напишите в комментариях. А я расскажу, как это можно сделать в Java 12 с помощью метода &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/stream/Collectors.html#teeing(java.util.stream.Collector,java.util.stream.Collector,java.util.function.BiFunction)"&gt;Collectors.teeing()&lt;/a&gt;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;Entry&amp;lt;Long, Long&amp;gt; countWithPhoneAndTotal = employees
+    .collect(teeing(
+        filtering(employee -&gt; employee.getPhoneNumber() != &lt;span style="color: blue"&gt;null&lt;/span&gt;, counting()),
+        counting(),
+        Map::entry
+    ));&lt;/pre&gt;
+&lt;p&gt;И всё.&lt;/p&gt;
+&lt;p&gt;С методом &lt;code&gt;Collectors.teeing()&lt;/code&gt; была очень интересная история: когда ему придумывали имя, то долго не могли &lt;a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2018-June/053718.html"&gt;прийти к консенсусу&lt;/a&gt; из-за огромного количество предложенных вариантов. Чего там только не было: &lt;code&gt;toBoth&lt;/code&gt;, &lt;code&gt;collectingToBoth&lt;/code&gt;, &lt;code&gt;collectingToBothAndThen&lt;/code&gt;, &lt;code&gt;pairing&lt;/code&gt;, &lt;code&gt;bifurcate&lt;/code&gt;, &lt;code&gt;distributing&lt;/code&gt;, &lt;code&gt;unzipping&lt;/code&gt;, &lt;code&gt;forking&lt;/code&gt;, ... В итоге его назвали &lt;code&gt;teeing&lt;/code&gt; от английского слова tee, которое само произошло от буквы &lt;b&gt;T&lt;/b&gt;, напоминающую по форме раздваиватель. В этом и есть суть имени метода: он &lt;i&gt;раздваивает&lt;/i&gt; поток на две части.&lt;/p&gt;
+
+&lt;h4&gt;6. &lt;code&gt;Runtime.version()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 9&lt;/h5&gt;
+&lt;p&gt;Иногда нужно узнать версию Java во время выполнения. Помните ли вы, как это сделать? Скорее всего, вы полезете искать название нужного свойства в интернете. Возможно некоторые вспомнят, что оно называется &lt;code&gt;java.version&lt;/code&gt;. А ещё вроде бы есть &lt;code&gt;java.specification.version&lt;/code&gt;... На самом деле, таких свойств как минимум пять:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;for&lt;/span&gt; (String key : Arrays.asList(
+        &lt;span style="color: darkred"&gt;"java.version"&lt;/span&gt;,
+        &lt;span style="color: darkred"&gt;"java.runtime.version"&lt;/span&gt;,
+        &lt;span style="color: darkred"&gt;"java.specification.version"&lt;/span&gt;,
+        &lt;span style="color: darkred"&gt;"java.vm.version"&lt;/span&gt;,
+        &lt;span style="color: darkred"&gt;"java.vm.specification.version"&lt;/span&gt;)) {
+    System.out.println(key + &lt;span style="color: darkred"&gt;" = "&lt;/span&gt; + System.getProperty(key));
+}&lt;/pre&gt;
+&lt;p&gt;Если запустить код на Java 8, то он выведет примерно следующее:&lt;/p&gt;
+&lt;pre&gt;java.version = 1.8.0_192
+java.runtime.version = 1.8.0_192-b12
+java.specification.version = 1.8
+java.vm.version = 25.192-b12
+java.vm.specification.version = 1.8&lt;/pre&gt;
+&lt;p&gt;Как отсюда вытащить цифру 8? Наверное, надо взять &lt;code&gt;java.specification.version&lt;/code&gt;, отбросить &lt;code&gt;1.&lt;/code&gt;, потом сконвертировать строку в число... Но не торопитесь, потому что на Java 9 это всё сломается:&lt;/p&gt;
+&lt;pre&gt;java.version = 9.0.1
+java.runtime.version = 9.0.1+11
+java.specification.version = 9
+java.vm.version = 9.0.1+11
+java.vm.specification.version = 9&lt;/pre&gt;
+&lt;p&gt;Однако не печальтесь, потому что в Java 9 &lt;a href="https://openjdk.java.net/jeps/223"&gt;появилось&lt;/a&gt; нормальное API для получения версий и было &lt;a href="https://openjdk.java.net/jeps/322"&gt;немного допилено&lt;/a&gt; в Java 10. С этим API больше не нужно ничего &amp;laquo;вытаскивать&amp;raquo; и парсить, а можно просто позвать метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Runtime.html#version()"&gt;Runtime.version()&lt;/a&gt;&lt;/code&gt;. Этот метод возвращает объект типа &lt;code&gt;Runtime.Version&lt;/code&gt;, у которого можно запросить все нужные части версии:&lt;/p&gt;
+&lt;pre&gt;Runtime.Version version = Runtime.version();
+System.out.println(&lt;span style="color: darkred"&gt;"Feature = "&lt;/span&gt; + version.feature());
+System.out.println(&lt;span style="color: darkred"&gt;"Interim = "&lt;/span&gt; + version.interim());
+System.out.println(&lt;span style="color: darkred"&gt;"Update = "&lt;/span&gt; + version.update());
+System.out.println(&lt;span style="color: darkred"&gt;"Patch = "&lt;/span&gt; + version.patch());&lt;/pre&gt;
+&lt;p&gt;Например, вот что он вернёт, если его позвать на JDK 11.0.5:&lt;/p&gt;
+&lt;pre&gt;Feature = 11
+Interim = 0
+Update = 5
+Patch = 0&lt;/pre&gt;
+
+&lt;h4&gt;7. &lt;code&gt;Optional.isEmpty()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 11&lt;/h5&gt;
+&lt;p&gt;Я не стану утверждать, что этот метод изменит вашу жизнь радикальным образом, но всё же в некоторых случаях он сможет избавить вас от ненужных отрицаний:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (!stream.findAny().isPresent()) {
+    System.out.println(&lt;span style="color: darkred"&gt;"Stream is empty"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Используя метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html#isEmpty()"&gt;Optional.isEmpty()&lt;/a&gt;&lt;/code&gt;, код можно немножко упростить:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (stream.findAny().isEmpty()) {
+    System.out.println(&lt;span style="color: darkred"&gt;"Stream is empty"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Также этот метод позволяет заменить лямбды на ссылки на методы в некоторых случаях:&lt;/p&gt;
+&lt;pre&gt;Stream&amp;lt;Optional&amp;lt;Integer&amp;gt;&amp;gt; stream = Stream.of(
+    Optional.of(1),
+    Optional.empty(),
+    Optional.of(2));
+
+&lt;span style="color: blue"&gt;long&lt;/span&gt; emptyCount = stream
+    .filter(Optional::isEmpty) &lt;span style="color: green"&gt;// Было opt -&gt; !opt.isPresent()&lt;/span&gt;
+    .count();&lt;/pre&gt;
+
+&lt;h4&gt;8. HTTP-клиент&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 11&lt;/h5&gt;
+&lt;p&gt;Долгое время единственным API для клиентского HTTP был класс &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/net/HttpURLConnection.html"&gt;HttpURLConnection&lt;/a&gt;&lt;/code&gt;, который существовал в Java практически с момента её появления. Спустя два десятилетия стало очевидно, что он больше не отвечает современным требованиям: он неудобен в использовании, не поддерживает HTTP/2 и веб-сокеты, работает только в блокирующем режиме, а ещё его очень трудно поддерживать. Поэтому было принятое решение создать новый HTTP Client, который &lt;a href="http://openjdk.java.net/jeps/110"&gt;попал в Java 9&lt;/a&gt; в качестве &lt;a href="http://openjdk.java.net/jeps/11"&gt;инкубационного&lt;/a&gt; модуля, а позже был &lt;a href="http://openjdk.java.net/jeps/321"&gt;стандартизован в Java 11&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Новый клиент находится в модуле &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.net.http/java/net/http/package-summary.html"&gt;java.net.http&lt;/a&gt;&lt;/code&gt;, и его использование осуществляется через главный класс &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.net.http/java/net/http/HttpClient.html"&gt;HttpClient&lt;/a&gt;&lt;/code&gt;. Приведём пример, как можно сделать простой HTTP-запрос с сайта и получить содержимое страницы с кодом ответа:&lt;/p&gt;
+&lt;pre&gt;HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest request = HttpRequest
+    .newBuilder(new URI(&lt;span style="color: darkred"&gt;"https://minijug.ru"&lt;/span&gt;))
+    .build();
+
+HttpResponse&amp;lt;Stream&amp;lt;String&amp;gt;&amp;gt; response = client.send(request,
+    HttpResponse.BodyHandlers.ofLines());
+
+System.out.println(&lt;span style="color: darkred"&gt;"Status code = "&lt;/span&gt; + response.statusCode());
+System.out.println(&lt;span style="color: darkred"&gt;"Body = "&lt;/span&gt;);
+&lt;span style="color: green"&gt;// Первые 4 строки&lt;/span&gt;
+response.body().limit(4).forEach(System.out::println);&lt;/pre&gt;
+&lt;p&gt;Вывод:&lt;/p&gt;
+&lt;pre&gt;Status code = 200
+Body =
+&amp;lt;!doctype html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;title&gt;miniJUG&amp;lt;/title&amp;gt;&lt;/pre&gt;
+&lt;p&gt;В модуле &lt;code&gt;java.net.http&lt;/code&gt; большое количество возможностей, и на их описание уйдёт много времени, поэтому сегодня мы ограничимся только примером выше.&lt;/p&gt;
+
+&lt;h4&gt;9. &lt;code&gt;Lookup.defineClass()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 9&lt;/h5&gt;
+&lt;p&gt;Приходилось ли вам загружать классы во время выполнения? Если да, вы наверняка знаете, что в Java 8 без нового загрузчика класса это сделать нельзя. Ну или ещё можно использовать &lt;code&gt;Unsafe.defineClass()&lt;/code&gt; или &lt;code&gt;Unsafe.defineAnonymousClass()&lt;/code&gt;, но это нестандартное API, которое крайне не рекомендуется использовать.&lt;/p&gt;
+&lt;p&gt;Однако есть хорошая новость: если вам нужно загрузить класс в том же пакете, не создавая новый загрузчик класса, то для этого можно использовать стандартный метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/invoke/MethodHandles.Lookup.html#defineClass(byte%5B%5D)"&gt;MethodHandles.Lookup.defineClass()&lt;/a&gt;&lt;/code&gt;, который появился в Java 9. Этому методу достаточно передать массив байтов класса:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Main.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.lang.invoke.MethodHandles;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.nio.file.Files;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.nio.file.Path;
+
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) throws Exception {
+        &lt;span style="color: blue"&gt;byte&lt;/span&gt;[] bytes = Files.readAllBytes(Path.of(&lt;span style="color: darkred"&gt;"Temp.class"&lt;/span&gt;));
+        Class&amp;lt;?&amp;gt; clazz = MethodHandles.lookup().defineClass(bytes);
+        Object obj = clazz.getDeclaredConstructor().newInstance();
+        System.out.println(obj);
+    }
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Temp.java&lt;/span&gt;
+&lt;span style="color: blue"&gt;class&lt;/span&gt; Temp {
+    @Override
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; String toString() {
+        &lt;span style="color: blue"&gt;return&lt;/span&gt; &lt;span style="color: darkred"&gt;"Hello from Temp!"&lt;/span&gt;;
+    }
+}&lt;/pre&gt;
+&lt;p&gt;Теперь скомпилируем класс &lt;code&gt;Temp&lt;/code&gt;, а затем скомпилируем и запустим класс &lt;code&gt;Main&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&amp;gt; javac Temp.java
+
+&amp;gt; javac Main.java
+
+&amp;gt; java Main
+Hello from Temp!&lt;/pre&gt;
+
+&lt;p&gt;Повторюсь, чтобы это сработало, класс &lt;code&gt;Temp&lt;/code&gt; и класс &lt;code&gt;Main&lt;/code&gt; должны находиться в одном пакете (в данном случае они оба находятся в дефолтном пакете, поэтому всё хорошо). Если класс &lt;code&gt;Temp&lt;/code&gt; будет находиться в другом пакете, то понадобится завести специальный класс-делегат в том же пакете, что и &lt;code&gt;Temp&lt;/code&gt;, и осуществлять загрузку через него.&lt;/p&gt;
+&lt;p&gt;Да, пример выше совсем простой, но это сделано исключительно для краткости и простоты демонстрации. Так как &lt;code&gt;defineClass()&lt;/code&gt; принимает массив байтов, то загружать класс можно откуда угодно, а не только с файловой системы. Можно даже загрузить класс, скомпилированный в память во время исполнения. Для этого можно использовать &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.compiler/javax/tools/ToolProvider.html#getSystemJavaCompiler()"&gt;ToolProvider.getSystemJavaCompiler()&lt;/a&gt;&lt;/code&gt;, который находится в модуле &lt;code&gt;java.compiler&lt;/code&gt; (конкретную реализацию я оставлю в качестве упражнения для читателя).&lt;/p&gt;
+
+&lt;h4&gt;10. &lt;code&gt;ByteArrayOutputStream.writeBytes()&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 11&lt;/h5&gt;
+&lt;p&gt;Метод &lt;code&gt;&lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/io/ByteArrayOutputStream.html#writeBytes(byte%5B%5D)"&gt;ByteArrayOutputStream.writeBytes()&lt;/a&gt;&lt;/code&gt; &amp;ndash; это дублёр метода &lt;code&gt;ByteArrayOutputStream.write()&lt;/code&gt; с одним важным отличием: в сигнатуре &lt;code&gt;write()&lt;/code&gt; есть &lt;code&gt;throws IOException&lt;/code&gt;, а в сигнатуре &lt;code&gt;writeBytes()&lt;/code&gt; &amp;ndash; нету (&lt;code&gt;IOException&lt;/code&gt; есть во &lt;code&gt;write()&lt;/code&gt;, потому что этот метод наследуется от &lt;code&gt;OutputStream&lt;/code&gt;). Это значит, что &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8199713"&gt;начиная&lt;/a&gt; с Java 11, использование &lt;code&gt;ByteArrayOutputStream&lt;/code&gt; становится немножко проще:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;private static byte&lt;/span&gt;[] concat(Stream&amp;lt;&lt;span style="color: blue"&gt;byte&lt;/span&gt;[]&amp;gt; stream) {
+    ByteArrayOutputStream out = &lt;span style="color: blue"&gt;new&lt;/span&gt; ByteArrayOutputStream();
+    &lt;span style="color: green"&gt;// stream.forEach(out::write); (Не скомпилируется)&lt;/span&gt;
+    stream.forEach(out::writeBytes);
+    &lt;span style="color: blue"&gt;return&lt;/span&gt; out.toByteArray();
+}&lt;/pre&gt;
+
+&lt;h4&gt;Бонус: конструктор &lt;code&gt;IndexOutOfBoundsException(int)&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Появился в: Java 9&lt;/h5&gt;
+&lt;p&gt;Сегодняшний рассказ хочу завершить мелким улучшением в Java 9: если вам надо выбросить &lt;code&gt;IndexOutOfBoundsException&lt;/code&gt; с указанием неправильного индекса, то теперь можно просто передать этот индекс в &lt;a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/IndexOutOfBoundsException.html#%3Cinit%3E(int)"&gt;конструктор&lt;/a&gt;, и он сам сгенерирует сообщение:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;private static void&lt;/span&gt; doAtIndex(&lt;span style="color: blue"&gt;int&lt;/span&gt; index) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (index &lt; 0) {
+        &lt;span style="color: blue"&gt;throw new&lt;/span&gt; IndexOutOfBoundsException(index);
+    }
+    &lt;span style="color: green"&gt;// ...&lt;/span&gt;
+}
+
+&lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+    &lt;span style="color: green"&gt;// java.lang.IndexOutOfBoundsException: Index out of range: -1&lt;/span&gt;
+    doAtIndex(-1);
+}&lt;/pre&gt;
+
+&lt;h4&gt;Заключение&lt;/h4&gt;
+&lt;p&gt;Итак, мы рассмотрели ещё 10 (+1) новых API, которые появились в новых версиях Java. Всё ещё не хотите обновляться? Если нет, то тогда ждите следующую часть.&lt;/p&gt;</content>
+  </entry>
+</feed>
