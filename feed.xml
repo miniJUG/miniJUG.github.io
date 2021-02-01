@@ -4,7 +4,47 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-01-24T17:00:00Z</updated>
+  <updated>2021-01-31T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #5</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_5.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_5.html</id>
+    <updated>2021-01-31T17:00:00Z</updated>
+    <published>2021-01-31T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; На сайте OpenJDK опубликован черновик JEP &lt;a href="http://openjdk.java.net/jeps/8201533"&gt;&amp;laquo;Enhanced javadoc support for code samples (snippets)&amp;raquo;&lt;/a&gt;. В нём предлагается ввести в javadoc новый тег &lt;code&gt;@snippet&lt;/code&gt;, с помощью которого можно будет вставлять в документацию примеры кода и делать это лучше, чем это делается сейчас с использованием блоков &lt;code&gt;&amp;lt;pre&amp;gt;{@code ...}&amp;lt;/pre&amp;gt;&lt;/code&gt;. Новые сниппеты будут предоставлять механизм для лучшей проверки корректности кода, подсветки синтаксиса, улучшенной поддержки редактирования в IDE.&lt;/p&gt;
+&lt;p&gt;Пример сниппета:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;/**
+ * The following code shows how to use Optional.isPresent:
+ * {@snippet :
+ *     &lt;/span&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (v.isPresent()) {
+ &lt;span style="color: green"&gt;*&lt;/span&gt;         System.out.println(&lt;span style="color: darkred"&gt;"v: "&lt;/span&gt; + v.get());
+ &lt;span style="color: green"&gt;*&lt;/span&gt;     }
+ &lt;span style="color: green"&gt;* }
+ */&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Сниппеты в javadoc будут поддерживать вложенные комментарии &lt;code&gt;&lt;span style="color: green"&gt;/* ... */&lt;/span&gt;&lt;/code&gt; (с помощью &amp;lt;pre&amp;gt; это сделать нельзя), ссылки на код из внешнего файла (&lt;code&gt;@snippet file="SomeFile.java"&lt;/code&gt;), обрезание ненужных пробельных символов в началах строк (как в &lt;a href="text_blocks.html"&gt;блоках текста&lt;/a&gt;), подсветку определённых участков сниппета и многие другие возможности.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел ещё один черновик JEP &lt;a href="http://openjdk.java.net/jeps/8260688"&gt;&amp;laquo;Improve regex performance&amp;raquo;&lt;/a&gt;. В этом JEP'е предлагается заменить движок регулярных выражений, который в Java работает довольно быстро, но не даёт гарантированной максимальной сложности алгоритма поиска. Это делает сервисы, написанные на Java, потенциально уязвимыми к DoS-атакам на основе регулярных выражений (&lt;a href="https://en.wikipedia.org/wiki/ReDoS"&gt;ReDoS&lt;/a&gt;). Особенно легко такие атаки могут быть организованы, если пользователь знает, какое именно регулярное выражение используется на сервере для валидации полей, и уж тем более, если сам может загружать своё регулярное выражение.&lt;/p&gt;
+&lt;p&gt;Чтобы избежать этого, можно использовать движок регулярных выражений, основанный на детерминированных конечных автоматах (DFA), который даёт гарантированную сложность &lt;code&gt;O(N)&lt;/code&gt;, однако он поддерживает не все возможности регулярных выражений. В JEP'е предлагаются варианты решений такой проблемы, например, использовать разные алгоритмы в зависимости от указанного выражения или позволять пользователю указывать с помощью флага, какой именно алгоритм использовать. Пока что в JEP'е нет окончательного ответа относительно выбора подхода, и, видимо, он ещё будет сильно дорабатываться.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/01/intellij-idea-2021-1-eap-1/"&gt;IntelliJ IDEA 2021.1 EAP&lt;/a&gt; (Early Access Program). В этой версии среды появилась базовая поддержка Java 16, WSL 2 (Windows Subsytem for Linux 2), новая возможность Run Targets (выполнение программы в среде: Docker, SSH, WSL), улучшения в UI и т.д.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://jdk.java.net/jmc/8/"&gt;JDK Misson Control 8.0.0 EA&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Ну и напоследок немного юмора. Известный программист, Java-чемпион Heinz Kabutz &lt;a href="https://twitter.com/heinzkabutz/status/1355137101545799682"&gt;выложил в Твиттере задачку&lt;/a&gt; со следующим вопросом:&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Как, не меняя ни одного символа, сделать так, чтобы программа скомпилировалась:&lt;/i&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; InnerStaticMember {
+  &lt;span style="color: blue"&gt;public class&lt;/span&gt; Inner {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String... args) {
+      System.out.println(&lt;span style="color: darkred"&gt;"Look Ma, no hands!"&lt;/span&gt;);
+    }
+  }
+}&lt;/pre&gt;
+&lt;p&gt;Среди ответов отметилось несколько правильных: нужно просто перейти на Java 16, потому что Java 16 &lt;a href="https://openjdk.java.net/jeps/395"&gt;разрешает статические члены во внутренних классах&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Однако самым смешным (но в то же время абсолютно корректным) оказался ответ, где написан конвейер Linux-команд, который берёт исходное изображение, обрезает её так, что из неё остаётся только кусок с классом &lt;code&gt;Inner&lt;/code&gt;, распознаёт из неё текст и компилирует.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #4</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_4.html" />
@@ -501,39 +541,5 @@ false&lt;/pre&gt;
 }&lt;/pre&gt;
 &lt;p&gt;Во вложенных паттернах весь матчинг будет являться успешным только в том случае, если все его компоненты прошли соответственные тесты типа.&lt;/p&gt;
 &lt;p&gt;На текущий момент неизвестно, успеют ли деконструкционные паттерны попасть в Java 15 (но с большой вероятностью это будет так).&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Вышла Java 14</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_14_is_out.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_14_is_out.html</id>
-    <updated>2020-03-17T17:00:00Z</updated>
-    <published>2020-03-17T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Вышла общедоступная &lt;a href="https://openjdk.java.net/projects/jdk/14/"&gt;версия Java 14&lt;/a&gt;. Ссылки на скачивание:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase-jdk14-downloads.html"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://jdk.java.net/14/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;В этот релиз попало 16 JEP'ов, а также &lt;a href="https://jdk.java.net/14/release-notes"&gt;сотни более мелких улучшений&lt;/a&gt; и &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-14.txt"&gt;тысячи исправлений багов&lt;/a&gt;. Список JEP'ов:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/305"&gt;Паттерн-матчинг для оператора &lt;code&gt;instanceof&lt;/code&gt; (JEP 305)&lt;/a&gt; &amp;ndash; улучшение оператора &lt;code&gt;instanceof&lt;/code&gt; для поддержки паттерн-матчинга по типу. Его мы подробно рассматривали в &lt;a href="trying_new_instanceof_in_java_14.html"&gt;этой статье&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/359"&gt;Записи (Preview) (JEP 359)&lt;/a&gt; &amp;ndash; новая синтаксическая конструкция в языке, которая позволяет объвлять классы-носители данных намного более компактно посредством нового ключевого слова &lt;code&gt;record&lt;/code&gt;. Записи мы также рассматривали в &lt;a href="trying_records_in_java14.html"&gt;отдельной статье&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/361"&gt;Выражения &lt;code&gt;switch&lt;/code&gt; (JEP 361)&lt;/a&gt; &amp;ndash; улучшенный оператор &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="switch_expressions.html"&gt;появился&lt;/a&gt; в Java 12 и был &lt;a href="yield_in_switch.html"&gt;немного изменён&lt;/a&gt; в Java 13, теперь стал стабильной конструкцией и больше не требует preview-режима.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/368"&gt;Блоки текста (второе Preview) (JEP 368)&lt;/a&gt; &amp;ndash; новый вид строковых литералов, который &lt;a href="text_blocks.html"&gt;появился&lt;/a&gt; в Java 13, теперь &lt;a href="escape_sequences_for_line_continuation_and_whitespace.html"&gt;дополнен&lt;/a&gt; двумя новыми экранирующими последовательностями для продолжения строки и пробела. Конструкция пока ещё остаётся в preview-режиме.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/358"&gt;Полезные &lt;code&gt;NullPointerException&lt;/code&gt;'ы (JEP 358)&lt;/a&gt; &amp;ndash; улучшение &lt;code&gt;NullPointerException&lt;/code&gt;, которое детально сообщает, что именно было &lt;code&gt;null&lt;/code&gt;. Включается с помощью ключа &lt;code&gt;-XX:+ShowCodeDetailsInExceptionMessages&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/343"&gt;Инструмент упаковки (JEP 343)&lt;/a&gt; &amp;ndash; новый инструмент &lt;code&gt;jpackage&lt;/code&gt; для создания самодостаточных Java-приложений, который поддерживает нативные форматы упаковки. Пока предоставляется как инкубационный модуль.&lt;/li&gt;
-  &lt;li&gt;ZGC на &lt;a href="https://openjdk.java.net/jeps/364"&gt;macos&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/365"&gt;Windows&lt;/a&gt; (JEP 364 и 365) &amp;ndash; порт сборщика мусора ZGC, который был доступен &lt;a href="https://openjdk.java.net/jeps/333"&gt;только на Linux&lt;/a&gt;, на другие операционные системы. Сборщик мусора всё ещё находится в экспериментальном статусе.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/363"&gt;Удаление сборщика мусора CMS (JEP 363)&lt;/a&gt; &amp;ndash; сборщик мусора Concurrent Mark Sweep, который &lt;a href="https://openjdk.java.net/jeps/291"&gt;стал deprecated&lt;/a&gt; в Java 9, теперь окончательно удалён.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/366"&gt;Deprecate the ParallelScavenge + SerialOld GC Combination (JEP 366)&lt;/a&gt; &amp;ndash; комбинация флагов &lt;code&gt;-XX:+UseParallelGC -XX:-UseParallelOldGC&lt;/code&gt; теперь стала deprecated.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/345"&gt;NUMA-Aware Memory Allocation for G1 (JEP 345)&lt;/a&gt; &amp;ndash; неравномерный доступ к памяти теперь поддерживается не только в ParallelGC, но и в G1.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/349"&gt;JFR Event Streaming (JEP 349)&lt;/a&gt; &amp;ndash; предоставление возможности поглощения данных JDK Flight Recorder в непрерывном режиме. Это может быть полезно, например, в целях непрерывного мониторинга Java-процесса. Раньше данные можно было считывать только путём остановки записи, сохранения файла на диск и его последующего чтения.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/352"&gt;Non-Volatile Mapped Byte Buffers (JEP 352)&lt;/a&gt; &amp;ndash; поддержка неволатильной памяти в &lt;code&gt;MappedByteBuffer&lt;/code&gt;. Ранее в Java это было возможно лишь посредством внешних вызовов к системной библиотеке, написанной на C (например, &lt;a href="https://pmem.io/pmdk/libpmem/"&gt;libpmem&lt;/a&gt;). Однако такие вызовы стоят очень дорого, что делает Java плохо пригодной для написания транзакционных программ с персистестным состоянием. Новый же режим отображения в &lt;code&gt;MappedByteBuffer&lt;/code&gt; решает эту проблему.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/362"&gt;Deprecate the Solaris and SPARC Ports (JEP 362)&lt;/a&gt; &amp;ndash; порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC стали deprected for removal. Когда порты исчезнут окончательно, это упростит и ускорит разработку JDK.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/367"&gt;Remove the Pack200 Tools and API (JEP 367)&lt;/a&gt; &amp;ndash; инструменты &lt;code&gt;pack200&lt;/code&gt; и &lt;code&gt;unpack200&lt;/code&gt;, которые &lt;a href="https://openjdk.java.net/jeps/336"&gt;стали deprecated&lt;/a&gt; в Java 11, теперь удалены окончательно.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/370"&gt;Foreign-Memory Access API (Incubator) (JEP 370)&lt;/a&gt; &amp;ndash; долгожданное стандартное API для доступа к памяти вне кучи Java, которое разрабатывается в рамках проекта &lt;a href="https://openjdk.java.net/projects/panama/"&gt;Panama&lt;/a&gt;. Это новое API не имеет ограничений, которые есть у direct &lt;code&gt;ByteBuffer&lt;/code&gt;, более безопасно, чем нестандартный &lt;code&gt;sun.misc.Unsafe&lt;/code&gt; и более эффективно, чем JNI (и без возни с кодом на C). Однако новое API ещё имеет экспериментальном статус, и поэтому находится в инкубационном модуле.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Java 14 не является LTS-релизом.&lt;/p&gt;</content>
   </entry>
 </feed>
