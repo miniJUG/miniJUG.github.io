@@ -4,7 +4,39 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-01-31T17:00:00Z</updated>
+  <updated>2021-02-07T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #6</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_6.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_6.html</id>
+    <updated>2021-02-07T17:00:00Z</updated>
+    <published>2021-02-07T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-February/005062.html"&gt;Вышел&lt;/a&gt; первый релиз-кандидат 16-й версии Java: &lt;a href="https://jdk.java.net/16/"&gt;JDK 16+35&lt;/a&gt;. Также вышла новая рання сборка JDK 17: &lt;a href="http://jdk.java.net/17/"&gt;JDK 17-ea+8&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-3"&gt;&amp;bull; Стал известен второй JEP, который предложен к выходу в Java 17. Это &lt;a href="http://openjdk.java.net/jeps/382"&gt;JEP 382: New macOS Rendering Pipeline&lt;/a&gt;. Цель этого JEP'а &amp;ndash; реализовать новый конвейер Java 2D-рендеринга на основе Apple Metal API в качестве альтернативы старому deprecated OpenGL API. Разработка нового конвейера ведётся в рамках &lt;a href="http://openjdk.java.net/projects/lanai/"&gt;проекта Lanai&lt;/a&gt;, у которого недавно вышла &lt;a href="https://jdk.java.net/lanai/"&gt;ранняя сборка&lt;/a&gt; JDK 17-lanai+2-49.&lt;/p&gt;
+&lt;p class="pt-3"&gt;&amp;bull; Компания JFrog &lt;a href="https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/"&gt;закрывает&lt;/a&gt; свои облачные платформы Bintray, GoCenter и ChartCenter. Эти сервисы много лет предоставляли возможность бесплатно публиковать и распространять бинарные артефакты любому разработчику открытого программного обеспечения, однако 1 мая 2021 года сервисы будут остановлены, и все опубликованные артефакты перестанут быть доступными.&lt;/p&gt;
+&lt;p&gt;Частью Bintray, также подпадающей под закрытие, является репозиторий JCenter, который стал популярной альтернативой &lt;a href="https://search.maven.org/"&gt;Maven Central&lt;/a&gt; благодаря более простому процессу публикации туда Maven-артефактов. Особенно популярен JCenter среди пользователей Gradle, поскольку документация и примеры Gradle &lt;a href="https://docs.gradle.org/current/samples/sample_gradle_plugin.html"&gt;рекомендуют&lt;/a&gt; использовать JCenter в качестве репозитория по умолчанию:&lt;/p&gt;
+&lt;pre&gt;repositories {
+    &lt;span style="color: darkgreen"&gt;// Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.&lt;/span&gt;
+    jcenter()
+}&lt;/pre&gt;
+&lt;p&gt;Также JCenter &lt;a href="https://developer.android.com/studio/build/dependencies#remote-repositories"&gt;указывается&lt;/a&gt; по умолчанию в новых проектах Android Studio.&lt;/p&gt;
+&lt;p&gt;Брайан Фокс, CTO компании Sonatype, которая обслуживает Maven Central, после выхода новости о закрытии Bintray &lt;a href="https://blog.sonatype.com/dear-bintray-and-jcenter-users-heres-what-you-need-to-know-about-the-central-repository"&gt;опубликовал пост&lt;/a&gt;, в котором призвал пользователей JCenter не беспокоиться и ответил на несколько частозадаваемых вопросов относительно перехода на Central.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышло сразу три новых черновика JEP:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8261007"&gt;Frozen Arrays (Preview)&lt;/a&gt;. Здесь предлагается ввести в Java замороженные массивы, то есть массивы, которые нельзя изменять. Такие массивы могут сделать код более безопасным, а саму программу более эффективной благодаря лучшей оптимизации неизменяемых массивов виртуальной машиной. Сами массивы можно будет создавать либо с помощью методов-фабрик, либо путём замораживания существующего мутабельного массива (при этом возвращается новый массив).&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8261099"&gt;Internal Frozen Arrays&lt;/a&gt;. Этот JEP связан с предыдущим, и в нём описаны внутренние низкоуровневые методы JDK, которые смогут замораживать мутабельные массивы на месте (без копирования). Эти методы предоставят основу для реализации более высокоуровневых методов-фабрик.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8260865"&gt;Generational Shenandoah&lt;/a&gt;. В этом JEP'е предлагается добавить в сборщик мусора Shenandoah поколения. Это сможет &lt;a href="https://youtu.be/cJyzt9b6KrU?t=2345"&gt;повысить эффективность&lt;/a&gt; сборки мусора.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; JUG.ru &lt;a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b_bCEiqcpNwoB0xT6wlIofb"&gt;выложил видео&lt;/a&gt; с конференции Joker 2020.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2021/02/kotlin-1-4-30-released/"&gt;Kotlin 1.4.30&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Компания JetBrains опубликовала &lt;a href="https://www.jetbrains.com/lp/annualreport-2020/"&gt;JetBrains 2020/21 Annual Highlights&lt;/a&gt;. На этой странице собраны все самые значительные события, которые произошли с компанией за предыдущий год, и опубликованы статистики роста популярности продуктов, количества пользователей и прочих показателей.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #5</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_5.html" />
@@ -508,38 +540,5 @@ false&lt;/pre&gt;
 &lt;p&gt;По аналогии с локальными записями локальные интерфейсы и перечисления могут ссылаться только на объявленные выше локальные записи, интерфейсы и перечисления, но не на те, которые объявлены ниже. Также они могут ссылаться на самих себя.&lt;/p&gt;
 &lt;p&gt;Про возможность объявлять локальные статические классы пока ничего не сказано, однако в январе Brian Goetz &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-January/001904.html"&gt;написал письмо&lt;/a&gt; в рассылку, в котором он сказал, что конечной целью должна быть возможность вкладывать всё что угодно во всё что угодно. Это значит, что локальные статические классы могут появиться позже.&lt;/p&gt;
 &lt;p&gt;Остальные изменения в JEP'е относятся к самим записям. Их мало, и они незначительны. Например, в новой версии убрано ограничение, что канонический конструктор записи обязательно должен быть публичным.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>В Java появятся паттерны деконструкции</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/deconstruction_patterns.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/deconstruction_patterns.html</id>
-    <updated>2020-03-29T17:00:00Z</updated>
-    <published>2020-03-29T17:00:00Z</published>
-    <content type="html">&lt;p&gt;В недавно вышедшем &lt;a href="https://openjdk.java.net/jeps/375"&gt;JEP 375&lt;/a&gt; появилась информация о введении в язык так называемых &lt;i&gt;паттернов деконструкции&lt;/i&gt;. Такие паттерны позволят применять оператор &lt;code&gt;instanceof&lt;/code&gt; не просто для теста по типу, но и для извлечения компонентов этого типа. В первой реализации можно будет извлекать только компоненты &lt;a href="trying_records_in_java14.html"&gt;записей&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point (&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
-
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b)) {
-    System.out.println(a + b);
-}&lt;/pre&gt;
-&lt;p&gt;В примере выше сначала проверяется, является ли &lt;code&gt;obj&lt;/code&gt; объектом типа &lt;code&gt;Point&lt;/code&gt;, а затем происходит "привязка" новых переменных &lt;code&gt;a&lt;/code&gt; и &lt;code&gt;b&lt;/code&gt; типа &lt;code&gt;int&lt;/code&gt; к полям &lt;code&gt;Point.x&lt;/code&gt; и &lt;code&gt;Point.y&lt;/code&gt; соответственно. Использование ключевого слово &lt;code&gt;var&lt;/code&gt; в паттерне является обязательным: чтобы нельзя было &lt;a href="https://mail.openjdk.java.net/pipermail/amber-dev/2020-March/005645.html"&gt;перепутать&lt;/a&gt; привязки переменных с константами с тем же именем, которые случайно могут оказаться в той же области видимости (хотя константы пока что не могут использоваться в паттернах, однако в будущем это может измениться).&lt;/p&gt;
-&lt;p&gt;Код выше семантически эквивалентен следующему более громоздкому коду:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point) {
-    &lt;span style="color: blue"&gt;var&lt;/span&gt; a = ((Point) obj).x;
-    &lt;span style="color: blue"&gt;var&lt;/span&gt; b = ((Point) obj).y;
-    System.out.println(a + b);
-}&lt;/pre&gt;
-&lt;p&gt;Как видно, новый подход является более компактным, декларативным и более типобезопасным.&lt;/p&gt;
-&lt;p&gt;Новый паттерн-матчинг также будет поддерживать вложенные паттерны:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Circle(Point origin, &lt;span style="color: blue"&gt;int&lt;/span&gt; radius) {}
-
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Circle(Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b), &lt;span style="color: blue"&gt;var&lt;/span&gt; r)) {
-    System.out.println(&lt;span style="color: darkred"&gt;"Circle centered at ("&lt;/span&gt; + a + &lt;span style="color: darkred"&gt;", "&lt;/span&gt; + b + &lt;span style="color: darkred"&gt;")"&lt;/span&gt;);
-    System.out.println(&lt;span style="color: darkred"&gt;"Area is: "&lt;/span&gt; + Math.PI*r*r);
-}&lt;/pre&gt;
-&lt;p&gt;Во вложенных паттернах весь матчинг будет являться успешным только в том случае, если все его компоненты прошли соответственные тесты типа.&lt;/p&gt;
-&lt;p&gt;На текущий момент неизвестно, успеют ли деконструкционные паттерны попасть в Java 15 (но с большой вероятностью это будет так).&lt;/p&gt;</content>
   </entry>
 </feed>
