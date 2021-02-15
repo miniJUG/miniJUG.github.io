@@ -4,7 +4,25 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-02-07T17:00:00Z</updated>
+  <updated>2021-02-14T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #7</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_7.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_7.html</id>
+    <updated>2021-02-14T17:00:00Z</updated>
+    <published>2021-02-14T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел ещё один JEP по проекту Valhalla: &lt;a href="Unify the Basic Primitives with Objects (Preview)"&gt;Unify the Basic Primitives with Objects (Preview)&lt;/a&gt;. В нём предлагается мигрировать 8 примитивных типов Java (&lt;code&gt;int&lt;/code&gt;, &lt;code&gt;long&lt;/code&gt;, &lt;code&gt;double&lt;/code&gt;, &lt;code&gt;float&lt;/code&gt;, &lt;code&gt;short&lt;/code&gt;, &lt;code&gt;byte&lt;/code&gt;, &lt;code&gt;char&lt;/code&gt;, &lt;code&gt;boolean&lt;/code&gt;) таким образом, чтобы они стали экземплярами соответствующих классов-обёрток (&lt;code&gt;Integer&lt;/code&gt;, &lt;code&gt;Long&lt;/code&gt;, &lt;code&gt;Double&lt;/code&gt;, &lt;code&gt;Float&lt;/code&gt;, &lt;code&gt;Short&lt;/code&gt;, &lt;code&gt;Byte&lt;/code&gt;, &lt;code&gt;Character&lt;/code&gt;, &lt;code&gt;Boolean&lt;/code&gt;), которые сами станут примитивными классами. В такой схеме, например, тип &lt;code&gt;int&lt;/code&gt; станет алиасом для &lt;code&gt;Integer.val,&lt;/code&gt; а &lt;code&gt;Integer&lt;/code&gt; &amp;ndash; к &lt;code&gt;int.ref&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Благодаря такой унификации у примитивных типов появятся свойства, которых у них не было с самого появления языка: наследование, наличие методов (&lt;code&gt;17.toString()&lt;/code&gt;, &lt;code&gt;23.compareTo(42))&lt;/code&gt; и возможность быть параметрами дженериков (будет отдельный JEP).&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; В рассылке OpenJDK &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-February/004934.html"&gt;предложили&lt;/a&gt; перевести проект &lt;a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u"&gt;jdk11u&lt;/a&gt; на Git. Так как переход 16u и 13u на Git уже &lt;a href="https://openjdk.java.net/projects/skara/"&gt;совершён&lt;/a&gt;, то это поможет унифицировать процесс разработки обновлений разных мажорных версий JDK. Переход на Git предлагается сделать к июню 2021 года, когда начнётся работа над JDK 11.0.13.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Компания JetBrains начала программу раннего доступа (EAP) к своему &lt;a href="https://blog.jetbrains.com/idea/2021/02/early-access-program-for-qodana-a-new-product-that-brings-the-smarts-of-jetbrains-ides-into-your-ci-pipeline/"&gt;новому продукту Qodana&lt;/a&gt; &amp;ndash; платформы для статического анализа и измерения качества кода. Qodana состоит из двух частей: движок для запуска анализа в CI и веб-панель с отчётами. Статический анализатор кода представляет собой движок IntelliJ IDEA без графического интерфейса, и его можно запустить на любом CI-сервере. Для TeamCity есть готовый плагин.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Николай Парлог (aka &lt;a href="https://twitter.com/nipafx"&gt;nipafx&lt;/a&gt;) выложил на YouTube &lt;a href="https://youtu.be/ZyTH8uCziI4"&gt;интервью с Брайаном Гетцом&lt;/a&gt; про то, почему сериализация, nullability, мутабельность и другие аспекты сделаны умолчательными в Java, и можно ли это было сделать по-другому.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #6</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_6.html" />
@@ -510,35 +528,5 @@ false&lt;/pre&gt;
 &lt;p&gt;Сегодня Java продолжает развиваться огромными темпами. Версии Java стали выходить раз в полгода, что теперь позволяет разработчикам начать пользоваться нововведениями намного раньше. В рамках проекта Amber в языке появляются всё новые и новые синтаксические изменения, которые позволят сделать код ещё выразительнее и безопаснее. Проекты Valhalla и Graal позволят ещё сильнее увеличить производительность Java-программ, сократив разницу с нативными языками до минимума. Проект Panama ликвидирует брешь в возможностях взаимодействия JVM с нативным кодом. Проект Loom позволит писать многопоточные конкурентные приложения так же просто, как в Erlang и Go. Проект Leyden поможет в решении проблемы медленного старта Java-приложений.&lt;/p&gt;
 &lt;p&gt;25 лет – это немалый возраст для языка, но Java ни в коем случае не устарела. Наоборот, сегодня она находится на самом пике своего цветения и продолжает уверенно укреплять свои позиции на рынке. Эти 25 лет были прекрасным временем, но будущее будет ещё более светлым и захватывающим.&lt;/p&gt;
 &lt;p&gt;Всех с праздником!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>В Java можно будет объявлять локальные интерфейсы и перечисления</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/local_interfaces_and_enums.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/local_interfaces_and_enums.html</id>
-    <updated>2020-04-30T17:00:00Z</updated>
-    <published>2020-04-30T17:00:00Z</published>
-    <content type="html">&lt;p&gt;На сайте OpenJDK вышел &lt;a href="http://openjdk.java.net/jeps/8242303"&gt;новый черновик&lt;/a&gt; JEP с заголовком "Records (Second Preview)". В нём специфицируются некоторые изменения в записях по сравнению с &lt;a href="http://openjdk.java.net/jeps/359"&gt;первым preview&lt;/a&gt;, а также возможность объявлять в методах интерфейсы и перечисления.&lt;/p&gt;
-&lt;p&gt;Напомним, что в Java есть возможность объявлять классы прямо внутри методов и блоков. Такие классы называются &lt;i&gt;локальными&lt;/i&gt;, и они могут захватывать effectively final переменные, объявленные выше в этом же методе или блоке. Пример объявления локального класса:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; m() {
-    &lt;span style="color: blue"&gt;class&lt;/span&gt; Foo {
-        …
-    }
-}&lt;/pre&gt;
-&lt;p&gt;С &lt;a href="java_14_is_out.html"&gt;Java 14&lt;/a&gt; появилась возможность также объявлять локальные записи. Особенность локальных записей заключается в том, что они неявно являются &lt;i&gt;статическими&lt;/i&gt; в отличие от локальных классов, которые могут быть только &lt;i&gt;нестатическими&lt;/i&gt;. Таким образом, локальные записи стали первым историческим примером статических деклараций внутри метода, которые до этого в Java были запрещены (локальные классы и переменные не могут быть статическими). Пример стал успешным: локальные записи ничему не противоречат и не нарушают никакую семантику. Такой успешный пример навёл на мысль о том, что нужно расширить поле возможных локальных статических деклараций на интерфейсы и перечисления:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; m() {
-    &lt;span style="color: blue"&gt;enum&lt;/span&gt; Foo {
-        A, B
-    }
-
-    &lt;span style="color: blue"&gt;interface&lt;/span&gt; Bar {
-         Foo getFoo();
-    }
-}&lt;/pre&gt;
-&lt;p&gt;По аналогии с локальными записями локальные интерфейсы и перечисления могут ссылаться только на объявленные выше локальные записи, интерфейсы и перечисления, но не на те, которые объявлены ниже. Также они могут ссылаться на самих себя.&lt;/p&gt;
-&lt;p&gt;Про возможность объявлять локальные статические классы пока ничего не сказано, однако в январе Brian Goetz &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-January/001904.html"&gt;написал письмо&lt;/a&gt; в рассылку, в котором он сказал, что конечной целью должна быть возможность вкладывать всё что угодно во всё что угодно. Это значит, что локальные статические классы могут появиться позже.&lt;/p&gt;
-&lt;p&gt;Остальные изменения в JEP'е относятся к самим записям. Их мало, и они незначительны. Например, в новой версии убрано ограничение, что канонический конструктор записи обязательно должен быть публичным.&lt;/p&gt;</content>
   </entry>
 </feed>
