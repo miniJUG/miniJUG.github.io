@@ -4,7 +4,110 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-02-14T17:00:00Z</updated>
+  <updated>2021-02-28T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #8</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_8.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_8.html</id>
+    <updated>2021-02-28T17:00:00Z</updated>
+    <published>2021-02-28T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышло два новых черновика JEP: &lt;a href="http://openjdk.java.net/jeps/8260244"&gt;Record and Array Patterns (Preview)&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В первом JEP'е предлагается ввести в язык паттерны записей и паттерны массивов. Паттерны записей будут выглядеть следующим образом:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+...
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y)) {
+    System.out.println(x + y);
+}&lt;/pre&gt;
+&lt;p&gt;Паттерны могут быть вложенными:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (r &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Rectangle(ColoredPoint(Point p, Color c), ColoredPoint r)) {
+    System.out.println(c);
+}&lt;/pre&gt;
+&lt;p&gt;Паттерны массивов выглядят так:&lt;/p&gt;
+&lt;pre&gt;if (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; String[] { String s1, String s2, ... }) {
+    System.out.println(s1 + s2);
+}&lt;/pre&gt;
+&lt;p&gt;Паттерн на примере выше срабатывает для массивов длины 2 или более. Если нужен паттерн строгой длины 2, то многоточие не нужно указывать:&lt;/p&gt;
+&lt;pre&gt;if (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; String[] { String s1, String s2 }) {
+    System.out.println(s1 + s2);
+}&lt;/pre&gt;
+&lt;p&gt;Есть возможность осуществлять паттерн-матчинг по многомерным массивам. Также можно вкладывать паттерны массивов в паттерны записей и наоборот.&lt;/p&gt;
+&lt;p class="pt-1"&gt;Во втором JEP'е предлагается ввести паттерн-матчинг по типу для оператора &lt;code&gt;switch&lt;/code&gt;, и это будет выглядеть следующим образом:&lt;/p&gt;
+&lt;pre&gt;Object o = ...
+&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; String.format(&lt;span style="color: darkred"&gt;"int %d"&lt;/span&gt;, i);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Byte b -&gt; String.format(&lt;span style="color: darkred"&gt;"byte %d"&lt;/span&gt;, b);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Long l -&gt; String.format(&lt;span style="color: darkred"&gt;"long %d"&lt;/span&gt;, l);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Double d -&gt; String.format(&lt;span style="color: darkred"&gt;"double %f"&lt;/span&gt;, d);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; String.format(&lt;span style="color: darkred"&gt;"String %s"&lt;/span&gt;, s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; o.toString();
+};&lt;/pre&gt;
+&lt;p&gt;Если пользователю нужен матчинг &lt;code&gt;null&lt;/code&gt;, то придётся указывать отдельную ветку:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case null&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
+}&lt;/pre&gt;
+&lt;p&gt;Если не указывать явную ветку &lt;code&gt;case null&lt;/code&gt; и в &lt;code&gt;switch&lt;/code&gt; передастся нулевой объект, то будет выбрасываться &lt;code&gt;NullPointerException&lt;/code&gt;, даже если будет присутствовать ветка &lt;code&gt;default&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;String s = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) { &lt;span style="color: red"&gt;// will throw NPE&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; &lt;span style="color: darkred"&gt;"Foo"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Bar"&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"My favourite!"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Acceptable..."&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Чтобы ветка &lt;code&gt;default&lt;/code&gt; покрывала &lt;code&gt;null&lt;/code&gt;, нужно будет использовать паттерн &lt;code&gt;null, default&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;String s = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; &lt;span style="color: darkred"&gt;"Foo"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Bar"&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"My favourite!"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case null, default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Acceptable..."&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Паттерн &lt;code&gt;null&lt;/code&gt; можно будет также объединять и с паттерном по типу:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; String.format(&lt;span style="color: darkred"&gt;"int %d"&lt;/span&gt;, i);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Byte b -&gt; String.format(&lt;span style="color: darkred"&gt;"byte %d"&lt;/span&gt;, b);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Long l -&gt; String.format(&lt;span style="color: darkred"&gt;"long %d"&lt;/span&gt;, l);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Double d -&gt; String.format(&lt;span style="color: darkred"&gt;"double %f"&lt;/span&gt;, d);
+    &lt;span style="color: blue"&gt;case null&lt;/span&gt;, String s -&gt; String.format(&lt;span style="color: darkred"&gt;"String %s"&lt;/span&gt;, s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; o.toString();
+};&lt;/pre&gt;
+&lt;p&gt;В первой итерации поддержки смешанных паттернов (паттернов по типу и константных паттернов в одном &lt;code&gt;switch&lt;/code&gt;) не будет:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; &lt;span style="color: darkred"&gt;"Hello world"&lt;/span&gt; -&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello back"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"Nothing?"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;switch&lt;/code&gt; также будет поддерживать условные паттерны. Для этого предлагается ввести охранные паттерны вида &lt;code&gt;true(boolean expr)&lt;/code&gt; и &lt;code&gt;false(boolean expr)&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;Shape s = ...
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Triangle t &amp; &lt;span style="color: blue"&gt;true&lt;/span&gt;(t.calculateArea() &gt; 100) -&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"Large Triangle"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"A shape (including small triangles"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p class="pt-1"&gt;Если оба JEP'а будет реализованы вместе, то первый будет дополнять возможности второго. Так, все паттерны по записям и массивам можно будет использовать и в ветках &lt;code&gt;switch&lt;/code&gt; (в том числе вложенные).&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел первый релиз-кандидат языка Scala 3: &lt;a href="https://dotty.epfl.ch/blog/2021/02/17/scala3-rc1.html"&gt;Scala 3.0.0-RC1&lt;/a&gt;. В эту версию попало более 400 пулл-реквестов от контрибьюторов с прошлого релиза 3.0.0-M3.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.scala-lang.org/scala3/new-in-scala3.html"&gt;Scala 3&lt;/a&gt;, разработка которой более 5 лет ведётся в проекте &lt;a href="https://www.scala-lang.org/blog/2016/02/03/essence-of-scala.html"&gt;Dotty&lt;/a&gt; &amp;ndash; это полная переработка Scala 2, но в значительной части с ней совместимая: большая часть кода на Scala 2 остаётся валидным кодом для компилятора Scala 3, а для остального кода есть &lt;a href="https://scalacenter.github.io/scala-3-migration-guide/"&gt;гид по миграции&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Также вышло обновление &lt;a href="https://github.com/scala/scala/releases/tag/v2.13.5"&gt;Scala 2.13.5&lt;/a&gt;. В него попала поддержка последних версий Java вплоть до ещё не вышедшей Java 17, поддержка Scala 3.0.0-RC1, более безопасный паттерн-матчинг и другие изменения.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Опубликованы результуты &lt;a href="https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html"&gt;опроса Jakarta EE&lt;/a&gt;, который проводился с сентября 2020 по февраль 2021 года. В нём 684 респондента ответили на вопросы относительно использования технологий Java EE / JakartaEE. Из интересных результатов опроса следующие факты:&lt;/p&gt;
+ &lt;ul&gt;
+   &lt;li&gt;Самый используемый сервер приложений &amp;ndash; это RedHat WildFly, а самый ненавистный &amp;ndash; IBM WebSphere.&lt;/li&gt;
+   &lt;li&gt;Наиболее часто используемые API: JPA, CDI и JAX-RS.&lt;/li&gt;
+   &lt;li&gt;Наиболее часто используемые библиотеки: Hibernate, Weld и Hibernate Validator.&lt;/li&gt;
+   &lt;li&gt;&lt;a href="https://microprofile.io/"&gt;MicroProfile&lt;/a&gt; попробовало 32% опрошенных. Это на 16% больше, чем 2 года назад.&lt;/li&gt;
+   &lt;li&gt;Самые популярные продукты MicroProfile: Quarkus, WildFly и Payara Micro.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Была объявлена виртуальная конференция &lt;a href="https://jakartaone.org/2021/russian/"&gt;JakartaOne Livestream на русском&lt;/a&gt;, которая пройдёт 31 марта 2021 года.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+11&lt;/a&gt;, &lt;a href="https://jdk.java.net/panama/"&gt;JDK 17-panama+2-51&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышлая &lt;a href="https://www.reddit.com/r/java/comments/lsbcwe/flatlaf_10_swing_look_and_feel/"&gt;версия 1.0&lt;/a&gt; библиотеки &lt;a href="https://github.com/JFormDesigner/FlatLaf"&gt;FlatLaf&lt;/a&gt; для кроссплатформенного Look and Feel в приложениях на Swing.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; В официальной документации Android &lt;a href="https://stackoverflow.com/questions/66346971/android-deprecated-annotation-is-deprecated-whats-the-replacement"&gt;обнаружили&lt;/a&gt;, что аннотация &lt;code&gt;@Deprecated&lt;/code&gt; помечена как Deprecated. Эта ошибка возникла из-за того, что в JavaDoc аннотации присутствовал код &lt;code&gt;{@code @deprecated}&lt;/code&gt;, который сигнализировал парсеру документации добавить "пропущенную" аннотацию &lt;code&gt;@Deprecated&lt;/code&gt;. Баг уже был &lt;a href="https://android-review.googlesource.com/c/platform/libcore/+/1601554"&gt;устранён&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #7</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_7.html" />
@@ -513,20 +616,5 @@ false&lt;/pre&gt;
 &lt;p&gt;Далеко не всегда иерархии классов должны быть открыты для расширения неограниченным кругом лиц. Часто встречается необходимость смоделировать такую иерархию, которая будет открыта для использования, но закрыта для расширения. &amp;laquo;Запечатанные&amp;raquo; классы и интерфейсы в Java 15, наконец, сделают такое возможным. Особенно хорошо &lt;code&gt;sealed&lt;/code&gt; классы будут взаимодействовать с записями, позволив легко моделировать алгебраические типы данных.&lt;/p&gt;
 &lt;p&gt;Но ещё более эффектной эта возможность будет, когда реализуют полноценный &lt;a href="https://openjdk.java.net/jeps/8213076"&gt;паттерн-матчинг для оператора &lt;code&gt;switch&lt;/code&gt;&lt;/a&gt;, и компилятор, работая с &lt;code&gt;sealed&lt;/code&gt; иерархией, сможет делать проверки исчерпываемости (exhaustiveness). Это поможет разработчику сделать код ещё более безопасным.&lt;/p&gt;
 &lt;p&gt;Сейчас &lt;code&gt;sealed&lt;/code&gt; классы некоторое время будут находиться в режиме preview, но к следующему LTS релизу Java 17 они, скорее всего, станут стабильными. Это даст неплохую мотивацию перейти на последнюю версию Java.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Java исполняется 25 лет</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_celebrates_25_years.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_celebrates_25_years.html</id>
-    <updated>2020-05-22T17:00:00Z</updated>
-    <published>2020-05-22T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Друзья, сегодня у нас знаменательная дата. 23 мая 1995 года, ровно 25 лет назад, вышла первая публичная версия языка программирования Java. Новый язык мгновенно завоевал огромную популярность: благодаря простоте, кроссплатформенности, отсутствию необходимости вручную освобождать память и при этом довольно неплохой производительности разработчики получили огромный прирост в скорости написания программ. Java быстро стала стандартом де-факто для написания корпоративных веб-приложений. Сегодня по самым скромным оценкам порядка 15% всего Интернета работает на JVM.&lt;/p&gt;
-&lt;p&gt;С момента выхода первой версии язык и платформа кардинально эволюционировали. JDK стала полностью открытым и свободным ПО. JIT-компилятор был усовершенствован настолько, что программы на Java по скорости хорошо приблизились к C++. Появилось несметное количество инструментов и библиотек, решающих самый большой спектр задач. С возможностями IntelliJ IDEA не может соревноваться ни одна другая среда разработки. Новые сборщики мусора Shenandoah и ZGC сделали возможным писать приложения, чувствительные к миллисекундным временам отклика. Сам язык значительно изменился: появились дженерики, аннотации, лямбда-выражения, модули. Были созданы другие популярные языки на основе JVM, такие как Scala, Kotlin, Groovy.&lt;/p&gt;
-&lt;p&gt;Сегодня Java продолжает развиваться огромными темпами. Версии Java стали выходить раз в полгода, что теперь позволяет разработчикам начать пользоваться нововведениями намного раньше. В рамках проекта Amber в языке появляются всё новые и новые синтаксические изменения, которые позволят сделать код ещё выразительнее и безопаснее. Проекты Valhalla и Graal позволят ещё сильнее увеличить производительность Java-программ, сократив разницу с нативными языками до минимума. Проект Panama ликвидирует брешь в возможностях взаимодействия JVM с нативным кодом. Проект Loom позволит писать многопоточные конкурентные приложения так же просто, как в Erlang и Go. Проект Leyden поможет в решении проблемы медленного старта Java-приложений.&lt;/p&gt;
-&lt;p&gt;25 лет – это немалый возраст для языка, но Java ни в коем случае не устарела. Наоборот, сегодня она находится на самом пике своего цветения и продолжает уверенно укреплять свои позиции на рынке. Эти 25 лет были прекрасным временем, но будущее будет ещё более светлым и захватывающим.&lt;/p&gt;
-&lt;p&gt;Всех с праздником!&lt;/p&gt;</content>
   </entry>
 </feed>
