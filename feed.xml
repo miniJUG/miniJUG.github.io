@@ -4,7 +4,36 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-02-28T17:00:00Z</updated>
+  <updated>2021-03-07T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #9</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_9.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_9.html</id>
+    <updated>2021-03-07T17:00:00Z</updated>
+    <published>2021-03-07T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Брайан Гетц запустил в рассылке Amber &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002862.html"&gt;дискуссию&lt;/a&gt; по поводу того, как в &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;&lt;code&gt;switch&lt;/code&gt;&lt;/a&gt; должны выглядеть паттерны с условиями. Пока что в этом вопросе консесуса нет, и была предложена масса вариантов. Вот примеры возможных решений:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp; &lt;span style="color: blue"&gt;true&lt;/span&gt;(x &gt; 0):&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp; &lt;span style="color: blue"&gt;when&lt;/span&gt;(x &gt; 0):&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &lt;span style="color: blue"&gt;if&lt;/span&gt; (x &gt; 0):&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0):&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp;&amp; x &gt; 0:&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x &amp;&amp; x &gt; 0):&lt;/pre&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Ещё одно письмо от Брайна Гетца было опубликовано про &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002836.html"&gt;паттерны примитивных типов и конверсии&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.java.net/jeps/398"&gt;JEP 398: Deprecate the Applet API for Removal&lt;/a&gt;. API аплетов, которое &lt;a href="https://openjdk.java.net/jeps/289"&gt;стало deprecated&lt;/a&gt; в Java 9, теперь предлагается пометить как подлежащее окончательному удалению.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; В блоге JetBrains вышел новый мартовский выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/03/java-annotated-monthly-march-2021/"&gt;Java Annotated Monthly&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; В блоге AdoptOpenJDK &lt;a href="https://blog.adoptopenjdk.net/2021/03/transition-to-eclipse-an-update/"&gt;появился пост&lt;/a&gt; с обновлением статуса переезда проекта в Eclipse Foundation. Напомним, что 9 месяцев назад &lt;a href="https://blog.adoptopenjdk.net/2020/06/adoptopenjdk-to-join-the-eclipse-foundation/"&gt;было объявлено&lt;/a&gt;, что проект AdoptOpenJDK собирается присоединиться к Eclipse Foundation, а его имя будет изменено на Eclipse Adoptium.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+12&lt;/a&gt;, &lt;a href="https://jdk.java.net/lanai/"&gt;JDK 17-lanai+3-133&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышёл &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-March/003171.html"&gt;JMH 1.28&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #8</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_8.html" />
@@ -364,257 +393,5 @@
 &lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/339"&gt;Edwards-Curve Digital Signature Algorithm (EdDSA) (JEP 339)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;Современный алгоритм с открытым ключом для создания цифровой подписи EdDSA реализован в Java.&lt;/p&gt;
 &lt;p class="pt-3"&gt;Java 15, как и 12, 13, 14, является STS-релизом, и у неё выйдет только два обновления.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Исследуем sealed классы в Java 15</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/trying_sealed_classes_in_java_15.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/trying_sealed_classes_in_java_15.html</id>
-    <updated>2020-06-06T17:00:00Z</updated>
-    <published>2020-06-06T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Продолжаем исследовать новые возможности, которые появляются в Java. В прошлые разы мы подробно рассматривали &lt;a href="trying_new_instanceof_in_java_14.html"&gt;улучшенный оператор &lt;code&gt;instanceof&lt;/code&gt;&lt;/a&gt; и &lt;a href="trying_records_in_java14.html"&gt;записи&lt;/a&gt;, а сегодня объектом исследования будут &lt;code&gt;sealed&lt;/code&gt; классы, которые запланированы к выходу в &lt;a href="https://openjdk.java.net/projects/jdk/15/"&gt;пятнадцатой версии&lt;/a&gt; Java.&lt;/p&gt;
-&lt;!-- cut --&gt;
-&lt;p&gt;Идея введения в язык &amp;laquo;запечатанных&amp;raquo; типов впервые была подробно описана в феврале 2019 года в документе &lt;a href="http://cr.openjdk.java.net/~briangoetz/amber/datum.html"&gt;"Data Classes and Sealed Types for Java"&lt;/a&gt;, и в июле того же года получила свой &lt;a href="https://openjdk.java.net/jeps/360"&gt;JEP 360&lt;/a&gt;, который был любезно &lt;a href="https://habr.com/ru/company/jugru/blog/498494/"&gt;переведён на Хабре&lt;/a&gt; Олегом Чирухиным. Стоит отметить, что версия JEP'а, которую перевёл Олег, немного устарела и отличается от актуальной. В частности, в новой версии &lt;code&gt;sealed&lt;/code&gt; типы больше не типы, а классы и интерфейсы. Связано это переименование с тем, что термин &amp;laquo;тип&amp;raquo; слишком перегружен и может означать не только классы и интерфейсы, но и их производные вроде массивов (&lt;code&gt;Object[]&lt;/code&gt;, &lt;code&gt;String[]&lt;/code&gt;) и параметризацией дженериков (&lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt;, &lt;code&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;). Подробнее про это переименование можно прочитать &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-May/002175.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Впрочем, довольно лирики, и давайте перейдём непосредственно к нашим &lt;code&gt;sealed&lt;/code&gt; классам. Программистам, знакомым со Scala и Kotlin, такой вид классов должен быть знаком. В Java он означает в точности то же самое, что и там: модификатор &lt;code&gt;sealed&lt;/code&gt; ограничивает круг классов, которые могут наследоваться от данного класса. А вот в C# &lt;code&gt;sealed&lt;/code&gt; означает &lt;a href="https://docs.microsoft.com/ru-ru/dotnet/csharp/language-reference/keywords/sealed"&gt;совсем другое&lt;/a&gt;. Так что если вы пришли из C#, то будьте осторожнее: аналог ключевого слова &lt;code&gt;sealed&lt;/code&gt; в Java &amp;ndash; это &lt;code&gt;final&lt;/code&gt;, а не &lt;code&gt;sealed&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Давайте же наконец играться с &lt;code&gt;sealed&lt;/code&gt; классами. Но для начала проверим нашу версию Java:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; java --version
-openjdk 15-ea 2020-09-15
-OpenJDK Runtime Environment (build 15-ea+26-1287)
-OpenJDK 64-Bit Server VM (build 15-ea+26-1287, mixed mode, sharing)&lt;/pre&gt;
-&lt;p&gt;Как видите, я запустил &lt;a href="http://jdk.java.net/15/"&gt;раннюю сборку&lt;/a&gt; JDK 15. В ней &lt;code&gt;sealed&lt;/code&gt; классы уже присутствуют.&lt;/p&gt;
-&lt;p&gt;Напишем и запустим какой-нибудь простой код:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        Shape rectangle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle(1, 2);
-        Shape circle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Circle(3);
-        System.out.println(rectangle);
-        System.out.println(circle);
-    }
-}
-
-&lt;span style="color: blue"&gt;sealed abstract class&lt;/span&gt; Shape {
-}
-
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; Rectangle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
-    &lt;span style="color: blue"&gt;final int&lt;/span&gt; width, height;
-
-    Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) {
-        &lt;span style="color: blue"&gt;this&lt;/span&gt;.width = width;
-        &lt;span style="color: blue"&gt;this&lt;/span&gt;.height = height;
-    }
-}
-
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; Circle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
-    &lt;span style="color: blue"&gt;final int&lt;/span&gt; radius;
-
-    Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) {
-        &lt;span style="color: blue"&gt;this&lt;/span&gt;.radius = radius;
-    }
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-&lt;span style="color: grey"&gt;Note: Main.java uses preview language features.
-Note: Recompile with -Xlint:preview for details.&lt;/span&gt;
-Rectangle@11e21d0e
-Circle@1dd02175&lt;/pre&gt;
-&lt;p&gt;В коде выше особо ничего интересного, но заметьте, что мне пришлось сделать классы &lt;code&gt;Rectangle&lt;/code&gt; и &lt;code&gt;Shape&lt;/code&gt; &lt;code&gt;final&lt;/code&gt;, иначе бы код не скомпилировался:&lt;/p&gt;
-&lt;pre&gt;&amp;hellip;
-
-&lt;span style="color: blue"&gt;class&lt;/span&gt; Rectangle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
-    &amp;hellip;
-}
-
-&lt;span style="color: blue"&gt;class&lt;/span&gt; Circle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
-    &amp;hellip;
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-&lt;span style="color: red"&gt;Main.java:13: error: sealed, non-sealed or final modifiers expected
-class Rectangle extends Shape {
-^
-Main.java:22: error: sealed, non-sealed or final modifiers expected
-class Circle extends Shape {
-^&lt;/span&gt;
-&amp;hellip;&lt;/pre&gt;
-&lt;p&gt;Таким образом, подклассы &lt;code&gt;sealed&lt;/code&gt; классов могут быть либо &lt;code&gt;sealed&lt;/code&gt;, либо &lt;code&gt;non-sealed&lt;/code&gt;, либо &lt;code&gt;final&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Кстати, у нас же есть записи. Может, перепишем код, используя их, чтобы стало короче?&lt;/p&gt;
-&lt;pre&gt;&amp;hellip;
-
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
-}
-
-&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}
-
-&lt;span style="color: blue"&gt;record&lt;/span&gt; Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-Rectangle[width=1, height=2]
-Circle[radius=3]&lt;/pre&gt;
-&lt;p&gt;Так гораздо лучше. Но пришлось сделать &lt;code&gt;Shape&lt;/code&gt; интерфейсом, потому что записи не могут наследоваться от классов.&lt;/p&gt;
-&lt;p&gt;Однако мы так и не проверили, что модификатор &lt;code&gt;sealed&lt;/code&gt; действительно работает. Давайте перенесём один из классов в другой файл:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Main.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        Shape rectangle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle(1, 2);
-        Shape circle = &lt;span style="color: blue"&gt;new&lt;/span&gt; Circle(3);
-        System.out.println(rectangle);
-        System.out.println(circle);
-    }
-}
-
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
-}
-
-&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Circle.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;record&lt;/span&gt; Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Main.java Circle.java
-&lt;span style="color: red"&gt;Circle.java:1: error: class is not allowed to extend sealed class: Shape
-record Circle(int radius) implements Shape {
-^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Чего и следовало ожидать: компилятор разрешает наследоваться от &lt;code&gt;sealed&lt;/code&gt; интерфейса только тем классам, которые находятся в том же файле. Но что если мне нужно, чтобы мои классы были в разных файлах? Например, я хочу сделать все классы публичными, а значит они должны находиться в отдельных файлах, но при этом я не хочу терять преимущества &lt;code&gt;sealed&lt;/code&gt;. На помощь приходит ключевое слово &lt;code&gt;permits&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle, Circle {
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Rectangle.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Circle.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public record&lt;/span&gt; Circle(&lt;span style="color: blue"&gt;int&lt;/span&gt; radius) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;p&gt;Теперь всё успешно компилируется. С помощью &lt;code&gt;permits&lt;/code&gt; мы указали явно все классы, которые будут наследоваться от &lt;code&gt;Shape&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Давайте попробуем сделать что-нибудь нелегальное. Например, укажем в &lt;code&gt;permits&lt;/code&gt; класс, но &amp;laquo;забудем&amp;raquo; его отнаследовать:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle {
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Rectangle.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) {
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java Rectangle.java
-&lt;span style="color: red"&gt;Shape.java:1: error: invalid permits clause
-public sealed interface Shape permits Rectangle {
-                                      ^
-  (subclass Rectangle must extend sealed class)&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Это явно ошибочная ситуация, и компилятор надёжно её перехватывает, сообщая нам об ошибке.&lt;/p&gt;
-&lt;p&gt;А если попробовать вписать в &lt;code&gt;permits&lt;/code&gt; класс, который не является прямым наследником?&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; RectangleShape, Rectangle {
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// RectangleShape.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; RectangleShape &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle {
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Rectangle.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; RectangleShape {
-}&lt;/pre&gt;
-&lt;p&gt;Заметьте, что в данной иерархии &lt;code&gt;Rectangle&lt;/code&gt; наследуется от &lt;code&gt;RectangleShape&lt;/code&gt;, а &lt;code&gt;RectangleShape&lt;/code&gt; &amp;ndash; от &lt;code&gt;Shape&lt;/code&gt;. Но при этом в &lt;code&gt;Shape permits&lt;/code&gt; указан &lt;code&gt;Rectangle&lt;/code&gt;. Попробуем скомпилировать это:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java RectangleShape.java Rectangle.java
-&lt;span style="color: red"&gt;Shape.java:1: error: invalid permits clause
-public sealed interface Shape permits RectangleShape, Rectangle {
-                                                      ^
-  (subclass Rectangle must extend sealed class)&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Получили в общем-то ту же самую ошибку, что и выше: если указываешь в &lt;code&gt;permits&lt;/code&gt; класс, то это класс должен быть отнаследован напрямую.&lt;/p&gt;
-&lt;p&gt;Интересно, что будет, если указать в &lt;code&gt;permits&lt;/code&gt; какой-нибудь совершенно левый класс?&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; &lt;b&gt;Integer&lt;/b&gt;, Rectangle, Circle {
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java Rectangle.java Circle.java
-&lt;span style="color: red"&gt;Shape.java:1: error: class is not allowed to extend sealed class: Shape
-public sealed interface Shape permits Integer, Rectangle, Circle {
-                                      ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Здесь мы тоже совершенно ожидаемо получили ошибку: Java разрешает указывать в &lt;code&gt;permits&lt;/code&gt; только классы из того же модуля. Класс &lt;code&gt;java.lang.Integer&lt;/code&gt; находится в модуле &lt;code&gt;java.base&lt;/code&gt;, поэтому код не компилируется.&lt;/p&gt;
-&lt;p&gt;Что если сделать &lt;code&gt;sealed&lt;/code&gt; без единого наследника?&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Shape.java&lt;/span&gt;
-&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 15 Shape.java
-&lt;span style="color: red"&gt;Shape.java:1: error: sealed class must have subclasses
-public sealed interface Shape {
-              ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;И здесь компилятор надёжен. Если класс &lt;code&gt;sealed&lt;/code&gt;, то он должен иметь хотя бы один подкласс, иначе какой тогда смысл в &lt;code&gt;sealed&lt;/code&gt;? (Хотя это могло бы быть полезным для возможности объявления &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2019-October/001719.html"&gt;утилитных интерфейсов&lt;/a&gt;, но тут скорее нужно позволить объявлять &lt;code&gt;final&lt;/code&gt; интерфейсы, нежели &lt;code&gt;sealed&lt;/code&gt;)&lt;/p&gt;
-&lt;p&gt;Было бы ещё интересно проверить вот что. Java на этапе компиляции умеет делать проверки совместимости типов. Если она сможет доказать, что два типа не могут быть приведены друг к другу, то будет ошибка компиляции. Например:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        Rectangle rect = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle();
-        System.out.println(rect &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Runnable);
-    }
-}
-
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; Rectangle {
-}&lt;/pre&gt;
-&lt;p&gt;Такой код ожидаемо не скомпилируется, ведь совершенно точно известно, что никакой объект &lt;code&gt;Rectangle&lt;/code&gt; не может быть &lt;code&gt;Runnable&lt;/code&gt;, потому что &lt;code&gt;Rectangle&lt;/code&gt; объявлен как &lt;code&gt;final&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; java Main.java
-&lt;span style="color: red"&gt;Main.java:4: error: incompatible types: Rectangle cannot be converted to Runnable
-        System.out.println(rect instanceof Runnable);
-                           ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;А теперь вопрос: будет ли ошибка компиляции, если усложнить наш пример, введя промежуточный &lt;code&gt;sealed&lt;/code&gt; класс? Давайте проверим:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        Shape rect = &lt;span style="color: blue"&gt;new&lt;/span&gt; Rectangle();
-        System.out.println(rect &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Runnable);
-    }
-}
-
-&lt;span style="color: blue"&gt;sealed class&lt;/span&gt; Shape &lt;span style="color: blue"&gt;permits&lt;/span&gt; Rectangle {
-}
-
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; Rectangle &lt;span style="color: blue"&gt;extends&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;p&gt;В данном примере объект &lt;code&gt;rect&lt;/code&gt; тоже абсолютно точно не может быть &lt;code&gt;Runnable&lt;/code&gt;, потому что иерархия &lt;code&gt;Shape&lt;/code&gt; закрытая, и ни &lt;code&gt;Shape&lt;/code&gt;, ни &lt;code&gt;Rectangle&lt;/code&gt; не реализуют &lt;code&gt;Runnable&lt;/code&gt;. Хватит ли компилятору ума, чтобы обнаружить ошибку?&lt;/p&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-false&lt;/pre&gt;
-&lt;p&gt;К сожалению, не хватило. Вообще это довольно странно, потому что это было бы совершенно логичным поведением компилятора. Я решил задать про это вопрос в рассылке OpenJDK, и &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-observers/2020-June/002344.html"&gt;мне ответили&lt;/a&gt;, что решили эту возможность пока не реализовывать и отложить её до следующего релиза. Ну что ж, тогда будем ждать.&lt;/p&gt;
-&lt;p&gt;Что мы ещё не попробовали? Что насчёт анонимных классов? Могут ли они наследоваться от sealed классов?&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        Shape shape = &lt;span style="color: blue"&gt;new&lt;/span&gt; Shape() {};
-    }
-}
-
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
-}
-
-&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-&lt;span style="color: red"&gt;Main.java:3: error: local classes must not extend sealed classes
-        Shape shape = new Shape() {};
-                                  ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Ага, значит наследоваться не могут не только анонимные, но и вообще любые локальные классы. Ну и, конечно же, логично было бы запретить лямбды:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        Shape shape = () -&gt; {};
-    }
-}
-
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
-    &lt;span style="color: blue"&gt;void&lt;/span&gt; f();
-}
-
-&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(&lt;span style="color: blue"&gt;int&lt;/span&gt; width, &lt;span style="color: blue"&gt;int&lt;/span&gt; height) &lt;span style="color: blue"&gt;implements&lt;/span&gt; Shape {
-    &lt;span style="color: blue"&gt;public void&lt;/span&gt; f() {
-    }
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-&lt;span style="color: red"&gt;Main.java:3: error: incompatible types: Shape is not a functional interface
-        Shape shape = () -&gt; {};
-                      ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Интересное сообщение об ошибке. То есть sealed интерфейс не может быть функциональным интерфейсом. И если просто попытаться использовать аннотацию &lt;code&gt;@FunctionalInterface&lt;/code&gt;, то будет ошибка:&lt;/p&gt;
-&lt;pre&gt;&amp;hellip;
-
-@FunctionalInterface
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Shape {
-    &lt;span style="color: blue"&gt;void&lt;/span&gt; f();
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; java --enable-preview --source 15 Main.java
-&lt;span style="color: red"&gt;Main.java:6: error: Unexpected @FunctionalInterface annotation
-@FunctionalInterface
-^
-  Shape is not a functional interface&lt;/span&gt;&lt;/pre&gt;
-&lt;h4&gt;Заключение&lt;/h4&gt;
-&lt;p&gt;Далеко не всегда иерархии классов должны быть открыты для расширения неограниченным кругом лиц. Часто встречается необходимость смоделировать такую иерархию, которая будет открыта для использования, но закрыта для расширения. &amp;laquo;Запечатанные&amp;raquo; классы и интерфейсы в Java 15, наконец, сделают такое возможным. Особенно хорошо &lt;code&gt;sealed&lt;/code&gt; классы будут взаимодействовать с записями, позволив легко моделировать алгебраические типы данных.&lt;/p&gt;
-&lt;p&gt;Но ещё более эффектной эта возможность будет, когда реализуют полноценный &lt;a href="https://openjdk.java.net/jeps/8213076"&gt;паттерн-матчинг для оператора &lt;code&gt;switch&lt;/code&gt;&lt;/a&gt;, и компилятор, работая с &lt;code&gt;sealed&lt;/code&gt; иерархией, сможет делать проверки исчерпываемости (exhaustiveness). Это поможет разработчику сделать код ещё более безопасным.&lt;/p&gt;
-&lt;p&gt;Сейчас &lt;code&gt;sealed&lt;/code&gt; классы некоторое время будут находиться в режиме preview, но к следующему LTS релизу Java 17 они, скорее всего, станут стабильными. Это даст неплохую мотивацию перейти на последнюю версию Java.&lt;/p&gt;</content>
   </entry>
 </feed>
