@@ -22,7 +22,7 @@
 &lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp;&amp; x &gt; 0:&lt;/pre&gt;
 &lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x &amp;&amp; x &gt; 0):&lt;/pre&gt;
 
-&lt;p class="pt-3"&gt;&amp;bull; Ещё одно письмо от Брайна Гетца было опубликовано про &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002836.html"&gt;паттерны примитивных типов и конверсии&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-3"&gt;&amp;bull; Ещё одно письмо от Брайана Гетца было опубликовано про &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002836.html"&gt;паттерны примитивных типов и конверсии&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.java.net/jeps/398"&gt;JEP 398: Deprecate the Applet API for Removal&lt;/a&gt;. API аплетов, которое &lt;a href="https://openjdk.java.net/jeps/289"&gt;стало deprecated&lt;/a&gt; в Java 9, теперь предлагается пометить как подлежащее окончательному удалению.&lt;/p&gt;
 
