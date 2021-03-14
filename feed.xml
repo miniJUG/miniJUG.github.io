@@ -4,7 +4,40 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-03-07T17:00:00Z</updated>
+  <updated>2021-03-13T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #10</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_10.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_10.html</id>
+    <updated>2021-03-13T17:00:00Z</updated>
+    <published>2021-03-13T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; В рассылке OpenJDK &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002895.html"&gt;продолжается обсуждение&lt;/a&gt; того, как должны выглядеть условия в &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;паттернах&lt;/a&gt;, и, похоже, группа экспертов уже близка к единому мнению. Условия, скорее всего, будут отделяться от паттернов оператором &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s &amp;&amp; (s.length() == 1) -&gt; ...
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; ...
+}&lt;/pre&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Брайан Гетц предвидит, что в Java когда-нибудь могут появиться паттерны в присваивании, поэтому уже сейчас начинает &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002916.html"&gt;обсуждать&lt;/a&gt; эту тему в рассылке.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышло два новых JEP:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.java.net/jeps/399"&gt;JEP 399: Intermediate-Representation Graph Serialization&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.java.net/jeps/400"&gt;JEP 400: UTF-8 by Default&lt;/a&gt;. В этом JEP'е предлагается сделать UTF-8 кодировкой по умолчанию для таких API как &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/FileReader.html"&gt;FileReader&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/FileWriter.html"&gt;FileWriter&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/InputStreamReader.html"&gt;InputStreamReader&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/OutputStreamWriter.html"&gt;OutputStreamWriter&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Formatter.html"&gt;Formatter&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Scanner.html"&gt;Scanner&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/URLEncoder.html"&gt;URLEncoder&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/URLDecoder.html"&gt;URLDeconder&lt;/a&gt; и т.д. Сейчас кодировка по умолчанию определяется во время старта JVM и может зависеть от различных факторов, таких как операционная система, пользовательская локаль и значения некоторых свойств виртуальной машины. Когда этот JEP будет реализован, UTF-8 станет кодировкой по умолчанию для всех JDK, что сделает приложения на Java более портируемыми.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Роман Кеннке, лидер проекта Shenandoah в RedHat, предложил в рассылке &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html"&gt;новый проект Lilliput&lt;/a&gt;, целью которого будет уменьшение размера заголовка объекта в Hotspot до 64/32 бит и более гибкая схема размещения битов в нём. Сейчас заголовок каждого объекта в 64-разрядном Hotspot имеет размер от 96 до 128 бит, и такое сжатие могло бы существенно снизить нагрузку на память и/или CPU в Java-приложениях.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Компания JetBrains выпустила первую версию своего &lt;a href="https://blog.jetbrains.com/blog/2021/03/11/projector-is-out/"&gt;нового инструмента Projector&lt;/a&gt;, который позволяет запускать IDE от JetBrains или Swing-приложения на сервере и управлять ими откуда угодно с помощью браузера или нативного приложения.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://netbeans.apache.org/download/nb123/nb123.html"&gt;Apache NetBeans 12.3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышла версия 1.0 библиотеки &lt;a href="https://in.relation.to/2021/03/08/hibernate-reactive-1/"&gt;Hibernate Reactive&lt;/a&gt;, которая предоставляет реактивное API к Hibernate ORM.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://openjfx.io/highlights/16/"&gt;JavaFX 16&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+13-1000&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+4-174&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #9</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_9.html" />
@@ -14,7 +47,7 @@
     <id>https://minijug.ru/java_news_9.html</id>
     <updated>2021-03-07T17:00:00Z</updated>
     <published>2021-03-07T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Брайан Гетц запустил в рассылке Amber &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002862.html"&gt;дискуссию&lt;/a&gt; по поводу того, как в &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;&lt;code&gt;switch&lt;/code&gt;&lt;/a&gt; должны выглядеть паттерны с условиями. Пока что в этом вопросе консесуса нет, и была предложена масса вариантов. Вот примеры возможных решений:&lt;/p&gt;
+    <content type="html">&lt;p&gt;&amp;bull; Брайан Гетц запустил в рассылке Amber &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002862.html"&gt;дискуссию&lt;/a&gt; по поводу того, как в &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;&lt;code&gt;switch&lt;/code&gt;&lt;/a&gt; должны выглядеть паттерны с условиями. Пока что в этом вопросе консенсуса нет, и была предложена масса вариантов. Вот примеры возможных решений:&lt;/p&gt;
 &lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp; &lt;span style="color: blue"&gt;true&lt;/span&gt;(x &gt; 0):&lt;/pre&gt;
 &lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp; &lt;span style="color: blue"&gt;when&lt;/span&gt;(x &gt; 0):&lt;/pre&gt;
 &lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &lt;span style="color: blue"&gt;if&lt;/span&gt; (x &gt; 0):&lt;/pre&gt;
@@ -342,56 +375,5 @@
 &lt;p&gt;&amp;bull; Huawei реализовал &lt;a href="https://gitee.com/openeuler/bishengjdk-11/tree/risc-v/"&gt;свой порт&lt;/a&gt; OpenJDK 11 под архитектуру Linux/RISC-V и &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html"&gt;спрашивает&lt;/a&gt;, заинтересовано ли сообщество во включении этого порта в jdk-master. Alibaba изъявили желание помочь и сделать вклад в разработку.&lt;/p&gt;
 &lt;p&gt;&amp;bull; Команда Jetty &lt;a href="https://mail.openjdk.java.net/pipermail/loom-dev/2020-December/001974.html"&gt;рассказала&lt;/a&gt; об опыте перехода веб-сервера на виртуальные нити из проекта Loom. Они сделали вывод, что количество нитей &amp;ndash; это не всегда главный лимитирующий фактор, и правило &amp;laquo;просто всегда создавай виртуальную нить&amp;raquo; может не сработать, если каждая нить имеет глубокий стек или держит какие-то большие ресурсы.&lt;/p&gt;
 &lt;p&gt;&amp;bull; Разработчик из Oracle &lt;a href="https://cl4es.github.io/2021/01/04/Investigating-MD5-Overheads.html"&gt;рассказал&lt;/a&gt; о том, как ускорил MD5 в OpenJDK.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Вышла Java 15</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_15_is_out.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_15_is_out.html</id>
-    <updated>2020-09-14T17:00:00Z</updated>
-    <published>2020-09-14T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Сегодня в свет вышла новая, &lt;a href="http://openjdk.java.net/projects/jdk/15/"&gt;15-я версия платформы Java&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Скачать JDK 15 можно по следующим ссылкам:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase-jdk15-downloads.html"&gt;Oracle JDK&lt;/a&gt; (проприетарная версия, обратите внимание на ограничения в использовании).&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://jdk.java.net/15/"&gt;OpenJDK&lt;/a&gt; (бесплатная версия)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;В новый релиз попало 14 JEP'ов и &lt;a href="http://jdk.java.net/15/release-notes"&gt;сотни более мелких улучшений&lt;/a&gt;. Если хочется ознакомиться с полным списком изменений с точностью до всех JIRA-тикетов, то их можно посмотреть на &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-15.txt"&gt;сайте Алексея Шипилёва&lt;/a&gt;. Также если интересны все изменения API, то их можно посмотреть &lt;a href="https://javaalmanac.io/jdk/15/apidiff/14/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- cut --&gt;
-&lt;p&gt;Перечислим JEP'ы, которые попали в Java 15:&lt;/p&gt;
-&lt;h4&gt;Язык&lt;/h4&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/378"&gt;Блоки текста (JEP 378)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Блоки текста, которые &lt;a href="text_blocks.html"&gt;появились&lt;/a&gt; в Java 13 и прошли два preview, теперь стали стабильной синтаксической конструкцией. Это значит, что в Java теперь две постоянные конструкции, которые появились с выхода Java 11: &lt;a href="https://openjdk.java.net/jeps/361"&gt;выражения &lt;code&gt;switch&lt;/code&gt;&lt;/a&gt; и блоки текста.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/375"&gt;Паттерн-матчинг для оператора &lt;code&gt;instanceof&lt;/code&gt; (второе preview) (JEP 375)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Улучшенный оператор &lt;code&gt;instanceof&lt;/code&gt;, который &lt;a href="https://openjdk.java.net/jeps/305"&gt;появился&lt;/a&gt; в Java 14, перешёл во второе preview без изменений. Напомним, что &lt;a href="https://openjdk.java.net/jeps/12"&gt;режим preview&lt;/a&gt; существует в Java для нововведений, которые находятся в предварительном статусе, т.е. могут измениться несовместимым образом или даже совсем исчезнуть, и для их включения необходим специальный флаг &lt;code&gt;--enable-preview&lt;/code&gt;. Паттерн-матчинг для &lt;code&gt;instanceof&lt;/code&gt; мы подробно рассматривали в &lt;a href="trying_new_instanceof_in_java_14.html"&gt;этой статье&lt;/a&gt;.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/384"&gt;Записи (второе preview) (JEP 384)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Записи, которые также &lt;a href="https://openjdk.java.net/jeps/359"&gt;появились&lt;/a&gt; в Java 14, тоже остались в режиме preview. Изменений по сравнению с прошлой версией немного: убрано ограничение, что канонический конструктор должен быть &lt;code&gt;public&lt;/code&gt;, а также разрешены &lt;a href="local_interfaces_and_enums.html"&gt;локальные перечисления и интерфейсы&lt;/a&gt;.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/360"&gt;&lt;code&gt;sealed&lt;/code&gt; классы (preview) (JEP 360)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;В Java появилось языковое нововведение: &amp;laquo;запечатанные&amp;raquo; классы. Помечаются такие классы модификатором &lt;code&gt;sealed&lt;/code&gt;, после чего круг классов, которые могут наследоваться от данного класса, становится ограниченным. &lt;code&gt;sealed&lt;/code&gt; классы мы подробно рассматривали в &lt;a href="trying_sealed_classes_in_java_15.html"&gt;этой статье&lt;/a&gt;.&lt;/p&gt;
-&lt;h4&gt;JVM&lt;/h4&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/377"&gt;ZGC (JEP 377)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;ZGC, который &lt;a href="https://openjdk.java.net/jeps/333"&gt;появился&lt;/a&gt; в Java 11 в экспериментальном статусе, теперь официально готов к продуктовой разработке. Напомним, что ZGC &amp;ndash; это сборщик мусора, который нацелен на маленькие паузы (&lt; 10мс) и готовность работать в условиях огромных куч (&gt; 1TB).&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/379"&gt;Shenandoah (JEP 379)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Shenandoah, ещё один низкопаузный сборщик мусора и &lt;a href="zgc.html"&gt;конкурент&lt;/a&gt; ZGC, теперь также имеет статус готового к продуктовой разработке. Shenandoah впервые &lt;a href="https://openjdk.java.net/jeps/189"&gt;появился&lt;/a&gt; в Java 12. Также недавно стало известно, что Shenandoah был &lt;a href="https://twitter.com/rkennke/status/1288530745179463680"&gt;бэкпортирован в JDK 11&lt;/a&gt;, который является текущим LTS-релизом Java. Это значит, что чтобы его использовать, необязательно обновляться до JDK 15, а достаточно обновиться до JDK 11.0.9, которая &lt;a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u"&gt;выйдет&lt;/a&gt; 20 октября 2020 года.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/374"&gt;Disable and Deprecate Biased Locking (JEP 374)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Biased Locking, который много лет существовал в JDK, было решено убрать из-за сложности поддержки и "неочевидных преимуществ" этой оптимизации. Начиная с этого релиза, опция &lt;code&gt;-XX:+UseBiasedLocking&lt;/code&gt; отключена по умолчанию, а при её использовании и всех её связанных опций будет выдаваться предупреждение. Про мотивы отключения Biased Locking рассказал Сергей Куксенко в &lt;a href="https://www.youtube.com/watch?v=v3oK5_docYE"&gt;подкасте Hydra&lt;/a&gt;.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/381"&gt;Удаление портов Solaris и SPARC (JEP 381)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Порты JDK на Solaris/SPARC, Solaris/x64 и Linux/SPARC, которые &lt;a href="https://openjdk.java.net/jeps/362"&gt;стали&lt;/a&gt; deprecated for removal в Java 14, теперь удалены окончательно. Удаление этих портов упростит и ускорит разработку JDK.&lt;/p&gt;
-&lt;h4&gt;API&lt;/h4&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/371"&gt;Скрытые классы (JEP 371)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Появился новый тип классов, называемых &lt;a href="hidden_classes.html"&gt;скрытыми&lt;/a&gt;. На скрытые классы не могут прямо ссылаться другие классы, и всё их использование может осуществляться только через рефлексию. Также их нельзя обнаружить по имени, и их методы не появляются в стек-трейсах. Создаются такие классы с помощью нового метода &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/lang/invoke/MethodHandles.Lookup.html#defineHiddenClass(byte%5B%5D,boolean,java.lang.invoke.MethodHandles.Lookup.ClassOption...)"&gt;&lt;code&gt;Lookup.defineHiddenClass()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/372"&gt;Удаление движка JavaScript Nashorn (JEP 372)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Движок Nashorn, который &lt;a href="https://openjdk.java.net/jeps/335"&gt;стал&lt;/a&gt; deprecated for removal в Java 11, теперь удалён &lt;a href="remove_nashorn.html"&gt;окончательно&lt;/a&gt;. В качестве замены Nashorn теперь придётся искать другой движок JavaScript, например, &lt;a href="https://github.com/graalvm/graaljs"&gt;GraalVM JavaScript&lt;/a&gt; или &lt;a href="https://github.com/mozilla/rhino"&gt;Rhino&lt;/a&gt;.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/373"&gt;Reimplement the Legacy DatagramSocket API (JEP 373)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Реализации старых сокетов из JDK 1.0 &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/DatagramSocket.html"&gt;&lt;code&gt;java.net.DatagramSocket&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/MulticastSocket.html"&gt;&lt;code&gt;java.net.MulticastSocket&lt;/code&gt;&lt;/a&gt; были полностью заменены на более простые, современные и легкоадаптируемые к виртуальным нитям, которые планируется ввести в язык в рамках &lt;a href="https://openjdk.java.net/projects/loom/"&gt;проекта Loom&lt;/a&gt;. Ранее в Java 13 &lt;a href="https://openjdk.java.net/jeps/353"&gt;были переписаны&lt;/a&gt; &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/Socket.html"&gt;&lt;code&gt;java.net.Socket&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/ServerSocket.html"&gt;&lt;code&gt;java.net.ServerSocket&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/383"&gt;Foreign-Memory Access API (Second Incubator) (JEP 383)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;API для доступа вне кучи Java, которое &lt;a href="https://openjdk.java.net/jeps/370"&gt;появилось&lt;/a&gt; в Java 14 в статусе модуля-&lt;a href="https://openjdk.java.net/jeps/11"&gt;инкубатора&lt;/a&gt;, остаётся в этом статусе.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/385"&gt;Deprecate RMI Activation for Removal (JEP 385)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Устаревшая и малоиспользуемая часть RMI, которая называется RMI Activation, стала deprecated for removal.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/339"&gt;Edwards-Curve Digital Signature Algorithm (EdDSA) (JEP 339)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Современный алгоритм с открытым ключом для создания цифровой подписи EdDSA реализован в Java.&lt;/p&gt;
-&lt;p class="pt-3"&gt;Java 15, как и 12, 13, 14, является STS-релизом, и у неё выйдет только два обновления.&lt;/p&gt;</content>
   </entry>
 </feed>
