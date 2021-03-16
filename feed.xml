@@ -4,7 +4,138 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-03-13T17:00:00Z</updated>
+  <updated>2021-03-15T17:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 16</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_16.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_16.html</id>
+    <updated>2021-03-15T17:00:00Z</updated>
+    <published>2021-03-15T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла &lt;a href="http://openjdk.java.net/projects/jdk/16/"&gt;16-я версия&lt;/a&gt; платформы Java SE. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-16.txt"&gt;двух с половиной тысяч&lt;/a&gt; закрытых задач и 17 JEP'ов. Изменения API можно посмотреть &lt;a href="https://javaalmanac.io/jdk/16/apidiff/15/"&gt;здесь&lt;/a&gt;. Release notes &lt;a href="https://www.oracle.com/java/technologies/javase/16-all-relnotes.html"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Уже сейчас доступны для скачивания дистрибутивы &lt;a href="https://www.oracle.com/java/technologies/javase-jdk16-downloads.html"&gt;Oracle JDK&lt;/a&gt; и &lt;a href="http://jdk.java.net/16/"&gt;OpenJDK&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;JEP'ы, которые попали в Java 16, мы разобьём на четыре категории: язык, API, JVM и инфраструктура.&lt;/p&gt;
+&lt;h4&gt;Язык&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/375"&gt;Паттерн-матчинг для оператора &lt;code&gt;instanceof&lt;/code&gt; (JEP 375)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Оператор &lt;code&gt;instanceof&lt;/code&gt; с паттерн-матчингом, который &lt;a href="https://openjdk.java.net/jeps/305"&gt;появился&lt;/a&gt; в Java 14 и перешёл во &lt;a href="https://openjdk.java.net/jeps/375"&gt;второе preview&lt;/a&gt; в Java 15, теперь стал стабильной синтаксической конструкцией и больше не требует флага &lt;code&gt;--enable-preview&lt;/code&gt;. Паттерн-матчинг мы подробно рассматривали в &lt;a href="trying_new_instanceof_in_java_14.html"&gt;этой статье&lt;/a&gt;, и с того момента в него было внесено два изменения:&lt;/p&gt;
+&lt;p&gt;Во-первых, переменные паттернов теперь не являются неявно финальными:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; String s) {
+    s = &lt;span style="color: darkred"&gt;"Hello"&lt;/span&gt;; &lt;span style="color: green"&gt;// OK в Java 16, ошибка в Java 15&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;p&gt;Во-вторых, если тип выражения, известный на этапе компиляции, является подтипом проверяемого типа, то теперь это ошибка компиляции:&lt;/p&gt;
+&lt;pre&gt;String str = ...
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (str &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; String s) { &lt;span style="color: green"&gt;// Oшибка в Java 16, OK в Java 15&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/395"&gt;Записи (JEP 395)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Ещё одна синтаксическая конструкция, которая стала стабильной &amp;ndash; это записи. Она также была в режиме preview в &lt;a href="https://openjdk.java.net/jeps/359"&gt;Java 14&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/384"&gt;Java 15&lt;/a&gt;. Записи мы также подробно &lt;a href="trying_records_in_java14.html"&gt;рассматривали ранее&lt;/a&gt;. В Java 16 было внесено следующее изменение: теперь во внутренних классах разрешено объявлять статические члены:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Outer {
+    &lt;span style="color: blue"&gt;public class&lt;/span&gt; Inner {
+        &lt;span style="color: green"&gt;// OK в Java 16, ошибка в Java 15&lt;/span&gt;
+        &lt;span style="color: blue"&gt;static void&lt;/span&gt; main(String[] args) {
+        }
+
+        &lt;span style="color: green"&gt;// OK в Java 16, ошибка в Java 15&lt;/span&gt;
+        &lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {
+        }
+    }
+}&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/397"&gt;&lt;code&gt;sealed&lt;/code&gt; классы (второе preview) (JEP 397)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;&amp;laquo;Запечатанные&amp;raquo; классы, которые появились в Java 15 в режиме preview, остаются в этом статусе. Их мы рассматривали в &lt;a href="trying_sealed_classes_in_java_15.html"&gt;этой статье&lt;/a&gt;. Изменения по сравнению с прошлой версией следующие:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Теперь в спецификации языка Java появилось понятие contextual keyword взамен старым понятиям restricted keyword и restricted identifier, и одними из таких contextual keywords стали &lt;code&gt;sealed&lt;/code&gt;, &lt;code&gt;non-sealed&lt;/code&gt; и &lt;code&gt;permits&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Компилятор теперь производит более строгие проверки при конверсии типов, в иерархиях которых есть &lt;code&gt;sealed&lt;/code&gt; классы:&lt;pre&gt;
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Sealed {
+}
+
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; Impl &lt;span style="color: blue"&gt;implements&lt;/span&gt; Sealed {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; f(Runnable r) {
+        Sealed s = (Sealed) r; &lt;span style="color: red"&gt;// error: incompatible types&lt;/span&gt;
+    }
+}&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;Метод &lt;code&gt;Class.permittedSubclasses()&lt;/code&gt; переименован в &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Class.html#getPermittedSubclasses()"&gt;&lt;code&gt;Class.getPermittedSubclasses()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;JVM&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/396"&gt;Строгая инкапсуляция внутренностей JDK по умолчанию (JEP 396)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Инкапсуляция внутренних API JDK, которая была &lt;a href="https://openjdk.java.net/jeps/260"&gt;введена в Java 9&lt;/a&gt;, теперь стала строгой: если в Java 9-15 значение опции &lt;code&gt;--illegal-access&lt;/code&gt; было по умолчанию &lt;code&gt;permit&lt;/code&gt;, то с Java 16 она становится &lt;code&gt;deny&lt;/code&gt;. Это значит, что рефлективный доступ к защищённым членам классов и статический доступ к неэкспортированным API (&lt;code&gt;sun.*&lt;/code&gt;, &lt;code&gt;com.sun.*&lt;/code&gt;, &lt;code&gt;jdk.internal.*&lt;/code&gt; и т.д.) теперь будет выбрасывать ошибку.&lt;/p&gt;
+&lt;p&gt;Если код требует доступа к внутренностям JDK во время выполнения, то чтобы он продолжал работать на Java 16, теперь придётся явно указывать одну из трёх опций JVM:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;--illegal-access=permit/warn/debug&lt;/code&gt;: открытие всех пакетов JDK&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--add-opens=module/package=target-module&lt;/code&gt;: открытие одного пакета&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--add-exports=module/package=target-module&lt;/code&gt;: экспортирование одного пакета (только для статического доступа)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В будущем опция &lt;code&gt;--illegal-access&lt;/code&gt; может быть удалена окончательно. Начиная с Java 16, при её использовании выдаётся предупреждение: &lt;code&gt;Option --illegal-access is deprecated and will be removed in a future release&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Изменения не касаются критического API в модуле &lt;code&gt;jdk.unsupported&lt;/code&gt;: классы в пакетах &lt;code&gt;sun.misc&lt;/code&gt; и &lt;code&gt;sun.reflect&lt;/code&gt; остаются доступными без флагов.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/390"&gt;Warnings for Value-Based Classes (JEP 390)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Классы-обёртки примитивных типов (&lt;code&gt;Integer&lt;/code&gt;, &lt;code&gt;Double&lt;/code&gt;, &lt;code&gt;Character&lt;/code&gt; и т.д.) теперь относятся к категории value-based классов, и их конструкторы, которые ранее &lt;a href="new_integer_is_deprecated.html"&gt;стали deprecated&lt;/a&gt; в Java 9, теперь помечены как &lt;a href="https://openjdk.java.net/jeps/277"&gt;deprecated for removal&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Понятие value-based классов появилось в спецификации API &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/lang/doc-files/ValueBased.html"&gt;Java 8&lt;/a&gt;. Такие классы являются неизменяемыми, создаются только через фабрики, и в их использовании не должны использоваться операции, чувствительные к identity: сравнение на &lt;code&gt;==&lt;/code&gt;, синхронизация, &lt;code&gt;identityHashCode()&lt;/code&gt; и т.д. Value-based классы являются кандидатами для миграции на &lt;a href="https://openjdk.java.net/jeps/8251554"&gt;примитивные классы&lt;/a&gt; в рамках проекта &lt;a href="https://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt;, который сейчас находится в стадии активной разработки.&lt;/p&gt;
+&lt;p&gt;При синхронизации на объектах value-based классов теперь будет выдаваться предупреждение во время компиляции:&lt;/p&gt;
+&lt;pre&gt;Double d = 0.0;
+&lt;span style="color: blue"&gt;synchronized&lt;/span&gt; (d) { &lt;span style="color: orange"&gt;// warning: [synchronization] attempt to synchronize on an instance of a value-based class&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;p&gt;Также можно включить проверки синхронизации на value-based объектах во время выполнения с помощью флагов JVM:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;-XX:+UnlockDiagnosticVMOptions -XX:DiagnoseSyncOnValueBasedClasses=1&lt;/code&gt;: при попытке синхронизации будет фатальная ошибка.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;-XX:+UnlockDiagnosticVMOptions -XX:DiagnoseSyncOnValueBasedClasses=2&lt;/code&gt;: при попытке синхронизации будет предупреждение.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/376"&gt;ZGC: Concurrent Thread-Stack Processing (JEP 376)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Обработка стеков потоков в сборщике мусора &lt;a href="https://openjdk.java.net/jeps/377"&gt;ZGC&lt;/a&gt; теперь перенесена из safepoints в конкурентную фазу. Это позволило ещё сильнее уменьшить паузы сборщика мусора.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/380"&gt;Unix-Domain Socket Channels (JEP 380)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Добавлена поддержка &lt;a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D0%BA%D0%B5%D1%82_%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%B0_Unix"&gt;сокетов доменов Unix&lt;/a&gt; в socket channel и server-socket channel API. Такие сокеты используются для межпроцессного взаимодействия внутри одного хоста, и в них не используются сетевые соединения, что делает такое взаимодействие более безопасным и эффективным. Сокеты доменов Unix с &lt;a href="https://devblogs.microsoft.com/commandline/af_unix-comes-to-windows/"&gt;недавних пор&lt;/a&gt; поддерживаются в Windows 10 и Windows Server 2019.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/387"&gt;Elastic Metaspace (JEP 387)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Metaspace (пространство JVM, в котором хранятся метаданные классов) переработан для более эффективной отдачи неиспользуемой памяти обратно операционной системе и меньшего потребления памяти вне кучи в целом. Такое улучшение может быть полезно для приложений, которые интенсивно загружают и выгражают классы посредством большого количества загрузчиков классов.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/386"&gt;Alpine Linux Port (JEP 386)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;JDK теперь портирован на &lt;a href="https://ru.wikipedia.org/wiki/Alpine_Linux"&gt;Alpine Linux&lt;/a&gt; и другие дистрибутивы Linux, которые используют &lt;a href="https://ru.wikipedia.org/wiki/Musl"&gt;musl&lt;/a&gt; в качестве реализации стандартной библиотеки C. Alpine Linux популярен в облаках, микросервисах и контейнерах благодаря своему маленькому размеру образа. Новый порт позволит нативно запускать JDK в этих окружениях.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/388"&gt;Windows/AArch64 Port (JEP 388)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;JDK также портирован на архитектуру &lt;a href="https://docs.microsoft.com/ru-ru/windows/uwp/porting/apps-on-arm"&gt;Windows/AArch64&lt;/a&gt;. Это позволит запускать Java на компьютерах с Windows on ARM, которые в последнее время набирают популярность.&lt;/p&gt;
+
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;h5&gt;Новые методы в &lt;code&gt;Stream&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;Хотя для этих двух новых методов в интерфейсе &lt;code&gt;java.util.stream.Stream&lt;/code&gt; нет отдельного JEP, хочется упомянуть их здесь, так как это довольно заметное изменение.&lt;/p&gt;
+&lt;p&gt;Первый метод &amp;ndash; это &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/Stream.html#toList()"&gt;&lt;code&gt;Stream.toList()&lt;/code&gt;&lt;/a&gt;. Этот метод собирает содержимое &lt;code&gt;Stream&lt;/code&gt; в неизменяемый список и возвращает его. При этом, в отличие от &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/Collectors.html#toUnmodifiableList()"&gt;&lt;code&gt;Collectors.toUnmodifiableList()&lt;/code&gt;&lt;/a&gt;, список, который возвращается из &lt;code&gt;Stream.toList()&lt;/code&gt;, толерантен к &lt;code&gt;null&lt;/code&gt;-элементам.&lt;/p&gt;
+&lt;p&gt;Второй метод &amp;ndash; это &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/Stream.html#mapMulti(java.util.function.BiConsumer)"&gt;&lt;code&gt;Stream.mapMulti()&lt;/code&gt;&lt;/a&gt; (и примитивные специализации). Это метод является императивным аналогом метода &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream/Stream.html#flatMap(java.util.function.Function)"&gt;&lt;code&gt;Stream.flatMap()&lt;/code&gt;&lt;/a&gt;: если &lt;code&gt;flatMap()&lt;/code&gt; принимает функцию, которая для каждого элемента должна вернуть &lt;code&gt;Stream&lt;/code&gt;, то &lt;code&gt;mapMulti()&lt;/code&gt; принимает процедуру с двумя параметрами, где первый параметр &amp;ndash; это текущий элемент, а второй &amp;ndash; Consumer, в который кладутся значения. Пример:&lt;/p&gt;
+&lt;pre&gt;IntStream.rangeClosed(1, 10).mapMulti((i, consumer) -&gt; {
+    &lt;span style="color: blue"&gt;for&lt;/span&gt; (&lt;span style="color: blue"&gt;int&lt;/span&gt; j = 1; j &lt;= i; j++) {
+        consumer.accept(j);
+    }
+}); &lt;span style="color: green"&gt;// Возвращает 1, 1, 2, 1, 2, 3, 1, 2, 3, 4, 1, 2, 3, 4, 5, ...&lt;/span&gt;&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/392"&gt;Инструмент упаковки (JEP 392)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Инструмент создания самодостаточных приложений &lt;code&gt;jpackage&lt;/code&gt;, который &lt;a href="https://openjdk.java.net/jeps/343"&gt;появился в Java 14&lt;/a&gt; в инкубационном статусе, теперь стал постоянным модулем.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/338"&gt;Vector API (Incubator) (JEP 338)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появился новый инструментарий для преобразования векторных вычислений в SIMD-инструкции процессора (x64 и AArch64). Векторное API позволит разработчику контролировать процесс компиляции и не полагаться на автовекторизацию, которая в JVM является ограниченным и хрупким механизмом. Явная векторизация может применяться в таких областях как машинное обучение, линейная алгебра, криптография и др.&lt;/p&gt;
+&lt;p&gt;API находится в инкубационном модуле &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/389"&gt;Foreign Linker API (Incubator) (JEP 389)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Ещё одно новое API, которое появилось в результате работы над проектом &lt;a href="http://openjdk.java.net/projects/panama/"&gt;Panama&lt;/a&gt; &amp;ndash; это &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/jdk.incubator.foreign/module-summary.html"&gt;Foreign Linker API&lt;/a&gt;. Это инструментарий для статического доступа к нативному коду из Java, созданный для замены JNI: он должен быть более простым в использовании, более безопасным и желательно более быстрым.&lt;/p&gt;
+&lt;p&gt;Про Foreign API &lt;a href="https://www.youtube.com/watch?v=4vHMmLqF09Y"&gt;делал доклад&lt;/a&gt; Владимир Иванов из Oracle.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/393"&gt;Foreign-Memory Access API (Third Incubator) (JEP 393)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;API для доступа вне кучи Java, которое появилось &lt;a href="https://openjdk.java.net/jeps/370"&gt;в Java 14&lt;/a&gt;, остаётся в инкубационном статусе с некоторыми изменениями.&lt;/p&gt;
+
+&lt;h4&gt;Инфраструктура&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/347"&gt;Enable C++14 Language Features (JEP 347)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Кодовая база JDK до Java 16 использовала стандарты C++98/03. При этом с Java 11 код стал собираться версией с более новым стандартом, однако в нём всё ещё нельзя было использовать возможности стандарта C++11/14. Теперь же часть из этих возможностей использовать можно: в гиде по стилю HotSpot определён список возможностей C++11/14, которые можно использовать и которые нельзя.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/357"&gt;Migrate from Mercurial to Git (JEP 357)&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/369"&gt;Migrate to GitHub (JEP 369)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Совершён переход репозиториев JDK на Git и GitHub. Миграция была полностью завершена в &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2020-September/004694.html"&gt;сентябре 2020 года&lt;/a&gt;, и разработка Java 16 уже полностью велась в &lt;a href="https://git.openjdk.java.net/jdk"&gt;новом репозитории&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Переход на GitHub облегчил процесс принятия изменений контрибьюторами. Теперь изменения предлагаются через привычные большинству пользователей пулл-реквесты, и большая часть процесса автоматизирована с помощью команд и ботов. Подробнее про процесс можно прочитать на &lt;a href="https://wiki.openjdk.java.net/display/SKARA/Skara"&gt;странице проекта Skara&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Также сейчас &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-February/004934.html"&gt;обсуждается&lt;/a&gt; переход на Git более старых версий JDK: &lt;a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u"&gt;jdk11u&lt;/a&gt; и, возможно, &lt;a href="https://wiki.openjdk.java.net/display/jdk8u/Main"&gt;jdk8u&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;Java 16 является STS-релизом, у которого выйдет только два обновления.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #10</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_10.html" />
@@ -358,22 +489,5 @@
 
 &lt;p class="pt-3"&gt;&amp;bull; Брюс Эккель, автор &amp;laquo;Философия Java&amp;raquo; и многих других книг о Java, C++ и JVM языках, &lt;a href="https://www.bruceeckel.com/2021/01/02/the-problem-with-gradle/"&gt;написал пост&lt;/a&gt; &amp;laquo;The Problem with Gradle&amp;raquo;, где рассказал свою историю использования Gradle и перечислил его проблемы.&lt;/p&gt;
 &lt;p class="pt-3"&gt;&amp;bull; &lt;a href="https://docs.gradle.org/6.8/release-notes.html"&gt;Вышел Gradle 6.8&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #1</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_1.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_1.html</id>
-    <updated>2021-01-03T17:00:00Z</updated>
-    <published>2021-01-03T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Всех с Новым 2021 Годом!&lt;/p&gt;
-&lt;p&gt;&amp;bull; В компиляторе javac &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8259025"&gt;нашли баг&lt;/a&gt;, который не позволяет использовать лямбды в компактных конструкторах записей при определённых обстоятельствах. Баг был обнаружен пользователем @skohlman &lt;a href="https://twitter.com/skohlmann/status/1344684426836500480"&gt;в Твиттере&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&amp;bull; &lt;a href="https://youtrack.jetbrains.com/issue/JBR-2526#focus=Comments-27-4620322.0-0"&gt;Вышла&lt;/a&gt; стабильная версия JetBrains Runtime под Apple M1. Теперь она включена почти во все IDE компании, начиная с версии 2020.3.1. Пользователи уже доложили о нескольких ошибках, которые проявляются в различных IDE.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Разработчики обнаружили новый класс &lt;a href="https://download.java.net/java/early_access/jdk17/docs/api/java.base/java/util/HexFormat.html"&gt;HexFormat&lt;/a&gt;, который появится в Java 17. С помощью этого класса можно будет конвертировать строки с шестнадцатеричными символами в массивы байтов и обратно.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Huawei реализовал &lt;a href="https://gitee.com/openeuler/bishengjdk-11/tree/risc-v/"&gt;свой порт&lt;/a&gt; OpenJDK 11 под архитектуру Linux/RISC-V и &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html"&gt;спрашивает&lt;/a&gt;, заинтересовано ли сообщество во включении этого порта в jdk-master. Alibaba изъявили желание помочь и сделать вклад в разработку.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Команда Jetty &lt;a href="https://mail.openjdk.java.net/pipermail/loom-dev/2020-December/001974.html"&gt;рассказала&lt;/a&gt; об опыте перехода веб-сервера на виртуальные нити из проекта Loom. Они сделали вывод, что количество нитей &amp;ndash; это не всегда главный лимитирующий фактор, и правило &amp;laquo;просто всегда создавай виртуальную нить&amp;raquo; может не сработать, если каждая нить имеет глубокий стек или держит какие-то большие ресурсы.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Разработчик из Oracle &lt;a href="https://cl4es.github.io/2021/01/04/Investigating-MD5-Overheads.html"&gt;рассказал&lt;/a&gt; о том, как ускорил MD5 в OpenJDK.&lt;/p&gt;</content>
   </entry>
 </feed>
