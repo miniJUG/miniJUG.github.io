@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Oracle разрабатывают новый сборщик мусора ZGC</title>
+    <title>Новости Java #11</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Oracle разрабатывают новый сборщик мусора ZGC">
-    <meta property="og:description" content="Вчера появилась новость о разработке внутри Oracle нового сборщика мусора Z Garbage Collector (ZGC)&hellip;">
+    <meta property="og:title" content="Новости Java #11">
+    <meta property="og:description" content="&bull; Главная новость этой недели &ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в этой статье. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2017-10-27">
+    <meta property="article:published_time" content="2021-03-21">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="В Oracle разрабатывают новый сборщик мусора ZGC">
-    <meta name="twitter:description" content="Вчера появилась новость о разработке внутри Oracle нового сборщика мусора Z Garbage Collector (ZGC)&hellip;">
+    <meta name="twitter:title" content="Новости Java #11">
+    <meta name="twitter:description" content="&bull; Главная новость этой недели &ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в этой статье. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_11.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_11.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,22 +31,41 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Oracle разрабатывают новый сборщик мусора ZGC</h3>
-<p class="text-secondary"><time datetime="2017-10-27">27 октября, 2017</time></p>
+<h3 id="title">Новости Java #11</h3>
+<p class="text-secondary"><time datetime="2021-03-21">21 марта, 2021</time></p>
 <article>
-<p>Вчера появилась <a href="http://mail.openjdk.java.net/pipermail/announce/2017-October/000237.html">новость</a> о разработке внутри Oracle нового сборщика мусора Z Garbage Collector (ZGC).</p>
-<p>ZGC нацелен на маленькие паузы (< 10мс) и большие кучи (> 1TB), при этом понижение производительности не должно превышать 15%. Как утверждает лидер проекта Per Liden, реализация уже достаточна зрелая и стабильная.</p>
-<p>Сейчас происходит процедура голосования за утверждение ZGC как проекта OpenJDK, после которой исходники нового сборщика мусора станут доступны сообществу.</p>
-<p>Тем временем, сообщество восприняло новость неоднозначно. Сборщик мусора с ультрамаленькими паузами, безусловно, нужен, но многие выразили недоумение, так как разработка подобного сборщика мусора уже ведётся в другом проекте Shenandoah (<a href="http://openjdk.java.net/jeps/189">JEP 189</a>). В частности, Volker Simonis из SAP <a href="http://mail.openjdk.java.net/pipermail/discuss/2017-October/004540.html">выразил</a> своё беспокойство по поводу дублирования усилий разными командами (RedHat инвестировал в Shenandoah большие ресурсы), а так же факта, что процедуру голосования начали без предварительной публичной дискуссии. Кроме того, наличие двух сборщиков мусоров, делающих примерно то же самое, немного сбивает с толку. Какой из них лучше? Какой в итоге останется в OpenJDK или останутся оба?</p>
-<p>С другой стороны, некоторым не терпится как можно быстрее посмотреть код ZGC и пощупать сборщик мусора в действии.</p>
+<p>&bull; Главная новость этой недели &ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в <a href="java_16.html">этой статье</a>. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои сборки OpenJDK 16: <a href="https://sap.github.io/SapMachine/">SapMachine</a>, <a href="https://aws.amazon.com/ru/about-aws/whats-new/2021/03/announcing-general-availability-amazon-corretto-16/">Amazon Corretto</a>, <a href="https://www.azul.com/downloads/zulu-community/?version=java-16&package=jdk">Azul Zulu</a>, <a href="https://blog.adoptopenjdk.net/2021/03/adoptopenjdk-16-available/">AdoptOpenJDK</a> (в т.ч. OpenJ9), <a href="https://bell-sw.com/announcements/2021/03/19/JDK-16-Release/">Liberica JDK</a>.</p>
+
+<p class="pt-3">&bull; Сразу позле выхода Java 16 вышло 4 новых JEP. Это <a href="http://openjdk.java.net/jeps/401">JEP 401: Primitive Objects (Preview)</a>, <a href="http://openjdk.java.net/jeps/402">JEP 402: Unify the Basic Primitives with Objects (Preview)</a>, <a href="http://openjdk.java.net/jeps/403">JEP 403: Strongly Encapsulate JDK Internals</a> и <a href="http://openjdk.java.net/jeps/404">JEP 404: Generational Shenandoah</a>. Про все JEP кроме третьего мы уже писали в предыдущих выпусках, когда они ещё были черновиками.</p>
+<p>В JEP 403 предлагается сделать опцию <code class="text-nowrap">--illegal-access</code> недействующей. В Java 9-16 эта опция позволяет глобально открыть все внутренности JDK без перечисления конкретных пакетов (в Java 16 её значение <a href="http://openjdk.java.net/jeps/396">стало</a> по умолчанию <code class="text-nowrap">deny</code>). Если JEP будет реализован, то <code class="text-nowrap">--illegal-access=permit/warn/debug</code> не будет иметь эффекта, и для открытия пакетов придётся использовать опцию <code class="text-nowrap">--add-opens</code>. Также в будущем планируется удалить <code class="text-nowrap">--illegal-access</code> окончательно.</p>
+
+<p class="pt-3">&bull; Ещё два JEP были предложены к попаданию в Java 17. Это <a href="https://openjdk.java.net/jeps/391">JEP 391: macOS/AArch64 Port</a> и <a href="https://openjdk.java.net/jeps/398">JEP 398: Deprecate the Applet API for Removal</a>.</p>
+
+<p class="pt-3">&bull; Роман Кеннке, который на прошлой неделе предложил <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html">проект Lilliput</a>, запустил <a href="https://mail.openjdk.java.net/pipermail/announce/2021-March/000296.html">официальное голосование</a> по созданию проекта. На текущий момент проголосовало 26 членов OpenJDK, и все они проголосовали за создание проекта.</p>
+
+<p class="pt-3">&bull; Вышел <a href="https://www.youtube.com/watch?v=OGGALLHnH-c">Eclipse 2021-03</a>. В нём появилось параллельное построение индекса поиска, неблокирующее автодополнение, 16 новых Clean Up действий, quick fix для инициализации переменной в <code class="text-nowrap">try-with-resources</code>, улучшенная поддержка <code class="text-nowrap">sealed</code> классов и многое другое.</p>
+
+<p class="pt-3">&bull; Вышел баг-фикс релиз <a href="https://blog.jetbrains.com/idea/2021/03/intellij-idea-2020-3-3/">IntelliJ IDEA 2020.3.3</a>.</p>
+
+<p class="pt-3">&bull; Вышел <a href="https://github.com/jvm-profiling-tools/async-profiler/releases/tag/v2.0">Async Profiler 2.0</a>. Также <a href="https://www.youtube.com/watch?v=TDpbt4thECc">вышло видео</a>, где Андрей Паньгин демонстрирует работу Async Profiler в IntelliJ IDEA.</p>
+
+<p class="pt-3">&bull; Вышел <a href="https://inside.java/2021/03/16/jmc-8-released/">JDK Misson Control 8.0.0</a>.</p>
+
+<p class="pt-3">&bull; Вышел <a href="https://spring.io/blog/2021/03/16/spring-framework-5-3-5-available-now">Spring Framefork 5.3.5</a> с поддержкой Java 16.</p>
+
+<p class="pt-3">&bull; Вышла статья <a href="https://seanjmullan.org/blog/2021/03/18/jdk16">JDK 16 Security Enhancements</a>, где рассказано какие изменения в криптографии, PKI, TLS, Signed JARs были сделаны в Java 16.</p>
+
+<p class="pt-3">&bull; Вышла <a href="https://github.com/google/guava/releases/tag/v30.1.1">Guava 30.1.1</a>.</p>
+
+<p class="pt-3">&bull; Вышли новые ранние сборки JDK: <a href="https://jdk.java.net/17/">JDK 17-ea+13</a>, <a href="https://jdk.java.net/loom/">JDK 17-loom+5</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_11.html" class="text-secondary">Новости Java #11</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #11</li>
 <li class="text-secondary"><a href="java_16.html" class="text-secondary">Вышла Java 16</a></li>
 <li class="text-secondary"><a href="java_news_10.html" class="text-secondary">Новости Java #10</a></li>
 <li class="text-secondary"><a href="java_news_9.html" class="text-secondary">Новости Java #9</a></li>
@@ -108,8 +127,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="true" aria-controls="year2017">2017</a>
-  <ul class="collapse show" id="year2017">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
 <li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
@@ -125,7 +144,7 @@
 <li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
 <li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
 <li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
-<li>В Oracle разрабатывают новый сборщик мусора ZGC</li>
+<li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
 </div>
 </div>

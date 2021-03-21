@@ -4,7 +4,41 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-03-15T17:00:00Z</updated>
+  <updated>2021-03-20T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #11</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_11.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_11.html</id>
+    <updated>2021-03-20T17:00:00Z</updated>
+    <published>2021-03-20T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Главная новость этой недели &amp;ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в &lt;a href="java_16.html"&gt;этой статье&lt;/a&gt;. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои сборки OpenJDK 16: &lt;a href="https://sap.github.io/SapMachine/"&gt;SapMachine&lt;/a&gt;, &lt;a href="https://aws.amazon.com/ru/about-aws/whats-new/2021/03/announcing-general-availability-amazon-corretto-16/"&gt;Amazon Corretto&lt;/a&gt;, &lt;a href="https://www.azul.com/downloads/zulu-community/?version=java-16&amp;package=jdk"&gt;Azul Zulu&lt;/a&gt;, &lt;a href="https://blog.adoptopenjdk.net/2021/03/adoptopenjdk-16-available/"&gt;AdoptOpenJDK&lt;/a&gt; (в т.ч. OpenJ9), &lt;a href="https://bell-sw.com/announcements/2021/03/19/JDK-16-Release/"&gt;Liberica JDK&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Сразу позле выхода Java 16 вышло 4 новых JEP. Это &lt;a href="http://openjdk.java.net/jeps/401"&gt;JEP 401: Primitive Objects (Preview)&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/402"&gt;JEP 402: Unify the Basic Primitives with Objects (Preview)&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/403"&gt;JEP 403: Strongly Encapsulate JDK Internals&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/404"&gt;JEP 404: Generational Shenandoah&lt;/a&gt;. Про все JEP кроме третьего мы уже писали в предыдущих выпусках, когда они ещё были черновиками.&lt;/p&gt;
+&lt;p&gt;В JEP 403 предлагается сделать опцию &lt;code&gt;--illegal-access&lt;/code&gt; недействующей. В Java 9-16 эта опция позволяет глобально открыть все внутренности JDK без перечисления конкретных пакетов (в Java 16 её значение &lt;a href="http://openjdk.java.net/jeps/396"&gt;стало&lt;/a&gt; по умолчанию &lt;code&gt;deny&lt;/code&gt;). Если JEP будет реализован, то &lt;code&gt;--illegal-access=permit/warn/debug&lt;/code&gt; не будет иметь эффекта, и для открытия пакетов придётся использовать опцию &lt;code&gt;--add-opens&lt;/code&gt;. Также в будущем планируется удалить &lt;code&gt;--illegal-access&lt;/code&gt; окончательно.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Ещё два JEP были предложены к попаданию в Java 17. Это &lt;a href="https://openjdk.java.net/jeps/391"&gt;JEP 391: macOS/AArch64 Port&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/398"&gt;JEP 398: Deprecate the Applet API for Removal&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Роман Кеннке, который на прошлой неделе предложил &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html"&gt;проект Lilliput&lt;/a&gt;, запустил &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-March/000296.html"&gt;официальное голосование&lt;/a&gt; по созданию проекта. На текущий момент проголосовало 26 членов OpenJDK, и все они проголосовали за создание проекта.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=OGGALLHnH-c"&gt;Eclipse 2021-03&lt;/a&gt;. В нём появилось параллельное построение индекса поиска, неблокирующее автодополнение, 16 новых Clean Up действий, quick fix для инициализации переменной в &lt;code&gt;try-with-resources&lt;/code&gt;, улучшенная поддержка &lt;code&gt;sealed&lt;/code&gt; классов и многое другое.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел баг-фикс релиз &lt;a href="https://blog.jetbrains.com/idea/2021/03/intellij-idea-2020-3-3/"&gt;IntelliJ IDEA 2020.3.3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://github.com/jvm-profiling-tools/async-profiler/releases/tag/v2.0"&gt;Async Profiler 2.0&lt;/a&gt;. Также &lt;a href="https://www.youtube.com/watch?v=TDpbt4thECc"&gt;вышло видео&lt;/a&gt;, где Андрей Паньгин демонстрирует работу Async Profiler в IntelliJ IDEA.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://inside.java/2021/03/16/jmc-8-released/"&gt;JDK Misson Control 8.0.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/03/16/spring-framework-5-3-5-available-now"&gt;Spring Framefork 5.3.5&lt;/a&gt; с поддержкой Java 16.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышла статья &lt;a href="https://seanjmullan.org/blog/2021/03/18/jdk16"&gt;JDK 16 Security Enhancements&lt;/a&gt;, где рассказано какие изменения в криптографии, PKI, TLS, Signed JARs были сделаны в Java 16.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://github.com/google/guava/releases/tag/v30.1.1"&gt;Guava 30.1.1&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+13&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+5&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Вышла Java 16</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_16.html" />
@@ -446,48 +480,5 @@
 &lt;p class="pt-3"&gt;&amp;bull; В блоге JetBrains вышел новый выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/01/java-annotated-monthly-january-2021/"&gt;&amp;laquo;Java Annotated Monthly&amp;raquo;&lt;/a&gt;, где собрано огромное количество ссылок на новости, статьи, тьюториалы и прочие материалы о Java и связанных темах.&lt;/p&gt;
 &lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://mail.openjdk.java.net/pipermail/loom-dev/2021-January/002046.html"&gt;новая сборка Loom&lt;/a&gt;, основанная на JDK 17+5.&lt;/p&gt;
 &lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://github.com/scala/scala/releases/tag/v2.12.13"&gt;Scala 2.12.13&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #2</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_2.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_2.html</id>
-    <updated>2021-01-10T17:00:00Z</updated>
-    <published>2021-01-10T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Стал известен первый JEP, который попадёт в Java 17. Это &lt;a href="https://openjdk.java.net/jeps/356"&gt;JEP 356: Enhanced Pseudo-Random Number Generators&lt;/a&gt;. В рамках этого JEP'а будет добавлен интерфейс &lt;code&gt;RandomGenerator&lt;/code&gt; с четырьмя его специализациями: &lt;code&gt;SplittableRandomGenerator&lt;/code&gt;, &lt;code&gt;JumpableRandomGenerator&lt;/code&gt;, &lt;code&gt;LeapableRandomGenerator&lt;/code&gt; и &lt;code&gt;ArbitrarilyJumpableRandomGenerator&lt;/code&gt;. Кроме того, будет добавлен класс &lt;code&gt;RandomGeneratorFactory&lt;/code&gt;, который будет возвращать конкретные реализации &lt;code&gt;RandomGenerator&lt;/code&gt;. Старые классы &lt;code&gt;Random&lt;/code&gt;, &lt;code&gt;ThreadLocalRandom&lt;/code&gt; и &lt;code&gt;SplittableRandom&lt;/code&gt; будут отрефакторены и станут одними из реализаций &lt;code&gt;RandomGenerator&lt;/code&gt;. Также будут реализованы новые алгоритмы генерации псевдослучайных чисел.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Брайан Гетц опубликовал &lt;a href="https://github.com/openjdk/amber-docs/blob/master/site/design-notes/pattern-match-object-model.md"&gt;новый документ&lt;/a&gt; &amp;laquo;Паттерн-матчинг в объектной модели Java&amp;raquo;. В нём описывается возможный подход внедрения паттерн-матчинга в язык. Документ довольно большой, поэтому попробуем выделить основные моменты:&lt;/p&gt;
-&lt;p&gt;&amp;ndash; Если язык предоставляет возможноть агрегации посредством конструкторов/фабричных методов, то он должен предоставлять и обратный механизм деконструкции:&lt;/p&gt;
-&lt;pre&gt;Object x = &lt;span style="color: blue"&gt;new&lt;/span&gt; Foo(a, b); &lt;span style="color: green"&gt;// конструкция&lt;/span&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b): ... &lt;span style="color: green"&gt;// деконструкция&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;&amp;ndash; Если конструирование объекта поддерживает композицию, то и деконструирование тоже должно её поддерживать:&lt;/p&gt;
-&lt;pre&gt;Optional.of(Shape.redBall(1));&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Optional.of(Shape.redBall(&lt;span style="color: blue"&gt;var&lt;/span&gt; size)): ...&lt;/pre&gt;
-&lt;p&gt;&amp;ndash; Паттерны деконструкции являются точно такими же членами класса, как и конструкторы/методы. Паттерны имеют тело, в котором описывается всё необходимое поведение.&lt;/p&gt;
-&lt;p&gt;&amp;ndash; Раз паттерны являются членами класса, то они поддерживают все их атрибуты: модификаторы доступа, перегрузка, переопределение, static/instance, параметрический полиморфизм, делегирование к другим паттернам, varargs и т.д.&lt;/p&gt;
-&lt;p&gt;&amp;ndash; Паттерны также имеют дополнительные уникальные атрибуты: наличие целевого операнда, тип которого должен быть совместим с целевым типом, полнота/частичность, исчерпываемость, разделение аргументов на входные и выходные.&lt;/p&gt;
-&lt;p&gt;&amp;ndash; В конце документа описываются также другие идеи вроде комбинирования паттернов с помощью булевых операторов (AND/OR), структурные паттерны и т.д.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Также Брайн Гетц предложил в рассылке Amber несколько идей относительно паттерн-матчинга:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002688.html"&gt;Оператор алмаза в паттернах&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Было&lt;/span&gt;:
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (m &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; EnumMap&amp;lt;K, ? extends V&amp;gt; em) { ... }
-
-&lt;span style="color: green"&gt;// Стало&lt;/span&gt;:
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (m &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; EnumMap&amp;lt;&amp;gt; em) { ... }&lt;/pre&gt;
-&lt;p&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002695.html"&gt;Паттерны массивов&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (arr &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; String[] { &lt;span style="color: blue"&gt;var&lt;/span&gt; a, &lt;span style="color: blue"&gt;var&lt;/span&gt; b }) { ... }&lt;/pre&gt;
-&lt;p&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002710.html"&gt;Охранные паттерны&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; P(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) __AND &lt;span style="color: blue"&gt;true&lt;/span&gt;(x &gt; 0) __AND Q(&lt;span style="color: blue"&gt;var&lt;/span&gt; y):&lt;/pre&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Джонатан Гиббонс (Oracle) &lt;a href="https://mail.openjdk.java.net/pipermail/code-tools-dev/2021-January/000625.html"&gt;предложил&lt;/a&gt; добавить в JDK утилиту &lt;code&gt;apidiff&lt;/code&gt; для сравнения нескольких версий API. Утилита сможет анализировать class-файлы, исходные файлы Java и файлы документации и генерировать HTML-отчёт о различиях в API. Внутри она будет использовать фронтенд &lt;code&gt;javac&lt;/code&gt; и модули &lt;code&gt;java.compiler&lt;/code&gt;/&lt;code&gt;jdk.compiler&lt;/code&gt; для чтения исходных и класс-файлов, а значит не будет проблем с поддержкой в утилите последних языковых изменений. Джонатан пишет, что у него уже есть продвинутый прототип утилиты и он надеется в скором времени опубликовать его на GitHub.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Американские новостные агентства &lt;a href="https://www.wsj.com/articles/solarwinds-hack-breached-justice-department-systems-11609958761"&gt;написали&lt;/a&gt; о взломе нескольких министерств США через программное обеспечение компании SolarWinds и о возможной организации этих кибератак хакерами, связанными с Россией. В статьях написано, что хакеры могли это сделать, получив доступ к билд-серверу TeamCity, развёрнутому в компании для сборки ПО. Далее сообщается, что американские спецслужбы и специалисты по кибербезопасности начали исследование возможной роли JetBrains в атаке.&lt;/p&gt;
-&lt;p&gt;При этом авторы не объясняют, почему такой негативный акцент в статьях сделан именно на JetBrains, ведь кроме TeamCity в SolarWinds должно использоваться множество других программ и инструментов для разработки. New York Times вообще &lt;a href="https://web.archive.org/web/20210106195835/https://www.nytimes.com/2021/01/06/us/politics/russia-cyber-hack.html"&gt;назвал&lt;/a&gt; JetBrains &amp;laquo;obscure software company&amp;raquo; (&amp;laquo;тёмная&amp;raquo;, &amp;laquo;неясная&amp;raquo;), но позже изменил эту фразу в статье на &amp;laquo;widely used software company&amp;raquo;, и вообще в течение последующих дней множество раз изменял статью, постоянно внося туда правки и уточнения. Многие программисты в Твиттере довольно резко отреагировали на &lt;a href="https://twitter.com/nicoleperlroth/status/1346909580219936769"&gt;твит&lt;/a&gt; редактора New York Times и одной из авторов статьи, делая &lt;a href="https://twitter.com/nikitonsky/status/1347004468966141954"&gt;ретвиты&lt;/a&gt; с саркастическими шутками.&lt;/p&gt;
-&lt;p&gt;Максим Шафиров, CEO JetBrains, после выхода новостей, сразу написал &lt;a href="https://blog.jetbrains.com/blog/2021/01/06/statement-on-the-story-from-the-new-york-times-regarding-jetbrains-and-solarwinds/"&gt;официальный ответ&lt;/a&gt;, что JetBrains никак не может быть причастен к атаке и компания не была извещена о расследовании, но полностью готова к сотрудничеству. На следующий день он выложил &lt;a href="https://blog.jetbrains.com/blog/2021/01/07/an-update-on-solarwinds/"&gt;более подробный пост&lt;/a&gt;, в котором более подробно описал ситуацию. Он написал, что компании неизвестно об уязвимостях в TeamCity, которые могли бы быть эксплуатированы для организации подобных атак, и компания проводит регулярный аудит своих инструментов и систем.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Брюс Эккель, автор &amp;laquo;Философия Java&amp;raquo; и многих других книг о Java, C++ и JVM языках, &lt;a href="https://www.bruceeckel.com/2021/01/02/the-problem-with-gradle/"&gt;написал пост&lt;/a&gt; &amp;laquo;The Problem with Gradle&amp;raquo;, где рассказал свою историю использования Gradle и перечислил его проблемы.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; &lt;a href="https://docs.gradle.org/6.8/release-notes.html"&gt;Вышел Gradle 6.8&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
