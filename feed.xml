@@ -4,7 +4,22 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-03-20T17:00:00Z</updated>
+  <updated>2021-03-28T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #12</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_12.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_12.html</id>
+    <updated>2021-03-28T17:00:00Z</updated>
+    <published>2021-03-28T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышло 3 новых JEP. Это &lt;a href="http://openjdk.java.net/jeps/405"&gt;JEP 405: Record Patterns &amp; Array Patterns (Preview)&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/406"&gt;JEP 406: Pattern Matching for switch (Preview)&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/407"&gt;JEP 407: Remove RMI Activation&lt;/a&gt;. Про первые два мы уже писали в &lt;a href="java_news_8.html"&gt;предыдущих выпусках&lt;/a&gt;. В JEP 407 предлагается окончательно удалить устаревшую часть RMI, которая называется RMI Activation. В Java 15 она стала &lt;a href="http://openjdk.java.net/jeps/385"&gt;deprecated for removal&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Появилось 3 новых черновика JEP: &lt;a href="http://openjdk.java.net/jeps/8263381"&gt;Dynamic Deserialization Filters&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/8264130"&gt;PAC-RET protection for Linux/AArch64&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/8264131"&gt;Arm64e support for MacOS/AArch64&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Официально объявлено, что проект jdk11u &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-March/005470.html"&gt;переедет на Git и GitHub&lt;/a&gt;. Это случится летом, когда начнётся разработка JDK 11.0.13.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://newsroom.eclipse.org/news/announcements/eclipse-foundation%E2%80%99s-eclipse-jetty-project-prepares-future-jetty-11-release"&gt;Eclipse Jetty 11&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pr-2"&gt;&amp;bull; Вышла статья &lt;a href="https://malloc.se/blog/zgc-jdk16"&gt;ZGC | What's new in JDK 16&lt;/a&gt;. В ней утверждается, что в JDK 16 удалось снизить максимальные паузы с 10мс до 1мс.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #11</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_11.html" />
@@ -457,28 +472,5 @@
 &lt;p class="pt-3"&gt;&amp;bull; Тагир Валеев опубликовал статью на Хабре: &lt;a href="https://habr.com/ru/post/538280/"&gt;Анбоксинг в современной Java&lt;/a&gt;.&lt;/p&gt;
 &lt;p class="pt-3"&gt;&amp;bull; Вышла GraalVM 21.0. В дополнение к &lt;a href="https://medium.com/graalvm/graalvm-21-0-introducing-a-new-way-to-run-java-df894256de28"&gt;основной новости&lt;/a&gt; о выходе новой версии была опубликована &lt;a href="https://medium.com/graalvm/java-on-truffle-going-fully-metacircular-215531e3f840"&gt;дополнительная статья&lt;/a&gt; с подробностями того, как JVM реализована полностью на Java с использованием фреймворка Truffle.&lt;/p&gt;
 &lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/lists/tycho-dev/msg01837.html"&gt;Eclipse Tycho 2.2.0.&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #3</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_3.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_3.html</id>
-    <updated>2021-01-17T17:00:00Z</updated>
-    <published>2021-01-17T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; По просьбам читателей на сайт &lt;a href="https://minijug.ru"&gt;minijug.ru&lt;/a&gt; был добавлен feed в формате Atom. Это сделано для тех, кто предпочитает узнавать о новых публикациях через агрегатор новостных лент, а не через &lt;a href="https://t.me/miniJUG"&gt;Telegram-канал&lt;/a&gt;. Адрес feed &lt;a href="https://minijug.ru/feed.xml"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Java 16 теперь во &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-January/005001.html"&gt;второй фазе Rampdown&lt;/a&gt;, а значит на одну ступень ближе к релизу, который &lt;a href="http://openjdk.java.net/projects/jdk/16/"&gt;по плану&lt;/a&gt; должен произойти 16 марта.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; В компилятор Java было внесено &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8250769"&gt;несколько изменений&lt;/a&gt; в отношении preview API. Preview API &amp;ndash; это один из трёх типов &lt;a href="https://openjdk.java.net/jeps/12"&gt;preview feature&lt;/a&gt; в Java, наряду с preview language feature и preview VM feature. Preview API разделены на две большие группы: &lt;em&gt;нормальные&lt;/em&gt; (normal) и &lt;em&gt;рефлективные&lt;/em&gt; (reflective). Нормальные также подразделяются на &lt;em&gt;неотъемлемые&lt;/em&gt; (essential), &lt;em&gt;удобные&lt;/em&gt; (convenient) и &lt;em&gt;автономные&lt;/em&gt; (standalone). Однако для &lt;code&gt;javac&lt;/code&gt; важно только разделение на нормальные и рефлективные. Главные изменения &lt;code&gt;javac&lt;/code&gt; следующие:&lt;/p&gt;
-&lt;p&gt;1. Аннотация &lt;code&gt;@PreviewFeature&lt;/code&gt; перенесена из пакета &lt;code&gt;jdk.internal&lt;/code&gt; в пакет &lt;code&gt;jdk.internal.javac&lt;/code&gt;, и в неё добавлен флаг &lt;code&gt;reflective&lt;/code&gt;, который заменил старый флаг &lt;code&gt;essentialAPI&lt;/code&gt;. Этот новый флаг как раз и поможет компилятору отличать рефлективные preview API от нормальных.&lt;/p&gt;
-&lt;p&gt;2. Рефлективные preview API можно использовать без флага компилятора &lt;code&gt;--enable-preview&lt;/code&gt;, а нормальные &amp;ndash; только с флагом.&lt;/p&gt;
-&lt;p&gt;3. При использовании класса, который использует preview feature, теперь выдаётся предупреждение (например, если использован &lt;code&gt;sealed&lt;/code&gt;-класс из какой-нибудь библиотеки). Но это предупреждение можно подавить через &lt;code&gt;@SuppressWarnings(&lt;span style="color: darkred"&gt;"preview"&lt;/span&gt;)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;4. Классы помечаются как зависящие от preview feature, только если это действительно необходимо (такие class-файлы имеют специальную минорную версию 65535, например 61.65535 для Java 17). Если класс не использует ни одной preview language feature (ни прямо, ни косвенно), ни одной preview VM feature и ни одного нормального preview API, то он компилируется в обычный (не-preview) class-файл. Другими словами, если из preview features использовать только рефлективные preview API, то такие программы можно будет запускать без флага &lt;code&gt;--enable-preview&lt;/code&gt;, даже если они скомпилированы с флагом &lt;code&gt;--enable-preview&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Эти изменения в &lt;code&gt;javac&lt;/code&gt; будут работать только начиная с Java 17.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Опубликован новый черновик &lt;a href="https://openjdk.java.net/jeps/8251554"&gt;JEP: Primitive Objects (Preview)&lt;/a&gt;, в котором описывается, как в Java планируется внедрить примитивные объекты. Примитивные объекты &amp;ndash; это объекты, которые не имеют идентичности, то есть при их копировании получается объект, неотличимый от оригинального. Такие объекты могут передаваться напрямую и легко встраиваться (в другие объекты/массивы/стек), что снижает накладные расходы на их использование и делает их более эффективными, чем объекты с идентичностью.&lt;/p&gt;
-&lt;p class="pt-3"&gt;Новый черновик JEP &amp;ndash; это возможно первая детальная публичная спецификация, которая стала результатом многолетних исследований, множества встреч экспертов и обсуждений, проведённых по value-типам в рамках проекта &lt;a href="http://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt;. В ходе проекта было сделано несколько прототипов, несколько раз значительно менялась концепция, а сами value-типы дважды переименовывались: сначала в &lt;a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2019-April/000916.html"&gt;inline-классы&lt;/a&gt;, а потом в &lt;a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2020-October/001415.html"&gt;примитивные классы&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; В блоге JetBrains вышел новый выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/01/java-annotated-monthly-january-2021/"&gt;&amp;laquo;Java Annotated Monthly&amp;raquo;&lt;/a&gt;, где собрано огромное количество ссылок на новости, статьи, тьюториалы и прочие материалы о Java и связанных темах.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://mail.openjdk.java.net/pipermail/loom-dev/2021-January/002046.html"&gt;новая сборка Loom&lt;/a&gt;, основанная на JDK 17+5.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://github.com/scala/scala/releases/tag/v2.12.13"&gt;Scala 2.12.13&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
