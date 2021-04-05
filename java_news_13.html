@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Егор Бугаенко раскритиковал идею введения data-классов в Java</title>
+    <title>Новости Java #13</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Егор Бугаенко раскритиковал идею введения data-классов в Java">
-    <meta property="og:description" content="На предложение ввести в Java data-классы негативно отреагировал Егор Бугаенко. Он написал в своём Твиттере, что &laquo;ещё один анти-паттерн ожидает легализации в Java; на этот раз это data-классы от&hellip;">
+    <meta property="og:title" content="Новости Java #13">
+    <meta property="og:description" content="&bull; Появилось расписание процесса выхода JDK 17. Общедоступная версия Java 17 по плану должна выйти 14 сентября 2021 года&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2017-11-08">
+    <meta property="article:published_time" content="2021-04-05">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="Егор Бугаенко раскритиковал идею введения data-классов в Java">
-    <meta name="twitter:description" content="На предложение ввести в Java data-классы негативно отреагировал Егор Бугаенко. Он написал в своём Твиттере, что &laquo;ещё один анти-паттерн ожидает легализации в Java; на этот раз это data-классы от&hellip;">
+    <meta name="twitter:title" content="Новости Java #13">
+    <meta name="twitter:description" content="&bull; Появилось расписание процесса выхода JDK 17. Общедоступная версия Java 17 по плану должна выйти 14 сентября 2021 года&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_13.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_13.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,22 +31,36 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Егор Бугаенко раскритиковал идею введения data-классов в Java</h3>
-<p class="text-secondary"><time datetime="2017-11-08">8 ноября, 2017</time></p>
+<h3 id="title">Новости Java #13</h3>
+<p class="text-secondary"><time datetime="2021-04-05">5 апреля, 2021</time></p>
 <article>
-<p>На предложение ввести в Java <a href="data_classes.html">data-классы</a> негативно отреагировал Егор Бугаенко. Он <a href="https://twitter.com/yegor256/status/925960351165841408">написал в своём Твиттере</a>, что &laquo;ещё один анти-паттерн ожидает легализации в Java; на этот раз это data-классы от <a href="https://twitter.com/BrianGoetz">@BrianGoetz</a>&raquo;.</p>
-<p><a href="https://twitter.com/yegor256">Егор Бугаенко</a> известен своими <a href="http://www.yegor256.com/">статьями</a>, выступлениями <a href="http://2017.jpoint.ru/talks/java-annotations-are-a-big-mistake/">на конференциях</a> и участием <a href="http://razbor-poletov.com/2016/09/episode-116.html">в подкастах</a>, где он критикует современное ООП, считая его &laquo;неправильным&raquo;. Он даже написал свою серию книг <a href="http://www.yegor256.com/elegant-objects.html">&laquo;Элегантные объекты&raquo;</a> (Elegant Objects), где в подробностях описал, что такое &laquo;правильное&raquo; ООП, и реализовал несколько <a href="https://github.com/yegor256/takes">фреймворков</a> с использованием своих идей.</p>
-<p>С точки зрения Егора DTO (Data Transfer Object) являются анти-паттерном, про который он написал ещё более года назад в своей статье <a href="http://www.yegor256.com/2016/07/06/data-transfer-object.html">&laquo;DTO это позор&raquo;</a>. Главным посланием Егора является то, что объекты не должны видеть данные друг друга, иначе это будет противоречить одному из трёх китов ООП – инкапсуляции. &laquo;Сама идея DTO неправильная, потому что она превращает объектно-ориентированный код в процедурный код&raquo;, – пишет он.</p>
-<p>Кроме того, Егор подготовил свой &laquo;официальный ответ к предложению&raquo; Brian Goetz в виде <a href="http://www.yegor256.com/2017/11/07/five-new-java-features.html">новой статьи</a> в своём блоге, где он в саркастической форме предлагает ввести ещё 5 фич, который сделают язык &laquo;ещё лучше&raquo;. Среди них глобальные переменные, глобальные функции и пространства имён, полный доступ к приватным членам класса, <code class="text-nowrap">NULL</code> по умолчанию в аргументах методов и автоматическая генерация методов доступа к приватным полям.</p>
-<p>В ответ на критику своего предложения Brian Goetz <a href="https://twitter.com/BrianGoetz/status/926171041520635904">написал</a>, что Егор &laquo;не понял его сути&raquo;.</p>
+<p>&bull; Появилось <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-March/005266.html">расписание процесса выхода JDK 17</a>. Общедоступная версия Java 17 по плану должна выйти 14 сентября 2021 года.</p>
+
+<p class="pt-2">&bull; Появился новый <a href="https://openjdk.java.net/jeps/408">JEP 408: Simple Web Server</a>. В нём предлагает добавить в JDK стандартную утилиту, которая будет запускать простой веб-сервер для хостинга статических файлов в указанной директории. При этом реализация веб-сервера в Java существует ещё с JDK 1.6 в публичном пакете <a href="https://docs.oracle.com/en/java/javase/16/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html"><code class="text-nowrap">com.sun.net.httpserver</code></a>, а задачей JEP будет лишь предоставить для него простое API и возможность запускать его из командной строки одной простой командой.</p>
+
+<p class="pt-2">&bull; <a href="https://mail.openjdk.java.net/pipermail/announce/2021-April/000299.html">Завершено голосование</a> по созданию проекта Lilliput, и теперь он будет официально запущен. Напомним, в этом проекте будут исследоваться возможности по <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html">сжатию заголовков</a> Java-объектов до 64/32 бит.</p>
+
+<p class="pt-2">&bull; На YouTube <a href="https://www.youtube.com/playlist?list=PLutlXcN4EAwD4L_vwgYXtoHoNembpw_t0">появились видео докладов</a> с конференции JakartaOne Livestream.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://maven.apache.org/docs/3.8.1/release-notes.html">Apache Maven 3.8.1</a>. В этой версии внешние репозитории, использующие протокол HTTP, теперь блокируются по умолчанию. Это первый релиз Maven спустя полтора года после выхода версии 3.6.3.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://projectlombok.org/changelog">Lombok 1.18.20</a> с поддержкой Java 16 и записей.</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://blog.jetbrains.com/idea/2021/03/intellij-idea-2021-1-rc/">IntelliJ IDEA 2021.1 RC</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jol-dev/2021-March/000335.html">JOL 0.15</a>.</p>
+
+<p class="pt-3">&bull; Вышли новые ранние сборки JDK: <a href="https://jdk.java.net/17/">JDK 17-ea+16</a>, <a href="https://jdk.java.net/loom/">JDK 17-loom+6</a>.</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://dotty.epfl.ch/blog/2021/03/31/scala3-rc2.html">Scala 3.0.0-RC2</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_13.html" class="text-secondary">Новости Java #13</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #13</li>
 <li class="text-secondary"><a href="java_news_12.html" class="text-secondary">Новости Java #12</a></li>
 <li class="text-secondary"><a href="java_news_11.html" class="text-secondary">Новости Java #11</a></li>
 <li class="text-secondary"><a href="java_16.html" class="text-secondary">Вышла Java 16</a></li>
@@ -110,8 +124,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="true" aria-controls="year2017">2017</a>
-  <ul class="collapse show" id="year2017">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
 <li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
@@ -120,7 +134,7 @@
 <li class="text-secondary"><a href="epsilon_gc.html" class="text-secondary">В Java появится сборщик мусора, который не будет собирать мусор</a></li>
 <li class="text-secondary"><a href="java_10_release_date.html" class="text-secondary">Стала известна дата выхода Java 10</a></li>
 <li class="text-secondary"><a href="pattern_matching.html" class="text-secondary">В Java появится паттерн-матчинг</a></li>
-<li>Егор Бугаенко раскритиковал идею введения data-классов в Java</li>
+<li class="text-secondary"><a href="yegor256_data_classes.html" class="text-secondary">Егор Бугаенко раскритиковал идею введения data-классов в Java</a></li>
 <li class="text-secondary"><a href="new_integer_is_deprecated.html" class="text-secondary">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</a></li>
 <li class="text-secondary"><a href="jdk_10_early_access.html" class="text-secondary">Ранние сборки JDK 10 уже доступны для скачивания</a></li>
 <li class="text-secondary"><a href="data_classes.html" class="text-secondary">В Java появятся data-классы</a></li>

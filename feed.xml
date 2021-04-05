@@ -4,7 +4,36 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-03-28T17:00:00Z</updated>
+  <updated>2021-04-04T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #13</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_13.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_13.html</id>
+    <updated>2021-04-04T17:00:00Z</updated>
+    <published>2021-04-04T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Появилось &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-March/005266.html"&gt;расписание процесса выхода JDK 17&lt;/a&gt;. Общедоступная версия Java 17 по плану должна выйти 14 сентября 2021 года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Появился новый &lt;a href="https://openjdk.java.net/jeps/408"&gt;JEP 408: Simple Web Server&lt;/a&gt;. В нём предлагает добавить в JDK стандартную утилиту, которая будет запускать простой веб-сервер для хостинга статических файлов в указанной директории. При этом реализация веб-сервера в Java существует ещё с JDK 1.6 в публичном пакете &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html"&gt;&lt;code&gt;com.sun.net.httpserver&lt;/code&gt;&lt;/a&gt;, а задачей JEP будет лишь предоставить для него простое API и возможность запускать его из командной строки одной простой командой.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-April/000299.html"&gt;Завершено голосование&lt;/a&gt; по созданию проекта Lilliput, и теперь он будет официально запущен. Напомним, в этом проекте будут исследоваться возможности по &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html"&gt;сжатию заголовков&lt;/a&gt; Java-объектов до 64/32 бит.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; На YouTube &lt;a href="https://www.youtube.com/playlist?list=PLutlXcN4EAwD4L_vwgYXtoHoNembpw_t0"&gt;появились видео докладов&lt;/a&gt; с конференции JakartaOne Livestream.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://maven.apache.org/docs/3.8.1/release-notes.html"&gt;Apache Maven 3.8.1&lt;/a&gt;. В этой версии внешние репозитории, использующие протокол HTTP, теперь блокируются по умолчанию. Это первый релиз Maven спустя полтора года после выхода версии 3.6.3.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://projectlombok.org/changelog"&gt;Lombok 1.18.20&lt;/a&gt; с поддержкой Java 16 и записей.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/03/intellij-idea-2021-1-rc/"&gt;IntelliJ IDEA 2021.1 RC&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jol-dev/2021-March/000335.html"&gt;JOL 0.15&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+16&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+6&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://dotty.epfl.ch/blog/2021/03/31/scala3-rc2.html"&gt;Scala 3.0.0-RC2&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #12</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_12.html" />
@@ -440,38 +469,5 @@
 }&lt;/pre&gt;
 &lt;p&gt;Среди ответов отметилось несколько правильных: нужно просто перейти на Java 16, потому что Java 16 &lt;a href="https://openjdk.java.net/jeps/395"&gt;разрешает статические члены во внутренних классах&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Однако самым смешным (но в то же время абсолютно корректным) оказался ответ, где написан конвейер Linux-команд, который берёт исходное изображение, обрезает её так, что из неё остаётся только кусок с классом &lt;code&gt;Inner&lt;/code&gt;, распознаёт из неё текст и компилирует.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #4</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_4.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_4.html</id>
-    <updated>2021-01-24T17:00:00Z</updated>
-    <published>2021-01-24T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Java отпраздновала знаменательную дату: 23 января 1996 года, ровно 25 лет назад, вышла первая стабильная версия JDK, которая имела версию &lt;a href="https://javaalmanac.io/jdk/1.0/"&gt;1.0.2&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; &lt;a href="https://blog.adoptopenjdk.net/2021/01/adoptopenjdk-8u282-11010-and-1502-available/"&gt;Вышли&lt;/a&gt; обновления JDK:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2021-January/013337.html"&gt;JDK 8u282&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-January/004689.html"&gt;JDK 11.0.10&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-January/004690.html"&gt;JDK 13.0.6&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://jdk.java.net/15/"&gt;JDK 15.0.2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Также вышли обновления ранних сборок JDK: &lt;a href="http://jdk.java.net/16/"&gt;JDK 16-ea+33&lt;/a&gt; и &lt;a href="http://jdk.java.net/17/"&gt;JDK 17-ea+6&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Брайн Гетц опубликовал несколько писем в &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/thread.html"&gt;рассылке Amber&lt;/a&gt; с рассуждениями относительно паттерн-матчинга и подробностями его развития в ближайшем будущем:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002758.html"&gt;Pattern features for next iteration&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002763.html"&gt;Patterns: Nullity&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002778.html"&gt;Patterns: Declaration&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-January/002782.html"&gt;Relaxed assignment conversions for sealed types&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Также Брайн Гетц опубликовал статью на InfoQ: &lt;a href="https://www.infoq.com/articles/java-pattern-matching/"&gt;Java Feature Spotlight: Pattern Matching&lt;/a&gt;. В ней он рассказывает, как выглядит паттерн-матчинг в Java сейчас и в каком направлении он будет развиваться.&lt;/p&gt;
-&lt;p&gt;Кроме того, выложено &lt;a href="https://freecontent.manning.com/interview-with-brian-goetz/"&gt;большое интервью&lt;/a&gt; с Брайном про его работу над развитием языка.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Ещё один день рождения празднует IntelliJ IDEA. Её первая версия вышла в свет в 2001 году. В связи с этим JetBrains организует бесплатную виртуальную конференцию &lt;a href="https://www.jetbrains.com/ru-ru/lp/intellijidea-20-anniversary/"&gt;IntelliJ IDEA Conf&lt;/a&gt;, которая состоится 25-26 февраля.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; В новосибирском сообществе Java-программистов JUGNsk объявили об очередном &lt;a href="https://www.meetup.com/JUGNsk/events/275807033/"&gt;онлайн-митапе&lt;/a&gt;, который состоится 28 января в 15:00 по московскому времени.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Тагир Валеев опубликовал статью на Хабре: &lt;a href="https://habr.com/ru/post/538280/"&gt;Анбоксинг в современной Java&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Вышла GraalVM 21.0. В дополнение к &lt;a href="https://medium.com/graalvm/graalvm-21-0-introducing-a-new-way-to-run-java-df894256de28"&gt;основной новости&lt;/a&gt; о выходе новой версии была опубликована &lt;a href="https://medium.com/graalvm/java-on-truffle-going-fully-metacircular-215531e3f840"&gt;дополнительная статья&lt;/a&gt; с подробностями того, как JVM реализована полностью на Java с использованием фреймворка Truffle.&lt;/p&gt;
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/lists/tycho-dev/msg01837.html"&gt;Eclipse Tycho 2.2.0.&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
