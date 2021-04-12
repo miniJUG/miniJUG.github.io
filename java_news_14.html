@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Новости Java #11</title>
+    <title>Новости Java #14</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #11">
-    <meta property="og:description" content="&bull; Главная новость этой недели &ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в этой статье. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои&hellip;">
+    <meta property="og:title" content="Новости Java #14">
+    <meta property="og:description" content="&bull; На сайте OpenJDK появилось два новых JEP&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-03-21">
+    <meta property="article:published_time" content="2021-04-12">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="Новости Java #11">
-    <meta name="twitter:description" content="&bull; Главная новость этой недели &ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в этой статье. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои&hellip;">
+    <meta name="twitter:title" content="Новости Java #14">
+    <meta name="twitter:description" content="&bull; На сайте OpenJDK появилось два новых JEP&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_11.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_14.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_11.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_14.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,33 +31,24 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #11</h3>
-<p class="text-secondary"><time datetime="2021-03-21">21 марта, 2021</time></p>
+<h3 id="title">Новости Java #14</h3>
+<p class="text-secondary"><time datetime="2021-04-12">12 апреля, 2021</time></p>
 <article>
-<p>&bull; Главная новость этой недели &ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в <a href="java_16.html">этой статье</a>. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои сборки OpenJDK 16: <a href="https://sap.github.io/SapMachine/">SapMachine</a>, <a href="https://aws.amazon.com/ru/about-aws/whats-new/2021/03/announcing-general-availability-amazon-corretto-16/">Amazon Corretto</a>, <a href="https://www.azul.com/downloads/zulu-community/?version=java-16&package=jdk">Azul Zulu</a>, <a href="https://blog.adoptopenjdk.net/2021/03/adoptopenjdk-16-available/">AdoptOpenJDK</a> (в т.ч. OpenJ9), <a href="https://bell-sw.com/announcements/2021/03/19/JDK-16-Release/">Liberica JDK</a>.</p>
+<p>&bull; На сайте OpenJDK появилось два новых JEP.</p>
+<p>В <a href="https://openjdk.java.net/jeps/409">JEP 409: Sealed Classes</a> предлагается, наконец, вывести <code class="text-nowrap">sealed</code> классы из режима preview и сделать их стабильной языковой конструкцией.</p>
+<p>В <a href="https://openjdk.java.net/jeps/410">JEP 410: Remove the Experimental AOT and JIT Compiler</a> предлагается убрать экспериментальные <a href="https://openjdk.java.net/jeps/295">ahead-of-time</a> и <a href="https://openjdk.java.net/jeps/317">just-in-time</a> Graal компиляторы из-за их малой используемости и сложности поддержки. По факту эти компиляторы уже исчезли из сборок JDK 16 от Oracle. При этом интерфейс компилятора <a href="https://openjdk.java.net/jeps/243">JVMCI</a> не планируется удалять.</p>
 
-<p class="pt-3">&bull; Сразу позле выхода Java 16 вышло 4 новых JEP. Это <a href="http://openjdk.java.net/jeps/401">JEP 401: Primitive Objects (Preview)</a>, <a href="http://openjdk.java.net/jeps/402">JEP 402: Unify the Basic Primitives with Objects (Preview)</a>, <a href="http://openjdk.java.net/jeps/403">JEP 403: Strongly Encapsulate JDK Internals</a> и <a href="http://openjdk.java.net/jeps/404">JEP 404: Generational Shenandoah</a>. Про все JEP кроме третьего мы уже писали в предыдущих выпусках, когда они ещё были черновиками.</p>
-<p>В JEP 403 предлагается сделать опцию <code class="text-nowrap">--illegal-access</code> недействующей. В Java 9-16 эта опция позволяет глобально открыть все внутренности JDK без перечисления конкретных пакетов (в Java 16 её значение <a href="http://openjdk.java.net/jeps/396">стало</a> по умолчанию <code class="text-nowrap">deny</code>). Если JEP будет реализован, то <code class="text-nowrap">--illegal-access=permit/warn/debug</code> не будет иметь эффекта, и для открытия пакетов придётся использовать опцию <code class="text-nowrap">--add-opens</code>. Также в будущем планируется удалить <code class="text-nowrap">--illegal-access</code> окончательно.</p>
+<p class="pt-2">&bull; Проект Lilliput стартовал. У него появилась <a href="https://openjdk.java.net/projects/lilliput/">собственная страница</a> на сайте OpenJDK, <a href="https://wiki.openjdk.java.net/display/lilliput">Wiki</a> и <a href="https://mail.openjdk.java.net/mailman/listinfo/lilliput-dev">e-mail рассылка</a>.</p>
 
-<p class="pt-3">&bull; Ещё два JEP были предложены к попаданию в Java 17. Это <a href="https://openjdk.java.net/jeps/391">JEP 391: macOS/AArch64 Port</a> и <a href="https://openjdk.java.net/jeps/398">JEP 398: Deprecate the Applet API for Removal</a>.</p>
+<p class="pt-2">&bull; Вышла <a href="https://blog.jetbrains.com/ru/idea/2021/04/intellij-idea-2021-1/">IntelliJ IDEA 2021.1</a>. В ней появилась поддержка Java 16, WSL 2, интеграция с JetBrains Space, сервис Code With Me с поддержкой видео- и аудиозвонков, новая функция Run Targets, новые инспекции и многое другое.</p>
 
-<p class="pt-3">&bull; Роман Кеннке, который на прошлой неделе предложил <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html">проект Lilliput</a>, запустил <a href="https://mail.openjdk.java.net/pipermail/announce/2021-March/000296.html">официальное голосование</a> по созданию проекта. На текущий момент проголосовало 26 членов OpenJDK, и все они проголосовали за создание проекта.</p>
+<p class="pt-2">&bull; Google <a href="https://3dnews.ru/1036576/sud-reshil-chto-google-zakonno-ispolzovalajava-v-android-kompanii-ne-pridyotsya-viplachivat-oracle-kompensatsiyu-v-9-mlrd">выиграл многолетнюю тяжбу с Oracle</a>, которая продолжалась с 2010 года. Окончательным решением Верховного Суда США стало то, что Google не нарушал авторские права Oracle, используя Java API для разработки своей операционной системы Android.</p>
 
-<p class="pt-3">&bull; Вышел <a href="https://www.youtube.com/watch?v=OGGALLHnH-c">Eclipse 2021-03</a>. В нём появилось параллельное построение индекса поиска, неблокирующее автодополнение, 16 новых Clean Up действий, quick fix для инициализации переменной в <code class="text-nowrap">try-with-resources</code>, улучшенная поддержка <code class="text-nowrap">sealed</code> классов и многое другое.</p>
+<p class="pt-2">&bull; Microsoft теперь будет выпускать свою <a href="https://devblogs.microsoft.com/java/announcing-preview-of-microsoft-build-of-openjdk/">собственную сборку OpenJDK</a>.</p>
 
-<p class="pt-3">&bull; Вышел баг-фикс релиз <a href="https://blog.jetbrains.com/idea/2021/03/intellij-idea-2020-3-3/">IntelliJ IDEA 2020.3.3</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.0/release-notes.html">Gradle 7.0</a> с улучшенной инкрементальной сборкой, поддержкой Java 16, сборки на Apple Silicon и т.д.</p>
 
-<p class="pt-3">&bull; Вышел <a href="https://github.com/jvm-profiling-tools/async-profiler/releases/tag/v2.0">Async Profiler 2.0</a>. Также <a href="https://www.youtube.com/watch?v=TDpbt4thECc">вышло видео</a>, где Андрей Паньгин демонстрирует работу Async Profiler в IntelliJ IDEA.</p>
-
-<p class="pt-3">&bull; Вышел <a href="https://inside.java/2021/03/16/jmc-8-released/">JDK Misson Control 8.0.0</a>.</p>
-
-<p class="pt-3">&bull; Вышел <a href="https://spring.io/blog/2021/03/16/spring-framework-5-3-5-available-now">Spring Framefork 5.3.5</a> с поддержкой Java 16.</p>
-
-<p class="pt-3">&bull; Вышла статья <a href="https://seanjmullan.org/blog/2021/03/18/jdk16">JDK 16 Security Enhancements</a>, где рассказано какие изменения в криптографии, PKI, TLS, Signed JARs были сделаны в Java 16.</p>
-
-<p class="pt-3">&bull; Вышла <a href="https://github.com/google/guava/releases/tag/v30.1.1">Guava 30.1.1</a>.</p>
-
-<p class="pt-3">&bull; Вышли новые ранние сборки JDK: <a href="https://jdk.java.net/17/">JDK 17-ea+13</a>, <a href="https://jdk.java.net/loom/">JDK 17-loom+5</a>.</p>
+<p class="pt-2">&bull; Тагир Валеев предложил <a href="https://github.com/openjdk/jdk/pull/3427">патч</a> в OpenJDK с оптимизацией операций <code class="text-nowrap">Stream::limit</code> и <code class="text-nowrap">Stream::skip</code>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -65,10 +56,10 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
-<li class="text-secondary"><a href="java_news_14.html" class="text-secondary">Новости Java #14</a></li>
+<li>Новости Java #14</li>
 <li class="text-secondary"><a href="java_news_13.html" class="text-secondary">Новости Java #13</a></li>
 <li class="text-secondary"><a href="java_news_12.html" class="text-secondary">Новости Java #12</a></li>
-<li>Новости Java #11</li>
+<li class="text-secondary"><a href="java_news_11.html" class="text-secondary">Новости Java #11</a></li>
 <li class="text-secondary"><a href="java_16.html" class="text-secondary">Вышла Java 16</a></li>
 <li class="text-secondary"><a href="java_news_10.html" class="text-secondary">Новости Java #10</a></li>
 <li class="text-secondary"><a href="java_news_9.html" class="text-secondary">Новости Java #9</a></li>

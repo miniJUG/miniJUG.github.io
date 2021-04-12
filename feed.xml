@@ -4,7 +4,32 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-04-04T17:00:00Z</updated>
+  <updated>2021-04-11T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #14</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_14.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_14.html</id>
+    <updated>2021-04-11T17:00:00Z</updated>
+    <published>2021-04-11T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; На сайте OpenJDK появилось два новых JEP.&lt;/p&gt;
+&lt;p&gt;В &lt;a href="https://openjdk.java.net/jeps/409"&gt;JEP 409: Sealed Classes&lt;/a&gt; предлагается, наконец, вывести &lt;code&gt;sealed&lt;/code&gt; классы из режима preview и сделать их стабильной языковой конструкцией.&lt;/p&gt;
+&lt;p&gt;В &lt;a href="https://openjdk.java.net/jeps/410"&gt;JEP 410: Remove the Experimental AOT and JIT Compiler&lt;/a&gt; предлагается убрать экспериментальные &lt;a href="https://openjdk.java.net/jeps/295"&gt;ahead-of-time&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/317"&gt;just-in-time&lt;/a&gt; Graal компиляторы из-за их малой используемости и сложности поддержки. По факту эти компиляторы уже исчезли из сборок JDK 16 от Oracle. При этом интерфейс компилятора &lt;a href="https://openjdk.java.net/jeps/243"&gt;JVMCI&lt;/a&gt; не планируется удалять.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Проект Lilliput стартовал. У него появилась &lt;a href="https://openjdk.java.net/projects/lilliput/"&gt;собственная страница&lt;/a&gt; на сайте OpenJDK, &lt;a href="https://wiki.openjdk.java.net/display/lilliput"&gt;Wiki&lt;/a&gt; и &lt;a href="https://mail.openjdk.java.net/mailman/listinfo/lilliput-dev"&gt;e-mail рассылка&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/ru/idea/2021/04/intellij-idea-2021-1/"&gt;IntelliJ IDEA 2021.1&lt;/a&gt;. В ней появилась поддержка Java 16, WSL 2, интеграция с JetBrains Space, сервис Code With Me с поддержкой видео- и аудиозвонков, новая функция Run Targets, новые инспекции и многое другое.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Google &lt;a href="https://3dnews.ru/1036576/sud-reshil-chto-google-zakonno-ispolzovalajava-v-android-kompanii-ne-pridyotsya-viplachivat-oracle-kompensatsiyu-v-9-mlrd"&gt;выиграл многолетнюю тяжбу с Oracle&lt;/a&gt;, которая продолжалась с 2010 года. Окончательным решением Верховного Суда США стало то, что Google не нарушал авторские права Oracle, используя Java API для разработки своей операционной системы Android.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Microsoft теперь будет выпускать свою &lt;a href="https://devblogs.microsoft.com/java/announcing-preview-of-microsoft-build-of-openjdk/"&gt;собственную сборку OpenJDK&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.0/release-notes.html"&gt;Gradle 7.0&lt;/a&gt; с улучшенной инкрементальной сборкой, поддержкой Java 16, сборки на Apple Silicon и т.д.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Тагир Валеев предложил &lt;a href="https://github.com/openjdk/jdk/pull/3427"&gt;патч&lt;/a&gt; в OpenJDK с оптимизацией операций &lt;code&gt;Stream::limit&lt;/code&gt; и &lt;code&gt;Stream::skip&lt;/code&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #13</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_13.html" />
@@ -429,45 +454,5 @@
 &lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2021/02/kotlin-1-4-30-released/"&gt;Kotlin 1.4.30&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;&amp;bull; Компания JetBrains опубликовала &lt;a href="https://www.jetbrains.com/lp/annualreport-2020/"&gt;JetBrains 2020/21 Annual Highlights&lt;/a&gt;. На этой странице собраны все самые значительные события, которые произошли с компанией за предыдущий год, и опубликованы статистики роста популярности продуктов, количества пользователей и прочих показателей.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #5</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_5.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_5.html</id>
-    <updated>2021-01-31T17:00:00Z</updated>
-    <published>2021-01-31T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; На сайте OpenJDK опубликован черновик JEP &lt;a href="http://openjdk.java.net/jeps/8201533"&gt;&amp;laquo;Enhanced javadoc support for code samples (snippets)&amp;raquo;&lt;/a&gt;. В нём предлагается ввести в javadoc новый тег &lt;code&gt;@snippet&lt;/code&gt;, с помощью которого можно будет вставлять в документацию примеры кода и делать это лучше, чем это делается сейчас с использованием блоков &lt;code&gt;&amp;lt;pre&amp;gt;{@code ...}&amp;lt;/pre&amp;gt;&lt;/code&gt;. Новые сниппеты будут предоставлять механизм для лучшей проверки корректности кода, подсветки синтаксиса, улучшенной поддержки редактирования в IDE.&lt;/p&gt;
-&lt;p&gt;Пример сниппета:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;/**
- * The following code shows how to use Optional.isPresent:
- * {@snippet :
- *     &lt;/span&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (v.isPresent()) {
- &lt;span style="color: green"&gt;*&lt;/span&gt;         System.out.println(&lt;span style="color: darkred"&gt;"v: "&lt;/span&gt; + v.get());
- &lt;span style="color: green"&gt;*&lt;/span&gt;     }
- &lt;span style="color: green"&gt;* }
- */&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Сниппеты в javadoc будут поддерживать вложенные комментарии &lt;code&gt;&lt;span style="color: green"&gt;/* ... */&lt;/span&gt;&lt;/code&gt; (с помощью &amp;lt;pre&amp;gt; это сделать нельзя), ссылки на код из внешнего файла (&lt;code&gt;@snippet file="SomeFile.java"&lt;/code&gt;), обрезание ненужных пробельных символов в началах строк (как в &lt;a href="text_blocks.html"&gt;блоках текста&lt;/a&gt;), подсветку определённых участков сниппета и многие другие возможности.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел ещё один черновик JEP &lt;a href="http://openjdk.java.net/jeps/8260688"&gt;&amp;laquo;Improve regex performance&amp;raquo;&lt;/a&gt;. В этом JEP'е предлагается заменить движок регулярных выражений, который в Java работает довольно быстро, но не даёт гарантированной максимальной сложности алгоритма поиска. Это делает сервисы, написанные на Java, потенциально уязвимыми к DoS-атакам на основе регулярных выражений (&lt;a href="https://en.wikipedia.org/wiki/ReDoS"&gt;ReDoS&lt;/a&gt;). Особенно легко такие атаки могут быть организованы, если пользователь знает, какое именно регулярное выражение используется на сервере для валидации полей, и уж тем более, если сам может загружать своё регулярное выражение.&lt;/p&gt;
-&lt;p&gt;Чтобы избежать этого, можно использовать движок регулярных выражений, основанный на детерминированных конечных автоматах (DFA), который даёт гарантированную сложность &lt;code&gt;O(N)&lt;/code&gt;, однако он поддерживает не все возможности регулярных выражений. В JEP'е предлагаются варианты решений такой проблемы, например, использовать разные алгоритмы в зависимости от указанного выражения или позволять пользователю указывать с помощью флага, какой именно алгоритм использовать. Пока что в JEP'е нет окончательного ответа относительно выбора подхода, и, видимо, он ещё будет сильно дорабатываться.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/01/intellij-idea-2021-1-eap-1/"&gt;IntelliJ IDEA 2021.1 EAP&lt;/a&gt; (Early Access Program). В этой версии среды появилась базовая поддержка Java 16, WSL 2 (Windows Subsytem for Linux 2), новая возможность Run Targets (выполнение программы в среде: Docker, SSH, WSL), улучшения в UI и т.д.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://jdk.java.net/jmc/8/"&gt;JDK Misson Control 8.0.0 EA&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Ну и напоследок немного юмора. Известный программист, Java-чемпион Heinz Kabutz &lt;a href="https://twitter.com/heinzkabutz/status/1355137101545799682"&gt;выложил в Твиттере задачку&lt;/a&gt; со следующим вопросом:&lt;/p&gt;
-&lt;p&gt;&lt;i&gt;Как, не меняя ни одного символа, сделать так, чтобы программа скомпилировалась:&lt;/i&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; InnerStaticMember {
-  &lt;span style="color: blue"&gt;public class&lt;/span&gt; Inner {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String... args) {
-      System.out.println(&lt;span style="color: darkred"&gt;"Look Ma, no hands!"&lt;/span&gt;);
-    }
-  }
-}&lt;/pre&gt;
-&lt;p&gt;Среди ответов отметилось несколько правильных: нужно просто перейти на Java 16, потому что Java 16 &lt;a href="https://openjdk.java.net/jeps/395"&gt;разрешает статические члены во внутренних классах&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Однако самым смешным (но в то же время абсолютно корректным) оказался ответ, где написан конвейер Linux-команд, который берёт исходное изображение, обрезает её так, что из неё остаётся только кусок с классом &lt;code&gt;Inner&lt;/code&gt;, распознаёт из неё текст и компилирует.&lt;/p&gt;</content>
   </entry>
 </feed>
