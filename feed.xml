@@ -28,7 +28,7 @@
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел ещё один &lt;a href="https://openjdk.java.net/jeps/412"&gt;JEP 412: Foreign Function &amp; Memory API (Incubator)&lt;/a&gt;. Этот JEP &amp;ndash; не что иное, как объединение и дальнейшая эволюция других двух JEP'ов: &lt;a href="https://openjdk.java.net/jeps/370"&gt;JEP 370: Foreign-Memory Access API (Incubator)&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/389"&gt;JEP 389: Foreign Linker API (Incubator)&lt;/a&gt;. Эти два API тесно связаны друг с другом и находятся в одном модуле &lt;code&gt;jdk.incubator.foreign&lt;/code&gt;, поэтому было логично их объединить.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2021/04/java-annotated-monthly-april-2021/"&gt;Java Annotated Montly за апрель 2021&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2021/04/java-annotated-monthly-april-2021/"&gt;Java Annotated Monthly за апрель 2021&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; JetBrains &lt;a href="https://blog.jetbrains.com/idea/2021/04/end-of-support-for-32-bit-operating-systems-in-intellij-based-ides/"&gt;откажется от поддержки 32-битных версий&lt;/a&gt; своих IDE. 2021.1 станут последними версиями сред, которые поддерживают 32 бит.&lt;/p&gt;
 
