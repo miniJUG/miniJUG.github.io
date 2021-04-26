@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В конструкторах классов можно будет писать код перед this() и super()</title>
+    <title>Новости Java #15</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В конструкторах классов можно будет писать код перед this() и super()">
-    <meta property="og:description" content="Недавно в репозитории проекта Amber появился коммит, который позволит писать инструкции кода выше вызовов this() и super() в конструкторах. Сейчас this() и super() обязательно должны быть первыми&hellip;">
+    <meta property="og:title" content="Новости Java #15">
+    <meta property="og:description" content="&bull; Вышли обновления JDK&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2018-01-08">
+    <meta property="article:published_time" content="2021-04-26">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="В конструкторах классов можно будет писать код перед this() и super()">
-    <meta name="twitter:description" content="Недавно в репозитории проекта Amber появился коммит, который позволит писать инструкции кода выше вызовов this() и super() в конструкторах. Сейчас this() и super() обязательно должны быть первыми&hellip;">
+    <meta name="twitter:title" content="Новости Java #15">
+    <meta name="twitter:description" content="&bull; Вышли обновления JDK&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/code_before_this_super.png">
-    <meta property="og:image:width" content="1022">
-    <meta property="og:image:height" content="329">
-    <meta name="twitter:image" content="https://minijug.ru/code_before_this_super.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_15.png">
+    <meta property="og:image:width" content="1269">
+    <meta property="og:image:height" content="664">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_15.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,28 +31,49 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В конструкторах классов можно будет писать код перед <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code></h3>
-<p class="text-secondary"><time datetime="2018-01-08">8 января, 2018</time></p>
+<h3 id="title">Новости Java #15</h3>
+<p class="text-secondary"><time datetime="2021-04-26">26 апреля, 2021</time></p>
 <article>
-<p>Недавно в репозитории проекта Amber появился <a href="http://mail.openjdk.java.net/pipermail/amber-dev/2018-January/002482.html">коммит</a>, который позволит писать инструкции кода выше вызовов <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code> в конструкторах. Сейчас <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code> обязательно должны быть первыми вызовами в конструкторах, что часто создаёт неудобства при написании кода, например, если необходимо сделать какую-то нетривиальную валидацию входных аргументов или просто вынести в переменные слишком длинные выражения:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> TxtFile <span style="color: blue">extends</span> File {
-    <span style="color: blue">public</span> TxtFile(String path) {
-        <span style="color: blue">if</span> (!path.endsWith(<span style="color: darkred">".txt"</span>)) {
-            <span style="color: blue">throw new</span> IllegalArgumentException(<span style="color: darkred">"Not a txt file"</span>);
-        }
-        <span style="color: blue">super</span>(path);
-    }
-}</pre>
-<p>Кроме того, возможность писать код перед вызовом конструктора также сильно поможет при написании <a href="data_classes.html">data-классов</a>. При компиляции data-класса компилятор будет создавать конструктор по умолчанию, который не будет делать никакой другой работы кроме инициализации полей. Чтобы добавить в инициализацию класса какую-то более сложную логику, нужно будет объявить свой конструктор, в котором необходимо вызвать конструктор по умолчанию посредством ключевого слова <code class="text-nowrap">default()</code> (аналогично <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code>).</p>
-<p>Так как объект до вызова <code class="text-nowrap">this()</code> / <code class="text-nowrap">super()</code> / <code class="text-nowrap">default()</code> ещё неявляется проинициализированным, на код будут накладываться некоторые ограничения. Например, этот код не сможет использовать поля класса и нестатические методы.</p>
+<p>&bull; Вышли обновления JDK:</p>
+<ul>
+  <li><a href="https://www.oracle.com/java/technologies/javase/16-0-1-relnotes.html">JDK 16.0.1</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-April/005848.html">JDK 15.0.3</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-April/005850.html">JDK 13.0.7</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-April/005860.html">JDK 11.0.11</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2021-April/013680.html">JDK 8u292</a></li>
+  <li><a href="http://jdk.java.net/17/">JDK 17-ea+19</a></li>
+</ul>
+<p>&bull; Вышел <a href="https://openjdk.java.net/jeps/411">JEP 411: Deprecate the Security Manager for Removal</a>. Как следует из названия, в нём предлагается пометить класс <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/SecurityManager.html"><code class="text-nowrap">java.lang.SecurityManager</code></a> как deprecated for removal, а в будущих релизах удалить его окончательно. Также этой же участи будут постигнуты ещё 10 классов и 7 методов, связанных с <code class="text-nowrap">SecurityManager</code>. Кроме того, значение свойста <code class="text-nowrap">java.security.manager</code> станет по умолчанию <code class="text-nowrap">disallow</code> (что означает, что <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"><code class="text-nowrap">System.setSecurityManager()</code></a> будет выбрасывать <code class="text-nowrap">UnsupportedOperationException</code>), а при его указании через аргументы командной строки будет выдаваться предупреждение на старте.</p>
+<p>Отказаться от Security Manager предлагается по причине того, что он слабо отвечает современным требованиям безопасности и не имеет высокого спроса со стороны современных Java-разработчиков, а цена его поддержки очень высока. У него хрупкая модель разрешений, сложная программная модель, и он приносит большие накладные расходы в плане производительности.</p>
+
+<p class="pt-2">&bull; Вышел ещё один <a href="https://openjdk.java.net/jeps/412">JEP 412: Foreign Function & Memory API (Incubator)</a>. Этот JEP &ndash; не что иное, как объединение и дальнейшая эволюция других двух JEP'ов: <a href="https://openjdk.java.net/jeps/370">JEP 370: Foreign-Memory Access API (Incubator)</a> и <a href="https://openjdk.java.net/jeps/389">JEP 389: Foreign Linker API (Incubator)</a>. Эти два API тесно связаны друг с другом и находятся в одном модуле <code class="text-nowrap">jdk.incubator.foreign</code>, поэтому было логично их объединить.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/idea/2021/04/java-annotated-monthly-april-2021/">Java Annotated Montly за апрель 2021</a>.</p>
+
+<p class="pt-2">&bull; JetBrains <a href="https://blog.jetbrains.com/idea/2021/04/end-of-support-for-32-bit-operating-systems-in-intellij-based-ides/">откажется от поддержки 32-битных версий</a> своих IDE. 2021.1 станут последними версиями сред, которые поддерживают 32 бит.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/blog/2021/04/13/jetbrains-toolbox-2021-1-summary/">JetBrains ToolBox 2021.1</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/kotlin/2021/04/kotlin-1-5-0-rc-released/">Kotlin 1.5.0-RC</a>.</p>
+
+<p>&bull; Вышли новые версии Spring:</p>
+<ul>
+  <li><a href="https://spring.io/blog/2021/04/13/spring-framework-5-3-6-and-5-2-14-available-now">Spring Framework 5.3.6 и 5.2.14</a></li>
+  <li><a href="https://spring.io/blog/2021/04/14/spring-integration-5-5-rc1-5-4-6-5-3-7-available">Spring Integration 5.5-RC1, 5.4.6 и 5.3.7</a></li>
+  <li><a href="https://spring.io/blog/2021/04/15/spring-boot-2-5-0-rc1-available-now">Spring Boot 2.5.0-RC1</a>, <a href="https://spring.io/blog/2021/04/15/spring-boot-2-4-5-available-now">2.4.5</a> и <a href="https://spring.io/blog/2021/04/15/spring-boot-2-3-10-is-now-available">2.3.10</a></li>
+  <li><a href="https://spring.io/blog/2021/04/12/spring-security-5-5-0-rc1-released">Spring Security 5.5.0-RC1</a>, <a href="https://spring.io/blog/2021/04/12/spring-security-5-2-10-5-3-9-and-5-4-6-released">5.4.6, 5.3.9 и 5.2.10</a></li>
+  <li><a href="https://spring.io/blog/2021/04/20/what-s-new-in-spring-data-2021-0">Spring Data 2021.0</a></li>
+</ul>
+
+<p class="pt-2">&bull; Вышел <a href="https://github.com/raphw/byte-buddy/blob/master/release-notes.md">ByteBuddy 1.11.0</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_15.html" class="text-secondary">Новости Java #15</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #15</li>
 <li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_3.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 3</a></li>
 <li class="text-secondary"><a href="java_news_14.html" class="text-secondary">Новости Java #14</a></li>
 <li class="text-secondary"><a href="java_news_13.html" class="text-secondary">Новости Java #13</a></li>
@@ -105,8 +126,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="true" aria-controls="year2018">2018</a>
-  <ul class="collapse show" id="year2018">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
 <li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
 <li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
@@ -115,7 +136,7 @@
 <li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
 <li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
 <li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
-<li>В конструкторах классов можно будет писать код перед <code class="text-nowrap">this()</code> и <code class="text-nowrap">super()</code></li>
+<li class="text-secondary"><a href="code_before_this_super.html" class="text-secondary">В конструкторах классов можно будет писать код перед <code>this()</code> и <code>super()</code></a></li>
   </ul>
 </div>
 <div class="mt-3">
