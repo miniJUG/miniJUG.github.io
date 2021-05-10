@@ -4,7 +4,39 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-05-02T17:00:00Z</updated>
+  <updated>2021-05-09T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #17</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_17.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_17.html</id>
+    <updated>2021-05-09T17:00:00Z</updated>
+    <published>2021-05-09T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Самая главная новость этой недели &amp;ndash; выход &lt;a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-0-released/"&gt;Kotlin 1.5&lt;/a&gt;. Перечислим некоторые изменения и улучшения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Появилась поддержка &lt;a href="https://openjdk.java.net/jeps/395"&gt;JVM-записей&lt;/a&gt; с помощью аннотации &lt;code&gt;@JvmRecord&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Модификатор &lt;code&gt;sealed&lt;/code&gt; теперь можно применять не только классам, но и к интерфейсам.&lt;/li&gt;
+  &lt;li&gt;Подклассы &lt;code&gt;sealed&lt;/code&gt; классов теперь не обязаны объявляться в том же файле, а могут объявляться в любых файлах того же пакета.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md"&gt;&lt;code&gt;inline value&lt;/code&gt; классы&lt;/a&gt;, которые появились в экспериментальном режиме в Kotlin 1.2.30, теперь стали стабильными.&lt;/li&gt;
+  &lt;li&gt;Новый &lt;a href="https://blog.jetbrains.com/kotlin/2021/02/the-jvm-backend-is-in-beta-let-s-make-it-stable-together/"&gt;IR (Intermediate Representation) компилятор&lt;/a&gt; Kotlin в JVM стал стабильным и включенным по умолчанию.&lt;/li&gt;
+  &lt;li&gt;SAM (Single Abstract Method) адаптеры теперь компилируются в &lt;code&gt;invokedynamic&lt;/code&gt;. Для простых лямбд такая возможность тоже появилась, но только в экспериментальном режиме с включенной опцией &lt;code&gt;-Xlambdas=indy&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Версия JVM target теперь 1.8 вместо 1.6.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="JEP 415: Context-Specific Deserialization Filters"&gt;JEP 415: Context-Specific Deserialization Filters&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/05/java-annotated-monthly-may-2021/"&gt;Java Annotated Montly за май 2021&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В Java &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8266431"&gt;предложено&lt;/a&gt; улучшить алгоритм сортировки чисел. Тесты показывают, что прирост производительности составляет 50% в среднем и до 6 раз на больших случайных массивах. Огромный прирост в последнем случае достигается засчёт использования поразрядной сортировки.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK было предложено сделать &lt;a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-May/001518.html"&gt;&lt;code&gt;java.lang.Object&lt;/code&gt; абстрактным классом&lt;/a&gt;. Это бы сделало согласованной модель, в которой примитивные классы могут наследоваться только от абстрактных классов без полей, но сломало бы обратную совместимость на уровне исходного кода. Но запретить вызывать &lt;code&gt;new Object()&lt;/code&gt; можно было поэтапно, сначала показывая предупреждение, а спустя несколько лет переквалифицировать в ошибку компиляции.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел бэкпорт-релиз &lt;a href="https://docs.gradle.org/6.9/release-notes.html"&gt;Gradle 6.9&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003237.html"&gt;JMH 1.30&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #16</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_16.html" />
@@ -1172,34 +1204,5 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
 &lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://openjfx.io/highlights/16/"&gt;JavaFX 16&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+13-1000&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+4-174&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #9</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_9.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_9.html</id>
-    <updated>2021-03-07T17:00:00Z</updated>
-    <published>2021-03-07T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Брайан Гетц запустил в рассылке Amber &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002862.html"&gt;дискуссию&lt;/a&gt; по поводу того, как в &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;&lt;code&gt;switch&lt;/code&gt;&lt;/a&gt; должны выглядеть паттерны с условиями. Пока что в этом вопросе консенсуса нет, и была предложена масса вариантов. Вот примеры возможных решений:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp; &lt;span style="color: blue"&gt;true&lt;/span&gt;(x &gt; 0):&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp; &lt;span style="color: blue"&gt;when&lt;/span&gt;(x &gt; 0):&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &lt;span style="color: blue"&gt;if&lt;/span&gt; (x &gt; 0):&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0):&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x) &amp;&amp; x &gt; 0:&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; Foo(&lt;span style="color: blue"&gt;var&lt;/span&gt; x &amp;&amp; x &gt; 0):&lt;/pre&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Ещё одно письмо от Брайана Гетца было опубликовано про &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002836.html"&gt;паттерны примитивных типов и конверсии&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.java.net/jeps/398"&gt;JEP 398: Deprecate the Applet API for Removal&lt;/a&gt;. API аплетов, которое &lt;a href="https://openjdk.java.net/jeps/289"&gt;стало deprecated&lt;/a&gt; в Java 9, теперь предлагается пометить как подлежащее окончательному удалению.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; В блоге JetBrains вышел новый мартовский выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/03/java-annotated-monthly-march-2021/"&gt;Java Annotated Monthly&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; В блоге AdoptOpenJDK &lt;a href="https://blog.adoptopenjdk.net/2021/03/transition-to-eclipse-an-update/"&gt;появился пост&lt;/a&gt; с обновлением статуса переезда проекта в Eclipse Foundation. Напомним, что 9 месяцев назад &lt;a href="https://blog.adoptopenjdk.net/2020/06/adoptopenjdk-to-join-the-eclipse-foundation/"&gt;было объявлено&lt;/a&gt;, что проект AdoptOpenJDK собирается присоединиться к Eclipse Foundation, а его имя будет изменено на Eclipse Adoptium.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+12&lt;/a&gt;, &lt;a href="https://jdk.java.net/lanai/"&gt;JDK 17-lanai+3-133&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-March/003171.html"&gt;JMH 1.28&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
