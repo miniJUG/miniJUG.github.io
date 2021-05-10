@@ -14,7 +14,7 @@
     <id>https://minijug.ru/java_news_17.html</id>
     <updated>2021-05-09T17:00:00Z</updated>
     <published>2021-05-09T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Самая главная новость этой недели &amp;ndash; выход &lt;a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-0-released/"&gt;Kotlin 1.5&lt;/a&gt;. Перечислим некоторые изменения и улучшения:&lt;/p&gt;
+    <content type="html">&lt;p&gt;&amp;bull; Самая главная новость этой недели &amp;ndash; выход &lt;a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-0-released/"&gt;Kotlin 1.5.0&lt;/a&gt;. Перечислим некоторые изменения и улучшения:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Появилась поддержка &lt;a href="https://openjdk.java.net/jeps/395"&gt;JVM-записей&lt;/a&gt; с помощью аннотации &lt;code&gt;@JvmRecord&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Модификатор &lt;code&gt;sealed&lt;/code&gt; теперь можно применять не только классам, но и к интерфейсам.&lt;/li&gt;
@@ -27,7 +27,7 @@
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="JEP 415: Context-Specific Deserialization Filters"&gt;JEP 415: Context-Specific Deserialization Filters&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/05/java-annotated-monthly-may-2021/"&gt;Java Annotated Montly за май 2021&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/05/java-annotated-monthly-may-2021/"&gt;Java Annotated Monthly за май 2021&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; В Java &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8266431"&gt;предложено&lt;/a&gt; улучшить алгоритм сортировки чисел. Тесты показывают, что прирост производительности составляет 50% в среднем и до 6 раз на больших случайных массивах. Огромный прирост в последнем случае достигается засчёт использования поразрядной сортировки.&lt;/p&gt;
 
