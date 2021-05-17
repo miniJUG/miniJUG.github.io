@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-05-10">
+    <meta property="article:published_time" content="2021-05-17">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,31 +31,34 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #17</h3>
-<p class="text-secondary"><time datetime="2021-05-10">10 мая, 2021</time></p>
+<h3 id="title">Новости Java #18</h3>
+<p class="text-secondary"><time datetime="2021-05-17">17 мая, 2021</time></p>
 <article>
-<p>&bull; Самая главная новость этой недели &ndash; выход <a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-0-released/">Kotlin 1.5.0</a>. Перечислим некоторые изменения и улучшения:</p>
+<p>&bull; Вышла <a href="https://scala-lang.org/blog/2021/05/14/scala3-is-here.html">Scala 3</a>. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач. Новый язык содержит в себе &laquo;последние исследования в теории типов, так же как и индустриальный опыт Scala 2&raquo;. Перечислим лишь некоторые изменения в новой версии:</p>
 <ul>
-  <li>Появилась поддержка <a href="https://openjdk.java.net/jeps/395">JVM-записей</a> с помощью аннотации <code class="text-nowrap">@JvmRecord</code>.</li>
-  <li>Модификатор <code class="text-nowrap">sealed</code> теперь можно применять не только классам, но и к интерфейсам.</li>
-  <li>Подклассы <code class="text-nowrap">sealed</code> классов теперь не обязаны объявляться в том же файле, а могут объявляться в любых файлах того же пакета.</li>
-  <li><a href="https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md"><code class="text-nowrap">inline value</code> классы</a>, которые появились в экспериментальном режиме в Kotlin 1.2.30, теперь стали стабильными.</li>
-  <li>Новый <a href="https://blog.jetbrains.com/kotlin/2021/02/the-jvm-backend-is-in-beta-let-s-make-it-stable-together/">IR (Intermediate Representation) компилятор</a> Kotlin в JVM стал стабильным и включенным по умолчанию.</li>
-  <li>SAM (Single Abstract Method) адаптеры теперь компилируются в <code class="text-nowrap">invokedynamic</code>. Для простых лямбд такая возможность тоже появилась, но только в экспериментальном режиме с включенной опцией <code class="text-nowrap">-Xlambdas=indy</code>.</li>
-  <li>Версия JVM target теперь 1.8 вместо 1.6.</li>
+  <li>Новый синтаксис <a href="https://dotty.epfl.ch/docs/reference/other-new-features/control-syntax.html">без фигурных скобок</a>. Индентация теперь имеет <a href="https://dotty.epfl.ch/docs/reference/other-new-features/indentation.html">строгие правила</a> и влияет на компиляцию.</li>
+  <li>Ключевое слово <code class="text-nowrap">new</code> теперь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/creator-applications.html">опционально</a>.</li>
+  <li>Implicit'ов больше нет, и теперь концепция разделена на несколько независимых частей, каждая из которых заточена под свои конкретные вещи: <a href="https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html">условия using</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/givens.html">given-инстансы</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">extension-методы</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/conversions.html">неявные конверсии</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/context-functions.html">контекстные функции</a>.</li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/enums/enums.html">Перечисления</a>.</li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Пересечения</a> и <a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">объеденения</a> типов.</li>
+  <li>Типы функций, <a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html">зависящие от параметров</a>.</li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/match-types.html">match-типы</a>.</li>
+  <li>trait'ы теперь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">могут иметь параметры</a>.</li>
+  <li>Классы, от которых можно наследоваться, теперь должны иметь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html">модификатор <code class="text-nowrap">open</code></a>.</li>
 </ul>
+<p>Подробный список новых возможностей и улучшений в Scala 3 можно найти <a href="https://docs.scala-lang.org/scala3/new-in-scala3.html">здесь</a>.</p>
 
-<p class="pt-2">&bull; Вышел новый <a href="JEP 415: Context-Specific Deserialization Filters">JEP 415: Context-Specific Deserialization Filters</a>.</p>
+<p class="pt-2">&bull; Вышел новый черновик <a href="http://openjdk.java.net/jeps/8266010">JEP: Reimplement Core Reflection on Method Handles</a>. В нём предлагается реализовать рефлексию в Java поверх method handles, тем самым избавившись от одной лишней реализации рефлективного механизма, которые дублируют друг друга. Это уменьшит затраты на поддержку и разработку API в пакетах <code class="text-nowrap">java.lang.reflect</code> и <code class="text-nowrap">java.lang.invoke</code>.</p>
 
-<p class="pt-2">&bull; Вышел выпуск <a href="https://blog.jetbrains.com/idea/2021/05/java-annotated-monthly-may-2021/">Java Annotated Monthly за май 2021</a>.</p>
+<p class="pt-2">&bull; На сайте OpenJDK впервые появились <a href="https://jdk.java.net/17/">сборки JDK под Apple M1</a>.</p>
 
-<p class="pt-2">&bull; В Java <a href="https://bugs.openjdk.java.net/browse/JDK-8266431">предложено</a> улучшить алгоритм сортировки чисел. Тесты показывают, что прирост производительности составляет 50% в среднем и до 6 раз на больших случайных массивах. Огромный прирост в последнем случае достигается засчёт использования поразрядной сортировки.</p>
+<p class="pt-2">&bull; JetBrains объявил <a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-online-event/">Kotlin Online Event</a> в честь выхода Kotlin 1.5. Он состоится 25 мая.</p>
 
-<p class="pt-2">&bull; В рассылке OpenJDK было предложено сделать <a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-May/001518.html"><code class="text-nowrap">java.lang.Object</code> абстрактным классом</a>. Это бы сделало согласованной модель, в которой примитивные классы могут наследоваться только от абстрактных классов без полей, но сломало бы обратную совместимость на уровне исходного кода. Но запретить вызывать <code class="text-nowrap">new Object()</code> можно поэтапно, сначала показывая предупреждение, а спустя несколько лет переквалифицировать в ошибку компиляции.</p>
+<p class="pt-2">&bull; Вышла <a href="https://github.com/scala/scala/releases/tag/v2.13.6">Scala 2.13.6</a>.</p>
 
-<p class="pt-2">&bull; Вышел бэкпорт-релиз <a href="https://docs.gradle.org/6.9/release-notes.html">Gradle 6.9</a>.</p>
+<p class="pt-2">&bull; Вышли <a href="https://spring.io/blog/2021/05/11/spring-framework-5-3-7-and-5-2-15-available-now">Spring Framework 5.3.7 и 5.2.15</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003237.html">JMH 1.30</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003286.html">JMH 1.31</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -63,6 +66,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_18.html" class="text-secondary">Новости Java #18</a></li>
 <li class="text-secondary"><a href="java_news_17.html" class="text-secondary">Новости Java #17</a></li>
 <li class="text-secondary"><a href="java_news_16.html" class="text-secondary">Новости Java #16</a></li>
 <li class="text-secondary"><a href="java_news_15.html" class="text-secondary">Новости Java #15</a></li>

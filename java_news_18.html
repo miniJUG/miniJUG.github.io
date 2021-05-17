@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java появится стандартный HTTP-клиент</title>
+    <title>Новости Java #18</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java появится стандартный HTTP-клиент">
-    <meta property="og:description" content="Недавно в свет вышел новый JEP 321, целью которого является стандартизация клиента для работы с HTTP в Java. Этот клиент уже присутствует в JDK 9, однако он находится в инкубированном модуле&hellip;">
+    <meta property="og:title" content="Новости Java #18">
+    <meta property="og:description" content="&bull; Вышла Scala 3. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2017-12-11">
+    <meta property="article:published_time" content="2021-05-17">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="В Java появится стандартный HTTP-клиент">
-    <meta name="twitter:description" content="Недавно в свет вышел новый JEP 321, целью которого является стандартизация клиента для работы с HTTP в Java. Этот клиент уже присутствует в JDK 9, однако он находится в инкубированном модуле&hellip;">
+    <meta name="twitter:title" content="Новости Java #18">
+    <meta name="twitter:description" content="&bull; Вышла Scala 3. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/http_client.png">
-    <meta property="og:image:width" content="873">
-    <meta property="og:image:height" content="442">
-    <meta name="twitter:image" content="https://minijug.ru/http_client.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_18.png">
+    <meta property="og:image:width" content="1269">
+    <meta property="og:image:height" content="664">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_18.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,33 +31,42 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java появится стандартный HTTP-клиент</h3>
-<p class="text-secondary"><time datetime="2017-12-11">11 декабря, 2017</time></p>
+<h3 id="title">Новости Java #18</h3>
+<p class="text-secondary"><time datetime="2021-05-17">17 мая, 2021</time></p>
 <article>
-<p>Недавно в свет вышел новый <a href="http://openjdk.java.net/jeps/321">JEP 321</a>, целью которого является стандартизация клиента для работы с HTTP в Java. Этот клиент уже присутствует в JDK 9, однако он находится в инкубированном модуле <code class="text-nowrap">jdk.incubator.httpclient</code>, т.е. имеет статус экспериментального API, который может измениться в будущем. Когда JEP будет реализован, инкубированный модуль будет перенесён в стандартный модуль <code class="text-nowrap">java.net.httpclient</code>, а сам инкубированный модуль будет удалён.</p>
-<p>Пример кода с использованием <code class="text-nowrap">HttpClient</code>:</p>
-<pre class="border p-lg-2 p-1">HttpClient client = HttpClient.newHttpClient();
+<p>&bull; Вышла <a href="https://scala-lang.org/blog/2021/05/14/scala3-is-here.html">Scala 3</a>. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач. Новый язык содержит в себе &laquo;последние исследования в теории типов, так же как и индустриальный опыт Scala 2&raquo;. Перечислим лишь некоторые изменения в новой версии:</p>
+<ul>
+  <li>Новый синтаксис <a href="https://dotty.epfl.ch/docs/reference/other-new-features/control-syntax.html">без фигурных скобок</a>. Индентация теперь имеет <a href="https://dotty.epfl.ch/docs/reference/other-new-features/indentation.html">строгие правила</a> и влияет на компиляцию.</li>
+  <li>Ключевое слово <code class="text-nowrap">new</code> теперь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/creator-applications.html">опционально</a>.</li>
+  <li>Implicit'ов больше нет, и теперь концепция разделена на несколько независимых частей, каждая из которых заточена под свои конкретные вещи: <a href="https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html">условия using</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/givens.html">given-инстансы</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">extension-методы</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/conversions.html">неявные конверсии</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/context-functions.html">контекстные функции</a>.</li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/enums/enums.html">Перечисления</a>.</li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Пересечения</a> и <a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">объеденения</a> типов.</li>
+  <li>Типы функций, <a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html">зависящие от параметров</a>.</li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/match-types.html">match-типы</a>.</li>
+  <li>trait'ы теперь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">могут иметь параметры</a>.</li>
+  <li>Классы, от которых можно наследоваться, теперь должны иметь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html">модификатор <code class="text-nowrap">open</code></a>.</li>
+</ul>
+<p>Подробный список новых возможностей и улучшений в Scala 3 можно найти <a href="https://docs.scala-lang.org/scala3/new-in-scala3.html">здесь</a>.</p>
 
-HttpRequest request = HttpRequest.newBuilder()
-    .uri(<span style="color: blue">new</span> URI(<span style="color: darkred">"http://example.org"</span>))
-    .GET()
-    .build();
+<p class="pt-2">&bull; Вышел новый черновик <a href="http://openjdk.java.net/jeps/8266010">JEP: Reimplement Core Reflection on Method Handles</a>. В нём предлагается реализовать рефлексию в Java поверх method handles, тем самым избавившись от одной лишней реализации рефлективного механизма, которые дублируют друг друга. Это уменьшит затраты на поддержку и разработку API в пакетах <code class="text-nowrap">java.lang.reflect</code> и <code class="text-nowrap">java.lang.invoke</code>.</p>
 
-HttpResponse&lt;String&gt; response = client.send(request,
-    HttpResponse.BodyHandlers.ofString());
+<p class="pt-2">&bull; На сайте OpenJDK впервые появились <a href="https://jdk.java.net/17/">сборки JDK под Apple M1</a>.</p>
 
-System.out.println(response.statusCode());
-System.out.println(response.body());</pre>
-<p>Новый HTTP-клиент начал разрабатываться <a href="http://openjdk.java.net/jeps/110">в 2014 году</a>, когда стало ясно, что устаревший класс <code class="text-nowrap">HttpURLConnection</code>, который появился ещё в JDK 1.1, более не отвечает современным требованиям: он неудобен в использовании, не поддерживает HTTP/2 и веб-сокеты, работает только в блокирующем режиме, а также его очень трудно поддерживать. Новый HTTP-клиент решает все эти проблемы и предоставляет более удобный и современный API. После введения в JDK 9 в качестве инкубированного модуля он был практически полностью переписан и значительно улучшен.</p>
-<p>В какой релиз попадёт новый стандартный HTTP-клиент, пока ещё неизвестно. В Java 10 он попасть не успеет, поэтому, скорее всего, попадёт в Java 11.</p>
+<p class="pt-2">&bull; JetBrains объявил <a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-online-event/">Kotlin Online Event</a> в честь выхода Kotlin 1.5. Он состоится 25 мая.</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://github.com/scala/scala/releases/tag/v2.13.6">Scala 2.13.6</a>.</p>
+
+<p class="pt-2">&bull; Вышли <a href="https://spring.io/blog/2021/05/11/spring-framework-5-3-7-and-5-2-15-available-now">Spring Framework 5.3.7 и 5.2.15</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003286.html">JMH 1.31</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_18.html" class="text-secondary">Новости Java #18</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #18</li>
 <li class="text-secondary"><a href="java_news_17.html" class="text-secondary">Новости Java #17</a></li>
 <li class="text-secondary"><a href="java_news_16.html" class="text-secondary">Новости Java #16</a></li>
 <li class="text-secondary"><a href="java_news_15.html" class="text-secondary">Новости Java #15</a></li>
@@ -127,10 +136,10 @@ System.out.println(response.body());</pre>
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="true" aria-controls="year2017">2017</a>
-  <ul class="collapse show" id="year2017">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
-<li>В Java появится стандартный HTTP-клиент</li>
+<li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
 <li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
 <li class="text-secondary"><a href="remove_java_ee_and_corba_modules.html" class="text-secondary">Модули Java EE и CORBA исчезнут из Java</a></li>
 <li class="text-secondary"><a href="kotlin_1_2_is_out.html" class="text-secondary">Вышел Kotlin 1.2</a></li>

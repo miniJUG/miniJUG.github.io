@@ -4,7 +4,42 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-05-09T17:00:00Z</updated>
+  <updated>2021-05-16T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #18</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_18.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_18.html</id>
+    <updated>2021-05-16T17:00:00Z</updated>
+    <published>2021-05-16T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышла &lt;a href="https://scala-lang.org/blog/2021/05/14/scala3-is-here.html"&gt;Scala 3&lt;/a&gt;. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач. Новый язык содержит в себе &amp;laquo;последние исследования в теории типов, так же как и индустриальный опыт Scala 2&amp;raquo;. Перечислим лишь некоторые изменения в новой версии:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Новый синтаксис &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/control-syntax.html"&gt;без фигурных скобок&lt;/a&gt;. Индентация теперь имеет &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/indentation.html"&gt;строгие правила&lt;/a&gt; и влияет на компиляцию.&lt;/li&gt;
+  &lt;li&gt;Ключевое слово &lt;code&gt;new&lt;/code&gt; теперь &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/creator-applications.html"&gt;опционально&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Implicit'ов больше нет, и теперь концепция разделена на несколько независимых частей, каждая из которых заточена под свои конкретные вещи: &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html"&gt;условия using&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/givens.html"&gt;given-инстансы&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html"&gt;extension-методы&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/conversions.html"&gt;неявные конверсии&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/context-functions.html"&gt;контекстные функции&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://dotty.epfl.ch/docs/reference/enums/enums.html"&gt;Перечисления&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html"&gt;Пересечения&lt;/a&gt; и &lt;a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html"&gt;объеденения&lt;/a&gt; типов.&lt;/li&gt;
+  &lt;li&gt;Типы функций, &lt;a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html"&gt;зависящие от параметров&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://dotty.epfl.ch/docs/reference/new-types/match-types.html"&gt;match-типы&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;trait'ы теперь &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html"&gt;могут иметь параметры&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Классы, от которых можно наследоваться, теперь должны иметь &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html"&gt;модификатор &lt;code&gt;open&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Подробный список новых возможностей и улучшений в Scala 3 можно найти &lt;a href="https://docs.scala-lang.org/scala3/new-in-scala3.html"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый черновик &lt;a href="http://openjdk.java.net/jeps/8266010"&gt;JEP: Reimplement Core Reflection on Method Handles&lt;/a&gt;. В нём предлагается реализовать рефлексию в Java поверх method handles, тем самым избавившись от одной лишней реализации рефлективного механизма, которые дублируют друг друга. Это уменьшит затраты на поддержку и разработку API в пакетах &lt;code&gt;java.lang.reflect&lt;/code&gt; и &lt;code&gt;java.lang.invoke&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; На сайте OpenJDK впервые появились &lt;a href="https://jdk.java.net/17/"&gt;сборки JDK под Apple M1&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; JetBrains объявил &lt;a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-online-event/"&gt;Kotlin Online Event&lt;/a&gt; в честь выхода Kotlin 1.5. Он состоится 25 мая.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://github.com/scala/scala/releases/tag/v2.13.6"&gt;Scala 2.13.6&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышли &lt;a href="https://spring.io/blog/2021/05/11/spring-framework-5-3-7-and-5-2-15-available-now"&gt;Spring Framework 5.3.7 и 5.2.15&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003286.html"&gt;JMH 1.31&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #17</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_17.html" />
@@ -1171,38 +1206,5 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
 &lt;p&gt;Также сейчас &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-February/004934.html"&gt;обсуждается&lt;/a&gt; переход на Git более старых версий JDK: &lt;a href="https://wiki.openjdk.java.net/display/JDKUpdates/JDK11u"&gt;jdk11u&lt;/a&gt; и, возможно, &lt;a href="https://wiki.openjdk.java.net/display/jdk8u/Main"&gt;jdk8u&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;Java 16 является STS-релизом, у которого выйдет только два обновления.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #10</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_10.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_10.html</id>
-    <updated>2021-03-13T17:00:00Z</updated>
-    <published>2021-03-13T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; В рассылке OpenJDK &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002895.html"&gt;продолжается обсуждение&lt;/a&gt; того, как должны выглядеть условия в &lt;a href="http://openjdk.java.net/jeps/8213076"&gt;паттернах&lt;/a&gt;, и, похоже, группа экспертов уже близка к единому мнению. Условия, скорее всего, будут отделяться от паттернов оператором &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s &amp;&amp; (s.length() == 1) -&gt; ...
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; ...
-}&lt;/pre&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Брайан Гетц предвидит, что в Java когда-нибудь могут появиться паттерны в присваивании, поэтому уже сейчас начинает &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-March/002916.html"&gt;обсуждать&lt;/a&gt; эту тему в рассылке.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышло два новых JEP:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://openjdk.java.net/jeps/399"&gt;JEP 399: Intermediate-Representation Graph Serialization&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://openjdk.java.net/jeps/400"&gt;JEP 400: UTF-8 by Default&lt;/a&gt;. В этом JEP'е предлагается сделать UTF-8 кодировкой по умолчанию для таких API как &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/FileReader.html"&gt;FileReader&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/FileWriter.html"&gt;FileWriter&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/InputStreamReader.html"&gt;InputStreamReader&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/OutputStreamWriter.html"&gt;OutputStreamWriter&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Formatter.html"&gt;Formatter&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Scanner.html"&gt;Scanner&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/URLEncoder.html"&gt;URLEncoder&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/URLDecoder.html"&gt;URLDeconder&lt;/a&gt; и т.д. Сейчас кодировка по умолчанию определяется во время старта JVM и может зависеть от различных факторов, таких как операционная система, пользовательская локаль и значения некоторых свойств виртуальной машины. Когда этот JEP будет реализован, UTF-8 станет кодировкой по умолчанию для всех JDK, что сделает приложения на Java более портируемыми.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Роман Кеннке, лидер проекта Shenandoah в RedHat, предложил в рассылке &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html"&gt;новый проект Lilliput&lt;/a&gt;, целью которого будет уменьшение размера заголовка объекта в Hotspot до 64/32 бит и более гибкая схема размещения битов в нём. Сейчас заголовок каждого объекта в 64-разрядном Hotspot имеет размер от 96 до 128 бит, и такое сжатие могло бы существенно снизить нагрузку на память и/или CPU в Java-приложениях.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Компания JetBrains выпустила первую версию своего &lt;a href="https://blog.jetbrains.com/blog/2021/03/11/projector-is-out/"&gt;нового инструмента Projector&lt;/a&gt;, который позволяет запускать IDE от JetBrains или Swing-приложения на сервере и управлять ими откуда угодно с помощью браузера или нативного приложения.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://netbeans.apache.org/download/nb123/nb123.html"&gt;Apache NetBeans 12.3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышла версия 1.0 библиотеки &lt;a href="https://in.relation.to/2021/03/08/hibernate-reactive-1/"&gt;Hibernate Reactive&lt;/a&gt;, которая предоставляет реактивное API к Hibernate ORM.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://openjfx.io/highlights/16/"&gt;JavaFX 16&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+13-1000&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+4-174&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
