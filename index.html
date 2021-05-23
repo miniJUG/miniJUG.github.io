@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-05-17">
+    <meta property="article:published_time" content="2021-05-23">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,34 +31,47 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #18</h3>
-<p class="text-secondary"><time datetime="2021-05-17">17 мая, 2021</time></p>
+<h3 id="title">Новости Java #19</h3>
+<p class="text-secondary"><time datetime="2021-05-23">23 мая, 2021</time></p>
 <article>
-<p>&bull; Вышла <a href="https://scala-lang.org/blog/2021/05/14/scala3-is-here.html">Scala 3</a>. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач. Новый язык содержит в себе &laquo;последние исследования в теории типов, так же как и индустриальный опыт Scala 2&raquo;. Перечислим лишь некоторые изменения в новой версии:</p>
+<p>&bull; Языку Java исполнилось 26 лет. 23 мая 1995 года компания Sun Microsystems впервые официально представила платформу Java, имевшую версию 1.0a2.</p>
+<p>В честь дня рождения будет проведён онлайн-марафон <a href="https://nipafx.dev/26h-java/">"26 Hours of Java"</a>.</p>
+
+<p class="pt-2">&bull; Разработка <a href="http://openjdk.java.net/projects/jdk/17/">Java 17</a> идёт полным ходом, и количество JEP'ов в этом релизе прибавилось сразу на семь штук.</p>
+<p>Запланированы:</p>
 <ul>
-  <li>Новый синтаксис <a href="https://dotty.epfl.ch/docs/reference/other-new-features/control-syntax.html">без фигурных скобок</a>. Индентация теперь имеет <a href="https://dotty.epfl.ch/docs/reference/other-new-features/indentation.html">строгие правила</a> и влияет на компиляцию.</li>
-  <li>Ключевое слово <code class="text-nowrap">new</code> теперь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/creator-applications.html">опционально</a>.</li>
-  <li>Implicit'ов больше нет, и теперь концепция разделена на несколько независимых частей, каждая из которых заточена под свои конкретные вещи: <a href="https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html">условия using</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/givens.html">given-инстансы</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">extension-методы</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/conversions.html">неявные конверсии</a>, <a href="https://dotty.epfl.ch/docs/reference/contextual/context-functions.html">контекстные функции</a>.</li>
-  <li><a href="https://dotty.epfl.ch/docs/reference/enums/enums.html">Перечисления</a>.</li>
-  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Пересечения</a> и <a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">объеденения</a> типов.</li>
-  <li>Типы функций, <a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html">зависящие от параметров</a>.</li>
-  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/match-types.html">match-типы</a>.</li>
-  <li>trait'ы теперь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">могут иметь параметры</a>.</li>
-  <li>Классы, от которых можно наследоваться, теперь должны иметь <a href="https://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html">модификатор <code class="text-nowrap">open</code></a>.</li>
+  <li><a href="https://openjdk.java.net/jeps/412">JEP 412: Foreign Function & Memory API (Incubator)</a></li>
+  <li><a href="https://openjdk.java.net/jeps/414">JEP 414: Vector API (Second Incubator)</a></li>
 </ul>
-<p>Подробный список новых возможностей и улучшений в Scala 3 можно найти <a href="https://docs.scala-lang.org/scala3/new-in-scala3.html">здесь</a>.</p>
+<p>Предложены:</p>
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/306">JEP 306: Restore Always-Strict Floating-Point Semantics</a></li>
+  <li><a href="https://openjdk.java.net/jeps/403">JEP 403: Strongly Encapsulate JDK Internals</a></li>
+  <li><a href="https://openjdk.java.net/jeps/406">JEP 406: Pattern Matching for switch (Preview)</a></li>
+  <li><a href="https://openjdk.java.net/jeps/407">JEP 407: Remove RMI Activation</a></li>
+  <li><a href="https://openjdk.java.net/jeps/411">JEP 411: Deprecate the Security Manager for Removal</a></li>
+</ul>
 
-<p class="pt-2">&bull; Вышел новый черновик <a href="http://openjdk.java.net/jeps/8266010">JEP: Reimplement Core Reflection on Method Handles</a>. В нём предлагается реализовать рефлексию в Java поверх method handles, тем самым избавившись от одной лишней реализации рефлективного механизма, которые дублируют друг друга. Это уменьшит затраты на поддержку и разработку API в пакетах <code class="text-nowrap">java.lang.reflect</code> и <code class="text-nowrap">java.lang.invoke</code>.</p>
+<p class="pt-2">&bull; Брайан Гетц написал <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-May/002996.html">письмо в рассылку OpenJDK</a>, где он описал прогресс, которого в итоге удалось достигнуть в расширении возможностей оператора <code class="text-nowrap">switch</code>. Он рассказал, каким образом удалось решить проблемы с тотальностью, проваливанием (fallthrough), областями видимости и <code class="text-nowrap">null</code>.</p>
 
-<p class="pt-2">&bull; На сайте OpenJDK впервые появились <a href="https://jdk.java.net/17/">сборки JDK под Apple M1</a>.</p>
+<p class="pt-2">&bull; Вышли новые ранние сборки JDK: <a href="https://jdk.java.net/17/">JDK 17-ea+23</a>, <a href="https://jdk.java.net/panama/">JDK 17-panama+3</a>.</p>
 
-<p class="pt-2">&bull; JetBrains объявил <a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-online-event/">Kotlin Online Event</a> в честь выхода Kotlin 1.5. Он состоится 25 мая.</p>
+<p class="pt-2">&bull; Ещё один день рождения празднует <a href="https://en.wikipedia.org/wiki/Hibernate_(framework)">Hibernate</a>. Его первая версия вышла ровно 20 лет назад, 23 мая 2001 года.</p>
 
-<p class="pt-2">&bull; Вышла <a href="https://github.com/scala/scala/releases/tag/v2.13.6">Scala 2.13.6</a>.</p>
+<p class="pt-2">&bull; Вышли новые версии Spring:</p>
+<ul>
+  <li><a href="https://spring.io/blog/2021/05/20/spring-boot-2-5-is-now-ga">Spring Boot 2.5</a></li>
+  <li><a href="https://spring.io/blog/2021/05/18/spring-security-5-5-goes-ga">Spring Security 5.5</a></li>
+  <li><a href="https://spring.io/blog/2021/05/19/spring-integration-5-5-goes-ga">Spring Integration 5.5 и 5.4.7</a></li>
+  <li><a href="https://spring.io/blog/2021/05/19/spring-batch-4-2-7-and-4-3-3-are-out">Spring Batch 4.2.7 и 4.3.3</a></li>
+  <li><a href="https://spring.io/blog/2021/05/17/spring-amqp-2-2-17-releae-2-3-7-available">Spring AMQP 2.2.17 и 2.3.7</a></li>
+  <li><a href="https://spring.io/blog/2021/05/14/spring-ldap-2-3-4-released">Spring LDAP 2.3.4</a></li>
+  <li><a href="https://spring.io/blog/2021/05/14/spring-data-2021-0-1-and-2020-0-9-released">Spring Data 2021.0.1 and 2020.0.9</a></li>
+</ul>
 
-<p class="pt-2">&bull; Вышли <a href="https://spring.io/blog/2021/05/11/spring-framework-5-3-7-and-5-2-15-available-now">Spring Framework 5.3.7 и 5.2.15</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://spockframework.org/spock/docs/2.0/release_notes.html">Spock 2.0</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003286.html">JMH 1.31</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jol-dev/2021-May/000369.html">JOL 0.16</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -66,6 +79,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_19.html" class="text-secondary">Новости Java #19</a></li>
 <li class="text-secondary"><a href="java_news_18.html" class="text-secondary">Новости Java #18</a></li>
 <li class="text-secondary"><a href="java_news_17.html" class="text-secondary">Новости Java #17</a></li>
 <li class="text-secondary"><a href="java_news_16.html" class="text-secondary">Новости Java #16</a></li>

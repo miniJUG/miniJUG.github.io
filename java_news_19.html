@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Модули Java EE и CORBA исчезнут из Java</title>
+    <title>Новости Java #19</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Модули Java EE и CORBA исчезнут из Java">
-    <meta property="og:description" content="Модули Java EE и CORBA, объявлённые в Java 9 как deprecated, теперь окончательно уберут в одном из следующих релизов. Об этом информирует JEP 320, который недавно появился на сайте OpenJDK&hellip;">
+    <meta property="og:title" content="Новости Java #19">
+    <meta property="og:description" content="&bull; Языку Java исполнилось 26 лет. 23 мая 1995 года компания Sun Microsystems впервые официально представила платформу Java, имевшую версию 1.0a2&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2017-12-02">
+    <meta property="article:published_time" content="2021-05-23">
     <meta property="article:author" content="Zheka Kozlov">
     <meta property="article:author_url" content="https://twitter.com/ZhekaKozlov">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@ZhekaKozlov">
-    <meta name="twitter:title" content="Модули Java EE и CORBA исчезнут из Java">
-    <meta name="twitter:description" content="Модули Java EE и CORBA, объявлённые в Java 9 как deprecated, теперь окончательно уберут в одном из следующих релизов. Об этом информирует JEP 320, который недавно появился на сайте OpenJDK&hellip;">
+    <meta name="twitter:title" content="Новости Java #19">
+    <meta name="twitter:description" content="&bull; Языку Java исполнилось 26 лет. 23 мая 1995 года компания Sun Microsystems впервые официально представила платформу Java, имевшую версию 1.0a2&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/remove_java_ee_and_corba_modules.png">
-    <meta property="og:image:width" content="1086">
-    <meta property="og:image:height" content="1280">
-    <meta name="twitter:image" content="https://minijug.ru/remove_java_ee_and_corba_modules.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_19.png">
+    <meta property="og:image:width" content="1269">
+    <meta property="og:image:height" content="664">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_19.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,22 +31,55 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Модули Java EE и CORBA исчезнут из Java</h3>
-<p class="text-secondary"><time datetime="2017-12-02">2 декабря, 2017</time></p>
+<h3 id="title">Новости Java #19</h3>
+<p class="text-secondary"><time datetime="2021-05-23">23 мая, 2021</time></p>
 <article>
-<p>Модули Java EE и CORBA, объявлённые в Java 9 как deprecated, теперь окончательно уберут в одном из следующих релизов. Об этом информирует <a href="http://openjdk.java.net/jeps/320">JEP 320</a>, который недавно появился на сайте OpenJDK.</p>
-<p>Поддержка <a href="https://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture">CORBA</a> (Common Object Request Broker Architecture) появилась в Java ещё в далёком 1998 году. Сейчас эта технология устарела и не представляет большого интереса для современных приложений. Теперь, когда Java модуляризована и CORBA помечена как <a href="https://docs.oracle.com/javase/9/docs/api/java.corba-summary.html">deprecated(forRemoval=true)</a>, разработчики платформы могут с чистой совестью убрать этот модуль в одной из следующих версий.</p>
-<p>Поддержка некоторых возможностей Java EE появилась в Java SE 6. В первую очередь, это было сделано для упрощения разработки веб-сервисов. Тогда это оказалось очень удобным, ведь из коробки в Java SE сразу были такие технологии как <a href="https://docs.oracle.com/javase/9/docs/api/java.xml.ws-summary.html">JAX-WS</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java.xml.bind-summary.html">JAXB</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java.activation-summary.html">JAF</a> и <a href="https://docs.oracle.com/javase/9/docs/api/java.xml.ws.annotation-summary.html">Commons Annotations</a>. Однако со временем Java EE стала развиваться всё более стремительно, и разработчикам OpenJDK стало труднее поддерживать синхронизацию версий Java SE и Java EE. Кроме того, в Java постоянно был некий хаос с переопределением встроенных Java EE модулей внешними (автономными) Java EE модулями. В конце концов, разработчики OpenJDK пришли к выводу, что Java EE лучше полностью убрать из Java SE, а пользователям посоветовали полностью переключиться на использование альтернативных Java EE модулей, которые можно скачать с Maven-репозитория. Чтобы такой переход был не сильно болезненным, в Java 9 ввели технику обновляемых модулей (upgradeable modules).</p>
-<p>Также исчезнет модуль <a href="https://docs.oracle.com/javase/9/docs/api/java.transaction-summary.html">JTA</a> (Java Transaction API), который появился в J2SE 1.3. Замену JTA 1.3 в Maven обещают сделать в начале 2018 года.</p>
-<p>Полный список модулей и инструментов, которые будут удалены, можно посмотреть на странице JEP’а.</p>
+<p>&bull; Языку Java исполнилось 26 лет. 23 мая 1995 года компания Sun Microsystems впервые официально представила платформу Java, имевшую версию 1.0a2.</p>
+<p>В честь дня рождения будет проведён онлайн-марафон <a href="https://nipafx.dev/26h-java/">"26 Hours of Java"</a>.</p>
+
+<p class="pt-2">&bull; Разработка <a href="http://openjdk.java.net/projects/jdk/17/">Java 17</a> идёт полным ходом, и количество JEP'ов в этом релизе прибавилось сразу на семь штук.</p>
+<p>Запланированы:</p>
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/412">JEP 412: Foreign Function & Memory API (Incubator)</a></li>
+  <li><a href="https://openjdk.java.net/jeps/414">JEP 414: Vector API (Second Incubator)</a></li>
+</ul>
+<p>Предложены:</p>
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/306">JEP 306: Restore Always-Strict Floating-Point Semantics</a></li>
+  <li><a href="https://openjdk.java.net/jeps/403">JEP 403: Strongly Encapsulate JDK Internals</a></li>
+  <li><a href="https://openjdk.java.net/jeps/406">JEP 406: Pattern Matching for switch (Preview)</a></li>
+  <li><a href="https://openjdk.java.net/jeps/407">JEP 407: Remove RMI Activation</a></li>
+  <li><a href="https://openjdk.java.net/jeps/411">JEP 411: Deprecate the Security Manager for Removal</a></li>
+</ul>
+
+<p class="pt-2">&bull; Брайан Гетц написал <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-May/002996.html">письмо в рассылку OpenJDK</a>, где он описал прогресс, которого в итоге удалось достигнуть в расширении возможностей оператора <code class="text-nowrap">switch</code>. Он рассказал, каким образом удалось решить проблемы с тотальностью, проваливанием (fallthrough), областями видимости и <code class="text-nowrap">null</code>.</p>
+
+<p class="pt-2">&bull; Вышли новые ранние сборки JDK: <a href="https://jdk.java.net/17/">JDK 17-ea+23</a>, <a href="https://jdk.java.net/panama/">JDK 17-panama+3</a>.</p>
+
+<p class="pt-2">&bull; Ещё один день рождения празднует <a href="https://en.wikipedia.org/wiki/Hibernate_(framework)">Hibernate</a>. Его первая версия вышла ровно 20 лет назад, 23 мая 2001 года.</p>
+
+<p class="pt-2">&bull; Вышли новые версии Spring:</p>
+<ul>
+  <li><a href="https://spring.io/blog/2021/05/20/spring-boot-2-5-is-now-ga">Spring Boot 2.5</a></li>
+  <li><a href="https://spring.io/blog/2021/05/18/spring-security-5-5-goes-ga">Spring Security 5.5</a></li>
+  <li><a href="https://spring.io/blog/2021/05/19/spring-integration-5-5-goes-ga">Spring Integration 5.5 и 5.4.7</a></li>
+  <li><a href="https://spring.io/blog/2021/05/19/spring-batch-4-2-7-and-4-3-3-are-out">Spring Batch 4.2.7 и 4.3.3</a></li>
+  <li><a href="https://spring.io/blog/2021/05/17/spring-amqp-2-2-17-releae-2-3-7-available">Spring AMQP 2.2.17 и 2.3.7</a></li>
+  <li><a href="https://spring.io/blog/2021/05/14/spring-ldap-2-3-4-released">Spring LDAP 2.3.4</a></li>
+  <li><a href="https://spring.io/blog/2021/05/14/spring-data-2021-0-1-and-2020-0-9-released">Spring Data 2021.0.1 and 2020.0.9</a></li>
+</ul>
+
+<p class="pt-2">&bull; Вышел <a href="https://spockframework.org/spock/docs/2.0/release_notes.html">Spock 2.0</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jol-dev/2021-May/000369.html">JOL 0.16</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_19.html" class="text-secondary">Новости Java #19</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #19</li>
 <li class="text-secondary"><a href="java_news_18.html" class="text-secondary">Новости Java #18</a></li>
 <li class="text-secondary"><a href="java_news_17.html" class="text-secondary">Новости Java #17</a></li>
 <li class="text-secondary"><a href="java_news_16.html" class="text-secondary">Новости Java #16</a></li>
@@ -117,12 +150,12 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="true" aria-controls="year2017">2017</a>
-  <ul class="collapse show" id="year2017">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
 <li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
-<li>Модули Java EE и CORBA исчезнут из Java</li>
+<li class="text-secondary"><a href="remove_java_ee_and_corba_modules.html" class="text-secondary">Модули Java EE и CORBA исчезнут из Java</a></li>
 <li class="text-secondary"><a href="kotlin_1_2_is_out.html" class="text-secondary">Вышел Kotlin 1.2</a></li>
 <li class="text-secondary"><a href="epsilon_gc.html" class="text-secondary">В Java появится сборщик мусора, который не будет собирать мусор</a></li>
 <li class="text-secondary"><a href="java_10_release_date.html" class="text-secondary">Стала известна дата выхода Java 10</a></li>
