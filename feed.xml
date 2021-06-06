@@ -4,7 +4,45 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-05-22T17:00:00Z</updated>
+  <updated>2021-06-05T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #20</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_20.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_20.html</id>
+    <updated>2021-06-05T17:00:00Z</updated>
+    <published>2021-06-05T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Началась разработка Java 18. В репозитории GitHub &lt;a href="https://github.com/openjdk/jdk/pull/4175/commits"&gt;появился пулл-реквест&lt;/a&gt; со стандартными процедурами, которые проводятся при старте нового релиза: добавление новых констант с версиями, таблиц символов, заголовков в файлах и т.д. Новая версия формата class-файлов будет равна 62.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый черновик JEP, связанный с проектом &lt;a href="https://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/401"&gt;примитивными объектами&lt;/a&gt;: &lt;a href="http://openjdk.java.net/jeps/8267650"&gt;Better-defined JVM class file validation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В &lt;a href="https://openjdk.java.net/jeps/411"&gt;JEP 411: Deprecate the Security Manager for Removal&lt;/a&gt; были внесены &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-May/005616.html"&gt;важные изменения&lt;/a&gt;. Значение свойства &lt;code&gt;java.security.manager&lt;/code&gt; всё-таки предлагается по умолчанию оставить равным &lt;code&gt;allow&lt;/code&gt;, а не &lt;code&gt;disallow&lt;/code&gt;, что означает, что при вызове &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"&gt;&lt;code&gt;System.setSecurityManager()&lt;/code&gt;&lt;/a&gt; будет выводиться предупреждение в консоль, а не выбрасываться &lt;code&gt;UnsupportedOperationException&lt;/code&gt;. Таким образом, приложения, которые используют &lt;code&gt;setSecurityManager()&lt;/code&gt;, будут продолжать работать на Java 17 без изменений, что &lt;a href="https://blogs.apache.org/netbeans/entry/jep-411-deprecate-the-security1"&gt;облегчит&lt;/a&gt; их миграцию.&lt;/p&gt;
+&lt;p&gt;Однако значение свойства &lt;code&gt;java.security.manager&lt;/code&gt; всё-таки станет равным &lt;code&gt;disallow&lt;/code&gt;, но это произойдёт в Java 18.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK продолжается обсуждение темы &lt;a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-June/001533.html"&gt;абстрактности класса Object&lt;/a&gt;. На данный момент предлагается следующее:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Будет введён новый метод &lt;code&gt;IdentityObject::newIdentity&lt;/code&gt; (Б.Гетц предлагает &lt;code&gt;Objects::newIdentity&lt;/code&gt;), который будет возвращать объект некоторого внутреннего класса, реализующего интерфейс &lt;code&gt;IdentityObject&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;JVM будет заменять вызовы &lt;code&gt;new Object()&lt;/code&gt; на создание объекта, реализующего &lt;code&gt;IdentityObject&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;javac будет заменять вызовы &lt;code&gt;new Object()&lt;/code&gt; на &lt;code&gt;IdentityObject.newIdentity()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Такая стратегия позволит постепенно перейти от возможности вызова &lt;code&gt;new Object()&lt;/code&gt; до его полного запрета в будущем.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Программисты из Amazon предлагают порассуждать о возможности &lt;a href="https://mail.openjdk.java.net/pipermail/hotspot-compiler-dev/2021-May/047486.html"&gt;реализации Partial Escape Analysis&lt;/a&gt; в Hotspot.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://jakarta.ee/news/jakarta-ee-9-1-released/"&gt;Jakarta EE 9.1&lt;/a&gt; с поддержкой Java 11. Также вышел &lt;a href="https://github.com/eclipse-ee4j/glassfish/releases/tag/6.1.0"&gt;Eclipse GlassFish 6.1.0&lt;/a&gt;, который соответствует спецификации Jakarta EE 9.1.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2021/06/02/hibernate-orm-550-final-release/"&gt;Hibernate 5.5.0.Final&lt;/a&gt;. Вместе с обычными артефактами в пространстве имён &lt;code&gt;javax&lt;/code&gt; теперь появились аналогичные артефакты в пространстве имён &lt;code&gt;jakarta&lt;/code&gt;. Например, у Hibernate Core есть две версии: &lt;a href="https://search.maven.org/artifact/org.hibernate/hibernate-core/5.5.0.Final/jar"&gt;hibernate-core&lt;/a&gt; и &lt;a href="https://search.maven.org/artifact/org.hibernate/hibernate-core-jakarta/5.5.0.Final/jar"&gt;hibernate-core-jakarta&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+25&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+7&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://netbeans.apache.org/download/nb124/nb124.html"&gt;NetBeans 12.4&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/06/intellij-idea-2021-1-2/"&gt;IntelliJ IDEA 2021.1.2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003307.html"&gt;JMH 1.32&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #19</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_19.html" />
@@ -1089,39 +1127,5 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://newsroom.eclipse.org/news/announcements/eclipse-foundation%E2%80%99s-eclipse-jetty-project-prepares-future-jetty-11-release"&gt;Eclipse Jetty 11&lt;/a&gt; (а точнее 11.0.2).&lt;/p&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-March/003218.html"&gt;JMH 1.29&lt;/a&gt;.&lt;/p&gt;
 &lt;p class="pr-2"&gt;&amp;bull; Вышла статья &lt;a href="https://malloc.se/blog/zgc-jdk16"&gt;ZGC | What's new in JDK 16&lt;/a&gt;. В ней утверждается, что в JDK 16 удалось снизить максимальные паузы с 10мс до 1мс.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #11</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_11.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_11.html</id>
-    <updated>2021-03-20T17:00:00Z</updated>
-    <published>2021-03-20T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Главная новость этой недели &amp;ndash; это, конечно же, выход Java 16. Про неё мы подробно написали в &lt;a href="java_16.html"&gt;этой статье&lt;/a&gt;. В течение небольшого промежутка времени после выхода большинство поставщиков выкатили свои сборки OpenJDK 16: &lt;a href="https://sap.github.io/SapMachine/"&gt;SapMachine&lt;/a&gt;, &lt;a href="https://aws.amazon.com/ru/about-aws/whats-new/2021/03/announcing-general-availability-amazon-corretto-16/"&gt;Amazon Corretto&lt;/a&gt;, &lt;a href="https://www.azul.com/downloads/zulu-community/?version=java-16&amp;package=jdk"&gt;Azul Zulu&lt;/a&gt;, &lt;a href="https://blog.adoptopenjdk.net/2021/03/adoptopenjdk-16-available/"&gt;AdoptOpenJDK&lt;/a&gt; (в т.ч. OpenJ9), &lt;a href="https://bell-sw.com/announcements/2021/03/19/JDK-16-Release/"&gt;Liberica JDK&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Сразу позле выхода Java 16 вышло 4 новых JEP. Это &lt;a href="http://openjdk.java.net/jeps/401"&gt;JEP 401: Primitive Objects (Preview)&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/402"&gt;JEP 402: Unify the Basic Primitives with Objects (Preview)&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/403"&gt;JEP 403: Strongly Encapsulate JDK Internals&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/404"&gt;JEP 404: Generational Shenandoah&lt;/a&gt;. Про все JEP кроме третьего мы уже писали в предыдущих выпусках, когда они ещё были черновиками.&lt;/p&gt;
-&lt;p&gt;В JEP 403 предлагается сделать опцию &lt;code&gt;--illegal-access&lt;/code&gt; недействующей. В Java 9-16 эта опция позволяет глобально открыть все внутренности JDK без перечисления конкретных пакетов (в Java 16 её значение &lt;a href="http://openjdk.java.net/jeps/396"&gt;стало&lt;/a&gt; по умолчанию &lt;code&gt;deny&lt;/code&gt;). Если JEP будет реализован, то &lt;code&gt;--illegal-access=permit/warn/debug&lt;/code&gt; не будет иметь эффекта, и для открытия пакетов придётся использовать опцию &lt;code&gt;--add-opens&lt;/code&gt;. Также в будущем планируется удалить &lt;code&gt;--illegal-access&lt;/code&gt; окончательно.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Ещё два JEP были предложены к попаданию в Java 17. Это &lt;a href="https://openjdk.java.net/jeps/391"&gt;JEP 391: macOS/AArch64 Port&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/398"&gt;JEP 398: Deprecate the Applet API for Removal&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Роман Кеннке, который на прошлой неделе предложил &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-March/005720.html"&gt;проект Lilliput&lt;/a&gt;, запустил &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-March/000296.html"&gt;официальное голосование&lt;/a&gt; по созданию проекта. На текущий момент проголосовало 26 членов OpenJDK, и все они проголосовали за создание проекта.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=OGGALLHnH-c"&gt;Eclipse 2021-03&lt;/a&gt;. В нём появилось параллельное построение индекса поиска, неблокирующее автодополнение, 16 новых Clean Up действий, quick fix для инициализации переменной в &lt;code&gt;try-with-resources&lt;/code&gt;, улучшенная поддержка &lt;code&gt;sealed&lt;/code&gt; классов и многое другое.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел баг-фикс релиз &lt;a href="https://blog.jetbrains.com/idea/2021/03/intellij-idea-2020-3-3/"&gt;IntelliJ IDEA 2020.3.3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://github.com/jvm-profiling-tools/async-profiler/releases/tag/v2.0"&gt;Async Profiler 2.0&lt;/a&gt;. Также &lt;a href="https://www.youtube.com/watch?v=TDpbt4thECc"&gt;вышло видео&lt;/a&gt;, где Андрей Паньгин демонстрирует работу Async Profiler в IntelliJ IDEA.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://inside.java/2021/03/16/jmc-8-released/"&gt;JDK Misson Control 8.0.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/03/16/spring-framework-5-3-5-available-now"&gt;Spring Framefork 5.3.5&lt;/a&gt; с поддержкой Java 16.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышла статья &lt;a href="https://seanjmullan.org/blog/2021/03/18/jdk16"&gt;JDK 16 Security Enhancements&lt;/a&gt;, где рассказано какие изменения в криптографии, PKI, TLS, Signed JARs были сделаны в Java 16.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышла &lt;a href="https://github.com/google/guava/releases/tag/v30.1.1"&gt;Guava 30.1.1&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+13&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+5&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
