@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Вышла Java 12</title>
+    <title>Новости Java #21</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Вышла Java 12">
-    <meta property="og:description" content="Вышла новая, двенадцатая версия платформы Java. Как и в случае с Java 11, на сайте Oracle доступен для скачки только JDK и только для некоммерческого использования. Также доступны для скачки архивы&hellip;">
+    <meta property="og:title" content="Новости Java #21">
+    <meta property="og:description" content="&bull; JDK 17 перешёл в первую фазу Rampdown. Это значит, что JDK 17 форкнут в отдельный стабилизационный репозиторий, и в релиз больше не будут приниматься никакие новые JEP'ы&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2019-03-20">
+    <meta property="article:published_time" content="2021-06-15">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Вышла Java 12">
-    <meta name="twitter:description" content="Вышла новая, двенадцатая версия платформы Java. Как и в случае с Java 11, на сайте Oracle доступен для скачки только JDK и только для некоммерческого использования. Также доступны для скачки архивы&hellip;">
+    <meta name="twitter:title" content="Новости Java #21">
+    <meta name="twitter:description" content="&bull; JDK 17 перешёл в первую фазу Rampdown. Это значит, что JDK 17 форкнут в отдельный стабилизационный репозиторий, и в релиз больше не будут приниматься никакие новые JEP'ы&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_21.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_21.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,29 +31,38 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Вышла Java 12</h3>
-<p class="text-secondary"><time datetime="2019-03-20">20 марта, 2019</time></p>
+<h3 id="title">Новости Java #21</h3>
+<p class="text-secondary"><time datetime="2021-06-15">15 июня, 2021</time></p>
 <article>
-<p><a href="https://www.oracle.com/technetwork/java/javase/12-relnote-issues-5211422.html">Вышла новая</a>, двенадцатая версия платформы Java. Как и в случае с <a href="java_11_is_out.html">Java 11</a>, на сайте Oracle <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html">доступен для скачки</a> только JDK и только для некоммерческого использования. Также доступны для скачки <a href="https://jdk.java.net/12">архивы OpenJDK</a>, которые можно использовать в коммерческих целях.</p>
-<p>Вот список изменений и нововведений Java 12.</p>
-<ul>
-  <li><a href="https://openjdk.java.net/jeps/189">JEP 189: Shenandoah: A Low-Pause-Time Garbage Collector (Experimental)</a>. Сборщик мусора с низкими паузами Shenandoah, который так долго разрабатывался командой из RedHat, наконец стал частью OpenJDK. Для его включения нужно использовать опции <code class="text-nowrap">-XX:+UnlockExperimentalVMOptions</code> и <code class="text-nowrap">-XX:+UseShenandoahGC</code>.</li>
-  <li><a href="https://openjdk.java.net/jeps/230">JEP 230: Microbenchmark Suite</a>. В исходный код JDK добавлен базовый набор бенчмарков, основанных на JMH.</li>
-  <li><a href="https://openjdk.java.net/jeps/325">JEP 325: Switch Expressions (Preview)</a>. В языке Java оператор <code class="text-nowrap">switch</code> теперь <a href="switch_expressions.html">может возвращать значения</a>. Однако эта возможность работает только в <a href="https://openjdk.java.net/jeps/12">preview-режиме</a>, то есть только при указании ключа <code class="text-nowrap">--enable-preview</code>.</li>
-  <li><a href="https://openjdk.java.net/jeps/334">JEP 334: JVM Constants API</a>.</li>
-  <li><a href="https://openjdk.java.net/jeps/340">JEP 340: One AArch64 Port, Not Two</a>.</li>
-  <li><a href="https://openjdk.java.net/jeps/341">JEP 341: Default CDS Archives</a>.</li>
-  <li><a href="https://openjdk.java.net/jeps/344">JEP 344: Abortable Mixed Collections for G1</a>.</li>
-  <li><a href="https://openjdk.java.net/jeps/346">JEP 346: Promptly Return Unused Committed Memory from G1</a>.</li>
-</ul>
+<p>&bull; JDK 17 перешёл в <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-June/005690.html">первую фазу Rampdown</a>. Это значит, что JDK 17 форкнут в отдельный <a href="https://github.com/openjdk/jdk17">стабилизационный репозиторий</a>, и в релиз больше не будут приниматься никакие новые JEP'ы.</p>
+<p>Кроме того, стало известно, что <a href="https://openjdk.java.net/jeps/406">JEP 406: Pattern Matching for switch (Preview)</a> был интегрирован в Java 17 и попал в последнюю сборку <a href="http://jdk.java.net/17/">JDK 17-ea+26</a>.</p>
+<p>Также вышла первая сборка <a href="http://jdk.java.net/18/">JDK 18-ea+1</a>.</p>
+
+<p class="pt-2">&bull; Вышел новый черновик <a href="http://openjdk.java.net/jeps/8261529">JEP: Universal Generics (Preview)</a>. Это очередной JEP по проекту <a href="http://openjdk.java.net/projects/valhalla/">Valhalla</a>, и в нём предлагается расширить пространство всех переменных типов в дженериках до всех типов, то есть не только ссылочных типов, но и примитивных типов значений. Это означает, что для компилятора Java больше не будет ошибкой, если указать примитивы в качестве типов-параметров (например, List&lt;int&gt;). При этом, если в generic коде переменной типа будет присвоен <code class="text-nowrap">null</code>, то компилятор будет выдавать предупреждение:</p>
+<pre class="border p-lg-2 p-1">class C&lt;T&gt; {
+    T x = null; <span style="color: orange">// warning: null assignment</span>
+}</pre>
+<p>Таким образом, компилятор предупреждает разработчика о том, что может произойти <code class="text-nowrap">null</code>-загрязнение, то есть если переменная <code class="text-nowrap">T</code> окажется value-типом, то в ней будет находиться несовместимое значение, что в дальнейшем может привеcти к NullPointerException:</p>
+<pre class="border p-lg-2 p-1">C&lt;Point&gt; c = new C&lt;Point&gt;();
+Point p = c.x; <span style="color: red">// NPE</span></pre>
+<p>Такая стратегия означает, что весь существующий код дженериков будет продолжать компилироваться, и лишь в некоторых местах будут предупреждения, которые сопроводитель кода сможет исправить постепенно.</p>
+<p>Важно отметить, что в данном JEP речи о специализации дженериков времени выполнения пока не идёт, и дженерики будут продолжать компилироваться в байткод через стирание типов (erasure), то есть во время выполнения дженерики с value-типами будут работать как ссылочные типы. JEP про специализацию будет опубликован в будущем.</p>
+
+<p class="pt-2">&bull; У инструмента <code class="text-nowrap">jar</code>, который входит в состав JDK, появилась новая опция <a href="https://github.com/openjdk/jdk/pull/3971"><code class="text-nowrap">--validate</code></a>. Она служит для валидации <a href="https://openjdk.java.net/jeps/238">multi-release JAR-файлов</a>: делает анализ экспортированных API для каждой из декларированных версий Java и проверяет, что они согласованны. Такой анализ проводился и ранее при создании или обновлении JAR-файлов, но теперь его можно выполнить отдельным действием.</p>
+
+<p class="pt-2">&bull; В блоге JetBrains вышел <a href="https://blog.jetbrains.com/idea/2021/06/java-annotated-monthly-june-2021/">Java Annotated Monthly за июнь 2021</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://spring.io/blog/2021/06/09/spring-framework-5-3-8-available-now">Spring Framework 5.3.8</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.1/release-notes.html">Gradle 7.1</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_21.html" class="text-secondary">Новости Java #21</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #21</li>
 <li class="text-secondary"><a href="java_news_20.html" class="text-secondary">Новости Java #20</a></li>
 <li class="text-secondary"><a href="java_news_19.html" class="text-secondary">Новости Java #19</a></li>
 <li class="text-secondary"><a href="java_news_18.html" class="text-secondary">Новости Java #18</a></li>
@@ -95,8 +104,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
-  <ul class="collapse show" id="year2019">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <ul class="collapse" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
 <li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
 <li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
@@ -108,7 +117,7 @@
 <li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
 <li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
 <li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
-<li>Вышла Java 12</li>
+<li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
   </ul>
 </div>
 <div class="mt-3">
