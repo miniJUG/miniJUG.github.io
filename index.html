@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-06-15">
+    <meta property="article:published_time" content="2021-06-28">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,30 +31,36 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #21</h3>
-<p class="text-secondary"><time datetime="2021-06-15">15 июня, 2021</time></p>
+<h3 id="title">Новости Java #22</h3>
+<p class="text-secondary"><time datetime="2021-06-28">28 июня, 2021</time></p>
 <article>
-<p>&bull; JDK 17 перешёл в <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-June/005690.html">первую фазу Rampdown</a>. Это значит, что JDK 17 форкнут в отдельный <a href="https://github.com/openjdk/jdk17">стабилизационный репозиторий</a>, и в релиз больше не будут приниматься никакие новые JEP'ы.</p>
-<p>Кроме того, стало известно, что <a href="https://openjdk.java.net/jeps/406">JEP 406: Pattern Matching for switch (Preview)</a> был интегрирован в Java 17 и попал в последнюю сборку <a href="http://jdk.java.net/17/">JDK 17-ea+26</a>.</p>
-<p>Также вышла первая сборка <a href="http://jdk.java.net/18/">JDK 18-ea+1</a>.</p>
+<p>&bull; Вышел <a href="https://www.eclipse.org/eclipse/news/4.20/">Eclipse 2021-06</a>. Что нового появилось в новой версии:</p>
+<ul>
+  <li>Языковая поддержка Java 16: <a href="https://openjdk.java.net/jeps/394">паттерн-матчинг для <code class="text-nowrap">instanceof</code></a>, <a href="https://openjdk.java.net/jeps/395">записи</a> и <a href="https://openjdk.java.net/jeps/397"><code class="text-nowrap">sealed</code>-классы (preview)</a>.</li>
+  <li>Новый quick fix для объявления переменной в цикле <code class="text-nowrap">foreach</code>.</li>
+  <li>12 новых действий clean up.</li>
+  <li>Отображение значения полей в цепочке при отладке, то есть при наведении на <code class="text-nowrap">b</code> или <code class="text-nowrap">c</code> в <code class="text-nowrap">a.b.c</code> показывается значение <code class="text-nowrap">b</code> или <code class="text-nowrap">c</code>.</li>
+  <li>А также общие улучшения в IDE, плагине для Git и в других подсистемах.</li>
+</ul>
 
-<p class="pt-2">&bull; Вышел новый черновик <a href="http://openjdk.java.net/jeps/8261529">JEP: Universal Generics (Preview)</a>. Это очередной JEP по проекту <a href="http://openjdk.java.net/projects/valhalla/">Valhalla</a>, и в нём предлагается расширить пространство всех переменных типов в дженериках до всех типов, то есть не только ссылочных типов, но и примитивных типов значений. Это означает, что для компилятора Java больше не будет ошибкой, если указать примитивы в качестве типов-параметров (например, List&lt;int&gt;). При этом, если в generic коде переменной типа будет присвоен <code class="text-nowrap">null</code>, то компилятор будет выдавать предупреждение:</p>
-<pre class="border p-lg-2 p-1">class C&lt;T&gt; {
-    T x = null; <span style="color: orange">// warning: null assignment</span>
-}</pre>
-<p>Таким образом, компилятор предупреждает разработчика о том, что может произойти <code class="text-nowrap">null</code>-загрязнение, то есть если переменная <code class="text-nowrap">T</code> окажется value-типом, то в ней будет находиться несовместимое значение, что в дальнейшем может привеcти к NullPointerException:</p>
-<pre class="border p-lg-2 p-1">C&lt;Point&gt; c = new C&lt;Point&gt;();
-Point p = c.x; <span style="color: red">// NPE</span></pre>
-<p>Такая стратегия означает, что весь существующий код дженериков будет продолжать компилироваться, и лишь в некоторых местах будут предупреждения, которые сопроводитель кода сможет исправить постепенно.</p>
-<p>Важно отметить, что в данном JEP речи о специализации дженериков времени выполнения пока не идёт, и дженерики будут продолжать компилироваться в байткод через стирание типов (erasure), то есть во время выполнения дженерики с value-типами будут работать как ссылочные типы. JEP про специализацию будет опубликован в будущем.</p>
+<p class="pt-2">&bull; В 2021 году разработчики впервые стали больше использовать Java 11, чем Java 8. Такими данными поделилась компания Snyk в своём ежегодном отчёте <a href="https://foojay.io/today/new-jvm-ecosystem-report-2021-has-arrived/">"JVM Ecosystem Survey" за 2021 год</a>. Snyk проводила опрос совместно с Azul с февраля по март 2021 года среди более чем 2 тысяч разработчиков Java.</p>
+<p>Как показывают результаты опроса, в продуктовых окружениях Java 11 использует 61.5% респондентов, что на 1.6% больше, чем Java 8. При этом последние версии Java (14 и 15 на момент опроса) имеют цифры 4.9% и 11.7% соответственно. Это существенно больше, чем постепенно уходящие в небытие Java 6 и 7, которые имеют всего 1.9% и 3.8%.</p>
+<p>В разработке же новые версии имеют ещё большую популярность: Java 11 использует 64.3% респондентов против 50.1% у Java 8. Java 15 использует 25.6% опрошенных.</p>
+<p>В отчёте также присутствует множество других интересных данных, например:</p>
+<ul>
+  <li>Наиболее популярный дистрибутив JDK &ndash; AdoptOpenJDK (44.1%). Второе место у Oracle OpenJDK (28%).</li>
+  <li>Kotlin &ndash; второй популярный язык после Java (17.7% и 91% соответственно). Groovy использует 13% опрошенных.</li>
+  <li>IntelliJ IDEA &ndash; с большим отрывом самая популярная IDE (71.6%). Следующий идёт Eclipse, у которого всего 24.6%.</li>
+  <li>Среди билд-систем больше всего используется Maven (76.2%). У Gradle цифра более скромная &ndash; 38.1%.</li>
+</ul>
 
-<p class="pt-2">&bull; У инструмента <code class="text-nowrap">jar</code>, который входит в состав JDK, появилась новая опция <a href="https://github.com/openjdk/jdk/pull/3971"><code class="text-nowrap">--validate</code></a>. Она служит для валидации <a href="https://openjdk.java.net/jeps/238">multi-release JAR-файлов</a>: делает анализ экспортированных API для каждой из декларированных версий Java и проверяет, что они согласованны. Такой анализ проводился и ранее при создании или обновлении JAR-файлов, но теперь его можно выполнить отдельным действием.</p>
+<p class="pt-2">&bull; Из Java окончательно <a href="https://github.com/openjdk/jdk/pull/4522">удалили код</a>, отвечающий за biased locking. Ранее в Java 15 biased locking был <a href="https://openjdk.java.net/jeps/374">отключен по умолчанию</a> и стал deprecated. Сейчас же он удалён окончательно, и с Java 18 опция -XX:+UseBiasedLocking станет несуществующей.</p>
 
-<p class="pt-2">&bull; В блоге JetBrains вышел <a href="https://blog.jetbrains.com/idea/2021/06/java-annotated-monthly-june-2021/">Java Annotated Monthly за июнь 2021</a>.</p>
+<p class="pt-2">&bull; Вышли новые ранние сборки JDK: <a href="http://jdk.java.net/17/">JDK 17-ea+28</a> и <a href="http://jdk.java.net/18/">JDK 18-ea+3</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://spring.io/blog/2021/06/09/spring-framework-5-3-8-available-now">Spring Framework 5.3.8</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2021-June/079414.html">ASM 9.2</a> с поддержкой Java 18.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.1/release-notes.html">Gradle 7.1</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://www.wildfly.org/news/2021/06/17/WildFly24-Final-Released/">WildFly 24</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -62,6 +68,7 @@ Point p = c.x; <span style="color: red">// NPE</span></pre>
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_22.html" class="text-secondary">Новости Java #22</a></li>
 <li class="text-secondary"><a href="java_news_21.html" class="text-secondary">Новости Java #21</a></li>
 <li class="text-secondary"><a href="java_news_20.html" class="text-secondary">Новости Java #20</a></li>
 <li class="text-secondary"><a href="java_news_19.html" class="text-secondary">Новости Java #19</a></li>
