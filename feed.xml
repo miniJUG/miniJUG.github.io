@@ -4,7 +4,47 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-06-27T17:00:00Z</updated>
+  <updated>2021-07-17T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #23</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_23.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_23.html</id>
+    <updated>2021-07-17T17:00:00Z</updated>
+    <published>2021-07-17T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; JDK 17 перешла во &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-July/005758.html"&gt;вторую фазу Rampdown&lt;/a&gt;. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK начата &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-July/005846.html"&gt;предварительная дискуссия&lt;/a&gt; по созданию проекта, целью которого будет поддержка в Java сервера дисплея Wayland в Linux. &lt;a href="https://ru.wikipedia.org/wiki/Wayland"&gt;Wayland&lt;/a&gt; является современной заменой сервера X11 и уже включён по умолчанию в некоторых дистрибутивах, например &lt;a href="https://www.opennet.ru/opennews/art.shtml?num=54481"&gt;Ubuntu 21.04&lt;/a&gt; и &lt;a href="https://www.opennet.ru/opennews/art.shtml?num=50644"&gt;RHEL 8&lt;/a&gt;. Так как Linux с графическим интерфейсом является популярным выбором многих разработчиков Java, поддержка Wayland будет иметь большую важность для них.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Компания JetBrains выпустила свой ежегодный отчёт &lt;a href="https://blog.jetbrains.com/blog/2021/07/16/the-state-of-developer-ecosystem-2021/"&gt;&amp;laquo;Состояние экосистемы разработки&amp;raquo;&lt;/a&gt;. В этом году в опросе участвовало более 30 тысяч разработчиков из 183 стран. Перечислим некоторые интересные результаты:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Самый популярный язык &amp;ndash; JavaScript. Его использовали 69% опрошенных в течение последних 12 месяцев (Java использовали 49%). Также он является и самым популярным в качестве основного языка разработки (39% против 32% у Java).&lt;/li&gt;
+  &lt;li&gt;Kotlin пока что не попадает в первую десятку, однако имеет неплохой результат: с точки зрения общей распространённости он на 13-м месте (14%), а в как основной язык &amp;ndash; на 11-м (7%). Также Kotlin является самым желаемым языком для перехода с Java: в ближайшие 12 месяцев на него хотят перейти 13% разработчиков Java. Кроме того, Kotlin в пятёрке желаемых для перехода со всех языков (вместе с Go, TypeScript, Python и Rust).&lt;/li&gt;
+  &lt;li&gt;Популярность Scala падает уже третий год подряд: в 2019 её использовали 6%, в 2020 &amp;ndash; 5%, в 2021 &amp;ndash; 3%.&lt;/li&gt;
+  &lt;li&gt;Количество сотрудников, работающих удалённо, возрасло с 20% (в начале 2020) до 70%.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://quarkus.io/blog/quarkus-2-0-0-final-released/"&gt;Quarkus 2.0&lt;/a&gt;. В новой версии был осуществлён переход на JDK 11, Vert.x 4, Eclipse MicroProfile 4, GraalVM 21.1, а также внесено множество других изменений. Также пока готовился этот недельный выпуск, вышли багфикс-релизы &lt;a href="https://quarkus.io/blog/quarkus-2-0-1-final-released/"&gt;2.0.1&lt;/a&gt; и &lt;a href="https://quarkus.io/blog/quarkus-2-0-2-final-released/"&gt;2.0.2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.sonarqube.org/sonarqube-9-0/"&gt;SonarQube 9.0&lt;/a&gt; с поддержкой Bitbucket Cloud, GitHub Actions, C++ 20, Java 16, более точно анализа и многого другого.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/blog/2021/07/15/new-tool-pages-improved-performance-refreshed-ui-and-more-in-toolbox-app-1-21/"&gt;JetBrains ToolBox 1.21&lt;/a&gt;. Это первый релиз ToolBox, который написан полностью на чистом Kotlin, с использованием фреймворка &lt;a href="https://www.jetbrains.com/lp/compose/"&gt;Compose for Desktop&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышли новые версии Spring:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/07/14/spring-framework-5-3-9-and-5-2-16-available-now"&gt;Spring Framework 5.3.9 и 5.2.16&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Spring Boot &lt;a href="https://spring.io/blog/2021/06/24/spring-boot-2-5-2-is-now-available"&gt;2.5.2&lt;/a&gt; и &lt;a href="https://spring.io/blog/2021/06/24/spring-boot-2-4-8-is-now-available"&gt;2.4.8&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/22/spring-security-5-5-1-5-4-7-5-3-10-and-5-2-11-released"&gt;Spring Security 5.5.1, 5.4.7, 5.3.10 и 5.2.11&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/14/spring-native-0-10-0-available-now"&gt;Spring Native 0.10.0&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/22/spring-data-2021-0-2-and-2020-0-10-released"&gt;Spring Data 2021.0.2 и 2020.0.10&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/25/spring-integration-zip-2-0-0-available"&gt;Spring Integration Zip 2.0.0&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/07/09/spring-authorization-server-0-1-2-available-now"&gt;Spring Authorization Server 0.1.2&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/nashorn-dev/2021-July/007639.html"&gt;Nashorn 15.3&lt;/a&gt; с поддержкой Java 17.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #22</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_22.html" />
@@ -1125,30 +1165,5 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
 &lt;h4&gt;Заключение&lt;/h4&gt;
 &lt;p&gt;Сегодня я рассказал про 10 интересных API, некоторые из которых появились в буквально только что &lt;a href="java_16.html"&gt;вышедшей Java 16&lt;/a&gt;, а некоторые уже присутствуют довольно давно ещё с 9-й версии. Надеюсь, что после прочтения данной статьи вы стали более заинтересованными в миграции на последнюю версию Java. Помните, что в новых версиях Java появляются не только новые возможности, но и изменения, ломающие обратную совместимость (&lt;a href="https://openjdk.java.net/jeps/260"&gt;1&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/322"&gt;2&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/320"&gt;3&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/372"&gt;4&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/396"&gt;5&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/363"&gt;6&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/367"&gt;7&lt;/a&gt;, &lt;a href="http://openjdk.java.net/jeps/403"&gt;8&lt;/a&gt;). И чем больше вы тянете с переходом с Java 8 на последнюю версию, тем сложнее вам будет осуществить этот переход.&lt;/p&gt;
 &lt;p&gt;Продолжение следует...&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #14</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_14.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_14.html</id>
-    <updated>2021-04-11T17:00:00Z</updated>
-    <published>2021-04-11T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; На сайте OpenJDK появилось два новых JEP.&lt;/p&gt;
-&lt;p&gt;В &lt;a href="https://openjdk.java.net/jeps/409"&gt;JEP 409: Sealed Classes&lt;/a&gt; предлагается, наконец, вывести &lt;code&gt;sealed&lt;/code&gt; классы из режима preview и сделать их стабильной языковой конструкцией.&lt;/p&gt;
-&lt;p&gt;В &lt;a href="https://openjdk.java.net/jeps/410"&gt;JEP 410: Remove the Experimental AOT and JIT Compiler&lt;/a&gt; предлагается убрать экспериментальные &lt;a href="https://openjdk.java.net/jeps/295"&gt;ahead-of-time&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/317"&gt;just-in-time&lt;/a&gt; Graal компиляторы из-за их малой используемости и сложности поддержки. По факту эти компиляторы уже исчезли из сборок JDK 16 от Oracle. При этом интерфейс компилятора &lt;a href="https://openjdk.java.net/jeps/243"&gt;JVMCI&lt;/a&gt; не планируется удалять.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Проект Lilliput стартовал. У него появилась &lt;a href="https://openjdk.java.net/projects/lilliput/"&gt;собственная страница&lt;/a&gt; на сайте OpenJDK, &lt;a href="https://wiki.openjdk.java.net/display/lilliput"&gt;Wiki&lt;/a&gt; и &lt;a href="https://mail.openjdk.java.net/mailman/listinfo/lilliput-dev"&gt;e-mail рассылка&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/ru/idea/2021/04/intellij-idea-2021-1/"&gt;IntelliJ IDEA 2021.1&lt;/a&gt;. В ней появилась поддержка Java 16, WSL 2, интеграция с JetBrains Space, сервис Code With Me с поддержкой видео- и аудиозвонков, новая функция Run Targets, новые инспекции и многое другое.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Google &lt;a href="https://3dnews.ru/1036576/sud-reshil-chto-google-zakonno-ispolzovalajava-v-android-kompanii-ne-pridyotsya-viplachivat-oracle-kompensatsiyu-v-9-mlrd"&gt;выиграл многолетнюю тяжбу с Oracle&lt;/a&gt;, которая продолжалась с 2010 года. Окончательным решением Верховного Суда США стало то, что Google не нарушал авторские права Oracle, используя Java API для разработки своей операционной системы Android.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Microsoft теперь будет выпускать свою &lt;a href="https://devblogs.microsoft.com/java/announcing-preview-of-microsoft-build-of-openjdk/"&gt;собственную сборку OpenJDK&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.0/release-notes.html"&gt;Gradle 7.0&lt;/a&gt; с улучшенной инкрементальной сборкой, поддержкой Java 16, сборки на Apple Silicon и т.д.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Тагир Валеев предложил &lt;a href="https://github.com/openjdk/jdk/pull/3427"&gt;патч&lt;/a&gt; в OpenJDK с оптимизацией операций &lt;code&gt;Stream::limit&lt;/code&gt; и &lt;code&gt;Stream::skip&lt;/code&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

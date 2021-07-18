@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java можно будет исполнять исходные файлы напрямую</title>
+    <title>Новости Java #23</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java можно будет исполнять исходные файлы напрямую">
-    <meta property="og:description" content="Позавчера на сайте OpenJDK появился новый черновик JEP, в котором предлагается наделить лаунчер java способностью запускать исходные файлы Java напрямую без необходимости предварительной компиляции&hellip;">
+    <meta property="og:title" content="Новости Java #23">
+    <meta property="og:description" content="&bull; JDK 17 перешла во вторую фазу Rampdown. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2018-02-11">
+    <meta property="article:published_time" content="2021-07-18">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="В Java можно будет исполнять исходные файлы напрямую">
-    <meta name="twitter:description" content="Позавчера на сайте OpenJDK появился новый черновик JEP, в котором предлагается наделить лаунчер java способностью запускать исходные файлы Java напрямую без необходимости предварительной компиляции&hellip;">
+    <meta name="twitter:title" content="Новости Java #23">
+    <meta name="twitter:description" content="&bull; JDK 17 перешла во вторую фазу Rampdown. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_23.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_23.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,25 +31,47 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java можно будет исполнять исходные файлы напрямую</h3>
-<p class="text-secondary"><time datetime="2018-02-11">11 февраля, 2018</time></p>
+<h3 id="title">Новости Java #23</h3>
+<p class="text-secondary"><time datetime="2021-07-18">18 июля, 2021</time></p>
 <article>
-<p>Позавчера на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/8192920">новый черновик JEP</a>, в котором предлагается наделить лаунчер java способностью запускать исходные файлы Java напрямую без необходимости предварительной компиляции. Например, программу <code class="text-nowrap">HelloWorld.java</code> можно будет запустить, просто исполнив команду <code class="text-nowrap">java HelloWorld.java</code>. Это будет эквивалентом к компиляции <code class="text-nowrap">HelloWorld.java</code> через <code class="text-nowrap">javac</code> и последующим запуском Main-класса через java-лаунчер. Таким образом, запуск исходных файлов будет четвёртым способом запуска Java-программ. Первые три – это запуск class-файлов, JAR-файлов и модулей (<code class="text-nowrap">java --module &lt;module&gt;[/mainclass]</code>).</p>
-<p>Исполнение java-файлов напрямую будет весьма полезной возможностью, которая может пригодиться, например, при обучении программированию на Java, для запуска скриптов, тестирования и т.д.</p>
-<p>Перечислим основные пункты JEP:</p>
+<p>&bull; JDK 17 перешла во <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-July/005758.html">вторую фазу Rampdown</a>. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2.</p>
+
+<p class="pt-2">&bull; В рассылке OpenJDK начата <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-July/005846.html">предварительная дискуссия</a> по созданию проекта, целью которого будет поддержка в Java сервера дисплея Wayland в Linux. <a href="https://ru.wikipedia.org/wiki/Wayland">Wayland</a> является современной заменой сервера X11 и уже включён по умолчанию в некоторых дистрибутивах, например <a href="https://www.opennet.ru/opennews/art.shtml?num=54481">Ubuntu 21.04</a> и <a href="https://www.opennet.ru/opennews/art.shtml?num=50644">RHEL 8</a>. Так как Linux с графическим интерфейсом является популярным выбором многих разработчиков Java, поддержка Wayland будет иметь большую важность для них.</p>
+
+<p class="pt-2">&bull; Компания JetBrains выпустила свой ежегодный отчёт <a href="https://blog.jetbrains.com/blog/2021/07/16/the-state-of-developer-ecosystem-2021/">&laquo;Состояние экосистемы разработки&raquo;</a>. В этом году в опросе участвовало более 30 тысяч разработчиков из 183 стран. Перечислим некоторые интересные результаты:</p>
 <ul>
-  <li>Запуск java-файлов будет поддерживать аргументы командной строки (<code class="text-nowrap">java Factorial.java 3 4 5</code>).</li>
-  <li>На Unix-совместимых платформах Java-программы можно будет писать в виде <a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B5%D0%B1%D0%B0%D0%BD%D0%B3_(Unix)">shebang-файлов</a> и исполнять как обычные исполняемые файлы. Такие файлы должны начинаться со строки <code class="text-nowrap">#!/path/to/java --source</code>.</li>
-  <li>Для запуска java-файлов необходима их компиляция, а это означает, что их можно будет запускать только на тех образах Java, в которых присутствует модуль <code class="text-nowrap">jdk.compiler</code>. Другими словами, запустить java-файлы можно будет на JDK, но не на JRE.</li>
+  <li>Самый популярный язык &ndash; JavaScript. Его использовали 69% опрошенных в течение последних 12 месяцев (Java использовали 49%). Также он является и самым популярным в качестве основного языка разработки (39% против 32% у Java).</li>
+  <li>Kotlin пока что не попадает в первую десятку, однако имеет неплохой результат: с точки зрения общей распространённости он на 13-м месте (14%), а в как основной язык &ndash; на 11-м (7%). Также Kotlin является самым желаемым языком для перехода с Java: в ближайшие 12 месяцев на него хотят перейти 13% разработчиков Java. Кроме того, Kotlin в пятёрке желаемых для перехода со всех языков (вместе с Go, TypeScript, Python и Rust).</li>
+  <li>Популярность Scala падает уже третий год подряд: в 2019 её использовали 6%, в 2020 &ndash; 5%, в 2021 &ndash; 3%.</li>
+  <li>Количество сотрудников, работающих удалённо, возрасло с 20% (в начале 2020) до 70%.</li>
 </ul>
+
+<p class="pt-2">&bull; Вышел <a href="https://quarkus.io/blog/quarkus-2-0-0-final-released/">Quarkus 2.0</a>. В новой версии был осуществлён переход на JDK 11, Vert.x 4, Eclipse MicroProfile 4, GraalVM 21.1, а также внесено множество других изменений. Также пока готовился этот недельный выпуск, вышли багфикс-релизы <a href="https://quarkus.io/blog/quarkus-2-0-1-final-released/">2.0.1</a> и <a href="https://quarkus.io/blog/quarkus-2-0-2-final-released/">2.0.2</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://www.sonarqube.org/sonarqube-9-0/">SonarQube 9.0</a> с поддержкой Bitbucket Cloud, GitHub Actions, C++ 20, Java 16, более точно анализа и многого другого.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/blog/2021/07/15/new-tool-pages-improved-performance-refreshed-ui-and-more-in-toolbox-app-1-21/">JetBrains ToolBox 1.21</a>. Это первый релиз ToolBox, который написан полностью на чистом Kotlin, с использованием фреймворка <a href="https://www.jetbrains.com/lp/compose/">Compose for Desktop</a>.</p>
+
+<p class="pt-2">&bull; Вышли новые версии Spring:</p>
+<ul>
+  <li><a href="https://spring.io/blog/2021/07/14/spring-framework-5-3-9-and-5-2-16-available-now">Spring Framework 5.3.9 и 5.2.16</a>.</li>
+  <li>Spring Boot <a href="https://spring.io/blog/2021/06/24/spring-boot-2-5-2-is-now-available">2.5.2</a> и <a href="https://spring.io/blog/2021/06/24/spring-boot-2-4-8-is-now-available">2.4.8</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/22/spring-security-5-5-1-5-4-7-5-3-10-and-5-2-11-released">Spring Security 5.5.1, 5.4.7, 5.3.10 и 5.2.11</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/14/spring-native-0-10-0-available-now">Spring Native 0.10.0</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/22/spring-data-2021-0-2-and-2020-0-10-released">Spring Data 2021.0.2 и 2020.0.10</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/25/spring-integration-zip-2-0-0-available">Spring Integration Zip 2.0.0</a>.</li>
+  <li><a href="https://spring.io/blog/2021/07/09/spring-authorization-server-0-1-2-available-now">Spring Authorization Server 0.1.2</a>.</li>
+</ul>
+
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/nashorn-dev/2021-July/007639.html">Nashorn 15.3</a> с поддержкой Java 17.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_23.html" class="text-secondary">Новости Java #23</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #23</li>
 <li class="text-secondary"><a href="java_news_22.html" class="text-secondary">Новости Java #22</a></li>
 <li class="text-secondary"><a href="java_news_21.html" class="text-secondary">Новости Java #21</a></li>
 <li class="text-secondary"><a href="java_news_20.html" class="text-secondary">Новости Java #20</a></li>
@@ -110,13 +132,13 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="true" aria-controls="year2018">2018</a>
-  <ul class="collapse show" id="year2018">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
 <li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
 <li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
 <li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
-<li>В Java можно будет исполнять исходные файлы напрямую</li>
+<li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
 <li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
 <li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
 <li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>

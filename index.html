@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-06-28">
+    <meta property="article:published_time" content="2021-07-18">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,36 +31,39 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #22</h3>
-<p class="text-secondary"><time datetime="2021-06-28">28 июня, 2021</time></p>
+<h3 id="title">Новости Java #23</h3>
+<p class="text-secondary"><time datetime="2021-07-18">18 июля, 2021</time></p>
 <article>
-<p>&bull; Вышел <a href="https://www.eclipse.org/eclipse/news/4.20/">Eclipse 2021-06</a>. Что нового появилось в новой версии:</p>
+<p>&bull; JDK 17 перешла во <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-July/005758.html">вторую фазу Rampdown</a>. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2.</p>
+
+<p class="pt-2">&bull; В рассылке OpenJDK начата <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-July/005846.html">предварительная дискуссия</a> по созданию проекта, целью которого будет поддержка в Java сервера дисплея Wayland в Linux. <a href="https://ru.wikipedia.org/wiki/Wayland">Wayland</a> является современной заменой сервера X11 и уже включён по умолчанию в некоторых дистрибутивах, например <a href="https://www.opennet.ru/opennews/art.shtml?num=54481">Ubuntu 21.04</a> и <a href="https://www.opennet.ru/opennews/art.shtml?num=50644">RHEL 8</a>. Так как Linux с графическим интерфейсом является популярным выбором многих разработчиков Java, поддержка Wayland будет иметь большую важность для них.</p>
+
+<p class="pt-2">&bull; Компания JetBrains выпустила свой ежегодный отчёт <a href="https://blog.jetbrains.com/blog/2021/07/16/the-state-of-developer-ecosystem-2021/">&laquo;Состояние экосистемы разработки&raquo;</a>. В этом году в опросе участвовало более 30 тысяч разработчиков из 183 стран. Перечислим некоторые интересные результаты:</p>
 <ul>
-  <li>Языковая поддержка Java 16: <a href="https://openjdk.java.net/jeps/394">паттерн-матчинг для <code class="text-nowrap">instanceof</code></a>, <a href="https://openjdk.java.net/jeps/395">записи</a> и <a href="https://openjdk.java.net/jeps/397"><code class="text-nowrap">sealed</code>-классы (preview)</a>.</li>
-  <li>Новый quick fix для объявления переменной в цикле <code class="text-nowrap">foreach</code>.</li>
-  <li>12 новых действий clean up.</li>
-  <li>Отображение значения полей в цепочке при отладке, то есть при наведении на <code class="text-nowrap">b</code> или <code class="text-nowrap">c</code> в <code class="text-nowrap">a.b.c</code> показывается значение <code class="text-nowrap">b</code> или <code class="text-nowrap">c</code>.</li>
-  <li>А также общие улучшения в IDE, плагине для Git и в других подсистемах.</li>
+  <li>Самый популярный язык &ndash; JavaScript. Его использовали 69% опрошенных в течение последних 12 месяцев (Java использовали 49%). Также он является и самым популярным в качестве основного языка разработки (39% против 32% у Java).</li>
+  <li>Kotlin пока что не попадает в первую десятку, однако имеет неплохой результат: с точки зрения общей распространённости он на 13-м месте (14%), а в как основной язык &ndash; на 11-м (7%). Также Kotlin является самым желаемым языком для перехода с Java: в ближайшие 12 месяцев на него хотят перейти 13% разработчиков Java. Кроме того, Kotlin в пятёрке желаемых для перехода со всех языков (вместе с Go, TypeScript, Python и Rust).</li>
+  <li>Популярность Scala падает уже третий год подряд: в 2019 её использовали 6%, в 2020 &ndash; 5%, в 2021 &ndash; 3%.</li>
+  <li>Количество сотрудников, работающих удалённо, возрасло с 20% (в начале 2020) до 70%.</li>
 </ul>
 
-<p class="pt-2">&bull; В 2021 году разработчики впервые стали больше использовать Java 11, чем Java 8. Такими данными поделилась компания Snyk в своём ежегодном отчёте <a href="https://foojay.io/today/new-jvm-ecosystem-report-2021-has-arrived/">"JVM Ecosystem Survey" за 2021 год</a>. Snyk проводила опрос совместно с Azul с февраля по март 2021 года среди более чем 2 тысяч разработчиков Java.</p>
-<p>Как показывают результаты опроса, в продуктовых окружениях Java 11 использует 61.5% респондентов, что на 1.6% больше, чем Java 8. При этом последние версии Java (14 и 15 на момент опроса) имеют цифры 4.9% и 11.7% соответственно. Это существенно больше, чем постепенно уходящие в небытие Java 6 и 7, которые имеют всего 1.9% и 3.8%.</p>
-<p>В разработке же новые версии имеют ещё большую популярность: Java 11 использует 64.3% респондентов против 50.1% у Java 8. Java 15 использует 25.6% опрошенных.</p>
-<p>В отчёте также присутствует множество других интересных данных, например:</p>
+<p class="pt-2">&bull; Вышел <a href="https://quarkus.io/blog/quarkus-2-0-0-final-released/">Quarkus 2.0</a>. В новой версии был осуществлён переход на JDK 11, Vert.x 4, Eclipse MicroProfile 4, GraalVM 21.1, а также внесено множество других изменений. Также пока готовился этот недельный выпуск, вышли багфикс-релизы <a href="https://quarkus.io/blog/quarkus-2-0-1-final-released/">2.0.1</a> и <a href="https://quarkus.io/blog/quarkus-2-0-2-final-released/">2.0.2</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://www.sonarqube.org/sonarqube-9-0/">SonarQube 9.0</a> с поддержкой Bitbucket Cloud, GitHub Actions, C++ 20, Java 16, более точно анализа и многого другого.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/blog/2021/07/15/new-tool-pages-improved-performance-refreshed-ui-and-more-in-toolbox-app-1-21/">JetBrains ToolBox 1.21</a>. Это первый релиз ToolBox, который написан полностью на чистом Kotlin, с использованием фреймворка <a href="https://www.jetbrains.com/lp/compose/">Compose for Desktop</a>.</p>
+
+<p class="pt-2">&bull; Вышли новые версии Spring:</p>
 <ul>
-  <li>Наиболее популярный дистрибутив JDK &ndash; AdoptOpenJDK (44.1%). Второе место у Oracle OpenJDK (28%).</li>
-  <li>Kotlin &ndash; второй популярный язык после Java (17.7% и 91% соответственно). Groovy использует 13% опрошенных.</li>
-  <li>IntelliJ IDEA &ndash; с большим отрывом самая популярная IDE (71.6%). Следующий идёт Eclipse, у которого всего 24.6%.</li>
-  <li>Среди билд-систем больше всего используется Maven (76.2%). У Gradle цифра более скромная &ndash; 38.1%.</li>
+  <li><a href="https://spring.io/blog/2021/07/14/spring-framework-5-3-9-and-5-2-16-available-now">Spring Framework 5.3.9 и 5.2.16</a>.</li>
+  <li>Spring Boot <a href="https://spring.io/blog/2021/06/24/spring-boot-2-5-2-is-now-available">2.5.2</a> и <a href="https://spring.io/blog/2021/06/24/spring-boot-2-4-8-is-now-available">2.4.8</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/22/spring-security-5-5-1-5-4-7-5-3-10-and-5-2-11-released">Spring Security 5.5.1, 5.4.7, 5.3.10 и 5.2.11</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/14/spring-native-0-10-0-available-now">Spring Native 0.10.0</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/22/spring-data-2021-0-2-and-2020-0-10-released">Spring Data 2021.0.2 и 2020.0.10</a>.</li>
+  <li><a href="https://spring.io/blog/2021/06/25/spring-integration-zip-2-0-0-available">Spring Integration Zip 2.0.0</a>.</li>
+  <li><a href="https://spring.io/blog/2021/07/09/spring-authorization-server-0-1-2-available-now">Spring Authorization Server 0.1.2</a>.</li>
 </ul>
 
-<p class="pt-2">&bull; Из Java окончательно <a href="https://github.com/openjdk/jdk/pull/4522">удалили код</a>, отвечающий за biased locking. Ранее в Java 15 biased locking был <a href="https://openjdk.java.net/jeps/374">отключен по умолчанию</a> и стал deprecated. Сейчас же он удалён окончательно, и с Java 18 опция -XX:+UseBiasedLocking станет несуществующей.</p>
-
-<p class="pt-2">&bull; Вышли новые ранние сборки JDK: <a href="http://jdk.java.net/17/">JDK 17-ea+28</a> и <a href="http://jdk.java.net/18/">JDK 18-ea+3</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2021-June/079414.html">ASM 9.2</a> с поддержкой Java 18.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://www.wildfly.org/news/2021/06/17/WildFly24-Final-Released/">WildFly 24</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/nashorn-dev/2021-July/007639.html">Nashorn 15.3</a> с поддержкой Java 17.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -68,6 +71,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_23.html" class="text-secondary">Новости Java #23</a></li>
 <li class="text-secondary"><a href="java_news_22.html" class="text-secondary">Новости Java #22</a></li>
 <li class="text-secondary"><a href="java_news_21.html" class="text-secondary">Новости Java #21</a></li>
 <li class="text-secondary"><a href="java_news_20.html" class="text-secondary">Новости Java #20</a></li>
