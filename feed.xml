@@ -34,6 +34,8 @@
 };&lt;/pre&gt;
 &lt;p&gt;Сейчас для рефакторинга такой лямбды в класс неизбежно придётся завести именованный класс. Если идея Брайана будет реализована, то лямбду можно будет легко сконвертировать в анонимный класс.&lt;/p&gt;
 
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://android-developers.googleblog.com/2021/07/jetpack-compose-announcement.html"&gt;Jetpack Compose 1.0&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://cassandra.apache.org/_/blog/Apache-Cassandra-4.0-is-Here.html"&gt;Apache Cassandra 4.0&lt;/a&gt;. Новая мажорная версия распределённой СУБД стала доступной спустя почти 6 лет после выхода версии 3.0.&lt;/p&gt;</content>
   </entry>
   <entry>
