@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java можно будет объявлять локальные интерфейсы и перечисления</title>
+    <title>Новости Java #26</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java можно будет объявлять локальные интерфейсы и перечисления">
-    <meta property="og:description" content="На сайте OpenJDK вышел новый черновик JEP с заголовком &quot;Records (Second Preview)&quot;. В нём специфицируются некоторые изменения в записях по сравнению с первым preview, а также возможность объявлять в&hellip;">
+    <meta property="og:title" content="Новости Java #26">
+    <meta property="og:description" content="&bull; Вышел первый релиз-кандидат JDK 17. Им стала сборка JDK 17+35&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2020-05-01">
+    <meta property="article:published_time" content="2021-08-15">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="В Java можно будет объявлять локальные интерфейсы и перечисления">
-    <meta name="twitter:description" content="На сайте OpenJDK вышел новый черновик JEP с заголовком &quot;Records (Second Preview)&quot;. В нём специфицируются некоторые изменения в записях по сравнению с первым preview, а также возможность объявлять в&hellip;">
+    <meta name="twitter:title" content="Новости Java #26">
+    <meta name="twitter:description" content="&bull; Вышел первый релиз-кандидат JDK 17. Им стала сборка JDK 17+35&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/local_interfaces_and_enums.png">
-    <meta property="og:image:width" content="1091">
-    <meta property="og:image:height" content="654">
-    <meta name="twitter:image" content="https://minijug.ru/local_interfaces_and_enums.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_26.png">
+    <meta property="og:image:width" content="1269">
+    <meta property="og:image:height" content="664">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_26.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,37 +31,42 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java можно будет объявлять локальные интерфейсы и перечисления</h3>
-<p class="text-secondary"><time datetime="2020-05-01">1 мая, 2020</time></p>
+<h3 id="title">Новости Java #26</h3>
+<p class="text-secondary"><time datetime="2021-08-15">15 августа, 2021</time></p>
 <article>
-<p>На сайте OpenJDK вышел <a href="http://openjdk.java.net/jeps/8242303">новый черновик</a> JEP с заголовком "Records (Second Preview)". В нём специфицируются некоторые изменения в записях по сравнению с <a href="http://openjdk.java.net/jeps/359">первым preview</a>, а также возможность объявлять в методах интерфейсы и перечисления.</p>
-<p>Напомним, что в Java есть возможность объявлять классы прямо внутри методов и блоков. Такие классы называются <i>локальными</i>, и они могут захватывать effectively final переменные, объявленные выше в этом же методе или блоке. Пример объявления локального класса:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> m() {
-    <span style="color: blue">class</span> Foo {
-        …
-    }
-}</pre>
-<p>С <a href="java_14_is_out.html">Java 14</a> появилась возможность также объявлять локальные записи. Особенность локальных записей заключается в том, что они неявно являются <i>статическими</i> в отличие от локальных классов, которые могут быть только <i>нестатическими</i>. Таким образом, локальные записи стали первым историческим примером статических деклараций внутри метода, которые до этого в Java были запрещены (локальные классы и переменные не могут быть статическими). Пример стал успешным: локальные записи ничему не противоречат и не нарушают никакую семантику. Такой успешный пример навёл на мысль о том, что нужно расширить поле возможных локальных статических деклараций на интерфейсы и перечисления:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> m() {
-    <span style="color: blue">enum</span> Foo {
-        A, B
-    }
+<p>&bull; Вышел первый <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-August/005906.html">релиз-кандидат JDK 17</a>. Им стала сборка JDK 17+35.</p>
+<p>Также вышла ранняя сборка <a href="http://jdk.java.net/18/">JDK 18+10</a>. Кроме того, появилось обновление Loom: <a href="https://jdk.java.net/loom/">JDK 18-loom+2</a>. Список архитектур, поддерживаемых Loom, пополнился AArch64.</p>
 
-    <span style="color: blue">interface</span> Bar {
-         Foo getFoo();
-    }
-}</pre>
-<p>По аналогии с локальными записями локальные интерфейсы и перечисления могут ссылаться только на объявленные выше локальные записи, интерфейсы и перечисления, но не на те, которые объявлены ниже. Также они могут ссылаться на самих себя.</p>
-<p>Про возможность объявлять локальные статические классы пока ничего не сказано, однако в январе Brian Goetz <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2020-January/001904.html">написал письмо</a> в рассылку, в котором он сказал, что конечной целью должна быть возможность вкладывать всё что угодно во всё что угодно. Это значит, что локальные статические классы могут появиться позже.</p>
-<p>Остальные изменения в JEP'е относятся к самим записям. Их мало, и они незначительны. Например, в новой версии убрано ограничение, что канонический конструктор записи обязательно должен быть публичным.</p>
+<p class="pt-2">&bull; Вышло два новых JEP:</p>
+<p>Первый &ndash; <a href="https://openjdk.java.net/jeps/416">JEP 416: Reimplement Core Reflection with Method Handles</a>. Про него мы писали в <a href="java_news_18.html">выпуске 18</a>, когда был опубликован его черновик.</p>
+<p>Второй &ndash; <a href="https://openjdk.java.net/jeps/417">JEP 417: Vector API (Third Incubator)</a>. Это уже третья итерация Vector API в Java. <a href="https://openjdk.java.net/jeps/338">Первая</a> попала в Java 16, <a href="https://openjdk.java.net/jeps/414">вторая</a> &ndash; в Java 17. Таким образом, третья должна попасть в <a href="http://openjdk.java.net/projects/jdk/18/">Java 18</a>.</p>
+
+<p class="pt-2">&bull; В рассылке OpenJDK <a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000305.html">объявлено голосование</a> по созданию нового проекта JDK под именем Wakefield. Целью этого проекта будет поддержка в Java сервера дисплея <a href="https://ru.wikipedia.org/wiki/Wayland">Wayland</a> в Linux, который создан для полной замены устаревшего X11. Лидером проекта предложил себя Фил Рэйс из Oracle.</p>
+
+<p class="pt-2">&bull; Переход AdoptOpenJDK в проект Eclipse Adoptium <a href="https://blog.adoptopenjdk.net/2021/08/goodbye-adoptopenjdk-hello-adoptium/">полностью завершён</a>. Теперь скачивать сборки OpenJDK (которые теперь называются Eclipse Temurin) рекомендуется с сайта <a href="https://adoptium.net/">adoptium.net</a>. При этом сайт <a href="https://adoptopenjdk.net/">AdoptOpenJDK</a> и его API будут ещё какое-то время функционировать.</p>
+<p>Сборки OpenJ9 не будут предоставляться Adoptium, поэтому их нужно скачивать с <a href="https://developer.ibm.com/languages/java/semeru-runtimes/">сайта IBM</a>.</p>
+
+<p class="pt-2">&bull; Опубликован <a href="https://redmonk.com/sogrady/2021/08/05/language-rankings-6-21/">RedMonk Programming Languages Rankings</a> за 2021 год. В этом рейтинге популярность языков программирования вычисляется на основе метрик, собранных с GitHub и StackOverflow. В этом году ничего кардинального для Java и других JVM-языков не произошло: популярность Java немного возросла, и она стала делить второе место с Python (в прошлом году Python и Java занимали второе и третье место соответственно), а Scala, Kotlin и Groovy остались приблизительно на своих местах.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://maven.apache.org/download.cgi">Apache Maven 3.8.2</a>. Список изменений можно посмотреть <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&version=12349965">здесь</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-August/003355.html">JMH 1.33</a>.</p>
+
+<h4 class="pt-2">Полезняшки</h4>
+<p>Чтобы выпуски новостей сделать более занимательными, я решил открыть новую рубрику &laquo;Полезняшки&raquo;, где я буду выкладывать по несколько ссылок на интересные инструменты, библиотеки, фреймворки, которые могут оказаться полезными для разработчиков на Java или других JVM-языках.</p>
+<ol>
+  <li><a href="https://github.com/Col-E/Recaf">Recaf</a> &ndash; программа просмотра class-/jar-файлов с возможностью редактирования байткода и его сохранения.</li>
+  <li><a href="https://jqwik.net/">jqwik</a> &ndash; библиотека для тестирования на основе свойств (property-based testing). Название намекает на отсылку к <a href="https://en.wikipedia.org/wiki/QuickCheck">QuickCheck</a>, оригинальной библиотеке на Haskell для написания тестов на основе свойств.</li>
+  <li><a href="https://github.com/linkedin/URL-Detector">URL-Detector</a> &ndash; библиотека для поиска URL в строках. Написана командой безопасности LinkedIn.</li>
+</ol>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_26.html" class="text-secondary">Новости Java #26</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #26</li>
 <li class="text-secondary"><a href="java_news_25.html" class="text-secondary">Новости Java #25</a></li>
 <li class="text-secondary"><a href="java_news_24.html" class="text-secondary">Новости Java #24</a></li>
 <li class="text-secondary"><a href="java_news_23.html" class="text-secondary">Новости Java #23</a></li>
@@ -92,12 +97,12 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="true" aria-controls="year2020">2020</a>
-  <ul class="collapse show" id="year2020">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
+  <ul class="collapse" id="year2020">
 <li class="text-secondary"><a href="java_15_is_out.html" class="text-secondary">Вышла Java 15</a></li>
 <li class="text-secondary"><a href="trying_sealed_classes_in_java_15.html" class="text-secondary">Исследуем <code>sealed</code> классы в Java 15</a></li>
 <li class="text-secondary"><a href="java_celebrates_25_years.html" class="text-secondary">Java исполняется 25 лет</a></li>
-<li>В Java можно будет объявлять локальные интерфейсы и перечисления</li>
+<li class="text-secondary"><a href="local_interfaces_and_enums.html" class="text-secondary">В Java можно будет объявлять локальные интерфейсы и перечисления</a></li>
 <li class="text-secondary"><a href="deconstruction_patterns.html" class="text-secondary">В Java появятся паттерны деконструкции</a></li>
 <li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
 <li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>

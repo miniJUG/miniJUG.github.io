@@ -4,7 +4,42 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-08-02T17:00:00Z</updated>
+  <updated>2021-08-14T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #26</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_26.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_26.html</id>
+    <updated>2021-08-14T17:00:00Z</updated>
+    <published>2021-08-14T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел первый &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-August/005906.html"&gt;релиз-кандидат JDK 17&lt;/a&gt;. Им стала сборка JDK 17+35.&lt;/p&gt;
+&lt;p&gt;Также вышла ранняя сборка &lt;a href="http://jdk.java.net/18/"&gt;JDK 18+10&lt;/a&gt;. Кроме того, появилось обновление Loom: &lt;a href="https://jdk.java.net/loom/"&gt;JDK 18-loom+2&lt;/a&gt;. Список архитектур, поддерживаемых Loom, пополнился AArch64.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышло два новых JEP:&lt;/p&gt;
+&lt;p&gt;Первый &amp;ndash; &lt;a href="https://openjdk.java.net/jeps/416"&gt;JEP 416: Reimplement Core Reflection with Method Handles&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_18.html"&gt;выпуске 18&lt;/a&gt;, когда был опубликован его черновик.&lt;/p&gt;
+&lt;p&gt;Второй &amp;ndash; &lt;a href="https://openjdk.java.net/jeps/417"&gt;JEP 417: Vector API (Third Incubator)&lt;/a&gt;. Это уже третья итерация Vector API в Java. &lt;a href="https://openjdk.java.net/jeps/338"&gt;Первая&lt;/a&gt; попала в Java 16, &lt;a href="https://openjdk.java.net/jeps/414"&gt;вторая&lt;/a&gt; &amp;ndash; в Java 17. Таким образом, третья должна попасть в &lt;a href="http://openjdk.java.net/projects/jdk/18/"&gt;Java 18&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000305.html"&gt;объявлено голосование&lt;/a&gt; по созданию нового проекта JDK под именем Wakefield. Целью этого проекта будет поддержка в Java сервера дисплея &lt;a href="https://ru.wikipedia.org/wiki/Wayland"&gt;Wayland&lt;/a&gt; в Linux, который создан для полной замены устаревшего X11. Лидером проекта предложил себя Фил Рэйс из Oracle.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Переход AdoptOpenJDK в проект Eclipse Adoptium &lt;a href="https://blog.adoptopenjdk.net/2021/08/goodbye-adoptopenjdk-hello-adoptium/"&gt;полностью завершён&lt;/a&gt;. Теперь скачивать сборки OpenJDK (которые теперь называются Eclipse Temurin) рекомендуется с сайта &lt;a href="https://adoptium.net/"&gt;adoptium.net&lt;/a&gt;. При этом сайт &lt;a href="https://adoptopenjdk.net/"&gt;AdoptOpenJDK&lt;/a&gt; и его API будут ещё какое-то время функционировать.&lt;/p&gt;
+&lt;p&gt;Сборки OpenJ9 не будут предоставляться Adoptium, поэтому их нужно скачивать с &lt;a href="https://developer.ibm.com/languages/java/semeru-runtimes/"&gt;сайта IBM&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Опубликован &lt;a href="https://redmonk.com/sogrady/2021/08/05/language-rankings-6-21/"&gt;RedMonk Programming Languages Rankings&lt;/a&gt; за 2021 год. В этом рейтинге популярность языков программирования вычисляется на основе метрик, собранных с GitHub и StackOverflow. В этом году ничего кардинального для Java и других JVM-языков не произошло: популярность Java немного возросла, и она стала делить второе место с Python (в прошлом году Python и Java занимали второе и третье место соответственно), а Scala, Kotlin и Groovy остались приблизительно на своих местах.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://maven.apache.org/download.cgi"&gt;Apache Maven 3.8.2&lt;/a&gt;. Список изменений можно посмотреть &lt;a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&amp;version=12349965"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-August/003355.html"&gt;JMH 1.33&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 class="pt-2"&gt;Полезняшки&lt;/h4&gt;
+&lt;p&gt;Чтобы выпуски новостей сделать более занимательными, я решил открыть новую рубрику &amp;laquo;Полезняшки&amp;raquo;, где я буду выкладывать по несколько ссылок на интересные инструменты, библиотеки, фреймворки, которые могут оказаться полезными для разработчиков на Java или других JVM-языках.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href="https://github.com/Col-E/Recaf"&gt;Recaf&lt;/a&gt; &amp;ndash; программа просмотра class-/jar-файлов с возможностью редактирования байткода и его сохранения.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://jqwik.net/"&gt;jqwik&lt;/a&gt; &amp;ndash; библиотека для тестирования на основе свойств (property-based testing). Название намекает на отсылку к &lt;a href="https://en.wikipedia.org/wiki/QuickCheck"&gt;QuickCheck&lt;/a&gt;, оригинальной библиотеке на Haskell для написания тестов на основе свойств.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/linkedin/URL-Detector"&gt;URL-Detector&lt;/a&gt; &amp;ndash; библиотека для поиска URL в строках. Написана командой безопасности LinkedIn.&lt;/li&gt;
+&lt;/ol&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #25</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_25.html" />
@@ -326,38 +361,5 @@ Point p = c.x; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел бэкпорт-релиз &lt;a href="https://docs.gradle.org/6.9/release-notes.html"&gt;Gradle 6.9&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003237.html"&gt;JMH 1.30&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #16</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_16.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_16.html</id>
-    <updated>2021-05-02T17:00:00Z</updated>
-    <published>2021-05-02T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.java.net/jeps/413"&gt;JEP 413: Code Snippets in Java API Documentation&lt;/a&gt;. Про него мы подробно писали в &lt;a href="java_news_5.html"&gt;выпуске новостей #5&lt;/a&gt;, когда появился его черновик.&lt;/p&gt;
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://openjdk.java.net/jeps/414"&gt;JEP 414: Vector API (Second Incubator)&lt;/a&gt;. API для векторных вычислений появилось &lt;a href="java_16.html"&gt;в Java 16&lt;/a&gt; в статусе инкубатора, и в следующем релизе продолжит находиться в этом статусе.&lt;/p&gt;
-&lt;p class="pt-2"&gt;&amp;bull; Брайан Гётц &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-April/002959.html"&gt;предложил&lt;/a&gt; в рассылке OpenJDK идею сделать все &lt;code&gt;switch&lt;/code&gt; исчерпывающими (exhaustive). Это значит, что подобное использование оператора &lt;code&gt;switch&lt;/code&gt; когда-нибудь перестанет компилироваться:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;enum&lt;/span&gt; COLOR {
-    RED, GREEN, BLUE;
-}
-
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (color) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; RED: System.out.println(&lt;span style="color: darkred"&gt;"red"&lt;/span&gt;); &lt;span style="color: blue"&gt;break&lt;/span&gt;;
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; GREEN: System.out.println(&lt;span style="color: darkred"&gt;"green"&lt;/span&gt;); &lt;span style="color: blue"&gt;break&lt;/span&gt;;
-}&lt;/pre&gt;
-&lt;p&gt;Чтобы такой statement стал компилироваться, нужно будет добавить либо недостающую константу, либо ветку &lt;code&gt;default&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Так как предлагаемое изменение сломает обратную совместимость, то сначала для неисчерпывающих &lt;code&gt;switch&lt;/code&gt; предлагается выдавать предупреждение, а лишь потом переквалифицировать их в ошибки компиляции.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли IntelliJ IDEA &lt;a href="https://blog.jetbrains.com/idea/2021/04/intellij-idea-2020-3-4/"&gt;2020.3.4&lt;/a&gt; и &lt;a href="https://blog.jetbrains.com/idea/2021/04/intellij-idea-2021-1-1/"&gt;2021.1.1&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://medium.com/graalvm/graalvm-21-1-96e18f6806bf"&gt;GraalVM 21.1&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.micronaut.io/latest/guide/#whatsNew"&gt;Micronaut 2.5&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышло обновление JDK: &lt;a href="http://jdk.java.net/17/"&gt;17-ea+20&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jcstress-dev/2021-April/000561.html"&gt;JCStress 0.10&lt;/a&gt; (библиотека для проверки корректности concurrency).&lt;/p&gt;</content>
   </entry>
 </feed>
