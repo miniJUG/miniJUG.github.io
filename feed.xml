@@ -4,7 +4,37 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-08-14T17:00:00Z</updated>
+  <updated>2021-08-29T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #27</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_27.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_27.html</id>
+    <updated>2021-08-29T17:00:00Z</updated>
+    <published>2021-08-29T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Стали известны первые два JEP'а, которые попадут в Java 18:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/400"&gt;JEP 400: UTF-8 by Default&lt;/a&gt;. В нём предлагается сделать UTF-8 кодировкой по умолчанию на всех платформах. Про него мы писали в &lt;a href="java_news_10.html"&gt;выпуске #10&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/413"&gt;JEP 413: Code Snippets in Java API Documentation&lt;/a&gt;. В этом JEP предлагается ввести новый тег &lt;code&gt;@snippet&lt;/code&gt;, помощью которого можно будет вставлять в javadoc примеры кода. Про него мы писали в &lt;a href="java_news_5.html"&gt;выпуске #5&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В IntelliJ IDEA появилась базовая поддержка Java 17. В &lt;a href="https://blog.jetbrains.com/idea/2021/08/intellij-idea-2021-2-1/"&gt;новой версии 2021.2.1&lt;/a&gt; теперь есть новый уровень языка "17 - Sealed types, always-strict floating-point semantics", а также "17 (Preview) - Pattern matching for switch", включив который, можно попробовать &lt;a href="https://openjdk.java.net/jeps/406"&gt;новую preview конструкцию языка&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Завершились голосования за создание проектов &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000306.html"&gt;Wakefield&lt;/a&gt; и &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000307.html"&gt;CRaC&lt;/a&gt;. Теперь лидеры могут официально стартовать проекты.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; JUGNsk выложил &lt;a href="https://www.youtube.com/playlist?list=PLecWId-JT7S5cqUiY7ixWcZgjdRV4upnw"&gt;видеозаписи докладов&lt;/a&gt; с февральской конференции SnowOne 2021.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://micronaut.io/2021/08/18/micronaut-framework-3-released/"&gt;Micronaut 3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.2/release-notes.html"&gt;Gradle 7.2&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 class="pt-2"&gt;Полезняшки&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://github.com/TravaOpenJDK/trava-jdk-11-dcevm"&gt;TravaOpenJDK11&lt;/a&gt; &amp;ndash; модификация OpenJDK 11 с улучшенной возможностью переопределения загруженных классов во время выполнения. Является продолжением проекта &lt;a href="https://ssw.jku.at/dcevm/"&gt;DCEVM&lt;/a&gt;. Если в обычной версии HotSpot механизм hotswap позволяет изменять только тела методов, то в DCEVM можно добавлять и удалять поля и методы, не перезапуская JVM.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/gaul/modernizer-maven-plugin"&gt;Modernizer Maven Plugin&lt;/a&gt; &amp;ndash; плагин для Maven, который ищет в проекте использования legacy API. При нахождении таких API плагин предлагает современную альтернативу (например, &lt;code&gt;java.util.Objects.equal()&lt;/code&gt; вместо &lt;code&gt;com.google.common.base.Objects.equal()&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/atp-mipt/ljv"&gt;Lightweight Java Visualizer&lt;/a&gt; &amp;ndash; библиотека, которая парсит Java-объект с помощью рефлексии, строит граф и визуализирует его с помощью Graphviz. Очень удобно, когда нужно быстро понять, как устроена та или иная структура данных.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #26</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_26.html" />
@@ -329,37 +359,5 @@ Point p = c.x; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышли &lt;a href="https://spring.io/blog/2021/05/11/spring-framework-5-3-7-and-5-2-15-available-now"&gt;Spring Framework 5.3.7 и 5.2.15&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003286.html"&gt;JMH 1.31&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #17</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_17.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_17.html</id>
-    <updated>2021-05-09T17:00:00Z</updated>
-    <published>2021-05-09T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Самая главная новость этой недели &amp;ndash; выход &lt;a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-0-released/"&gt;Kotlin 1.5.0&lt;/a&gt;. Перечислим некоторые изменения и улучшения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Появилась поддержка &lt;a href="https://openjdk.java.net/jeps/395"&gt;JVM-записей&lt;/a&gt; с помощью аннотации &lt;code&gt;@JvmRecord&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Модификатор &lt;code&gt;sealed&lt;/code&gt; теперь можно применять не только классам, но и к интерфейсам.&lt;/li&gt;
-  &lt;li&gt;Подклассы &lt;code&gt;sealed&lt;/code&gt; классов теперь не обязаны объявляться в том же файле, а могут объявляться в любых файлах того же пакета.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md"&gt;&lt;code&gt;inline value&lt;/code&gt; классы&lt;/a&gt;, которые появились в экспериментальном режиме в Kotlin 1.2.30, теперь стали стабильными.&lt;/li&gt;
-  &lt;li&gt;Новый &lt;a href="https://blog.jetbrains.com/kotlin/2021/02/the-jvm-backend-is-in-beta-let-s-make-it-stable-together/"&gt;IR (Intermediate Representation) компилятор&lt;/a&gt; Kotlin в JVM стал стабильным и включенным по умолчанию.&lt;/li&gt;
-  &lt;li&gt;SAM (Single Abstract Method) адаптеры теперь компилируются в &lt;code&gt;invokedynamic&lt;/code&gt;. Для простых лямбд такая возможность тоже появилась, но только в экспериментальном режиме с включенной опцией &lt;code&gt;-Xlambdas=indy&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Версия JVM target теперь 1.8 вместо 1.6.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="JEP 415: Context-Specific Deserialization Filters"&gt;JEP 415: Context-Specific Deserialization Filters&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/05/java-annotated-monthly-may-2021/"&gt;Java Annotated Monthly за май 2021&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В Java &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8266431"&gt;предложено&lt;/a&gt; улучшить алгоритм сортировки чисел. Тесты показывают, что прирост производительности составляет 50% в среднем и до 6 раз на больших случайных массивах. Огромный прирост в последнем случае достигается засчёт использования поразрядной сортировки.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK было предложено сделать &lt;a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-May/001518.html"&gt;&lt;code&gt;java.lang.Object&lt;/code&gt; абстрактным классом&lt;/a&gt;. Это бы сделало согласованной модель, в которой примитивные классы могут наследоваться только от абстрактных классов без полей, но сломало бы обратную совместимость на уровне исходного кода. Но запретить вызывать &lt;code&gt;new Object()&lt;/code&gt; можно поэтапно, сначала показывая предупреждение, а спустя несколько лет переквалифицировать в ошибку компиляции.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел бэкпорт-релиз &lt;a href="https://docs.gradle.org/6.9/release-notes.html"&gt;Gradle 6.9&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003237.html"&gt;JMH 1.30&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
