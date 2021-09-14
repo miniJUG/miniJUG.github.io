@@ -4,7 +4,160 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-08-29T17:00:00Z</updated>
+  <updated>2021-09-13T17:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 17</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_17.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_17.html</id>
+    <updated>2021-09-13T17:00:00Z</updated>
+    <published>2021-09-13T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="http://openjdk.java.net/projects/jdk/17/"&gt;Java 17&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-17.html"&gt;2700 закрытых задач и 14 JEP'ов&lt;/a&gt;. Изменения API можно посмотреть по &lt;a href="https://javaalmanac.io/jdk/17/apidiff/16/"&gt;этой ссылке&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/17/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Перечислим JEP'ы, которые попали в Java 17.&lt;/p&gt;
+&lt;h4&gt;Язык&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/306"&gt;Восстановление всегда строгой семантики чисел с плавающей точкой (JEP 306)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Теперь все выражения с плавающей точкой вычисляются строго на всех платформах, и разницы между строгой семантикой и семантикой по умолчанию больше нет (как это было до Java 1.2). Таким образом, ключевое слово &lt;code&gt;strictfp&lt;/code&gt; больше не имеет эффекта, и при его использовании выдаётся предупреждение:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; javac Main.java
+Main.java:1: &lt;span style="color: orange"&gt;warning: [strictfp] as of release 17, all floating-point
+expressions are evaluated strictly and 'strictfp' is not required&lt;/span&gt;
+strictfp public class Main {
+                ^&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/409"&gt;&lt;code&gt;sealed&lt;/code&gt; классы (JEP 409)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;&amp;laquo;Запечатанные&amp;raquo; классы после двух preview итераций в &lt;a href="https://openjdk.java.net/jeps/360"&gt;Java 15&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/397"&gt;Java 16&lt;/a&gt; наконец-то стали стабильной синтаксической конструкцией и больше не требуют флага &lt;code&gt;--enable-preview&lt;/code&gt;. Различий по сравнению с Java 16 нет.&lt;/p&gt;
+&lt;p&gt;Напомним, ключевым слово &lt;code&gt;sealed&lt;/code&gt; можно пометить класс или интерфейс, если нужно ограничить список его наследников. Список можно указать явно, перечислив все наследники с помощью ключевого слова &lt;code&gt;permits&lt;/code&gt;, либо он выведется неявно компилятором из всех задекларированных наследников в текущем исходном файле.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/406"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Preview) (JEP 406)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появилась новая синтаксическая конструкция в режиме preview, существенно расширяющая возможности оператора &lt;code&gt;switch&lt;/code&gt;: теперь оператор &lt;code&gt;switch&lt;/code&gt; поддерживает не только простые тесты на равенство с константами примитивов, перечислений и строк, но и тесты по паттернам.&lt;/p&gt;
+&lt;p&gt;Простейшие паттерны это паттерны по типу:&lt;/p&gt;
+&lt;pre&gt;Object o = ...
+&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; String.format(&lt;span style="color: darkred"&gt;"int %d"&lt;/span&gt;, i);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Long l -&gt; String.format(&lt;span style="color: darkred"&gt;"long %d"&lt;/span&gt;, l);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Double d -&gt; String.format(&lt;span style="color: darkred"&gt;"double %f"&lt;/span&gt;, d);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; String.format(&lt;span style="color: darkred"&gt;"String %s"&lt;/span&gt;, s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; o.toString();
+};&lt;/pre&gt;
+&lt;p&gt;Паттерны могут снабжаться условиями путём добавления охранных паттернов:&lt;/p&gt;
+&lt;pre&gt;Shape s = ...
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Triangle t &amp;&amp; (t.calculateArea() &gt; 100) -&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"Large Triangle"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"A shape (possibly a small triangle)"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Также добавлена поддержка матчинга &lt;code&gt;null&lt;/code&gt; с помощью отдельной метки &lt;code&gt;null&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;Object o = ...
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case null&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Other"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Ветки &lt;code&gt;null&lt;/code&gt; и &lt;code&gt;default&lt;/code&gt; можно объединять друг с другом:&lt;/p&gt;
+&lt;pre&gt;String s = ...
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; &lt;span style="color: darkred"&gt;"Foo"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Bar"&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Foo or Bar"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case null, default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null or other"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Все &lt;code&gt;switch&lt;/code&gt; с паттернами должны быть исчерпывающими (даже если это &lt;code&gt;switch&lt;/code&gt; statement, а не &lt;code&gt;switch&lt;/code&gt; expression):&lt;/p&gt;
+&lt;pre&gt;Object o = ...
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Integer"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 17 Main.java
+Main.java:4: &lt;span style="color: red"&gt;error: the switch statement does not cover all possible input values
+        switch (o) {
+        ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Чтобы пример выше стал компилироваться, нужно либо добавить ветку &lt;code&gt;default&lt;/code&gt;, либо тотальный паттерн (в данном случае &lt;code&gt;case Object obj&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Старый &lt;code&gt;switch&lt;/code&gt; statement можно продолжать делать неисчерпывающим, однако это может &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-April/002959.html"&gt;измениться в будущем&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Новый &lt;code&gt;switch&lt;/code&gt; очень хорошо взаимодействует с &lt;code&gt;sealed&lt;/code&gt; классами, поскольку круг подтипов является ограниченным, а это значит, что ветка &lt;code&gt;default&lt;/code&gt; не является необходимой, если перечислены все возможные случаи:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; S &lt;span style="color: blue"&gt;permits&lt;/span&gt; A, B, C {}
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; A &lt;span style="color: blue"&gt;implements&lt;/span&gt; S {}
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; B &lt;span style="color: blue"&gt;implements&lt;/span&gt; S {}
+&lt;span style="color: blue"&gt;record&lt;/span&gt; C(&lt;span style="color: blue"&gt;int&lt;/span&gt; i) &lt;span style="color: blue"&gt;implements&lt;/span&gt; S {}&lt;/pre&gt;
+&lt;pre&gt;S s = ...
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; A a -&gt; System.out.println(&lt;span style="color: darkred"&gt;"A"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; B b -&gt; System.out.println(&lt;span style="color: darkred"&gt;"B"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; C c -&gt; System.out.println(&lt;span style="color: darkred"&gt;"C"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p class="pt-2"&gt;На этом беглое рассмотрение паттерн-матчинга для &lt;code&gt;switch&lt;/code&gt; мы закончим, а про другие возможности и нюансы можно почитать на &lt;a href="https://openjdk.java.net/jeps/406"&gt;странице JEP&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/356"&gt;Enhanced Pseudo-Random Number Generators (JEP 356)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В Java 17 появился новый пакет &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/package-summary.html"&gt;&lt;code&gt;java.util.random&lt;/code&gt;&lt;/a&gt; с новыми интерфейсами и реализациями генераторов псевдослучайных чисел. Наверху иерархии новый интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.html"&gt;&lt;code&gt;RandomGenerator&lt;/code&gt;&lt;/a&gt;, который является родителем как новых генераторов и специализаций (&lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.SplittableGenerator.html"&gt;&lt;code&gt;SplittableRandomGenerator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.JumpableGenerator.html"&gt;&lt;code&gt;JumpableRandomGenerator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.LeapableGenerator.html"&gt;&lt;code&gt;LeapableRandomGenerator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.ArbitrarilyJumpableGenerator.html"&gt;&lt;code&gt;ArbitrarilyJumpableRandomGenerator&lt;/code&gt;&lt;/a&gt;), так и старых классов (&lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html"&gt;&lt;code&gt;Random&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadLocalRandom.html"&gt;&lt;code&gt;ThreadLocalRandom&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/SplittableRandom.html"&gt;&lt;code&gt;SplittableRandom&lt;/code&gt;&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Таким образом, алгоритмы генерации чисел теперь стали более взаимозаменяемыми:&lt;/p&gt;
+&lt;pre&gt;RandomGenerator random1 = &lt;span style="color: blue"&gt;new&lt;/span&gt; Random();
+RandomGenerator random2 = ThreadLocalRandom.current();
+RandomGenerator random3 = RandomGenerator.getDefault();
+RandomGenerator random4 = RandomGenerator.of(&lt;span style="color: darkred"&gt;"Xoshiro256PlusPlus"&lt;/span&gt;);&lt;/pre&gt;
+&lt;p&gt;Кроме того, список генераторов ограничен не только теми, что предоставлены самим JDK, но является расширяемыем: предоставлять свои или сторонние реализации можно через механизм &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html"&gt;ServiceLoader&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/398"&gt;Deprecate the Applet API for Removal (JEP 398)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;API аплетов, которое &lt;a href="https://openjdk.java.net/jeps/289"&gt;стало deprecated&lt;/a&gt; в Java 9, теперь стало помечено как подлежащее окончательному удалению. Таким образом, существующий код, который использует классы из Applet API (&lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/applet/Applet.html"&gt;&lt;code&gt;java.applet.Applet&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JApplet.html"&gt;&lt;code&gt;javax.swing.JApplet&lt;/code&gt;&lt;/a&gt; и т.д.), может перестать работать на одной из следующих версий Java (но всё ещё продолжит работать на Java 17).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/407"&gt;Удаление RMI Activation (JEP 407)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Механизм RMI Activation, который стал &lt;a href="https://openjdk.java.net/jeps/385"&gt;deprecated в Java 15&lt;/a&gt;, теперь удалён окончательно. RMI Activation был частью RMI, которая использовалась в чрезвычайно малом количестве приложений и фактически устарела. Для того чтобы избежать дорогой поддержки никому не нужного механизма, было принято решение его полностью удалить.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/411"&gt;Deprecate the Security Manager for Removal (JEP 411)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Security Manager стал помечен как подлежащий удалению. В одной из будущих версий его планируется удалить окончательно. Аннотацию &lt;code&gt;@Deprecated(forRemoval=true)&lt;/code&gt; получили 10 классов и 10 методов из стандартной библиотеки Java. Среди них &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/SecurityManager.html"&gt;&lt;code&gt;java.lang.SecurityManager&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/security/Policy.html"&gt;&lt;code&gt;java.security.Policy&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"&gt;&lt;code&gt;java.lang.System::setSecurityManager&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#getSecurityManager()"&gt;&lt;code&gt;java.lang.System::getSecurityManager&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html#checkAccess()"&gt;&lt;code&gt;java.lang.Thread::checkAccess&lt;/code&gt;&lt;/a&gt; и другие. Кроме того, при вызове метода &lt;code&gt;System.setSecurityManager()&lt;/code&gt; во время исполнения будет выдаваться предупреждение:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: orange"&gt;WARNING: A terminally deprecated method in java.lang.System has been called
+WARNING: System::setSecurityManager has been called by com.foo.bar.Server
+  (file:/tmp/foobarserver/thing.jar)
+WARNING: Please consider reporting this to the maintainers of com.foo.bar.Server
+WARNING: System::setSecurityManager will be removed in a future release&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Также предупреждение будет выдаваться при установке Security Manager через аргументы командной строки указанием свойства &lt;code&gt;java.security.manager&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; java -Djava.security.manager=com.foo.bar.Server MyApp
+&lt;span style="color: darkorange"&gt;WARNING: A command line option has enabled the Security Manager
+WARNING: The Security Manager is deprecated and will be removed in a future release&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;Начать отказ от Security Manager было решено по причине того, что он слабо отвечает современным требованиям безопасности и всё меньше и меньше пользуется спросом при разработке новых Java-приложений, но цена его поддержки остаётся очень высокой. У него хрупкая модель разрешений, сложная программная модель, и он приносит большие накладные расходы по производительности.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/412"&gt;Foreign Function &amp; Memory API (Incubator) (JEP 412)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Foreign Memory API, который побывал в Java &lt;a href="https://openjdk.java.net/jeps/370"&gt;14&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/383"&gt;15&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/393"&gt;16&lt;/a&gt; в инкубационном статусе, и Foreign Linker API, появившийся в &lt;a href="https://openjdk.java.net/jeps/389"&gt;Java 16&lt;/a&gt;, теперь объединены в один Foreign Function &amp; Memory API, и он всё ещё остаётся в инкубационном статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/jdk.incubator.foreign/module-summary.html"&gt;&lt;code&gt;jdk.incubator.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/414"&gt;Vector API (Second Incubator) (JEP 414)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.java.net/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, всё ещё остаётся в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/415"&gt;Context-Specific Deserialization Filters (JEP 415)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Фильтры десериализации, которые &lt;a href="https://openjdk.java.net/jeps/290"&gt;появились в Java 9&lt;/a&gt; для контроля десериализации из ненадёжных источников данных, стали более гибкими благодаря введению фабрики фильтров. Если раньше возможно было только указывать фильтр индивидуально для каждого объекта &lt;code&gt;ObjectInputStream&lt;/code&gt; или использовать один глобальный статический фильтр для всей виртуальной машины, то сейчас можно указать статическую фабрику фильтров, которая для каждой операции десериализации будет возвращать нужный фильтр, подходящий для данного контекста.&lt;/p&gt;
+&lt;p&gt;Фабрику фильтров можно установить через метод &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/ObjectInputFilter.Config.html#setSerialFilterFactory(java.util.function.BinaryOperator)"&gt;&lt;code&gt;ObjectInputFilter.Config::setSerialFilterFactory&lt;/code&gt;&lt;/a&gt;, либо через аргументы командной строки, передав имя класса фабрики в свойство &lt;code&gt;jdk.serialFilterFactory&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4&gt;JVM&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/382"&gt;New macOS Rendering Pipeline (JEP 382)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Реализован новый конвейер рендеринга на основе современного &lt;a href="https://developer.apple.com/metal/"&gt;Apple Metal API&lt;/a&gt;, который был создан с целью заменить устаревший Apple OpenGL API. Новый конвейер сосуществует со старым, который пока что остаётся включённым по умолчанию, но если OpenGL не работает, то запускается новый. Таким образом, Java 17 полностью готова к запуску на будущих версиях macOS, где OpenGL API будет окончательно удалён. Также новый конвейер можно включить явно, указав опцию &lt;code&gt;-Dsun.java2d.metal=true&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/391"&gt;Порт под macOS/AArch64 (JEP 391)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;OpenJDK портирован на архитектуру macOS/AArch64, и теперь список дистрибутивов OpenJDK и Oracle JDK пополнился сборками для Apple M1.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/403"&gt;Строгая инкапсуляция внутренностей JDK (JEP 403)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Инкапсуляция внутренних API, которая была &lt;a href="https://openjdk.java.net/jeps/260"&gt;введена в Java 9&lt;/a&gt; и была выключена по умолчанию &lt;a href="https://openjdk.java.net/jeps/396"&gt;в Java 16&lt;/a&gt;, но всё ещё могла быть включена одной опцией командной строки, теперь не может быть включена одной опцией:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; java --illegal-access=permit Main
+&lt;span style="color: orange"&gt;OpenJDK 64-Bit Server VM warning: Ignoring option --illegal-access=permit;
+  support was removed in 17.0&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Таким образом, доступиться до внутренностей JDK (&lt;code&gt;sun.*&lt;/code&gt;, &lt;code&gt;com.sun.*&lt;/code&gt;, &lt;code&gt;jdk.internal.*&lt;/code&gt; и т.д.) теперь можно только путём явного перечисления всех необходимых пакетов с помощью опций &lt;code&gt;--add-opens&lt;/code&gt; или &lt;code&gt;--add-exports&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Изменения не касаются критического API в модуле &lt;code&gt;jdk.unsupported&lt;/code&gt;: классы в пакетах &lt;code&gt;sun.misc&lt;/code&gt; и &lt;code&gt;sun.reflect&lt;/code&gt; остаются доступными без флагов.&lt;/p&gt;
+&lt;p&gt;В будущем опция &lt;code&gt;--illegal-access&lt;/code&gt; будет удалена окончательно, и при её использовании будет ошибка старта.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/410"&gt;Удаление экспериментальных компиляторов AOT и JIT (JEP 410)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Удалены экспериментальные &lt;a href="https://openjdk.java.net/jeps/295"&gt;ahead-of-time&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/317"&gt;just-in-time&lt;/a&gt; Graal компиляторы. Такое решение было принято из-за сложности поддержки и их малой используемости (те, кому они нужны, используют &lt;a href="https://www.graalvm.org/"&gt;GraalVM&lt;/a&gt;). По факту этих компиляторов уже не было в сборках JDK 16 от Oracle.&lt;/p&gt;
+&lt;p&gt;Удалению подлежали три модуля: &lt;code&gt;jdk.aot&lt;/code&gt;, &lt;code&gt;jdk.internal.vm.compiler&lt;/code&gt; и &lt;code&gt;jdk.internal.vm.compiler.management&lt;/code&gt;. Модуль &lt;a href="https://openjdk.java.net/jeps/243"&gt;JVMCI&lt;/a&gt; (&lt;code&gt;jdk.internal.vm.ci&lt;/code&gt;) остался, чтобы у разработчиков всё ещё оставалась возможность использовать внешний JIT-компилятор.&lt;/p&gt;
+
+&lt;h4&gt;Заключение&lt;/h4&gt;
+&lt;p&gt;Предыдущая версия OpenJDK с Long Term Support, &lt;a href="https://minijug.ru/java_11_is_out.html"&gt;Java 11&lt;/a&gt;, вышла ровно 3 года назад, хотя кажется, что она вышла совсем недавно, практически вчера. Но вот уже вышло 5 версий (12, 13, 14, 15, 16) и мы не успели опомниться, как подоспела следующая LTS-версия, Java 17.&lt;/p&gt;
+&lt;p&gt;Для тех, кто будет переходить с 11, Java 17 будет достаточно &lt;a href="http://openjdk.java.net/projects/jdk/17/jeps-since-jdk-11"&gt;большим апгрейдом&lt;/a&gt;. Если сложить все релизы с 12 по 17, то в сумме появилось 5 больших языковых конструкций: выражения &lt;code&gt;switch&lt;/code&gt;, блоки текста, записи, паттерн-матчинг для &lt;code&gt;instanceof&lt;/code&gt; и &lt;code&gt;sealed&lt;/code&gt; классы. Появилось очень много интересного API, сделано много улучшений производительности, оптимизировано потребление памяти, уменьшено время старта JVM. Очень много чего было удалено, поэтому могут возникнуть некоторые трудности при миграции.&lt;/p&gt;
+&lt;p&gt;Следующими большими шагами для Java будет завершение реализации проектов &lt;a href="http://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt;, &lt;a href="http://openjdk.java.net/projects/loom/"&gt;Loom&lt;/a&gt; и &lt;a href="http://openjdk.java.net/projects/panama/"&gt;Panama&lt;/a&gt;, а также дальнейшие языковые улучшения в проекте &lt;a href="http://openjdk.java.net/projects/amber/"&gt;Amber&lt;/a&gt;. Увидим ли мы всё это в следующей LTS-версии? Узнаем через 3 года.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #27</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_27.html" />
@@ -324,40 +477,5 @@ Point p = c.x; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spockframework.org/spock/docs/2.0/release_notes.html"&gt;Spock 2.0&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jol-dev/2021-May/000369.html"&gt;JOL 0.16&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #18</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_18.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_18.html</id>
-    <updated>2021-05-16T17:00:00Z</updated>
-    <published>2021-05-16T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышла &lt;a href="https://scala-lang.org/blog/2021/05/14/scala3-is-here.html"&gt;Scala 3&lt;/a&gt;. Это следующая версия языка, работа над которой велась более 8 лет более чем 100 разработчиками. В этот релиз попало 28 тысяч коммитов, 7400 пулл-реквестов и 4100 закрытых задач. Новый язык содержит в себе &amp;laquo;последние исследования в теории типов, так же как и индустриальный опыт Scala 2&amp;raquo;. Перечислим лишь некоторые изменения в новой версии:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Новый синтаксис &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/control-syntax.html"&gt;без фигурных скобок&lt;/a&gt;. Индентация теперь имеет &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/indentation.html"&gt;строгие правила&lt;/a&gt; и влияет на компиляцию.&lt;/li&gt;
-  &lt;li&gt;Ключевое слово &lt;code&gt;new&lt;/code&gt; теперь &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/creator-applications.html"&gt;опционально&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Implicit'ов больше нет, и теперь концепция разделена на несколько независимых частей, каждая из которых заточена под свои конкретные вещи: &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html"&gt;условия using&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/givens.html"&gt;given-инстансы&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html"&gt;extension-методы&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/conversions.html"&gt;неявные конверсии&lt;/a&gt;, &lt;a href="https://dotty.epfl.ch/docs/reference/contextual/context-functions.html"&gt;контекстные функции&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://dotty.epfl.ch/docs/reference/enums/enums.html"&gt;Перечисления&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html"&gt;Пересечения&lt;/a&gt; и &lt;a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html"&gt;объеденения&lt;/a&gt; типов.&lt;/li&gt;
-  &lt;li&gt;Типы функций, &lt;a href="https://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html"&gt;зависящие от параметров&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://dotty.epfl.ch/docs/reference/new-types/match-types.html"&gt;match-типы&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;trait'ы теперь &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html"&gt;могут иметь параметры&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Классы, от которых можно наследоваться, теперь должны иметь &lt;a href="https://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html"&gt;модификатор &lt;code&gt;open&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Подробный список новых возможностей и улучшений в Scala 3 можно найти &lt;a href="https://docs.scala-lang.org/scala3/new-in-scala3.html"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый черновик &lt;a href="http://openjdk.java.net/jeps/8266010"&gt;JEP: Reimplement Core Reflection on Method Handles&lt;/a&gt;. В нём предлагается реализовать рефлексию в Java поверх method handles, тем самым избавившись от одной лишней реализации рефлективного механизма, которые дублируют друг друга. Это уменьшит затраты на поддержку и разработку API в пакетах &lt;code&gt;java.lang.reflect&lt;/code&gt; и &lt;code&gt;java.lang.invoke&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; На сайте OpenJDK впервые появились &lt;a href="https://jdk.java.net/17/"&gt;сборки JDK под Apple M1&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JetBrains объявил &lt;a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-online-event/"&gt;Kotlin Online Event&lt;/a&gt; в честь выхода Kotlin 1.5. Он состоится 25 мая.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://github.com/scala/scala/releases/tag/v2.13.6"&gt;Scala 2.13.6&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли &lt;a href="https://spring.io/blog/2021/05/11/spring-framework-5-3-7-and-5-2-15-available-now"&gt;Spring Framework 5.3.7 и 5.2.15&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003286.html"&gt;JMH 1.31&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
