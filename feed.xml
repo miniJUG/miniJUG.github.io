@@ -37,7 +37,7 @@
 
 &lt;p class="pt-2"&gt;&amp;bull; Роман Кеннке, лидер проекта Shenandoah в RedHat, рассказал, как им удалось достичь &lt;a href="https://developers.redhat.com/articles/2021/09/16/shenandoah-openjdk-17-sub-millisecond-gc-pauses"&gt;субмиллисекундных пауз&lt;/a&gt; сборщика мусора в Java 17. В этом им помогла &lt;a href="https://openjdk.java.net/jeps/376"&gt;конкурентная обработка стеков потоков&lt;/a&gt;, которая ранее была реализована для ZGC и также помогла значительно &lt;a href="https://malloc.se/blog/zgc-jdk16"&gt;снизить паузы&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2021/09/java-annotated-monthly-september-2021/"&gt;Java Annotated Montly&lt;/a&gt; от JetBrains за сентябрь 2021.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2021/09/java-annotated-monthly-september-2021/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за сентябрь 2021.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://gluonhq.com/products/javafx/openjfx-17-release-notes/"&gt;JavaFX 17&lt;/a&gt; с Long Term Support.&lt;/p&gt;</content>
   </entry>
