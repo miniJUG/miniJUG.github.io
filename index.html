@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-09-14">
+    <meta property="article:published_time" content="2021-09-20">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,152 +31,35 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Вышла Java 17</h3>
-<p class="text-secondary"><time datetime="2021-09-14">14 сентября, 2021</time></p>
+<h3 id="title">Новости Java #28</h3>
+<p class="text-secondary"><time datetime="2021-09-20">20 сентября, 2021</time></p>
 <article>
-<p>Вышла общедоступная версия <a href="http://openjdk.java.net/projects/jdk/17/">Java 17</a>. В этот релиз попало более <a href="https://builds.shipilev.net/backports-monitor/release-notes-17.html">2700 закрытых задач и 14 JEP'ов</a>. Изменения API можно посмотреть по <a href="https://javaalmanac.io/jdk/17/apidiff/16/">этой ссылке</a>.</p>
-<!-- cut -->
-<p>Ссылки на скачивание:</p>
+<p>&bull; Главной новостью прошедшей недели стал <a href="java_17.html">выход Java 17</a>. Это следующая LTS-версия Java, которая вышла спустя 3 года после предыдущей <a href="java_11_is_out.html">Java 11</a>.</p>
+<p>Но релиз Java 17 оказался не единственным большим событием. Сразу после того, как Oracle JDK 17 стал доступен для скачивания на сайте компании, Oracle опубликовал две важных новости.</p>
+<p>Во-первых, лицензия Oracle JDK <a href="https://blogs.oracle.com/java/post/free-java-license">поменялась</a> и вновь стала свободной, как это было <a href="https://minijug.ru/no_more_free_oracle_jdk.html">до Java 11</a>. Таким образом, сборку Oracle JDK 17 можно использовать бесплатно как в разработке, так и в продуктовом окружении в коммерческих целях. Такое решение было принято компанией в результате анализа обратной связи со стороны пользователей, которые приветствовали наличие сборок OpenJDK под GPL, но всё же хотели иметь &laquo;проверенный и надёжный, как скала&raquo;, образ Oracle JDK под однозначно бесплатной лицензией. Кроме того, было заявлено, что бесплатные <a href="https://www.oracle.com/java/technologies/downloads/">обновления  Oracle JDK 17</a> будут выходить как минимум до сентября 2024 года, то есть три года, а не полгода с момента выхода, как это было для Java 9-16. Что касается Oracle OpenJDK, то с ним всё остаётся <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-September/005949.html">без изменений</a>: Oracle будет поддерживать OpenJDK первые полгода и выпустит, как обычно, только два обновления (17.0.1 и 17.0.2).</p>
+<p>Во-вторых, Oracle предложил <a href="https://blogs.oracle.com/java/post/moving-the-jdk-to-a-two-year-lts-cadence">участить цикл</a> выхода LTS-версий Java и выпускать LTS не каждые три года, а каждые два. Это значит, что согласно этому предложению следующей LTS-версией может стать Java 21, которая выйдет в 2023 году, а не Java 23. Такое изменение компания мотивирует тем, что несмотря на наличие предсказуемых шестимесячных релизов, многие предприятия всё же предпочитают использовать LTS и не спешат обновляться. Более короткий цикл мог бы дать компаниям мотивацию обновляться чаще и повысит привлекательность всех релизов, в том числе и не-LTS. Это в свою очередь даст ускорение всей экосистеме Java.</p>
+<p>Также Oracle запустил новый сайт <a href="https://dev.java/">dev.java</a>, в котором собраны полезные материалы для изучения Java, ссылки на новости и полезные ресурсы.</p>
+<p class="pt-2">&bull; Новости JEP'ов:</p>
 <ul>
-  <li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle JDK</a></li>
-  <li><a href="http://jdk.java.net/17/">OpenJDK</a></li>
+  <li>Java 18 пополнилась ещё одним JEP: <a href="https://openjdk.java.net/jeps/417">Vector API (Third Incubator)</a>. Теперь в Java 18 <a href="http://openjdk.java.net/projects/jdk/18/">уже три JEP'а</a>.</li>
+  <li><a href="https://openjdk.java.net/jeps/418">Internet-Address Resolution SPI</a> перестал быть черновиком и стал кандидатом, получив номер 418. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</li>
 </ul>
 
-<p>Перечислим JEP'ы, которые попали в Java 17.</p>
-<h4>Язык</h4>
-<h5><a href="https://openjdk.java.net/jeps/306">Восстановление всегда строгой семантики чисел с плавающей точкой (JEP 306)</a></h5>
-<p>Теперь все выражения с плавающей точкой вычисляются строго на всех платформах, и разницы между строгой семантикой и семантикой по умолчанию больше нет (как это было до Java 1.2). Таким образом, ключевое слово <code class="text-nowrap">strictfp</code> больше не имеет эффекта, и при его использовании выдаётся предупреждение:</p>
-<pre class="border p-lg-2 p-1">&gt; javac Main.java
-Main.java:1: <span style="color: orange">warning: [strictfp] as of release 17, all floating-point
-expressions are evaluated strictly and 'strictfp' is not required</span>
-strictfp public class Main {
-                ^</pre>
+<p class="pt-2">&bull; Джим Ласки и Брайан Гётц <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-September/003107.html">предложили</a> рассмотреть идею новой языковой конструкции в Java: <a href="https://github.com/openjdk/amber-docs/blob/master/site/design-notes/templated-strings.md">шаблонные строки</a>. Шаблонные строки представляют собой улучшение и развитие идеи строковой интерполяции, которая есть в большинстве популярных языков программирования (C#, Kotlin, Scala, JavaScript и др).</p>
+<p>Главное отличие от простой строковой интерполяции &ndash; это отделение механизма выражения шаблонной строки в языке от политики комбинирования строки и параметров. Например, все эти три примера используют один и тот же механизм:</p>
+<pre class="border p-lg-2 p-1">String s = STR.<span style="color: darkred">"Hello </span><span style="color: darkblue">\{</span>name<span style="color: darkblue">}</span><span style="color: darkred">, I am </span><span style="color: darkblue">\{</span>age<span style="color: darkblue">}</span><span style="color: darkred"> years old"</span>;</pre>
+<pre class="border p-lg-2 p-1"><span style="color: blue">var</span> query = connection.<span style="color: darkred">"SELECT * FROM </span><span style="color: darkblue">\{</span>table<span style="color: darkblue">}</span><span style="color: darkred">"</span>;</pre>
+<pre class="border p-lg-2 p-1">String message = resourceBundle.<span style="color: darkred">"error: file </span><span style="color: darkblue">\{</span>filename<span style="color: darkblue">}</span><span style="color: darkred"> not found"</span>;</pre>
+<p>Но политика комбинирования шаблона и параметров совершенно разная, потому что каждый из объектов реализует интерфейс политики по-своему: <code class="text-nowrap">STR</code> выполняет простую строковую конкатенацию, <code class="text-nowrap">connection</code> создаёт объект запроса (который необязательно <code class="text-nowrap">String</code>), выполняя валидацию и нормализацию, например, оборачивает имя таблицы в одинарные кавычки, а <code class="text-nowrap">resourceBundle</code> пытается найти подходящую строку для текущей локали и форматирует сообщение по правилам <code class="text-nowrap">MessageFormat</code>.</p>
+<p>Таким образом, шаблонные строки не просто решают задачу интерполяции, а предоставляют гибкий и общий инструмент, дающий возможность библиотекам полностью контролировать весь процесс валидации, трансформации и комбинирования параметров со строкой.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/409"><code class="text-nowrap">sealed</code> классы (JEP 409)</a></h5>
-<p>&laquo;Запечатанные&raquo; классы после двух preview итераций в <a href="https://openjdk.java.net/jeps/360">Java 15</a> и <a href="https://openjdk.java.net/jeps/397">Java 16</a> наконец-то стали стабильной синтаксической конструкцией и больше не требуют флага <code class="text-nowrap">--enable-preview</code>. Различий по сравнению с Java 16 нет.</p>
-<p>Напомним, ключевым слово <code class="text-nowrap">sealed</code> можно пометить класс или интерфейс, если нужно ограничить список его наследников. Список можно указать явно, перечислив все наследники с помощью ключевого слова <code class="text-nowrap">permits</code>, либо он выведется неявно компилятором из всех задекларированных наследников в текущем исходном файле.</p>
+<p class="pt-2">&bull; Вышел <a href="https://www.eclipse.org/eclipseide/2021-09/noteworthy/">Eclipse 2021-09</a>. Среди улучшений более быстрый стартап IDE, функция Raw Paste, новый quick-fix для конвертации цикла <code class="text-nowrap">while</code> в <code class="text-nowrap">do-while</code>, дефолтные фильтры в Java &#8594; Appearance &#8594; Type Filters, улучшенный диалог сохранения нескольких файлов, улучшенная тёмная тема и другие. Встроенной поддержки Java 17 пока что нет, но она доступна в <a href="https://marketplace.eclipse.org/content/java-17-support-eclipse-2021-09-421">Eclipse Marketplace</a>. Более подробно про улучшения можно посмотреть в <a href="https://www.youtube.com/watch?v=_OkIpz__Fyk">видео</a>.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/406">Паттерн-матчинг для <code class="text-nowrap">switch</code> (Preview) (JEP 406)</a></h5>
-<p>Появилась новая синтаксическая конструкция в режиме preview, существенно расширяющая возможности оператора <code class="text-nowrap">switch</code>: теперь оператор <code class="text-nowrap">switch</code> поддерживает не только простые тесты на равенство с константами примитивов, перечислений и строк, но и тесты по паттернам.</p>
-<p>Простейшие паттерны это паттерны по типу:</p>
-<pre class="border p-lg-2 p-1">Object o = ...
-<span style="color: blue">return switch</span> (o) {
-    <span style="color: blue">case</span> Integer i -> String.format(<span style="color: darkred">"int %d"</span>, i);
-    <span style="color: blue">case</span> Long l -> String.format(<span style="color: darkred">"long %d"</span>, l);
-    <span style="color: blue">case</span> Double d -> String.format(<span style="color: darkred">"double %f"</span>, d);
-    <span style="color: blue">case</span> String s -> String.format(<span style="color: darkred">"String %s"</span>, s);
-    <span style="color: blue">default</span> -> o.toString();
-};</pre>
-<p>Паттерны могут снабжаться условиями путём добавления охранных паттернов:</p>
-<pre class="border p-lg-2 p-1">Shape s = ...
-<span style="color: blue">switch</span> (s) {
-    <span style="color: blue">case</span> Triangle t && (t.calculateArea() > 100) ->
-        System.out.println(<span style="color: darkred">"Large Triangle"</span>);
-    <span style="color: blue">default</span> ->
-        System.out.println(<span style="color: darkred">"A shape (possibly a small triangle)"</span>);
-}</pre>
-<p>Также добавлена поддержка матчинга <code class="text-nowrap">null</code> с помощью отдельной метки <code class="text-nowrap">null</code>:</p>
-<pre class="border p-lg-2 p-1">Object o = ...
-<span style="color: blue">switch</span> (o) {
-    <span style="color: blue">case null</span> -> System.out.println(<span style="color: darkred">"Null"</span>);
-    <span style="color: blue">case</span> String s -> System.out.println(<span style="color: darkred">"String: "</span> + s);
-    <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"Other"</span>);
-}</pre>
-<p>Ветки <code class="text-nowrap">null</code> и <code class="text-nowrap">default</code> можно объединять друг с другом:</p>
-<pre class="border p-lg-2 p-1">String s = ...
-<span style="color: blue">switch</span> (s) {
-    <span style="color: blue">case</span> <span style="color: darkred">"Foo"</span>, <span style="color: darkred">"Bar"</span> -> System.out.println(<span style="color: darkred">"Foo or Bar"</span>);
-    <span style="color: blue">case null, default</span> -> System.out.println(<span style="color: darkred">"Null or other"</span>);
-}</pre>
-<p>Все <code class="text-nowrap">switch</code> с паттернами должны быть исчерпывающими (даже если это <code class="text-nowrap">switch</code> statement, а не <code class="text-nowrap">switch</code> expression):</p>
-<pre class="border p-lg-2 p-1">Object o = ...
-<span style="color: blue">switch</span> (o) {
-    <span style="color: blue">case</span> String s -> System.out.println(<span style="color: darkred">"String: "</span> + s);
-    <span style="color: blue">case</span> Integer i -> System.out.println(<span style="color: darkred">"Integer"</span>);
-}</pre>
-<pre class="border p-lg-2 p-1">&gt; javac --enable-preview --release 17 Main.java
-Main.java:4: <span style="color: red">error: the switch statement does not cover all possible input values
-        switch (o) {
-        ^</span></pre>
-<p>Чтобы пример выше стал компилироваться, нужно либо добавить ветку <code class="text-nowrap">default</code>, либо тотальный паттерн (в данном случае <code class="text-nowrap">case Object obj</code>).</p>
-<p>Старый <code class="text-nowrap">switch</code> statement можно продолжать делать неисчерпывающим, однако это может <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-April/002959.html">измениться в будущем</a>.</p>
-<p>Новый <code class="text-nowrap">switch</code> очень хорошо взаимодействует с <code class="text-nowrap">sealed</code> классами, поскольку круг подтипов является ограниченным, а это значит, что ветка <code class="text-nowrap">default</code> не является необходимой, если перечислены все возможные случаи:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">sealed interface</span> S <span style="color: blue">permits</span> A, B, C {}
-<span style="color: blue">final class</span> A <span style="color: blue">implements</span> S {}
-<span style="color: blue">final class</span> B <span style="color: blue">implements</span> S {}
-<span style="color: blue">record</span> C(<span style="color: blue">int</span> i) <span style="color: blue">implements</span> S {}</pre>
-<pre class="border p-lg-2 p-1">S s = ...
-<span style="color: blue">switch</span> (s) {
-    <span style="color: blue">case</span> A a -> System.out.println(<span style="color: darkred">"A"</span>);
-    <span style="color: blue">case</span> B b -> System.out.println(<span style="color: darkred">"B"</span>);
-    <span style="color: blue">case</span> C c -> System.out.println(<span style="color: darkred">"C"</span>);
-}</pre>
-<p class="pt-2">На этом беглое рассмотрение паттерн-матчинга для <code class="text-nowrap">switch</code> мы закончим, а про другие возможности и нюансы можно почитать на <a href="https://openjdk.java.net/jeps/406">странице JEP</a>.</p>
+<p class="pt-2">&bull; Роман Кеннке, лидер проекта Shenandoah в RedHat, рассказал, как им удалось достичь <a href="https://developers.redhat.com/articles/2021/09/16/shenandoah-openjdk-17-sub-millisecond-gc-pauses">субмиллисекундных пауз</a> сборщика мусора в Java 17. В этом им помогла <a href="https://openjdk.java.net/jeps/376">конкурентная обработка стеков потоков</a>, которая ранее была реализована для ZGC и также помогла значительно <a href="https://malloc.se/blog/zgc-jdk16">снизить паузы</a>.</p>
 
-<h4>API</h4>
-<h5><a href="https://openjdk.java.net/jeps/356">Enhanced Pseudo-Random Number Generators (JEP 356)</a></h5>
-<p>В Java 17 появился новый пакет <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/package-summary.html"><code class="text-nowrap">java.util.random</code></a> с новыми интерфейсами и реализациями генераторов псевдослучайных чисел. Наверху иерархии новый интерфейс <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.html"><code class="text-nowrap">RandomGenerator</code></a>, который является родителем как новых генераторов и специализаций (<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.SplittableGenerator.html"><code class="text-nowrap">SplittableRandomGenerator</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.JumpableGenerator.html"><code class="text-nowrap">JumpableRandomGenerator</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.LeapableGenerator.html"><code class="text-nowrap">LeapableRandomGenerator</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.ArbitrarilyJumpableGenerator.html"><code class="text-nowrap">ArbitrarilyJumpableRandomGenerator</code></a>), так и старых классов (<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html"><code class="text-nowrap">Random</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadLocalRandom.html"><code class="text-nowrap">ThreadLocalRandom</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/SplittableRandom.html"><code class="text-nowrap">SplittableRandom</code></a>).</p>
-<p>Таким образом, алгоритмы генерации чисел теперь стали более взаимозаменяемыми:</p>
-<pre class="border p-lg-2 p-1">RandomGenerator random1 = <span style="color: blue">new</span> Random();
-RandomGenerator random2 = ThreadLocalRandom.current();
-RandomGenerator random3 = RandomGenerator.getDefault();
-RandomGenerator random4 = RandomGenerator.of(<span style="color: darkred">"Xoshiro256PlusPlus"</span>);</pre>
-<p>Кроме того, список генераторов ограничен не только теми, что предоставлены самим JDK, но является расширяемыем: предоставлять свои или сторонние реализации можно через механизм <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html">ServiceLoader</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/idea/2021/09/java-annotated-monthly-september-2021/">Java Annotated Montly</a> от JetBrains за сентябрь 2021.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/398">Deprecate the Applet API for Removal (JEP 398)</a></h5>
-<p>API аплетов, которое <a href="https://openjdk.java.net/jeps/289">стало deprecated</a> в Java 9, теперь стало помечено как подлежащее окончательному удалению. Таким образом, существующий код, который использует классы из Applet API (<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/applet/Applet.html"><code class="text-nowrap">java.applet.Applet</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JApplet.html"><code class="text-nowrap">javax.swing.JApplet</code></a> и т.д.), может перестать работать на одной из следующих версий Java (но всё ещё продолжит работать на Java 17).</p>
-
-<h5><a href="https://openjdk.java.net/jeps/407">Удаление RMI Activation (JEP 407)</a></h5>
-<p>Механизм RMI Activation, который стал <a href="https://openjdk.java.net/jeps/385">deprecated в Java 15</a>, теперь удалён окончательно. RMI Activation был частью RMI, которая использовалась в чрезвычайно малом количестве приложений и фактически устарела. Для того чтобы избежать дорогой поддержки никому не нужного механизма, было принято решение его полностью удалить.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/411">Deprecate the Security Manager for Removal (JEP 411)</a></h5>
-<p>Security Manager стал помечен как подлежащий удалению. В одной из будущих версий его планируется удалить окончательно. Аннотацию <code class="text-nowrap">@Deprecated(forRemoval=true)</code> получили 10 классов и 10 методов из стандартной библиотеки Java. Среди них <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/SecurityManager.html"><code class="text-nowrap">java.lang.SecurityManager</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/security/Policy.html"><code class="text-nowrap">java.security.Policy</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"><code class="text-nowrap">java.lang.System::setSecurityManager</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#getSecurityManager()"><code class="text-nowrap">java.lang.System::getSecurityManager</code></a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html#checkAccess()"><code class="text-nowrap">java.lang.Thread::checkAccess</code></a> и другие. Кроме того, при вызове метода <code class="text-nowrap">System.setSecurityManager()</code> во время исполнения будет выдаваться предупреждение:</p>
-<pre class="border p-lg-2 p-1"><span style="color: orange">WARNING: A terminally deprecated method in java.lang.System has been called
-WARNING: System::setSecurityManager has been called by com.foo.bar.Server
-  (file:/tmp/foobarserver/thing.jar)
-WARNING: Please consider reporting this to the maintainers of com.foo.bar.Server
-WARNING: System::setSecurityManager will be removed in a future release</span></pre>
-<p>Также предупреждение будет выдаваться при установке Security Manager через аргументы командной строки указанием свойства <code class="text-nowrap">java.security.manager</code>:</p>
-<pre class="border p-lg-2 p-1">&gt; java -Djava.security.manager=com.foo.bar.Server MyApp
-<span style="color: darkorange">WARNING: A command line option has enabled the Security Manager
-WARNING: The Security Manager is deprecated and will be removed in a future release</span></pre>
-
-<p class="pt-2">Начать отказ от Security Manager было решено по причине того, что он слабо отвечает современным требованиям безопасности и всё меньше и меньше пользуется спросом при разработке новых Java-приложений, но цена его поддержки остаётся очень высокой. У него хрупкая модель разрешений, сложная программная модель, и он приносит большие накладные расходы по производительности.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/412">Foreign Function & Memory API (Incubator) (JEP 412)</a></h5>
-<p>Foreign Memory API, который побывал в Java <a href="https://openjdk.java.net/jeps/370">14</a>, <a href="https://openjdk.java.net/jeps/383">15</a>, <a href="https://openjdk.java.net/jeps/393">16</a> в инкубационном статусе, и Foreign Linker API, появившийся в <a href="https://openjdk.java.net/jeps/389">Java 16</a>, теперь объединены в один Foreign Function & Memory API, и он всё ещё остаётся в инкубационном статусе в модуле <a href="https://docs.oracle.com/en/java/javase/17/docs/api/jdk.incubator.foreign/module-summary.html"><code class="text-nowrap">jdk.incubator.foreign</code></a>.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/414">Vector API (Second Incubator) (JEP 414)</a></h5>
-<p>Векторное API, которое появилось в <a href="https://openjdk.java.net/jeps/338">Java 16</a> в инкубационном статусе, всё ещё остаётся в этом статусе в модуле <a href="https://docs.oracle.com/en/java/javase/17/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/415">Context-Specific Deserialization Filters (JEP 415)</a></h5>
-<p>Фильтры десериализации, которые <a href="https://openjdk.java.net/jeps/290">появились в Java 9</a> для контроля десериализации из ненадёжных источников данных, стали более гибкими благодаря введению фабрики фильтров. Если раньше возможно было только указывать фильтр индивидуально для каждого объекта <code class="text-nowrap">ObjectInputStream</code> или использовать один глобальный статический фильтр для всей виртуальной машины, то сейчас можно указать статическую фабрику фильтров, которая для каждой операции десериализации будет возвращать нужный фильтр, подходящий для данного контекста.</p>
-<p>Фабрику фильтров можно установить через метод <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/ObjectInputFilter.Config.html#setSerialFilterFactory(java.util.function.BinaryOperator)"><code class="text-nowrap">ObjectInputFilter.Config::setSerialFilterFactory</code></a>, либо через аргументы командной строки, передав имя класса фабрики в свойство <code class="text-nowrap">jdk.serialFilterFactory</code>.</p>
-
-<h4>JVM</h4>
-<h5><a href="https://openjdk.java.net/jeps/382">New macOS Rendering Pipeline (JEP 382)</a></h5>
-<p>Реализован новый конвейер рендеринга на основе современного <a href="https://developer.apple.com/metal/">Apple Metal API</a>, который был создан с целью заменить устаревший Apple OpenGL API. Новый конвейер сосуществует со старым, который пока что остаётся включённым по умолчанию, но если OpenGL не работает, то запускается новый. Таким образом, Java 17 полностью готова к запуску на будущих версиях macOS, где OpenGL API будет окончательно удалён. Также новый конвейер можно включить явно, указав опцию <code class="text-nowrap">-Dsun.java2d.metal=true</code>.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/391">Порт под macOS/AArch64 (JEP 391)</a></h5>
-<p>OpenJDK портирован на архитектуру macOS/AArch64, и теперь список дистрибутивов OpenJDK и Oracle JDK пополнился сборками для Apple M1.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/403">Строгая инкапсуляция внутренностей JDK (JEP 403)</a></h5>
-<p>Инкапсуляция внутренних API, которая была <a href="https://openjdk.java.net/jeps/260">введена в Java 9</a> и была выключена по умолчанию <a href="https://openjdk.java.net/jeps/396">в Java 16</a>, но всё ещё могла быть включена одной опцией командной строки, теперь не может быть включена одной опцией:</p>
-<pre class="border p-lg-2 p-1">&gt; java --illegal-access=permit Main
-<span style="color: orange">OpenJDK 64-Bit Server VM warning: Ignoring option --illegal-access=permit;
-  support was removed in 17.0</span></pre>
-<p>Таким образом, доступиться до внутренностей JDK (<code class="text-nowrap">sun.*</code>, <code class="text-nowrap">com.sun.*</code>, <code class="text-nowrap">jdk.internal.*</code> и т.д.) теперь можно только путём явного перечисления всех необходимых пакетов с помощью опций <code class="text-nowrap">--add-opens</code> или <code class="text-nowrap">--add-exports</code>.</p>
-<p>Изменения не касаются критического API в модуле <code class="text-nowrap">jdk.unsupported</code>: классы в пакетах <code class="text-nowrap">sun.misc</code> и <code class="text-nowrap">sun.reflect</code> остаются доступными без флагов.</p>
-<p>В будущем опция <code class="text-nowrap">--illegal-access</code> будет удалена окончательно, и при её использовании будет ошибка старта.</p>
-
-<h5><a href="https://openjdk.java.net/jeps/410">Удаление экспериментальных компиляторов AOT и JIT (JEP 410)</a></h5>
-<p>Удалены экспериментальные <a href="https://openjdk.java.net/jeps/295">ahead-of-time</a> и <a href="https://openjdk.java.net/jeps/317">just-in-time</a> Graal компиляторы. Такое решение было принято из-за сложности поддержки и их малой используемости (те, кому они нужны, используют <a href="https://www.graalvm.org/">GraalVM</a>). По факту этих компиляторов уже не было в сборках JDK 16 от Oracle.</p>
-<p>Удалению подлежали три модуля: <code class="text-nowrap">jdk.aot</code>, <code class="text-nowrap">jdk.internal.vm.compiler</code> и <code class="text-nowrap">jdk.internal.vm.compiler.management</code>. Модуль <a href="https://openjdk.java.net/jeps/243">JVMCI</a> (<code class="text-nowrap">jdk.internal.vm.ci</code>) остался, чтобы у разработчиков всё ещё оставалась возможность использовать внешний JIT-компилятор.</p>
-
-<h4>Заключение</h4>
-<p>Предыдущая версия OpenJDK с Long Term Support, <a href="https://minijug.ru/java_11_is_out.html">Java 11</a>, вышла ровно 3 года назад, хотя кажется, что она вышла совсем недавно, практически вчера. Но вот уже вышло 5 версий (12, 13, 14, 15, 16) и мы не успели опомниться, как подоспела следующая LTS-версия, Java 17.</p>
-<p>Для тех, кто будет переходить с 11, Java 17 будет достаточно <a href="http://openjdk.java.net/projects/jdk/17/jeps-since-jdk-11">большим апгрейдом</a>. Если сложить все релизы с 12 по 17, то в сумме появилось 5 больших языковых конструкций: выражения <code class="text-nowrap">switch</code>, блоки текста, записи, паттерн-матчинг для <code class="text-nowrap">instanceof</code> и <code class="text-nowrap">sealed</code> классы. Появилось очень много интересного API, сделано много улучшений производительности, оптимизировано потребление памяти, уменьшено время старта JVM. Очень много чего было удалено, поэтому могут возникнуть некоторые трудности при миграции.</p>
-<p>Следующими большими шагами для Java будет завершение реализации проектов <a href="http://openjdk.java.net/projects/valhalla/">Valhalla</a>, <a href="http://openjdk.java.net/projects/loom/">Loom</a> и <a href="http://openjdk.java.net/projects/panama/">Panama</a>, а также дальнейшие языковые улучшения в проекте <a href="http://openjdk.java.net/projects/amber/">Amber</a>. Увидим ли мы всё это в следующей LTS-версии? Узнаем через <a href="https://mreinhold.org/blog/forward-even-faster">2 года</a>.</p>
+<p class="pt-2">&bull; Вышла <a href="https://gluonhq.com/products/javafx/openjfx-17-release-notes/">JavaFX 17</a> с Long Term Support.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -184,6 +67,7 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_28.html" class="text-secondary">Новости Java #28</a></li>
 <li class="text-secondary"><a href="java_17.html" class="text-secondary">Вышла Java 17</a></li>
 <li class="text-secondary"><a href="java_news_27.html" class="text-secondary">Новости Java #27</a></li>
 <li class="text-secondary"><a href="java_news_26.html" class="text-secondary">Новости Java #26</a></li>

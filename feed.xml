@@ -4,7 +4,43 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-09-13T17:00:00Z</updated>
+  <updated>2021-09-19T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #28</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_28.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_28.html</id>
+    <updated>2021-09-19T17:00:00Z</updated>
+    <published>2021-09-19T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Главной новостью прошедшей недели стал &lt;a href="java_17.html"&gt;выход Java 17&lt;/a&gt;. Это следующая LTS-версия Java, которая вышла спустя 3 года после предыдущей &lt;a href="java_11_is_out.html"&gt;Java 11&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Но релиз Java 17 оказался не единственным большим событием. Сразу после того, как Oracle JDK 17 стал доступен для скачивания на сайте компании, Oracle опубликовал две важных новости.&lt;/p&gt;
+&lt;p&gt;Во-первых, лицензия Oracle JDK &lt;a href="https://blogs.oracle.com/java/post/free-java-license"&gt;поменялась&lt;/a&gt; и вновь стала свободной, как это было &lt;a href="https://minijug.ru/no_more_free_oracle_jdk.html"&gt;до Java 11&lt;/a&gt;. Таким образом, сборку Oracle JDK 17 можно использовать бесплатно как в разработке, так и в продуктовом окружении в коммерческих целях. Такое решение было принято компанией в результате анализа обратной связи со стороны пользователей, которые приветствовали наличие сборок OpenJDK под GPL, но всё же хотели иметь &amp;laquo;проверенный и надёжный, как скала&amp;raquo;, образ Oracle JDK под однозначно бесплатной лицензией. Кроме того, было заявлено, что бесплатные &lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;обновления  Oracle JDK 17&lt;/a&gt; будут выходить как минимум до сентября 2024 года, то есть три года, а не полгода с момента выхода, как это было для Java 9-16. Что касается Oracle OpenJDK, то с ним всё остаётся &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-September/005949.html"&gt;без изменений&lt;/a&gt;: Oracle будет поддерживать OpenJDK первые полгода и выпустит, как обычно, только два обновления (17.0.1 и 17.0.2).&lt;/p&gt;
+&lt;p&gt;Во-вторых, Oracle предложил &lt;a href="https://blogs.oracle.com/java/post/moving-the-jdk-to-a-two-year-lts-cadence"&gt;участить цикл&lt;/a&gt; выхода LTS-версий Java и выпускать LTS не каждые три года, а каждые два. Это значит, что согласно этому предложению следующей LTS-версией может стать Java 21, которая выйдет в 2023 году, а не Java 23. Такое изменение компания мотивирует тем, что несмотря на наличие предсказуемых шестимесячных релизов, многие предприятия всё же предпочитают использовать LTS и не спешат обновляться. Более короткий цикл мог бы дать компаниям мотивацию обновляться чаще и повысит привлекательность всех релизов, в том числе и не-LTS. Это в свою очередь даст ускорение всей экосистеме Java.&lt;/p&gt;
+&lt;p&gt;Также Oracle запустил новый сайт &lt;a href="https://dev.java/"&gt;dev.java&lt;/a&gt;, в котором собраны полезные материалы для изучения Java, ссылки на новости и полезные ресурсы.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Новости JEP'ов:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Java 18 пополнилась ещё одним JEP: &lt;a href="https://openjdk.java.net/jeps/417"&gt;Vector API (Third Incubator)&lt;/a&gt;. Теперь в Java 18 &lt;a href="http://openjdk.java.net/projects/jdk/18/"&gt;уже три JEP'а&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/418"&gt;Internet-Address Resolution SPI&lt;/a&gt; перестал быть черновиком и стал кандидатом, получив номер 418. Про него мы писали в &lt;a href="java_news_24.html"&gt;выпуске #24&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Джим Ласки и Брайан Гётц &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-September/003107.html"&gt;предложили&lt;/a&gt; рассмотреть идею новой языковой конструкции в Java: &lt;a href="https://github.com/openjdk/amber-docs/blob/master/site/design-notes/templated-strings.md"&gt;шаблонные строки&lt;/a&gt;. Шаблонные строки представляют собой улучшение и развитие идеи строковой интерполяции, которая есть в большинстве популярных языков программирования (C#, Kotlin, Scala, JavaScript и др).&lt;/p&gt;
+&lt;p&gt;Главное отличие от простой строковой интерполяции &amp;ndash; это отделение механизма выражения шаблонной строки в языке от политики комбинирования строки и параметров. Например, все эти три примера используют один и тот же механизм:&lt;/p&gt;
+&lt;pre&gt;String s = STR.&lt;span style="color: darkred"&gt;"Hello &lt;/span&gt;&lt;span style="color: darkblue"&gt;\{&lt;/span&gt;name&lt;span style="color: darkblue"&gt;}&lt;/span&gt;&lt;span style="color: darkred"&gt;, I am &lt;/span&gt;&lt;span style="color: darkblue"&gt;\{&lt;/span&gt;age&lt;span style="color: darkblue"&gt;}&lt;/span&gt;&lt;span style="color: darkred"&gt; years old"&lt;/span&gt;;&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; query = connection.&lt;span style="color: darkred"&gt;"SELECT * FROM &lt;/span&gt;&lt;span style="color: darkblue"&gt;\{&lt;/span&gt;table&lt;span style="color: darkblue"&gt;}&lt;/span&gt;&lt;span style="color: darkred"&gt;"&lt;/span&gt;;&lt;/pre&gt;
+&lt;pre&gt;String message = resourceBundle.&lt;span style="color: darkred"&gt;"error: file &lt;/span&gt;&lt;span style="color: darkblue"&gt;\{&lt;/span&gt;filename&lt;span style="color: darkblue"&gt;}&lt;/span&gt;&lt;span style="color: darkred"&gt; not found"&lt;/span&gt;;&lt;/pre&gt;
+&lt;p&gt;Но политика комбинирования шаблона и параметров совершенно разная, потому что каждый из объектов реализует интерфейс политики по-своему: &lt;code&gt;STR&lt;/code&gt; выполняет простую строковую конкатенацию, &lt;code&gt;connection&lt;/code&gt; создаёт объект запроса (который необязательно &lt;code&gt;String&lt;/code&gt;), выполняя валидацию и нормализацию, например, оборачивает имя таблицы в одинарные кавычки, а &lt;code&gt;resourceBundle&lt;/code&gt; пытается найти подходящую строку для текущей локали и форматирует сообщение по правилам &lt;code&gt;MessageFormat&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Таким образом, шаблонные строки не просто решают задачу интерполяции, а предоставляют гибкий и общий инструмент, дающий возможность библиотекам полностью контролировать весь процесс валидации, трансформации и комбинирования параметров со строкой.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/eclipseide/2021-09/noteworthy/"&gt;Eclipse 2021-09&lt;/a&gt;. Среди улучшений более быстрый стартап IDE, функция Raw Paste, новый quick-fix для конвертации цикла &lt;code&gt;while&lt;/code&gt; в &lt;code&gt;do-while&lt;/code&gt;, дефолтные фильтры в Java &amp;#8594; Appearance &amp;#8594; Type Filters, улучшенный диалог сохранения нескольких файлов, улучшенная тёмная тема и другие. Встроенной поддержки Java 17 пока что нет, но она доступна в &lt;a href="https://marketplace.eclipse.org/content/java-17-support-eclipse-2021-09-421"&gt;Eclipse Marketplace&lt;/a&gt;. Более подробно про улучшения можно посмотреть в &lt;a href="https://www.youtube.com/watch?v=_OkIpz__Fyk"&gt;видео&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Роман Кеннке, лидер проекта Shenandoah в RedHat, рассказал, как им удалось достичь &lt;a href="https://developers.redhat.com/articles/2021/09/16/shenandoah-openjdk-17-sub-millisecond-gc-pauses"&gt;субмиллисекундных пауз&lt;/a&gt; сборщика мусора в Java 17. В этом им помогла &lt;a href="https://openjdk.java.net/jeps/376"&gt;конкурентная обработка стеков потоков&lt;/a&gt;, которая ранее была реализована для ZGC и также помогла значительно &lt;a href="https://malloc.se/blog/zgc-jdk16"&gt;снизить паузы&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2021/09/java-annotated-monthly-september-2021/"&gt;Java Annotated Montly&lt;/a&gt; от JetBrains за сентябрь 2021.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://gluonhq.com/products/javafx/openjfx-17-release-notes/"&gt;JavaFX 17&lt;/a&gt; с Long Term Support.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Вышла Java 17</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_17.html" />
@@ -429,53 +465,5 @@ Point p = c.x; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/06/intellij-idea-2021-1-2/"&gt;IntelliJ IDEA 2021.1.2&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003307.html"&gt;JMH 1.32&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #19</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_19.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_19.html</id>
-    <updated>2021-05-22T17:00:00Z</updated>
-    <published>2021-05-22T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Языку Java исполнилось 26 лет. 23 мая 1995 года компания Sun Microsystems впервые официально представила платформу Java, имевшую версию 1.0a2.&lt;/p&gt;
-&lt;p&gt;В честь дня рождения будет проведён онлайн-марафон &lt;a href="https://nipafx.dev/26h-java/"&gt;"26 Hours of Java"&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Разработка &lt;a href="http://openjdk.java.net/projects/jdk/17/"&gt;Java 17&lt;/a&gt; идёт полным ходом, и количество JEP'ов в этом релизе прибавилось сразу на семь штук.&lt;/p&gt;
-&lt;p&gt;Запланированы:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/412"&gt;JEP 412: Foreign Function &amp; Memory API (Incubator)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/414"&gt;JEP 414: Vector API (Second Incubator)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Предложены:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/306"&gt;JEP 306: Restore Always-Strict Floating-Point Semantics&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/403"&gt;JEP 403: Strongly Encapsulate JDK Internals&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/406"&gt;JEP 406: Pattern Matching for switch (Preview)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/407"&gt;JEP 407: Remove RMI Activation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/411"&gt;JEP 411: Deprecate the Security Manager for Removal&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Брайан Гетц написал &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-May/002996.html"&gt;письмо в рассылку OpenJDK&lt;/a&gt;, где он описал прогресс, которого в итоге удалось достигнуть в расширении возможностей оператора &lt;code&gt;switch&lt;/code&gt;. Он рассказал, каким образом удалось решить проблемы с тотальностью, проваливанием (fallthrough), областями видимости и &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+23&lt;/a&gt;, &lt;a href="https://jdk.java.net/panama/"&gt;JDK 17-panama+3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Ещё один день рождения празднует &lt;a href="https://en.wikipedia.org/wiki/Hibernate_(framework)"&gt;Hibernate&lt;/a&gt;. Его первая версия вышла ровно 20 лет назад, 23 мая 2001 года.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли новые версии Spring:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/20/spring-boot-2-5-is-now-ga"&gt;Spring Boot 2.5&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/18/spring-security-5-5-goes-ga"&gt;Spring Security 5.5&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/19/spring-integration-5-5-goes-ga"&gt;Spring Integration 5.5 и 5.4.7&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/19/spring-batch-4-2-7-and-4-3-3-are-out"&gt;Spring Batch 4.2.7 и 4.3.3&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/17/spring-amqp-2-2-17-releae-2-3-7-available"&gt;Spring AMQP 2.2.17 и 2.3.7&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/14/spring-ldap-2-3-4-released"&gt;Spring LDAP 2.3.4&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/05/14/spring-data-2021-0-1-and-2020-0-9-released"&gt;Spring Data 2021.0.1 and 2020.0.9&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spockframework.org/spock/docs/2.0/release_notes.html"&gt;Spock 2.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jol-dev/2021-May/000369.html"&gt;JOL 0.16&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
