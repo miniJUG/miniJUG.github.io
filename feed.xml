@@ -4,7 +4,73 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-09-19T17:00:00Z</updated>
+  <updated>2021-10-17T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #29</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_29.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_29.html</id>
+    <updated>2021-10-17T17:00:00Z</updated>
+    <published>2021-10-17T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Очередной JEP &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-October/006157.html"&gt;запланирован&lt;/a&gt; в Java 18: &lt;a href="https://openjdk.java.net/jeps/408"&gt;Simple Web Server (JEP 408)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_13.html"&gt;выпуске 13&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Появился новый черновик JEP: &lt;a href="http://openjdk.java.net/jeps/8273326"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (Second Preview)&lt;/a&gt;. В рассылке начато &lt;a href="https://mail.openjdk.java.net/pipermail/amber-dev/2021-September/007090.html"&gt;обсуждение&lt;/a&gt; того, что можно улучшить в паттерн-матчинге в следующей версии Java. Перечислим некоторые идеи, которые обсуждаются.&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;Улучшенная проверка тотальности для дженериков. К примеру, есть иерархия:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
+&lt;span style="color: blue"&gt;class&lt;/span&gt; A&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
+&lt;span style="color: blue"&gt;class&lt;/span&gt; B&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
+&lt;span style="color: blue"&gt;class&lt;/span&gt; C &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;String&amp;gt; { }&lt;/pre&gt;
+&lt;p&gt;Тогда при паттерн-матчинге по переменной типа &lt;code&gt;Foo&amp;lt;Integer&amp;gt;&lt;/code&gt;, вариант &lt;code&gt;C&lt;/code&gt; рассматривать не нужно, потому что типы &lt;code&gt;Foo&amp;lt;String&amp;gt;&lt;/code&gt; и &lt;code&gt;Foo&amp;lt;Integer&amp;gt;&lt;/code&gt; несовместимы.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;Улучшенный вывод типов при паттерн-матчинге. Сейчас необходимо указывать полный тип:&lt;/p&gt;
+&lt;pre&gt;List&amp;lt;Integer&amp;gt; list = &lt;span style="color: blue"&gt;new&lt;/span&gt; ArrayList&amp;lt;&amp;gt;();
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (list) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; ArrayList&amp;lt;Integer&amp;gt; arrayList -&gt; ...
+    ...
+}&lt;/pre&gt;
+&lt;p&gt;Предлагается разрешить не указывать параметры и дать компилятору выводить их из целевого типа:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; ArrayList arrayList -&gt; ... &lt;span style="color: green"&gt;// Выводится ArrayList&amp;lt;Integer&amp;gt;&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;Улучшенная проверка покрытия в более сложных случаях:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; A {}
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; B1 &lt;span style="color: blue"&gt;extends&lt;/span&gt; A {}
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; B2 &lt;span style="color: blue"&gt;extends&lt;/span&gt; A {}
+&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; C &lt;span style="color: blue"&gt;extends&lt;/span&gt; A {}
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; D1 &lt;span style="color: blue"&gt;implements&lt;/span&gt; B1, C {}
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; D2 &lt;span style="color: blue"&gt;implements&lt;/span&gt; B2, C {}
+...
+&lt;span style="color: blue"&gt;int&lt;/span&gt; i = &lt;span style="color: blue"&gt;switch&lt;/span&gt; (arg) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; B1 b1 -&gt; 1;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; B2 b2 -&gt; 2;
+};
+&lt;/pre&gt;
+&lt;p&gt;В Java 17 такой код не компилируется, хотя &lt;code&gt;switch&lt;/code&gt; покрывает все возможные случаи. Предлагается это исправить.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;Добавить частичный порядок между паттернами с условиями и константами. Такой код не должен компилироваться и &lt;code&gt;case&lt;/code&gt; с константой должен быть объявлен выше:&lt;/p&gt;
+&lt;pre&gt;switch (value) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 3 -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; {}
+}&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;Запретить ставить ветку &lt;code&gt;default&lt;/code&gt; не в конец &lt;code&gt;switch&lt;/code&gt; (или хотя бы выдавать предупреждение):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; {} &lt;span style="color: green"&gt;// Должна быть ошибка компиляции&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; i &gt; 0 -&gt; {}
+}&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-October/000309.html"&gt;Начато голосование&lt;/a&gt; по созданию проекта RISC-V Port. Предложение сделать официальный порт OpenJDK под архитектуру RISC-V &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html"&gt;было озвучено&lt;/a&gt; Huawei ещё в декабре 2020 года. Тогда это предложение получило положительную обратную связь, и за это время порт стал достаточно стабилен, чтобы началась работа по его интеграции в главную ветку JDK. Когда проект будет одобрен, планируется выпустить JEP с предложением по интеграции.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2021/10/05/WildFly25-Final-Released/"&gt;WildFly 25&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2021/10/13/hibernate-orm-560-final/"&gt;Hibernate 5.6.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://github.com/google/guava/releases/tag/v31.0"&gt;Guava 31.0&lt;/a&gt; (и сразу же &lt;a href="https://github.com/google/guava/releases/tag/v31.0.1"&gt;31.0.1&lt;/a&gt; из-за проблемы с GWT).&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://github.com/mockito/mockito/releases/tag/v4.0.0"&gt;Mockito 4&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #28</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_28.html" />
@@ -427,43 +493,5 @@ Point p = c.x; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/06/09/spring-framework-5-3-8-available-now"&gt;Spring Framework 5.3.8&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.1/release-notes.html"&gt;Gradle 7.1&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #20</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_20.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_20.html</id>
-    <updated>2021-06-05T17:00:00Z</updated>
-    <published>2021-06-05T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Началась разработка Java 18. В репозитории GitHub &lt;a href="https://github.com/openjdk/jdk/pull/4175/commits"&gt;появился пулл-реквест&lt;/a&gt; со стандартными процедурами, которые проводятся при старте нового релиза: добавление новых констант с версиями, таблиц символов, заголовков в файлах и т.д. Новая версия формата class-файлов будет равна 62.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый черновик JEP, связанный с проектом &lt;a href="https://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/401"&gt;примитивными объектами&lt;/a&gt;: &lt;a href="http://openjdk.java.net/jeps/8267650"&gt;Better-defined JVM class file validation&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В &lt;a href="https://openjdk.java.net/jeps/411"&gt;JEP 411: Deprecate the Security Manager for Removal&lt;/a&gt; были внесены &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-May/005616.html"&gt;важные изменения&lt;/a&gt;. Значение свойства &lt;code&gt;java.security.manager&lt;/code&gt; всё-таки предлагается по умолчанию оставить равным &lt;code&gt;allow&lt;/code&gt;, а не &lt;code&gt;disallow&lt;/code&gt;, что означает, что при вызове &lt;a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"&gt;&lt;code&gt;System.setSecurityManager()&lt;/code&gt;&lt;/a&gt; будет выводиться предупреждение в консоль, а не выбрасываться &lt;code&gt;UnsupportedOperationException&lt;/code&gt;. Таким образом, приложения, которые используют &lt;code&gt;setSecurityManager()&lt;/code&gt;, будут продолжать работать на Java 17 без изменений, что &lt;a href="https://blogs.apache.org/netbeans/entry/jep-411-deprecate-the-security1"&gt;облегчит&lt;/a&gt; их миграцию.&lt;/p&gt;
-&lt;p&gt;Однако значение свойства &lt;code&gt;java.security.manager&lt;/code&gt; всё-таки станет равным &lt;code&gt;disallow&lt;/code&gt;, но это произойдёт в Java 18.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK продолжается обсуждение темы &lt;a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-June/001533.html"&gt;абстрактности класса Object&lt;/a&gt;. На данный момент предлагается следующее:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Будет введён новый метод &lt;code&gt;IdentityObject::newIdentity&lt;/code&gt; (Б.Гетц предлагает &lt;code&gt;Objects::newIdentity&lt;/code&gt;), который будет возвращать объект некоторого внутреннего класса, реализующего интерфейс &lt;code&gt;IdentityObject&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;JVM будет заменять вызовы &lt;code&gt;new Object()&lt;/code&gt; на создание объекта, реализующего &lt;code&gt;IdentityObject&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;javac будет заменять вызовы &lt;code&gt;new Object()&lt;/code&gt; на &lt;code&gt;IdentityObject.newIdentity()&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Такая стратегия позволит постепенно перейти от возможности вызова &lt;code&gt;new Object()&lt;/code&gt; до его полного запрета в будущем.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Программисты из Amazon предлагают порассуждать о возможности &lt;a href="https://mail.openjdk.java.net/pipermail/hotspot-compiler-dev/2021-May/047486.html"&gt;реализации Partial Escape Analysis&lt;/a&gt; в Hotspot.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://jakarta.ee/news/jakarta-ee-9-1-released/"&gt;Jakarta EE 9.1&lt;/a&gt; с поддержкой Java 11. Также вышел &lt;a href="https://github.com/eclipse-ee4j/glassfish/releases/tag/6.1.0"&gt;Eclipse GlassFish 6.1.0&lt;/a&gt;, который соответствует спецификации Jakarta EE 9.1.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2021/06/02/hibernate-orm-550-final-release/"&gt;Hibernate 5.5.0.Final&lt;/a&gt;. Вместе с обычными артефактами в пространстве имён &lt;code&gt;javax&lt;/code&gt; теперь появились аналогичные артефакты в пространстве имён &lt;code&gt;jakarta&lt;/code&gt;. Например, у Hibernate Core есть две версии: &lt;a href="https://search.maven.org/artifact/org.hibernate/hibernate-core/5.5.0.Final/jar"&gt;hibernate-core&lt;/a&gt; и &lt;a href="https://search.maven.org/artifact/org.hibernate/hibernate-core-jakarta/5.5.0.Final/jar"&gt;hibernate-core-jakarta&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="https://jdk.java.net/17/"&gt;JDK 17-ea+25&lt;/a&gt;, &lt;a href="https://jdk.java.net/loom/"&gt;JDK 17-loom+7&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://netbeans.apache.org/download/nb124/nb124.html"&gt;NetBeans 12.4&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/06/intellij-idea-2021-1-2/"&gt;IntelliJ IDEA 2021.1.2&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003307.html"&gt;JMH 1.32&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

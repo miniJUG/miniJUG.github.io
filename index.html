@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-09-20">
+    <meta property="article:published_time" content="2021-10-18">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,35 +31,65 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #28</h3>
-<p class="text-secondary"><time datetime="2021-09-20">20 сентября, 2021</time></p>
+<h3 id="title">Новости Java #29</h3>
+<p class="text-secondary"><time datetime="2021-10-18">18 октября, 2021</time></p>
 <article>
-<p>&bull; Главной новостью прошедшей недели стал <a href="java_17.html">выход Java 17</a>. Это следующая LTS-версия Java, которая вышла спустя 3 года после предыдущей <a href="java_11_is_out.html">Java 11</a>.</p>
-<p>Но релиз Java 17 оказался не единственным большим событием. Сразу после того, как Oracle JDK 17 стал доступен для скачивания на сайте компании, Oracle опубликовал две важных новости.</p>
-<p>Во-первых, лицензия Oracle JDK <a href="https://blogs.oracle.com/java/post/free-java-license">поменялась</a> и вновь стала свободной, как это было <a href="https://minijug.ru/no_more_free_oracle_jdk.html">до Java 11</a>. Таким образом, сборку Oracle JDK 17 можно использовать бесплатно как в разработке, так и в продуктовом окружении в коммерческих целях. Такое решение было принято компанией в результате анализа обратной связи со стороны пользователей, которые приветствовали наличие сборок OpenJDK под GPL, но всё же хотели иметь &laquo;проверенный и надёжный, как скала&raquo;, образ Oracle JDK под однозначно бесплатной лицензией. Кроме того, было заявлено, что бесплатные <a href="https://www.oracle.com/java/technologies/downloads/">обновления  Oracle JDK 17</a> будут выходить как минимум до сентября 2024 года, то есть три года, а не полгода с момента выхода, как это было для Java 9-16. Что касается Oracle OpenJDK, то с ним всё остаётся <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-September/005949.html">без изменений</a>: Oracle будет поддерживать OpenJDK первые полгода и выпустит, как обычно, только два обновления (17.0.1 и 17.0.2).</p>
-<p>Во-вторых, Oracle предложил <a href="https://blogs.oracle.com/java/post/moving-the-jdk-to-a-two-year-lts-cadence">участить цикл</a> выхода LTS-версий Java и выпускать LTS не каждые три года, а каждые два. Это значит, что согласно этому предложению следующей LTS-версией может стать Java 21, которая выйдет в 2023 году, а не Java 23. Такое изменение компания мотивирует тем, что несмотря на наличие предсказуемых шестимесячных релизов, многие предприятия всё же предпочитают использовать LTS и не спешат обновляться. Более короткий цикл мог бы дать компаниям мотивацию обновляться чаще и повысит привлекательность всех релизов, в том числе и не-LTS. Это в свою очередь даст ускорение всей экосистеме Java.</p>
-<p>Также Oracle запустил новый сайт <a href="https://dev.java/">dev.java</a>, в котором собраны полезные материалы для изучения Java, ссылки на новости и полезные ресурсы.</p>
-<p class="pt-2">&bull; Новости JEP'ов:</p>
-<ul>
-  <li>Java 18 пополнилась ещё одним JEP: <a href="https://openjdk.java.net/jeps/417">Vector API (Third Incubator)</a>. Теперь в Java 18 <a href="http://openjdk.java.net/projects/jdk/18/">уже три JEP'а</a>.</li>
-  <li><a href="https://openjdk.java.net/jeps/418">Internet-Address Resolution SPI</a> перестал быть черновиком и стал кандидатом, получив номер 418. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</li>
-</ul>
+<p>&bull; Очередной JEP <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-October/006157.html">запланирован</a> в Java 18: <a href="https://openjdk.java.net/jeps/408">Simple Web Server (JEP 408)</a>. Про него мы писали в <a href="java_news_13.html">выпуске 13</a>.</p>
+<p class="pt-2">&bull; Появился новый черновик JEP: <a href="http://openjdk.java.net/jeps/8273326">Pattern Matching for <code class="text-nowrap">switch</code> (Second Preview)</a>. В рассылке начато <a href="https://mail.openjdk.java.net/pipermail/amber-dev/2021-September/007090.html">обсуждение</a> того, что можно улучшить в паттерн-матчинге в следующей версии Java. Перечислим некоторые идеи, которые обсуждаются.</p>
 
-<p class="pt-2">&bull; Джим Ласки и Брайан Гётц <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-September/003107.html">предложили</a> рассмотреть идею новой языковой конструкции в Java: <a href="https://github.com/openjdk/amber-docs/blob/master/site/design-notes/templated-strings.md">шаблонные строки</a>. Шаблонные строки представляют собой улучшение и развитие идеи строковой интерполяции, которая есть в большинстве популярных языков программирования (C#, Kotlin, Scala, JavaScript и др).</p>
-<p>Главное отличие от простой строковой интерполяции &ndash; это отделение механизма выражения шаблонной строки в языке от политики комбинирования строки и параметров. Например, все эти три примера используют один и тот же механизм:</p>
-<pre class="border p-lg-2 p-1">String s = STR.<span style="color: darkred">"Hello </span><span style="color: darkblue">\{</span>name<span style="color: darkblue">}</span><span style="color: darkred">, I am </span><span style="color: darkblue">\{</span>age<span style="color: darkblue">}</span><span style="color: darkred"> years old"</span>;</pre>
-<pre class="border p-lg-2 p-1"><span style="color: blue">var</span> query = connection.<span style="color: darkred">"SELECT * FROM </span><span style="color: darkblue">\{</span>table<span style="color: darkblue">}</span><span style="color: darkred">"</span>;</pre>
-<pre class="border p-lg-2 p-1">String message = resourceBundle.<span style="color: darkred">"error: file </span><span style="color: darkblue">\{</span>filename<span style="color: darkblue">}</span><span style="color: darkred"> not found"</span>;</pre>
-<p>Но политика комбинирования шаблона и параметров совершенно разная, потому что каждый из объектов реализует интерфейс политики по-своему: <code class="text-nowrap">STR</code> выполняет простую строковую конкатенацию, <code class="text-nowrap">connection</code> создаёт объект запроса (который необязательно <code class="text-nowrap">String</code>), выполняя валидацию и нормализацию, например, оборачивает имя таблицы в одинарные кавычки, а <code class="text-nowrap">resourceBundle</code> пытается найти подходящую строку для текущей локали и форматирует сообщение по правилам <code class="text-nowrap">MessageFormat</code>.</p>
-<p>Таким образом, шаблонные строки не просто решают задачу интерполяции, а предоставляют гибкий и общий инструмент, дающий возможность библиотекам полностью контролировать весь процесс валидации, трансформации и комбинирования параметров со строкой.</p>
+<p class="pt-1">Улучшенная проверка тотальности для дженериков. К примеру, есть иерархия:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">sealed interface</span> Foo&lt;T&gt; { }
+<span style="color: blue">class</span> A&lt;T&gt; <span style="color: blue">implements</span> Foo&lt;T&gt; { }
+<span style="color: blue">class</span> B&lt;T&gt; <span style="color: blue">implements</span> Foo&lt;T&gt; { }
+<span style="color: blue">class</span> C <span style="color: blue">implements</span> Foo&lt;String&gt; { }</pre>
+<p>Тогда при паттерн-матчинге по переменной типа <code class="text-nowrap">Foo&lt;Integer&gt;</code>, вариант <code class="text-nowrap">C</code> рассматривать не нужно, потому что типы <code class="text-nowrap">Foo&lt;String&gt;</code> и <code class="text-nowrap">Foo&lt;Integer&gt;</code> несовместимы.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://www.eclipse.org/eclipseide/2021-09/noteworthy/">Eclipse 2021-09</a>. Среди улучшений более быстрый стартап IDE, функция Raw Paste, новый quick-fix для конвертации цикла <code class="text-nowrap">while</code> в <code class="text-nowrap">do-while</code>, дефолтные фильтры в Java &#8594; Appearance &#8594; Type Filters, улучшенный диалог сохранения нескольких файлов, улучшенная тёмная тема и другие. Встроенной поддержки Java 17 пока что нет, но она доступна в <a href="https://marketplace.eclipse.org/content/java-17-support-eclipse-2021-09-421">Eclipse Marketplace</a>. Более подробно про улучшения можно посмотреть в <a href="https://www.youtube.com/watch?v=_OkIpz__Fyk">видео</a>.</p>
+<p class="pt-2">Улучшенный вывод типов при паттерн-матчинге. Сейчас необходимо указывать полный тип:</p>
+<pre class="border p-lg-2 p-1">List&lt;Integer&gt; list = <span style="color: blue">new</span> ArrayList&lt;&gt;();
+<span style="color: blue">switch</span> (list) {
+    <span style="color: blue">case</span> ArrayList&lt;Integer&gt; arrayList -> ...
+    ...
+}</pre>
+<p>Предлагается разрешить не указывать параметры и дать компилятору выводить их из целевого типа:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">case</span> ArrayList arrayList -> ... <span style="color: green">// Выводится ArrayList&lt;Integer&gt;</span></pre>
 
-<p class="pt-2">&bull; Роман Кеннке, лидер проекта Shenandoah в RedHat, рассказал, как им удалось достичь <a href="https://developers.redhat.com/articles/2021/09/16/shenandoah-openjdk-17-sub-millisecond-gc-pauses">субмиллисекундных пауз</a> сборщика мусора в Java 17. В этом им помогла <a href="https://openjdk.java.net/jeps/376">конкурентная обработка стеков потоков</a>, которая ранее была реализована для ZGC и также помогла значительно <a href="https://malloc.se/blog/zgc-jdk16">снизить паузы</a>.</p>
+<p class="pt-2">Улучшенная проверка покрытия в более сложных случаях:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">sealed interface</span> A {}
+<span style="color: blue">sealed interface</span> B1 <span style="color: blue">extends</span> A {}
+<span style="color: blue">sealed interface</span> B2 <span style="color: blue">extends</span> A {}
+<span style="color: blue">sealed interface</span> C <span style="color: blue">extends</span> A {}
+<span style="color: blue">final class</span> D1 <span style="color: blue">implements</span> B1, C {}
+<span style="color: blue">final class</span> D2 <span style="color: blue">implements</span> B2, C {}
+...
+<span style="color: blue">int</span> i = <span style="color: blue">switch</span> (arg) {
+    <span style="color: blue">case</span> B1 b1 -> 1;
+    <span style="color: blue">case</span> B2 b2 -> 2;
+};
+</pre>
+<p>В Java 17 такой код не компилируется, хотя <code class="text-nowrap">switch</code> покрывает все возможные случаи. Предлагается это исправить.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/idea/2021/09/java-annotated-monthly-september-2021/">Java Annotated Monthly</a> от JetBrains за сентябрь 2021.</p>
+<p class="pt-2">Добавить частичный порядок между паттернами с условиями и константами. Такой код не должен компилироваться и <code class="text-nowrap">case</code> с константой должен быть объявлен выше:</p>
+<pre class="border p-lg-2 p-1">switch (value) {
+    <span style="color: blue">case</span> Integer i && bar() -> {}
+    <span style="color: blue">case</span> 3 -> {}
+    <span style="color: blue">case</span> Integer i -> {}
+}</pre>
 
-<p class="pt-2">&bull; Вышла <a href="https://gluonhq.com/products/javafx/openjfx-17-release-notes/">JavaFX 17</a> с Long Term Support.</p>
+<p class="pt-2">Запретить ставить ветку <code class="text-nowrap">default</code> не в конец <code class="text-nowrap">switch</code> (или хотя бы выдавать предупреждение):</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">switch</span> (value) {
+    <span style="color: blue">default</span> -> {} <span style="color: green">// Должна быть ошибка компиляции</span>
+    <span style="color: blue">case</span> Integer i && i > 0 -> {}
+}</pre>
+
+<p class="pt-2">&bull; <a href="https://mail.openjdk.java.net/pipermail/announce/2021-October/000309.html">Начато голосование</a> по созданию проекта RISC-V Port. Предложение сделать официальный порт OpenJDK под архитектуру RISC-V <a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html">было озвучено</a> Huawei ещё в декабре 2020 года. Тогда это предложение получило положительную обратную связь, и за это время порт стал достаточно стабилен, чтобы началась работа по его интеграции в главную ветку JDK. Когда проект будет одобрен, планируется выпустить JEP с предложением по интеграции.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://www.wildfly.org/news/2021/10/05/WildFly25-Final-Released/">WildFly 25</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://in.relation.to/2021/10/13/hibernate-orm-560-final/">Hibernate 5.6.0</a>.</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://github.com/google/guava/releases/tag/v31.0">Guava 31.0</a> (и сразу же <a href="https://github.com/google/guava/releases/tag/v31.0.1">31.0.1</a> из-за проблемы с GWT).</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://github.com/mockito/mockito/releases/tag/v4.0.0">Mockito 4</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -67,6 +97,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_29.html" class="text-secondary">Новости Java #29</a></li>
 <li class="text-secondary"><a href="java_news_28.html" class="text-secondary">Новости Java #28</a></li>
 <li class="text-secondary"><a href="java_17.html" class="text-secondary">Вышла Java 17</a></li>
 <li class="text-secondary"><a href="java_news_27.html" class="text-secondary">Новости Java #27</a></li>
