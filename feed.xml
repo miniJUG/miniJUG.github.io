@@ -4,7 +4,39 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-10-17T17:00:00Z</updated>
+  <updated>2021-10-24T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #30</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_30.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_30.html</id>
+    <updated>2021-10-24T17:00:00Z</updated>
+    <published>2021-10-24T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления JDK:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-1-relnotes.html"&gt;JDK 17.0.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-October/009375.html"&gt;JDK 15.0.5&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-October/009376.html"&gt;JDK 13.0.9&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-October/009368.html"&gt;JDK 11.0.13&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2021-October/014373.html"&gt;JDK 8u312&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/18/"&gt;JDK 18-ea+20&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Новости JEP'ов:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/416"&gt;JEP 416: Reimplement Core Reflection with Method Handles&lt;/a&gt; предложен к &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-October/006163.html"&gt;JDK 18&lt;/a&gt;. Про этот JEP мы писали в &lt;a href="java_news_18.html"&gt;выпуске 18&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/420"&gt;JEP 420: Pattern Matching for switch (Second Preview)&lt;/a&gt; стал кандидатом (был черновиком).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышли новые версии Spring:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/14/spring-framework-5-3-11-and-5-2-18-available-now"&gt;Spring Framework 5.3.11 и 5.2.18&lt;/a&gt; (сразу после 5.3.11 вышел &lt;a href="https://spring.io/blog/2021/10/21/spring-framework-5-3-12-available-now"&gt;5.3.12&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/18/spring-data-2021-0-6-and-2020-0-14-released"&gt;Spring Data 2021.0.6 и 2020.0.14&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Boot &lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-5-6-is-now-available"&gt;2.5.6&lt;/a&gt; и &lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-4-12-is-now-available"&gt;2.4.12&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #29</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_29.html" />
@@ -462,36 +494,5 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2021-June/079414.html"&gt;ASM 9.2&lt;/a&gt; с поддержкой Java 18.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2021/06/17/WildFly24-Final-Released/"&gt;WildFly 24&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #21</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_21.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_21.html</id>
-    <updated>2021-06-14T17:00:00Z</updated>
-    <published>2021-06-14T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; JDK 17 перешёл в &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-June/005690.html"&gt;первую фазу Rampdown&lt;/a&gt;. Это значит, что JDK 17 форкнут в отдельный &lt;a href="https://github.com/openjdk/jdk17"&gt;стабилизационный репозиторий&lt;/a&gt;, и в релиз больше не будут приниматься никакие новые JEP'ы.&lt;/p&gt;
-&lt;p&gt;Кроме того, стало известно, что &lt;a href="https://openjdk.java.net/jeps/406"&gt;JEP 406: Pattern Matching for switch (Preview)&lt;/a&gt; был интегрирован в Java 17 и попал в последнюю сборку &lt;a href="http://jdk.java.net/17/"&gt;JDK 17-ea+26&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Также вышла первая сборка &lt;a href="http://jdk.java.net/18/"&gt;JDK 18-ea+1&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый черновик &lt;a href="http://openjdk.java.net/jeps/8261529"&gt;JEP: Universal Generics (Preview)&lt;/a&gt;. Это очередной JEP по проекту &lt;a href="http://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt;, и в нём предлагается расширить пространство всех переменных типов в дженериках до всех типов, то есть не только ссылочных типов, но и примитивных типов значений. Это означает, что для компилятора Java больше не будет ошибкой, если указать примитивы в качестве типов-параметров (например, List&amp;lt;int&amp;gt;). При этом, если в generic коде переменной типа будет присвоен &lt;code&gt;null&lt;/code&gt;, то компилятор будет выдавать предупреждение:&lt;/p&gt;
-&lt;pre&gt;class C&amp;lt;T&amp;gt; {
-    T x = null; &lt;span style="color: orange"&gt;// warning: null assignment&lt;/span&gt;
-}&lt;/pre&gt;
-&lt;p&gt;Таким образом, компилятор предупреждает разработчика о том, что может произойти &lt;code&gt;null&lt;/code&gt;-загрязнение, то есть если переменная &lt;code&gt;T&lt;/code&gt; окажется value-типом, то в ней будет находиться несовместимое значение, что в дальнейшем может привеcти к NullPointerException:&lt;/p&gt;
-&lt;pre&gt;C&amp;lt;Point&amp;gt; c = new C&amp;lt;Point&amp;gt;();
-Point p = c.x; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Такая стратегия означает, что весь существующий код дженериков будет продолжать компилироваться, и лишь в некоторых местах будут предупреждения, которые сопроводитель кода сможет исправить постепенно.&lt;/p&gt;
-&lt;p&gt;Важно отметить, что в данном JEP речи о специализации дженериков времени выполнения пока не идёт, и дженерики будут продолжать компилироваться в байткод через стирание типов (erasure), то есть во время выполнения дженерики с value-типами будут работать как ссылочные типы. JEP про специализацию будет опубликован в будущем.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; У инструмента &lt;code&gt;jar&lt;/code&gt;, который входит в состав JDK, появилась новая опция &lt;a href="https://github.com/openjdk/jdk/pull/3971"&gt;&lt;code&gt;--validate&lt;/code&gt;&lt;/a&gt;. Она служит для валидации &lt;a href="https://openjdk.java.net/jeps/238"&gt;multi-release JAR-файлов&lt;/a&gt;: делает анализ экспортированных API для каждой из декларированных версий Java и проверяет, что они согласованны. Такой анализ проводился и ранее при создании или обновлении JAR-файлов, но теперь его можно выполнить отдельным действием.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В блоге JetBrains вышел &lt;a href="https://blog.jetbrains.com/idea/2021/06/java-annotated-monthly-june-2021/"&gt;Java Annotated Monthly за июнь 2021&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/06/09/spring-framework-5-3-8-available-now"&gt;Spring Framework 5.3.8&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.1/release-notes.html"&gt;Gradle 7.1&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
