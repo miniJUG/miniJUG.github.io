@@ -4,7 +4,33 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-10-24T17:00:00Z</updated>
+  <updated>2021-11-14T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #31</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_31.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_31.html</id>
+    <updated>2021-11-14T17:00:00Z</updated>
+    <published>2021-11-14T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Появилось &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-November/006199.html"&gt;расписание выхода JDK 18&lt;/a&gt;. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="http://openjdk.java.net/jeps/421"&gt;JEP 421: Deprecate Finalization for Removal&lt;/a&gt;. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.&lt;/p&gt;
+&lt;p&gt;Финализация &amp;ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у &lt;code&gt;finalize()&lt;/code&gt; есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &amp;laquo;сломать&amp;raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать &lt;code&gt;super.finalize()&lt;/code&gt; в подклассе) и т.д. Это привело к тому, что в Java 9 метод &lt;a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--"&gt;Object.finalize()&lt;/a&gt; стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В Java 18 был интегрирован &lt;a href="https://openjdk.java.net/jeps/418"&gt;JEP 418: Internet-Address Resolution SPI&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_24.html"&gt;выпуске #24&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Появилось два новых черновика JEP: &lt;a href="http://openjdk.java.net/jeps/8276094"&gt;Region Pinning in G1&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/8276797"&gt;Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; JUG.ru выложил &lt;a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2"&gt;видео с JPoint 2021&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; JetBrains выпустил &lt;a href="https://blog.jetbrains.com/idea/2021/11/java-annotated-monthly-november-2021/"&gt;Java Annotated Monthly за ноябрь 2021&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.3/release-notes.html"&gt;Gradle 7.3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0"&gt;StreamEx 0.8.0&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #30</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_30.html" />
@@ -457,42 +483,5 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
 &lt;/ul&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/nashorn-dev/2021-July/007639.html"&gt;Nashorn 15.3&lt;/a&gt; с поддержкой Java 17.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #22</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_22.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_22.html</id>
-    <updated>2021-06-27T17:00:00Z</updated>
-    <published>2021-06-27T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/eclipse/news/4.20/"&gt;Eclipse 2021-06&lt;/a&gt;. Что нового появилось в новой версии:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Языковая поддержка Java 16: &lt;a href="https://openjdk.java.net/jeps/394"&gt;паттерн-матчинг для &lt;code&gt;instanceof&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/395"&gt;записи&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/397"&gt;&lt;code&gt;sealed&lt;/code&gt;-классы (preview)&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Новый quick fix для объявления переменной в цикле &lt;code&gt;foreach&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;12 новых действий clean up.&lt;/li&gt;
-  &lt;li&gt;Отображение значения полей в цепочке при отладке, то есть при наведении на &lt;code&gt;b&lt;/code&gt; или &lt;code&gt;c&lt;/code&gt; в &lt;code&gt;a.b.c&lt;/code&gt; показывается значение &lt;code&gt;b&lt;/code&gt; или &lt;code&gt;c&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;А также общие улучшения в IDE, плагине для Git и в других подсистемах.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В 2021 году разработчики впервые стали больше использовать Java 11, чем Java 8. Такими данными поделилась компания Snyk в своём ежегодном отчёте &lt;a href="https://foojay.io/today/new-jvm-ecosystem-report-2021-has-arrived/"&gt;"JVM Ecosystem Survey" за 2021 год&lt;/a&gt;. Snyk проводила опрос совместно с Azul с февраля по март 2021 года среди более чем 2 тысяч разработчиков Java.&lt;/p&gt;
-&lt;p&gt;Как показывают результаты опроса, в продуктовых окружениях Java 11 использует 61.5% респондентов, что на 1.6% больше, чем Java 8. При этом последние версии Java (14 и 15 на момент опроса) имеют цифры 4.9% и 11.7% соответственно. Это существенно больше, чем постепенно уходящие в небытие Java 6 и 7, которые имеют всего 1.9% и 3.8%.&lt;/p&gt;
-&lt;p&gt;В разработке же новые версии имеют ещё большую популярность: Java 11 использует 64.3% респондентов против 50.1% у Java 8. Java 15 использует 25.6% опрошенных.&lt;/p&gt;
-&lt;p&gt;В отчёте также присутствует множество других интересных данных, например:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Наиболее популярный дистрибутив JDK &amp;ndash; AdoptOpenJDK (44.1%). Второе место у Oracle OpenJDK (28%).&lt;/li&gt;
-  &lt;li&gt;Kotlin &amp;ndash; второй популярный язык после Java (17.7% и 91% соответственно). Groovy использует 13% опрошенных.&lt;/li&gt;
-  &lt;li&gt;IntelliJ IDEA &amp;ndash; с большим отрывом самая популярная IDE (71.6%). Следующий идёт Eclipse, у которого всего 24.6%.&lt;/li&gt;
-  &lt;li&gt;Среди билд-систем больше всего используется Maven (76.2%). У Gradle цифра более скромная &amp;ndash; 38.1%.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Из Java окончательно &lt;a href="https://github.com/openjdk/jdk/pull/4522"&gt;удалили код&lt;/a&gt;, отвечающий за biased locking. Ранее в Java 15 biased locking был &lt;a href="https://openjdk.java.net/jeps/374"&gt;отключен по умолчанию&lt;/a&gt; и стал deprecated. Сейчас же он удалён окончательно, и с Java 18 опция -XX:+UseBiasedLocking станет несуществующей.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли новые ранние сборки JDK: &lt;a href="http://jdk.java.net/17/"&gt;JDK 17-ea+28&lt;/a&gt; и &lt;a href="http://jdk.java.net/18/"&gt;JDK 18-ea+3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2021-June/079414.html"&gt;ASM 9.2&lt;/a&gt; с поддержкой Java 18.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2021/06/17/WildFly24-Final-Released/"&gt;WildFly 24&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

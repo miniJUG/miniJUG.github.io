@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Новости Java #8</title>
+    <title>Новости Java #31</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #8">
-    <meta property="og:description" content="&bull; Вышло два новых черновика JEP: Record and Array Patterns (Preview) и Pattern Matching for switch (Preview)&hellip;">
+    <meta property="og:title" content="Новости Java #31">
+    <meta property="og:description" content="&bull; Появилось расписание выхода JDK 18. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-03-01">
+    <meta property="article:published_time" content="2021-11-15">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Новости Java #8">
-    <meta name="twitter:description" content="&bull; Вышло два новых черновика JEP: Record and Array Patterns (Preview) и Pattern Matching for switch (Preview)&hellip;">
+    <meta name="twitter:title" content="Новости Java #31">
+    <meta name="twitter:description" content="&bull; Появилось расписание выхода JDK 18. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_8.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_31.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_8.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_31.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,102 +31,25 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #8</h3>
-<p class="text-secondary"><time datetime="2021-03-01">1 марта, 2021</time></p>
+<h3 id="title">Новости Java #31</h3>
+<p class="text-secondary"><time datetime="2021-11-15">15 ноября, 2021</time></p>
 <article>
-<p>&bull; Вышло два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8260244">Record and Array Patterns (Preview)</a> и <a href="http://openjdk.java.net/jeps/8213076">Pattern Matching for <code class="text-nowrap">switch</code> (Preview)</a>.</p>
-<p>В первом JEP'е предлагается ввести в язык паттерны записей и паттерны массивов. Паттерны записей будут выглядеть следующим образом:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) {}
-...
-<span style="color: blue">if</span> (o <span style="color: blue">instanceof</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y)) {
-    System.out.println(x + y);
-}</pre>
-<p>Паттерны могут быть вложенными:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (r <span style="color: blue">instanceof</span> Rectangle(ColoredPoint(Point p, Color c), ColoredPoint r)) {
-    System.out.println(c);
-}</pre>
-<p>Паттерны массивов выглядят так:</p>
-<pre class="border p-lg-2 p-1">if (o <span style="color: blue">instanceof</span> String[] { String s1, String s2, ... }) {
-    System.out.println(s1 + s2);
-}</pre>
-<p>Паттерн на примере выше срабатывает для массивов длины 2 или более. Если нужен паттерн строгой длины 2, то многоточие не нужно указывать:</p>
-<pre class="border p-lg-2 p-1">if (o <span style="color: blue">instanceof</span> String[] { String s1, String s2 }) {
-    System.out.println(s1 + s2);
-}</pre>
-<p>Есть возможность осуществлять паттерн-матчинг по многомерным массивам. Также можно вкладывать паттерны массивов в паттерны записей и наоборот.</p>
-<p class="pt-1">Во втором JEP'е предлагается ввести паттерн-матчинг по типу для оператора <code class="text-nowrap">switch</code>, и это будет выглядеть следующим образом:</p>
-<pre class="border p-lg-2 p-1">Object o = ...
-<span style="color: blue">return switch</span> (o) {
-    <span style="color: blue">case</span> Integer i -> String.format(<span style="color: darkred">"int %d"</span>, i);
-    <span style="color: blue">case</span> Byte b -> String.format(<span style="color: darkred">"byte %d"</span>, b);
-    <span style="color: blue">case</span> Long l -> String.format(<span style="color: darkred">"long %d"</span>, l);
-    <span style="color: blue">case</span> Double d -> String.format(<span style="color: darkred">"double %f"</span>, d);
-    <span style="color: blue">case</span> String s -> String.format(<span style="color: darkred">"String %s"</span>, s);
-    <span style="color: blue">default</span> -> o.toString();
-};</pre>
-<p>Если пользователю нужен матчинг <code class="text-nowrap">null</code>, то придётся указывать отдельную ветку:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">switch</span> (o) {
-    <span style="color: blue">case null</span> -> System.out.println(<span style="color: darkred">"Null"</span>);
-    <span style="color: blue">case</span> String s -> System.out.println(<span style="color: darkred">"String: "</span> + s);
-}</pre>
-<p>Если не указывать явную ветку <code class="text-nowrap">case null</code> и в <code class="text-nowrap">switch</code> передастся нулевой объект, то будет выбрасываться <code class="text-nowrap">NullPointerException</code>, даже если будет присутствовать ветка <code class="text-nowrap">default</code>:</p>
-<pre class="border p-lg-2 p-1">String s = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (s) { <span style="color: red">// will throw NPE</span>
-    <span style="color: blue">case</span> <span style="color: darkred">"Foo"</span>, <span style="color: darkred">"Bar"</span> -> System.out.println(<span style="color: darkred">"My favourite!"</span>);
-    <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"Acceptable..."</span>);
-}</pre>
-<p>Чтобы ветка <code class="text-nowrap">default</code> покрывала <code class="text-nowrap">null</code>, нужно будет использовать паттерн <code class="text-nowrap">null, default</code>:</p>
-<pre class="border p-lg-2 p-1">String s = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (s) {
-    <span style="color: blue">case</span> <span style="color: darkred">"Foo"</span>, <span style="color: darkred">"Bar"</span> -> System.out.println(<span style="color: darkred">"My favourite!"</span>);
-    <span style="color: blue">case null, default</span> -> System.out.println(<span style="color: darkred">"Acceptable..."</span>);
-}</pre>
-<p>Паттерн <code class="text-nowrap">null</code> можно будет также объединять и с паттерном по типу:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">return switch</span> (o) {
-    <span style="color: blue">case</span> Integer i -> String.format(<span style="color: darkred">"int %d"</span>, i);
-    <span style="color: blue">case</span> Byte b -> String.format(<span style="color: darkred">"byte %d"</span>, b);
-    <span style="color: blue">case</span> Long l -> String.format(<span style="color: darkred">"long %d"</span>, l);
-    <span style="color: blue">case</span> Double d -> String.format(<span style="color: darkred">"double %f"</span>, d);
-    <span style="color: blue">case null</span>, String s -> String.format(<span style="color: darkred">"String %s"</span>, s);
-    <span style="color: blue">default</span> -> o.toString();
-};</pre>
-<p>В первой итерации поддержки смешанных паттернов (паттернов по типу и константных паттернов в одном <code class="text-nowrap">switch</code>) не будет:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">switch</span> (s) {
-    <span style="color: blue">case</span> <span style="color: darkred">"Hello world"</span> ->
-        System.out.println(<span style="color: darkred">"Hello back"</span>);
-    <span style="color: blue">case</span> String s -> <span style="color: red">// Error</span>
-        System.out.println(<span style="color: darkred">"Nothing?"</span>);
-}</pre>
-<p><code class="text-nowrap">switch</code> также будет поддерживать условные паттерны. Для этого предлагается ввести охранные паттерны вида <code class="text-nowrap">true(boolean expr)</code> и <code class="text-nowrap">false(boolean expr)</code>:</p>
-<pre class="border p-lg-2 p-1">Shape s = ...
-<span style="color: blue">switch</span> (s) {
-    <span style="color: blue">case</span> Triangle t & <span style="color: blue">true</span>(t.calculateArea() > 100) ->
-        System.out.println(<span style="color: darkred">"Large Triangle"</span>);
-    <span style="color: blue">default</span> ->
-        System.out.println(<span style="color: darkred">"A shape (including small triangles"</span>);
-}</pre>
-<p class="pt-1">Если оба JEP'а будет реализованы вместе, то первый будет дополнять возможности второго. Так, все паттерны по записям и массивам можно будет использовать и в ветках <code class="text-nowrap">switch</code> (в том числе вложенные).</p>
+<p>&bull; Появилось <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-November/006199.html">расписание выхода JDK 18</a>. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.</p>
 
-<p class="pt-3">&bull; Вышел первый релиз-кандидат языка Scala 3: <a href="https://dotty.epfl.ch/blog/2021/02/17/scala3-rc1.html">Scala 3.0.0-RC1</a>. В эту версию попало более 400 пулл-реквестов от контрибьюторов с прошлого релиза 3.0.0-M3.</p>
-<p><a href="https://docs.scala-lang.org/scala3/new-in-scala3.html">Scala 3</a>, разработка которой более 5 лет ведётся в проекте <a href="https://www.scala-lang.org/blog/2016/02/03/essence-of-scala.html">Dotty</a> &ndash; это полная переработка Scala 2, но в значительной части с ней совместимая: большая часть кода на Scala 2 остаётся валидным кодом для компилятора Scala 3, а для остального кода есть <a href="https://scalacenter.github.io/scala-3-migration-guide/">гид по миграции</a>.</p>
-<p>Также вышло обновление <a href="https://github.com/scala/scala/releases/tag/v2.13.5">Scala 2.13.5</a>. В него попала поддержка последних версий Java вплоть до ещё не вышедшей Java 17, поддержка Scala 3.0.0-RC1, более безопасный паттерн-матчинг и другие изменения.</p>
+<p class="pt-2">&bull; Вышел новый <a href="http://openjdk.java.net/jeps/421">JEP 421: Deprecate Finalization for Removal</a>. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.</p>
+<p>Финализация &ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у <code class="text-nowrap">finalize()</code> есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &laquo;сломать&raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать <code class="text-nowrap">super.finalize()</code> в подклассе) и т.д. Это привело к тому, что в Java 9 метод <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--">Object.finalize()</a> стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.</p>
 
-<p class="pt-3">&bull; Опубликованы результаты <a href="https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html">опроса Jakarta EE</a>, который проводился с сентября 2020 по февраль 2021 года. В нём 684 респондента ответили на вопросы относительно использования технологий Java EE / JakartaEE. Из интересных результатов опроса следующие факты:</p>
- <ul>
-   <li>Самый используемый сервер приложений &ndash; это RedHat WildFly, а самый ненавистный &ndash; IBM WebSphere.</li>
-   <li>Наиболее часто используемые API: JPA, CDI и JAX-RS.</li>
-   <li>Наиболее часто используемые библиотеки: Hibernate, Weld и Hibernate Validator.</li>
-   <li><a href="https://microprofile.io/">MicroProfile</a> попробовало 32% опрошенных. Это на 16% больше, чем 2 года назад.</li>
-   <li>Самые популярные продукты MicroProfile: Quarkus, WildFly и Payara Micro.</li>
-</ul>
+<p class="pt-2">&bull; В Java 18 был интегрирован <a href="https://openjdk.java.net/jeps/418">JEP 418: Internet-Address Resolution SPI</a>. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</p>
 
-<p class="pt-3">&bull; Была объявлена виртуальная конференция <a href="https://jakartaone.org/2021/russian/">JakartaOne Livestream на русском</a>, которая пройдёт 31 марта 2021 года.</p>
+<p class="pt-2">&bull; Появилось два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8276094">Region Pinning in G1</a> и <a href="http://openjdk.java.net/jeps/8276797">Linux/RISC-V Port</a>.</p>
 
-<p class="pt-3">&bull; Вышли новые ранние сборки JDK: <a href="https://jdk.java.net/17/">JDK 17-ea+11</a>, <a href="https://jdk.java.net/panama/">JDK 17-panama+2-51</a>.</p>
+<p class="pt-2">&bull; JUG.ru выложил <a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2">видео с JPoint 2021</a>.</p>
 
-<p class="pt-3">&bull; Вышлая <a href="https://www.reddit.com/r/java/comments/lsbcwe/flatlaf_10_swing_look_and_feel/">версия 1.0</a> библиотеки <a href="https://github.com/JFormDesigner/FlatLaf">FlatLaf</a> для кроссплатформенного Look and Feel в приложениях на Swing.</p>
+<p class="pt-2">&bull; JetBrains выпустил <a href="https://blog.jetbrains.com/idea/2021/11/java-annotated-monthly-november-2021/">Java Annotated Monthly за ноябрь 2021</a>.</p>
 
-<p class="pt-3">&bull; В официальной документации Android <a href="https://stackoverflow.com/questions/66346971/android-deprecated-annotation-is-deprecated-whats-the-replacement">обнаружили</a>, что аннотация <code class="text-nowrap">@Deprecated</code> помечена как Deprecated. Эта ошибка возникла из-за того, что в JavaDoc аннотации присутствовал код <code class="text-nowrap">{@code @deprecated}</code>, который сигнализировал парсеру документации добавить "пропущенную" аннотацию <code class="text-nowrap">@Deprecated</code>. Баг уже был <a href="https://android-review.googlesource.com/c/platform/libcore/+/1601554">устранён</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.3/release-notes.html">Gradle 7.3</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0">StreamEx 0.8.0</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -134,7 +57,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
-<li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>
+<li>Новости Java #31</li>
 <li class="text-secondary"><a href="java_news_30.html" class="text-secondary">Новости Java #30</a></li>
 <li class="text-secondary"><a href="java_news_29.html" class="text-secondary">Новости Java #29</a></li>
 <li class="text-secondary"><a href="java_news_28.html" class="text-secondary">Новости Java #28</a></li>
@@ -160,7 +83,7 @@
 <li class="text-secondary"><a href="java_16.html" class="text-secondary">Вышла Java 16</a></li>
 <li class="text-secondary"><a href="java_news_10.html" class="text-secondary">Новости Java #10</a></li>
 <li class="text-secondary"><a href="java_news_9.html" class="text-secondary">Новости Java #9</a></li>
-<li>Новости Java #8</li>
+<li class="text-secondary"><a href="java_news_8.html" class="text-secondary">Новости Java #8</a></li>
 <li class="text-secondary"><a href="java_news_7.html" class="text-secondary">Новости Java #7</a></li>
 <li class="text-secondary"><a href="java_news_6.html" class="text-secondary">Новости Java #6</a></li>
 <li class="text-secondary"><a href="java_news_5.html" class="text-secondary">Новости Java #5</a></li>
