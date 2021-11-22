@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-11-15">
+    <meta property="article:published_time" content="2021-11-22">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,25 +31,72 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #31</h3>
-<p class="text-secondary"><time datetime="2021-11-15">15 ноября, 2021</time></p>
+<h3 id="title">Новости Java #32</h3>
+<p class="text-secondary"><time datetime="2021-11-22">22 ноября, 2021</time></p>
 <article>
-<p>&bull; Появилось <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-November/006199.html">расписание выхода JDK 18</a>. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.</p>
+<p>&bull; Вышел <a href="https://blog.jetbrains.com/kotlin/2021/11/kotlin-1-6-0-is-released/">Kotlin 1.6</a>. Перечислим самые заметные изменения и улучшения:</p>
+<ul>
+  <li>Проверка исчерпываемости в <code class="text-nowrap">when</code>-стейтментах: если <code class="text-nowrap">when</code> не покрывает все возможные ветки (например, все подклассы sealed-класса), то компилятор выдаёт предупреждение. В Kotlin 1.7 такие предупреждения станут ошибкой.</li>
+  <li><code class="text-nowrap">suspend</code> функциональные типы теперь могут быть суперинтерфейсами (т.е. можно писать, например, <code class="text-nowrap">class MyClickAction : suspend () -> Unit)</code>.</li>
+  <li>Автоматические конверсии из обычных функциональных типов к соответствующим <code class="text-nowrap">suspend</code> функциональным типам.</li>
+  <li>Улучшенный вывод типов для рекурсивных generic типов.</li>
+  <li>Возможность разработки, используя три предыдущих версии API (т.е. 1.3, 1.4 и 1.5 для 1.6). Раньше поддерживалось только две предыдущих версии API.</li>
+  <li>Поддержка повторяющихся аннотаций с удержанием в рантайме.
+  <li>Появились две новые функции: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html"><code class="text-nowrap">readln()</code></a>, которая возвращает non-nullable String, и <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln-or-null.html"><code class="text-nowrap">readlnOrNull()</code></a>.</li>
+  <li>API стали стабильными: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/type-of.html"><code class="text-nowrap">typeOf()</code></a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/"><code class="text-nowrap">Duration</code></a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration-unit/"><code class="text-nowrap">DurationUnit</code></a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html">билдеры коллекций</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/split-to-sequence.html"><code class="text-nowrap">splitToSequence()</code></a> с Regex, операции <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/rotate-right.html">битового поворота</a> чисел.</li>
+  <li>Функцию <code class="text-nowrap">compareTo()</code> теперь можно вызывать через инфиксную нотацию (<code class="text-nowrap">x compareTo y</code>).</li>
+</ul>
 
-<p class="pt-2">&bull; Вышел новый <a href="http://openjdk.java.net/jeps/421">JEP 421: Deprecate Finalization for Removal</a>. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.</p>
-<p>Финализация &ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у <code class="text-nowrap">finalize()</code> есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &laquo;сломать&raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать <code class="text-nowrap">super.finalize()</code> в подклассе) и т.д. Это привело к тому, что в Java 9 метод <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--">Object.finalize()</a> стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.</p>
+<p class="pt-2">&bull; Очередных два JEP'а предложены к JDK 18. Это <a href="https://openjdk.java.net/jeps/419">JEP 419: Foreign Function & Memory API (Second Incubator)</a> и <a href="https://openjdk.java.net/jeps/420">JEP 420: Pattern Matching for switch (Second Preview)</a>.</p>
+<p>Также появился новый <a href="https://openjdk.java.net/jeps/422">JEP 422: Linux/RISC-V Port</a>.</p>
 
-<p class="pt-2">&bull; В Java 18 был интегрирован <a href="https://openjdk.java.net/jeps/418">JEP 418: Internet-Address Resolution SPI</a>. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</p>
+<p class="pt-2">&bull; В <a href="https://wiki.openjdk.java.net/display/loom/Main">проекте Loom</a> появились первые два черновика JEP.</p>
+<p>Первый &ndash; <a href="http://openjdk.java.net/jeps/8277129">Structured Concurrency (Preview)</a>.</p>
+<p>В этом JEP'е предлагается добавить в Java новое API для структурного concurrency. Структурное concurrency &ndash; это concurrency, которое заимствует принципы обычного (последовательного) структурного программирования и гарантирует следующее: когда поток выполнения разделяется на несколько потоков выполнения, то эти потоки воссоединяются в том же блоке кода. Все эти потоки логически сгруппированы и организованы в иерархию.</p>
+<p>Рассмотрим простой пример кода, выполняющийся последовательно:</p>
+<pre class="border p-lg-2 p-1">String foo() <span style="color: blue">throws</span> IOException, InterruptedException {
+    <span style="color: blue">int</span> bar = bar(); <span style="color: green">// throws IOException, InterruptedException</span>
+    String baz = baz(); <span style="color: green">// то же самое</span>
+    <span style="color: blue">return</span> baz + bar;
+}</pre>
+<p>В этом коде нет ничего сверхестественного, и он чрезвычайно прост и надёжен. Но если необходимо выполнить операции <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> параллельно, то трансформировать этот код с сохранением всех структурных гарантий, используя существующие средства Java, будет не так уж и просто.</p>
+<p>Новый предложенный класс <code class="text-nowrap">StructuredExecutor</code> призван, чтобы решить эту проблему. С его использованием аналогичный распараллеленный код будет выглядеть следующим образом:</p>
+<pre class="border p-lg-2 p-1">String foo() <span style="color: blue">throws</span> IOException, InterruptedException {
+    <span style="color: blue">try</span> (<span style="color: blue">var</span> s = StructuredExecutor.open()) {
+        <span style="color: blue">var</span> handler = <span style="color: blue">new</span> StructuredExecutor.ShutdownOnFailure();
+        Future&lt;Integer&gt; bar = s.fork(() -> bar(), handler);
+        Future&lt;String&gt; baz = s.fork(() -> baz(), handler);
 
-<p class="pt-2">&bull; Появилось два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8276094">Region Pinning in G1</a> и <a href="http://openjdk.java.net/jeps/8276797">Linux/RISC-V Port</a>.</p>
+        s.join();
+        handler.throwIfFailed();
 
-<p class="pt-2">&bull; JUG.ru выложил <a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2">видео с JPoint 2021</a>.</p>
+        <span style="color: blue">return</span> baz.resultNow() + bar.resultNow();
+    } <span style="color: blue">catch</span> (ExecutionException e) {
+        <span style="color: blue">if</span> (e.getCause() <span style="color: blue">instanceof</span> IOException ioe) throw ioe;
+        <span style="color: blue">throw new</span> RuntimeException(e);
+   }
+}</pre>
+<p><code class="text-nowrap">StructuredExecutor</code> в данном случае обеспечивает множество гарантий. Например, если одна из операций <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> завершается ошибкой, то другая операция отменяется автоматически (если ещё не завершена). Или если операция <code class="text-nowrap">foo()</code> прерывается в процессе ожидания <code class="text-nowrap">join()</code>, то обе операции <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> отменяются. Всех этих гарантий не было бы, если бы использовались существующие реализации <code class="text-nowrap">ExecutorService</code>. Чтобы эти гарантии обеспечить, пришлось бы для этого написать большое количество дополнительного кода.</p>
+<p>Таким образом, новое API значительно облегчит написание чистого и корректного конкурентного кода с использованием структурного подхода.</p>
 
-<p class="pt-2">&bull; JetBrains выпустил <a href="https://blog.jetbrains.com/idea/2021/11/java-annotated-monthly-november-2021/">Java Annotated Monthly за ноябрь 2021</a>.</p>
+<p class="pt-2">Второй JEP &ndash; это <a href="http://openjdk.java.net/jeps/8277131">Virtual Threads (Preview)</a>.</p>
+<p>Виртуальные нити &ndash; это новый вид нитей (т.е. новый подкласс <code class="text-nowrap">java.lang.Thread</code>), которые, в отличие от нитей операционной системы, могут хорошо масштабироваться до миллионов экземпляров. При этом поведение таких нитей практически не отличается от обычных, а значит существующий конкурентный код можно будет смигрировать на виртуальные нити, не затрачивая больших усилий. Виртуальные нити являются пользовательской надстройкой и работают поверх нитей операционной системы, поэтому существуют только для JVM, но не для OS.</p>
+<p>Отличительной особенностью виртуальных нитей является то, что при блокирующем вызове они приостанавливаются, позволяя нити-носителю продолжить выполнять другие задачи. Когда блокирующая операция завершается, виртуальная нить помещается в очередь планировщика и её выполнение возобновляется на той же или уже совсем другой нити-носителе.</p>
+<p>Вместе с виртуальным нитями также вводится большое количество нового API:</p>
+<ul>
+  <li><code class="text-nowrap">Thread.Builder</code> &ndash; билдер нитей. Например, виртуальную нить можно создать путём вызова <code class="text-nowrap">Thread.ofVirtual().name("name").unstarted(runnable)</code>.</li>
+  <li><code class="text-nowrap">Thread.startVirtualThread(Runnable)</code> &ndash; удобный метод, позволяющий создать и сразу же запустить виртуальную нить.</li>
+  <li><code class="text-nowrap">Thread.isVirtual()</code>.</li>
+  <li><code class="text-nowrap">Thread.join(Duration)</code> и <code class="text-nowrap">Thread.sleep(Duration)</code>.</li>
+  <li><code class="text-nowrap">Executors.newVirtualThreadExecutor()</code> и <code class="text-nowrap">Executors.newThreadPerTaskExecutor()</code>.</li>
+  <li><code class="text-nowrap">Future.join()</code>, <code class="text-nowrap">Future.state()</code> и <code class="text-nowrap">Future.isCompletedNormally()</code>.</li>
+  <li><code class="text-nowrap">ExecutorService</code> теперь является AutoCloseable.</li>
+  <li>И другие.</li>
+</ul>
+<p>Для виртуальных нитей также добавляется поддержка в дебаггере, JVM TI и Java Flight Recorder.</p>
+<p>В целом виртуальные нити должны значительно облегчить написание конкурентных программ, избавя от необходимости прибегать к асинхронным API во многих случаях.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.3/release-notes.html">Gradle 7.3</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0">StreamEx 0.8.0</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://spring.io/blog/2021/11/19/spring-boot-2-6-is-now-available">Spring Boot 2.6</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -57,6 +104,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
 <li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>
 <li class="text-secondary"><a href="java_news_30.html" class="text-secondary">Новости Java #30</a></li>
 <li class="text-secondary"><a href="java_news_29.html" class="text-secondary">Новости Java #29</a></li>

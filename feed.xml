@@ -4,7 +4,80 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-11-14T17:00:00Z</updated>
+  <updated>2021-11-21T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #32</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_32.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_32.html</id>
+    <updated>2021-11-21T17:00:00Z</updated>
+    <published>2021-11-21T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2021/11/kotlin-1-6-0-is-released/"&gt;Kotlin 1.6&lt;/a&gt;. Перечислим самые заметные изменения и улучшения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Проверка исчерпываемости в &lt;code&gt;when&lt;/code&gt;-стейтментах: если &lt;code&gt;when&lt;/code&gt; не покрывает все возможные ветки (например, все подклассы sealed-класса), то компилятор выдаёт предупреждение. В Kotlin 1.7 такие предупреждения станут ошибкой.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;suspend&lt;/code&gt; функциональные типы теперь могут быть суперинтерфейсами (т.е. можно писать, например, &lt;code&gt;class MyClickAction : suspend () -&gt; Unit)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Автоматические конверсии из обычных функциональных типов к соответствующим &lt;code&gt;suspend&lt;/code&gt; функциональным типам.&lt;/li&gt;
+  &lt;li&gt;Улучшенный вывод типов для рекурсивных generic типов.&lt;/li&gt;
+  &lt;li&gt;Возможность разработки, используя три предыдущих версии API (т.е. 1.3, 1.4 и 1.5 для 1.6). Раньше поддерживалось только две предыдущих версии API.&lt;/li&gt;
+  &lt;li&gt;Поддержка повторяющихся аннотаций с удержанием в рантайме.
+  &lt;li&gt;Появились две новые функции: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html"&gt;&lt;code&gt;readln()&lt;/code&gt;&lt;/a&gt;, которая возвращает non-nullable String, и &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln-or-null.html"&gt;&lt;code&gt;readlnOrNull()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;API стали стабильными: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/type-of.html"&gt;&lt;code&gt;typeOf()&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/"&gt;&lt;code&gt;Duration&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration-unit/"&gt;&lt;code&gt;DurationUnit&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html"&gt;билдеры коллекций&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/split-to-sequence.html"&gt;&lt;code&gt;splitToSequence()&lt;/code&gt;&lt;/a&gt; с Regex, операции &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/rotate-right.html"&gt;битового поворота&lt;/a&gt; чисел.&lt;/li&gt;
+  &lt;li&gt;Функцию &lt;code&gt;compareTo()&lt;/code&gt; теперь можно вызывать через инфиксную нотацию (&lt;code&gt;x compareTo y&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Очередных два JEP'а предложены к JDK 18. Это &lt;a href="https://openjdk.java.net/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/420"&gt;JEP 420: Pattern Matching for switch (Second Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Также появился новый &lt;a href="https://openjdk.java.net/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В &lt;a href="https://wiki.openjdk.java.net/display/loom/Main"&gt;проекте Loom&lt;/a&gt; появились первые два черновика JEP.&lt;/p&gt;
+&lt;p&gt;Первый &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/8277129"&gt;Structured Concurrency (Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В этом JEP'е предлагается добавить в Java новое API для структурного concurrency. Структурное concurrency &amp;ndash; это concurrency, которое заимствует принципы обычного (последовательного) структурного программирования и гарантирует следующее: когда поток выполнения разделяется на несколько потоков выполнения, то эти потоки воссоединяются в том же блоке кода. Все эти потоки логически сгруппированы и организованы в иерархию.&lt;/p&gt;
+&lt;p&gt;Рассмотрим простой пример кода, выполняющийся последовательно:&lt;/p&gt;
+&lt;pre&gt;String foo() &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException, InterruptedException {
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; bar = bar(); &lt;span style="color: green"&gt;// throws IOException, InterruptedException&lt;/span&gt;
+    String baz = baz(); &lt;span style="color: green"&gt;// то же самое&lt;/span&gt;
+    &lt;span style="color: blue"&gt;return&lt;/span&gt; baz + bar;
+}&lt;/pre&gt;
+&lt;p&gt;В этом коде нет ничего сверхестественного, и он чрезвычайно прост и надёжен. Но если необходимо выполнить операции &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; параллельно, то трансформировать этот код с сохранением всех структурных гарантий, используя существующие средства Java, будет не так уж и просто.&lt;/p&gt;
+&lt;p&gt;Новый предложенный класс &lt;code&gt;StructuredExecutor&lt;/code&gt; призван, чтобы решить эту проблему. С его использованием аналогичный распараллеленный код будет выглядеть следующим образом:&lt;/p&gt;
+&lt;pre&gt;String foo() &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException, InterruptedException {
+    &lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; s = StructuredExecutor.open()) {
+        &lt;span style="color: blue"&gt;var&lt;/span&gt; handler = &lt;span style="color: blue"&gt;new&lt;/span&gt; StructuredExecutor.ShutdownOnFailure();
+        Future&amp;lt;Integer&amp;gt; bar = s.fork(() -&gt; bar(), handler);
+        Future&amp;lt;String&amp;gt; baz = s.fork(() -&gt; baz(), handler);
+
+        s.join();
+        handler.throwIfFailed();
+
+        &lt;span style="color: blue"&gt;return&lt;/span&gt; baz.resultNow() + bar.resultNow();
+    } &lt;span style="color: blue"&gt;catch&lt;/span&gt; (ExecutionException e) {
+        &lt;span style="color: blue"&gt;if&lt;/span&gt; (e.getCause() &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; IOException ioe) throw ioe;
+        &lt;span style="color: blue"&gt;throw new&lt;/span&gt; RuntimeException(e);
+   }
+}&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;StructuredExecutor&lt;/code&gt; в данном случае обеспечивает множество гарантий. Например, если одна из операций &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически (если ещё не завершена). Или если операция &lt;code&gt;foo()&lt;/code&gt; прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; отменяются. Всех этих гарантий не было бы, если бы использовались существующие реализации &lt;code&gt;ExecutorService&lt;/code&gt;. Чтобы эти гарантии обеспечить, пришлось бы для этого написать большое количество дополнительного кода.&lt;/p&gt;
+&lt;p&gt;Таким образом, новое API значительно облегчит написание чистого и корректного конкурентного кода с использованием структурного подхода.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;Второй JEP &amp;ndash; это &lt;a href="http://openjdk.java.net/jeps/8277131"&gt;Virtual Threads (Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Виртуальные нити &amp;ndash; это новый вид нитей (т.е. новый подкласс &lt;code&gt;java.lang.Thread&lt;/code&gt;), которые, в отличие от нитей операционной системы, могут хорошо масштабироваться до миллионов экземпляров. При этом поведение таких нитей практически не отличается от обычных, а значит существующий конкурентный код можно будет смигрировать на виртуальные нити, не затрачивая больших усилий. Виртуальные нити являются пользовательской надстройкой и работают поверх нитей операционной системы, поэтому существуют только для JVM, но не для OS.&lt;/p&gt;
+&lt;p&gt;Отличительной особенностью виртуальных нитей является то, что при блокирующем вызове они приостанавливаются, позволяя нити-носителю продолжить выполнять другие задачи. Когда блокирующая операция завершается, виртуальная нить помещается в очередь планировщика и её выполнение возобновляется на той же или уже совсем другой нити-носителе.&lt;/p&gt;
+&lt;p&gt;Вместе с виртуальным нитями также вводится большое количество нового API:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;Thread.Builder&lt;/code&gt; &amp;ndash; билдер нитей. Например, виртуальную нить можно создать путём вызова &lt;code&gt;Thread.ofVirtual().name("name").unstarted(runnable)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Thread.startVirtualThread(Runnable)&lt;/code&gt; &amp;ndash; удобный метод, позволяющий создать и сразу же запустить виртуальную нить.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Thread.isVirtual()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Thread.join(Duration)&lt;/code&gt; и &lt;code&gt;Thread.sleep(Duration)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Executors.newVirtualThreadExecutor()&lt;/code&gt; и &lt;code&gt;Executors.newThreadPerTaskExecutor()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Future.join()&lt;/code&gt;, &lt;code&gt;Future.state()&lt;/code&gt; и &lt;code&gt;Future.isCompletedNormally()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;ExecutorService&lt;/code&gt; теперь является AutoCloseable.&lt;/li&gt;
+  &lt;li&gt;И другие.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Для виртуальных нитей также добавляется поддержка в дебаггере, JVM TI и Java Flight Recorder.&lt;/p&gt;
+&lt;p&gt;В целом виртуальные нити должны значительно облегчить написание конкурентных программ, избавя от необходимости прибегать к асинхронным API во многих случаях.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/11/19/spring-boot-2-6-is-now-available"&gt;Spring Boot 2.6&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #31</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_31.html" />
@@ -443,45 +516,5 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
 &lt;p class="pt-2"&gt;&amp;bull; Языку Kotlin &lt;a href="https://twitter.com/kotlin/status/1417188498667446272"&gt;исполнилось 10 лет&lt;/a&gt;. Проект Kotlin впервые был публично анонсирован JetBrains 22 июля 2011 года. Тогда Дмитрий Жемеров заявил: &amp;laquo;Мы посмотрели на все существующие языки JVM и выяснили, что  ни один из них не отвечает нашим требованиям. У Scala хороший набор фич, но её самый очевидный недостаток &amp;ndash; очень медленная компиляция&amp;raquo;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://medium.com/graalvm/graalvm-21-2-ee2cce3b57aa"&gt;GraalVM 21.2&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #23</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_23.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_23.html</id>
-    <updated>2021-07-17T17:00:00Z</updated>
-    <published>2021-07-17T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; JDK 17 перешла во &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-July/005758.html"&gt;вторую фазу Rampdown&lt;/a&gt;. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK начата &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2021-July/005846.html"&gt;предварительная дискуссия&lt;/a&gt; по созданию проекта, целью которого будет поддержка в Java сервера дисплея Wayland в Linux. &lt;a href="https://ru.wikipedia.org/wiki/Wayland"&gt;Wayland&lt;/a&gt; является современной заменой сервера X11 и уже включён по умолчанию в некоторых дистрибутивах, например &lt;a href="https://www.opennet.ru/opennews/art.shtml?num=54481"&gt;Ubuntu 21.04&lt;/a&gt; и &lt;a href="https://www.opennet.ru/opennews/art.shtml?num=50644"&gt;RHEL 8&lt;/a&gt;. Так как Linux с графическим интерфейсом является популярным выбором многих разработчиков Java, поддержка Wayland будет иметь большую важность для них.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Компания JetBrains выпустила свой ежегодный отчёт &lt;a href="https://blog.jetbrains.com/blog/2021/07/16/the-state-of-developer-ecosystem-2021/"&gt;&amp;laquo;Состояние экосистемы разработки&amp;raquo;&lt;/a&gt;. В этом году в опросе участвовало более 30 тысяч разработчиков из 183 стран. Перечислим некоторые интересные результаты:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Самый популярный язык &amp;ndash; JavaScript. Его использовали 69% опрошенных в течение последних 12 месяцев (Java использовали 49%). Также он является и самым популярным в качестве основного языка разработки (39% против 32% у Java).&lt;/li&gt;
-  &lt;li&gt;Kotlin пока что не попадает в первую десятку, однако имеет неплохой результат: с точки зрения общей распространённости он на 13-м месте (14%), а в как основной язык &amp;ndash; на 11-м (7%). Также Kotlin является самым желаемым языком для перехода с Java: в ближайшие 12 месяцев на него хотят перейти 13% разработчиков Java. Кроме того, Kotlin в пятёрке желаемых для перехода со всех языков (вместе с Go, TypeScript, Python и Rust).&lt;/li&gt;
-  &lt;li&gt;Популярность Scala падает уже третий год подряд: в 2019 её использовали 6%, в 2020 &amp;ndash; 5%, в 2021 &amp;ndash; 3%.&lt;/li&gt;
-  &lt;li&gt;Количество сотрудников, работающих удалённо, возрасло с 20% (в начале 2020) до 70%.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://quarkus.io/blog/quarkus-2-0-0-final-released/"&gt;Quarkus 2.0&lt;/a&gt;. В новой версии был осуществлён переход на JDK 11, Vert.x 4, Eclipse MicroProfile 4, GraalVM 21.1, а также внесено множество других изменений. Также пока готовился этот недельный выпуск, вышли багфикс-релизы &lt;a href="https://quarkus.io/blog/quarkus-2-0-1-final-released/"&gt;2.0.1&lt;/a&gt; и &lt;a href="https://quarkus.io/blog/quarkus-2-0-2-final-released/"&gt;2.0.2&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.sonarqube.org/sonarqube-9-0/"&gt;SonarQube 9.0&lt;/a&gt; с поддержкой Bitbucket Cloud, GitHub Actions, C++ 20, Java 16, более точно анализа и многого другого.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/blog/2021/07/15/new-tool-pages-improved-performance-refreshed-ui-and-more-in-toolbox-app-1-21/"&gt;JetBrains ToolBox 1.21&lt;/a&gt;. Это первый релиз ToolBox, который написан полностью на чистом Kotlin, с использованием фреймворка &lt;a href="https://www.jetbrains.com/lp/compose/"&gt;Compose for Desktop&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли новые версии Spring:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/07/14/spring-framework-5-3-9-and-5-2-16-available-now"&gt;Spring Framework 5.3.9 и 5.2.16&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Spring Boot &lt;a href="https://spring.io/blog/2021/06/24/spring-boot-2-5-2-is-now-available"&gt;2.5.2&lt;/a&gt; и &lt;a href="https://spring.io/blog/2021/06/24/spring-boot-2-4-8-is-now-available"&gt;2.4.8&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/22/spring-security-5-5-1-5-4-7-5-3-10-and-5-2-11-released"&gt;Spring Security 5.5.1, 5.4.7, 5.3.10 и 5.2.11&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/14/spring-native-0-10-0-available-now"&gt;Spring Native 0.10.0&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/22/spring-data-2021-0-2-and-2020-0-10-released"&gt;Spring Data 2021.0.2 и 2020.0.10&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/06/25/spring-integration-zip-2-0-0-available"&gt;Spring Integration Zip 2.0.0&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/07/09/spring-authorization-server-0-1-2-available-now"&gt;Spring Authorization Server 0.1.2&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/nashorn-dev/2021-July/007639.html"&gt;Nashorn 15.3&lt;/a&gt; с поддержкой Java 17.&lt;/p&gt;</content>
   </entry>
 </feed>
