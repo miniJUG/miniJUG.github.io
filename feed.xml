@@ -4,7 +4,28 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2021-12-12T17:00:00Z</updated>
+  <updated>2022-03-13T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #35</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_35.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_35.html</id>
+    <updated>2022-03-13T17:00:00Z</updated>
+    <published>2022-03-13T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это &lt;a href="https://openjdk.java.net/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Также появился новый &lt;a href="https://openjdk.java.net/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Этот JEP является продолжением &lt;a href="https://openjdk.java.net/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt;, однако теперь API уже не будет инкубационным, а станет preview API в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Появилось несколько черновиков JEP.&lt;/p&gt;
+&lt;p&gt;В &lt;a href="https://openjdk.java.net/jeps/8280836"&gt;Sequenced Collections&lt;/a&gt; предлагается ввести несколько новых интерфейсов коллекций (&lt;code&gt;SequencedCollection&lt;/code&gt;, &lt;code&gt;SequencedSet&lt;/code&gt;, &lt;code&gt;SequencedMap&lt;/code&gt;), в которых элементы будут иметь установленный порядок. Сейчас в стандартной библиотеке интерфейса с такой характеристикой нет, и в случае её надобности приходится прибегать либо к слишком общему интерфейсу &lt;code&gt;Collection&lt;/code&gt;, но тогда туда будут попадать неупорядоченные коллекции (например, &lt;code&gt;HashSet&lt;/code&gt;), либо к слишком частному &lt;code&gt;List&lt;/code&gt;, куда не смогут попасть, например, &lt;code&gt;ArrayDeque&lt;/code&gt; или &lt;code&gt;LinkedHashSet&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8280173"&gt;Vector API (Fourth Incubator)&lt;/a&gt; &amp;ndash; уже четвёртая итерация Vector API. Предыдущие три попали в Java &lt;a href="https://openjdk.java.net/jeps/338"&gt;16&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/414"&gt;17&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/417"&gt;18&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8281710"&gt;TLS Certificate Compression&lt;/a&gt; &amp;ndash; добавление поддержки &lt;a href="https://datatracker.ietf.org/doc/html/rfc8879"&gt;сжатых цепочек сертификатов TLS&lt;/a&gt;. Это позволит ускорить соединения TLS и QUIC из-за уменьшения количества байт, необходимых для передачи во время фазы рукопожатия. Также это может улучшить безопасноть благодаря снижению возможностей атак на основе амплификации. Сжатие TLS-сертификатов уже работает в Chrome и Safari.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Вышел &lt;a href="https://groovy-lang.org/releasenotes/groovy-4.0.html"&gt;Groovy 4.0&lt;/a&gt;. Среди новшеств языка выражения &lt;code&gt;switch&lt;/code&gt;, &lt;code&gt;sealed&lt;/code&gt; типы, встроенные проверки типов, встроенные макро-методы, инкубационные фичи (записи, JavaShell, аннотация POJO, контракты, GINQ) и другие.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Вышла &lt;a href="https://netbeans.apache.org/download/nb13/index.html"&gt;Apache NetBeans 13&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Вышла &lt;a href="https://www.infoq.com/news/2022/01/graalvm-22-native-image/"&gt;GraalVM 22.0&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Вышла &lt;a href="https://www.infoq.com/news/2022/02/eclipse-collections-11-0-0/"&gt;Eclipse Collections 11.0.0&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&amp;bull; Вышла &lt;a href="https://github.com/google/guava/releases/tag/v31.1"&gt;Guava 31.1&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #34</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_34.html" />
@@ -497,40 +518,5 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
 &lt;p&gt;&lt;a href="https://github.com/TravaOpenJDK/trava-jdk-11-dcevm"&gt;TravaOpenJDK11&lt;/a&gt; &amp;ndash; модификация OpenJDK 11 с улучшенной возможностью переопределения загруженных классов во время выполнения. Является продолжением проекта &lt;a href="https://ssw.jku.at/dcevm/"&gt;DCEVM&lt;/a&gt;. Если в обычной версии HotSpot механизм hotswap позволяет изменять только тела методов, то в DCEVM можно добавлять и удалять поля и методы, не перезапуская JVM.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/gaul/modernizer-maven-plugin"&gt;Modernizer Maven Plugin&lt;/a&gt; &amp;ndash; плагин для Maven, который ищет в проекте использования legacy API. При нахождении таких API плагин предлагает современную альтернативу (например, &lt;code&gt;java.util.Objects.equal()&lt;/code&gt; вместо &lt;code&gt;com.google.common.base.Objects.equal()&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/atp-mipt/ljv"&gt;Lightweight Java Visualizer&lt;/a&gt; &amp;ndash; библиотека, которая парсит Java-объект с помощью рефлексии, строит граф и визуализирует его с помощью Graphviz. Очень удобно, когда нужно быстро понять, как устроена та или иная структура данных.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #26</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_26.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_26.html</id>
-    <updated>2021-08-14T17:00:00Z</updated>
-    <published>2021-08-14T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел первый &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-August/005906.html"&gt;релиз-кандидат JDK 17&lt;/a&gt;. Им стала сборка JDK 17+35.&lt;/p&gt;
-&lt;p&gt;Также вышла ранняя сборка &lt;a href="http://jdk.java.net/18/"&gt;JDK 18+10&lt;/a&gt;. Кроме того, появилось обновление Loom: &lt;a href="https://jdk.java.net/loom/"&gt;JDK 18-loom+2&lt;/a&gt;. Список архитектур, поддерживаемых Loom, пополнился AArch64.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышло два новых JEP:&lt;/p&gt;
-&lt;p&gt;Первый &amp;ndash; &lt;a href="https://openjdk.java.net/jeps/416"&gt;JEP 416: Reimplement Core Reflection with Method Handles&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_18.html"&gt;выпуске 18&lt;/a&gt;, когда был опубликован его черновик.&lt;/p&gt;
-&lt;p&gt;Второй &amp;ndash; &lt;a href="https://openjdk.java.net/jeps/417"&gt;JEP 417: Vector API (Third Incubator)&lt;/a&gt;. Это уже третья итерация Vector API в Java. &lt;a href="https://openjdk.java.net/jeps/338"&gt;Первая&lt;/a&gt; попала в Java 16, &lt;a href="https://openjdk.java.net/jeps/414"&gt;вторая&lt;/a&gt; &amp;ndash; в Java 17. Таким образом, третья должна попасть в &lt;a href="http://openjdk.java.net/projects/jdk/18/"&gt;Java 18&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000305.html"&gt;объявлено голосование&lt;/a&gt; по созданию нового проекта JDK под именем Wakefield. Целью этого проекта будет поддержка в Java сервера дисплея &lt;a href="https://ru.wikipedia.org/wiki/Wayland"&gt;Wayland&lt;/a&gt; в Linux, который создан для полной замены устаревшего X11. Лидером проекта предложил себя Фил Рэйс из Oracle.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Переход AdoptOpenJDK в проект Eclipse Adoptium &lt;a href="https://blog.adoptopenjdk.net/2021/08/goodbye-adoptopenjdk-hello-adoptium/"&gt;полностью завершён&lt;/a&gt;. Теперь скачивать сборки OpenJDK (которые теперь называются Eclipse Temurin) рекомендуется с сайта &lt;a href="https://adoptium.net/"&gt;adoptium.net&lt;/a&gt;. При этом сайт &lt;a href="https://adoptopenjdk.net/"&gt;AdoptOpenJDK&lt;/a&gt; и его API будут ещё какое-то время функционировать.&lt;/p&gt;
-&lt;p&gt;Сборки OpenJ9 не будут предоставляться Adoptium, поэтому их нужно скачивать с &lt;a href="https://developer.ibm.com/languages/java/semeru-runtimes/"&gt;сайта IBM&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Опубликован &lt;a href="https://redmonk.com/sogrady/2021/08/05/language-rankings-6-21/"&gt;RedMonk Programming Languages Rankings&lt;/a&gt; за 2021 год. В этом рейтинге популярность языков программирования вычисляется на основе метрик, собранных с GitHub и StackOverflow. В этом году ничего кардинального для Java и других JVM-языков не произошло: популярность Java немного возросла, и она стала делить второе место с Python (в прошлом году Python и Java занимали второе и третье место соответственно), а Scala, Kotlin и Groovy остались приблизительно на своих местах.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://maven.apache.org/download.cgi"&gt;Apache Maven 3.8.2&lt;/a&gt;. Список изменений можно посмотреть &lt;a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&amp;version=12349965"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-August/003355.html"&gt;JMH 1.33&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 class="pt-2"&gt;Полезняшки&lt;/h4&gt;
-&lt;p&gt;Чтобы выпуски новостей сделать более занимательными, я решил открыть новую рубрику &amp;laquo;Полезняшки&amp;raquo;, где я буду выкладывать по несколько ссылок на интересные инструменты, библиотеки, фреймворки, которые могут оказаться полезными для разработчиков на Java или других JVM-языках.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href="https://github.com/Col-E/Recaf"&gt;Recaf&lt;/a&gt; &amp;ndash; программа просмотра class-/jar-файлов с возможностью редактирования байткода и его сохранения.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://jqwik.net/"&gt;jqwik&lt;/a&gt; &amp;ndash; библиотека для тестирования на основе свойств (property-based testing). Название намекает на отсылку к &lt;a href="https://en.wikipedia.org/wiki/QuickCheck"&gt;QuickCheck&lt;/a&gt;, оригинальной библиотеке на Haskell для написания тестов на основе свойств.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/linkedin/URL-Detector"&gt;URL-Detector&lt;/a&gt; &amp;ndash; библиотека для поиска URL в строках. Написана командой безопасности LinkedIn.&lt;/li&gt;
-&lt;/ol&gt;</content>
   </entry>
 </feed>

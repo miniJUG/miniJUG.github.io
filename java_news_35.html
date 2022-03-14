@@ -1,20 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java появятся компактные тела методов</title>
+    <title>Новости Java #35</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java появятся компактные тела методов">
-    <meta property="og:description" content="Недавно на сайте OpenJDK появился новый черновик JEP, в котором предлагается позволить в Java писать методы в более компактной форме. Сейчас в Java для объявления методов есть только одна форма, в&hellip;">
+    <meta property="og:title" content="Новости Java #35">
+    <meta property="og:description" content="&bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это JEP 422: Linux/RISC-V Port&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2018-09-21">
+    <meta property="article:published_time" content="2022-03-14">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="В Java появятся компактные тела методов">
-    <meta name="twitter:description" content="Недавно на сайте OpenJDK появился новый черновик JEP, в котором предлагается позволить в Java писать методы в более компактной форме. Сейчас в Java для объявления методов есть только одна форма, в&hellip;">
+    <meta name="twitter:title" content="Новости Java #35">
+    <meta name="twitter:description" content="&bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это JEP 422: Linux/RISC-V Port&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
     <meta property="og:image" content="https://minijug.ru/minijug.png">
     <meta property="og:image:width" content="1269">
@@ -31,28 +31,28 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java появятся компактные тела методов</h3>
-<p class="text-secondary"><time datetime="2018-09-21">21 сентября, 2018</time></p>
+<h3 id="title">Новости Java #35</h3>
+<p class="text-secondary"><time datetime="2022-03-14">14 марта, 2022</time></p>
 <article>
-<p>Недавно на сайте OpenJDK появился <a href="http://openjdk.java.net/jeps/8209434">новый черновик JEP</a>, в котором предлагается позволить в Java писать методы в более компактной форме. Сейчас в Java для объявления методов есть только одна форма, в которой даже для простейших методов приходится писать фигурные скобки и ключевое слово <code class="text-nowrap">return</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) {
-    <span style="color: blue">return</span> s.length();
-}</pre>
-<p>Компактная форма будет существенно короче:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) -> s.length();</pre>
-<p>Кроме того, если методы являются просто обёртками над существующими методами, то предлагается также ещё форма через ссылку на метод:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> length(String s) = String::length;</pre>
-<p>Таким образом, новые компактные тела методов будут полностью аналогичны лямбда выражениям в Java, у которых тоже есть две формы: через оператор <code class="text-nowrap">-&gt;</code> и через ссылку на метод.</p>
-<p>Если этот JEP будет реализован, то это позволит в будущем писать более короткий и читаемый Java-код без лишнего шума, особенно в ситуациях, когда в проекте много классов с большим количеством геттеров и сеттеров.</p>
-<p>Компактные тела методов уже существуют во многих языках, например, <a href="https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members">C#</a>, <a href="https://kotlinlang.org/docs/reference/functions.html#single-expression-functions">Kotlin</a>, <a href="https://docs.scala-lang.org/style/declarations.html#methods">Scala</a>. Примечательно, что в C# с помощью краткой формы можно писать не только методы, но и конструкторы. Однако Java-proposal специфицирует, что данная форма будет доступна только для методов.</p>
+<p>&bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это <a href="https://openjdk.java.net/jeps/422">JEP 422: Linux/RISC-V Port</a>.</p>
+<p>Также появился новый <a href="https://openjdk.java.net/jeps/424">JEP 424: Foreign Function & Memory API (Preview)</a>. Этот JEP является продолжением <a href="https://openjdk.java.net/jeps/419">JEP 419: Foreign Function & Memory API (Second Incubator)</a>, однако теперь API уже не будет инкубационным, а станет preview API в пакете <code class="text-nowrap">java.lang.foreign</code>.</p>
+<p>&bull; Появилось несколько черновиков JEP.</p>
+<p>В <a href="https://openjdk.java.net/jeps/8280836">Sequenced Collections</a> предлагается ввести несколько новых интерфейсов коллекций (<code class="text-nowrap">SequencedCollection</code>, <code class="text-nowrap">SequencedSet</code>, <code class="text-nowrap">SequencedMap</code>), в которых элементы будут иметь установленный порядок. Сейчас в стандартной библиотеке интерфейса с такой характеристикой нет, и в случае её надобности приходится прибегать либо к слишком общему интерфейсу <code class="text-nowrap">Collection</code>, но тогда туда будут попадать неупорядоченные коллекции (например, <code class="text-nowrap">HashSet</code>), либо к слишком частному <code class="text-nowrap">List</code>, куда не смогут попасть, например, <code class="text-nowrap">ArrayDeque</code> или <code class="text-nowrap">LinkedHashSet</code>.</p>
+<p><a href="http://openjdk.java.net/jeps/8280173">Vector API (Fourth Incubator)</a> &ndash; уже четвёртая итерация Vector API. Предыдущие три попали в Java <a href="https://openjdk.java.net/jeps/338">16</a>, <a href="https://openjdk.java.net/jeps/414">17</a> и <a href="https://openjdk.java.net/jeps/417">18</a>.</p>
+<p><a href="http://openjdk.java.net/jeps/8281710">TLS Certificate Compression</a> &ndash; добавление поддержки <a href="https://datatracker.ietf.org/doc/html/rfc8879">сжатых цепочек сертификатов TLS</a>. Это позволит ускорить соединения TLS и QUIC из-за уменьшения количества байт, необходимых для передачи во время фазы рукопожатия. Также это может улучшить безопасноть благодаря снижению возможностей атак на основе амплификации. Сжатие TLS-сертификатов уже работает в Chrome и Safari.</p>
+<p>&bull; Вышел <a href="https://groovy-lang.org/releasenotes/groovy-4.0.html">Groovy 4.0</a>. Среди новшеств языка выражения <code class="text-nowrap">switch</code>, <code class="text-nowrap">sealed</code> типы, встроенные проверки типов, встроенные макро-методы, инкубационные фичи (записи, JavaShell, аннотация POJO, контракты, GINQ) и другие.</p>
+<p>&bull; Вышла <a href="https://netbeans.apache.org/download/nb13/index.html">Apache NetBeans 13</a>.</p>
+<p>&bull; Вышла <a href="https://www.infoq.com/news/2022/01/graalvm-22-native-image/">GraalVM 22.0</a>.</p>
+<p>&bull; Вышла <a href="https://www.infoq.com/news/2022/02/eclipse-collections-11-0-0/">Eclipse Collections 11.0.0</a>.</p>
+<p>&bull; Вышла <a href="https://github.com/google/guava/releases/tag/v31.1">Guava 31.1</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
-  <ul class="collapse" id="year2022">
-<li class="text-secondary"><a href="java_news_35.html" class="text-secondary">Новости Java #35</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
+  <ul class="collapse show" id="year2022">
+<li>Новости Java #35</li>
   </ul>
 </div>
 <div class="mt-3">
@@ -131,10 +131,10 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="true" aria-controls="year2018">2018</a>
-  <ul class="collapse show" id="year2018">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
-<li>В Java появятся компактные тела методов</li>
+<li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
 <li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
 <li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
 <li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
