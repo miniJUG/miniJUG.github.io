@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Новости Java #31</title>
+    <title>Новости Java #36</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #31">
-    <meta property="og:description" content="&bull; Появилось расписание выхода JDK 18. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года&hellip;">
+    <meta property="og:title" content="Новости Java #36">
+    <meta property="og:description" content="&bull; Вышел новый черновик JEP: Extended Opcodes. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-11-15">
+    <meta property="article:published_time" content="2022-03-21">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Новости Java #31">
-    <meta name="twitter:description" content="&bull; Появилось расписание выхода JDK 18. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года&hellip;">
+    <meta name="twitter:title" content="Новости Java #36">
+    <meta name="twitter:description" content="&bull; Вышел новый черновик JEP: Extended Opcodes. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_31.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_36.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_31.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_36.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,43 +31,47 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #31</h3>
-<p class="text-secondary"><time datetime="2021-11-15">15 ноября, 2021</time></p>
+<h3 id="title">Новости Java #36</h3>
+<p class="text-secondary"><time datetime="2022-03-21">21 марта, 2022</time></p>
 <article>
-<p>&bull; Появилось <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-November/006199.html">расписание выхода JDK 18</a>. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.</p>
+<p>&bull; Вышел новый черновик JEP: <a href="http://openjdk.java.net/jeps/8283291">Extended Opcodes</a>. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему нехватки опкодов, которых сейчас осталось всего 55 (из 256 возможных). Расширение опкодов не затронет существующие опкоды, и они так и останутся однобайтовыми, а новые расширенные опкоды будут состоять из двух частей: наименее значащий байт будет отделён от остальных байтов, которые будут храниться в отдельном атрибуте. Такое решение сохранит максимальную совместимость с текущей схемой, а также сохранит компактность class-файлов.</p>
 
-<p class="pt-2">&bull; Вышел новый <a href="http://openjdk.java.net/jeps/421">JEP 421: Deprecate Finalization for Removal</a>. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.</p>
-<p>Финализация &ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у <code class="text-nowrap">finalize()</code> есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &laquo;сломать&raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать <code class="text-nowrap">super.finalize()</code> в подклассе) и т.д. Это привело к тому, что в Java 9 метод <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--">Object.finalize()</a> стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.</p>
+<p>&bull; Вышел <a href="https://www.youtube.com/watch?v=GnNnQY5ujFg">Eclipse 2022-03</a>. Перечислим некоторые нововведения и улучшения:</p>
+<ul>
+  <li>Новый quick assist, позволяющий быстро добавлять статический импорт в список Favorites.</li>
+  <li>Новый quick assist "Extract lambda body to method".</li>
+  <li>Теперь можно ставить брейкпоинт на вхождение в лямбду или выход из лямбды.</li>
+  <li>Возможность переходить в место объявления поля из списка переменных в дебаггере.</li>
+  <li>При изменении final поля в дебаггере теперь выдаётся предупреждение.</li>
+  <li>В дебаггере теперь отображается PID процесса (в Debug View, а также в консоли).</li>
+  <li>6 новых настроек форматирования Java-кода.</li>
+  <li>Улучшения в Maven и Git.</li>
+  <li>Возможность открывать большие файлы в редакторах, отличных от дефолтных.</li>
+</ul>
 
-<p class="pt-2">&bull; В Java 18 был интегрирован <a href="https://openjdk.java.net/jeps/418">JEP 418: Internet-Address Resolution SPI</a>. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</p>
+<p>&bull; Вышла статья <a href="https://tschatzl.github.io/2022/03/14/jdk18-g1-parallel-gc-changes.html">"JDK 18 G1/Parallel/Serial GC changes"</a>, где рассказано, какие улучшения в сборщиках мусора произошли в Java 18.</p>
 
-<p class="pt-2">&bull; Появилось два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8276094">Region Pinning in G1</a> и <a href="http://openjdk.java.net/jeps/8276797">Linux/RISC-V Port</a>.</p>
+<p>&bull; Вышел <a href="https://docs.gradle.org/7.4/release-notes.html">Gradle 7.4</a>.</p>
 
-<p class="pt-2">&bull; JUG.ru выложил <a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2">видео с JPoint 2021</a>.</p>
-
-<p class="pt-2">&bull; JetBrains выпустил <a href="https://blog.jetbrains.com/idea/2021/11/java-annotated-monthly-november-2021/">Java Annotated Monthly за ноябрь 2021</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.3/release-notes.html">Gradle 7.3</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0">StreamEx 0.8.0</a>.</p>
+<p>&bull; Вышел <a href="https://www.eclipse.org/lists/birt-dev/msg11552.html">BIRT 4.9.0</a>. Это первый релиз фреймворка спустя 4 года после выхода версии 4.8.0.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
-  <ul class="collapse" id="year2022">
-<li class="text-secondary"><a href="java_news_36.html" class="text-secondary">Новости Java #36</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
+  <ul class="collapse show" id="year2022">
+<li>Новости Java #36</li>
 <li class="text-secondary"><a href="java_news_35.html" class="text-secondary">Новости Java #35</a></li>
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
-  <ul class="collapse show" id="year2021">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
+  <ul class="collapse" id="year2021">
 <li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
 <li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
-<li>Новости Java #31</li>
+<li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>
 <li class="text-secondary"><a href="java_news_30.html" class="text-secondary">Новости Java #30</a></li>
 <li class="text-secondary"><a href="java_news_29.html" class="text-secondary">Новости Java #29</a></li>
 <li class="text-secondary"><a href="java_news_28.html" class="text-secondary">Новости Java #28</a></li>

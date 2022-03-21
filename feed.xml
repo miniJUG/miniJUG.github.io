@@ -4,7 +4,37 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-03-13T17:00:00Z</updated>
+  <updated>2022-03-20T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #36</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_36.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_36.html</id>
+    <updated>2022-03-20T17:00:00Z</updated>
+    <published>2022-03-20T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="http://openjdk.java.net/jeps/8283291"&gt;Extended Opcodes&lt;/a&gt;. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему нехватки опкодов, которых сейчас осталось всего 55 (из 256 возможных). Расширение опкодов не затронет существующие опкоды, и они так и останутся однобайтовыми, а новые расширенные опкоды будут состоять из двух частей: наименее значащий байт будет отделён от остальных байтов, которые будут храниться в отдельном атрибуте. Такое решение сохранит максимальную совместимость с текущей схемой, а также сохранит компактность class-файлов.&lt;/p&gt;
+
+&lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=GnNnQY5ujFg"&gt;Eclipse 2022-03&lt;/a&gt;. Перечислим некоторые нововведения и улучшения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Новый quick assist, позволяющий быстро добавлять статический импорт в список Favorites.&lt;/li&gt;
+  &lt;li&gt;Новый quick assist "Extract lambda body to method".&lt;/li&gt;
+  &lt;li&gt;Теперь можно ставить брейкпоинт на вхождение в лямбду или выход из лямбды.&lt;/li&gt;
+  &lt;li&gt;Возможность переходить в место объявления поля из списка переменных в дебаггере.&lt;/li&gt;
+  &lt;li&gt;При изменении final поля в дебаггере теперь выдаётся предупреждение.&lt;/li&gt;
+  &lt;li&gt;В дебаггере теперь отображается PID процесса (в Debug View, а также в консоли).&lt;/li&gt;
+  &lt;li&gt;6 новых настроек форматирования Java-кода.&lt;/li&gt;
+  &lt;li&gt;Улучшения в Maven и Git.&lt;/li&gt;
+  &lt;li&gt;Возможность открывать большие файлы в редакторах, отличных от дефолтных.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;bull; Вышла статья &lt;a href="https://tschatzl.github.io/2022/03/14/jdk18-g1-parallel-gc-changes.html"&gt;"JDK 18 G1/Parallel/Serial GC changes"&lt;/a&gt;, где рассказано, какие улучшения в сборщиках мусора произошли в Java 18.&lt;/p&gt;
+
+&lt;p&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.4/release-notes.html"&gt;Gradle 7.4&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/lists/birt-dev/msg11552.html"&gt;BIRT 4.9.0&lt;/a&gt;. Это первый релиз фреймворка спустя 4 года после выхода версии 4.8.0.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #35</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_35.html" />
@@ -488,35 +518,5 @@ WARNING: The Security Manager is deprecated and will be removed in a future rele
 &lt;p&gt;Предыдущая версия OpenJDK с Long Term Support, &lt;a href="https://minijug.ru/java_11_is_out.html"&gt;Java 11&lt;/a&gt;, вышла ровно 3 года назад, хотя кажется, что она вышла совсем недавно, практически вчера. Но вот уже вышло 5 версий (12, 13, 14, 15, 16) и мы не успели опомниться, как подоспела следующая LTS-версия, Java 17.&lt;/p&gt;
 &lt;p&gt;Для тех, кто будет переходить с 11, Java 17 будет достаточно &lt;a href="http://openjdk.java.net/projects/jdk/17/jeps-since-jdk-11"&gt;большим апгрейдом&lt;/a&gt;. Если сложить все релизы с 12 по 17, то в сумме появилось 5 больших языковых конструкций: выражения &lt;code&gt;switch&lt;/code&gt;, блоки текста, записи, паттерн-матчинг для &lt;code&gt;instanceof&lt;/code&gt; и &lt;code&gt;sealed&lt;/code&gt; классы. Появилось очень много интересного API, сделано много улучшений производительности, оптимизировано потребление памяти, уменьшено время старта JVM. Очень много чего было удалено, поэтому могут возникнуть некоторые трудности при миграции.&lt;/p&gt;
 &lt;p&gt;Следующими большими шагами для Java будет завершение реализации проектов &lt;a href="http://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt;, &lt;a href="http://openjdk.java.net/projects/loom/"&gt;Loom&lt;/a&gt; и &lt;a href="http://openjdk.java.net/projects/panama/"&gt;Panama&lt;/a&gt;, а также дальнейшие языковые улучшения в проекте &lt;a href="http://openjdk.java.net/projects/amber/"&gt;Amber&lt;/a&gt;. Увидим ли мы всё это в следующей LTS-версии? Узнаем через &lt;a href="https://mreinhold.org/blog/forward-even-faster"&gt;2 года&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #27</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_27.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_27.html</id>
-    <updated>2021-08-29T17:00:00Z</updated>
-    <published>2021-08-29T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Стали известны первые два JEP'а, которые попадут в Java 18:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/400"&gt;JEP 400: UTF-8 by Default&lt;/a&gt;. В нём предлагается сделать UTF-8 кодировкой по умолчанию на всех платформах. Про него мы писали в &lt;a href="java_news_10.html"&gt;выпуске #10&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/413"&gt;JEP 413: Code Snippets in Java API Documentation&lt;/a&gt;. В этом JEP предлагается ввести новый тег &lt;code&gt;@snippet&lt;/code&gt;, помощью которого можно будет вставлять в javadoc примеры кода. Про него мы писали в &lt;a href="java_news_5.html"&gt;выпуске #5&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В IntelliJ IDEA появилась базовая поддержка Java 17. В &lt;a href="https://blog.jetbrains.com/idea/2021/08/intellij-idea-2021-2-1/"&gt;новой версии 2021.2.1&lt;/a&gt; теперь есть новый уровень языка "17 - Sealed types, always-strict floating-point semantics", а также "17 (Preview) - Pattern matching for switch", включив который, можно попробовать &lt;a href="https://openjdk.java.net/jeps/406"&gt;новую preview конструкцию языка&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Завершились голосования за создание проектов &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000306.html"&gt;Wakefield&lt;/a&gt; и &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-August/000307.html"&gt;CRaC&lt;/a&gt;. Теперь лидеры могут официально стартовать проекты.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JUGNsk выложил &lt;a href="https://www.youtube.com/playlist?list=PLecWId-JT7S5cqUiY7ixWcZgjdRV4upnw"&gt;видеозаписи докладов&lt;/a&gt; с февральской конференции SnowOne 2021.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://micronaut.io/2021/08/18/micronaut-framework-3-released/"&gt;Micronaut 3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.2/release-notes.html"&gt;Gradle 7.2&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 class="pt-2"&gt;Полезняшки&lt;/h4&gt;
-&lt;p&gt;&lt;a href="https://github.com/TravaOpenJDK/trava-jdk-11-dcevm"&gt;TravaOpenJDK11&lt;/a&gt; &amp;ndash; модификация OpenJDK 11 с улучшенной возможностью переопределения загруженных классов во время выполнения. Является продолжением проекта &lt;a href="https://ssw.jku.at/dcevm/"&gt;DCEVM&lt;/a&gt;. Если в обычной версии HotSpot механизм hotswap позволяет изменять только тела методов, то в DCEVM можно добавлять и удалять поля и методы, не перезапуская JVM.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/gaul/modernizer-maven-plugin"&gt;Modernizer Maven Plugin&lt;/a&gt; &amp;ndash; плагин для Maven, который ищет в проекте использования legacy API. При нахождении таких API плагин предлагает современную альтернативу (например, &lt;code&gt;java.util.Objects.equal()&lt;/code&gt; вместо &lt;code&gt;com.google.common.base.Objects.equal()&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/atp-mipt/ljv"&gt;Lightweight Java Visualizer&lt;/a&gt; &amp;ndash; библиотека, которая парсит Java-объект с помощью рефлексии, строит граф и визуализирует его с помощью Graphviz. Очень удобно, когда нужно быстро понять, как устроена та или иная структура данных.&lt;/p&gt;</content>
   </entry>
 </feed>
