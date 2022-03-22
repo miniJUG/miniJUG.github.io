@@ -4,7 +4,142 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-03-20T17:00:00Z</updated>
+  <updated>2022-03-21T17:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 18</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_18.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_18.html</id>
+    <updated>2022-03-21T17:00:00Z</updated>
+    <published>2022-03-21T17:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="http://openjdk.java.net/projects/jdk/18/"&gt;Java 18&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-18.html"&gt;2000 закрытых задач и 9 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/18/release-notes"&gt;здесь&lt;/a&gt;. Изменения API можно посмотреть по &lt;a href="https://javaalmanac.io/jdk/18/apidiff/17/"&gt;этой ссылке&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/18/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Перечислим JEP'ы, которые попали в Java 18.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/420"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Second Preview) (JEP 420)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="https://openjdk.java.net/jeps/406"&gt;появился в Java 17&lt;/a&gt; в режиме preview, остаётся в этом статусе. В этом релизе присутствует два изменения по сравнению с предыдущей версией.&lt;/p&gt;
+&lt;p&gt;Первое изменение &amp;ndash; константные паттерны теперь должны находиться выше, чем паттерны с условиями того же типа. Например, такой код успешно компилируется в Java 17:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 3 -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; {}
+}&lt;/pre&gt;
+&lt;p&gt;Но не компилируется в Java 18:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; javac --enable-preview --release 18 Main.java
+&lt;span style="color: red"&gt;Main.java:8: error: this case label is dominated by a preceding case label
+            case 3 -&gt; {}
+                 ^&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Чтобы код компилировался на Java 18, нужно переместить константный паттерн выше:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 3 -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; {}
+}&lt;/pre&gt;
+
+&lt;p&gt;Второе изменение &amp;ndash; улучшенная проверка исчерпываемости для дженериков. Например, такой код не компилируется в Java 17, несмотря на то что &lt;code&gt;switch&lt;/code&gt; покрывает все возможные случаи:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; A&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; B&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
+&lt;span style="color: blue"&gt;final class&lt;/span&gt; C &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;String&amp;gt; { }
+
+&lt;span style="color: blue"&gt;static int&lt;/span&gt; testGenericSealedExhaustive(Foo&amp;lt;Integer&amp;gt; foo) {
+    &lt;span style="color: blue"&gt;return switch&lt;/span&gt; (foo) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; A&amp;lt;Integer&amp;gt; a -&amp;gt; 1;
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; B&amp;lt;Integer&amp;gt; b -&amp;gt; 2;
+    };
+}&lt;/pre&gt;
+&lt;pre&gt;javac --enable-preview --release 17 Main.java
+&lt;span style="color: red"&gt;Main.java:10: error: the switch expression does not cover all possible input values
+    return switch (foo) {
+           ^&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;В Java 18 же такой код успешно компилируется.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/413"&gt;Сниппеты кода в документации Java API (JEP 413)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В JavaDoc теперь поддерживается новый тег &lt;code&gt;@snippet&lt;/code&gt;, который указывает на то, что данный участок является примером кода.&lt;/p&gt;
+&lt;p&gt;Пример сниппета кода:&lt;/p&gt;
+&lt;pre&gt;/**
+ * A simple program.
+ * {@snippet :
+ *   public class HelloWorld {
+ *     public static void main(String... args) {
+ *       System.out.println("Hello World!"); // @highlight substring="println"
+ *     }
+ *   }
+ * }
+ */&lt;/pre&gt;
+&lt;p&gt;Сгенерированная документация для него будет выглядеть примерно следующим образом:&lt;/p&gt;
+&lt;pre&gt;public class HelloWorld {
+  public static void main(String... args) {
+    System.out.&lt;b&gt;println&lt;/b&gt;("Hello World!");
+  }
+}&lt;/pre&gt;
+
+&lt;p&gt;Тег &lt;code&gt;@snippet&lt;/code&gt; введён в качестве замены существующему методу вставки примеров кода в JavaDoc с помощью блоков &lt;code&gt;&amp;lt;pre&amp;gt;{@code ... }&amp;lt;/pre&amp;gt;&lt;/code&gt;, который имеет ряд недостатков:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Тег &lt;code&gt;@code&lt;/code&gt; не поддерживает возможность указания языка фрагмента, а значит теряется возможность проверки корректности кода, подсветки синтаксиса и ссылок, поскольку инструменты трактуют все такие фрагменты как простой текст.&lt;/li&gt;
+  &lt;li&gt;Подсветку синтаксиса также нельзя добавить и вручную, поскольку внутренние HTML-теги будут трактоваться как часть фрагмента. Проблему можно решить через использование тега &lt;code&gt;&amp;lt;pre&amp;gt;...&amp;lt;/pre&amp;gt;&lt;/code&gt; (без &lt;code&gt;@code&lt;/code&gt;), но тогда полностью исчезает указание того, что данный фрагмент документации является кодом.&lt;/li&gt;
+  &lt;li&gt;Фрагменты кода часто являются неполными или содержат плейсхолдеры и многоточия. Тег &lt;code&gt;@code&lt;/code&gt; никак не решает данную проблему.&lt;/li&gt;
+  &lt;li&gt;Индентация строк во фрагменте остаётся такой, как написана в исходном коде.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Новый тег же не только решает все вышеперечисленные проблемы, но и добавляет новые возможности:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;В сниппете можно указать язык фрагмента с помощью атрибута &lt;code&gt;lang&lt;/code&gt;: &lt;code&gt;{@snippet lang=properties : ... }&lt;/code&gt;. Если язык не указан, то считается, что это Java. Проверка корректности пока ограничена только сбалансированностью фигурных скобок, но инструменты могут реализовать более сложную проверку.&lt;/li&gt;
+  &lt;li&gt;Подсветка отдельных элементов фрагмента может быть сделана с помощью тега &lt;code&gt;@highlight&lt;/code&gt;, который поддерживает три стиля &lt;code&gt;bold&lt;/code&gt;, &lt;code&gt;italic&lt;/code&gt; и &lt;code&gt;highlighted&lt;/code&gt;. Все теги указываются в комментариях, поэтому полностью исчезают после генерации. Инструменты также имеют возможность сделать автоматическую подсветку синтаксиса.&lt;/li&gt;
+  &lt;li&gt;Многоточия и неполные фрагменты кода возможны с помощью тега &lt;code&gt;@replace&lt;/code&gt;. Фрагмент кода до замены плейсхолдеров остаётся синтаксически валидным кодом.&lt;/li&gt;
+  &lt;li&gt;В сниппете можно сделать ссылки с помощью тега &lt;code&gt;@link&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Общие отступы строк фрагмента съедаются при генерации документации.&lt;/li&gt;
+  &lt;li&gt;При генерации HTML-документации стандартным доклетом сниппеты кода лучше выделяются на фоне остальной документации благодаря серому фону. Кроме того, каждый сниппет кода будет сопровождаться кнопкой копирования в буфер обмена.&lt;/li&gt;
+  &lt;li&gt;Сниппеты кода могут быть внешними и подтягивать код из внешних файлов. Чтобы иметь возможность не включать весь файл в JavaDoc, поддерживаются регионы с помощью тега &lt;code&gt;@region&lt;/code&gt;. Внешние сниппеты хороши тем, что внешние файлы могут быть предварительно проверены на корректность (например, если файлы Java не будут компилироваться, то и не смогут быть включены в JavaDoc).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/400"&gt;UTF-8 по умолчанию (JEP 400)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;UTF-8 теперь является кодировкой по умолчанию на всех платформах. Кодировка по умолчанию используется в таких API как &lt;code&gt;java.io&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/InputStreamReader.html"&gt;&lt;code&gt;InputStreamReader&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileReader.html"&gt;&lt;code&gt;FileReader&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/OutputStreamWriter.html"&gt;&lt;code&gt;OutputStreamWriter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileWriter.html"&gt;&lt;code&gt;FileWriter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html"&gt;&lt;code&gt;PrintStream&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;java.util&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Formatter.html"&gt;&lt;code&gt;Formatter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Scanner.html"&gt;&lt;code&gt;Scanner&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;java.net&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLEncoder.html"&gt;&lt;code&gt;URLEncoder&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLDecoder.html"&gt;&lt;code&gt;URLDecoder&lt;/code&gt;&lt;/a&gt;). Кодировка в пакете &lt;code&gt;java.nio.file&lt;/code&gt; осталась неизменной: в нём самого начала UTF-8 было в качестве &lt;code&gt;Charset&lt;/code&gt; по умолчанию.&lt;/p&gt;
+&lt;p&gt;Если в Java 17 и более ранних версиях кодировка по умолчанию определялась при старте JVM и зависела от разных факторов (операционная система, пользовательская локаль, кодировка операционной системы), то с Java 18 она всегда UTF-8. Если нужно включить старый механизм установки кодировки при старте, то можно использовать опцию &lt;code&gt;-Dfile.encoding=COMPAT&lt;/code&gt;. Кроме того, эту кодировку можно узнать, используя свойство &lt;code&gt;native.encoding&lt;/code&gt;, которое &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8265989"&gt;появилось в Java 17&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Чтобы будущий переход на Java 18 был более гладким, рекомендуется стартовать свои приложения на Java 17 или более ранних версиях с опцией &lt;code&gt;-Dfile.encoding=UTF-8&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/408"&gt;Простой веб-сервер (JEP 408)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появилась новая утилита &lt;code&gt;jwebserver&lt;/code&gt;, которая запускает простой веб-сервер, предоставляющий статический доступ к указанной папке с файлами. По умолчанию используется текущая директория (если не указана опция &lt;code&gt;-d&lt;/code&gt;), а порт равен 8000 (если не указана опция &lt;code&gt;-p&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Веб-сервер поддерживает только HTTP/1.1, не поддерживает HTTPS и аутентификацию. Его рекомендуется использовать только для целей разработки и тестирования.&lt;/p&gt;
+&lt;p&gt;Вместе с утилитой &lt;code&gt;jwebserver&lt;/code&gt; также появилось новое API, позволяющее запускать веб-сервер программно. За это отвечают новые классы &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/SimpleFileServer.html"&gt;&lt;code&gt;SimpleFileServer&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpHandlers.html"&gt;&lt;code&gt;HttpHandlers&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/Request.html"&gt;&lt;code&gt;Request&lt;/code&gt;&lt;/a&gt; в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html"&gt;&lt;code&gt;com.sun.net.httpserver&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Финализация объектов, которая &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8165641"&gt;стала deprecated в Java 9&lt;/a&gt;, теперь стала deprecated for removal, то есть подлежит окончательному удалению.&lt;/p&gt;
+&lt;p&gt;Начиная с Java 18, все методы, относящиеся к финализации, помечены аннотацией &lt;code&gt;@Deprecated(forRemoval=true)&lt;/code&gt;. Это &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()"&gt;&lt;code&gt;Object.finalize()&lt;/code&gt;&lt;/a&gt; и его наследники (часть из них удалены полностью), &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runtime.html#runFinalization()"&gt;&lt;code&gt;Runtime.runFinalization()&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/System.html#runFinalization()"&gt;&lt;code&gt;Runtime.runFinalization()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Сама финализация всё ещё работает, однако появилась новая опция &lt;code&gt;--finalization=disabled&lt;/code&gt;, которая её отключает.&lt;/p&gt;
+&lt;p&gt;В будущих версиях Java работа по дальнейшему отказу от финализации может быть продолжена. Сначала финализацию предлагается отключить по умолчанию с возможностью включения, потом отключить её полностью, и, наконец, удалить весь API финализации.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/416"&gt;Reimplement Core Reflection with Method Handles (JEP 416)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Механизм рефлексии в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/reflect/package-summary.html"&gt;&lt;code&gt;java.lang.reflect&lt;/code&gt;&lt;/a&gt; теперь реализован поверх method handles в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/invoke/package-summary.html"&gt;&lt;code&gt;java.lang.invoke&lt;/code&gt;&lt;/a&gt;. В Java 17 и раньше эти два механизма существовали независимо и имели разную внутреннюю реализацию. Такое дублирование усложняет поддержку платформы и внесение в неё новых языковых изменений.&lt;/p&gt;
+&lt;p&gt;Для разработчика такое изменение не должно иметь видимых последствий (кроме небольших различий в производительности). Однако на всякий случай предоставлен ключ, позволяющий включить старую реализацию: &lt;code&gt;-Djdk.reflect.useDirectMethodHandle=false&lt;/code&gt;. Старая реализация будет полностью удалена в одной из следующих версий Java.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/418"&gt;Internet-Address Resolution SPI (JEP 418)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появилось новое SPI, позволяющее кастомизировать получение IP-адреса по имени хоста (и наоборот). По умолчанию &lt;code&gt;InetAddress&lt;/code&gt; API делает нативный резолвинг, то есть делегированием операционной системе. Если нужен альтернативный механизм резолвинга, то теперь его можно предоставить путём реализации нового провайдера сервиса &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/spi/InetAddressResolverProvider.html"&gt;&lt;code&gt;InetAddressResolverProvider&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Примеры случаев, когда может понадобиться альтернативный резолвинг:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Более производительный резолвинг, чем системный.&lt;/li&gt;
+  &lt;li&gt;Неблокирующий резолвинг.&lt;/li&gt;
+  &lt;li&gt;Альтернативный протокол DNS (например, DNS over QUIC).&lt;/li&gt;
+  &lt;li&gt;Тестирование (подмена IP-адресов, моки).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/419"&gt;Foreign Function &amp; Memory API (Second Incubator) (JEP 419)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Foreign Function &amp; Memory API, который &lt;a href="https://openjdk.java.net/jeps/412"&gt;появился в Java 17&lt;/a&gt; в инкубационном статусе, остаётся в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.foreign/module-summary.html"&gt;&lt;code&gt;jdk.incubator.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В Java 19 это API перестанет быть инкубационным и &lt;a href="https://openjdk.java.net/jeps/424"&gt;станет preview API&lt;/a&gt; в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/417"&gt;Vector API (Third Incubator) (JEP 417)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.java.net/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, осталось в инкубационном статусе в &lt;a href="https://openjdk.java.net/jeps/414"&gt;Java 17&lt;/a&gt;, продолжает находиться в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-3"&gt;Java 18 не является LTS-релизом и будет получать обновления только в течение полугода (до сентября 2022).&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #36</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_36.html" />
@@ -365,158 +500,5 @@
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2021/09/java-annotated-monthly-september-2021/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за сентябрь 2021.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://gluonhq.com/products/javafx/openjfx-17-release-notes/"&gt;JavaFX 17&lt;/a&gt; с Long Term Support.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Вышла Java 17</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_17.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_17.html</id>
-    <updated>2021-09-13T17:00:00Z</updated>
-    <published>2021-09-13T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="http://openjdk.java.net/projects/jdk/17/"&gt;Java 17&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-17.html"&gt;2700 закрытых задач и 14 JEP'ов&lt;/a&gt;. Изменения API можно посмотреть по &lt;a href="https://javaalmanac.io/jdk/17/apidiff/16/"&gt;этой ссылке&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- cut --&gt;
-&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://jdk.java.net/17/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Перечислим JEP'ы, которые попали в Java 17.&lt;/p&gt;
-&lt;h4&gt;Язык&lt;/h4&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/306"&gt;Восстановление всегда строгой семантики чисел с плавающей точкой (JEP 306)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Теперь все выражения с плавающей точкой вычисляются строго на всех платформах, и разницы между строгой семантикой и семантикой по умолчанию больше нет (как это было до Java 1.2). Таким образом, ключевое слово &lt;code&gt;strictfp&lt;/code&gt; больше не имеет эффекта, и при его использовании выдаётся предупреждение:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; javac Main.java
-Main.java:1: &lt;span style="color: orange"&gt;warning: [strictfp] as of release 17, all floating-point
-expressions are evaluated strictly and 'strictfp' is not required&lt;/span&gt;
-strictfp public class Main {
-                ^&lt;/pre&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/409"&gt;&lt;code&gt;sealed&lt;/code&gt; классы (JEP 409)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;&amp;laquo;Запечатанные&amp;raquo; классы после двух preview итераций в &lt;a href="https://openjdk.java.net/jeps/360"&gt;Java 15&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/397"&gt;Java 16&lt;/a&gt; наконец-то стали стабильной синтаксической конструкцией и больше не требуют флага &lt;code&gt;--enable-preview&lt;/code&gt;. Различий по сравнению с Java 16 нет.&lt;/p&gt;
-&lt;p&gt;Напомним, ключевым слово &lt;code&gt;sealed&lt;/code&gt; можно пометить класс или интерфейс, если нужно ограничить список его наследников. Список можно указать явно, перечислив все наследники с помощью ключевого слова &lt;code&gt;permits&lt;/code&gt;, либо он выведется неявно компилятором из всех задекларированных наследников в текущем исходном файле.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/406"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Preview) (JEP 406)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Появилась новая синтаксическая конструкция в режиме preview, существенно расширяющая возможности оператора &lt;code&gt;switch&lt;/code&gt;: теперь оператор &lt;code&gt;switch&lt;/code&gt; поддерживает не только простые тесты на равенство с константами примитивов, перечислений и строк, но и тесты по паттернам.&lt;/p&gt;
-&lt;p&gt;Простейшие паттерны это паттерны по типу:&lt;/p&gt;
-&lt;pre&gt;Object o = ...
-&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (o) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; String.format(&lt;span style="color: darkred"&gt;"int %d"&lt;/span&gt;, i);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Long l -&gt; String.format(&lt;span style="color: darkred"&gt;"long %d"&lt;/span&gt;, l);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Double d -&gt; String.format(&lt;span style="color: darkred"&gt;"double %f"&lt;/span&gt;, d);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; String.format(&lt;span style="color: darkred"&gt;"String %s"&lt;/span&gt;, s);
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; o.toString();
-};&lt;/pre&gt;
-&lt;p&gt;Паттерны могут снабжаться условиями путём добавления охранных паттернов:&lt;/p&gt;
-&lt;pre&gt;Shape s = ...
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Triangle t &amp;&amp; (t.calculateArea() &gt; 100) -&gt;
-        System.out.println(&lt;span style="color: darkred"&gt;"Large Triangle"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt;
-        System.out.println(&lt;span style="color: darkred"&gt;"A shape (possibly a small triangle)"&lt;/span&gt;);
-}&lt;/pre&gt;
-&lt;p&gt;Также добавлена поддержка матчинга &lt;code&gt;null&lt;/code&gt; с помощью отдельной метки &lt;code&gt;null&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;Object o = ...
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
-    &lt;span style="color: blue"&gt;case null&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Other"&lt;/span&gt;);
-}&lt;/pre&gt;
-&lt;p&gt;Ветки &lt;code&gt;null&lt;/code&gt; и &lt;code&gt;default&lt;/code&gt; можно объединять друг с другом:&lt;/p&gt;
-&lt;pre&gt;String s = ...
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; &lt;span style="color: darkred"&gt;"Foo"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Bar"&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Foo or Bar"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;case null, default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null or other"&lt;/span&gt;);
-}&lt;/pre&gt;
-&lt;p&gt;Все &lt;code&gt;switch&lt;/code&gt; с паттернами должны быть исчерпывающими (даже если это &lt;code&gt;switch&lt;/code&gt; statement, а не &lt;code&gt;switch&lt;/code&gt; expression):&lt;/p&gt;
-&lt;pre&gt;Object o = ...
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (o) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Integer"&lt;/span&gt;);
-}&lt;/pre&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 17 Main.java
-Main.java:4: &lt;span style="color: red"&gt;error: the switch statement does not cover all possible input values
-        switch (o) {
-        ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Чтобы пример выше стал компилироваться, нужно либо добавить ветку &lt;code&gt;default&lt;/code&gt;, либо тотальный паттерн (в данном случае &lt;code&gt;case Object obj&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Старый &lt;code&gt;switch&lt;/code&gt; statement можно продолжать делать неисчерпывающим, однако это может &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-April/002959.html"&gt;измениться в будущем&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Новый &lt;code&gt;switch&lt;/code&gt; очень хорошо взаимодействует с &lt;code&gt;sealed&lt;/code&gt; классами, поскольку круг подтипов является ограниченным, а это значит, что ветка &lt;code&gt;default&lt;/code&gt; не является необходимой, если перечислены все возможные случаи:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; S &lt;span style="color: blue"&gt;permits&lt;/span&gt; A, B, C {}
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; A &lt;span style="color: blue"&gt;implements&lt;/span&gt; S {}
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; B &lt;span style="color: blue"&gt;implements&lt;/span&gt; S {}
-&lt;span style="color: blue"&gt;record&lt;/span&gt; C(&lt;span style="color: blue"&gt;int&lt;/span&gt; i) &lt;span style="color: blue"&gt;implements&lt;/span&gt; S {}&lt;/pre&gt;
-&lt;pre&gt;S s = ...
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (s) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; A a -&gt; System.out.println(&lt;span style="color: darkred"&gt;"A"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; B b -&gt; System.out.println(&lt;span style="color: darkred"&gt;"B"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; C c -&gt; System.out.println(&lt;span style="color: darkred"&gt;"C"&lt;/span&gt;);
-}&lt;/pre&gt;
-&lt;p class="pt-2"&gt;На этом беглое рассмотрение паттерн-матчинга для &lt;code&gt;switch&lt;/code&gt; мы закончим, а про другие возможности и нюансы можно почитать на &lt;a href="https://openjdk.java.net/jeps/406"&gt;странице JEP&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4&gt;API&lt;/h4&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/356"&gt;Enhanced Pseudo-Random Number Generators (JEP 356)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;В Java 17 появился новый пакет &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/package-summary.html"&gt;&lt;code&gt;java.util.random&lt;/code&gt;&lt;/a&gt; с новыми интерфейсами и реализациями генераторов псевдослучайных чисел. Наверху иерархии новый интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.html"&gt;&lt;code&gt;RandomGenerator&lt;/code&gt;&lt;/a&gt;, который является родителем как новых генераторов и специализаций (&lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.SplittableGenerator.html"&gt;&lt;code&gt;SplittableRandomGenerator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.JumpableGenerator.html"&gt;&lt;code&gt;JumpableRandomGenerator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.LeapableGenerator.html"&gt;&lt;code&gt;LeapableRandomGenerator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/RandomGenerator.ArbitrarilyJumpableGenerator.html"&gt;&lt;code&gt;ArbitrarilyJumpableRandomGenerator&lt;/code&gt;&lt;/a&gt;), так и старых классов (&lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html"&gt;&lt;code&gt;Random&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadLocalRandom.html"&gt;&lt;code&gt;ThreadLocalRandom&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/SplittableRandom.html"&gt;&lt;code&gt;SplittableRandom&lt;/code&gt;&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Таким образом, алгоритмы генерации чисел теперь стали более взаимозаменяемыми:&lt;/p&gt;
-&lt;pre&gt;RandomGenerator random1 = &lt;span style="color: blue"&gt;new&lt;/span&gt; Random();
-RandomGenerator random2 = ThreadLocalRandom.current();
-RandomGenerator random3 = RandomGenerator.getDefault();
-RandomGenerator random4 = RandomGenerator.of(&lt;span style="color: darkred"&gt;"Xoshiro256PlusPlus"&lt;/span&gt;);&lt;/pre&gt;
-&lt;p&gt;Кроме того, список генераторов ограничен не только теми, что предоставлены самим JDK, но является расширяемыем: предоставлять свои или сторонние реализации можно через механизм &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html"&gt;ServiceLoader&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/398"&gt;Deprecate the Applet API for Removal (JEP 398)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;API аплетов, которое &lt;a href="https://openjdk.java.net/jeps/289"&gt;стало deprecated&lt;/a&gt; в Java 9, теперь стало помечено как подлежащее окончательному удалению. Таким образом, существующий код, который использует классы из Applet API (&lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/applet/Applet.html"&gt;&lt;code&gt;java.applet.Applet&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JApplet.html"&gt;&lt;code&gt;javax.swing.JApplet&lt;/code&gt;&lt;/a&gt; и т.д.), может перестать работать на одной из следующих версий Java (но всё ещё продолжит работать на Java 17).&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/407"&gt;Удаление RMI Activation (JEP 407)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Механизм RMI Activation, который стал &lt;a href="https://openjdk.java.net/jeps/385"&gt;deprecated в Java 15&lt;/a&gt;, теперь удалён окончательно. RMI Activation был частью RMI, которая использовалась в чрезвычайно малом количестве приложений и фактически устарела. Для того чтобы избежать дорогой поддержки никому не нужного механизма, было принято решение его полностью удалить.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/411"&gt;Deprecate the Security Manager for Removal (JEP 411)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Security Manager стал помечен как подлежащий удалению. В одной из будущих версий его планируется удалить окончательно. Аннотацию &lt;code&gt;@Deprecated(forRemoval=true)&lt;/code&gt; получили 10 классов и 10 методов из стандартной библиотеки Java. Среди них &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/SecurityManager.html"&gt;&lt;code&gt;java.lang.SecurityManager&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/security/Policy.html"&gt;&lt;code&gt;java.security.Policy&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"&gt;&lt;code&gt;java.lang.System::setSecurityManager&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#getSecurityManager()"&gt;&lt;code&gt;java.lang.System::getSecurityManager&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html#checkAccess()"&gt;&lt;code&gt;java.lang.Thread::checkAccess&lt;/code&gt;&lt;/a&gt; и другие. Кроме того, при вызове метода &lt;code&gt;System.setSecurityManager()&lt;/code&gt; во время исполнения будет выдаваться предупреждение:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: orange"&gt;WARNING: A terminally deprecated method in java.lang.System has been called
-WARNING: System::setSecurityManager has been called by com.foo.bar.Server
-  (file:/tmp/foobarserver/thing.jar)
-WARNING: Please consider reporting this to the maintainers of com.foo.bar.Server
-WARNING: System::setSecurityManager will be removed in a future release&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Также предупреждение будет выдаваться при установке Security Manager через аргументы командной строки указанием свойства &lt;code&gt;java.security.manager&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; java -Djava.security.manager=com.foo.bar.Server MyApp
-&lt;span style="color: darkorange"&gt;WARNING: A command line option has enabled the Security Manager
-WARNING: The Security Manager is deprecated and will be removed in a future release&lt;/span&gt;&lt;/pre&gt;
-
-&lt;p class="pt-2"&gt;Начать отказ от Security Manager было решено по причине того, что он слабо отвечает современным требованиям безопасности и всё меньше и меньше пользуется спросом при разработке новых Java-приложений, но цена его поддержки остаётся очень высокой. У него хрупкая модель разрешений, сложная программная модель, и он приносит большие накладные расходы по производительности.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/412"&gt;Foreign Function &amp; Memory API (Incubator) (JEP 412)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Foreign Memory API, который побывал в Java &lt;a href="https://openjdk.java.net/jeps/370"&gt;14&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/383"&gt;15&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/393"&gt;16&lt;/a&gt; в инкубационном статусе, и Foreign Linker API, появившийся в &lt;a href="https://openjdk.java.net/jeps/389"&gt;Java 16&lt;/a&gt;, теперь объединены в один Foreign Function &amp; Memory API, и он всё ещё остаётся в инкубационном статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/jdk.incubator.foreign/module-summary.html"&gt;&lt;code&gt;jdk.incubator.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/414"&gt;Vector API (Second Incubator) (JEP 414)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.java.net/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, всё ещё остаётся в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/415"&gt;Context-Specific Deserialization Filters (JEP 415)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Фильтры десериализации, которые &lt;a href="https://openjdk.java.net/jeps/290"&gt;появились в Java 9&lt;/a&gt; для контроля десериализации из ненадёжных источников данных, стали более гибкими благодаря введению фабрики фильтров. Если раньше возможно было только указывать фильтр индивидуально для каждого объекта &lt;code&gt;ObjectInputStream&lt;/code&gt; или использовать один глобальный статический фильтр для всей виртуальной машины, то сейчас можно указать статическую фабрику фильтров, которая для каждой операции десериализации будет возвращать нужный фильтр, подходящий для данного контекста.&lt;/p&gt;
-&lt;p&gt;Фабрику фильтров можно установить через метод &lt;a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/ObjectInputFilter.Config.html#setSerialFilterFactory(java.util.function.BinaryOperator)"&gt;&lt;code&gt;ObjectInputFilter.Config::setSerialFilterFactory&lt;/code&gt;&lt;/a&gt;, либо через аргументы командной строки, передав имя класса фабрики в свойство &lt;code&gt;jdk.serialFilterFactory&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4&gt;JVM&lt;/h4&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/382"&gt;New macOS Rendering Pipeline (JEP 382)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Реализован новый конвейер рендеринга на основе современного &lt;a href="https://developer.apple.com/metal/"&gt;Apple Metal API&lt;/a&gt;, который был создан с целью заменить устаревший Apple OpenGL API. Новый конвейер сосуществует со старым, который пока что остаётся включённым по умолчанию, но если OpenGL не работает, то запускается новый. Таким образом, Java 17 полностью готова к запуску на будущих версиях macOS, где OpenGL API будет окончательно удалён. Также новый конвейер можно включить явно, указав опцию &lt;code&gt;-Dsun.java2d.metal=true&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/391"&gt;Порт под macOS/AArch64 (JEP 391)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;OpenJDK портирован на архитектуру macOS/AArch64, и теперь список дистрибутивов OpenJDK и Oracle JDK пополнился сборками для Apple M1.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/403"&gt;Строгая инкапсуляция внутренностей JDK (JEP 403)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Инкапсуляция внутренних API, которая была &lt;a href="https://openjdk.java.net/jeps/260"&gt;введена в Java 9&lt;/a&gt; и была выключена по умолчанию &lt;a href="https://openjdk.java.net/jeps/396"&gt;в Java 16&lt;/a&gt;, но всё ещё могла быть включена одной опцией командной строки, теперь не может быть включена одной опцией:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; java --illegal-access=permit Main
-&lt;span style="color: orange"&gt;OpenJDK 64-Bit Server VM warning: Ignoring option --illegal-access=permit;
-  support was removed in 17.0&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;Таким образом, доступиться до внутренностей JDK (&lt;code&gt;sun.*&lt;/code&gt;, &lt;code&gt;com.sun.*&lt;/code&gt;, &lt;code&gt;jdk.internal.*&lt;/code&gt; и т.д.) теперь можно только путём явного перечисления всех необходимых пакетов с помощью опций &lt;code&gt;--add-opens&lt;/code&gt; или &lt;code&gt;--add-exports&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Изменения не касаются критического API в модуле &lt;code&gt;jdk.unsupported&lt;/code&gt;: классы в пакетах &lt;code&gt;sun.misc&lt;/code&gt; и &lt;code&gt;sun.reflect&lt;/code&gt; остаются доступными без флагов.&lt;/p&gt;
-&lt;p&gt;В будущем опция &lt;code&gt;--illegal-access&lt;/code&gt; будет удалена окончательно, и при её использовании будет ошибка старта.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/410"&gt;Удаление экспериментальных компиляторов AOT и JIT (JEP 410)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Удалены экспериментальные &lt;a href="https://openjdk.java.net/jeps/295"&gt;ahead-of-time&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/317"&gt;just-in-time&lt;/a&gt; Graal компиляторы. Такое решение было принято из-за сложности поддержки и их малой используемости (те, кому они нужны, используют &lt;a href="https://www.graalvm.org/"&gt;GraalVM&lt;/a&gt;). По факту этих компиляторов уже не было в сборках JDK 16 от Oracle.&lt;/p&gt;
-&lt;p&gt;Удалению подлежали три модуля: &lt;code&gt;jdk.aot&lt;/code&gt;, &lt;code&gt;jdk.internal.vm.compiler&lt;/code&gt; и &lt;code&gt;jdk.internal.vm.compiler.management&lt;/code&gt;. Модуль &lt;a href="https://openjdk.java.net/jeps/243"&gt;JVMCI&lt;/a&gt; (&lt;code&gt;jdk.internal.vm.ci&lt;/code&gt;) остался, чтобы у разработчиков всё ещё оставалась возможность использовать внешний JIT-компилятор.&lt;/p&gt;
-
-&lt;h4&gt;Заключение&lt;/h4&gt;
-&lt;p&gt;Предыдущая версия OpenJDK с Long Term Support, &lt;a href="https://minijug.ru/java_11_is_out.html"&gt;Java 11&lt;/a&gt;, вышла ровно 3 года назад, хотя кажется, что она вышла совсем недавно, практически вчера. Но вот уже вышло 5 версий (12, 13, 14, 15, 16) и мы не успели опомниться, как подоспела следующая LTS-версия, Java 17.&lt;/p&gt;
-&lt;p&gt;Для тех, кто будет переходить с 11, Java 17 будет достаточно &lt;a href="http://openjdk.java.net/projects/jdk/17/jeps-since-jdk-11"&gt;большим апгрейдом&lt;/a&gt;. Если сложить все релизы с 12 по 17, то в сумме появилось 5 больших языковых конструкций: выражения &lt;code&gt;switch&lt;/code&gt;, блоки текста, записи, паттерн-матчинг для &lt;code&gt;instanceof&lt;/code&gt; и &lt;code&gt;sealed&lt;/code&gt; классы. Появилось очень много интересного API, сделано много улучшений производительности, оптимизировано потребление памяти, уменьшено время старта JVM. Очень много чего было удалено, поэтому могут возникнуть некоторые трудности при миграции.&lt;/p&gt;
-&lt;p&gt;Следующими большими шагами для Java будет завершение реализации проектов &lt;a href="http://openjdk.java.net/projects/valhalla/"&gt;Valhalla&lt;/a&gt;, &lt;a href="http://openjdk.java.net/projects/loom/"&gt;Loom&lt;/a&gt; и &lt;a href="http://openjdk.java.net/projects/panama/"&gt;Panama&lt;/a&gt;, а также дальнейшие языковые улучшения в проекте &lt;a href="http://openjdk.java.net/projects/amber/"&gt;Amber&lt;/a&gt;. Увидим ли мы всё это в следующей LTS-версии? Узнаем через &lt;a href="https://mreinhold.org/blog/forward-even-faster"&gt;2 года&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
