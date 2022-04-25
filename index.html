@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2022-04-11">
+    <meta property="article:published_time" content="2022-04-25">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,73 +31,40 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #37</h3>
-<p class="text-secondary"><time datetime="2022-04-11">11 апреля, 2022</time></p>
+<h3 id="title">Новости Java #38</h3>
+<p class="text-secondary"><time datetime="2022-04-25">25 апреля, 2022</time></p>
 <article>
-<p>&bull; Вышел <a href="http://openjdk.java.net/jeps/425">JEP 425: Virtual Threads (Preview)</a>. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.</p>
-<p>Напомним, что о старте проекта Loom было заявлено <a href="project_loom.html">в ноябре 2017 года</a> вскоре после выхода Java 9, а первый черновик JEP по виртуальным нитям по нему появился лишь спустя 4 года, о чём мы писали в <a href="java_news_32.html">выпуске #32</a>.</p>
-<p>Вместе с выходом JEP 425 также вышла новая Early-Access сборка Loom <a href="https://jdk.java.net/loom/">19-loom+5</a> с большим количеством изменений по сравнению с предыдущей версией.</p>
-
-<p class="pt-2">&bull; Вышел черновик <a href="https://openjdk.java.net/jeps/8282272">JEP Pattern matching for switch (Third Preview)</a>. Это значит, что паттерн-матчинг для <code class="text-nowrap">switch</code> стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.</p>
-<p>В этой итерации предлагается внести два изменения относительно предыдущей.</p>
-<p>Во-первых, заменить охранные паттерны на условия <code class="text-nowrap">when</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">// Java 18:</span>
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Integer x && x > 0 -> ...;
-    <span style="color: blue">default</span> -> ...;
-}
-
-<span style="color: green">// Java 19:</span>
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Integer x <span style="color: blue">when</span> x > 0 -> ...;
-    <span style="color: blue">default</span> -> ...;
-}</pre>
-<p>О мотивации заменить <code class="text-nowrap">&&</code> на <code class="text-nowrap">when</code> можно прочитать <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-January/003195.html">тут</a>.</p>
-<p>Во-вторых, предлагается изменить поведения матчинга <code class="text-nowrap">null</code> таким образом, чтобы он матчился только в ветках <code class="text-nowrap">case null</code> и ни в каких других (даже тотальных):</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">// Java 18:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: green">// matches</span>
-}
-
-<span style="color: green">// Java 19:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: red">// NPE</span>
-}</pre>
-<p>Про причины такого изменения можно прочитать <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-January/003194.html">тут</a>.</p>
-
-<p class="pt-1">Также вышло ещё два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8284289">Improved way of obtaining call traces asynchronously for profiling</a> и <a href="http://openjdk.java.net/jeps/8284453">Optionally Record Thread Context in JFR</a>.</p>
-
-
-<p class="pt-2">&bull; Вышел <a href="https://in.relation.to/2022/03/31/orm-60-final/">Hibernate 6.0 Final</a>. Новая версия фреймворка не является полностью совместимой с предыдущей версией 5.x, но в значительной степени совместимость удалось сохранить. Для тех, кто использует Hibernate исключительно через <a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html#_jakarta_persistence">Jakarta Persistence API</a>, переход должен быть полностью совместимым. Для остальных был написан <a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html">подробный гид по миграции</a>.</p>
-<p>Перечислим некоторые существенные изменения Hibernate 6.0:</p>
+<p>&bull; Вышли обновления Java:</p>
 <ul>
-  <li>Базовая версия Java теперь 11.</li>
-  <li>Java Persistence больше не поддерживается. Hibernate 6.0 можно использовать только с пространством имён <code class="text-nowrap">jakarta.persistence</code>, но не <code class="text-nowrap">javax.persistence</code>.</li>
-  <li>Теперь используется Read-by-position вместо Read-by-name при чтении из JDBC <code class="text-nowrap">ResultSet</code>. Это приводит к улучшению производительности, а также к более компактным и читаемым сгенерированным SQL-запросам.</li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/18-0-1-relnotes.html">JDK 18.0.1</a></li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/17-0-3-relnotes.html">JDK 17.0.3</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013820.html">JDK 15.0.7</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013821.html">JDK 13.0.11</a></li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/11-0-15-relnotes.html">JDK 11.0.15</a></li>
+  <li><a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2022-April/014839.html">JDK 8u332</a></li>
 </ul>
 
-<p class="pt-2">&bull; Вышла <a href="https://newsroom.eclipse.org/eclipse-newsletter/2022/march/what%E2%80%99s-new-jakarta-persistence-31">Jakarta Persistence 3.1</a>.</p>
+<p class="pt-2">&bull; Появилось <a href="https://openjdk.java.net/projects/jdk/19/">расписание выхода JDK 19</a>. Общедоступная версия Java 19 по плану должна выйти 20 сентября 2022 года.</p>
 
-<p class="pt-2">&bull; В Spring обнаружена <a href="https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement">критическая уязвимость</a>, позволяющая злоумышленнику выполнить произвольный код. Уязвимости подвержены приложения при следующих условиях:</p>
+<p class="pt-2">&bull; Вышел <a href="https://openjdk.java.net/jeps/426">JEP 426: Vector API (Fourth Incubator)</a>, который сразу стал предложен к выходу в JDK 19.</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://blog.jetbrains.com/idea/2022/04/intellij-idea-2022-1/">IntelliJ IDEA 2022.1</a>. Перечислим главные новшества:</p>
 <ul>
-  <li>Приложение запускается на JDK 9 или выше.</li>
-  <li>Используется Apache Tomcat в качестве контейнера сервлетов.</li>
-  <li>Приложение пакуется в WAR, а не JAR.</li>
-  <li>Используются зависимости <code class="text-nowrap">spring-webmvc</code> или <code class="text-nowrap">spring-webflux</code>.</li>
+  <li>Новый инструмент <i>Dependency Analyzer</i>, позволяющий находить конфликты зависимостей.</li>
+  <li>Новый улучшенный мастер создания проектов.</li>
+  <li>Новая вкладка <i>Notifications</i> вместо <i>Event Log</i>.</li>
+  <li>Улучшенные встроенные подсказки в редакторе, которые теперь отображают автора кода, использования, cвязанные проблемы и производные типы.</li>
+  <li>Обновленные диалоги <i>Structural Search</i> и <i>Structural Replace</i>.</li>
+  <li>Отображение уязвимостей в зависимостях (только в Ultimate).</li>
+  <li>Выполнение команд прямо из Markdown-файлов нажатием на иконку рядом с командой.</li>
+  <li>Копирование фрагментов кода из Markdown-файлов в буфер обмена.</li>
+  <li>Новая инспекция Incorrect formatting, предупреждающая о том, соответствует ли форматирование файла настройкам стиля кода.</li>
+  <li>Поддержка Java 18: сниппеты в документации, второе preview паттерн-матчинга для <code class="text-nowrap">switch</code>. Кодировкой по умолчанию для Java-файлов теперь является UTF-8 на всех платформах.</li>
+  <li>Улучшенная совместимость декомпилятора Java с Java 17.</li>
+  <li>Поддержка новых возможностей, появившихся в JUnit 5.7.</li>
+  <li>Шаблон <i>Surround with try/catch</i> теперь выбрасывает исключение, обернутое в <code class="text-nowrap">RuntimeException</code>, вместо проглатывания.</li>
+  <li>Новый значок <i>Reset Frame</i> вместо старого действия <i>Drop Frame</i> в панели инструментов отладчика.</li>
 </ul>
-<p>К моменту публикации уязвимости уже были выпущены новые версии Spring 5.3.18 и 5.2.20, в которых уязвимость была исправлена. На следующий день Apache Tomcat исправил уязвимость на своей стороне, выпустив версии 10.0.20, 9.0.62 и 8.5.78.</p>
-
-<p class="pt-2">&bull; Eclipse начал <a href="https://blogs.eclipse.org/post/denis-roy/moving-eclipse-projects-github-and-gitlab">переезд на GitHub</a>. Многие проекты на данный момент уже переехали (<a href="https://github.com/eclipse-platform/eclipse.platform">Platform</a>, <a href="https://github.com/eclipse-equinox">Equinox</a>, <a href="https://github.com/eclipse-platform/eclipse.platform.swt">SWT</a>, <a href="https://github.com/eclipse-jdt">JDT</a> и т.д).</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/idea/2022/04/java-annotated-monthly-april-2022/">Java Annotated Monthly</a> за апрель 2022.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://github.com/oracle/helidon/releases/tag/2.5.0">Helidon 2.5.0</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://andresalmiray.com/jreleaser-1-0-0-is-here/">JReleaser 1.0.0</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2022-March/003422.html">JMH 1.35</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -105,6 +72,7 @@ Object obj = <span style="color: blue">null</span>;
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
   <ul class="collapse show" id="year2022">
+<li class="text-secondary"><a href="java_news_38.html" class="text-secondary">Новости Java #38</a></li>
 <li class="text-secondary"><a href="java_news_37.html" class="text-secondary">Новости Java #37</a></li>
 <li class="text-secondary"><a href="java_18.html" class="text-secondary">Вышла Java 18</a></li>
 <li class="text-secondary"><a href="java_news_36.html" class="text-secondary">Новости Java #36</a></li>

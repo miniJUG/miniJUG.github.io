@@ -4,7 +4,48 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-04-10T17:00:00Z</updated>
+  <updated>2022-04-24T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #38</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_38.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_38.html</id>
+    <updated>2022-04-24T17:00:00Z</updated>
+    <published>2022-04-24T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/18-0-1-relnotes.html"&gt;JDK 18.0.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-3-relnotes.html"&gt;JDK 17.0.3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013820.html"&gt;JDK 15.0.7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013821.html"&gt;JDK 13.0.11&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/11-0-15-relnotes.html"&gt;JDK 11.0.15&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2022-April/014839.html"&gt;JDK 8u332&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Появилось &lt;a href="https://openjdk.java.net/projects/jdk/19/"&gt;расписание выхода JDK 19&lt;/a&gt;. Общедоступная версия Java 19 по плану должна выйти 20 сентября 2022 года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://openjdk.java.net/jeps/426"&gt;JEP 426: Vector API (Fourth Incubator)&lt;/a&gt;, который сразу стал предложен к выходу в JDK 19.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/04/intellij-idea-2022-1/"&gt;IntelliJ IDEA 2022.1&lt;/a&gt;. Перечислим главные новшества:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Новый инструмент &lt;i&gt;Dependency Analyzer&lt;/i&gt;, позволяющий находить конфликты зависимостей.&lt;/li&gt;
+  &lt;li&gt;Новый улучшенный мастер создания проектов.&lt;/li&gt;
+  &lt;li&gt;Новая вкладка &lt;i&gt;Notifications&lt;/i&gt; вместо &lt;i&gt;Event Log&lt;/i&gt;.&lt;/li&gt;
+  &lt;li&gt;Улучшенные встроенные подсказки в редакторе, которые теперь отображают автора кода, использования, cвязанные проблемы и производные типы.&lt;/li&gt;
+  &lt;li&gt;Обновленные диалоги &lt;i&gt;Structural Search&lt;/i&gt; и &lt;i&gt;Structural Replace&lt;/i&gt;.&lt;/li&gt;
+  &lt;li&gt;Отображение уязвимостей в зависимостях (только в Ultimate).&lt;/li&gt;
+  &lt;li&gt;Выполнение команд прямо из Markdown-файлов нажатием на иконку рядом с командой.&lt;/li&gt;
+  &lt;li&gt;Копирование фрагментов кода из Markdown-файлов в буфер обмена.&lt;/li&gt;
+  &lt;li&gt;Новая инспекция Incorrect formatting, предупреждающая о том, соответствует ли форматирование файла настройкам стиля кода.&lt;/li&gt;
+  &lt;li&gt;Поддержка Java 18: сниппеты в документации, второе preview паттерн-матчинга для &lt;code&gt;switch&lt;/code&gt;. Кодировкой по умолчанию для Java-файлов теперь является UTF-8 на всех платформах.&lt;/li&gt;
+  &lt;li&gt;Улучшенная совместимость декомпилятора Java с Java 17.&lt;/li&gt;
+  &lt;li&gt;Поддержка новых возможностей, появившихся в JUnit 5.7.&lt;/li&gt;
+  &lt;li&gt;Шаблон &lt;i&gt;Surround with try/catch&lt;/i&gt; теперь выбрасывает исключение, обернутое в &lt;code&gt;RuntimeException&lt;/code&gt;, вместо проглатывания.&lt;/li&gt;
+  &lt;li&gt;Новый значок &lt;i&gt;Reset Frame&lt;/i&gt; вместо старого действия &lt;i&gt;Drop Frame&lt;/i&gt; в панели инструментов отладчика.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #37</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_37.html" />
@@ -472,71 +513,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/18/spring-data-2021-0-6-and-2020-0-14-released"&gt;Spring Data 2021.0.6 и 2020.0.14&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Spring Boot &lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-5-6-is-now-available"&gt;2.5.6&lt;/a&gt; и &lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-4-12-is-now-available"&gt;2.4.12&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #29</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_29.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_29.html</id>
-    <updated>2021-10-17T17:00:00Z</updated>
-    <published>2021-10-17T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Очередной JEP &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-October/006157.html"&gt;запланирован&lt;/a&gt; в Java 18: &lt;a href="https://openjdk.java.net/jeps/408"&gt;Simple Web Server (JEP 408)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_13.html"&gt;выпуске 13&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-2"&gt;&amp;bull; Появился новый черновик JEP: &lt;a href="http://openjdk.java.net/jeps/8273326"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (Second Preview)&lt;/a&gt;. В рассылке начато &lt;a href="https://mail.openjdk.java.net/pipermail/amber-dev/2021-September/007090.html"&gt;обсуждение&lt;/a&gt; того, что можно улучшить в паттерн-матчинге в следующей версии Java. Перечислим некоторые идеи, которые обсуждаются.&lt;/p&gt;
-
-&lt;p class="pt-1"&gt;Улучшенная проверка тотальности для дженериков. К примеру, есть иерархия:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
-&lt;span style="color: blue"&gt;class&lt;/span&gt; A&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
-&lt;span style="color: blue"&gt;class&lt;/span&gt; B&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
-&lt;span style="color: blue"&gt;class&lt;/span&gt; C &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;String&amp;gt; { }&lt;/pre&gt;
-&lt;p&gt;Тогда при паттерн-матчинге по переменной типа &lt;code&gt;Foo&amp;lt;Integer&amp;gt;&lt;/code&gt;, вариант &lt;code&gt;C&lt;/code&gt; рассматривать не нужно, потому что типы &lt;code&gt;Foo&amp;lt;String&amp;gt;&lt;/code&gt; и &lt;code&gt;Foo&amp;lt;Integer&amp;gt;&lt;/code&gt; несовместимы.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;Улучшенный вывод типов при паттерн-матчинге. Сейчас необходимо указывать полный тип:&lt;/p&gt;
-&lt;pre&gt;List&amp;lt;Integer&amp;gt; list = &lt;span style="color: blue"&gt;new&lt;/span&gt; ArrayList&amp;lt;&amp;gt;();
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (list) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; ArrayList&amp;lt;Integer&amp;gt; arrayList -&gt; ...
-    ...
-}&lt;/pre&gt;
-&lt;p&gt;Предлагается разрешить не указывать параметры и дать компилятору выводить их из целевого типа:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;case&lt;/span&gt; ArrayList arrayList -&gt; ... &lt;span style="color: green"&gt;// Выводится ArrayList&amp;lt;Integer&amp;gt;&lt;/span&gt;&lt;/pre&gt;
-
-&lt;p class="pt-2"&gt;Улучшенная проверка покрытия в более сложных случаях:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; A {}
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; B1 &lt;span style="color: blue"&gt;extends&lt;/span&gt; A {}
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; B2 &lt;span style="color: blue"&gt;extends&lt;/span&gt; A {}
-&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; C &lt;span style="color: blue"&gt;extends&lt;/span&gt; A {}
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; D1 &lt;span style="color: blue"&gt;implements&lt;/span&gt; B1, C {}
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; D2 &lt;span style="color: blue"&gt;implements&lt;/span&gt; B2, C {}
-...
-&lt;span style="color: blue"&gt;int&lt;/span&gt; i = &lt;span style="color: blue"&gt;switch&lt;/span&gt; (arg) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; B1 b1 -&gt; 1;
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; B2 b2 -&gt; 2;
-};
-&lt;/pre&gt;
-&lt;p&gt;В Java 17 такой код не компилируется, хотя &lt;code&gt;switch&lt;/code&gt; покрывает все возможные случаи. Предлагается это исправить.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;Добавить частичный порядок между паттернами с условиями и константами. Такой код не должен компилироваться и &lt;code&gt;case&lt;/code&gt; с константой должен быть объявлен выше:&lt;/p&gt;
-&lt;pre&gt;switch (value) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; 3 -&gt; {}
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; {}
-}&lt;/pre&gt;
-
-&lt;p class="pt-2"&gt;Запретить ставить ветку &lt;code&gt;default&lt;/code&gt; не в конец &lt;code&gt;switch&lt;/code&gt; (или хотя бы выдавать предупреждение):&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; {} &lt;span style="color: green"&gt;// Должна быть ошибка компиляции&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; i &gt; 0 -&gt; {}
-}&lt;/pre&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2021-October/000309.html"&gt;Начато голосование&lt;/a&gt; по созданию проекта RISC-V Port. Предложение сделать официальный порт OpenJDK под архитектуру RISC-V &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2020-December/005657.html"&gt;было озвучено&lt;/a&gt; Huawei ещё в декабре 2020 года. Тогда это предложение получило положительную обратную связь, и за это время порт стал достаточно стабилен, чтобы началась работа по его интеграции в главную ветку JDK. Когда проект будет одобрен, планируется выпустить JEP с предложением по интеграции.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2021/10/05/WildFly25-Final-Released/"&gt;WildFly 25&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2021/10/13/hibernate-orm-560-final/"&gt;Hibernate 5.6.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://github.com/google/guava/releases/tag/v31.0"&gt;Guava 31.0&lt;/a&gt; (и сразу же &lt;a href="https://github.com/google/guava/releases/tag/v31.0.1"&gt;31.0.1&lt;/a&gt; из-за проблемы с GWT).&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://github.com/mockito/mockito/releases/tag/v4.0.0"&gt;Mockito 4&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
