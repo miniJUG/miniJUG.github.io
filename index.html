@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2022-04-25">
+    <meta property="article:published_time" content="2022-05-16">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,40 +31,24 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #38</h3>
-<p class="text-secondary"><time datetime="2022-04-25">25 апреля, 2022</time></p>
+<h3 id="title">Новости Java #39</h3>
+<p class="text-secondary"><time datetime="2022-05-16">16 мая, 2022</time></p>
 <article>
-<p>&bull; Вышли обновления Java:</p>
-<ul>
-  <li><a href="https://www.oracle.com/java/technologies/javase/18-0-1-relnotes.html">JDK 18.0.1</a></li>
-  <li><a href="https://www.oracle.com/java/technologies/javase/17-0-3-relnotes.html">JDK 17.0.3</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013820.html">JDK 15.0.7</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013821.html">JDK 13.0.11</a></li>
-  <li><a href="https://www.oracle.com/java/technologies/javase/11-0-15-relnotes.html">JDK 11.0.15</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2022-April/014839.html">JDK 8u332</a></li>
-</ul>
+<p>&bull; Стало известно ещё о трёх новых JEP, которые попадут в JDK 19.</p>
+<p>Первый &ndash; <a href="http://openjdk.java.net/jeps/425">JEP 425: Virtual Threads (Preview)</a> (этот JEP уже интегрирован в сборку <a href="https://jdk.java.net/19/">JDK 19-ea+22</a>).</p>
+<p>Второй &ndash; <a href="http://openjdk.java.net/jeps/427">JEP 427: Pattern Matching for switch (Third Preview)</a>. Про него мы писали в <a href="java_news_37.html">выпуске #37</a>, когда он был ещё в статусе черновика.</p>
+<p>Третий &ndash; <a href="http://openjdk.java.net/jeps/424">JEP 424: Foreign Function & Memory API (Preview)</a>. Про него мы писали в <a href="java_news_35.html">выпуске #35</a>.</p>
+<p class="pt-1">Также предложен ко включению в Java 19 <a href="http://openjdk.java.net/jeps/405">JEP 405: Record Patterns (Preview)</a>. Про этот JEP мы писали давно в <a href="java_news_8.html">выпуске #8</a>, когда он ещё был озаглавлен как "Record and Array Patterns (Preview)". В текущий JEP было решено не включать паттерны массивов и оставить только паттерны записей. Паттерны массивов отложены на один из будущих JEP'ов.</p>
 
-<p class="pt-2">&bull; Появилось <a href="https://openjdk.java.net/projects/jdk/19/">расписание выхода JDK 19</a>. Общедоступная версия Java 19 по плану должна выйти 20 сентября 2022 года.</p>
+<p class="pt-2">&bull; Марк Рейнолд предложил переименовать домен <a href="http://openjdk.java.net/">openjdk.java.net</a> в openjdk.org. С момента появления OpenJDK в 2007 году вся его инфраструктура (исходный код, веб, e-mail, wiki, задачи) хостится в домене третьего уровня openjdk.java.net, хотя веб-сайт <a href="https://en.wikipedia.org/wiki/Java.net">java.net</a> был сайтом для Java-сообщества и имел слабое отношение к разработке самого OpenJDK. В 2017 году этот сайт был закрыт.</p>
+<p>С тех пор много открытого ПО стало хоститься в домене .org, и перемещение туда OpenJDK будет логичным шагом. Также это послужит напоминанием о том, что OpenJDK разрабатывается сообществом, а не одной главенствующей корпорацией.</p>
+<p>Вместе с самим доменом openjdk.java.net также будут переименованы все его активные поддомены (bugs, cr, db, git, hg, mail, wiki). При этом старые ссылки, ведущие на openjdk.java.net, будут перенаправлены на соответствующие адреса в домене openjdk.org.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://openjdk.java.net/jeps/426">JEP 426: Vector API (Fourth Incubator)</a>, который сразу стал предложен к выходу в JDK 19.</p>
+<p class="pt-2">&bull; Вышел в свет новый декомпилятор Java-байткода <a href="https://github.com/QuiltMC/quiltflower">Quiltflower</a>. Quiltflower является форком декомпилятора Fernflower, который является стандартным декомпилятором в IntelliJ IDEA. Как <a href="https://www.reddit.com/r/java/comments/ue8u59/new_open_source_java_decompiler/">утверждает автор</a>, Quiltflower более точно воспроизводит исходный Java-код и поддерживает различные синтаксические конструкции (twy-with-resources, выражения <code class="text-nowrap">switch</code>, паттерн-матчинг, sealed-классы и т.д). В доказательство приводятся <a href="https://gist.github.com/SuperCoder7979/c7171b0e34b6eccf0b9f1c37030867dc">примеры</a>, сравнивающие результаты декомпиляции Fernflower и Quiltflower.</p>
 
-<p class="pt-2">&bull; Вышла <a href="https://blog.jetbrains.com/idea/2022/04/intellij-idea-2022-1/">IntelliJ IDEA 2022.1</a>. Перечислим главные новшества:</p>
-<ul>
-  <li>Новый инструмент <i>Dependency Analyzer</i>, позволяющий находить конфликты зависимостей.</li>
-  <li>Новый улучшенный мастер создания проектов.</li>
-  <li>Новая вкладка <i>Notifications</i> вместо <i>Event Log</i>.</li>
-  <li>Улучшенные встроенные подсказки в редакторе, которые теперь отображают автора кода, использования, cвязанные проблемы и производные типы.</li>
-  <li>Обновленные диалоги <i>Structural Search</i> и <i>Structural Replace</i>.</li>
-  <li>Отображение уязвимостей в зависимостях (только в Ultimate).</li>
-  <li>Выполнение команд прямо из Markdown-файлов нажатием на иконку рядом с командой.</li>
-  <li>Копирование фрагментов кода из Markdown-файлов в буфер обмена.</li>
-  <li>Новая инспекция Incorrect formatting, предупреждающая о том, соответствует ли форматирование файла настройкам стиля кода.</li>
-  <li>Поддержка Java 18: сниппеты в документации, второе preview паттерн-матчинга для <code class="text-nowrap">switch</code>. Кодировкой по умолчанию для Java-файлов теперь является UTF-8 на всех платформах.</li>
-  <li>Улучшенная совместимость декомпилятора Java с Java 17.</li>
-  <li>Поддержка новых возможностей, появившихся в JUnit 5.7.</li>
-  <li>Шаблон <i>Surround with try/catch</i> теперь выбрасывает исключение, обернутое в <code class="text-nowrap">RuntimeException</code>, вместо проглатывания.</li>
-  <li>Новый значок <i>Reset Frame</i> вместо старого действия <i>Drop Frame</i> в панели инструментов отладчика.</li>
-</ul>
+<p class="pt-2">&bull; Роман Кеннке <a href="https://mail.openjdk.java.net/pipermail/lilliput-dev/2022-May/000457.html">сообщил</a>, что проекту <a href="https://openjdk.java.net/projects/lilliput/">Lilliput</a> удалось сократить размер заголовков объектов с 96/128 бит до 64 бит. При этом 64-битные заголовки являются лишь промежуточным шагом, и он заявил, что следующим шагом будет сокращение заголовков ещё сильнее: до 32 бит.</p>
+
+<p class="pt-2">&bull; Вышел <a href="http://weld.cdi-spec.org/news/2022/04/29/weld-500Final/">Weld 5.0.0.Final</a>, который поддерживает спецификацию <a href="https://jakarta.ee/specifications/cdi/4.0/">CDI 4</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -72,6 +56,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
   <ul class="collapse show" id="year2022">
+<li class="text-secondary"><a href="java_news_39.html" class="text-secondary">Новости Java #39</a></li>
 <li class="text-secondary"><a href="java_news_38.html" class="text-secondary">Новости Java #38</a></li>
 <li class="text-secondary"><a href="java_news_37.html" class="text-secondary">Новости Java #37</a></li>
 <li class="text-secondary"><a href="java_18.html" class="text-secondary">Вышла Java 18</a></li>

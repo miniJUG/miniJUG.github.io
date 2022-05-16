@@ -4,7 +4,32 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-04-24T17:00:00Z</updated>
+  <updated>2022-05-15T17:00:00Z</updated>
+  <entry>
+    <title>Новости Java #39</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_39.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_39.html</id>
+    <updated>2022-05-15T17:00:00Z</updated>
+    <published>2022-05-15T17:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Стало известно ещё о трёх новых JEP, которые попадут в JDK 19.&lt;/p&gt;
+&lt;p&gt;Первый &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/425"&gt;JEP 425: Virtual Threads (Preview)&lt;/a&gt; (этот JEP уже интегрирован в сборку &lt;a href="https://jdk.java.net/19/"&gt;JDK 19-ea+22&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Второй &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/427"&gt;JEP 427: Pattern Matching for switch (Third Preview)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_37.html"&gt;выпуске #37&lt;/a&gt;, когда он был ещё в статусе черновика.&lt;/p&gt;
+&lt;p&gt;Третий &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_35.html"&gt;выпуске #35&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-1"&gt;Также предложен ко включению в Java 19 &lt;a href="http://openjdk.java.net/jeps/405"&gt;JEP 405: Record Patterns (Preview)&lt;/a&gt;. Про этот JEP мы писали давно в &lt;a href="java_news_8.html"&gt;выпуске #8&lt;/a&gt;, когда он ещё был озаглавлен как "Record and Array Patterns (Preview)". В текущий JEP было решено не включать паттерны массивов и оставить только паттерны записей. Паттерны массивов отложены на один из будущих JEP'ов.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Марк Рейнолд предложил переименовать домен &lt;a href="http://openjdk.java.net/"&gt;openjdk.java.net&lt;/a&gt; в openjdk.org. С момента появления OpenJDK в 2007 году вся его инфраструктура (исходный код, веб, e-mail, wiki, задачи) хостится в домене третьего уровня openjdk.java.net, хотя веб-сайт &lt;a href="https://en.wikipedia.org/wiki/Java.net"&gt;java.net&lt;/a&gt; был сайтом для Java-сообщества и имел слабое отношение к разработке самого OpenJDK. В 2017 году этот сайт был закрыт.&lt;/p&gt;
+&lt;p&gt;С тех пор много открытого ПО стало хоститься в домене .org, и перемещение туда OpenJDK будет логичным шагом. Также это послужит напоминанием о том, что OpenJDK разрабатывается сообществом, а не одной главенствующей корпорацией.&lt;/p&gt;
+&lt;p&gt;Вместе с самим доменом openjdk.java.net также будут переименованы все его активные поддомены (bugs, cr, db, git, hg, mail, wiki). При этом старые ссылки, ведущие на openjdk.java.net, будут перенаправлены на соответствующие адреса в домене openjdk.org.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел в свет новый декомпилятор Java-байткода &lt;a href="https://github.com/QuiltMC/quiltflower"&gt;Quiltflower&lt;/a&gt;. Quiltflower является форком декомпилятора Fernflower, который является стандартным декомпилятором в IntelliJ IDEA. Как &lt;a href="https://www.reddit.com/r/java/comments/ue8u59/new_open_source_java_decompiler/"&gt;утверждает автор&lt;/a&gt;, Quiltflower более точно воспроизводит исходный Java-код и поддерживает различные синтаксические конструкции (twy-with-resources, выражения &lt;code&gt;switch&lt;/code&gt;, паттерн-матчинг, sealed-классы и т.д). В доказательство приводятся &lt;a href="https://gist.github.com/SuperCoder7979/c7171b0e34b6eccf0b9f1c37030867dc"&gt;примеры&lt;/a&gt;, сравнивающие результаты декомпиляции Fernflower и Quiltflower.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Роман Кеннке &lt;a href="https://mail.openjdk.java.net/pipermail/lilliput-dev/2022-May/000457.html"&gt;сообщил&lt;/a&gt;, что проекту &lt;a href="https://openjdk.java.net/projects/lilliput/"&gt;Lilliput&lt;/a&gt; удалось сократить размер заголовков объектов с 96/128 бит до 64 бит. При этом 64-битные заголовки являются лишь промежуточным шагом, и он заявил, что следующим шагом будет сокращение заголовков ещё сильнее: до 32 бит.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="http://weld.cdi-spec.org/news/2022/04/29/weld-500Final/"&gt;Weld 5.0.0.Final&lt;/a&gt;, который поддерживает спецификацию &lt;a href="https://jakarta.ee/specifications/cdi/4.0/"&gt;CDI 4&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #38</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_38.html" />
@@ -481,37 +506,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.3/release-notes.html"&gt;Gradle 7.3&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0"&gt;StreamEx 0.8.0&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #30</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_30.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_30.html</id>
-    <updated>2021-10-24T17:00:00Z</updated>
-    <published>2021-10-24T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления JDK:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-1-relnotes.html"&gt;JDK 17.0.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-October/009375.html"&gt;JDK 15.0.5&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-October/009376.html"&gt;JDK 13.0.9&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-October/009368.html"&gt;JDK 11.0.13&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2021-October/014373.html"&gt;JDK 8u312&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://jdk.java.net/18/"&gt;JDK 18-ea+20&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Новости JEP'ов:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/416"&gt;JEP 416: Reimplement Core Reflection with Method Handles&lt;/a&gt; предложен к &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-October/006163.html"&gt;JDK 18&lt;/a&gt;. Про этот JEP мы писали в &lt;a href="java_news_18.html"&gt;выпуске 18&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://openjdk.java.net/jeps/420"&gt;JEP 420: Pattern Matching for switch (Second Preview)&lt;/a&gt; стал кандидатом (был черновиком).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли новые версии Spring:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/14/spring-framework-5-3-11-and-5-2-18-available-now"&gt;Spring Framework 5.3.11 и 5.2.18&lt;/a&gt; (сразу после 5.3.11 вышел &lt;a href="https://spring.io/blog/2021/10/21/spring-framework-5-3-12-available-now"&gt;5.3.12&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/18/spring-data-2021-0-6-and-2020-0-14-released"&gt;Spring Data 2021.0.6 и 2020.0.14&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Boot &lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-5-6-is-now-available"&gt;2.5.6&lt;/a&gt; и &lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-4-12-is-now-available"&gt;2.4.12&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
