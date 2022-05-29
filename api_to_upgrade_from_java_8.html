@@ -36,12 +36,12 @@
 <article>
 <p>На сегодняшний день Java 8 является самой популярной версией Java и ещё довольно долго будет ей оставаться. Однако с тех пор уже выпущено пять новых версий Java (9, 10, 11, 12, 13), и совсем скоро выйдет ещё одна, Java 14. В этих новых версиях появилось гигантское количество новых возможностей. Например, если считать в JEP'ах, то в сумме их было реализовано 141:</p>
 <ul>
-  <li>99 в <a href="https://openjdk.java.net/projects/jdk9/">JDK 9</a></li>
-  <li>12 в <a href="https://openjdk.java.net/projects/jdk/10/">JDK 10</a></li>
-  <li>17 в <a href="https://openjdk.java.net/projects/jdk/11/">JDK 11</a></li>
-  <li>8 в <a href="https://openjdk.java.net/projects/jdk/12/">JDK 12</a></li>
-  <li>5 в <a href="https://openjdk.java.net/projects/jdk/13/">JDK 13</a></li>
-  <li class="text-secondary">(+14 в <a href="https://openjdk.java.net/projects/jdk/14/">JDK 14</a>)</li>
+  <li>99 в <a href="https://openjdk.org/projects/jdk9/">JDK 9</a></li>
+  <li>12 в <a href="https://openjdk.org/projects/jdk/10/">JDK 10</a></li>
+  <li>17 в <a href="https://openjdk.org/projects/jdk/11/">JDK 11</a></li>
+  <li>8 в <a href="https://openjdk.org/projects/jdk/12/">JDK 12</a></li>
+  <li>5 в <a href="https://openjdk.org/projects/jdk/13/">JDK 13</a></li>
+  <li class="text-secondary">(+14 в <a href="https://openjdk.org/projects/jdk/14/">JDK 14</a>)</li>
 </ul>
 <p>Однако в этом цикле статей не будет никакого сухого перечисления JEP'ов. Вместо этого я хочу просто рассказать об интересных API, которые появились в новых версиях. Каждая статья будет содержать по 10 API. В выборе и порядке этих API не будет какой-то определённой логики и закономерности. Это будет просто 10 случайных API, не ТОП 10 и без сортировки от наиболее важного API к наименее важному. Давайте начнём.</p>
 <!-- cut -->
@@ -73,7 +73,7 @@
 
 <h4>2. Методы-фабрики, возвращающие неизменяемые коллекции</h4>
 <h5>Появились в: Java 9</h5>
-<p>Если предыдущие два метода – это просто косметика, то статические методы-фабрики коллекций позволяют действительно сильно сократить код и даже улучшить его безопасность. Речь о следующих методах, <a href="https://openjdk.java.net/jeps/269">появившихся</a> в Java 9:</p>
+<p>Если предыдущие два метода – это просто косметика, то статические методы-фабрики коллекций позволяют действительно сильно сократить код и даже улучшить его безопасность. Речь о следующих методах, <a href="https://openjdk.org/jeps/269">появившихся</a> в Java 9:</p>
 <ul>
   <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/List.html#of(E...)">List.of(E... elements)</a></code> (и перегрузки)</li>
   <li><code class="text-nowrap"><a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Set.html#of(E...)">Set.of(E... elements)</a></code> (и перегрузки)</li>

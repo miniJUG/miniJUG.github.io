@@ -34,7 +34,7 @@
 <h3 id="title">В Java у <code class="text-nowrap">NullPointerException</code> могут появиться детальные сообщения</h3>
 <p class="text-secondary"><time datetime="2019-03-26">26 марта, 2019</time></p>
 <article>
-<p>Вышел <a href="https://openjdk.java.net/jeps/358">новый черновик JEP</a>, в котором предлагается улучшить <code class="text-nowrap">java.lang.NullPointerException</code>, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация о том, что именно было <code class="text-nowrap">null</code> и какое действие вызвало ошибку.</p>
+<p>Вышел <a href="https://openjdk.org/jeps/358">новый черновик JEP</a>, в котором предлагается улучшить <code class="text-nowrap">java.lang.NullPointerException</code>, снабдив его сообщением, объясняющим причину выброса исключения. В этом сообщении будет содержаться информация о том, что именно было <code class="text-nowrap">null</code> и какое действие вызвало ошибку.</p>
 <p>Например, если в выражении <code class="text-nowrap">a.b.c.d</code> поле <code class="text-nowrap">b</code> было <code class="text-nowrap">null</code>, то сообщение будет примерно следующим:</p>
 <pre class="border p-lg-2 p-1">'a.b' is null. Can not read field 'c'.</pre>
 <p>Другой пример: выражение – <code class="text-nowrap">obj.hashCode()</code>, сообщение:</p>

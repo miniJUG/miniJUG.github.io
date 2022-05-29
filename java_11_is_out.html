@@ -43,26 +43,26 @@
   <li><a href="https://openjfx.io/">JavaFX</a> и Java Misssion Control теперь не поставляются вместе с JDK, а существуют как отдельные проекты.</li>
   <li>На Windows и macOS теперь нет автообновлений.</li>
   <li>Формат поставки для Windows сменился с tar.gz на zip.</li>
-  <li><a href="http://openjdk.java.net/jeps/323">JEP 323: Local-Variable Syntax for Lambda Parameters</a>. Теперь ключевое слово <code class="text-nowrap">var</code> можно использовать не только для объявления локальных переменных методов, но и <a href="var_in_lambdas.html">для параметров лямбда-выражений</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/320">JEP 320: Remove the Java EE and CORBA Modules</a>. Модули JAX-WS, JAXB, JAF, Common Annotations, CORBA, JTA, которые ранее в Java 9 были помечены как deprecated for removal, теперь <a href="remove_java_ee_and_corba_modules.html">удалены окончательно</a>. Вместо них теперь нужно использовать их <a href="https://stackoverflow.com/a/48204154/706317">аналоги из Maven</a>. Также удалён модуль-аггрегатор <code class="text-nowrap">java.se.ee</code>.</li>
-  <li><a href="http://openjdk.java.net/jeps/321">JEP 321: HTTP Client (Standard)</a>. HTTP Client, который появился в Java 9 как инкубационный модуль, теперь <a href="http_client.html">стал стандартным модулем</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/328">JEP 328: Flight Recorder</a>. Утилита Flight Recorder для диагностики и профилирования Java-приложений теперь стала общедоступной частью OpenJDK. Раньше её можно было использовать только на коммерческой основе.</li>
-  <li><a href="http://openjdk.java.net/jeps/330">JEP 330: Launch Single-File Source-Code Programs</a>. Исходные файлы Java теперь можно <a href="launch_single_file_source_code_programs.html">исполнять напрямую</a>, без промежуточной компиляции.</li>
-  <li><a href="http://openjdk.java.net/jeps/181">JEP 181: Nest-Based Access Control</a>. Доступ между закрытыми членами вложенных классов теперь <a href="nestmates.html">реализован на уровне JVM</a>, а значит больше не нужна генерация синтетических методов доступа между ними.</li>
-  <li><a href="http://openjdk.java.net/jeps/309">JEP 309: Dynamic Class-File Constants</a>. Появился новый механизм <code class="text-nowrap">constantdynamic</code> (<code class="text-nowrap">condy</code>), благодаря которому константными значениями теперь могут быть не только простые литералы, а более сложные динамические выражения произвольного типа.</li>
-  <li><a href="http://openjdk.java.net/jeps/318">JEP 318: Epsilon: A No-Op Garbage Collector</a>. Появился новый сборщик мусора EpsilonGC, который занимается только выделением памяти, <a href="epsilon_gc.html">но не освобождает её</a>. При достижении лимита памяти виртуальная машина останавливается.</li>
-  <li><a href="http://openjdk.java.net/jeps/333">JEP 333: ZGC: A Scalable Low-Latency Garbage Collector (Experimental)</a>. Появился новый <a href="zgc.html">сборщик мусора ZGC</a>, который ставит своей задачей обеспечить маленькие паузы (< 10 мс) на всём диапазоне куч (от сотен мегабайт до нескольких терабайт), при этом издержки производительности не должны превышать 15%. Сборщик мусора имеет экспериментальный статус и работает только на Linux/x64.</li>
+  <li><a href="https://openjdk.org/jeps/323">JEP 323: Local-Variable Syntax for Lambda Parameters</a>. Теперь ключевое слово <code class="text-nowrap">var</code> можно использовать не только для объявления локальных переменных методов, но и <a href="var_in_lambdas.html">для параметров лямбда-выражений</a>.</li>
+  <li><a href="https://openjdk.org/jeps/320">JEP 320: Remove the Java EE and CORBA Modules</a>. Модули JAX-WS, JAXB, JAF, Common Annotations, CORBA, JTA, которые ранее в Java 9 были помечены как deprecated for removal, теперь <a href="remove_java_ee_and_corba_modules.html">удалены окончательно</a>. Вместо них теперь нужно использовать их <a href="https://stackoverflow.com/a/48204154/706317">аналоги из Maven</a>. Также удалён модуль-аггрегатор <code class="text-nowrap">java.se.ee</code>.</li>
+  <li><a href="https://openjdk.org/jeps/321">JEP 321: HTTP Client (Standard)</a>. HTTP Client, который появился в Java 9 как инкубационный модуль, теперь <a href="http_client.html">стал стандартным модулем</a>.</li>
+  <li><a href="https://openjdk.org/jeps/328">JEP 328: Flight Recorder</a>. Утилита Flight Recorder для диагностики и профилирования Java-приложений теперь стала общедоступной частью OpenJDK. Раньше её можно было использовать только на коммерческой основе.</li>
+  <li><a href="https://openjdk.org/jeps/330">JEP 330: Launch Single-File Source-Code Programs</a>. Исходные файлы Java теперь можно <a href="launch_single_file_source_code_programs.html">исполнять напрямую</a>, без промежуточной компиляции.</li>
+  <li><a href="https://openjdk.org/jeps/181">JEP 181: Nest-Based Access Control</a>. Доступ между закрытыми членами вложенных классов теперь <a href="nestmates.html">реализован на уровне JVM</a>, а значит больше не нужна генерация синтетических методов доступа между ними.</li>
+  <li><a href="https://openjdk.org/jeps/309">JEP 309: Dynamic Class-File Constants</a>. Появился новый механизм <code class="text-nowrap">constantdynamic</code> (<code class="text-nowrap">condy</code>), благодаря которому константными значениями теперь могут быть не только простые литералы, а более сложные динамические выражения произвольного типа.</li>
+  <li><a href="https://openjdk.org/jeps/318">JEP 318: Epsilon: A No-Op Garbage Collector</a>. Появился новый сборщик мусора EpsilonGC, который занимается только выделением памяти, <a href="epsilon_gc.html">но не освобождает её</a>. При достижении лимита памяти виртуальная машина останавливается.</li>
+  <li><a href="https://openjdk.org/jeps/333">JEP 333: ZGC: A Scalable Low-Latency Garbage Collector (Experimental)</a>. Появился новый <a href="zgc.html">сборщик мусора ZGC</a>, который ставит своей задачей обеспечить маленькие паузы (< 10 мс) на всём диапазоне куч (от сотен мегабайт до нескольких терабайт), при этом издержки производительности не должны превышать 15%. Сборщик мусора имеет экспериментальный статус и работает только на Linux/x64.</li>
 </ul>
 <p>Остальные JEP-ы:</p>
 <ul>
-  <li><a href="http://openjdk.java.net/jeps/315">JEP 315: Improve Aarch64 Intrinsics</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/324">JEP 324: Key Agreement with Curve25519 and Curve448</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/327">JEP 327: Unicode 10</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/329">JEP 329: ChaCha20 and Poly1305 Cryptographic Algorithms</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/331">JEP 331: Low-Overhead Heap Profiling</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/332">JEP 332: Transport Layer Security (TLS) 1.3</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/336">JEP 336: Deprecate the Pack200 Tools and API</a>.</li>
-  <li><a href="http://openjdk.java.net/jeps/335">JEP 335: Deprecate the Nashorn JavaScript Engine</a>.</li>
+  <li><a href="https://openjdk.org/jeps/315">JEP 315: Improve Aarch64 Intrinsics</a>.</li>
+  <li><a href="https://openjdk.org/jeps/324">JEP 324: Key Agreement with Curve25519 and Curve448</a>.</li>
+  <li><a href="https://openjdk.org/jeps/327">JEP 327: Unicode 10</a>.</li>
+  <li><a href="https://openjdk.org/jeps/329">JEP 329: ChaCha20 and Poly1305 Cryptographic Algorithms</a>.</li>
+  <li><a href="https://openjdk.org/jeps/331">JEP 331: Low-Overhead Heap Profiling</a>.</li>
+  <li><a href="https://openjdk.org/jeps/332">JEP 332: Transport Layer Security (TLS) 1.3</a>.</li>
+  <li><a href="https://openjdk.org/jeps/336">JEP 336: Deprecate the Pack200 Tools and API</a>.</li>
+  <li><a href="https://openjdk.org/jeps/335">JEP 335: Deprecate the Nashorn JavaScript Engine</a>.</li>
 </ul>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>

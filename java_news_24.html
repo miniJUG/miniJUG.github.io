@@ -37,17 +37,17 @@
 <p>&bull; Вышли обновления JDK:</p>
 <ul>
   <li><a href="https://www.oracle.com/java/technologies/javase/16-0-2-relnotes.html">JDK 16.0.2</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-July/006956.html">JDK 15.0.4</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-July/006955.html">JDK 13.0.8</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2021-July/006954.html">JDK 11.0.12</a></li>
-  <li><a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2021-July/014118.html">JDK 8u302</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2021-July/006956.html">JDK 15.0.4</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2021-July/006955.html">JDK 13.0.8</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2021-July/006954.html">JDK 11.0.12</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2021-July/014118.html">JDK 8u302</a></li>
   <li><a href="http://jdk.java.net/17/">JDK 17-ea+32</a></li>
   <li><a href="http://jdk.java.net/18/">JDK 18-ea+7</a></li>
 </ul>
 
-<p class="pt-2">&bull; Вышел черновик <a href="https://openjdk.java.net/jeps/8263693">JEP: InetAddress host name and address lookup service provider interface</a>. В этом JEP предлагается добавить новый провайдер сервиса, который позволит кастомизировать получение IP-адреса по имени хоста (и наоборот). Сейчас в Java резолвинг выполняется только нативно, то есть делегированием операции системе. Это сильно усложняет задачу, если требуется альтернативный механизм резолвинга, например, более производительный, чем системный, или использующийся в других DNS-протоколах, таких как DNS-over-QUIC. Также это может быть полезно в тестировании, где часто нужно подменять IP-адреса или имена хостов.</p>
+<p class="pt-2">&bull; Вышел черновик <a href="https://openjdk.org/jeps/8263693">JEP: InetAddress host name and address lookup service provider interface</a>. В этом JEP предлагается добавить новый провайдер сервиса, который позволит кастомизировать получение IP-адреса по имени хоста (и наоборот). Сейчас в Java резолвинг выполняется только нативно, то есть делегированием операции системе. Это сильно усложняет задачу, если требуется альтернативный механизм резолвинга, например, более производительный, чем системный, или использующийся в других DNS-протоколах, таких как DNS-over-QUIC. Также это может быть полезно в тестировании, где часто нужно подменять IP-адреса или имена хостов.</p>
 
-<p class="pt-2">&bull; Azul предложил в рассылке OpenJDK <a href="https://mail.openjdk.java.net/pipermail/discuss/2021-July/005862.html">новый проект CRaC</a> (Coordinated Restore at Checkpoint), целью которого будет создание нового Java API, которое позволит сохранять состояние Java-рантайма, а затем его быстро восстанавливать, минуя фазу долгого старта и прогрева. Такая идея впервые была презентована ещё два года назад на JVM Language Summit 2019. Сейчас проект находится в статусе <a href="https://openjdk.java.net/projects/#new-project">предварительной дискуссии</a>. Следующим шагом будет официальное предложение по созданию проекта с последующим голосованием. Лидером проекта предлагается Антон Козлов из Azul.</p>
+<p class="pt-2">&bull; Azul предложил в рассылке OpenJDK <a href="https://mail.openjdk.org/pipermail/discuss/2021-July/005862.html">новый проект CRaC</a> (Coordinated Restore at Checkpoint), целью которого будет создание нового Java API, которое позволит сохранять состояние Java-рантайма, а затем его быстро восстанавливать, минуя фазу долгого старта и прогрева. Такая идея впервые была презентована ещё два года назад на JVM Language Summit 2019. Сейчас проект находится в статусе <a href="https://openjdk.org/projects/#new-project">предварительной дискуссии</a>. Следующим шагом будет официальное предложение по созданию проекта с последующим голосованием. Лидером проекта предлагается Антон Козлов из Azul.</p>
 
 <p class="pt-2">&bull; Языку Kotlin <a href="https://twitter.com/kotlin/status/1417188498667446272">исполнилось 10 лет</a>. Проект Kotlin впервые был публично анонсирован JetBrains 22 июля 2011 года. Тогда Дмитрий Жемеров заявил: &laquo;Мы посмотрели на все существующие языки JVM и выяснили, что  ни один из них не отвечает нашим требованиям. У Scala хороший набор фич, но её самый очевидный недостаток &ndash; очень медленная компиляция&raquo;.</p>
 

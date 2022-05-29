@@ -34,7 +34,7 @@
 <h3 id="title">В Java появится паттерн-матчинг</h3>
 <p class="text-secondary"><time datetime="2017-11-10">10 ноября, 2017</time></p>
 <article>
-<p>Паттерн-матчинг (сопоставление с образцом) является довольно популярной синтаксической конструкцией, которая есть практически во всех функциональных языках. За годы их существования эта конструкция уже настолько доказала свою пользу и необходимость, что начала проникать и в известные императивные языки. И теперь очередь дошла и до Java: паттерн-матчинг получил <a href="http://openjdk.java.net/jeps/305">свой JEP</a> и был включён в <a href="http://openjdk.java.net/projects/amber/">проект Amber</a>, где ведётся исследование и разработка будущих языковых улучшений. Помимо паттерн-матчинга там также есть <a href="http://openjdk.java.net/jeps/286">локальный вывод типов</a> (<code class="text-nowrap">var</code>), <a href="data_classes.html">data-классы</a>, <a href="http://openjdk.java.net/jeps/302">подчёркивания, улучшенные перечисления, перекрытия лямбда-параметров</a> и т.д.</p>
+<p>Паттерн-матчинг (сопоставление с образцом) является довольно популярной синтаксической конструкцией, которая есть практически во всех функциональных языках. За годы их существования эта конструкция уже настолько доказала свою пользу и необходимость, что начала проникать и в известные императивные языки. И теперь очередь дошла и до Java: паттерн-матчинг получил <a href="https://openjdk.org/jeps/305">свой JEP</a> и был включён в <a href="https://openjdk.org/projects/amber/">проект Amber</a>, где ведётся исследование и разработка будущих языковых улучшений. Помимо паттерн-матчинга там также есть <a href="https://openjdk.org/jeps/286">локальный вывод типов</a> (<code class="text-nowrap">var</code>), <a href="data_classes.html">data-классы</a>, <a href="https://openjdk.org/jeps/302">подчёркивания, улучшенные перечисления, перекрытия лямбда-параметров</a> и т.д.</p>
 <p>Смысл паттерн-матчинга заключается в объединении проверки типа и извлечения из структуры необходимых компонентов. Сейчас такое делается с помощью оператора <code class="text-nowrap">instanceof</code> и последующего приведения:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (value <span style="color: blue">instanceof</span> Integer) {
     <span style="color: blue">int</span> i = (Integer) value;
@@ -62,13 +62,13 @@
 };</pre>
 <p>При всей своей привлекательности введение паттерн-матчинга порождает ряд вопросов, которые на данный момент ожидают ответа:</p>
 <ul>
-  <li><a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000111.html">Области видимости</a></li>
-  <li><a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000112.html">Перекрытие переменными паттерна других переменных</a></li>
-  <li><a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000113.html">Матчинг <code class="text-nowrap">null</code></a></li>
-  <li><a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000115.html">Матчинг примитивных типов</a></li>
-  <li><a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000114.html">Матчинг generic-типов</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-November/000111.html">Области видимости</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-November/000112.html">Перекрытие переменными паттерна других переменных</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-November/000113.html">Матчинг <code class="text-nowrap">null</code></a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-November/000115.html">Матчинг примитивных типов</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-November/000114.html">Матчинг generic-типов</a></li>
 </ul>
-<p>Некоторые из этих вопросов кажутся действительно сложными, и это вызывает некое опасение, что паттерн-матчинг в Java может быть отложен на неопределённое время или полностью отвергнут, как это произошло с <a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-May/000041.html">Enhanced Enums</a>. Однако мы будем надеяться, что этого не произойдёт, и разработчики языка смогут решить вышеописанные проблемы.</p>
+<p>Некоторые из этих вопросов кажутся действительно сложными, и это вызывает некое опасение, что паттерн-матчинг в Java может быть отложен на неопределённое время или полностью отвергнут, как это произошло с <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-May/000041.html">Enhanced Enums</a>. Однако мы будем надеяться, что этого не произойдёт, и разработчики языка смогут решить вышеописанные проблемы.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>

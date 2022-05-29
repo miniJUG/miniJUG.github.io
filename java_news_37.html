@@ -34,11 +34,11 @@
 <h3 id="title">Новости Java #37</h3>
 <p class="text-secondary"><time datetime="2022-04-11">11 апреля, 2022</time></p>
 <article>
-<p>&bull; Вышел <a href="http://openjdk.java.net/jeps/425">JEP 425: Virtual Threads (Preview)</a>. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.</p>
+<p>&bull; Вышел <a href="https://openjdk.org/jeps/425">JEP 425: Virtual Threads (Preview)</a>. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.</p>
 <p>Напомним, что о старте проекта Loom было заявлено <a href="project_loom.html">в ноябре 2017 года</a> вскоре после выхода Java 9, а первый черновик JEP по виртуальным нитям по нему появился лишь спустя 4 года, о чём мы писали в <a href="java_news_32.html">выпуске #32</a>.</p>
 <p>Вместе с выходом JEP 425 также вышла новая Early-Access сборка Loom <a href="https://jdk.java.net/loom/">19-loom+5</a> с большим количеством изменений по сравнению с предыдущей версией.</p>
 
-<p class="pt-2">&bull; Вышел черновик <a href="https://openjdk.java.net/jeps/8282272">JEP Pattern matching for switch (Third Preview)</a>. Это значит, что паттерн-матчинг для <code class="text-nowrap">switch</code> стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.</p>
+<p class="pt-2">&bull; Вышел черновик <a href="https://openjdk.org/jeps/8282272">JEP Pattern matching for switch (Third Preview)</a>. Это значит, что паттерн-матчинг для <code class="text-nowrap">switch</code> стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.</p>
 <p>В этой итерации предлагается внести два изменения относительно предыдущей.</p>
 <p>Во-первых, заменить охранные паттерны на условия <code class="text-nowrap">when</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">// Java 18:</span>
@@ -52,7 +52,7 @@
     <span style="color: blue">case</span> Integer x <span style="color: blue">when</span> x > 0 -> ...;
     <span style="color: blue">default</span> -> ...;
 }</pre>
-<p>О мотивации заменить <code class="text-nowrap">&&</code> на <code class="text-nowrap">when</code> можно прочитать <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-January/003195.html">тут</a>.</p>
+<p>О мотивации заменить <code class="text-nowrap">&&</code> на <code class="text-nowrap">when</code> можно прочитать <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html">тут</a>.</p>
 <p>Во-вторых, предлагается изменить поведения матчинга <code class="text-nowrap">null</code> таким образом, чтобы он матчился только в ветках <code class="text-nowrap">case null</code> и ни в каких других (даже тотальных):</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">// Java 18:</span>
 Object obj = <span style="color: blue">null</span>;
@@ -65,9 +65,9 @@ Object obj = <span style="color: blue">null</span>;
 <span style="color: blue">switch</span> (obj) {
     <span style="color: blue">case</span> Object x -> ...; <span style="color: red">// NPE</span>
 }</pre>
-<p>Про причины такого изменения можно прочитать <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-January/003194.html">тут</a>.</p>
+<p>Про причины такого изменения можно прочитать <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html">тут</a>.</p>
 
-<p class="pt-1">Также вышло ещё два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8284289">Improved way of obtaining call traces asynchronously for profiling</a> и <a href="http://openjdk.java.net/jeps/8284453">Optionally Record Thread Context in JFR</a>.</p>
+<p class="pt-1">Также вышло ещё два новых черновика JEP: <a href="https://openjdk.org/jeps/8284289">Improved way of obtaining call traces asynchronously for profiling</a> и <a href="https://openjdk.org/jeps/8284453">Optionally Record Thread Context in JFR</a>.</p>
 
 
 <p class="pt-2">&bull; Вышел <a href="https://in.relation.to/2022/03/31/orm-60-final/">Hibernate 6.0 Final</a>. Новая версия фреймворка не является полностью совместимой с предыдущей версией 5.x, но в значительной степени совместимость удалось сохранить. Для тех, кто использует Hibernate исключительно через <a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html#_jakarta_persistence">Jakarta Persistence API</a>, переход должен быть полностью совместимым. Для остальных был написан <a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html">подробный гид по миграции</a>.</p>
@@ -97,7 +97,7 @@ Object obj = <span style="color: blue">null</span>;
 
 <p class="pt-2">&bull; Вышел <a href="https://andresalmiray.com/jreleaser-1-0-0-is-here/">JReleaser 1.0.0</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2022-March/003422.html">JMH 1.35</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-March/003422.html">JMH 1.35</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>

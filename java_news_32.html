@@ -47,11 +47,11 @@
   <li>Функцию <code class="text-nowrap">compareTo()</code> теперь можно вызывать через инфиксную нотацию (<code class="text-nowrap">x compareTo y</code>).</li>
 </ul>
 
-<p class="pt-2">&bull; Очередных два JEP'а предложены к JDK 18. Это <a href="https://openjdk.java.net/jeps/419">JEP 419: Foreign Function & Memory API (Second Incubator)</a> и <a href="https://openjdk.java.net/jeps/420">JEP 420: Pattern Matching for switch (Second Preview)</a>.</p>
-<p>Также появился новый <a href="https://openjdk.java.net/jeps/422">JEP 422: Linux/RISC-V Port</a>.</p>
+<p class="pt-2">&bull; Очередных два JEP'а предложены к JDK 18. Это <a href="https://openjdk.org/jeps/419">JEP 419: Foreign Function & Memory API (Second Incubator)</a> и <a href="https://openjdk.org/jeps/420">JEP 420: Pattern Matching for switch (Second Preview)</a>.</p>
+<p>Также появился новый <a href="https://openjdk.org/jeps/422">JEP 422: Linux/RISC-V Port</a>.</p>
 
 <p class="pt-2">&bull; В <a href="https://wiki.openjdk.java.net/display/loom/Main">проекте Loom</a> появились первые два черновика JEP.</p>
-<p>Первый &ndash; <a href="http://openjdk.java.net/jeps/8277129">Structured Concurrency (Preview)</a>.</p>
+<p>Первый &ndash; <a href="https://openjdk.org/jeps/8277129">Structured Concurrency (Preview)</a>.</p>
 <p>В этом JEP'е предлагается добавить в Java новое API для структурного concurrency. Структурное concurrency &ndash; это concurrency, которое заимствует принципы обычного (последовательного) структурного программирования и гарантирует следующее: когда поток выполнения разделяется на несколько потоков выполнения, то эти потоки воссоединяются в том же блоке кода. Все эти потоки логически сгруппированы и организованы в иерархию.</p>
 <p>Рассмотрим простой пример кода, выполняющийся последовательно:</p>
 <pre class="border p-lg-2 p-1">String foo() <span style="color: blue">throws</span> IOException, InterruptedException {
@@ -79,7 +79,7 @@
 <p><code class="text-nowrap">StructuredExecutor</code> в данном случае обеспечивает множество гарантий. Например, если одна из операций <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> завершается ошибкой, то другая операция отменяется автоматически (если ещё не завершена). Или если операция <code class="text-nowrap">foo()</code> прерывается в процессе ожидания <code class="text-nowrap">join()</code>, то обе операции <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> отменяются. Всех этих гарантий не было бы, если бы использовались существующие реализации <code class="text-nowrap">ExecutorService</code>. Чтобы эти гарантии обеспечить, пришлось бы для этого написать большое количество дополнительного кода.</p>
 <p>Таким образом, новое API значительно облегчит написание чистого и корректного конкурентного кода с использованием структурного подхода.</p>
 
-<p class="pt-2">Второй JEP &ndash; это <a href="http://openjdk.java.net/jeps/8277131">Virtual Threads (Preview)</a>.</p>
+<p class="pt-2">Второй JEP &ndash; это <a href="https://openjdk.org/jeps/8277131">Virtual Threads (Preview)</a>.</p>
 <p>Виртуальные нити &ndash; это новый вид нитей (т.е. новый подкласс <code class="text-nowrap">java.lang.Thread</code>), которые, в отличие от нитей операционной системы, могут хорошо масштабироваться до миллионов экземпляров. При этом поведение таких нитей практически не отличается от обычных, а значит существующий конкурентный код можно будет смигрировать на виртуальные нити, не затрачивая больших усилий. Виртуальные нити являются пользовательской надстройкой и работают поверх нитей операционной системы, поэтому существуют только для JVM, но не для OS.</p>
 <p>Отличительной особенностью виртуальных нитей является то, что при блокирующем вызове они приостанавливаются, позволяя нити-носителю продолжить выполнять другие задачи. Когда блокирующая операция завершается, виртуальная нить помещается в очередь планировщика и её выполнение возобновляется на той же или уже совсем другой нити-носителе.</p>
 <p>Вместе с виртуальным нитями также вводится большое количество нового API:</p>

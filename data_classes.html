@@ -34,7 +34,7 @@
 <h3 id="title">В Java появятся data-классы</h3>
 <p class="text-secondary"><time datetime="2017-11-03">3 ноября, 2017</time></p>
 <article>
-<p>Вчера Brian Goetz из Oracle написал <a href="http://mail.openjdk.java.net/pipermail/amber-spec-experts/2017-November/000099.html">письмо</a> со ссылкой на <a href="http://cr.openjdk.java.net/~briangoetz/amber/datum.html">документ</a>, в котором описывается идея введения в Java классов-данных (data-классов). Data-класс – это класс, единственной целью которого является держание некоторого набора данных.</p>
+<p>Вчера Brian Goetz из Oracle написал <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2017-November/000099.html">письмо</a> со ссылкой на <a href="http://cr.openjdk.java.net/~briangoetz/amber/datum.html">документ</a>, в котором описывается идея введения в Java классов-данных (data-классов). Data-класс – это класс, единственной целью которого является держание некоторого набора данных.</p>
 <p>Канонический пример такого прозрачного носителя данных – это класс <code class="text-nowrap">Point</code>, содержащего в себе два поля <code class="text-nowrap">int x</code> и <code class="text-nowrap">int y</code>. Сейчас корректная реализация <code class="text-nowrap">Point</code> занимает несколько десятков строк кода. Она включает в себя объявление полей, конструктора, методов <code class="text-nowrap">hashCode()</code>, <code class="text-nowrap">equals()</code>, <code class="text-nowrap">toString()</code> и методов доступа к полям. В типичном приложении таких классов может быть большое количество, а значит, программистам приходится вновь и вновь писать однотипные фрагменты кода, что отнимает время, порождает ошибки, ну и просто захламляет проект конструкциями, не имеющими большой смысловой нагрузки. В предложенном в документе варианте такой класс пишется в одну строчку:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">__data class</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) { }</pre>
 <p>Для такого класса компилятор автоматически реализует конструктор, методы <code class="text-nowrap">hashCode()</code>, <code class="text-nowrap">equals()</code>, <code class="text-nowrap">toString()</code>, экстракторы для паттерн-матчинга, а также геттеры <code class="text-nowrap">x()</code> и <code class="text-nowrap">y()</code>.</p>
@@ -44,7 +44,7 @@
   <li>Могут ли data-классы участвовать в наследовании? Вероятно, будет разрешено только наследование от интерфейсов и от абстрактных data-классов.</li>
   <li>Должна ли быть возможность объявлять дополнительные поля в data-классе? Плохая идея, так что, скорее всего, нет.</li>
   <li>Можно ли сделать собственную реализацию конструкторов? Предварительно да, в конце тела конструктора должен быть вызов основного конструктора.</li>
-  <li>Как data-классы будут сочетаться с value-типами из <a href="http://openjdk.java.net/projects/valhalla/">проекта Valhalla</a>?</li>
+  <li>Как data-классы будут сочетаться с value-типами из <a href="https://openjdk.org/projects/valhalla/">проекта Valhalla</a>?</li>
 </ol>
 <p>Над всеми этими непростыми вопросами архитекторам языка предстоит хорошо поработать и, в конце концов, дать на них точный ответ, однако уже скоро Brian Goetz обещает выложить рабочий прототип.</p>
 </article>

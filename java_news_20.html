@@ -36,12 +36,12 @@
 <article>
 <p>&bull; Началась разработка Java 18. В репозитории GitHub <a href="https://github.com/openjdk/jdk/pull/4175/commits">появился пулл-реквест</a> со стандартными процедурами, которые проводятся при старте нового релиза: добавление новых констант с версиями, таблиц символов, заголовков в файлах и т.д. Новая версия формата class-файлов будет равна 62.</p>
 
-<p class="pt-2">&bull; Вышел новый черновик JEP, связанный с проектом <a href="https://openjdk.java.net/projects/valhalla/">Valhalla</a> и <a href="https://openjdk.java.net/jeps/401">примитивными объектами</a>: <a href="http://openjdk.java.net/jeps/8267650">Better-defined JVM class file validation</a>.</p>
+<p class="pt-2">&bull; Вышел новый черновик JEP, связанный с проектом <a href="https://openjdk.org/projects/valhalla/">Valhalla</a> и <a href="https://openjdk.org/jeps/401">примитивными объектами</a>: <a href="https://openjdk.org/jeps/8267650">Better-defined JVM class file validation</a>.</p>
 
-<p class="pt-2">&bull; В <a href="https://openjdk.java.net/jeps/411">JEP 411: Deprecate the Security Manager for Removal</a> были внесены <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-May/005616.html">важные изменения</a>. Значение свойства <code class="text-nowrap">java.security.manager</code> всё-таки предлагается по умолчанию оставить равным <code class="text-nowrap">allow</code>, а не <code class="text-nowrap">disallow</code>, что означает, что при вызове <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"><code class="text-nowrap">System.setSecurityManager()</code></a> будет выводиться предупреждение в консоль, а не выбрасываться <code class="text-nowrap">UnsupportedOperationException</code>. Таким образом, приложения, которые используют <code class="text-nowrap">setSecurityManager()</code>, будут продолжать работать на Java 17 без изменений, что <a href="https://blogs.apache.org/netbeans/entry/jep-411-deprecate-the-security1">облегчит</a> их миграцию.</p>
+<p class="pt-2">&bull; В <a href="https://openjdk.org/jeps/411">JEP 411: Deprecate the Security Manager for Removal</a> были внесены <a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-May/005616.html">важные изменения</a>. Значение свойства <code class="text-nowrap">java.security.manager</code> всё-таки предлагается по умолчанию оставить равным <code class="text-nowrap">allow</code>, а не <code class="text-nowrap">disallow</code>, что означает, что при вызове <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"><code class="text-nowrap">System.setSecurityManager()</code></a> будет выводиться предупреждение в консоль, а не выбрасываться <code class="text-nowrap">UnsupportedOperationException</code>. Таким образом, приложения, которые используют <code class="text-nowrap">setSecurityManager()</code>, будут продолжать работать на Java 17 без изменений, что <a href="https://blogs.apache.org/netbeans/entry/jep-411-deprecate-the-security1">облегчит</a> их миграцию.</p>
 <p>Однако значение свойства <code class="text-nowrap">java.security.manager</code> всё-таки станет равным <code class="text-nowrap">disallow</code>, но это произойдёт в Java 18.</p>
 
-<p class="pt-2">&bull; В рассылке OpenJDK продолжается обсуждение темы <a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-June/001533.html">абстрактности класса Object</a>. На данный момент предлагается следующее:</p>
+<p class="pt-2">&bull; В рассылке OpenJDK продолжается обсуждение темы <a href="https://mail.openjdk.org/pipermail/valhalla-spec-experts/2021-June/001533.html">абстрактности класса Object</a>. На данный момент предлагается следующее:</p>
 <ul>
   <li>Будет введён новый метод <code class="text-nowrap">IdentityObject::newIdentity</code> (Б.Гетц предлагает <code class="text-nowrap">Objects::newIdentity</code>), который будет возвращать объект некоторого внутреннего класса, реализующего интерфейс <code class="text-nowrap">IdentityObject</code>.</li>
   <li>JVM будет заменять вызовы <code class="text-nowrap">new Object()</code> на создание объекта, реализующего <code class="text-nowrap">IdentityObject</code>.</li>
@@ -49,7 +49,7 @@
 </ul>
 <p>Такая стратегия позволит постепенно перейти от возможности вызова <code class="text-nowrap">new Object()</code> до его полного запрета в будущем.</p>
 
-<p class="pt-2">&bull; Программисты из Amazon предлагают порассуждать о возможности <a href="https://mail.openjdk.java.net/pipermail/hotspot-compiler-dev/2021-May/047486.html">реализации Partial Escape Analysis</a> в Hotspot.</p>
+<p class="pt-2">&bull; Программисты из Amazon предлагают порассуждать о возможности <a href="https://mail.openjdk.org/pipermail/hotspot-compiler-dev/2021-May/047486.html">реализации Partial Escape Analysis</a> в Hotspot.</p>
 
 <p class="pt-2">&bull; Вышла <a href="https://jakarta.ee/news/jakarta-ee-9-1-released/">Jakarta EE 9.1</a> с поддержкой Java 11. Также вышел <a href="https://github.com/eclipse-ee4j/glassfish/releases/tag/6.1.0">Eclipse GlassFish 6.1.0</a>, который соответствует спецификации Jakarta EE 9.1.</p>
 
@@ -61,7 +61,7 @@
 
 <p class="pt-2">&bull; Вышла <a href="https://blog.jetbrains.com/idea/2021/06/intellij-idea-2021-1-2/">IntelliJ IDEA 2021.1.2</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003307.html">JMH 1.32</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jmh-dev/2021-May/003307.html">JMH 1.32</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>

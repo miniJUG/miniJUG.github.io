@@ -42,9 +42,9 @@
 </ul>
 <p>Новшества, относящиеся непосредственно к Java: более точные и подробные описания инспекций, возможность назначить различные цвета подсветки модификаторов видимости (<code class="text-nowrap">private</code>/<code class="text-nowrap">protected</code>/<code class="text-nowrap">public</code>), новый wizard для создания проектов на JavaFX, а также <a href="https://blog.jetbrains.com/idea/2021/06/intellij-idea-2021-2-eap-4/#java">новые инспекции</a>.</p>
 
-<p class="pt-2">&bull; Антон Козлов из Azul объявил в рассылке OpenJDK <a href="https://mail.openjdk.java.net/pipermail/announce/2021-July/000304.html">голосование по созданию проекту CRaC</a> (Coordinated Restore at Checkpoint).</p>
+<p class="pt-2">&bull; Антон Козлов из Azul объявил в рассылке OpenJDK <a href="https://mail.openjdk.org/pipermail/announce/2021-July/000304.html">голосование по созданию проекту CRaC</a> (Coordinated Restore at Checkpoint).</p>
 
-<p class="pt-2">&bull; Брайан Гётц <a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2021-July/003052.html">предложил</a> добавить в Java возможность объявлять анонимные классы с произвольным количеством интерфейсов. Сейчас в Java анонимный класс может иметь только одного родителя:</p>
+<p class="pt-2">&bull; Брайан Гётц <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2021-July/003052.html">предложил</a> добавить в Java возможность объявлять анонимные классы с произвольным количеством интерфейсов. Сейчас в Java анонимный класс может иметь только одного родителя:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">var</span> foo = <span style="color: blue">new</span> AbstractFoo(args);</pre>
 <p>Брайан предлагает расширить синтаксис, позволив указывать дополнительные интерфейсы с помощью оператора <code class="text-nowrap">&amp;</code>:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">var</span> foo = <span style="color: blue">new</span> AbstractFoo(args) & RedFoo;</pre>

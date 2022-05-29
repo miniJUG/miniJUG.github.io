@@ -4,7 +4,7 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-05-15T17:00:00Z</updated>
+  <updated>2022-05-15T18:00:00Z</updated>
   <entry>
     <title>Новости Java #39</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_39.html" />
@@ -12,21 +12,21 @@
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_39.html</id>
-    <updated>2022-05-15T17:00:00Z</updated>
-    <published>2022-05-15T17:00:00Z</published>
+    <updated>2022-05-15T18:00:00Z</updated>
+    <published>2022-05-15T18:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Стало известно ещё о трёх новых JEP, которые попадут в JDK 19.&lt;/p&gt;
-&lt;p&gt;Первый &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/425"&gt;JEP 425: Virtual Threads (Preview)&lt;/a&gt; (этот JEP уже интегрирован в сборку &lt;a href="https://jdk.java.net/19/"&gt;JDK 19-ea+22&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Второй &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/427"&gt;JEP 427: Pattern Matching for switch (Third Preview)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_37.html"&gt;выпуске #37&lt;/a&gt;, когда он был ещё в статусе черновика.&lt;/p&gt;
-&lt;p&gt;Третий &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_35.html"&gt;выпуске #35&lt;/a&gt;.&lt;/p&gt;
-&lt;p class="pt-1"&gt;Также предложен ко включению в Java 19 &lt;a href="http://openjdk.java.net/jeps/405"&gt;JEP 405: Record Patterns (Preview)&lt;/a&gt;. Про этот JEP мы писали давно в &lt;a href="java_news_8.html"&gt;выпуске #8&lt;/a&gt;, когда он ещё был озаглавлен как "Record and Array Patterns (Preview)". В текущий JEP было решено не включать паттерны массивов и оставить только паттерны записей. Паттерны массивов отложены на один из будущих JEP'ов.&lt;/p&gt;
+&lt;p&gt;Первый &amp;ndash; &lt;a href="https://openjdk.org/jeps/425"&gt;JEP 425: Virtual Threads (Preview)&lt;/a&gt; (этот JEP уже интегрирован в сборку &lt;a href="https://jdk.java.net/19/"&gt;JDK 19-ea+22&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Второй &amp;ndash; &lt;a href="https://openjdk.org/jeps/427"&gt;JEP 427: Pattern Matching for switch (Third Preview)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_37.html"&gt;выпуске #37&lt;/a&gt;, когда он был ещё в статусе черновика.&lt;/p&gt;
+&lt;p&gt;Третий &amp;ndash; &lt;a href="https://openjdk.org/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_35.html"&gt;выпуске #35&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-1"&gt;Также предложен ко включению в Java 19 &lt;a href="https://openjdk.org/jeps/405"&gt;JEP 405: Record Patterns (Preview)&lt;/a&gt;. Про этот JEP мы писали давно в &lt;a href="java_news_8.html"&gt;выпуске #8&lt;/a&gt;, когда он ещё был озаглавлен как "Record and Array Patterns (Preview)". В текущий JEP было решено не включать паттерны массивов и оставить только паттерны записей. Паттерны массивов отложены на один из будущих JEP'ов.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Марк Рейнолд предложил переименовать домен &lt;a href="http://openjdk.java.net/"&gt;openjdk.java.net&lt;/a&gt; в openjdk.org. С момента появления OpenJDK в 2007 году вся его инфраструктура (исходный код, веб, e-mail, wiki, задачи) хостится в домене третьего уровня openjdk.java.net, хотя веб-сайт &lt;a href="https://en.wikipedia.org/wiki/Java.net"&gt;java.net&lt;/a&gt; был сайтом для Java-сообщества и имел слабое отношение к разработке самого OpenJDK. В 2017 году этот сайт был закрыт.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Марк Рейнолд предложил переименовать домен &lt;a href="https://openjdk.org/"&gt;openjdk.java.net&lt;/a&gt; в &lt;a href="https://openjdk.org"&gt;openjdk.org&lt;/a&gt;. С момента появления OpenJDK в 2007 году вся его инфраструктура (исходный код, веб, e-mail, wiki, задачи) хостится в домене третьего уровня openjdk.java.net, хотя веб-сайт &lt;a href="https://en.wikipedia.org/wiki/Java.net"&gt;java.net&lt;/a&gt; был сайтом для Java-сообщества и имел слабое отношение к разработке самого OpenJDK. В 2017 году этот сайт был закрыт.&lt;/p&gt;
 &lt;p&gt;С тех пор много открытого ПО стало хоститься в домене .org, и перемещение туда OpenJDK будет логичным шагом. Также это послужит напоминанием о том, что OpenJDK разрабатывается сообществом, а не одной главенствующей корпорацией.&lt;/p&gt;
 &lt;p&gt;Вместе с самим доменом openjdk.java.net также будут переименованы все его активные поддомены (bugs, cr, db, git, hg, mail, wiki). При этом старые ссылки, ведущие на openjdk.java.net, будут перенаправлены на соответствующие адреса в домене openjdk.org.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел в свет новый декомпилятор Java-байткода &lt;a href="https://github.com/QuiltMC/quiltflower"&gt;Quiltflower&lt;/a&gt;. Quiltflower является форком декомпилятора Fernflower, который является стандартным декомпилятором в IntelliJ IDEA. Как &lt;a href="https://www.reddit.com/r/java/comments/ue8u59/new_open_source_java_decompiler/"&gt;утверждает автор&lt;/a&gt;, Quiltflower более точно воспроизводит исходный Java-код и поддерживает различные синтаксические конструкции (try-with-resources, выражения &lt;code&gt;switch&lt;/code&gt;, паттерн-матчинг, sealed-классы и т.д). В доказательство приводятся &lt;a href="https://gist.github.com/SuperCoder7979/c7171b0e34b6eccf0b9f1c37030867dc"&gt;примеры&lt;/a&gt;, сравнивающие результаты декомпиляции Fernflower и Quiltflower.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Роман Кеннке &lt;a href="https://mail.openjdk.java.net/pipermail/lilliput-dev/2022-May/000457.html"&gt;сообщил&lt;/a&gt;, что проекту &lt;a href="https://openjdk.java.net/projects/lilliput/"&gt;Lilliput&lt;/a&gt; удалось сократить размер заголовков объектов с 96/128 бит до 64 бит. При этом 64-битные заголовки являются лишь промежуточным шагом, и он заявил, что следующим шагом будет сокращение заголовков ещё сильнее: до 32 бит.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Роман Кеннке &lt;a href="https://mail.openjdk.org/pipermail/lilliput-dev/2022-May/000457.html"&gt;сообщил&lt;/a&gt;, что проекту &lt;a href="https://openjdk.org/projects/lilliput/"&gt;Lilliput&lt;/a&gt; удалось сократить размер заголовков объектов с 96/128 бит до 64 бит. При этом 64-битные заголовки являются лишь промежуточным шагом, и он заявил, что следующим шагом будет сокращение заголовков ещё сильнее: до 32 бит.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="http://weld.cdi-spec.org/news/2022/04/29/weld-500Final/"&gt;Weld 5.0.0.Final&lt;/a&gt;, который поддерживает спецификацию &lt;a href="https://jakarta.ee/specifications/cdi/4.0/"&gt;CDI 4&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
@@ -37,21 +37,21 @@
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_38.html</id>
-    <updated>2022-04-24T17:00:00Z</updated>
-    <published>2022-04-24T17:00:00Z</published>
+    <updated>2022-04-24T18:00:00Z</updated>
+    <published>2022-04-24T18:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/18-0-1-relnotes.html"&gt;JDK 18.0.1&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-3-relnotes.html"&gt;JDK 17.0.3&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013820.html"&gt;JDK 15.0.7&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk-updates-dev/2022-April/013821.html"&gt;JDK 13.0.11&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2022-April/013820.html"&gt;JDK 15.0.7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2022-April/013821.html"&gt;JDK 13.0.11&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/11-0-15-relnotes.html"&gt;JDK 11.0.15&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.java.net/pipermail/jdk8u-dev/2022-April/014839.html"&gt;JDK 8u332&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2022-April/014839.html"&gt;JDK 8u332&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Появилось &lt;a href="https://openjdk.java.net/projects/jdk/19/"&gt;расписание выхода JDK 19&lt;/a&gt;. Общедоступная версия Java 19 по плану должна выйти 20 сентября 2022 года.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Появилось &lt;a href="https://openjdk.org/projects/jdk/19/"&gt;расписание выхода JDK 19&lt;/a&gt;. Общедоступная версия Java 19 по плану должна выйти 20 сентября 2022 года.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://openjdk.java.net/jeps/426"&gt;JEP 426: Vector API (Fourth Incubator)&lt;/a&gt;, который сразу стал предложен к выходу в JDK 19.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://openjdk.org/jeps/426"&gt;JEP 426: Vector API (Fourth Incubator)&lt;/a&gt;, который сразу стал предложен к выходу в JDK 19.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/04/intellij-idea-2022-1/"&gt;IntelliJ IDEA 2022.1&lt;/a&gt;. Перечислим главные новшества:&lt;/p&gt;
 &lt;ul&gt;
@@ -78,13 +78,13 @@
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_37.html</id>
-    <updated>2022-04-10T17:00:00Z</updated>
-    <published>2022-04-10T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="http://openjdk.java.net/jeps/425"&gt;JEP 425: Virtual Threads (Preview)&lt;/a&gt;. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.&lt;/p&gt;
+    <updated>2022-04-10T18:00:00Z</updated>
+    <published>2022-04-10T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://openjdk.org/jeps/425"&gt;JEP 425: Virtual Threads (Preview)&lt;/a&gt;. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.&lt;/p&gt;
 &lt;p&gt;Напомним, что о старте проекта Loom было заявлено &lt;a href="project_loom.html"&gt;в ноябре 2017 года&lt;/a&gt; вскоре после выхода Java 9, а первый черновик JEP по виртуальным нитям по нему появился лишь спустя 4 года, о чём мы писали в &lt;a href="java_news_32.html"&gt;выпуске #32&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Вместе с выходом JEP 425 также вышла новая Early-Access сборка Loom &lt;a href="https://jdk.java.net/loom/"&gt;19-loom+5&lt;/a&gt; с большим количеством изменений по сравнению с предыдущей версией.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел черновик &lt;a href="https://openjdk.java.net/jeps/8282272"&gt;JEP Pattern matching for switch (Third Preview)&lt;/a&gt;. Это значит, что паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел черновик &lt;a href="https://openjdk.org/jeps/8282272"&gt;JEP Pattern matching for switch (Third Preview)&lt;/a&gt;. Это значит, что паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.&lt;/p&gt;
 &lt;p&gt;В этой итерации предлагается внести два изменения относительно предыдущей.&lt;/p&gt;
 &lt;p&gt;Во-первых, заменить охранные паттерны на условия &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;span style="color: green"&gt;// Java 18:&lt;/span&gt;
@@ -98,7 +98,7 @@
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 -&gt; ...;
     &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
 }&lt;/pre&gt;
-&lt;p&gt;О мотивации заменить &lt;code&gt;&amp;&amp;&lt;/code&gt; на &lt;code&gt;when&lt;/code&gt; можно прочитать &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-January/003195.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;О мотивации заменить &lt;code&gt;&amp;&amp;&lt;/code&gt; на &lt;code&gt;when&lt;/code&gt; можно прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Во-вторых, предлагается изменить поведения матчинга &lt;code&gt;null&lt;/code&gt; таким образом, чтобы он матчился только в ветках &lt;code&gt;case null&lt;/code&gt; и ни в каких других (даже тотальных):&lt;/p&gt;
 &lt;pre&gt;&lt;span style="color: green"&gt;// Java 18:&lt;/span&gt;
 Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
@@ -111,9 +111,9 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;
 }&lt;/pre&gt;
-&lt;p&gt;Про причины такого изменения можно прочитать &lt;a href="https://mail.openjdk.java.net/pipermail/amber-spec-experts/2022-January/003194.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Про причины такого изменения можно прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-1"&gt;Также вышло ещё два новых черновика JEP: &lt;a href="http://openjdk.java.net/jeps/8284289"&gt;Improved way of obtaining call traces asynchronously for profiling&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/8284453"&gt;Optionally Record Thread Context in JFR&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-1"&gt;Также вышло ещё два новых черновика JEP: &lt;a href="https://openjdk.org/jeps/8284289"&gt;Improved way of obtaining call traces asynchronously for profiling&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/8284453"&gt;Optionally Record Thread Context in JFR&lt;/a&gt;.&lt;/p&gt;
 
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2022/03/31/orm-60-final/"&gt;Hibernate 6.0 Final&lt;/a&gt;. Новая версия фреймворка не является полностью совместимой с предыдущей версией 5.x, но в значительной степени совместимость удалось сохранить. Для тех, кто использует Hibernate исключительно через &lt;a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html#_jakarta_persistence"&gt;Jakarta Persistence API&lt;/a&gt;, переход должен быть полностью совместимым. Для остальных был написан &lt;a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html"&gt;подробный гид по миграции&lt;/a&gt;.&lt;/p&gt;
@@ -143,7 +143,7 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://andresalmiray.com/jreleaser-1-0-0-is-here/"&gt;JReleaser 1.0.0&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2022-March/003422.html"&gt;JMH 1.35&lt;/a&gt;.&lt;/p&gt;</content>
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-March/003422.html"&gt;JMH 1.35&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Вышла Java 18</title>
@@ -152,9 +152,9 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_18.html</id>
-    <updated>2022-03-21T17:00:00Z</updated>
-    <published>2022-03-21T17:00:00Z</published>
-    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="http://openjdk.java.net/projects/jdk/18/"&gt;Java 18&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-18.html"&gt;2000 закрытых задач и 9 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/18/release-notes"&gt;здесь&lt;/a&gt;. Изменения API можно посмотреть по &lt;a href="https://javaalmanac.io/jdk/18/apidiff/17/"&gt;этой ссылке&lt;/a&gt;.&lt;/p&gt;
+    <updated>2022-03-21T18:00:00Z</updated>
+    <published>2022-03-21T18:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/18/"&gt;Java 18&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-18.html"&gt;2000 закрытых задач и 9 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/18/release-notes"&gt;здесь&lt;/a&gt;. Изменения API можно посмотреть по &lt;a href="https://javaalmanac.io/jdk/18/apidiff/17/"&gt;этой ссылке&lt;/a&gt;.&lt;/p&gt;
 &lt;!-- cut --&gt;
 &lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
 &lt;ul&gt;
@@ -163,8 +163,8 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;/ul&gt;
 
 &lt;p&gt;Перечислим JEP'ы, которые попали в Java 18.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/420"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Second Preview) (JEP 420)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="https://openjdk.java.net/jeps/406"&gt;появился в Java 17&lt;/a&gt; в режиме preview, остаётся в этом статусе. В этом релизе присутствует два изменения по сравнению с предыдущей версией.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/420"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Second Preview) (JEP 420)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="https://openjdk.org/jeps/406"&gt;появился в Java 17&lt;/a&gt; в режиме preview, остаётся в этом статусе. В этом релизе присутствует два изменения по сравнению с предыдущей версией.&lt;/p&gt;
 &lt;p&gt;Первое изменение &amp;ndash; константные паттерны теперь должны находиться выше, чем паттерны с условиями того же типа. Например, такой код успешно компилируется в Java 17:&lt;/p&gt;
 &lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
@@ -202,7 +202,7 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
            ^&lt;/span&gt;&lt;/pre&gt;
 &lt;p&gt;В Java 18 же такой код успешно компилируется.&lt;/p&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/413"&gt;Сниппеты кода в документации Java API (JEP 413)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/413"&gt;Сниппеты кода в документации Java API (JEP 413)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;В JavaDoc теперь поддерживается новый тег &lt;code&gt;@snippet&lt;/code&gt;, который указывает на то, что данный участок является примером кода.&lt;/p&gt;
 &lt;p&gt;Пример сниппета кода:&lt;/p&gt;
 &lt;pre&gt;/**
@@ -241,27 +241,27 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
   &lt;li&gt;Сниппеты кода могут быть внешними и подтягивать код из внешних файлов. Чтобы иметь возможность не включать весь файл в JavaDoc, поддерживаются регионы с помощью тега &lt;code&gt;@region&lt;/code&gt;. Внешние сниппеты хороши тем, что внешние файлы могут быть предварительно проверены на корректность (например, если файлы Java не будут компилироваться, то и не смогут быть включены в JavaDoc).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/400"&gt;UTF-8 по умолчанию (JEP 400)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/400"&gt;UTF-8 по умолчанию (JEP 400)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;UTF-8 теперь является кодировкой по умолчанию на всех платформах. Кодировка по умолчанию используется в таких API как &lt;code&gt;java.io&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/InputStreamReader.html"&gt;&lt;code&gt;InputStreamReader&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileReader.html"&gt;&lt;code&gt;FileReader&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/OutputStreamWriter.html"&gt;&lt;code&gt;OutputStreamWriter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileWriter.html"&gt;&lt;code&gt;FileWriter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html"&gt;&lt;code&gt;PrintStream&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;java.util&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Formatter.html"&gt;&lt;code&gt;Formatter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Scanner.html"&gt;&lt;code&gt;Scanner&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;java.net&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLEncoder.html"&gt;&lt;code&gt;URLEncoder&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLDecoder.html"&gt;&lt;code&gt;URLDecoder&lt;/code&gt;&lt;/a&gt;). Кодировка в пакете &lt;code&gt;java.nio.file&lt;/code&gt; осталась неизменной: в нём самого начала UTF-8 было в качестве &lt;code&gt;Charset&lt;/code&gt; по умолчанию.&lt;/p&gt;
 &lt;p&gt;Если в Java 17 и более ранних версиях кодировка по умолчанию определялась при старте JVM и зависела от разных факторов (операционная система, пользовательская локаль, кодировка операционной системы), то с Java 18 она всегда UTF-8. Если нужно включить старый механизм установки кодировки при старте, то можно использовать опцию &lt;code&gt;-Dfile.encoding=COMPAT&lt;/code&gt;. Кроме того, эту кодировку можно узнать, используя свойство &lt;code&gt;native.encoding&lt;/code&gt;, которое &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8265989"&gt;появилось в Java 17&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Чтобы будущий переход на Java 18 был более гладким, рекомендуется стартовать свои приложения на Java 17 или более ранних версиях с опцией &lt;code&gt;-Dfile.encoding=UTF-8&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/408"&gt;Простой веб-сервер (JEP 408)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/408"&gt;Простой веб-сервер (JEP 408)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;Появилась новая утилита &lt;code&gt;jwebserver&lt;/code&gt;, которая запускает простой веб-сервер, предоставляющий статический доступ к указанной папке с файлами. По умолчанию используется текущая директория (если не указана опция &lt;code&gt;-d&lt;/code&gt;), а порт равен 8000 (если не указана опция &lt;code&gt;-p&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Веб-сервер поддерживает только HTTP/1.1, не поддерживает HTTPS и аутентификацию. Его рекомендуется использовать только для целей разработки и тестирования.&lt;/p&gt;
 &lt;p&gt;Вместе с утилитой &lt;code&gt;jwebserver&lt;/code&gt; также появилось новое API, позволяющее запускать веб-сервер программно. За это отвечают новые классы &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/SimpleFileServer.html"&gt;&lt;code&gt;SimpleFileServer&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpHandlers.html"&gt;&lt;code&gt;HttpHandlers&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/Request.html"&gt;&lt;code&gt;Request&lt;/code&gt;&lt;/a&gt; в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html"&gt;&lt;code&gt;com.sun.net.httpserver&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;Финализация объектов, которая &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8165641"&gt;стала deprecated в Java 9&lt;/a&gt;, теперь стала deprecated for removal, то есть подлежит окончательному удалению.&lt;/p&gt;
 &lt;p&gt;Начиная с Java 18, все методы, относящиеся к финализации, помечены аннотацией &lt;code&gt;@Deprecated(forRemoval=true)&lt;/code&gt;. Это &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()"&gt;&lt;code&gt;Object.finalize()&lt;/code&gt;&lt;/a&gt; и его наследники (часть из них удалены полностью), &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runtime.html#runFinalization()"&gt;&lt;code&gt;Runtime.runFinalization()&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/System.html#runFinalization()"&gt;&lt;code&gt;System.runFinalization()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Сама финализация всё ещё работает, однако появилась новая опция &lt;code&gt;--finalization=disabled&lt;/code&gt;, которая её отключает.&lt;/p&gt;
 &lt;p&gt;В будущих версиях Java работа по дальнейшему отказу от финализации может быть продолжена. Сначала финализацию предлагается отключить по умолчанию с возможностью включения, потом отключить её полностью, и, наконец, удалить весь API финализации.&lt;/p&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/416"&gt;Reimplement Core Reflection with Method Handles (JEP 416)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/416"&gt;Reimplement Core Reflection with Method Handles (JEP 416)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;Механизм рефлексии в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/reflect/package-summary.html"&gt;&lt;code&gt;java.lang.reflect&lt;/code&gt;&lt;/a&gt; теперь реализован поверх method handles в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/invoke/package-summary.html"&gt;&lt;code&gt;java.lang.invoke&lt;/code&gt;&lt;/a&gt;. В Java 17 и раньше эти два механизма существовали независимо и имели разную внутреннюю реализацию. Такое дублирование усложняет поддержку платформы и внесение в неё новых языковых изменений.&lt;/p&gt;
 &lt;p&gt;Для разработчика такое изменение не должно иметь видимых последствий (кроме небольших различий в производительности). Однако на всякий случай предоставлен ключ, позволяющий включить старую реализацию: &lt;code&gt;-Djdk.reflect.useDirectMethodHandle=false&lt;/code&gt;. Старая реализация будет полностью удалена в одной из следующих версий Java.&lt;/p&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/418"&gt;Internet-Address Resolution SPI (JEP 418)&lt;/a&gt;&lt;/h5&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/418"&gt;Internet-Address Resolution SPI (JEP 418)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;Появилось новое SPI, позволяющее кастомизировать получение IP-адреса по имени хоста (и наоборот). По умолчанию &lt;code&gt;InetAddress&lt;/code&gt; API делает нативный резолвинг, то есть делегированием операционной системе. Если нужен альтернативный механизм резолвинга, то теперь его можно предоставить путём реализации нового провайдера сервиса &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/spi/InetAddressResolverProvider.html"&gt;&lt;code&gt;InetAddressResolverProvider&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Примеры случаев, когда может понадобиться альтернативный резолвинг:&lt;/p&gt;
 &lt;ul&gt;
@@ -271,12 +271,12 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
   &lt;li&gt;Тестирование (подмена IP-адресов, моки).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/419"&gt;Foreign Function &amp; Memory API (Second Incubator) (JEP 419)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Foreign Function &amp; Memory API, который &lt;a href="https://openjdk.java.net/jeps/412"&gt;появился в Java 17&lt;/a&gt; в инкубационном статусе, остаётся в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.foreign/module-summary.html"&gt;&lt;code&gt;jdk.incubator.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;В Java 19 это API перестанет быть инкубационным и &lt;a href="https://openjdk.java.net/jeps/424"&gt;станет preview API&lt;/a&gt; в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/419"&gt;Foreign Function &amp; Memory API (Second Incubator) (JEP 419)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Foreign Function &amp; Memory API, который &lt;a href="https://openjdk.org/jeps/412"&gt;появился в Java 17&lt;/a&gt; в инкубационном статусе, остаётся в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.foreign/module-summary.html"&gt;&lt;code&gt;jdk.incubator.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В Java 19 это API перестанет быть инкубационным и &lt;a href="https://openjdk.org/jeps/424"&gt;станет preview API&lt;/a&gt; в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h5&gt;&lt;a href="https://openjdk.java.net/jeps/417"&gt;Vector API (Third Incubator) (JEP 417)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.java.net/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, осталось в инкубационном статусе в &lt;a href="https://openjdk.java.net/jeps/414"&gt;Java 17&lt;/a&gt;, продолжает находиться в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/417"&gt;Vector API (Third Incubator) (JEP 417)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.org/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, осталось в инкубационном статусе в &lt;a href="https://openjdk.org/jeps/414"&gt;Java 17&lt;/a&gt;, продолжает находиться в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;Java 18 не является LTS-релизом и будет получать обновления только в течение полугода (до сентября 2022).&lt;/p&gt;</content>
   </entry>
@@ -287,9 +287,9 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_36.html</id>
-    <updated>2022-03-20T17:00:00Z</updated>
-    <published>2022-03-20T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="http://openjdk.java.net/jeps/8283291"&gt;Extended Opcodes&lt;/a&gt;. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему нехватки опкодов, которых сейчас осталось всего 55 (из 256 возможных). Расширение опкодов не затронет существующие опкоды, и они так и останутся однобайтовыми, а новые расширенные опкоды будут состоять из двух частей: наименее значащий байт будет отделён от остальных байтов, которые будут храниться в отдельном атрибуте. Такое решение сохранит максимальную совместимость с текущей схемой, а также сохранит компактность class-файлов.&lt;/p&gt;
+    <updated>2022-03-20T18:00:00Z</updated>
+    <published>2022-03-20T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8283291"&gt;Extended Opcodes&lt;/a&gt;. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему нехватки опкодов, которых сейчас осталось всего 55 (из 256 возможных). Расширение опкодов не затронет существующие опкоды, и они так и останутся однобайтовыми, а новые расширенные опкоды будут состоять из двух частей: наименее значащий байт будет отделён от остальных байтов, которые будут храниться в отдельном атрибуте. Такое решение сохранит максимальную совместимость с текущей схемой, а также сохранит компактность class-файлов.&lt;/p&gt;
 
 &lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=GnNnQY5ujFg"&gt;Eclipse 2022-03&lt;/a&gt;. Перечислим некоторые нововведения и улучшения:&lt;/p&gt;
 &lt;ul&gt;
@@ -317,14 +317,14 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_35.html</id>
-    <updated>2022-03-13T17:00:00Z</updated>
-    <published>2022-03-13T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это &lt;a href="https://openjdk.java.net/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Также появился новый &lt;a href="https://openjdk.java.net/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Этот JEP является продолжением &lt;a href="https://openjdk.java.net/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt;, однако теперь API уже не будет инкубационным, а станет preview API в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
+    <updated>2022-03-13T18:00:00Z</updated>
+    <published>2022-03-13T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это &lt;a href="https://openjdk.org/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Также появился новый &lt;a href="https://openjdk.org/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Этот JEP является продолжением &lt;a href="https://openjdk.org/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt;, однако теперь API уже не будет инкубационным, а станет preview API в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&amp;bull; Появилось несколько черновиков JEP.&lt;/p&gt;
-&lt;p&gt;В &lt;a href="https://openjdk.java.net/jeps/8280836"&gt;Sequenced Collections&lt;/a&gt; предлагается ввести несколько новых интерфейсов коллекций (&lt;code&gt;SequencedCollection&lt;/code&gt;, &lt;code&gt;SequencedSet&lt;/code&gt;, &lt;code&gt;SequencedMap&lt;/code&gt;), в которых элементы будут иметь установленный порядок. Сейчас в стандартной библиотеке интерфейса с такой характеристикой нет, и в случае её надобности приходится прибегать либо к слишком общему интерфейсу &lt;code&gt;Collection&lt;/code&gt;, но тогда туда будут попадать неупорядоченные коллекции (например, &lt;code&gt;HashSet&lt;/code&gt;), либо к слишком частному &lt;code&gt;List&lt;/code&gt;, куда не смогут попасть, например, &lt;code&gt;ArrayDeque&lt;/code&gt; или &lt;code&gt;LinkedHashSet&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8280173"&gt;Vector API (Fourth Incubator)&lt;/a&gt; &amp;ndash; уже четвёртая итерация Vector API. Предыдущие три попали в Java &lt;a href="https://openjdk.java.net/jeps/338"&gt;16&lt;/a&gt;, &lt;a href="https://openjdk.java.net/jeps/414"&gt;17&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/417"&gt;18&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://openjdk.java.net/jeps/8281710"&gt;TLS Certificate Compression&lt;/a&gt; &amp;ndash; добавление поддержки &lt;a href="https://datatracker.ietf.org/doc/html/rfc8879"&gt;сжатых цепочек сертификатов TLS&lt;/a&gt;. Это позволит ускорить соединения TLS и QUIC из-за уменьшения количества байт, необходимых для передачи во время фазы рукопожатия. Также это может улучшить безопасноть благодаря снижению возможностей атак на основе амплификации. Сжатие TLS-сертификатов уже работает в Chrome и Safari.&lt;/p&gt;
+&lt;p&gt;В &lt;a href="https://openjdk.org/jeps/8280836"&gt;Sequenced Collections&lt;/a&gt; предлагается ввести несколько новых интерфейсов коллекций (&lt;code&gt;SequencedCollection&lt;/code&gt;, &lt;code&gt;SequencedSet&lt;/code&gt;, &lt;code&gt;SequencedMap&lt;/code&gt;), в которых элементы будут иметь установленный порядок. Сейчас в стандартной библиотеке интерфейса с такой характеристикой нет, и в случае её надобности приходится прибегать либо к слишком общему интерфейсу &lt;code&gt;Collection&lt;/code&gt;, но тогда туда будут попадать неупорядоченные коллекции (например, &lt;code&gt;HashSet&lt;/code&gt;), либо к слишком частному &lt;code&gt;List&lt;/code&gt;, куда не смогут попасть, например, &lt;code&gt;ArrayDeque&lt;/code&gt; или &lt;code&gt;LinkedHashSet&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/8280173"&gt;Vector API (Fourth Incubator)&lt;/a&gt; &amp;ndash; уже четвёртая итерация Vector API. Предыдущие три попали в Java &lt;a href="https://openjdk.org/jeps/338"&gt;16&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/414"&gt;17&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/417"&gt;18&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/8281710"&gt;TLS Certificate Compression&lt;/a&gt; &amp;ndash; добавление поддержки &lt;a href="https://datatracker.ietf.org/doc/html/rfc8879"&gt;сжатых цепочек сертификатов TLS&lt;/a&gt;. Это позволит ускорить соединения TLS и QUIC из-за уменьшения количества байт, необходимых для передачи во время фазы рукопожатия. Также это может улучшить безопасноть благодаря снижению возможностей атак на основе амплификации. Сжатие TLS-сертификатов уже работает в Chrome и Safari.&lt;/p&gt;
 &lt;p&gt;&amp;bull; Вышел &lt;a href="https://groovy-lang.org/releasenotes/groovy-4.0.html"&gt;Groovy 4.0&lt;/a&gt;. Среди новшеств языка выражения &lt;code&gt;switch&lt;/code&gt;, &lt;code&gt;sealed&lt;/code&gt; типы, встроенные проверки типов, встроенные макро-методы, инкубационные фичи (записи, JavaShell, аннотация POJO, контракты, GINQ) и другие.&lt;/p&gt;
 &lt;p&gt;&amp;bull; Вышла &lt;a href="https://netbeans.apache.org/download/nb13/index.html"&gt;Apache NetBeans 13&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&amp;bull; Вышла &lt;a href="https://www.infoq.com/news/2022/01/graalvm-22-native-image/"&gt;GraalVM 22.0&lt;/a&gt;.&lt;/p&gt;
@@ -338,9 +338,9 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_34.html</id>
-    <updated>2021-12-12T17:00:00Z</updated>
-    <published>2021-12-12T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Java 18 перешла в &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-December/006287.html"&gt;первую фазу Rampdown&lt;/a&gt;: главный репозиторий JDK был ответвлён в &lt;a href="https://github.com/openjdk/jdk18"&gt;стабилизационный репозиторий JDK 18&lt;/a&gt;, и новых JEP'ов в этом релизе больше не будет.&lt;/p&gt;
+    <updated>2021-12-12T18:00:00Z</updated>
+    <published>2021-12-12T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Java 18 перешла в &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-December/006287.html"&gt;первую фазу Rampdown&lt;/a&gt;: главный репозиторий JDK был ответвлён в &lt;a href="https://github.com/openjdk/jdk18"&gt;стабилизационный репозиторий JDK 18&lt;/a&gt;, и новых JEP'ов в этом релизе больше не будет.&lt;/p&gt;
 &lt;p&gt;Одновременно с этим началась &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8273146"&gt;разработка Java 19&lt;/a&gt;. У нового релиза появилась &lt;a href="https://jdk.java.net/19/"&gt;своя страница&lt;/a&gt;, где уже доступна для скачивания первая ранняя сборка JDK 19-ea+1.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; В популярной библиотеке логирования Apache Log4J 2.x обнаружили &lt;a href="https://www.lunasec.io/docs/blog/log4j-zero-day/"&gt;серьёзную уязвимость&lt;/a&gt;, позволяющую выполнить на уязвимом сервере произвольный код. Уязвимость может быть эксплуатирована, если Log4J используется для параметризированного логирования непроверенного текста, приходящего от пользователя, например:&lt;/p&gt;
@@ -372,13 +372,13 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_33.html</id>
-    <updated>2021-12-05T17:00:00Z</updated>
-    <published>2021-12-05T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Ещё один JEP предложен к Java 18: &lt;a href="https://openjdk.java.net/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;.&lt;/p&gt;
+    <updated>2021-12-05T18:00:00Z</updated>
+    <published>2021-12-05T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Ещё один JEP предложен к Java 18: &lt;a href="https://openjdk.org/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; В проекте Valhalla появился новый черновик JEP: &lt;a href="http://openjdk.java.net/jeps/8277163"&gt;Value Objects (Preview)&lt;/a&gt;. В нём предлагается ввести новый тип объектов в Java: value-объекты.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; В проекте Valhalla появился новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8277163"&gt;Value Objects (Preview)&lt;/a&gt;. В нём предлагается ввести новый тип объектов в Java: value-объекты.&lt;/p&gt;
 &lt;p&gt;Value-объекты отличаются от классических объектов тем, что не имеют identity. Это позволяет улучшить производительность при использовании таких объектов и уменьшить занимаемое ими место в памяти. Также value-объекты являются полностью иммутабельными, всегда являются &lt;code&gt;final&lt;/code&gt; и не могут иметь &lt;code&gt;synchronized&lt;/code&gt;-методов.&lt;/p&gt;
-&lt;p&gt;Однако, в отличие от примитивных объектов (&lt;a href="https://openjdk.java.net/jeps/401"&gt;JEP 401&lt;/a&gt;), которые также имеют все вышеописанные свойства, value-объекты являются ссылочными, поэтому являются nullable.&lt;/p&gt;
+&lt;p&gt;Однако, в отличие от примитивных объектов (&lt;a href="https://openjdk.org/jeps/401"&gt;JEP 401&lt;/a&gt;), которые также имеют все вышеописанные свойства, value-объекты являются ссылочными, поэтому являются nullable.&lt;/p&gt;
 &lt;p&gt;Таким образом, если в Valhalla всё будет реализовано согласно такой модели, то в Java будет три типа объектов: identity-объекты, value-объекты и примитивные объекты.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/11/intellij-idea-2021-3/"&gt;IntelliJ IDEA 2021.3&lt;/a&gt;. Перечислим некоторые заметные изменения и улучшения:&lt;/p&gt;
@@ -406,7 +406,7 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="http://www.h2database.com/html/changelog.html"&gt;вторая версия&lt;/a&gt; H2, популярной SQL СУБД, написанной полностью на Java. Это произошло спустя 16 лет после выхода первой версии.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.java.net/pipermail/jcstress-dev/2021-December/000965.html"&gt;JCStress 0.15&lt;/a&gt;.&lt;/p&gt;</content>
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jcstress-dev/2021-December/000965.html"&gt;JCStress 0.15&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Новости Java #32</title>
@@ -415,8 +415,8 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_32.html</id>
-    <updated>2021-11-21T17:00:00Z</updated>
-    <published>2021-11-21T17:00:00Z</published>
+    <updated>2021-11-21T18:00:00Z</updated>
+    <published>2021-11-21T18:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2021/11/kotlin-1-6-0-is-released/"&gt;Kotlin 1.6&lt;/a&gt;. Перечислим самые заметные изменения и улучшения:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Проверка исчерпываемости в &lt;code&gt;when&lt;/code&gt;-стейтментах: если &lt;code&gt;when&lt;/code&gt; не покрывает все возможные ветки (например, все подклассы sealed-класса), то компилятор выдаёт предупреждение. В Kotlin 1.7 такие предупреждения станут ошибкой.&lt;/li&gt;
@@ -430,11 +430,11 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
   &lt;li&gt;Функцию &lt;code&gt;compareTo()&lt;/code&gt; теперь можно вызывать через инфиксную нотацию (&lt;code&gt;x compareTo y&lt;/code&gt;).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Очередных два JEP'а предложены к JDK 18. Это &lt;a href="https://openjdk.java.net/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/420"&gt;JEP 420: Pattern Matching for switch (Second Preview)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Также появился новый &lt;a href="https://openjdk.java.net/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Очередных два JEP'а предложены к JDK 18. Это &lt;a href="https://openjdk.org/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/420"&gt;JEP 420: Pattern Matching for switch (Second Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Также появился новый &lt;a href="https://openjdk.org/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; В &lt;a href="https://wiki.openjdk.java.net/display/loom/Main"&gt;проекте Loom&lt;/a&gt; появились первые два черновика JEP.&lt;/p&gt;
-&lt;p&gt;Первый &amp;ndash; &lt;a href="http://openjdk.java.net/jeps/8277129"&gt;Structured Concurrency (Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Первый &amp;ndash; &lt;a href="https://openjdk.org/jeps/8277129"&gt;Structured Concurrency (Preview)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;В этом JEP'е предлагается добавить в Java новое API для структурного concurrency. Структурное concurrency &amp;ndash; это concurrency, которое заимствует принципы обычного (последовательного) структурного программирования и гарантирует следующее: когда поток выполнения разделяется на несколько потоков выполнения, то эти потоки воссоединяются в том же блоке кода. Все эти потоки логически сгруппированы и организованы в иерархию.&lt;/p&gt;
 &lt;p&gt;Рассмотрим простой пример кода, выполняющийся последовательно:&lt;/p&gt;
 &lt;pre&gt;String foo() &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException, InterruptedException {
@@ -462,7 +462,7 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p&gt;&lt;code&gt;StructuredExecutor&lt;/code&gt; в данном случае обеспечивает множество гарантий. Например, если одна из операций &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически (если ещё не завершена). Или если операция &lt;code&gt;foo()&lt;/code&gt; прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; отменяются. Всех этих гарантий не было бы, если бы использовались существующие реализации &lt;code&gt;ExecutorService&lt;/code&gt;. Чтобы эти гарантии обеспечить, пришлось бы для этого написать большое количество дополнительного кода.&lt;/p&gt;
 &lt;p&gt;Таким образом, новое API значительно облегчит написание чистого и корректного конкурентного кода с использованием структурного подхода.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;Второй JEP &amp;ndash; это &lt;a href="http://openjdk.java.net/jeps/8277131"&gt;Virtual Threads (Preview)&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;Второй JEP &amp;ndash; это &lt;a href="https://openjdk.org/jeps/8277131"&gt;Virtual Threads (Preview)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Виртуальные нити &amp;ndash; это новый вид нитей (т.е. новый подкласс &lt;code&gt;java.lang.Thread&lt;/code&gt;), которые, в отличие от нитей операционной системы, могут хорошо масштабироваться до миллионов экземпляров. При этом поведение таких нитей практически не отличается от обычных, а значит существующий конкурентный код можно будет смигрировать на виртуальные нити, не затрачивая больших усилий. Виртуальные нити являются пользовательской надстройкой и работают поверх нитей операционной системы, поэтому существуют только для JVM, но не для OS.&lt;/p&gt;
 &lt;p&gt;Отличительной особенностью виртуальных нитей является то, что при блокирующем вызове они приостанавливаются, позволяя нити-носителю продолжить выполнять другие задачи. Когда блокирующая операция завершается, виртуальная нить помещается в очередь планировщика и её выполнение возобновляется на той же или уже совсем другой нити-носителе.&lt;/p&gt;
 &lt;p&gt;Вместе с виртуальным нитями также вводится большое количество нового API:&lt;/p&gt;
@@ -488,16 +488,16 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
       <name>Евгений Козлов</name>
     </author>
     <id>https://minijug.ru/java_news_31.html</id>
-    <updated>2021-11-14T17:00:00Z</updated>
-    <published>2021-11-14T17:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Появилось &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-November/006199.html"&gt;расписание выхода JDK 18&lt;/a&gt;. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.&lt;/p&gt;
+    <updated>2021-11-14T18:00:00Z</updated>
+    <published>2021-11-14T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Появилось &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-November/006199.html"&gt;расписание выхода JDK 18&lt;/a&gt;. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="http://openjdk.java.net/jeps/421"&gt;JEP 421: Deprecate Finalization for Removal&lt;/a&gt;. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/421"&gt;JEP 421: Deprecate Finalization for Removal&lt;/a&gt;. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.&lt;/p&gt;
 &lt;p&gt;Финализация &amp;ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у &lt;code&gt;finalize()&lt;/code&gt; есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &amp;laquo;сломать&amp;raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать &lt;code&gt;super.finalize()&lt;/code&gt; в подклассе) и т.д. Это привело к тому, что в Java 9 метод &lt;a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--"&gt;Object.finalize()&lt;/a&gt; стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; В Java 18 был интегрирован &lt;a href="https://openjdk.java.net/jeps/418"&gt;JEP 418: Internet-Address Resolution SPI&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_24.html"&gt;выпуске #24&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; В Java 18 был интегрирован &lt;a href="https://openjdk.org/jeps/418"&gt;JEP 418: Internet-Address Resolution SPI&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_24.html"&gt;выпуске #24&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Появилось два новых черновика JEP: &lt;a href="http://openjdk.java.net/jeps/8276094"&gt;Region Pinning in G1&lt;/a&gt; и &lt;a href="http://openjdk.java.net/jeps/8276797"&gt;Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Появилось два новых черновика JEP: &lt;a href="https://openjdk.org/jeps/8276094"&gt;Region Pinning in G1&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/8276797"&gt;Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; JUG.ru выложил &lt;a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2"&gt;видео с JPoint 2021&lt;/a&gt;.&lt;/p&gt;
 

@@ -34,7 +34,7 @@
 <h3 id="title">В Java появятся легковесные нити и корутины</h3>
 <p class="text-secondary"><time datetime="2017-10-28">28 октября, 2017</time></p>
 <article>
-<p>Несколько часов назад Ron Pressler из Oracle <a href="http://mail.openjdk.java.net/pipermail/announce/2017-October/000238.html">анонсировал</a> новый проект Loom: <a href="http://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html">Fibers and Continuations for the Java Virtual Machine</a>.</p>
+<p>Несколько часов назад Ron Pressler из Oracle <a href="https://mail.openjdk.org/pipermail/announce/2017-October/000238.html">анонсировал</a> новый проект Loom: <a href="http://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html">Fibers and Continuations for the Java Virtual Machine</a>.</p>
 <p>Волокна (fibers) – это потоки, которые управляются на уровне виртуальной машины Java, в результате чего их можно сделать более легковесными и эффективными, чем потоки уровня операционной системы.</p>
 <p>Мотивация проекта объясняется тем, что нынешняю разработку concurrent приложений приходится вести в терминах потоков ОС, однако они плохо ложатся на логические единицы concurrency приложения и плохо масштабируются. В итоге, программисту приходится либо использовать потоки ОС и терять производительность, либо прибегать к другим не очень удобным абстракциям и терять простоту и читаемость кода. Волокна же являются простыми и естественными, но при этом очень дешёвыми. Например, одна виртуальная машина может запросто породить миллион волокон.</p>
 <p>Также в проекте будут реализованы корутины (continuations), так как они необходимы для реализации волокон, одна пока неясно, будут ли они доступны для пользователей через публичный API.</p>

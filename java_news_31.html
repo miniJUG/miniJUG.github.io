@@ -34,14 +34,14 @@
 <h3 id="title">Новости Java #31</h3>
 <p class="text-secondary"><time datetime="2021-11-15">15 ноября, 2021</time></p>
 <article>
-<p>&bull; Появилось <a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2021-November/006199.html">расписание выхода JDK 18</a>. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.</p>
+<p>&bull; Появилось <a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-November/006199.html">расписание выхода JDK 18</a>. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.</p>
 
-<p class="pt-2">&bull; Вышел новый <a href="http://openjdk.java.net/jeps/421">JEP 421: Deprecate Finalization for Removal</a>. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.</p>
+<p class="pt-2">&bull; Вышел новый <a href="https://openjdk.org/jeps/421">JEP 421: Deprecate Finalization for Removal</a>. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.</p>
 <p>Финализация &ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у <code class="text-nowrap">finalize()</code> есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &laquo;сломать&raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать <code class="text-nowrap">super.finalize()</code> в подклассе) и т.д. Это привело к тому, что в Java 9 метод <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--">Object.finalize()</a> стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.</p>
 
-<p class="pt-2">&bull; В Java 18 был интегрирован <a href="https://openjdk.java.net/jeps/418">JEP 418: Internet-Address Resolution SPI</a>. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</p>
+<p class="pt-2">&bull; В Java 18 был интегрирован <a href="https://openjdk.org/jeps/418">JEP 418: Internet-Address Resolution SPI</a>. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</p>
 
-<p class="pt-2">&bull; Появилось два новых черновика JEP: <a href="http://openjdk.java.net/jeps/8276094">Region Pinning in G1</a> и <a href="http://openjdk.java.net/jeps/8276797">Linux/RISC-V Port</a>.</p>
+<p class="pt-2">&bull; Появилось два новых черновика JEP: <a href="https://openjdk.org/jeps/8276094">Region Pinning in G1</a> и <a href="https://openjdk.org/jeps/8276797">Linux/RISC-V Port</a>.</p>
 
 <p class="pt-2">&bull; JUG.ru выложил <a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2">видео с JPoint 2021</a>.</p>
 

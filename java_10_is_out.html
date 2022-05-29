@@ -34,24 +34,24 @@
 <h3 id="title">Вышла Java 10</h3>
 <p class="text-secondary"><time datetime="2018-03-21">21 марта, 2018</time></p>
 <article>
-<p>Только что на сайте Oracle <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">стала доступна</a> для скачивания новая, десятая версия Java SE. Java 10 – это первая версия Java, вышедшая в соответствии с новым полугодовым релизным циклом, т.е. не через несколько лет после выхода Java 9, а всего через полгода. Это значит, что в Java 10 не так много изменений по сравнению с Java 9, чем в Java 9 по сравнению с Java 8 (<a href="http://openjdk.java.net/projects/jdk/10/">12 JEP'ов</a> в Java 10 против <a href="http://openjdk.java.net/projects/jdk9/">99</a> в Java 9).</p>
+<p>Только что на сайте Oracle <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">стала доступна</a> для скачивания новая, десятая версия Java SE. Java 10 – это первая версия Java, вышедшая в соответствии с новым полугодовым релизным циклом, т.е. не через несколько лет после выхода Java 9, а всего через полгода. Это значит, что в Java 10 не так много изменений по сравнению с Java 9, чем в Java 9 по сравнению с Java 8 (<a href="https://openjdk.org/projects/jdk/10/">12 JEP'ов</a> в Java 10 против <a href="https://openjdk.org/projects/jdk9/">99</a> в Java 9).</p>
 <p>Вот список главных изменений в Java 10:</p>
 <ul>
-  <li><a href="http://openjdk.java.net/jeps/286">JEP 286: Local-Variable Type Inference</a>. Теперь можно не писать тип локальных переменных, а вместо этого использовать ключевое слово <code class="text-nowrap">var</code>.</li>
-  <li><a href="http://openjdk.java.net/jeps/307">JEP 307: Parallel Full GC for G1</a>. G1, который стал сборщиком мусора по умолчанию начиная с Java 9, теперь поддерживает параллельную полную сборку мусора. До этого полная сборка мусора была однопоточной.</li>
-  <li><a href="http://openjdk.java.net/jeps/310">JEP 310: Application Class-Data Sharing</a>. Class-Data Sharing теперь поддерживает не только системные классы, но и классы приложения.</li>
-  <li><a href="http://openjdk.java.net/jeps/313">JEP 313: Remove the Native-Header Generation Tool</a>. Утилита <code class="text-nowrap">javah</code> для генерации нативных заголовков была удалена. Вместо неё нужно использовать javac.</li>
-  <li><a href="http://openjdk.java.net/jeps/317">JEP 317: Experimental Java-Based JIT Compiler</a>. Теперь в Java есть новый экспериментальный JIT-компилятор Graal, написанный полностью на Java. Graal использует интерфейс компилятора JVM (JVMCI), который появился в Java 9. Graal уже был включён в Java 9, но только на Linux. Теперь же он есть на всех платформах.</li>
-  <li><a href="http://openjdk.java.net/jeps/322">JEP 322: Time-Based Release Versioning</a>. Java 10 теперь будет использовать <a href="new_java_version_proposal.html">новую схему версионирования</a>, которая очень близка к предыдущей схеме, специфицированной в <a href="http://openjdk.java.net/jeps/223">JEP 223</a>, но с небольшими различиями, которые упрощают версионирование при новом релизном цикле.</li>
+  <li><a href="https://openjdk.org/jeps/286">JEP 286: Local-Variable Type Inference</a>. Теперь можно не писать тип локальных переменных, а вместо этого использовать ключевое слово <code class="text-nowrap">var</code>.</li>
+  <li><a href="https://openjdk.org/jeps/307">JEP 307: Parallel Full GC for G1</a>. G1, который стал сборщиком мусора по умолчанию начиная с Java 9, теперь поддерживает параллельную полную сборку мусора. До этого полная сборка мусора была однопоточной.</li>
+  <li><a href="https://openjdk.org/jeps/310">JEP 310: Application Class-Data Sharing</a>. Class-Data Sharing теперь поддерживает не только системные классы, но и классы приложения.</li>
+  <li><a href="https://openjdk.org/jeps/313">JEP 313: Remove the Native-Header Generation Tool</a>. Утилита <code class="text-nowrap">javah</code> для генерации нативных заголовков была удалена. Вместо неё нужно использовать javac.</li>
+  <li><a href="https://openjdk.org/jeps/317">JEP 317: Experimental Java-Based JIT Compiler</a>. Теперь в Java есть новый экспериментальный JIT-компилятор Graal, написанный полностью на Java. Graal использует интерфейс компилятора JVM (JVMCI), который появился в Java 9. Graal уже был включён в Java 9, но только на Linux. Теперь же он есть на всех платформах.</li>
+  <li><a href="https://openjdk.org/jeps/322">JEP 322: Time-Based Release Versioning</a>. Java 10 теперь будет использовать <a href="new_java_version_proposal.html">новую схему версионирования</a>, которая очень близка к предыдущей схеме, специфицированной в <a href="https://openjdk.org/jeps/223">JEP 223</a>, но с небольшими различиями, которые упрощают версионирование при новом релизном цикле.</li>
 </ul>
 <p>Также список JEP-ов, которые носят более технический характер:</p>
 <ul>
-  <li><a href="http://openjdk.java.net/jeps/296">JEP 296: Consolidate the JDK Forest into a Single Repository</a></li>
-  <li><a href="http://openjdk.java.net/jeps/304">JEP 304: Garbage Collector Interface</a></li>
-  <li><a href="http://openjdk.java.net/jeps/312">JEP 312: Thread-Local Handshakes</a></li>
-  <li><a href="http://openjdk.java.net/jeps/314">JEP 314: Additional Unicode Language-Tag Extensions</a></li>
-  <li><a href="http://openjdk.java.net/jeps/316">JEP 316: Heap Allocation on Alternative Memory Devices</a></li>
-  <li><a href="http://openjdk.java.net/jeps/319">JEP 319: Root Certificates</a></li>
+  <li><a href="https://openjdk.org/jeps/296">JEP 296: Consolidate the JDK Forest into a Single Repository</a></li>
+  <li><a href="https://openjdk.org/jeps/304">JEP 304: Garbage Collector Interface</a></li>
+  <li><a href="https://openjdk.org/jeps/312">JEP 312: Thread-Local Handshakes</a></li>
+  <li><a href="https://openjdk.org/jeps/314">JEP 314: Additional Unicode Language-Tag Extensions</a></li>
+  <li><a href="https://openjdk.org/jeps/316">JEP 316: Heap Allocation on Alternative Memory Devices</a></li>
+  <li><a href="https://openjdk.org/jeps/319">JEP 319: Root Certificates</a></li>
 </ul>
 <p>Список наиболее значимых изменений в API:</p>
 <ul>

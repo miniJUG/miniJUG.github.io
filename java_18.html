@@ -34,7 +34,7 @@
 <h3 id="title">Вышла Java 18</h3>
 <p class="text-secondary"><time datetime="2022-03-22">22 марта, 2022</time></p>
 <article>
-<p>Вышла общедоступная версия <a href="http://openjdk.java.net/projects/jdk/18/">Java 18</a>. В этот релиз попало более <a href="https://builds.shipilev.net/backports-monitor/release-notes-18.html">2000 закрытых задач и 9 JEP'ов</a>. Release Notes можно посмотреть <a href="http://jdk.java.net/18/release-notes">здесь</a>. Изменения API можно посмотреть по <a href="https://javaalmanac.io/jdk/18/apidiff/17/">этой ссылке</a>.</p>
+<p>Вышла общедоступная версия <a href="https://openjdk.org/projects/jdk/18/">Java 18</a>. В этот релиз попало более <a href="https://builds.shipilev.net/backports-monitor/release-notes-18.html">2000 закрытых задач и 9 JEP'ов</a>. Release Notes можно посмотреть <a href="http://jdk.java.net/18/release-notes">здесь</a>. Изменения API можно посмотреть по <a href="https://javaalmanac.io/jdk/18/apidiff/17/">этой ссылке</a>.</p>
 <!-- cut -->
 <p>Ссылки на скачивание:</p>
 <ul>
@@ -43,8 +43,8 @@
 </ul>
 
 <p>Перечислим JEP'ы, которые попали в Java 18.</p>
-<h5><a href="https://openjdk.java.net/jeps/420">Паттерн-матчинг для <code class="text-nowrap">switch</code> (Second Preview) (JEP 420)</a></h5>
-<p>Паттерн-матчинг для <code class="text-nowrap">switch</code>, который <a href="https://openjdk.java.net/jeps/406">появился в Java 17</a> в режиме preview, остаётся в этом статусе. В этом релизе присутствует два изменения по сравнению с предыдущей версией.</p>
+<h5><a href="https://openjdk.org/jeps/420">Паттерн-матчинг для <code class="text-nowrap">switch</code> (Second Preview) (JEP 420)</a></h5>
+<p>Паттерн-матчинг для <code class="text-nowrap">switch</code>, который <a href="https://openjdk.org/jeps/406">появился в Java 17</a> в режиме preview, остаётся в этом статусе. В этом релизе присутствует два изменения по сравнению с предыдущей версией.</p>
 <p>Первое изменение &ndash; константные паттерны теперь должны находиться выше, чем паттерны с условиями того же типа. Например, такой код успешно компилируется в Java 17:</p>
 <pre class="border p-lg-2 p-1"><span style="color: blue">switch</span> (value) {
     <span style="color: blue">case</span> Integer i && bar() -> {}
@@ -82,7 +82,7 @@
            ^</span></pre>
 <p>В Java 18 же такой код успешно компилируется.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/413">Сниппеты кода в документации Java API (JEP 413)</a></h5>
+<h5><a href="https://openjdk.org/jeps/413">Сниппеты кода в документации Java API (JEP 413)</a></h5>
 <p>В JavaDoc теперь поддерживается новый тег <code class="text-nowrap">@snippet</code>, который указывает на то, что данный участок является примером кода.</p>
 <p>Пример сниппета кода:</p>
 <pre class="border p-lg-2 p-1">/**
@@ -121,27 +121,27 @@
   <li>Сниппеты кода могут быть внешними и подтягивать код из внешних файлов. Чтобы иметь возможность не включать весь файл в JavaDoc, поддерживаются регионы с помощью тега <code class="text-nowrap">@region</code>. Внешние сниппеты хороши тем, что внешние файлы могут быть предварительно проверены на корректность (например, если файлы Java не будут компилироваться, то и не смогут быть включены в JavaDoc).</li>
 </ul>
 
-<h5><a href="https://openjdk.java.net/jeps/400">UTF-8 по умолчанию (JEP 400)</a></h5>
+<h5><a href="https://openjdk.org/jeps/400">UTF-8 по умолчанию (JEP 400)</a></h5>
 <p>UTF-8 теперь является кодировкой по умолчанию на всех платформах. Кодировка по умолчанию используется в таких API как <code class="text-nowrap">java.io</code> (<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/InputStreamReader.html"><code class="text-nowrap">InputStreamReader</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileReader.html"><code class="text-nowrap">FileReader</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/OutputStreamWriter.html"><code class="text-nowrap">OutputStreamWriter</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileWriter.html"><code class="text-nowrap">FileWriter</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html"><code class="text-nowrap">PrintStream</code></a>), <code class="text-nowrap">java.util</code> (<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Formatter.html"><code class="text-nowrap">Formatter</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Scanner.html"><code class="text-nowrap">Scanner</code></a>), <code class="text-nowrap">java.net</code> (<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLEncoder.html"><code class="text-nowrap">URLEncoder</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLDecoder.html"><code class="text-nowrap">URLDecoder</code></a>). Кодировка в пакете <code class="text-nowrap">java.nio.file</code> осталась неизменной: в нём самого начала UTF-8 было в качестве <code class="text-nowrap">Charset</code> по умолчанию.</p>
 <p>Если в Java 17 и более ранних версиях кодировка по умолчанию определялась при старте JVM и зависела от разных факторов (операционная система, пользовательская локаль, кодировка операционной системы), то с Java 18 она всегда UTF-8. Если нужно включить старый механизм установки кодировки при старте, то можно использовать опцию <code class="text-nowrap">-Dfile.encoding=COMPAT</code>. Кроме того, эту кодировку можно узнать, используя свойство <code class="text-nowrap">native.encoding</code>, которое <a href="https://bugs.openjdk.java.net/browse/JDK-8265989">появилось в Java 17</a>.</p>
 <p>Чтобы будущий переход на Java 18 был более гладким, рекомендуется стартовать свои приложения на Java 17 или более ранних версиях с опцией <code class="text-nowrap">-Dfile.encoding=UTF-8</code>.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/408">Простой веб-сервер (JEP 408)</a></h5>
+<h5><a href="https://openjdk.org/jeps/408">Простой веб-сервер (JEP 408)</a></h5>
 <p>Появилась новая утилита <code class="text-nowrap">jwebserver</code>, которая запускает простой веб-сервер, предоставляющий статический доступ к указанной папке с файлами. По умолчанию используется текущая директория (если не указана опция <code class="text-nowrap">-d</code>), а порт равен 8000 (если не указана опция <code class="text-nowrap">-p</code>).</p>
 <p>Веб-сервер поддерживает только HTTP/1.1, не поддерживает HTTPS и аутентификацию. Его рекомендуется использовать только для целей разработки и тестирования.</p>
 <p>Вместе с утилитой <code class="text-nowrap">jwebserver</code> также появилось новое API, позволяющее запускать веб-сервер программно. За это отвечают новые классы <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/SimpleFileServer.html"><code class="text-nowrap">SimpleFileServer</code></a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpHandlers.html"><code class="text-nowrap">HttpHandlers</code></a> и <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/Request.html"><code class="text-nowrap">Request</code></a> в пакете <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html"><code class="text-nowrap">com.sun.net.httpserver</code></a>.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/421">Deprecate Finalization for Removal (JEP 421)</a></h5>
+<h5><a href="https://openjdk.org/jeps/421">Deprecate Finalization for Removal (JEP 421)</a></h5>
 <p>Финализация объектов, которая <a href="https://bugs.openjdk.java.net/browse/JDK-8165641">стала deprecated в Java 9</a>, теперь стала deprecated for removal, то есть подлежит окончательному удалению.</p>
 <p>Начиная с Java 18, все методы, относящиеся к финализации, помечены аннотацией <code class="text-nowrap">@Deprecated(forRemoval=true)</code>. Это <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()"><code class="text-nowrap">Object.finalize()</code></a> и его наследники (часть из них удалены полностью), <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runtime.html#runFinalization()"><code class="text-nowrap">Runtime.runFinalization()</code></a> и <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/System.html#runFinalization()"><code class="text-nowrap">System.runFinalization()</code></a>.</p>
 <p>Сама финализация всё ещё работает, однако появилась новая опция <code class="text-nowrap">--finalization=disabled</code>, которая её отключает.</p>
 <p>В будущих версиях Java работа по дальнейшему отказу от финализации может быть продолжена. Сначала финализацию предлагается отключить по умолчанию с возможностью включения, потом отключить её полностью, и, наконец, удалить весь API финализации.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/416">Reimplement Core Reflection with Method Handles (JEP 416)</a></h5>
+<h5><a href="https://openjdk.org/jeps/416">Reimplement Core Reflection with Method Handles (JEP 416)</a></h5>
 <p>Механизм рефлексии в пакете <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/reflect/package-summary.html"><code class="text-nowrap">java.lang.reflect</code></a> теперь реализован поверх method handles в пакете <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/invoke/package-summary.html"><code class="text-nowrap">java.lang.invoke</code></a>. В Java 17 и раньше эти два механизма существовали независимо и имели разную внутреннюю реализацию. Такое дублирование усложняет поддержку платформы и внесение в неё новых языковых изменений.</p>
 <p>Для разработчика такое изменение не должно иметь видимых последствий (кроме небольших различий в производительности). Однако на всякий случай предоставлен ключ, позволяющий включить старую реализацию: <code class="text-nowrap">-Djdk.reflect.useDirectMethodHandle=false</code>. Старая реализация будет полностью удалена в одной из следующих версий Java.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/418">Internet-Address Resolution SPI (JEP 418)</a></h5>
+<h5><a href="https://openjdk.org/jeps/418">Internet-Address Resolution SPI (JEP 418)</a></h5>
 <p>Появилось новое SPI, позволяющее кастомизировать получение IP-адреса по имени хоста (и наоборот). По умолчанию <code class="text-nowrap">InetAddress</code> API делает нативный резолвинг, то есть делегированием операционной системе. Если нужен альтернативный механизм резолвинга, то теперь его можно предоставить путём реализации нового провайдера сервиса <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/spi/InetAddressResolverProvider.html"><code class="text-nowrap">InetAddressResolverProvider</code></a>.</p>
 <p>Примеры случаев, когда может понадобиться альтернативный резолвинг:</p>
 <ul>
@@ -151,12 +151,12 @@
   <li>Тестирование (подмена IP-адресов, моки).</li>
 </ul>
 
-<h5><a href="https://openjdk.java.net/jeps/419">Foreign Function & Memory API (Second Incubator) (JEP 419)</a></h5>
-<p>Foreign Function & Memory API, который <a href="https://openjdk.java.net/jeps/412">появился в Java 17</a> в инкубационном статусе, остаётся в этом статусе в модуле <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.foreign/module-summary.html"><code class="text-nowrap">jdk.incubator.foreign</code></a>.</p>
-<p>В Java 19 это API перестанет быть инкубационным и <a href="https://openjdk.java.net/jeps/424">станет preview API</a> в пакете <code class="text-nowrap">java.lang.foreign</code>.</p>
+<h5><a href="https://openjdk.org/jeps/419">Foreign Function & Memory API (Second Incubator) (JEP 419)</a></h5>
+<p>Foreign Function & Memory API, который <a href="https://openjdk.org/jeps/412">появился в Java 17</a> в инкубационном статусе, остаётся в этом статусе в модуле <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.foreign/module-summary.html"><code class="text-nowrap">jdk.incubator.foreign</code></a>.</p>
+<p>В Java 19 это API перестанет быть инкубационным и <a href="https://openjdk.org/jeps/424">станет preview API</a> в пакете <code class="text-nowrap">java.lang.foreign</code>.</p>
 
-<h5><a href="https://openjdk.java.net/jeps/417">Vector API (Third Incubator) (JEP 417)</a></h5>
-<p>Векторное API, которое появилось в <a href="https://openjdk.java.net/jeps/338">Java 16</a> в инкубационном статусе, осталось в инкубационном статусе в <a href="https://openjdk.java.net/jeps/414">Java 17</a>, продолжает находиться в этом статусе в модуле <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>.</p>
+<h5><a href="https://openjdk.org/jeps/417">Vector API (Third Incubator) (JEP 417)</a></h5>
+<p>Векторное API, которое появилось в <a href="https://openjdk.org/jeps/338">Java 16</a> в инкубационном статусе, осталось в инкубационном статусе в <a href="https://openjdk.org/jeps/414">Java 17</a>, продолжает находиться в этом статусе в модуле <a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>.</p>
 
 <p class="pt-3">Java 18 не является LTS-релизом и будет получать обновления только в течение полугода (до сентября 2022).</p>
 </article>

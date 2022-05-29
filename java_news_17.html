@@ -36,7 +36,7 @@
 <article>
 <p>&bull; Самая главная новость этой недели &ndash; выход <a href="https://blog.jetbrains.com/kotlin/2021/05/kotlin-1-5-0-released/">Kotlin 1.5.0</a>. Перечислим некоторые изменения и улучшения:</p>
 <ul>
-  <li>Появилась поддержка <a href="https://openjdk.java.net/jeps/395">JVM-записей</a> с помощью аннотации <code class="text-nowrap">@JvmRecord</code>.</li>
+  <li>Появилась поддержка <a href="https://openjdk.org/jeps/395">JVM-записей</a> с помощью аннотации <code class="text-nowrap">@JvmRecord</code>.</li>
   <li>Модификатор <code class="text-nowrap">sealed</code> теперь можно применять не только классам, но и к интерфейсам.</li>
   <li>Подклассы <code class="text-nowrap">sealed</code> классов теперь не обязаны объявляться в том же файле, а могут объявляться в любых файлах того же пакета.</li>
   <li><a href="https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md"><code class="text-nowrap">inline value</code> классы</a>, которые появились в экспериментальном режиме в Kotlin 1.2.30, теперь стали стабильными.</li>
@@ -51,11 +51,11 @@
 
 <p class="pt-2">&bull; В Java <a href="https://bugs.openjdk.java.net/browse/JDK-8266431">предложено</a> улучшить алгоритм сортировки чисел. Тесты показывают, что прирост производительности составляет 50% в среднем и до 6 раз на больших случайных массивах. Огромный прирост в последнем случае достигается засчёт использования поразрядной сортировки.</p>
 
-<p class="pt-2">&bull; В рассылке OpenJDK было предложено сделать <a href="https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-May/001518.html"><code class="text-nowrap">java.lang.Object</code> абстрактным классом</a>. Это бы сделало согласованной модель, в которой примитивные классы могут наследоваться только от абстрактных классов без полей, но сломало бы обратную совместимость на уровне исходного кода. Но запретить вызывать <code class="text-nowrap">new Object()</code> можно поэтапно, сначала показывая предупреждение, а спустя несколько лет переквалифицировать в ошибку компиляции.</p>
+<p class="pt-2">&bull; В рассылке OpenJDK было предложено сделать <a href="https://mail.openjdk.org/pipermail/valhalla-spec-experts/2021-May/001518.html"><code class="text-nowrap">java.lang.Object</code> абстрактным классом</a>. Это бы сделало согласованной модель, в которой примитивные классы могут наследоваться только от абстрактных классов без полей, но сломало бы обратную совместимость на уровне исходного кода. Но запретить вызывать <code class="text-nowrap">new Object()</code> можно поэтапно, сначала показывая предупреждение, а спустя несколько лет переквалифицировать в ошибку компиляции.</p>
 
 <p class="pt-2">&bull; Вышел бэкпорт-релиз <a href="https://docs.gradle.org/6.9/release-notes.html">Gradle 6.9</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.java.net/pipermail/jmh-dev/2021-May/003237.html">JMH 1.30</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jmh-dev/2021-May/003237.html">JMH 1.30</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
