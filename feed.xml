@@ -4,7 +4,36 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-05-15T18:00:00Z</updated>
+  <updated>2022-05-29T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #40</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_40.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_40.html</id>
+    <updated>2022-05-29T18:00:00Z</updated>
+    <published>2022-05-29T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java18"&gt;JDK 18.0.1.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java17"&gt;JDK 17.0.3.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java11"&gt;JDK 11.0.15.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java8"&gt;JDK 8u333&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Такое внеплановое обновление пришлось выпустить из-за &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8285468?jql=project%20%3D%20JDK%20AND%20fixVersion%20%3D%2018.0.1.1"&gt;нескольких критических багов&lt;/a&gt; в OpenJDK.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Ещё один JEP предложен к JDK 19. Это &lt;a href="https://openjdk.java.net/jeps/428"&gt;JEP 428: Structured Concurrency (Incubator)&lt;/a&gt;. Это седьмой и, вероятно, последний JEP, который попадёт в этот релиз, поскольку до первой фазы Rampdown остаётся &lt;a href="http://openjdk.java.net/projects/jdk/19/"&gt;меньше двух недель&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Марк Рейнолд &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2022-May/006110.html"&gt;заявил&lt;/a&gt; о начале работы над проектом Leyden. У проекта появилась &lt;a href="https://openjdk.java.net/projects/leyden/"&gt;своя страница&lt;/a&gt; на сайте OpenJDK и &lt;a href="https://mail.openjdk.java.net/mailman/listinfo/leyden-dev"&gt;почтовая рассылка&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Напомним, что целью проекта Leyden является решение проблемы медленного старта JVM и большого размера образа. Призыв к обсуждению проекта был ещё &lt;a href="https://mail.openjdk.java.net/pipermail/discuss/2020-April/005429.html"&gt;в апреле 2020 года&lt;/a&gt;, а голосование по нему завершилось &lt;a href="https://mail.openjdk.java.net/pipermail/announce/2020-June/000290.html"&gt;в июне того же года&lt;/a&gt;. Тогда предлагалось, что упомянутые проблемы будут решаться через концепцию статического образа &amp;ndash; автономной программы, которая выполняет целевое приложение и ничего больше.&lt;/p&gt;
+&lt;p&gt;В текущем предложении подход будет &lt;a href="https://openjdk.java.net/projects/leyden/notes/01-beginnings"&gt;несколько иным&lt;/a&gt;: движение к "закрытому миру" будет постепенным и инкрементальным. Полностью статические образы будут самой конечной целью, а в промежутке в JDK будут внедряться улучшения, которые разработчики смогут начать использовать раньше.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; JetBrains планирует полностью поменять интерфейс IntelliJ IDEA и других своих IDE. Как &lt;a href="https://blog.jetbrains.com/idea/2022/05/take-part-in-the-new-ui-preview-for-your-jetbrains-ide/"&gt;утверждается&lt;/a&gt; в блоге JetBrains, "тренды графического интерфейса эволюционировали, и многие из наших пользователей говорят нам, что текущий интерфейс кажется тяжеловесным и устаревшим". Поэтому в компании было принято решение разработать абсолютно новый look-and-feel, который будет чистым, современным и мощным.&lt;/p&gt;
+&lt;p&gt;Новый графический интерфейс будет внедряться постепенно. Сначала ограниченный круг пользователей сможет принять участие в &lt;a href="https://www.jetbrains.com/lp/intellij-new-ui-preview/"&gt;программе раннего доступа&lt;/a&gt;, где сможет попробовать новый интерфейс и поделиться обратной связью с командой JetBrains. Позже в этом году новый интерфейс станет общедоступным, а в следующем году он станет интерфейсом по умолчанию, сначала для новых пользователей, а потом для всех остальных. После этого старый интерфейс будет всё ещё доступен как минимум в течение года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2022/05/19/spring-boot-2-7-0-available-now"&gt;Spring Boot 2.7.0&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #39</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_39.html" />
@@ -480,31 +509,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p&gt;В целом виртуальные нити должны значительно облегчить написание конкурентных программ, избавя от необходимости прибегать к асинхронным API во многих случаях.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/11/19/spring-boot-2-6-is-now-available"&gt;Spring Boot 2.6&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #31</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_31.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_31.html</id>
-    <updated>2021-11-14T18:00:00Z</updated>
-    <published>2021-11-14T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Появилось &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-November/006199.html"&gt;расписание выхода JDK 18&lt;/a&gt;. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/421"&gt;JEP 421: Deprecate Finalization for Removal&lt;/a&gt;. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.&lt;/p&gt;
-&lt;p&gt;Финализация &amp;ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у &lt;code&gt;finalize()&lt;/code&gt; есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &amp;laquo;сломать&amp;raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать &lt;code&gt;super.finalize()&lt;/code&gt; в подклассе) и т.д. Это привело к тому, что в Java 9 метод &lt;a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--"&gt;Object.finalize()&lt;/a&gt; стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В Java 18 был интегрирован &lt;a href="https://openjdk.org/jeps/418"&gt;JEP 418: Internet-Address Resolution SPI&lt;/a&gt;. Про него мы писали в &lt;a href="java_news_24.html"&gt;выпуске #24&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Появилось два новых черновика JEP: &lt;a href="https://openjdk.org/jeps/8276094"&gt;Region Pinning in G1&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/8276797"&gt;Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JUG.ru выложил &lt;a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2"&gt;видео с JPoint 2021&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JetBrains выпустил &lt;a href="https://blog.jetbrains.com/idea/2021/11/java-annotated-monthly-november-2021/"&gt;Java Annotated Monthly за ноябрь 2021&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.3/release-notes.html"&gt;Gradle 7.3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0"&gt;StreamEx 0.8.0&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
