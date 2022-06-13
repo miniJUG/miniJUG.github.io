@@ -4,7 +4,38 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-05-29T18:00:00Z</updated>
+  <updated>2022-06-12T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #41</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_41.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_41.html</id>
+    <updated>2022-06-12T18:00:00Z</updated>
+    <published>2022-06-12T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; JDK 19 перешёл в &lt;a href="https://mail.openjdk.java.net/pipermail/jdk-dev/2022-June/006735.html"&gt;первую фазу Rampdown&lt;/a&gt;. Список JEP'ов &lt;a href="http://openjdk.java.net/projects/jdk/19/"&gt;заморожен&lt;/a&gt;, а исходный код ответвлён в &lt;a href="https://github.com/openjdk/jdk19"&gt;стабилизационный репозиторий&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Примечательно, что из всех семи JEP'ов Java 19 только один будет иметь стабильный характер (&lt;a href="https://openjdk.java.net/jeps/422"&gt;Linux/RISC-V Port&lt;/a&gt;). Все остальные будут иметь статус Preview, либо Incubator.&lt;/p&gt;
+&lt;p&gt;Тем временем, уже &lt;a href="https://github.com/openjdk/jdk/pull/8236"&gt;началась&lt;/a&gt; разработка Java 20. У нового релиза появилась &lt;a href="https://jdk.java.net/20/"&gt;своя страница&lt;/a&gt;, где можно скачать первую сборку JDK 20-ea+1.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В Java 19 попал интересный &lt;a href="https://github.com/openjdk/jdk/pull/3402"&gt;патч&lt;/a&gt;, который исправляет &lt;a href="https://bugs.openjdk.org/browse/JDK-4511638"&gt;баг 20-летней давности&lt;/a&gt;. Баг этот заключается в том, что метод &lt;code&gt;Double.toString()&lt;/code&gt; иногда возвращает некорректный результат, например:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; jshell
+&lt;span style="color: grey"&gt;|  Welcome to JShell -- Version 18.0.1.1
+|  For an introduction type: /help intro&lt;/span&gt;
+
+jshell&amp;gt; Double.toString(1e23)
+$1 ==&gt; "9.999999999999999E22"&lt;/pre&gt;
+&lt;p&gt;В Java 19 это исправлено:&lt;/p&gt;
+&lt;pre&gt;&amp;gt; jshell
+&lt;span style="color: grey"&gt;|  Welcome to JShell -- Version 19-ea
+|  For an introduction type: /help intro&lt;/span&gt;
+
+jshell&amp;gt; Double.toString(1e23)
+$1 ==&gt; "1.0E23"&lt;/pre&gt;
+&lt;p&gt;Помимо возвращения корректного результата новая реализация также значительно быстрее (в 17.7 раз по &lt;a href="https://mail.openjdk.java.net/pipermail/core-libs-dev/2020-April/065921.html"&gt;замерам автора&lt;/a&gt;), поскольку не выделяет промежуточных объектов, не содержит циклов и использует только целочисленную арифметику.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В блоге IntelliJ IDEA вышел новый выпуск &lt;a href="https://blog.jetbrains.com/idea/2022/06/java-annotated-monthly-june-2022/"&gt;Java Annotated Monthly&lt;/a&gt; за июнь.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #40</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_40.html" />
@@ -436,78 +467,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="http://www.h2database.com/html/changelog.html"&gt;вторая версия&lt;/a&gt; H2, популярной SQL СУБД, написанной полностью на Java. Это произошло спустя 16 лет после выхода первой версии.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jcstress-dev/2021-December/000965.html"&gt;JCStress 0.15&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #32</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_32.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_32.html</id>
-    <updated>2021-11-21T18:00:00Z</updated>
-    <published>2021-11-21T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2021/11/kotlin-1-6-0-is-released/"&gt;Kotlin 1.6&lt;/a&gt;. Перечислим самые заметные изменения и улучшения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Проверка исчерпываемости в &lt;code&gt;when&lt;/code&gt;-стейтментах: если &lt;code&gt;when&lt;/code&gt; не покрывает все возможные ветки (например, все подклассы sealed-класса), то компилятор выдаёт предупреждение. В Kotlin 1.7 такие предупреждения станут ошибкой.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;suspend&lt;/code&gt; функциональные типы теперь могут быть суперинтерфейсами (т.е. можно писать, например, &lt;code&gt;class MyClickAction : suspend () -&gt; Unit)&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Автоматические конверсии из обычных функциональных типов к соответствующим &lt;code&gt;suspend&lt;/code&gt; функциональным типам.&lt;/li&gt;
-  &lt;li&gt;Улучшенный вывод типов для рекурсивных generic типов.&lt;/li&gt;
-  &lt;li&gt;Возможность разработки, используя три предыдущих версии API (т.е. 1.3, 1.4 и 1.5 для 1.6). Раньше поддерживалось только две предыдущих версии API.&lt;/li&gt;
-  &lt;li&gt;Поддержка повторяющихся аннотаций с удержанием в рантайме.
-  &lt;li&gt;Появились две новые функции: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html"&gt;&lt;code&gt;readln()&lt;/code&gt;&lt;/a&gt;, которая возвращает non-nullable String, и &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln-or-null.html"&gt;&lt;code&gt;readlnOrNull()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;API стали стабильными: &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/type-of.html"&gt;&lt;code&gt;typeOf()&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/"&gt;&lt;code&gt;Duration&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration-unit/"&gt;&lt;code&gt;DurationUnit&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html"&gt;билдеры коллекций&lt;/a&gt;, &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/split-to-sequence.html"&gt;&lt;code&gt;splitToSequence()&lt;/code&gt;&lt;/a&gt; с Regex, операции &lt;a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/rotate-right.html"&gt;битового поворота&lt;/a&gt; чисел.&lt;/li&gt;
-  &lt;li&gt;Функцию &lt;code&gt;compareTo()&lt;/code&gt; теперь можно вызывать через инфиксную нотацию (&lt;code&gt;x compareTo y&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Очередных два JEP'а предложены к JDK 18. Это &lt;a href="https://openjdk.org/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/420"&gt;JEP 420: Pattern Matching for switch (Second Preview)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Также появился новый &lt;a href="https://openjdk.org/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В &lt;a href="https://wiki.openjdk.java.net/display/loom/Main"&gt;проекте Loom&lt;/a&gt; появились первые два черновика JEP.&lt;/p&gt;
-&lt;p&gt;Первый &amp;ndash; &lt;a href="https://openjdk.org/jeps/8277129"&gt;Structured Concurrency (Preview)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;В этом JEP'е предлагается добавить в Java новое API для структурного concurrency. Структурное concurrency &amp;ndash; это concurrency, которое заимствует принципы обычного (последовательного) структурного программирования и гарантирует следующее: когда поток выполнения разделяется на несколько потоков выполнения, то эти потоки воссоединяются в том же блоке кода. Все эти потоки логически сгруппированы и организованы в иерархию.&lt;/p&gt;
-&lt;p&gt;Рассмотрим простой пример кода, выполняющийся последовательно:&lt;/p&gt;
-&lt;pre&gt;String foo() &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException, InterruptedException {
-    &lt;span style="color: blue"&gt;int&lt;/span&gt; bar = bar(); &lt;span style="color: green"&gt;// throws IOException, InterruptedException&lt;/span&gt;
-    String baz = baz(); &lt;span style="color: green"&gt;// то же самое&lt;/span&gt;
-    &lt;span style="color: blue"&gt;return&lt;/span&gt; baz + bar;
-}&lt;/pre&gt;
-&lt;p&gt;В этом коде нет ничего сверхестественного, и он чрезвычайно прост и надёжен. Но если необходимо выполнить операции &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; параллельно, то трансформировать этот код с сохранением всех структурных гарантий, используя существующие средства Java, будет не так уж и просто.&lt;/p&gt;
-&lt;p&gt;Новый предложенный класс &lt;code&gt;StructuredExecutor&lt;/code&gt; призван, чтобы решить эту проблему. С его использованием аналогичный распараллеленный код будет выглядеть следующим образом:&lt;/p&gt;
-&lt;pre&gt;String foo() &lt;span style="color: blue"&gt;throws&lt;/span&gt; IOException, InterruptedException {
-    &lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; s = StructuredExecutor.open()) {
-        &lt;span style="color: blue"&gt;var&lt;/span&gt; handler = &lt;span style="color: blue"&gt;new&lt;/span&gt; StructuredExecutor.ShutdownOnFailure();
-        Future&amp;lt;Integer&amp;gt; bar = s.fork(() -&gt; bar(), handler);
-        Future&amp;lt;String&amp;gt; baz = s.fork(() -&gt; baz(), handler);
-
-        s.join();
-        handler.throwIfFailed();
-
-        &lt;span style="color: blue"&gt;return&lt;/span&gt; baz.resultNow() + bar.resultNow();
-    } &lt;span style="color: blue"&gt;catch&lt;/span&gt; (ExecutionException e) {
-        &lt;span style="color: blue"&gt;if&lt;/span&gt; (e.getCause() &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; IOException ioe) throw ioe;
-        &lt;span style="color: blue"&gt;throw new&lt;/span&gt; RuntimeException(e);
-   }
-}&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;StructuredExecutor&lt;/code&gt; в данном случае обеспечивает множество гарантий. Например, если одна из операций &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически (если ещё не завершена). Или если операция &lt;code&gt;foo()&lt;/code&gt; прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;bar()&lt;/code&gt; и &lt;code&gt;baz()&lt;/code&gt; отменяются. Всех этих гарантий не было бы, если бы использовались существующие реализации &lt;code&gt;ExecutorService&lt;/code&gt;. Чтобы эти гарантии обеспечить, пришлось бы для этого написать большое количество дополнительного кода.&lt;/p&gt;
-&lt;p&gt;Таким образом, новое API значительно облегчит написание чистого и корректного конкурентного кода с использованием структурного подхода.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;Второй JEP &amp;ndash; это &lt;a href="https://openjdk.org/jeps/8277131"&gt;Virtual Threads (Preview)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Виртуальные нити &amp;ndash; это новый вид нитей (т.е. новый подкласс &lt;code&gt;java.lang.Thread&lt;/code&gt;), которые, в отличие от нитей операционной системы, могут хорошо масштабироваться до миллионов экземпляров. При этом поведение таких нитей практически не отличается от обычных, а значит существующий конкурентный код можно будет смигрировать на виртуальные нити, не затрачивая больших усилий. Виртуальные нити являются пользовательской надстройкой и работают поверх нитей операционной системы, поэтому существуют только для JVM, но не для OS.&lt;/p&gt;
-&lt;p&gt;Отличительной особенностью виртуальных нитей является то, что при блокирующем вызове они приостанавливаются, позволяя нити-носителю продолжить выполнять другие задачи. Когда блокирующая операция завершается, виртуальная нить помещается в очередь планировщика и её выполнение возобновляется на той же или уже совсем другой нити-носителе.&lt;/p&gt;
-&lt;p&gt;Вместе с виртуальным нитями также вводится большое количество нового API:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;Thread.Builder&lt;/code&gt; &amp;ndash; билдер нитей. Например, виртуальную нить можно создать путём вызова &lt;code&gt;Thread.ofVirtual().name("name").unstarted(runnable)&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Thread.startVirtualThread(Runnable)&lt;/code&gt; &amp;ndash; удобный метод, позволяющий создать и сразу же запустить виртуальную нить.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Thread.isVirtual()&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Thread.join(Duration)&lt;/code&gt; и &lt;code&gt;Thread.sleep(Duration)&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Executors.newVirtualThreadExecutor()&lt;/code&gt; и &lt;code&gt;Executors.newThreadPerTaskExecutor()&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Future.join()&lt;/code&gt;, &lt;code&gt;Future.state()&lt;/code&gt; и &lt;code&gt;Future.isCompletedNormally()&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;ExecutorService&lt;/code&gt; теперь является AutoCloseable.&lt;/li&gt;
-  &lt;li&gt;И другие.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Для виртуальных нитей также добавляется поддержка в дебаггере, JVM TI и Java Flight Recorder.&lt;/p&gt;
-&lt;p&gt;В целом виртуальные нити должны значительно облегчить написание конкурентных программ, избавя от необходимости прибегать к асинхронным API во многих случаях.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2021/11/19/spring-boot-2-6-is-now-available"&gt;Spring Boot 2.6&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
