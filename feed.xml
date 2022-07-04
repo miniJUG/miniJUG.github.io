@@ -4,7 +4,41 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-06-12T18:00:00Z</updated>
+  <updated>2022-07-03T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #42</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_42.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_42.html</id>
+    <updated>2022-07-03T18:00:00Z</updated>
+    <published>2022-07-03T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик &lt;a href="https://openjdk.org/jeps/8280389"&gt;JEP: Classfile API&lt;/a&gt;. Цель этого JEP &amp;ndash; создать API для парсинга, генерации и трансформации class-файлов.&lt;/p&gt;
+&lt;p&gt;В данный момент наиболее распространена библиотека для работы с байткодом ASM, форк которой используется, в том числе, в самой JDK. Основная проблема с ASM заключается в том, что она всегда отстаёт на один релиз от JDK. Когда выходит новая версия JDK, последняя версия ASM поддерживает только предпоследнюю версию байткода. Из-за этого инструменты и библиотеки, которые корректно работали на предпоследней версии байткода, могут неожиданно ломаться, когда сталкиваются с новыми class-файлами. Раньше это не было большой проблемой, так как релизы Java выходили раз в 3-5 лет. С переходом на &lt;a href="java_18_3.html"&gt;новую частоту&lt;/a&gt; релизов это стало создавать неприятности как для пользователей, так и для разработчиков библиотек.&lt;/p&gt;
+&lt;p&gt;Решение этой проблемы очевидное: библиотека для работы с class-файлами должна быть частью JDK. Тогда пользователи такого classfile API не будут иметь проблем с только что вышедшей новой версией Java, поскольку поддержка новой версии байткода будет идти сразу "из коробки".&lt;/p&gt;
+&lt;p&gt;Новое API будет учитывать и ряд других проблем ASM. Например, ASM имеет старую кодовую базу с большим количеством багажа, доставшегося по наследству от первых версий. Также в ASM используется подход, основанный на Visitor. Было бы глупо в 2022-м году использовать этот же шаблон при наличии современных языковых конструкций: лямбд, записей и паттерн-матчинга.&lt;/p&gt;
+&lt;p&gt;Планируется, что API сначала заменит ASM внутри самой JDK, а позже станет частью публичного API.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=zDJtVYAJwyY"&gt;Eclipse 2022-06&lt;/a&gt;. Перечислим самые заметные нововведения и улучшения в среде разработки:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Поддержка Java 18.&lt;/li&gt;
+  &lt;li&gt;Улучшена производительность автодополнения в редакторе.&lt;/li&gt;
+  &lt;li&gt;Несколько новых &lt;i&gt;Quick Fix&lt;/i&gt; и &lt;i&gt;Cleanup Action&lt;/i&gt; для Java.&lt;/li&gt;
+  &lt;li&gt;Улучшена производительность печати в консоль.&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;Find Actions&lt;/i&gt; (&lt;code&gt;Ctrl+3&lt;/code&gt;) теперь может искать файлы.&lt;/li&gt;
+  &lt;li&gt;Несколько новых команд, связанных с режимом multi-selection.&lt;/li&gt;
+  &lt;li&gt;Кодировка по умолчанию для workspace теперь UTF-8.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/apache/netbeans/releases/tag/14"&gt;Apache NetBeans 14&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2022/06/kotlin-1-7-0-released/"&gt;Kotlin 1.7.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0"&gt;GWT 2.10.0&lt;/a&gt;. Это первое обновление библиотеки спустя два года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2022/06/14/orm-61-final/"&gt;Hibernate 6.1&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #41</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_41.html" />
@@ -424,48 +458,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
   &lt;li&gt;Улучшение времени старта IDE&lt;/li&gt;
   &lt;li&gt;Улучшения в EGit и JS-редакторе&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #33</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_33.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_33.html</id>
-    <updated>2021-12-05T18:00:00Z</updated>
-    <published>2021-12-05T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Ещё один JEP предложен к Java 18: &lt;a href="https://openjdk.org/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В проекте Valhalla появился новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8277163"&gt;Value Objects (Preview)&lt;/a&gt;. В нём предлагается ввести новый тип объектов в Java: value-объекты.&lt;/p&gt;
-&lt;p&gt;Value-объекты отличаются от классических объектов тем, что не имеют identity. Это позволяет улучшить производительность при использовании таких объектов и уменьшить занимаемое ими место в памяти. Также value-объекты являются полностью иммутабельными, всегда являются &lt;code&gt;final&lt;/code&gt; и не могут иметь &lt;code&gt;synchronized&lt;/code&gt;-методов.&lt;/p&gt;
-&lt;p&gt;Однако, в отличие от примитивных объектов (&lt;a href="https://openjdk.org/jeps/401"&gt;JEP 401&lt;/a&gt;), которые также имеют все вышеописанные свойства, value-объекты являются ссылочными, поэтому являются nullable.&lt;/p&gt;
-&lt;p&gt;Таким образом, если в Valhalla всё будет реализовано согласно такой модели, то в Java будет три типа объектов: identity-объекты, value-объекты и примитивные объекты.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2021/11/intellij-idea-2021-3/"&gt;IntelliJ IDEA 2021.3&lt;/a&gt;. Перечислим некоторые заметные изменения и улучшения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;В Ultimate версии появилась возможность &lt;a href="https://blog.jetbrains.com/blog/2021/11/29/introducing-remote-development-for-jetbrains-ides/"&gt;удалённой разработки&lt;/a&gt;. Развернув бэкенд IDEA на удалённом сервере, к нему можно подключиться и работать из любой точки мира. Функция пока работает в Beta-режиме.&lt;/li&gt;
-  &lt;li&gt;Новая функция &lt;i&gt;Repair IDE&lt;/i&gt; позволяет быстро диагностировать и устранять наиболее распространённые неполадки.&lt;/li&gt;
-  &lt;li&gt;Возможность изменить шрифт во всех вкладках одновременно с помощью &lt;code&gt;Ctrl&lt;/code&gt; и колеса мыши.&lt;/li&gt;
-  &lt;li&gt;Улучшенный предпросмотр результатов &lt;a href="https://www.jetbrains.com/help/idea/intention-actions.html"&gt;intention-действий&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Возможность разделения окна &lt;i&gt;Run&lt;/i&gt; на несколько вкладок.&lt;/li&gt;
-  &lt;li&gt;Поиск действий в &lt;i&gt;Search Everywhere&lt;/i&gt; теперь тоже использует машинное обучение (ранее в IDEA 2020.3 машинное обучение было введено для Code Completion).&lt;/li&gt;
-  &lt;li&gt;Новые инспекции в Java: отслеживание небезопасных строк (SQL-инъекция, XSS, конфиденциальные данные и т.п.), замена &lt;code&gt;collect(toList())&lt;/code&gt; на &lt;code&gt;toList()&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;При выполнении рефакторинга &lt;i&gt;Introduce Local Variable&lt;/i&gt; теперь не всплывает окно с настройками, а появляется значок шестерёнки. А при выполнении рефакторинга &lt;i&gt;Introduct Parameter&lt;/i&gt; среда теперь спрашивает, где нужно заменить вхождения, и тоже показывает значок шестерёнки.&lt;/li&gt;
-  &lt;li&gt;В &lt;i&gt;Run/Debug Configurations&lt;/i&gt; теперь можно настраивать classpath, вручную добавляя туда отдельные записи или исключая ненужные.&lt;/li&gt;
-  &lt;li&gt;Множество новых улучшений в Kotlin: действие &lt;i&gt;Smart Step Into&lt;/i&gt; в отладчике, &lt;code&gt;inline&lt;/code&gt;-функции в стек-трейсе, рефакторинг &lt;i&gt;Extract Constant&lt;/i&gt;, улучшенная инспекция &lt;i&gt;Possibly blocking call in non-blocking context&lt;/i&gt;, подсказки для диапазонов, улучшенный мастер создания проектов.&lt;/li&gt;
-  &lt;li&gt;Async Profiler 2.0 теперь доступен в Windows-версии IntelliJ IDEA Ultimate из коробки.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Компания JetBrains анонсировала свою новую среду разработки &lt;a href="https://blog.jetbrains.com/ru/blog/2021/11/29/welcome-to-fleet/"&gt;Fleet&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Fleet &amp;ndash; это созданная с нуля среда разработки, которая представляет собой легковесный редактор с базовыми возможностями, но с возможностью включения smart-режима, при котором она превращается в полнофункциональную IDE. В отличие от классических IDE JetBrains, каждая из которых создана для одной конкретной технологии, Fleet поддерживает разные технологии в рамках одного приложения (на текущий момент есть поддержка Java, Kotlin, Python, Go, JavaScript, Rust, TypeScript, JSON). Fleet имеет &lt;a href="https://www.jetbrains.com/help/fleet/1.0/architecture-overview.html"&gt;распределённую архитектуру&lt;/a&gt;, в которой фронтенд отделён от бэкенда, что позволяет использовать среду не только локально, но и в распределённых сценариях: удалённая, облачная, совместая разработка и т.д.&lt;/p&gt;
-&lt;p&gt;В данный момент Fleet недоступен широкому кругу пользователей, и работает программа Fleet Preview, в которой, однако, &lt;a href="https://twitter.com/JetBrains_Fleet/status/1466705214761840643"&gt;закончился приём заявок &lt;/a&gt; из-за большого наплыва желающих протестировать новую IDE.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2021/12/java-annotated-monthly-december-2021/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за декабрь 2021.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://maven.apache.org/docs/3.8.4/release-notes.html"&gt;Apache Maven 3.8.4&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="http://www.h2database.com/html/changelog.html"&gt;вторая версия&lt;/a&gt; H2, популярной SQL СУБД, написанной полностью на Java. Это произошло спустя 16 лет после выхода первой версии.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jcstress-dev/2021-December/000965.html"&gt;JCStress 0.15&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
