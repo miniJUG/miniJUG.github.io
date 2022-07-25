@@ -27,7 +27,7 @@
 
 &lt;p class="pt-2"&gt;&amp;bull; В Visual Studio Code появилась &lt;a href="https://devblogs.microsoft.com/java/java-on-visual-studio-code-update-july-2022/"&gt;поддержка Lombok&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/07/java-annotated-monthly-july-2022/"&gt;Java Annotated Montly&lt;/a&gt; от JetBrains за июль.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/07/java-annotated-monthly-july-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за июль.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;Возвращаем рубрику &amp;laquo;Полезняшки&amp;raquo;:&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://maven.apache.org/wrapper/"&gt;Maven Wrapper&lt;/a&gt;. Надоело держать зоопарк Maven'ов для своих проектов? Хорошая новость: скачивать Maven теперь вообще не нужно. Просто запускаете один раз &lt;code&gt;mvn wrapper:wrapper&lt;/code&gt; на проекте и дальше вместо &lt;code&gt;mvn command&lt;/code&gt; просто вызываете &lt;code&gt;mvnw command&lt;/code&gt;. Maven Wrapper сам скачает и запустит нужную версию Maven.&lt;/p&gt;
