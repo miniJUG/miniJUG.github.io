@@ -4,7 +4,58 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-07-24T18:00:00Z</updated>
+  <updated>2022-08-28T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #44</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_44.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_44.html</id>
+    <updated>2022-08-28T18:00:00Z</updated>
+    <published>2022-08-28T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/18-0-2-relnotes.html#R18_0_2_1"&gt;JDK 18.0.2.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-4-relnotes.html#R17_0_4_1"&gt;JDK 17.0.4.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2022-August/016645.html"&gt;JDK 11.0.16.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2022-August/015329.html"&gt;JDK 8u345&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;18.0.2.1, 17.0.4.1, 11.0.6.1 &amp;ndash; вынужденные обновления, которые пришлось выпустить из-за &lt;a href="https://bugs.openjdk.org/browse/JDK-8292260"&gt;критической регрессии&lt;/a&gt; в JIT-компиляторе C2, вызывающей креш JVM.&lt;/p&gt;
+&lt;p&gt;8u345 пришлось выпустить из-за другого &lt;a href="https://bugs.openjdk.org/browse/JDK-8290832"&gt;критического бага&lt;/a&gt; в 8u342.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел первый &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-August/006861.html"&gt;релиз-кандидат Java 19&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/429"&gt;JEP 429: Extent-Local Variables (Incubator)&lt;/a&gt;. В нём предлагается ввести новый класс &lt;a href="https://download.java.net/java/early_access/loom/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/ExtentLocal.html"&gt;&lt;code&gt;ExtentLocal&lt;/code&gt;&lt;/a&gt; в качестве альтернативы существующему классу &lt;code&gt;ThreadLocal&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Классы &lt;code&gt;ThreadLocal&lt;/code&gt; и &lt;code&gt;ExtentLocal&lt;/code&gt; похожи тем, что решают одну и ту же задачу: передать значение переменной в рамках одной нити (или дерева нитей) из одного места в другое без использования явного параметра. В случае &lt;code&gt;ThreadLocal&lt;/code&gt; для этого вызывается метод &lt;code&gt;set()&lt;/code&gt;, который кладёт значение переменной для данной нити, а потом метод &lt;code&gt;get()&lt;/code&gt; вызывается из другого места для получения значения переменной. У данного подхода есть ряд проблем, например, неконтролируемая мутабельность (&lt;code&gt;set()&lt;/code&gt; можно вызвать когда угодно и откуда угодно), неограниченное время жизни (переменная очистится, только когда исполнение всей нити завершится или когда будет вызван remove(), но про него часто забывают), высокая цена наследования (дочерние нити всегда вынуждены делать полную копию переменной, даже если родительская нить никогда не будет её изменять).&lt;/p&gt;
+&lt;p&gt;В отличие от &lt;code&gt;ThreadLocal&lt;/code&gt;, &lt;code&gt;ExtentLocal&lt;/code&gt; не имеет метода &lt;code&gt;set()&lt;/code&gt;. Однажды ассоциированное с объектом &lt;code&gt;ExtentLocal&lt;/code&gt; значение остаётся иммутабельным. Для этого используется метод &lt;code&gt;where()&lt;/code&gt;. Кроме того, значение ассоциируется на ограниченный срок, который определяется длительностью метода &lt;code&gt;run()&lt;/code&gt;. Как только исполнение метода &lt;code&gt;run()&lt;/code&gt; заканчивается, значение отвязывается от объекта &lt;code&gt;ExtentLocal&lt;/code&gt;. Поскольку значение не меняется, решается и проблема дорогого наследования: дочерним нитям не надо копировать значение, которое остаётся постоянным в течение периода жизни.
+&lt;p&gt;Пример использования &lt;code&gt;ExtentLocal&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;private static final&lt;/span&gt; ExtentLocal&amp;lt;Credentials&amp;gt; CREDENTIALS =
+    ExtentLocal.newInstance();
+
+Credentials creds = ...
+ExtentLocal.where(CREDENTIALS, creds).run(() -&gt; {
+   ...
+   Connection connection = connectDatabase();
+   ...
+});
+
+Connection connectDatabase() {
+   Credentials credentials = CREDENTIALS.get();
+   ...
+}
+&lt;/pre&gt;
+&lt;p&gt;Во многих случаях &lt;code&gt;ExtentLocal&lt;/code&gt; будет являться предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;. Однако когда иммутабельный подход неприменим для решения задачи, &lt;code&gt;ThreadLocal&lt;/code&gt; может остаться предпочтительным.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.slf4j.org/news.html"&gt;SLF4J 2.0&lt;/a&gt;. Это первое мажорное обновление фасада логирования спустя 17 лет после выхода первой версии. Новая версия теперь требует Java 8 и содержит новый &lt;a href="https://www.slf4j.org/manual.html#fluent"&gt;Fluent Logging API&lt;/a&gt;. Кроме того, SLF4J API теперь использует механизм &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html"&gt;&lt;code&gt;ServiceLoader&lt;/code&gt;&lt;/a&gt; для нахождения соответствующего логирующего провайдера. SLF4J 2.0 полностью обратно совместим с SLF4J 1.x, т.е. весь существующий код, использующий SLF4J API, не требует перекомпиляции. Однако при обновлении до второй версии потребуется соответствующее обновление бэкенда, иначе SLF4J API не сможет найти бэкенд и выдаст предупреждение.&lt;/p&gt;
+&lt;p&gt;Вместе с выходом второй версии SLF4J вышли &lt;a href="https://logback.qos.ch/news.html"&gt;Logback 1.3.0 и 1.4.0&lt;/a&gt;, которые поддерживают SLF4J 2.0. Различие между 1.3.0 и 1.4.0 состоит в том, Logback 1.4.0 требует Java 11 и использует пространство имён Jakarta EE (&lt;code&gt;jakarta.*&lt;/code&gt;), в то время как Logback 1.3.0 работает на Java 8 и использует Java EE (&lt;code&gt;javax.*&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://www.jetbrains.com/idea/whatsnew/"&gt;IntelliJ IDEA 2022.2&lt;/a&gt;. Теперь среда разработки использует JetBrains Runtime 17 вместо 11.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/08/java-annotated-monthly-august-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за август.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://medium.com/helidon/helidon-3-0-is-released-1bd2df1f999b"&gt;Helidon 3.0&lt;/a&gt;. Теперь фреймворк требует Java 17 и поддерживает спецификации MicroProfile 5.0 и Jakarta EE 9.1.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #43</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_43.html" />
@@ -432,26 +483,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.4/release-notes.html"&gt;Gradle 7.4&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/lists/birt-dev/msg11552.html"&gt;BIRT 4.9.0&lt;/a&gt;. Это первый релиз фреймворка спустя 4 года после выхода версии 4.8.0.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #35</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_35.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_35.html</id>
-    <updated>2022-03-13T18:00:00Z</updated>
-    <published>2022-03-13T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; У JDK 19 появился первый JEP, который предложен к выходу в этом релизе. Это &lt;a href="https://openjdk.org/jeps/422"&gt;JEP 422: Linux/RISC-V Port&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Также появился новый &lt;a href="https://openjdk.org/jeps/424"&gt;JEP 424: Foreign Function &amp; Memory API (Preview)&lt;/a&gt;. Этот JEP является продолжением &lt;a href="https://openjdk.org/jeps/419"&gt;JEP 419: Foreign Function &amp; Memory API (Second Incubator)&lt;/a&gt;, однако теперь API уже не будет инкубационным, а станет preview API в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Появилось несколько черновиков JEP.&lt;/p&gt;
-&lt;p&gt;В &lt;a href="https://openjdk.org/jeps/8280836"&gt;Sequenced Collections&lt;/a&gt; предлагается ввести несколько новых интерфейсов коллекций (&lt;code&gt;SequencedCollection&lt;/code&gt;, &lt;code&gt;SequencedSet&lt;/code&gt;, &lt;code&gt;SequencedMap&lt;/code&gt;), в которых элементы будут иметь установленный порядок. Сейчас в стандартной библиотеке интерфейса с такой характеристикой нет, и в случае её надобности приходится прибегать либо к слишком общему интерфейсу &lt;code&gt;Collection&lt;/code&gt;, но тогда туда будут попадать неупорядоченные коллекции (например, &lt;code&gt;HashSet&lt;/code&gt;), либо к слишком частному &lt;code&gt;List&lt;/code&gt;, куда не смогут попасть, например, &lt;code&gt;ArrayDeque&lt;/code&gt; или &lt;code&gt;LinkedHashSet&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://openjdk.org/jeps/8280173"&gt;Vector API (Fourth Incubator)&lt;/a&gt; &amp;ndash; уже четвёртая итерация Vector API. Предыдущие три попали в Java &lt;a href="https://openjdk.org/jeps/338"&gt;16&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/414"&gt;17&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/417"&gt;18&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://openjdk.org/jeps/8281710"&gt;TLS Certificate Compression&lt;/a&gt; &amp;ndash; добавление поддержки &lt;a href="https://datatracker.ietf.org/doc/html/rfc8879"&gt;сжатых цепочек сертификатов TLS&lt;/a&gt;. Это позволит ускорить соединения TLS и QUIC из-за уменьшения количества байт, необходимых для передачи во время фазы рукопожатия. Также это может улучшить безопасноть благодаря снижению возможностей атак на основе амплификации. Сжатие TLS-сертификатов уже работает в Chrome и Safari.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Вышел &lt;a href="https://groovy-lang.org/releasenotes/groovy-4.0.html"&gt;Groovy 4.0&lt;/a&gt;. Среди новшеств языка выражения &lt;code&gt;switch&lt;/code&gt;, &lt;code&gt;sealed&lt;/code&gt; типы, встроенные проверки типов, встроенные макро-методы, инкубационные фичи (записи, JavaShell, аннотация POJO, контракты, GINQ) и другие.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Вышла &lt;a href="https://netbeans.apache.org/download/nb13/index.html"&gt;Apache NetBeans 13&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Вышла &lt;a href="https://www.infoq.com/news/2022/01/graalvm-22-native-image/"&gt;GraalVM 22.0&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Вышла &lt;a href="https://www.infoq.com/news/2022/02/eclipse-collections-11-0-0/"&gt;Eclipse Collections 11.0.0&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&amp;bull; Вышла &lt;a href="https://github.com/google/guava/releases/tag/v31.1"&gt;Guava 31.1&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
