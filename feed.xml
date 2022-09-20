@@ -4,7 +4,168 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-08-28T18:00:00Z</updated>
+  <updated>2022-09-19T18:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 19</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_19.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_19.html</id>
+    <updated>2022-09-19T18:00:00Z</updated>
+    <published>2022-09-19T18:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/19/"&gt;Java 19&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-19.html"&gt;двух тысяч закрытых задач и 7 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/19/release-notes"&gt;здесь&lt;/a&gt;. Изменения API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/19/apidiff/18/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/19/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Вот список JEP'ов, которые попали в Java 19.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/427"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Third Preview) (JEP 427)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="https://openjdk.org/jeps/406"&gt;появился в Java 17&lt;/a&gt; в режиме preview и остался на &lt;a href="https://openjdk.org/jeps/420"&gt;второе preview в Java 18&lt;/a&gt;, всё ещё остаётся в этом статусе. Это первый случай в Java, когда языковой конструкции не хватило двух релизов, чтобы стать стабильной: ранее все конструкции укладывались в два preview.&lt;/p&gt;
+&lt;p&gt;В этом релизе в паттерн-матчинг было внесено два главных изменения.&lt;/p&gt;
+
+&lt;p&gt;Во-первых, охранные паттерны &lt;code&gt;&amp;&amp;&lt;/code&gt; были заменены на условия &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 18:&lt;/span&gt;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &amp;&amp; x &gt; 0 -&gt; ...;
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 -&gt; ...;
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
+}&lt;/pre&gt;
+
+&lt;p&gt;О мотивации такого изменения можно прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html"&gt;в рассылке проекта Amber&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;Во-вторых, было изменено поведение матчинга &lt;code&gt;null&lt;/code&gt;. Теперь &lt;code&gt;null&lt;/code&gt; матчится только в ветке &lt;code&gt;case null&lt;/code&gt; и большие ни в каких других, включая тотальных:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 18:&lt;/span&gt;
+Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: green"&gt;// matches because total pattern&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
+Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
+Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case null&lt;/span&gt; -&gt; ...; &lt;span style="color: green"&gt;// OK&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: red"&gt;&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;p&gt;Про причины такого изменения можно также прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html"&gt;в рассылке&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/405"&gt;Паттерны записей (Preview) (JEP 405)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Паттерн-матчинг дополнился новым видом паттерна: паттерн записей.&lt;/p&gt;
+&lt;p&gt;Раньше для паттерн-матчинга записей был доступен только паттерн по типу с дальнейшим ручным извлечением компонентов:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; printSum(Object o) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point p) {
+        &lt;span style="color: blue"&gt;int&lt;/span&gt; x = p.x();
+        &lt;span style="color: blue"&gt;int&lt;/span&gt; y = p.y();
+        System.out.println(x + y);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;С паттернами записей код становится существенно компактнее:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printSum(Object o) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y)) {
+        System.out.println(x + y);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Паттерны записей могут быть вложенными:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+&lt;span style="color: blue"&gt;enum&lt;/span&gt; Color { RED, GREEN, BLUE }
+&lt;span style="color: blue"&gt;record&lt;/span&gt; ColoredPoint(Point p, Color c) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; printCoordinatesAndColor(ColoredPoint cp) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (cp &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; ColoredPoint(Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y), &lt;span style="color: blue"&gt;var&lt;/span&gt; c)) {
+        System.out.println(&lt;span style="color: darkred"&gt;"x = "&lt;/span&gt; + x);
+        System.out.println(&lt;span style="color: darkred"&gt;"y = "&lt;/span&gt; + y);
+        System.out.println(&lt;span style="color: darkred"&gt;"color = "&lt;/span&gt; + c);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Также паттерны записей могут быть именованными:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printObject(Object obj) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) p) {
+        System.out.println(&lt;span style="color: darkred"&gt;"point = "&lt;/span&gt; + p);
+        System.out.println(&lt;span style="color: darkred"&gt;"x = "&lt;/span&gt; + x);
+        System.out.println(&lt;span style="color: darkred"&gt;"y = "&lt;/span&gt; + y);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Кроме того, паттерны записей хорошо сочетаются со &lt;code&gt;switch&lt;/code&gt; из предыдущего JEP'а:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printObject(Object obj) {
+    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 &amp;&amp; y &gt; 0 -&gt;
+            System.out.println(&lt;span style="color: darkred"&gt;"Positive point: x = "&lt;/span&gt; + x + &lt;span style="color: darkred"&gt;", y = "&lt;/span&gt; + y);
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) -&gt;
+            System.out.println(&lt;span style="color: darkred"&gt;"Point: x = "&lt;/span&gt; + x + &lt;span style="color: darkred"&gt;", y = "&lt;/span&gt; + y);
+        &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Other"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/425"&gt;Virtual Threads (Preview) (JEP 425)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В Java появились виртуальные потоки в режиме preview.&lt;/p&gt;
+&lt;p&gt;Виртуальные потоки, в отличие от потоков операционной системы, являются легковесными и могут создаваться в огромном количестве (миллионы экземпляров). Это свойство должно значительно облегчить написание конкурентных программ, поскольку позволит применять простой подход "один запрос &amp;ndash; один поток" и не прибегать к более сложному асинхронному программированию. При этом миграция на виртуальные потоки уже существующего кода должна быть максимально простой, потому что виртуальные потоки являются экземплярами существующего класса &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html"&gt;&lt;code&gt;java.lang.Thread&lt;/code&gt;&lt;/a&gt;, а значит, большую часть существующего кода не придётся переписывать.&lt;/p&gt;
+&lt;p&gt;Виртуальные потоки реализованы поверх обычных потоков и существуют только для JVM, но не для операционной системы (отсюда и название "виртуальные"). Поток, на котором в данный момент работает виртуальный поток, называется потоком-носителем. Если потоки платформы полагаются на планировщик операционной системы, то планировщиком для виртуальных потоков является &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/ForkJoinPool.html"&gt;&lt;code&gt;ForkJoinPool&lt;/code&gt;&lt;/a&gt;. Когда виртуальный поток блокируется на некоторой блокирующей операции, то он размонтируется от своего потока-носителя, что позволяет потоку-носителю примонтировать другой виртуальный поток и продолжить работу. Такой режим работы и малый размер виртуальных потоков позволяет им очень хорошо масштабироваться. Однако на данный момент есть два исключения: &lt;code&gt;synchronized&lt;/code&gt; блоки и JNI. При их выполнении виртуальный поток не может быть размонтирован, поскольку он привязан к своему потоку-носителю. Такое ограничение может препятствовать масштабированию. Поэтому при желании максимально использовать потенциал виртуальных потоков рекомендуется избегать &lt;code&gt;synchronized&lt;/code&gt; блоки и операции JNI, которые выполняются часто или занимают длительное время.&lt;/p&gt;
+&lt;p&gt;Для создания виртуальных потоков и работы с ними появилось следующее API:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.Builder.html"&gt;&lt;code&gt;Thread.Builder&lt;/code&gt;&lt;/a&gt; &amp;ndash; билдер потоков. Например, виртуальный поток можно создать путём вызова &lt;code&gt;Thread.ofVirtual().name("name").unstarted(runnable)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html#startVirtualThread(java.lang.Runnable)"&gt;&lt;code&gt;Thread.startVirtualThread(Runnable)&lt;/code&gt;&lt;/a&gt; &amp;ndash; создаёт и сразу же запускает виртуальный поток.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html#isVirtual()"&gt;&lt;code&gt;Thread.isVirtual()&lt;/code&gt;&lt;/a&gt; &amp;ndash; проверяет, является ли поток виртуальным.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/Executors.html#newVirtualThreadPerTaskExecutor()"&gt;&lt;code&gt;Executors.newVirtualThreadPerTaskExecutor()&lt;/code&gt;&lt;/a&gt; &amp;ndash; возвращает исполнитель, который создаёт новый виртуальный поток на каждую задачу.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Для виртуальных потоков также добавилась поддержка в дебаггере, JVM TI и Java Flight Recorder.&lt;/p&gt;
+&lt;p&gt;Виртуальные потоки разрабатываются &lt;a href="https://mail.openjdk.org/pipermail/announce/2017-October/000238.html"&gt;с 2017 года&lt;/a&gt; в рамках проекта &lt;a href="https://openjdk.org/projects/loom/"&gt;Loom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/428"&gt;Structured Concurrency (Incubator) (JEP 428)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Ещё одним результатом работы над проектом Loom стало добавление в Java нового API для Structured Concurrency.&lt;/p&gt;
+&lt;p&gt;Structured Concurrency &amp;ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.&lt;/p&gt;
+&lt;p&gt;В центре нового API класс &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/StructuredTaskScope.html"&gt;&lt;code&gt;StructuredTaskScope&lt;/code&gt;&lt;/a&gt;. Пример использования &lt;code&gt;StructuredTaskScope&lt;/code&gt;, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; scope = &lt;span style="color: blue"&gt;new&lt;/span&gt; StructuredTaskScope.ShutdownOnFailure()) {
+    Future&amp;lt;String&gt; user = scope.fork(() -&gt; findUser());
+    Future&amp;lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+
+    scope.join();           &lt;span style="color: green"&gt;// Join both forks&lt;/span&gt;
+    scope.throwIfFailed();  &lt;span style="color: green"&gt;// ... and propagate errors&lt;/span&gt;
+
+    &lt;span style="color: blue"&gt;return new&lt;/span&gt; Response(user.resultNow(), order.resultNow());
+}&lt;/pre&gt;
+
+&lt;p&gt;Может показаться, что в точности аналогичный код можно было бы написать с использованием &lt;code&gt;ExecutorService&lt;/code&gt; и &lt;code&gt;submit()&lt;/code&gt;, но у &lt;code&gt;StructuredTaskScope&lt;/code&gt; есть несколько принципиальных отличий, которые делают код безопаснее:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Время жизни всех потоков подзадач ограничено областью видимости блока &lt;code&gt;try-with-resources&lt;/code&gt;. Метод &lt;code&gt;close()&lt;/code&gt; гарантированно не завершится, пока не завершатся все подзадачи.&lt;/li&gt;
+  &lt;li&gt;Если одна из операций &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае политики &lt;code&gt;ShutdownOnFailure&lt;/code&gt;, возможны другие).&lt;/li&gt;
+  &lt;li&gt;Если главный поток прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; отменяются.&lt;/li&gt;
+  &lt;li&gt;В дампе потоков будет видна иерархия: потоки, выполняющие &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt;, будут отображаться как дочерние для главного потока.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Новое API должно облегчить написание многопоточных программ благодаря знакомому структурному подходу. Пока API имеет инкубационный статус, оно будет находиться в модуле &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.concurrent/module-summary.html"&gt;&lt;code&gt;jdk.incubator.concurrent&lt;/code&gt;&lt;/a&gt; и одноимённом пакете.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/424"&gt;Foreign Function &amp; Memory API (Preview) (JEP 424)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Foreign Function &amp; Memory API, которое было в инкубационном статусе &lt;a href="https://openjdk.org/jeps/412"&gt;в Java 17&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/419"&gt;Java 18&lt;/a&gt;, теперь стало Preview API. Оно находится в пакете &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/foreign/package-summary.html"&gt;&lt;code&gt;java.lang.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/426"&gt;Vector API (Fourth Incubator) (JEP 426)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API, которое уже было в инкубационном статусе три релиза (&lt;a href="https://openjdk.org/jeps/338"&gt;Java 16&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/414"&gt;Java 17&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/417"&gt;Java 18&lt;/a&gt;), продолжает в нём находиться. Пока API не выйдет из инкубационного статуса, оно будет находиться в модуле &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/422"&gt;Linux/RISC-V Port (JEP 422)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;JDK теперь официально портирован под архитектуру Linux/RISC-V.&lt;/p&gt;
+
+&lt;h5 class="pt-2"&gt;Заключение&lt;/h5&gt;
+&lt;p class="pt-3"&gt;Java 19 не является LTS-релизом и будет получать обновления от Oracle только в течение полугода (до марта 2023 года). Однако Azul обещает выпускать обновления Zulu как минимум &lt;a href="https://www.azul.com/products/azul-support-roadmap/"&gt;до марта 2025 года&lt;/a&gt; (2.5 года).&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #44</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_44.html" />
@@ -261,13 +422,13 @@ $1 ==&gt; "1.0E23"&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел черновик &lt;a href="https://openjdk.org/jeps/8282272"&gt;JEP Pattern matching for switch (Third Preview)&lt;/a&gt;. Это значит, что паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.&lt;/p&gt;
 &lt;p&gt;В этой итерации предлагается внести два изменения относительно предыдущей.&lt;/p&gt;
 &lt;p&gt;Во-первых, заменить охранные паттерны на условия &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Java 18:&lt;/span&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 18:&lt;/span&gt;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &amp;&amp; x &gt; 0 -&gt; ...;
     &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
 }
 
-&lt;span style="color: green"&gt;// Java 19:&lt;/span&gt;
+&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 -&gt; ...;
     &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
@@ -453,35 +614,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.org/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, осталось в инкубационном статусе в &lt;a href="https://openjdk.org/jeps/414"&gt;Java 17&lt;/a&gt;, продолжает находиться в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-3"&gt;Java 18 не является LTS-релизом и будет получать обновления только в течение полугода (до сентября 2022).&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #36</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_36.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_36.html</id>
-    <updated>2022-03-20T18:00:00Z</updated>
-    <published>2022-03-20T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8283291"&gt;Extended Opcodes&lt;/a&gt;. В нём предлагается расширить пространство возможных опкодов в class-файле, убрав ограничение на длину опкода в 1 байт. Это позволит решить проблему нехватки опкодов, которых сейчас осталось всего 55 (из 256 возможных). Расширение опкодов не затронет существующие опкоды, и они так и останутся однобайтовыми, а новые расширенные опкоды будут состоять из двух частей: наименее значащий байт будет отделён от остальных байтов, которые будут храниться в отдельном атрибуте. Такое решение сохранит максимальную совместимость с текущей схемой, а также сохранит компактность class-файлов.&lt;/p&gt;
-
-&lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=GnNnQY5ujFg"&gt;Eclipse 2022-03&lt;/a&gt;. Перечислим некоторые нововведения и улучшения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Новый quick assist, позволяющий быстро добавлять статический импорт в список Favorites.&lt;/li&gt;
-  &lt;li&gt;Новый quick assist "Extract lambda body to method".&lt;/li&gt;
-  &lt;li&gt;Теперь можно ставить брейкпоинт на вхождение в лямбду или выход из лямбды.&lt;/li&gt;
-  &lt;li&gt;Возможность переходить в место объявления поля из списка переменных в дебаггере.&lt;/li&gt;
-  &lt;li&gt;При изменении final поля в дебаггере теперь выдаётся предупреждение.&lt;/li&gt;
-  &lt;li&gt;В дебаггере теперь отображается PID процесса (в Debug View, а также в консоли).&lt;/li&gt;
-  &lt;li&gt;6 новых настроек форматирования Java-кода.&lt;/li&gt;
-  &lt;li&gt;Улучшения в Maven и Git.&lt;/li&gt;
-  &lt;li&gt;Возможность открывать большие файлы в редакторах, отличных от дефолтных.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&amp;bull; Вышла статья &lt;a href="https://tschatzl.github.io/2022/03/14/jdk18-g1-parallel-gc-changes.html"&gt;"JDK 18 G1/Parallel/Serial GC changes"&lt;/a&gt;, где рассказано, какие улучшения в сборщиках мусора произошли в Java 18.&lt;/p&gt;
-
-&lt;p&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/7.4/release-notes.html"&gt;Gradle 7.4&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&amp;bull; Вышел &lt;a href="https://www.eclipse.org/lists/birt-dev/msg11552.html"&gt;BIRT 4.9.0&lt;/a&gt;. Это первый релиз фреймворка спустя 4 года после выхода версии 4.8.0.&lt;/p&gt;</content>
   </entry>
 </feed>

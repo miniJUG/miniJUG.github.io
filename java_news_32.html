@@ -59,7 +59,7 @@
     String baz = baz(); <span style="color: green">// то же самое</span>
     <span style="color: blue">return</span> baz + bar;
 }</pre>
-<p>В этом коде нет ничего сверхестественного, и он чрезвычайно прост и надёжен. Но если необходимо выполнить операции <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> параллельно, то трансформировать этот код с сохранением всех структурных гарантий, используя существующие средства Java, будет не так уж и просто.</p>
+<p>В этом коде нет ничего сверхъестественного, и он чрезвычайно прост и надёжен. Но если необходимо выполнить операции <code class="text-nowrap">bar()</code> и <code class="text-nowrap">baz()</code> параллельно, то трансформировать этот код с сохранением всех структурных гарантий, используя существующие средства Java, будет не так уж и просто.</p>
 <p>Новый предложенный класс <code class="text-nowrap">StructuredExecutor</code> призван, чтобы решить эту проблему. С его использованием аналогичный распараллеленный код будет выглядеть следующим образом:</p>
 <pre class="border p-lg-2 p-1">String foo() <span style="color: blue">throws</span> IOException, InterruptedException {
     <span style="color: blue">try</span> (<span style="color: blue">var</span> s = StructuredExecutor.open()) {
@@ -104,6 +104,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
   <ul class="collapse" id="year2022">
+<li class="text-secondary"><a href="java_19.html" class="text-secondary">Вышла Java 19</a></li>
 <li class="text-secondary"><a href="java_news_44.html" class="text-secondary">Новости Java #44</a></li>
 <li class="text-secondary"><a href="java_news_43.html" class="text-secondary">Новости Java #43</a></li>
 <li class="text-secondary"><a href="java_news_42.html" class="text-secondary">Новости Java #42</a></li>
