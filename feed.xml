@@ -4,7 +4,33 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-09-19T18:00:00Z</updated>
+  <updated>2022-09-25T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #45</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_45.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_45.html</id>
+    <updated>2022-09-25T18:00:00Z</updated>
+    <published>2022-09-25T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/430"&gt;JEP 430: String Templates (Preview)&lt;/a&gt;. Про шаблонные строки мы писали в &lt;a href="java_news_28.html"&gt;выпуске #28&lt;/a&gt;, когда они были предложены в рассылке проекта Amber. С тех пор концепция шаблонных строк дозрела до JEP-кандидата, и возможно, они попадут в следующий релиз &lt;a href="https://jdk.java.net/20/"&gt;Java 20&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://jakarta.ee/release/10/"&gt;Jakarta EE 10&lt;/a&gt;. В этом релизе теперь требуется Java 11 в качестве минимальной версии, а также есть поддержка Java 17. В Jakarta EE 10 более 20 спецификаций получили обновления, а также появилась новая спецификация CDI Lite 4.0. Из принципиальных нововведений также стало появление &lt;a href="https://jakarta.ee/specifications/coreprofile/10/"&gt;Core Profile&lt;/a&gt;, минимального набора спецификаций, созданного специально для микросервисов.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Lightbend &lt;a href="https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka"&gt;объявила&lt;/a&gt; об изменении лицензии у Akka, инструментария, реализующего программную модель на основе акторов.&lt;/p&gt;
+&lt;p&gt;Начиная с версии 2.7, которая выйдет в октябре, Akka будет иметь коммерческую лицензию BSL 1.1. Это значит, что Akka будет иметь не open-source, а так называемую source-available модель, при которой исходные коды будут всё ещё доступны, но Akka можно будет использовать бесплатно только для разработки и других непроизводственных целей. Для производственных целей придётся приобретать коммерческую лицензию, которая, однако, будет бесплатной для компаний с годовым оборотом меньше 25 миллионов долларов. Кроме того, через 3 года после выхода код Akka становится полностью свободным под лицензией Apache 2.0. Также исключением является Play Framework, который внутри себя использует Akka: его также можно использовать бесплатно. Akka 2.6 &lt;a href="https://www.lightbend.com/akka/license-faq"&gt;будет оставаться&lt;/a&gt; под лицензией Apache 2.0 и будет получать критические обновления до сентября 2023 года.&lt;/p&gt;
+&lt;p&gt;Йонас Бонер, создатель Akka, объяснил такое решение тем, что большое количество крупных компаний, таких как Apple, Disney и GM, используют Akka совершенно бесплатно, но все усилия и затраты несёт на себе небольшая компания Lightbend. Новая лицензия позволит сдвинуть баланс в сторону других участников, которые будут обязаны платить и тем самым вносить вклад в будущее Akka.&lt;/p&gt;
+&lt;p&gt;Цены на Akka уже &lt;a href="https://www.lightbend.com/akka#pricing"&gt;опубликованы&lt;/a&gt; и составляют от 1995 до 2995 долларов в год за одно ядро в зависимости от лицензии.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=eEXvOjtauxI"&gt;Eclipse 2022-09&lt;/a&gt;. Вот некоторые улучшения и изменения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Более быстрый поиск по подстроке в workspace.&lt;/li&gt;
+  &lt;li&gt;Поддержка цветного вывода в консоли.&lt;/li&gt;
+  &lt;li&gt;Новая галочка "Enable word wrap when opening an editor".&lt;/li&gt;
+  &lt;li&gt;Улучшения в Clean Up Actions "Convert to switch expression" и "Convert to enhanced 'for' loops".&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Вышла Java 19</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_19.html" />
@@ -422,13 +448,13 @@ $1 ==&gt; "1.0E23"&lt;/pre&gt;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел черновик &lt;a href="https://openjdk.org/jeps/8282272"&gt;JEP Pattern matching for switch (Third Preview)&lt;/a&gt;. Это значит, что паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.&lt;/p&gt;
 &lt;p&gt;В этой итерации предлагается внести два изменения относительно предыдущей.&lt;/p&gt;
 &lt;p&gt;Во-первых, заменить охранные паттерны на условия &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 18:&lt;/span&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Java 18:&lt;/span&gt;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &amp;&amp; x &gt; 0 -&gt; ...;
     &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
 }
 
-&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
+&lt;span style="color: green"&gt;// Java 19:&lt;/span&gt;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
     &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 -&gt; ...;
     &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
@@ -479,140 +505,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://andresalmiray.com/jreleaser-1-0-0-is-here/"&gt;JReleaser 1.0.0&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-March/003422.html"&gt;JMH 1.35&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Вышла Java 18</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_18.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_18.html</id>
-    <updated>2022-03-21T18:00:00Z</updated>
-    <published>2022-03-21T18:00:00Z</published>
-    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/18/"&gt;Java 18&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-18.html"&gt;2000 закрытых задач и 9 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/18/release-notes"&gt;здесь&lt;/a&gt;. Изменения API можно посмотреть по &lt;a href="https://javaalmanac.io/jdk/18/apidiff/17/"&gt;этой ссылке&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- cut --&gt;
-&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://jdk.java.net/18/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Перечислим JEP'ы, которые попали в Java 18.&lt;/p&gt;
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/420"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Second Preview) (JEP 420)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="https://openjdk.org/jeps/406"&gt;появился в Java 17&lt;/a&gt; в режиме preview, остаётся в этом статусе. В этом релизе присутствует два изменения по сравнению с предыдущей версией.&lt;/p&gt;
-&lt;p&gt;Первое изменение &amp;ndash; константные паттерны теперь должны находиться выше, чем паттерны с условиями того же типа. Например, такой код успешно компилируется в Java 17:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; 3 -&gt; {}
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; {}
-}&lt;/pre&gt;
-&lt;p&gt;Но не компилируется в Java 18:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; javac --enable-preview --release 18 Main.java
-&lt;span style="color: red"&gt;Main.java:8: error: this case label is dominated by a preceding case label
-            case 3 -&gt; {}
-                 ^&lt;/span&gt;&lt;/pre&gt;
-
-&lt;p&gt;Чтобы код компилировался на Java 18, нужно переместить константный паттерн выше:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (value) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; 3 -&gt; {}
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &amp;&amp; bar() -&gt; {}
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; {}
-}&lt;/pre&gt;
-
-&lt;p&gt;Второе изменение &amp;ndash; улучшенная проверка исчерпываемости для дженериков. Например, такой код не компилируется в Java 17, несмотря на то что &lt;code&gt;switch&lt;/code&gt; покрывает все возможные случаи:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;sealed interface&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; A&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; B&amp;lt;T&amp;gt; &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;T&amp;gt; { }
-&lt;span style="color: blue"&gt;final class&lt;/span&gt; C &lt;span style="color: blue"&gt;implements&lt;/span&gt; Foo&amp;lt;String&amp;gt; { }
-
-&lt;span style="color: blue"&gt;static int&lt;/span&gt; testGenericSealedExhaustive(Foo&amp;lt;Integer&amp;gt; foo) {
-    &lt;span style="color: blue"&gt;return switch&lt;/span&gt; (foo) {
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; A&amp;lt;Integer&amp;gt; a -&amp;gt; 1;
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; B&amp;lt;Integer&amp;gt; b -&amp;gt; 2;
-    };
-}&lt;/pre&gt;
-&lt;pre&gt;javac --enable-preview --release 17 Main.java
-&lt;span style="color: red"&gt;Main.java:10: error: the switch expression does not cover all possible input values
-    return switch (foo) {
-           ^&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;В Java 18 же такой код успешно компилируется.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/413"&gt;Сниппеты кода в документации Java API (JEP 413)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;В JavaDoc теперь поддерживается новый тег &lt;code&gt;@snippet&lt;/code&gt;, который указывает на то, что данный участок является примером кода.&lt;/p&gt;
-&lt;p&gt;Пример сниппета кода:&lt;/p&gt;
-&lt;pre&gt;/**
- * A simple program.
- * {@snippet :
- *   public class HelloWorld {
- *     public static void main(String... args) {
- *       System.out.println("Hello World!"); // @highlight substring="println"
- *     }
- *   }
- * }
- */&lt;/pre&gt;
-&lt;p&gt;Сгенерированная документация для него будет выглядеть примерно следующим образом:&lt;/p&gt;
-&lt;pre&gt;public class HelloWorld {
-  public static void main(String... args) {
-    System.out.&lt;b&gt;println&lt;/b&gt;("Hello World!");
-  }
-}&lt;/pre&gt;
-
-&lt;p&gt;Тег &lt;code&gt;@snippet&lt;/code&gt; введён в качестве замены существующему методу вставки примеров кода в JavaDoc с помощью блоков &lt;code&gt;&amp;lt;pre&amp;gt;{@code ... }&amp;lt;/pre&amp;gt;&lt;/code&gt;, который имеет ряд недостатков:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Тег &lt;code&gt;@code&lt;/code&gt; не поддерживает возможность указания языка фрагмента, а значит теряется возможность проверки корректности кода, подсветки синтаксиса и ссылок, поскольку инструменты трактуют все такие фрагменты как простой текст.&lt;/li&gt;
-  &lt;li&gt;Подсветку синтаксиса также нельзя добавить и вручную, поскольку внутренние HTML-теги будут трактоваться как часть фрагмента. Проблему можно решить через использование тега &lt;code&gt;&amp;lt;pre&amp;gt;...&amp;lt;/pre&amp;gt;&lt;/code&gt; (без &lt;code&gt;@code&lt;/code&gt;), но тогда полностью исчезает указание того, что данный фрагмент документации является кодом.&lt;/li&gt;
-  &lt;li&gt;Фрагменты кода часто являются неполными или содержат плейсхолдеры и многоточия. Тег &lt;code&gt;@code&lt;/code&gt; никак не решает данную проблему.&lt;/li&gt;
-  &lt;li&gt;Индентация строк во фрагменте остаётся такой, как написана в исходном коде.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Новый тег же не только решает все вышеперечисленные проблемы, но и добавляет новые возможности:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;В сниппете можно указать язык фрагмента с помощью атрибута &lt;code&gt;lang&lt;/code&gt;: &lt;code&gt;{@snippet lang=properties : ... }&lt;/code&gt;. Если язык не указан, то считается, что это Java. Проверка корректности пока ограничена только сбалансированностью фигурных скобок, но инструменты могут реализовать более сложную проверку.&lt;/li&gt;
-  &lt;li&gt;Подсветка отдельных элементов фрагмента может быть сделана с помощью тега &lt;code&gt;@highlight&lt;/code&gt;, который поддерживает три стиля &lt;code&gt;bold&lt;/code&gt;, &lt;code&gt;italic&lt;/code&gt; и &lt;code&gt;highlighted&lt;/code&gt;. Все теги указываются в комментариях, поэтому полностью исчезают после генерации. Инструменты также имеют возможность сделать автоматическую подсветку синтаксиса.&lt;/li&gt;
-  &lt;li&gt;Многоточия и неполные фрагменты кода возможны с помощью тега &lt;code&gt;@replace&lt;/code&gt;. Фрагмент кода до замены плейсхолдеров остаётся синтаксически валидным кодом.&lt;/li&gt;
-  &lt;li&gt;В сниппете можно сделать ссылки с помощью тега &lt;code&gt;@link&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Общие отступы строк фрагмента съедаются при генерации документации.&lt;/li&gt;
-  &lt;li&gt;При генерации HTML-документации стандартным доклетом сниппеты кода лучше выделяются на фоне остальной документации благодаря серому фону. Кроме того, каждый сниппет кода будет сопровождаться кнопкой копирования в буфер обмена.&lt;/li&gt;
-  &lt;li&gt;Сниппеты кода могут быть внешними и подтягивать код из внешних файлов. Чтобы иметь возможность не включать весь файл в JavaDoc, поддерживаются регионы с помощью тега &lt;code&gt;@region&lt;/code&gt;. Внешние сниппеты хороши тем, что внешние файлы могут быть предварительно проверены на корректность (например, если файлы Java не будут компилироваться, то и не смогут быть включены в JavaDoc).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/400"&gt;UTF-8 по умолчанию (JEP 400)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;UTF-8 теперь является кодировкой по умолчанию на всех платформах. Кодировка по умолчанию используется в таких API как &lt;code&gt;java.io&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/InputStreamReader.html"&gt;&lt;code&gt;InputStreamReader&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileReader.html"&gt;&lt;code&gt;FileReader&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/OutputStreamWriter.html"&gt;&lt;code&gt;OutputStreamWriter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/FileWriter.html"&gt;&lt;code&gt;FileWriter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html"&gt;&lt;code&gt;PrintStream&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;java.util&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Formatter.html"&gt;&lt;code&gt;Formatter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Scanner.html"&gt;&lt;code&gt;Scanner&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;java.net&lt;/code&gt; (&lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLEncoder.html"&gt;&lt;code&gt;URLEncoder&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/URLDecoder.html"&gt;&lt;code&gt;URLDecoder&lt;/code&gt;&lt;/a&gt;). Кодировка в пакете &lt;code&gt;java.nio.file&lt;/code&gt; осталась неизменной: в нём самого начала UTF-8 было в качестве &lt;code&gt;Charset&lt;/code&gt; по умолчанию.&lt;/p&gt;
-&lt;p&gt;Если в Java 17 и более ранних версиях кодировка по умолчанию определялась при старте JVM и зависела от разных факторов (операционная система, пользовательская локаль, кодировка операционной системы), то с Java 18 она всегда UTF-8. Если нужно включить старый механизм установки кодировки при старте, то можно использовать опцию &lt;code&gt;-Dfile.encoding=COMPAT&lt;/code&gt;. Кроме того, эту кодировку можно узнать, используя свойство &lt;code&gt;native.encoding&lt;/code&gt;, которое &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8265989"&gt;появилось в Java 17&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Чтобы будущий переход на Java 18 был более гладким, рекомендуется стартовать свои приложения на Java 17 или более ранних версиях с опцией &lt;code&gt;-Dfile.encoding=UTF-8&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/408"&gt;Простой веб-сервер (JEP 408)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Появилась новая утилита &lt;code&gt;jwebserver&lt;/code&gt;, которая запускает простой веб-сервер, предоставляющий статический доступ к указанной папке с файлами. По умолчанию используется текущая директория (если не указана опция &lt;code&gt;-d&lt;/code&gt;), а порт равен 8000 (если не указана опция &lt;code&gt;-p&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Веб-сервер поддерживает только HTTP/1.1, не поддерживает HTTPS и аутентификацию. Его рекомендуется использовать только для целей разработки и тестирования.&lt;/p&gt;
-&lt;p&gt;Вместе с утилитой &lt;code&gt;jwebserver&lt;/code&gt; также появилось новое API, позволяющее запускать веб-сервер программно. За это отвечают новые классы &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/SimpleFileServer.html"&gt;&lt;code&gt;SimpleFileServer&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/HttpHandlers.html"&gt;&lt;code&gt;HttpHandlers&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/Request.html"&gt;&lt;code&gt;Request&lt;/code&gt;&lt;/a&gt; в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.httpserver/com/sun/net/httpserver/package-summary.html"&gt;&lt;code&gt;com.sun.net.httpserver&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/421"&gt;Deprecate Finalization for Removal (JEP 421)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Финализация объектов, которая &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8165641"&gt;стала deprecated в Java 9&lt;/a&gt;, теперь стала deprecated for removal, то есть подлежит окончательному удалению.&lt;/p&gt;
-&lt;p&gt;Начиная с Java 18, все методы, относящиеся к финализации, помечены аннотацией &lt;code&gt;@Deprecated(forRemoval=true)&lt;/code&gt;. Это &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()"&gt;&lt;code&gt;Object.finalize()&lt;/code&gt;&lt;/a&gt; и его наследники (часть из них удалены полностью), &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runtime.html#runFinalization()"&gt;&lt;code&gt;Runtime.runFinalization()&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/System.html#runFinalization()"&gt;&lt;code&gt;System.runFinalization()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Сама финализация всё ещё работает, однако появилась новая опция &lt;code&gt;--finalization=disabled&lt;/code&gt;, которая её отключает.&lt;/p&gt;
-&lt;p&gt;В будущих версиях Java работа по дальнейшему отказу от финализации может быть продолжена. Сначала финализацию предлагается отключить по умолчанию с возможностью включения, потом отключить её полностью, и, наконец, удалить весь API финализации.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/416"&gt;Reimplement Core Reflection with Method Handles (JEP 416)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Механизм рефлексии в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/reflect/package-summary.html"&gt;&lt;code&gt;java.lang.reflect&lt;/code&gt;&lt;/a&gt; теперь реализован поверх method handles в пакете &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/invoke/package-summary.html"&gt;&lt;code&gt;java.lang.invoke&lt;/code&gt;&lt;/a&gt;. В Java 17 и раньше эти два механизма существовали независимо и имели разную внутреннюю реализацию. Такое дублирование усложняет поддержку платформы и внесение в неё новых языковых изменений.&lt;/p&gt;
-&lt;p&gt;Для разработчика такое изменение не должно иметь видимых последствий (кроме небольших различий в производительности). Однако на всякий случай предоставлен ключ, позволяющий включить старую реализацию: &lt;code&gt;-Djdk.reflect.useDirectMethodHandle=false&lt;/code&gt;. Старая реализация будет полностью удалена в одной из следующих версий Java.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/418"&gt;Internet-Address Resolution SPI (JEP 418)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Появилось новое SPI, позволяющее кастомизировать получение IP-адреса по имени хоста (и наоборот). По умолчанию &lt;code&gt;InetAddress&lt;/code&gt; API делает нативный резолвинг, то есть делегированием операционной системе. Если нужен альтернативный механизм резолвинга, то теперь его можно предоставить путём реализации нового провайдера сервиса &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/net/spi/InetAddressResolverProvider.html"&gt;&lt;code&gt;InetAddressResolverProvider&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Примеры случаев, когда может понадобиться альтернативный резолвинг:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Более производительный резолвинг, чем системный.&lt;/li&gt;
-  &lt;li&gt;Неблокирующий резолвинг.&lt;/li&gt;
-  &lt;li&gt;Альтернативный протокол DNS (например, DNS over QUIC).&lt;/li&gt;
-  &lt;li&gt;Тестирование (подмена IP-адресов, моки).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/419"&gt;Foreign Function &amp; Memory API (Second Incubator) (JEP 419)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Foreign Function &amp; Memory API, который &lt;a href="https://openjdk.org/jeps/412"&gt;появился в Java 17&lt;/a&gt; в инкубационном статусе, остаётся в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.foreign/module-summary.html"&gt;&lt;code&gt;jdk.incubator.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;В Java 19 это API перестанет быть инкубационным и &lt;a href="https://openjdk.org/jeps/424"&gt;станет preview API&lt;/a&gt; в пакете &lt;code&gt;java.lang.foreign&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/417"&gt;Vector API (Third Incubator) (JEP 417)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Векторное API, которое появилось в &lt;a href="https://openjdk.org/jeps/338"&gt;Java 16&lt;/a&gt; в инкубационном статусе, осталось в инкубационном статусе в &lt;a href="https://openjdk.org/jeps/414"&gt;Java 17&lt;/a&gt;, продолжает находиться в этом статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/18/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;Java 18 не является LTS-релизом и будет получать обновления только в течение полугода (до сентября 2022).&lt;/p&gt;</content>
   </entry>
 </feed>

@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2022-09-20">
+    <meta property="article:published_time" content="2022-09-26">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,160 +31,25 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Вышла Java 19</h3>
-<p class="text-secondary"><time datetime="2022-09-20">20 сентября, 2022</time></p>
+<h3 id="title">Новости Java #45</h3>
+<p class="text-secondary"><time datetime="2022-09-26">26 сентября, 2022</time></p>
 <article>
-<p>Вышла общедоступная версия <a href="https://openjdk.org/projects/jdk/19/">Java 19</a>. В этот релиз попало более <a href="https://builds.shipilev.net/backports-monitor/release-notes-19.html">двух тысяч закрытых задач и 7 JEP'ов</a>. Release Notes можно посмотреть <a href="http://jdk.java.net/19/release-notes">здесь</a>. Изменения API &ndash; <a href="https://javaalmanac.io/jdk/19/apidiff/18/">здесь</a>.</p>
-<!-- cut -->
-<p>Ссылки на скачивание:</p>
+<p>&bull; Вышел новый <a href="https://openjdk.org/jeps/430">JEP 430: String Templates (Preview)</a>. Про шаблонные строки мы писали в <a href="java_news_28.html">выпуске #28</a>, когда они были предложены в рассылке проекта Amber. С тех пор концепция шаблонных строк дозрела до JEP-кандидата, и возможно, они попадут в следующий релиз <a href="https://jdk.java.net/20/">Java 20</a>.</p>
+
+<p class="pt-2">&bull; Вышла <a href="https://jakarta.ee/release/10/">Jakarta EE 10</a>. В этом релизе теперь требуется Java 11 в качестве минимальной версии, а также есть поддержка Java 17. В Jakarta EE 10 более 20 спецификаций получили обновления, а также появилась новая спецификация CDI Lite 4.0. Из принципиальных нововведений также стало появление <a href="https://jakarta.ee/specifications/coreprofile/10/">Core Profile</a>, минимального набора спецификаций, созданного специально для микросервисов.</p>
+
+<p class="pt-2">&bull; Lightbend <a href="https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka">объявила</a> об изменении лицензии у Akka, инструментария, реализующего программную модель на основе акторов.</p>
+<p>Начиная с версии 2.7, которая выйдет в октябре, Akka будет иметь коммерческую лицензию BSL 1.1. Это значит, что Akka будет иметь не open-source, а так называемую source-available модель, при которой исходные коды будут всё ещё доступны, но Akka можно будет использовать бесплатно только для разработки и других непроизводственных целей. Для производственных целей придётся приобретать коммерческую лицензию, которая, однако, будет бесплатной для компаний с годовым оборотом меньше 25 миллионов долларов. Кроме того, через 3 года после выхода код Akka становится полностью свободным под лицензией Apache 2.0. Также исключением является Play Framework, который внутри себя использует Akka: его также можно использовать бесплатно. Akka 2.6 <a href="https://www.lightbend.com/akka/license-faq">будет оставаться</a> под лицензией Apache 2.0 и будет получать критические обновления до сентября 2023 года.</p>
+<p>Йонас Бонер, создатель Akka, объяснил такое решение тем, что большое количество крупных компаний, таких как Apple, Disney и GM, используют Akka совершенно бесплатно, но все усилия и затраты несёт на себе небольшая компания Lightbend. Новая лицензия позволит сдвинуть баланс в сторону других участников, которые будут обязаны платить и тем самым вносить вклад в будущее Akka.</p>
+<p>Цены на Akka уже <a href="https://www.lightbend.com/akka#pricing">опубликованы</a> и составляют от 1995 до 2995 долларов в год за одно ядро в зависимости от лицензии.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://www.youtube.com/watch?v=eEXvOjtauxI">Eclipse 2022-09</a>. Вот некоторые улучшения и изменения:</p>
 <ul>
-  <li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle JDK</a></li>
-  <li><a href="http://jdk.java.net/19/">OpenJDK</a></li>
+  <li>Более быстрый поиск по подстроке в workspace.</li>
+  <li>Поддержка цветного вывода в консоли.</li>
+  <li>Новая галочка "Enable word wrap when opening an editor".</li>
+  <li>Улучшения в Clean Up Actions "Convert to switch expression" и "Convert to enhanced 'for' loops".</li>
 </ul>
-
-<p>Вот список JEP'ов, которые попали в Java 19.</p>
-
-<h5><a href="https://openjdk.org/jeps/427">Паттерн-матчинг для <code class="text-nowrap">switch</code> (Third Preview) (JEP 427)</a></h5>
-<p>Паттерн-матчинг для <code class="text-nowrap">switch</code>, который <a href="https://openjdk.org/jeps/406">появился в Java 17</a> в режиме preview и остался на <a href="https://openjdk.org/jeps/420">второе preview в Java 18</a>, всё ещё остаётся в этом статусе. Это первый случай в Java, когда языковой конструкции не хватило двух релизов, чтобы стать стабильной: ранее все конструкции укладывались в два preview.</p>
-<p>В этом релизе в паттерн-матчинг было внесено два главных изменения.</p>
-
-<p>Во-первых, охранные паттерны <code class="text-nowrap">&&</code> были заменены на условия <code class="text-nowrap">when</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --release 18:</span>
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Integer x && x > 0 -> ...;
-    <span style="color: blue">default</span> -> ...;
-}</pre>
-<pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --release 19:</span>
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Integer x <span style="color: blue">when</span> x > 0 -> ...;
-    <span style="color: blue">default</span> -> ...;
-}</pre>
-
-<p>О мотивации такого изменения можно прочитать <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html">в рассылке проекта Amber</a>.</p>
-
-<p class="pt-1">Во-вторых, было изменено поведение матчинга <code class="text-nowrap">null</code>. Теперь <code class="text-nowrap">null</code> матчится только в ветке <code class="text-nowrap">case null</code> и большие ни в каких других, включая тотальных:</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --release 18:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: green">// matches because total pattern</span>
-}</pre>
-<pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --release 19:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: red">// NPE</span>
-}</pre>
-<pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --release 19:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case null</span> -> ...; <span style="color: green">// OK</span>
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: red"></span>
-}</pre>
-
-<p>Про причины такого изменения можно также прочитать <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html">в рассылке</a>.</p>
-
-<h5><a href="https://openjdk.org/jeps/405">Паттерны записей (Preview) (JEP 405)</a></h5>
-<p>Паттерн-матчинг дополнился новым видом паттерна: паттерн записей.</p>
-<p>Раньше для паттерн-матчинга записей был доступен только паттерн по типу с дальнейшим ручным извлечением компонентов:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) {}
-
-<span style="color: blue">static void</span> printSum(Object o) {
-    <span style="color: blue">if</span> (o <span style="color: blue">instanceof</span> Point p) {
-        <span style="color: blue">int</span> x = p.x();
-        <span style="color: blue">int</span> y = p.y();
-        System.out.println(x + y);
-    }
-}</pre>
-
-<p>С паттернами записей код становится существенно компактнее:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">static void</span> printSum(Object o) {
-    <span style="color: blue">if</span> (o <span style="color: blue">instanceof</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y)) {
-        System.out.println(x + y);
-    }
-}</pre>
-
-<p>Паттерны записей могут быть вложенными:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) {}
-<span style="color: blue">enum</span> Color { RED, GREEN, BLUE }
-<span style="color: blue">record</span> ColoredPoint(Point p, Color c) {}
-
-<span style="color: blue">static void</span> printCoordinatesAndColor(ColoredPoint cp) {
-    <span style="color: blue">if</span> (cp <span style="color: blue">instanceof</span> ColoredPoint(Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y), <span style="color: blue">var</span> c)) {
-        System.out.println(<span style="color: darkred">"x = "</span> + x);
-        System.out.println(<span style="color: darkred">"y = "</span> + y);
-        System.out.println(<span style="color: darkred">"color = "</span> + c);
-    }
-}</pre>
-
-<p>Также паттерны записей могут быть именованными:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">static void</span> printObject(Object obj) {
-    <span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y) p) {
-        System.out.println(<span style="color: darkred">"point = "</span> + p);
-        System.out.println(<span style="color: darkred">"x = "</span> + x);
-        System.out.println(<span style="color: darkred">"y = "</span> + y);
-    }
-}</pre>
-
-<p>Кроме того, паттерны записей хорошо сочетаются со <code class="text-nowrap">switch</code> из предыдущего JEP'а:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">static void</span> printObject(Object obj) {
-    <span style="color: blue">switch</span> (obj) {
-        <span style="color: blue">case</span> Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y) <span style="color: blue">when</span> x > 0 && y > 0 ->
-            System.out.println(<span style="color: darkred">"Positive point: x = "</span> + x + <span style="color: darkred">", y = "</span> + y);
-        <span style="color: blue">case</span> Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y) ->
-            System.out.println(<span style="color: darkred">"Point: x = "</span> + x + <span style="color: darkred">", y = "</span> + y);
-        <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"Other"</span>);
-    }
-}</pre>
-
-<h5><a href="https://openjdk.org/jeps/425">Virtual Threads (Preview) (JEP 425)</a></h5>
-<p>В Java появились виртуальные потоки в режиме preview.</p>
-<p>Виртуальные потоки, в отличие от потоков операционной системы, являются легковесными и могут создаваться в огромном количестве (миллионы экземпляров). Это свойство должно значительно облегчить написание конкурентных программ, поскольку позволит применять простой подход "один запрос &ndash; один поток" и не прибегать к более сложному асинхронному программированию. При этом миграция на виртуальные потоки уже существующего кода должна быть максимально простой, потому что виртуальные потоки являются экземплярами существующего класса <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html"><code class="text-nowrap">java.lang.Thread</code></a>, а значит, большую часть существующего кода не придётся переписывать.</p>
-<p>Виртуальные потоки реализованы поверх обычных потоков и существуют только для JVM, но не для операционной системы (отсюда и название "виртуальные"). Поток, на котором в данный момент работает виртуальный поток, называется потоком-носителем. Если потоки платформы полагаются на планировщик операционной системы, то планировщиком для виртуальных потоков является <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/ForkJoinPool.html"><code class="text-nowrap">ForkJoinPool</code></a>. Когда виртуальный поток блокируется на некоторой блокирующей операции, то он размонтируется от своего потока-носителя, что позволяет потоку-носителю примонтировать другой виртуальный поток и продолжить работу. Такой режим работы и малый размер виртуальных потоков позволяет им очень хорошо масштабироваться. Однако на данный момент есть два исключения: <code class="text-nowrap">synchronized</code> блоки и JNI. При их выполнении виртуальный поток не может быть размонтирован, поскольку он привязан к своему потоку-носителю. Такое ограничение может препятствовать масштабированию. Поэтому при желании максимально использовать потенциал виртуальных потоков рекомендуется избегать <code class="text-nowrap">synchronized</code> блоки и операции JNI, которые выполняются часто или занимают длительное время.</p>
-<p>Для создания виртуальных потоков и работы с ними появилось следующее API:</p>
-<ul>
-  <li><a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.Builder.html"><code class="text-nowrap">Thread.Builder</code></a> &ndash; билдер потоков. Например, виртуальный поток можно создать путём вызова <code class="text-nowrap">Thread.ofVirtual().name("name").unstarted(runnable)</code>.</li>
-  <li><a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html#startVirtualThread(java.lang.Runnable)"><code class="text-nowrap">Thread.startVirtualThread(Runnable)</code></a> &ndash; создаёт и сразу же запускает виртуальный поток.</li>
-  <li><a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html#isVirtual()"><code class="text-nowrap">Thread.isVirtual()</code></a> &ndash; проверяет, является ли поток виртуальным.</li>
-  <li><a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/Executors.html#newVirtualThreadPerTaskExecutor()"><code class="text-nowrap">Executors.newVirtualThreadPerTaskExecutor()</code></a> &ndash; возвращает исполнитель, который создаёт новый виртуальный поток на каждую задачу.</li>
-</ul>
-<p>Для виртуальных потоков также добавилась поддержка в дебаггере, JVM TI и Java Flight Recorder.</p>
-<p>Виртуальные потоки разрабатываются <a href="https://mail.openjdk.org/pipermail/announce/2017-October/000238.html">с 2017 года</a> в рамках проекта <a href="https://openjdk.org/projects/loom/">Loom</a>.</p>
-
-<h5><a href="https://openjdk.org/jeps/428">Structured Concurrency (Incubator) (JEP 428)</a></h5>
-<p>Ещё одним результатом работы над проектом Loom стало добавление в Java нового API для Structured Concurrency.</p>
-<p>Structured Concurrency &ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.</p>
-<p>В центре нового API класс <a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a>. Пример использования <code class="text-nowrap">StructuredTaskScope</code>, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">try</span> (<span style="color: blue">var</span> scope = <span style="color: blue">new</span> StructuredTaskScope.ShutdownOnFailure()) {
-    Future&lt;String> user = scope.fork(() -> findUser());
-    Future&lt;Integer> order = scope.fork(() -> fetchOrder());
-
-    scope.join();           <span style="color: green">// Join both forks</span>
-    scope.throwIfFailed();  <span style="color: green">// ... and propagate errors</span>
-
-    <span style="color: blue">return new</span> Response(user.resultNow(), order.resultNow());
-}</pre>
-
-<p>Может показаться, что в точности аналогичный код можно было бы написать с использованием <code class="text-nowrap">ExecutorService</code> и <code class="text-nowrap">submit()</code>, но у <code class="text-nowrap">StructuredTaskScope</code> есть несколько принципиальных отличий, которые делают код безопаснее:</p>
-<ul>
-  <li>Время жизни всех потоков подзадач ограничено областью видимости блока <code class="text-nowrap">try-with-resources</code>. Метод <code class="text-nowrap">close()</code> гарантированно не завершится, пока не завершатся все подзадачи.</li>
-  <li>Если одна из операций <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае политики <code class="text-nowrap">ShutdownOnFailure</code>, возможны другие).</li>
-  <li>Если главный поток прерывается в процессе ожидания <code class="text-nowrap">join()</code>, то обе операции <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> отменяются.</li>
-  <li>В дампе потоков будет видна иерархия: потоки, выполняющие <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code>, будут отображаться как дочерние для главного потока.</li>
-</ul>
-
-<p>Новое API должно облегчить написание многопоточных программ благодаря знакомому структурному подходу. Пока API имеет инкубационный статус, оно будет находиться в модуле <a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.concurrent/module-summary.html"><code class="text-nowrap">jdk.incubator.concurrent</code></a> и одноимённом пакете.</p>
-
-<h5><a href="https://openjdk.org/jeps/424">Foreign Function & Memory API (Preview) (JEP 424)</a></h5>
-<p>Foreign Function & Memory API, которое было в инкубационном статусе <a href="https://openjdk.org/jeps/412">в Java 17</a> и <a href="https://openjdk.org/jeps/419">Java 18</a>, теперь стало Preview API. Оно находится в пакете <a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/foreign/package-summary.html"><code class="text-nowrap">java.lang.foreign</code></a>.</p>
-
-
-<h5><a href="https://openjdk.org/jeps/426">Vector API (Fourth Incubator) (JEP 426)</a></h5>
-<p>Векторное API, которое уже было в инкубационном статусе три релиза (<a href="https://openjdk.org/jeps/338">Java 16</a>, <a href="https://openjdk.org/jeps/414">Java 17</a>, <a href="https://openjdk.org/jeps/417">Java 18</a>), продолжает в нём находиться. Пока API не выйдет из инкубационного статуса, оно будет находиться в модуле <a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>.</p>
-
-<h5><a href="https://openjdk.org/jeps/422">Linux/RISC-V Port (JEP 422)</a></h5>
-<p>JDK теперь официально портирован под архитектуру Linux/RISC-V.</p>
-
-<h5 class="pt-2">Заключение</h5>
-<p class="pt-3">Java 19 не является LTS-релизом и будет получать обновления от Oracle только в течение полугода (до марта 2023 года). Однако Azul обещает выпускать обновления Zulu как минимум <a href="https://www.azul.com/products/azul-support-roadmap/">до марта 2025 года</a> (2.5 года).</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -192,6 +57,7 @@ Object obj = <span style="color: blue">null</span>;
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
   <ul class="collapse show" id="year2022">
+<li class="text-secondary"><a href="java_news_45.html" class="text-secondary">Новости Java #45</a></li>
 <li class="text-secondary"><a href="java_19.html" class="text-secondary">Вышла Java 19</a></li>
 <li class="text-secondary"><a href="java_news_44.html" class="text-secondary">Новости Java #44</a></li>
 <li class="text-secondary"><a href="java_news_43.html" class="text-secondary">Новости Java #43</a></li>
