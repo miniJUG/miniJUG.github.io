@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2022-09-26">
+    <meta property="article:published_time" content="2022-10-10">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,25 +31,130 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #45</h3>
-<p class="text-secondary"><time datetime="2022-09-26">26 сентября, 2022</time></p>
+<h3 id="title">Новости Java #46</h3>
+<p class="text-secondary"><time datetime="2022-10-10">10 октября, 2022</time></p>
 <article>
-<p>&bull; Вышел новый <a href="https://openjdk.org/jeps/430">JEP 430: String Templates (Preview)</a>. Про шаблонные строки мы писали в <a href="java_news_28.html">выпуске #28</a>, когда они были предложены в рассылке проекта Amber. С тех пор концепция шаблонных строк дозрела до JEP-кандидата, и возможно, они попадут в следующий релиз <a href="https://jdk.java.net/20/">Java 20</a>.</p>
+<p>&bull; Вышло несколько новых черновиков JEP. Рассмотрим каждый из них.</p>
+<p class="pt-1"><a href="https://openjdk.org/jeps/8294349">Unnamed local variables and patterns</a>. В этом JEP предлагается добавить в язык безымянные переменные и паттерны, которые будут обозначаться символом <code class="text-nowrap">_</code> (подчёркивание).</p>
+<p>Это очень полезное улучшение: оно позволит не давать имя переменной, которая в дальнейшем не будет использоваться. Такая ситуация возникает довольно часто, например, в блоке <code class="text-nowrap">try-catch</code>, когда важен только тип исключения:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">try</span> {
+    <span style="color: blue">int</span> i = Integer.parseInt(s);
+    ...
+} <span style="color: blue">catch</span> (NumberFormatException _) {
+    System.out.println(<span style="color: darkred">"Bad number: "</span> + s);
+}</pre>
+<p>Другой частый случай &ndash; лямбда-выражения:</p>
+<pre class="border p-lg-2 p-1">map.computeIfAbsent(k, _ -> <span style="color: blue">new</span> ArrayList<>());</pre>
+<p>Ещё один пример &ndash; паттерн-матчинг:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> pingDevice(Device d) {
+    String ip = <span style="color: blue">switch</span> (d) {
+        <span style="color: blue">case</span> Printer(_, _, _, String ipp) -> ipp;
+        <span style="color: blue">case</span> Server(_, String ips) -> ips;
+    };
 
-<p class="pt-2">&bull; Вышла <a href="https://jakarta.ee/release/10/">Jakarta EE 10</a>. В этом релизе теперь требуется Java 11 в качестве минимальной версии, а также есть поддержка Java 17. В Jakarta EE 10 более 20 спецификаций получили обновления, а также появилась новая спецификация CDI Lite 4.0. Из принципиальных нововведений также стало появление <a href="https://jakarta.ee/specifications/coreprofile/10/">Core Profile</a>, минимального набора спецификаций, созданного специально для микросервисов.</p>
-
-<p class="pt-2">&bull; Lightbend <a href="https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka">объявила</a> об изменении лицензии у Akka, инструментария, реализующего программную модель на основе акторов.</p>
-<p>Начиная с версии 2.7, которая выйдет в октябре, Akka будет иметь коммерческую лицензию BSL 1.1. Это значит, что Akka будет иметь не open-source, а так называемую source-available модель, при которой исходные коды будут всё ещё доступны, но Akka можно будет использовать бесплатно только для разработки и других непроизводственных целей. Для производственных целей придётся приобретать коммерческую лицензию, которая, однако, будет бесплатной для компаний с годовым оборотом меньше 25 миллионов долларов. Кроме того, через 3 года после выхода код Akka становится полностью свободным под лицензией Apache 2.0. Также исключением является Play Framework, который внутри себя использует Akka: его также можно использовать бесплатно. Akka 2.6 <a href="https://www.lightbend.com/akka/license-faq">будет оставаться</a> под лицензией Apache 2.0 и будет получать критические обновления до сентября 2023 года.</p>
-<p>Йонас Бонер, создатель Akka, объяснил такое решение тем, что большое количество крупных компаний, таких как Apple, Disney и GM, используют Akka совершенно бесплатно, но все усилия и затраты несёт на себе небольшая компания Lightbend. Новая лицензия позволит сдвинуть баланс в сторону других участников, которые будут обязаны платить и тем самым вносить вклад в будущее Akka.</p>
-<p>Цены на Akka уже <a href="https://www.lightbend.com/akka#pricing">опубликованы</a> и составляют от 1995 до 2995 долларов в год за одно ядро в зависимости от лицензии.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://www.youtube.com/watch?v=eEXvOjtauxI">Eclipse 2022-09</a>. Вот некоторые улучшения и изменения:</p>
+    ping(ip);
+}</pre>
+<p>Полный список случаев, когда можно будет использовать подчёркивание:</p>
 <ul>
-  <li>Более быстрый поиск по подстроке в workspace.</li>
-  <li>Поддержка цветного вывода в консоли.</li>
-  <li>Новая галочка "Enable word wrap when opening an editor".</li>
-  <li>Улучшения в Clean Up Actions "Convert to switch expression" и "Convert to enhanced 'for' loops".</li>
+  <li>Объявление локальной переменной в блоке.</li>
+  <li>Спецификация ресурса в <code class="text-nowrap">try-with-resources</code>.</li>
+  <li>Объявление базового цикла <code class="text-nowrap">for</code> или улучшенного цикла <code class="text-nowrap">for</code>.</li>
+  <li>Переменная паттерна.</li>
+  <li>Параметр <code class="text-nowrap">catch</code>.</li>
+  <li>Параметр лямбда-выражения.</li>
 </ul>
+<p>Заметим, что в данный список не входят параметры методов классов и интерфейсов. В них по прежнему придётся давать имена всем параметрам. Почему такое решение было принято, можно почитать в <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-September/003485.html">этой ветке</a> рассылки проекта Amber.</p>
+
+<p class="pt-1"><a href="https://openjdk.org/jeps/8294078">Record Patterns (Second Preview)</a>. Это второе preview паттернов записей (первое попало в <a href="https://openjdk.org/jeps/405">Java 19</a>).</p>
+<p>В этой итерации три главных изменения.</p>
+<p>Во-первых, добавляется поддержка вывода типов в записях-дженериках:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Box&lt;T>(T t) {}
+
+<span style="color: blue">static void</span> test(Box&lt;String> box) {
+    <span style="color: blue">if</span> (box <span style="color: blue">instanceof</span> Box(<span style="color: blue">var</span> s)) { <span style="color: green">// Выводится Box&lt;String>(var s)</span>
+        System.out.println(<span style="color: darkred">"String "</span> + s);
+    }
+}</pre>
+
+<p>Во-вторых, паттерны записей смогут присутствовать в объявлениях улучшенного цикла <code class="text-nowrap">for</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Pair&lt;T, U>(T first, U second) {}
+
+<span style="color: blue">static void</span> loop(List&lt;Pair&lt;String, Integer>> pairs) {
+    <span style="color: blue">for</span> (Pair(<span style="color: blue">var</span> first, <span style="color: blue">var</span> second) : pairs) {
+        System.out.println(first + <span style="color: darkred">", "</span> + second);
+    }
+}</pre>
+
+<p>В-третьих, исчезает поддержка именованных паттернов записей. Это значит, что такой код уже не будет компилироваться:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y) p) {
+    ...
+}</pre>
+<p>Однако по этому пункту возникла <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-October/thread.html#3582">дискуссия в рассылке</a>, и пока непонятно, действительно ли примут решение убрать такую полезную возможность языка. Брайн Гетц <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-October/003587.html">считает</a>, что с введением такой возможности поспешили и что если её откатить, то это позволит более тщательно её продумать и вернуть обратно в будущем в этой или иной форме.</p>
+
+<p class="pt-1"><a href="https://openjdk.org/jeps/8294285">Pattern Matching for <code class="text-nowrap">switch</code> (Fourth Preview)</a>. Это уже четвёртая итерация паттернов записей (предыдущие три попали в Java <a href="https://openjdk.org/jeps/406">17</a>, <a href="https://openjdk.org/jeps/420">18</a> и <a href="https://openjdk.org/jeps/427">19</a>). В новой версии два главных изменения: упрощённая грамматика switch labels и поддержка вывода типов для паттернов дженериков.</p>
+<p>Упрощённая грамматика большее значение представляет для разработчиков компиляторов и IDE. А вывод типов в <code class="text-nowrap">switch</code> выглядит следующим образом:</p>
+<pre class="border p-lg-2 p-1">Collection&lt;String> collection = ...;
+
+<span style="color: blue">switch</span> (collection) {
+    <span style="color: blue">case</span> List&lt;> l -> ... <span style="color: green">// Выводится List&lt;String></span>
+    <span style="color: blue">case</span> Set&lt;> s  -> ... <span style="color: green">// Выводится Set&lt;String></span>
+    <span style="color: blue">case</span> Queue q  -> ... <span style="color: green">// Ничего не выводится, сырой тип Queue</span>
+    ...
+}</pre>
+<p>Однако для записей diamond-оператор необязателен:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Pair&lt;T, U>(T first, U second) {}
+
+<span style="color: blue">static void</span> test(Pair&lt;String, Integer> pair) {
+    <span style="color: blue">switch</span> (pair) {
+        <span style="color: blue">case</span> Pair(var fst, var snd) -> ... <span style="color: green">// Выводится Pair&lt;String, Integer></span>
+        ...
+    }
+}</pre>
+<p>То же самое касается и паттерн-матчинга через <code class="text-nowrap">instanceof</code>, пример которого уже был приведён выше (см. пример с <code class="text-nowrap">Box&lt;T></code>).</p>
+
+<p class="pt-1"><a href="https://openjdk.org/jeps/8294992">64 bit object headers</a>. Цель этого JEP &ndash; уменьшение размера заголовков с 96/128 до 64 бит. Это позволит уменьшить потребление памяти кучей приблизительно на 6-12%, что, в свою очередь, уменьшит нагрузку на GC и CPU.</p>
+<p>Работа по сжатию заголовков ведётся в проекте <a href="https://openjdk.org/projects/lilliput/">Lilliput</a>, который был <a href="https://mail.openjdk.org/pipermail/discuss/2021-March/005720.html">предложен</a> в марте 2021 года Романом Кеннке, впоследствии и ставшим лидером проекта. Ранее Роман <a href="https://mail.openjdk.org/pipermail/lilliput-dev/2022-May/000457.html">сообщил</a>, что в проекте удалось добиться значительных успехов и что уже ведётся работа над следующим этапом: сжатием заголовка до 32 бит.</p>
+
+<p class="pt-2">&bull; Брайан Гетц <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-September/003552.html">предложил</a> внести изменения в Java, облегчающие вхождение новичков в язык. Он выложил документ с заголовком <a href="https://openjdk.org/projects/amber/design-notes/on-ramp">"Paving the on-ramp"</a> ("прокладывая заезд на автостраду"), где изложил свои мысли относительно возможных упрощений, которые сделают кривую изучения языка более пологой.</p>
+<p>Когда новичок впервые изучает Java, он сразу же сталкивается с большим числом незнакомых концепций, которых нельзя избежать при написании даже самой простой программы:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> HelloWorld {
+    <span style="color: blue">public static void</span> main(String[] args) {
+        System.out.println(<span style="color: darkred">"Hello World"</span>);
+    }
+}</pre>
+<p>Для полного понимания этого кода придётся разобраться чуть ли не со всеми основными аспектами языка:</p>
+<ol>
+  <li>Уровни видимости (<code class="text-nowrap">public</code>).</li>
+  <li>Классы.</li>
+  <li>Методы.</li>
+  <li><code class="text-nowrap">static</code>.</li>
+  <li><code class="text-nowrap">main</code>.</li>
+  <li>Строки.</li>
+  <li>Массивы (<code class="text-nowrap">String[]</code>).</li>
+  <li>Поля (<code class="text-nowrap">out</code>).</li>
+  <li>Константы (<code class="text-nowrap">out</code>).</li>
+</ol>
+<p>Брайан Гетц предлагает три упрощения, которые помогут изучающим язык начать с минимально короткой программы и постепенно переходить к более сложным концепциям.</p>
+<p>Во-первых, можно сделать <code class="text-nowrap">public</code>, <code class="text-nowrap">static</code> и параметр <code class="text-nowrap">args</code> опциональными. Тогда код упростится до следующего:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
+    <span style="color: blue">void</span> main() {
+        System.out.println(<span style="color: darkred">"Hello World"</span>);
+    }
+}</pre>
+
+<p>Во-вторых, можно ввести концепцию безымянных классов, что позволит объявлять поля и методы без объявления класса. Это позволит упростить код ещё сильнее:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> main() {
+    System.out.println(<span style="color: darkred">"Hello World"</span>);
+}</pre>
+
+<p>Наконец, можно сделать некоторые наиболее часто используемые методы статическими (<code class="text-nowrap">println</code>, <code class="text-nowrap">readln</code>) и импортировать их автоматически (как автоматически импортируются все классы в <code class="text-nowrap">java.lang</code>). В итоге код сократится до самого минимума:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> main() {
+    println(<span style="color: darkred">"Hello World"</span>);
+}</pre>
+
+<p class="pt-1">Сейчас всё это существует исключительно на уровне концепции, которая активно обсуждается в рассылке, но возможно что-то из предложенных идей будет в будущем реализовано в языке.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/idea/2022/10/java-annotated-monthly-october-2022/">Java Annotated Monthly</a> от JetBrains за октябрь.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -57,6 +162,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
   <ul class="collapse show" id="year2022">
+<li class="text-secondary"><a href="java_news_46.html" class="text-secondary">Новости Java #46</a></li>
 <li class="text-secondary"><a href="java_news_45.html" class="text-secondary">Новости Java #45</a></li>
 <li class="text-secondary"><a href="java_19.html" class="text-secondary">Вышла Java 19</a></li>
 <li class="text-secondary"><a href="java_news_44.html" class="text-secondary">Новости Java #44</a></li>

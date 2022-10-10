@@ -4,7 +4,138 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-09-25T18:00:00Z</updated>
+  <updated>2022-10-09T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #46</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_46.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_46.html</id>
+    <updated>2022-10-09T18:00:00Z</updated>
+    <published>2022-10-09T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышло несколько новых черновиков JEP. Рассмотрим каждый из них.&lt;/p&gt;
+&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294349"&gt;Unnamed local variables and patterns&lt;/a&gt;. В этом JEP предлагается добавить в язык безымянные переменные и паттерны, которые будут обозначаться символом &lt;code&gt;_&lt;/code&gt; (подчёркивание).&lt;/p&gt;
+&lt;p&gt;Это очень полезное улучшение: оно позволит не давать имя переменной, которая в дальнейшем не будет использоваться. Такая ситуация возникает довольно часто, например, в блоке &lt;code&gt;try-catch&lt;/code&gt;, когда важен только тип исключения:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;try&lt;/span&gt; {
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; i = Integer.parseInt(s);
+    ...
+} &lt;span style="color: blue"&gt;catch&lt;/span&gt; (NumberFormatException _) {
+    System.out.println(&lt;span style="color: darkred"&gt;"Bad number: "&lt;/span&gt; + s);
+}&lt;/pre&gt;
+&lt;p&gt;Другой частый случай &amp;ndash; лямбда-выражения:&lt;/p&gt;
+&lt;pre&gt;map.computeIfAbsent(k, _ -&gt; &lt;span style="color: blue"&gt;new&lt;/span&gt; ArrayList&lt;&gt;());&lt;/pre&gt;
+&lt;p&gt;Ещё один пример &amp;ndash; паттерн-матчинг:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; pingDevice(Device d) {
+    String ip = &lt;span style="color: blue"&gt;switch&lt;/span&gt; (d) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Printer(_, _, _, String ipp) -&gt; ipp;
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Server(_, String ips) -&gt; ips;
+    };
+
+    ping(ip);
+}&lt;/pre&gt;
+&lt;p&gt;Полный список случаев, когда можно будет использовать подчёркивание:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Объявление локальной переменной в блоке.&lt;/li&gt;
+  &lt;li&gt;Спецификация ресурса в &lt;code&gt;try-with-resources&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Объявление базового цикла &lt;code&gt;for&lt;/code&gt; или улучшенного цикла &lt;code&gt;for&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Переменная паттерна.&lt;/li&gt;
+  &lt;li&gt;Параметр &lt;code&gt;catch&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Параметр лямбда-выражения.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Заметим, что в данный список не входят параметры методов классов и интерфейсов. В них по прежнему придётся давать имена всем параметрам. Почему такое решение было принято, можно почитать в &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-September/003485.html"&gt;этой ветке&lt;/a&gt; рассылки проекта Amber.&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294078"&gt;Record Patterns (Second Preview)&lt;/a&gt;. Это второе preview паттернов записей (первое попало в &lt;a href="https://openjdk.org/jeps/405"&gt;Java 19&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;В этой итерации три главных изменения.&lt;/p&gt;
+&lt;p&gt;Во-первых, добавляется поддержка вывода типов в записях-дженериках:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Box&amp;lt;T&gt;(T t) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Box&amp;lt;String&gt; box) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (box &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Box(&lt;span style="color: blue"&gt;var&lt;/span&gt; s)) { &lt;span style="color: green"&gt;// Выводится Box&amp;lt;String&gt;(var s)&lt;/span&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"String "&lt;/span&gt; + s);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Во-вторых, паттерны записей смогут присутствовать в объявлениях улучшенного цикла &lt;code&gt;for&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Pair&amp;lt;T, U&gt;(T first, U second) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; loop(List&amp;lt;Pair&amp;lt;String, Integer&gt;&gt; pairs) {
+    &lt;span style="color: blue"&gt;for&lt;/span&gt; (Pair(&lt;span style="color: blue"&gt;var&lt;/span&gt; first, &lt;span style="color: blue"&gt;var&lt;/span&gt; second) : pairs) {
+        System.out.println(first + &lt;span style="color: darkred"&gt;", "&lt;/span&gt; + second);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;В-третьих, исчезает поддержка именованных паттернов записей. Это значит, что такой код уже не будет компилироваться:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) p) {
+    ...
+}&lt;/pre&gt;
+&lt;p&gt;Однако по этому пункту возникла &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-October/thread.html#3582"&gt;дискуссия в рассылке&lt;/a&gt;, и пока непонятно, действительно ли примут решение убрать такую полезную возможность языка. Брайн Гетц &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-October/003587.html"&gt;считает&lt;/a&gt;, что с введением такой возможности поспешили и что если её откатить, то это позволит более тщательно её продумать и вернуть обратно в будущем в этой или иной форме.&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294285"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (Fourth Preview)&lt;/a&gt;. Это уже четвёртая итерация паттернов записей (предыдущие три попали в Java &lt;a href="https://openjdk.org/jeps/406"&gt;17&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/420"&gt;18&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/427"&gt;19&lt;/a&gt;). В новой версии два главных изменения: упрощённая грамматика switch labels и поддержка вывода типов для паттернов дженериков.&lt;/p&gt;
+&lt;p&gt;Упрощённая грамматика большее значение представляет для разработчиков компиляторов и IDE. А вывод типов в &lt;code&gt;switch&lt;/code&gt; выглядит следующим образом:&lt;/p&gt;
+&lt;pre&gt;Collection&amp;lt;String&gt; collection = ...;
+
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (collection) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; List&amp;lt;&gt; l -&gt; ... &lt;span style="color: green"&gt;// Выводится List&amp;lt;String&gt;&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Set&amp;lt;&gt; s  -&gt; ... &lt;span style="color: green"&gt;// Выводится Set&amp;lt;String&gt;&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Queue q  -&gt; ... &lt;span style="color: green"&gt;// Ничего не выводится, сырой тип Queue&lt;/span&gt;
+    ...
+}&lt;/pre&gt;
+&lt;p&gt;Однако для записей diamond-оператор необязателен:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Pair&amp;lt;T, U&gt;(T first, U second) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Pair&amp;lt;String, Integer&gt; pair) {
+    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (pair) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Pair(var fst, var snd) -&gt; ... &lt;span style="color: green"&gt;// Выводится Pair&amp;lt;String, Integer&gt;&lt;/span&gt;
+        ...
+    }
+}&lt;/pre&gt;
+&lt;p&gt;То же самое касается и паттерн-матчинга через &lt;code&gt;instanceof&lt;/code&gt;, пример которого уже был приведён выше (см. пример с &lt;code&gt;Box&amp;lt;T&gt;&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294992"&gt;64 bit object headers&lt;/a&gt;. Цель этого JEP &amp;ndash; уменьшение размера заголовков с 96/128 до 64 бит. Это позволит уменьшить потребление памяти кучей приблизительно на 6-12%, что, в свою очередь, уменьшит нагрузку на GC и CPU.&lt;/p&gt;
+&lt;p&gt;Работа по сжатию заголовков ведётся в проекте &lt;a href="https://openjdk.org/projects/lilliput/"&gt;Lilliput&lt;/a&gt;, который был &lt;a href="https://mail.openjdk.org/pipermail/discuss/2021-March/005720.html"&gt;предложен&lt;/a&gt; в марте 2021 года Романом Кеннке, впоследствии и ставшим лидером проекта. Ранее Роман &lt;a href="https://mail.openjdk.org/pipermail/lilliput-dev/2022-May/000457.html"&gt;сообщил&lt;/a&gt;, что в проекте удалось добиться значительных успехов и что уже ведётся работа над следующим этапом: сжатием заголовка до 32 бит.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Брайан Гетц &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-September/003552.html"&gt;предложил&lt;/a&gt; внести изменения в Java, облегчающие вхождение новичков в язык. Он выложил документ с заголовком &lt;a href="https://openjdk.org/projects/amber/design-notes/on-ramp"&gt;"Paving the on-ramp"&lt;/a&gt; ("прокладывая заезд на автостраду"), где изложил свои мысли относительно возможных упрощений, которые сделают кривую изучения языка более пологой.&lt;/p&gt;
+&lt;p&gt;Когда новичок впервые изучает Java, он сразу же сталкивается с большим числом незнакомых концепций, которых нельзя избежать при написании даже самой простой программы:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; HelloWorld {
+    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+&lt;p&gt;Для полного понимания этого кода придётся разобраться чуть ли не со всеми основными аспектами языка:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Уровни видимости (&lt;code&gt;public&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Классы.&lt;/li&gt;
+  &lt;li&gt;Методы.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;static&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;main&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Строки.&lt;/li&gt;
+  &lt;li&gt;Массивы (&lt;code&gt;String[]&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Поля (&lt;code&gt;out&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Константы (&lt;code&gt;out&lt;/code&gt;).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Брайан Гетц предлагает три упрощения, которые помогут изучающим язык начать с минимально короткой программы и постепенно переходить к более сложным концепциям.&lt;/p&gt;
+&lt;p&gt;Во-первых, можно сделать &lt;code&gt;public&lt;/code&gt;, &lt;code&gt;static&lt;/code&gt; и параметр &lt;code&gt;args&lt;/code&gt; опциональными. Тогда код упростится до следующего:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Во-вторых, можно ввести концепцию безымянных классов, что позволит объявлять поля и методы без объявления класса. Это позволит упростить код ещё сильнее:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p&gt;Наконец, можно сделать некоторые наиболее часто используемые методы статическими (&lt;code&gt;println&lt;/code&gt;, &lt;code&gt;readln&lt;/code&gt;) и импортировать их автоматически (как автоматически импортируются все классы в &lt;code&gt;java.lang&lt;/code&gt;). В итоге код сократится до самого минимума:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p class="pt-1"&gt;Сейчас всё это существует исключительно на уровне концепции, которая активно обсуждается в рассылке, но возможно что-то из предложенных идей будет в будущем реализовано в языке.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2022/10/java-annotated-monthly-october-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за октябрь.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #45</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_45.html" />
@@ -355,7 +486,7 @@ $1 ==&gt; "1.0E23"&lt;/pre&gt;
 &lt;/ul&gt;
 &lt;p&gt;Такое внеплановое обновление пришлось выпустить из-за &lt;a href="https://bugs.openjdk.org/browse/JDK-8285468?jql=project%20%3D%20JDK%20AND%20fixVersion%20%3D%2018.0.1.1"&gt;нескольких критических багов&lt;/a&gt; в OpenJDK.&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Ещё один JEP предложен к JDK 19. Это &lt;a href="https://openjdk.org/jeps/428"&gt;JEP 428: Structured Concurrency (Incubator)&lt;/a&gt;. Это седьмой и, вероятно, последний JEP, который попадёт в этот релиз, поскольку до первой фазы Rampdown остаётся &lt;a href="http://openjdk.org/projects/jdk/19/"&gt;меньше двух недель&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Ещё один JEP предложен к JDK 19. Это &lt;a href="https://openjdk.org/jeps/428"&gt;JEP 428: Structured Concurrency (Incubator)&lt;/a&gt;. Это седьмой и, вероятно, последний JEP, который попадёт в этот релиз, поскольку до первой фазы Rampdown остаётся &lt;a href="https://openjdk.org/projects/jdk/19/"&gt;меньше двух недель&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Марк Рейнолд &lt;a href="https://mail.openjdk.org/pipermail/discuss/2022-May/006110.html"&gt;заявил&lt;/a&gt; о начале работы над проектом Leyden. У проекта появилась &lt;a href="https://openjdk.org/projects/leyden/"&gt;своя страница&lt;/a&gt; на сайте OpenJDK и &lt;a href="https://mail.openjdk.org/mailman/listinfo/leyden-dev"&gt;почтовая рассылка&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Напомним, что целью проекта Leyden является решение проблемы медленного старта JVM и большого размера образа. Призыв к обсуждению проекта был ещё &lt;a href="https://mail.openjdk.org/pipermail/discuss/2020-April/005429.html"&gt;в апреле 2020 года&lt;/a&gt;, а голосование по нему завершилось &lt;a href="https://mail.openjdk.org/pipermail/announce/2020-June/000290.html"&gt;в июне того же года&lt;/a&gt;. Тогда предлагалось, что упомянутые проблемы будут решаться через концепцию статического образа &amp;ndash; автономной программы, которая выполняет целевое приложение и ничего больше.&lt;/p&gt;
@@ -431,79 +562,5 @@ $1 ==&gt; "1.0E23"&lt;/pre&gt;
   &lt;li&gt;Шаблон &lt;i&gt;Surround with try/catch&lt;/i&gt; теперь выбрасывает исключение, обернутое в &lt;code&gt;RuntimeException&lt;/code&gt;, вместо проглатывания.&lt;/li&gt;
   &lt;li&gt;Новый значок &lt;i&gt;Reset Frame&lt;/i&gt; вместо старого действия &lt;i&gt;Drop Frame&lt;/i&gt; в панели инструментов отладчика.&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #37</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_37.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_37.html</id>
-    <updated>2022-04-10T18:00:00Z</updated>
-    <published>2022-04-10T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://openjdk.org/jeps/425"&gt;JEP 425: Virtual Threads (Preview)&lt;/a&gt;. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.&lt;/p&gt;
-&lt;p&gt;Напомним, что о старте проекта Loom было заявлено &lt;a href="project_loom.html"&gt;в ноябре 2017 года&lt;/a&gt; вскоре после выхода Java 9, а первый черновик JEP по виртуальным нитям по нему появился лишь спустя 4 года, о чём мы писали в &lt;a href="java_news_32.html"&gt;выпуске #32&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Вместе с выходом JEP 425 также вышла новая Early-Access сборка Loom &lt;a href="https://jdk.java.net/loom/"&gt;19-loom+5&lt;/a&gt; с большим количеством изменений по сравнению с предыдущей версией.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел черновик &lt;a href="https://openjdk.org/jeps/8282272"&gt;JEP Pattern matching for switch (Third Preview)&lt;/a&gt;. Это значит, что паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.&lt;/p&gt;
-&lt;p&gt;В этой итерации предлагается внести два изменения относительно предыдущей.&lt;/p&gt;
-&lt;p&gt;Во-первых, заменить охранные паттерны на условия &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Java 18:&lt;/span&gt;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &amp;&amp; x &gt; 0 -&gt; ...;
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
-}
-
-&lt;span style="color: green"&gt;// Java 19:&lt;/span&gt;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 -&gt; ...;
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
-}&lt;/pre&gt;
-&lt;p&gt;О мотивации заменить &lt;code&gt;&amp;&amp;&lt;/code&gt; на &lt;code&gt;when&lt;/code&gt; можно прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Во-вторых, предлагается изменить поведения матчинга &lt;code&gt;null&lt;/code&gt; таким образом, чтобы он матчился только в ветках &lt;code&gt;case null&lt;/code&gt; и ни в каких других (даже тотальных):&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// Java 18:&lt;/span&gt;
-Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: green"&gt;// matches&lt;/span&gt;
-}
-
-&lt;span style="color: green"&gt;// Java 19:&lt;/span&gt;
-Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;
-}&lt;/pre&gt;
-&lt;p&gt;Про причины такого изменения можно прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html"&gt;тут&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-1"&gt;Также вышло ещё два новых черновика JEP: &lt;a href="https://openjdk.org/jeps/8284289"&gt;Improved way of obtaining call traces asynchronously for profiling&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/8284453"&gt;Optionally Record Thread Context in JFR&lt;/a&gt;.&lt;/p&gt;
-
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2022/03/31/orm-60-final/"&gt;Hibernate 6.0 Final&lt;/a&gt;. Новая версия фреймворка не является полностью совместимой с предыдущей версией 5.x, но в значительной степени совместимость удалось сохранить. Для тех, кто использует Hibernate исключительно через &lt;a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html#_jakarta_persistence"&gt;Jakarta Persistence API&lt;/a&gt;, переход должен быть полностью совместимым. Для остальных был написан &lt;a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html"&gt;подробный гид по миграции&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Перечислим некоторые существенные изменения Hibernate 6.0:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Базовая версия Java теперь 11.&lt;/li&gt;
-  &lt;li&gt;Java Persistence больше не поддерживается. Hibernate 6.0 можно использовать только с пространством имён &lt;code&gt;jakarta.persistence&lt;/code&gt;, но не &lt;code&gt;javax.persistence&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Теперь используется Read-by-position вместо Read-by-name при чтении из JDBC &lt;code&gt;ResultSet&lt;/code&gt;. Это приводит к улучшению производительности, а также к более компактным и читаемым сгенерированным SQL-запросам.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://newsroom.eclipse.org/eclipse-newsletter/2022/march/what%E2%80%99s-new-jakarta-persistence-31"&gt;Jakarta Persistence 3.1&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В Spring обнаружена &lt;a href="https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement"&gt;критическая уязвимость&lt;/a&gt;, позволяющая злоумышленнику выполнить произвольный код. Уязвимости подвержены приложения при следующих условиях:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Приложение запускается на JDK 9 или выше.&lt;/li&gt;
-  &lt;li&gt;Используется Apache Tomcat в качестве контейнера сервлетов.&lt;/li&gt;
-  &lt;li&gt;Приложение пакуется в WAR, а не JAR.&lt;/li&gt;
-  &lt;li&gt;Используются зависимости &lt;code&gt;spring-webmvc&lt;/code&gt; или &lt;code&gt;spring-webflux&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;К моменту публикации уязвимости уже были выпущены новые версии Spring 5.3.18 и 5.2.20, в которых уязвимость была исправлена. На следующий день Apache Tomcat исправил уязвимость на своей стороне, выпустив версии 10.0.20, 9.0.62 и 8.5.78.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Eclipse начал &lt;a href="https://blogs.eclipse.org/post/denis-roy/moving-eclipse-projects-github-and-gitlab"&gt;переезд на GitHub&lt;/a&gt;. Многие проекты на данный момент уже переехали (&lt;a href="https://github.com/eclipse-platform/eclipse.platform"&gt;Platform&lt;/a&gt;, &lt;a href="https://github.com/eclipse-equinox"&gt;Equinox&lt;/a&gt;, &lt;a href="https://github.com/eclipse-platform/eclipse.platform.swt"&gt;SWT&lt;/a&gt;, &lt;a href="https://github.com/eclipse-jdt"&gt;JDT&lt;/a&gt; и т.д).&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2022/04/java-annotated-monthly-april-2022/"&gt;Java Annotated Monthly&lt;/a&gt; за апрель 2022.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/oracle/helidon/releases/tag/2.5.0"&gt;Helidon 2.5.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://andresalmiray.com/jreleaser-1-0-0-is-here/"&gt;JReleaser 1.0.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-March/003422.html"&gt;JMH 1.35&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
