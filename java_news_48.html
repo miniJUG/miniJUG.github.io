@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Java переходит на 6-месячный релизный цикл и меняет схему версионирования</title>
+    <title>Новости Java #48</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Java переходит на 6-месячный релизный цикл и меняет схему версионирования">
-    <meta property="og:description" content="Java всегда была известна медленным темпом выхода новых версий. В среднем новые релизы Java выходили приблизительно раз в 3 года: Java 7 вышла в 2011 году, Java 8 &ndash; в 2014, Java 9 &ndash; в 2017. При этом&hellip;">
+    <meta property="og:title" content="Новости Java #48">
+    <meta property="og:description" content="&bull; Вышли два новых JEP&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2017-11-01">
+    <meta property="article:published_time" content="2022-11-07">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Java переходит на 6-месячный релизный цикл и меняет схему версионирования">
-    <meta name="twitter:description" content="Java всегда была известна медленным темпом выхода новых версий. В среднем новые релизы Java выходили приблизительно раз в 3 года: Java 7 вышла в 2011 году, Java 8 &ndash; в 2014, Java 9 &ndash; в 2017. При этом&hellip;">
+    <meta name="twitter:title" content="Новости Java #48">
+    <meta name="twitter:description" content="&bull; Вышли два новых JEP&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_48.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_48.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,28 +31,27 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</h3>
-<p class="text-secondary"><time datetime="2017-11-01">1 ноября, 2017</time></p>
+<h3 id="title">Новости Java #48</h3>
+<p class="text-secondary"><time datetime="2022-11-07">7 ноября, 2022</time></p>
 <article>
-<p>Java всегда была известна медленным темпом выхода новых версий. В среднем новые релизы Java выходили приблизительно раз в 3 года: Java 7 вышла в 2011 году, Java 8 – в 2014, Java 9 – в 2017. При этом релизы были очень крупными, например в Java 9 вошло аж <a href="https://openjdk.org/projects/jdk9/">99 JEP'ов</a>. Постепенно Oracle понял, что в современном мире такой медленный темп выхода может навредить развитию и продвижению Java, поэтому принял решение перейти к 6-месячному релизному циклу. Таким образом, выход новых фич, которые могут быть выпущены прямо сейчас, не будет задерживаться из-за других более долгих фич. Например, <a href="https://openjdk.org/jeps/286">Local-Variable Type Inference</a> (<code class="text-nowrap">var</code>) возможно уже появится в следующей версии Java, которая выйдет в <a href="http://www.oracle.com/technetwork/java/eol-135779.html">марте 2018 года</a>.</p>
-<p>Вместе с изменением частоты выхода релизов Oracle также планирует изменить схему версионирования. Будущие версии Java предлагается нумеровать в соответствии с годом и месяцом выпуска: Java 18.3 будет означать март 2018, Java 18.9 – сентябрь 2018 и т.д. Мотивацию по поводу перехода к такой схеме объяснил в <a href="https://mail.openjdk.org/pipermail/jdk-dev/2017-October/000007.html">своём письме</a> Mark Reinhold (главный архитектор Java-платформы).</p>
-<p>Однако сообщество восприняло изменение схемы версионирования неоднозначно. На письмо Марка было множество ответов, где многие пытались переубедить Марка не менять схему и продолжать версионировать по-старому (10, 11, 12 и т.д.). </p>
-<p>Противники новой схемы приводили множество аргументов. Попробуем резюмировать наиболее значимые из них. </p>
-<ol>
-  <li>Java только что уже поменяла схему версионирования (<a href="https://openjdk.org/jeps/223">JEP 223</a>), зачем её менять ещё раз? Получается, что JEP 223 ввели и сразу же выбрасывают на свалку ради более сомнительной схемы, что в будущем будет источником заблуждений и непониманий со стороны пользователей. Зачем менять то, что уже работает и работает хорошо?</li>
-  <li>Схема <code class="text-nowrap">YY.MM</code> выглядит как <a href="http://semver.org/">семантическое версионирование</a>, но таковым не является, и это будет сбивать с толку людей. <code class="text-nowrap">YY.MM</code> внешне выглядит как <code class="text-nowrap">MAJOR.MINOR</code>, но в схеме <code class="text-nowrap">MAJOR.MINOR</code> вторая часть (<code class="text-nowrap">MINOR</code>) может измениться только, если происходят обратно-совместимые изменения. Однако переход от 18.3 к 18.9 является крупным релизом, в котором могут быть и обратно-несовместимые изменения (например, удаление deprecated API). Кроме того, при схеме <code class="text-nowrap">YY.MM</code> многим может показаться, что переход от 18.9 к 19.3 является более значимым, чем от 18.3 к 18.9, однако это не так. 18.9 – такой же полноценный крупный релиз, как и 19.3.</li>
-  <li>Для многих людей такая схема незнакома. Непосвящённые люди будут задаваться вопросом, что означает 18.3 и почему, например, нет 18.0, 18.1 и 18.2. И почему после 18.3 произошёл скачок сразу на 18.9.</li>
-  <li>Новая схема не позволяет по версии релиза понять, является он LTS или не-LTS. LTS означает релиз с долгосрочной поддержкой, и теперь после значительно увеличения частоты релизов не все из них будут LTS, как это было раньше. Впрочем, старая схема также не позволяет понять, является ли релиз LTS.</li>
-</ol>
-<p>Подводя итог, можно смело сказать, что на текущий момент нет чёткого обоснования необходимости перехода на новую сомнительную схему. Перечисленные Марком преимущества этой схемы не кажутся достаточно вескими, чтобы заморачиваться с переходом. А зная тот факт, насколько неохотно вводятся изменения в Java платформу, необходимость которых не доказана, кажется несколько странным, что Oracle принимает подобные сомнительные решения.</p>
+<p>&bull; Вышли два новых JEP.</p>
+<p>Первый &ndash; <a href="https://openjdk.org/jeps/434">JEP 434: Foreign Function & Memory API (Second Preview)</a>.</p>
+<p>Второй &ndash; <a href="https://openjdk.org/jeps/435">JEP 435: Asynchronous Stack Trace VM API</a>. В нём предлагается добавить в JDK публичное и хорошо протестированное нативное API для получения стек-трейсов с возможностью асинхронного использования. В OpenJDK уже существует API <code class="text-nowrap">AsyncGetCallTrace</code>, которое широко используется во многих профилировщиках (например, <a href="https://github.com/jvm-profiling-tools/async-profiler">async-profiler</a>), но это API является внутренним и не поддерживает нативные фреймы. JEP 435 предлагает ввести новый метод <code class="text-nowrap">AsyncGetStackTrace</code>, который будет экспортирован в заголовке <code class="text-nowrap">include/profile.h</code> и будет иметь возможность включать фреймы C/C++ в результат.</p>
+<p class="pt-1">Кроме того, ещё вышло два новых черновика JEP: <a href="https://openjdk.org/jeps/8295817">Virtual Threads (Second Preview)</a> и <a href="https://openjdk.org/jeps/8296037">Structured Concurrency (Second Incubator)</a>.</p>
+
+<p class="pt-2">&bull; На сайте Oracle стали публиковаться <a href="https://jdk.java.net/javafx20/">ранние сборки JavaFX 20</a>. Скачать можно как JavaFX SDK, так и файлы JMOD.</p>
+
+<p class="pt-2">&bull; JUG.ru <a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b8OCdXV_tqP8YrMIlgB_BER">выложил</a> доклады с конференции JPoint 2022.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.14">Jackson 2.14</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
-  <ul class="collapse" id="year2022">
-<li class="text-secondary"><a href="java_news_48.html" class="text-secondary">Новости Java #48</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
+  <ul class="collapse show" id="year2022">
+<li>Новости Java #48</li>
 <li class="text-secondary"><a href="java_news_47.html" class="text-secondary">Новости Java #47</a></li>
 <li class="text-secondary"><a href="java_news_46.html" class="text-secondary">Новости Java #46</a></li>
 <li class="text-secondary"><a href="java_news_45.html" class="text-secondary">Новости Java #45</a></li>
@@ -160,8 +159,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="true" aria-controls="year2017">2017</a>
-  <ul class="collapse show" id="year2017">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
 <li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
@@ -175,7 +174,7 @@
 <li class="text-secondary"><a href="jdk_10_early_access.html" class="text-secondary">Ранние сборки JDK 10 уже доступны для скачивания</a></li>
 <li class="text-secondary"><a href="data_classes.html" class="text-secondary">В Java появятся data-классы</a></li>
 <li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
-<li>Java переходит на 6-месячный релизный цикл и меняет схему версионирования</li>
+<li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
 <li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
 <li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
