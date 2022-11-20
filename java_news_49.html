@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Новости Java #23</title>
+    <title>Новости Java #49</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #23">
-    <meta property="og:description" content="&bull; JDK 17 перешла во вторую фазу Rampdown. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2&hellip;">
+    <meta property="og:title" content="Новости Java #49">
+    <meta property="og:description" content="&bull; Первые два JEP'а предложены к выходу в JDK 20. Это 432: Record Patterns (Second Preview) и 433: Pattern Matching for switch (Fourth Preview)&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-07-18">
+    <meta property="article:published_time" content="2022-11-21">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Новости Java #23">
-    <meta name="twitter:description" content="&bull; JDK 17 перешла во вторую фазу Rampdown. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2&hellip;">
+    <meta name="twitter:title" content="Новости Java #49">
+    <meta name="twitter:description" content="&bull; Первые два JEP'а предложены к выходу в JDK 20. Это 432: Record Patterns (Second Preview) и 433: Pattern Matching for switch (Fourth Preview)&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_23.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_49.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_23.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_49.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,47 +31,44 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #23</h3>
-<p class="text-secondary"><time datetime="2021-07-18">18 июля, 2021</time></p>
+<h3 id="title">Новости Java #49</h3>
+<p class="text-secondary"><time datetime="2022-11-21">21 ноября, 2022</time></p>
 <article>
-<p>&bull; JDK 17 перешла во <a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-July/005758.html">вторую фазу Rampdown</a>. Теперь в релиз могут приниматься только критические баги с приоритетом P1 или P2.</p>
+<p>&bull; Первые два JEP'а предложены к выходу в <a href="https://openjdk.org/projects/jdk/20/">JDK 20</a>. Это <a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007198.html">432: Record Patterns (Second Preview)</a> и <a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007199.html">433: Pattern Matching for switch (Fourth Preview)</a>.</p>
 
-<p class="pt-2">&bull; В рассылке OpenJDK начата <a href="https://mail.openjdk.org/pipermail/discuss/2021-July/005846.html">предварительная дискуссия</a> по созданию проекта, целью которого будет поддержка в Java сервера дисплея Wayland в Linux. <a href="https://ru.wikipedia.org/wiki/Wayland">Wayland</a> является современной заменой сервера X11 и уже включён по умолчанию в некоторых дистрибутивах, например <a href="https://www.opennet.ru/opennews/art.shtml?num=54481">Ubuntu 21.04</a> и <a href="https://www.opennet.ru/opennews/art.shtml?num=50644">RHEL 8</a>. Так как Linux с графическим интерфейсом является популярным выбором многих разработчиков Java, поддержка Wayland будет иметь большую важность для них.</p>
+<p class="pt-2">&bull; Вышли два новых JEP'а. Это <a href="https://openjdk.org/jeps/436">JEP 436: Virtual Threads (Second Preview)</a> и <a href="https://openjdk.org/jeps/437">JEP 437: Structured Concurrency (Second Incubator)</a>.</p>
 
-<p class="pt-2">&bull; Компания JetBrains выпустила свой ежегодный отчёт <a href="https://blog.jetbrains.com/blog/2021/07/16/the-state-of-developer-ecosystem-2021/">&laquo;Состояние экосистемы разработки&raquo;</a>. В этом году в опросе участвовало более 30 тысяч разработчиков из 183 стран. Перечислим некоторые интересные результаты:</p>
-<ul>
-  <li>Самый популярный язык &ndash; JavaScript. Его использовали 69% опрошенных в течение последних 12 месяцев (Java использовали 49%). Также он является и самым популярным в качестве основного языка разработки (39% против 32% у Java).</li>
-  <li>Kotlin пока что не попадает в первую десятку, однако имеет неплохой результат: с точки зрения общей распространённости он на 13-м месте (14%), а в как основной язык &ndash; на 11-м (7%). Также Kotlin является самым желаемым языком для перехода с Java: в ближайшие 12 месяцев на него хотят перейти 13% разработчиков Java. Кроме того, Kotlin в пятёрке желаемых для перехода со всех языков (вместе с Go, TypeScript, Python и Rust).</li>
-  <li>Популярность Scala падает уже третий год подряд: в 2019 её использовали 6%, в 2020 &ndash; 5%, в 2021 &ndash; 3%.</li>
-  <li>Количество сотрудников, работающих удалённо, возрасло с 20% (в начале 2020) до 70%.</li>
-</ul>
+<p class="pt-2">&bull; Вышел черновик JEP: <a href="https://openjdk.org/jeps/8288476">Support for primitive types in <code class="text-nowrap">instanceof</code> and type patterns</a>. В нём предлагается расширить возможности оператора <code class="text-nowrap">instanceof</code> и паттернов типов, позволив делать проверки не только для ссылочных, но и для примитивных типов:</p>
+<pre class="border p-lg-2 p-1">Object obj = 42;
+<span style="color: blue">if</span> (obj <span style="color: blue">instanceof int</span> i) {
+    ...
+}</pre>
+<p>В случае сужающей конверсии такие тесты будут дополнительно проверять, проходит ли конверсия без потери точности. Например, в данном случае условие не выполнится, потому что <code class="text-nowrap">500</code> не попадает в диапазон <code class="text-nowrap">byte</code> (от <code class="text-nowrap">-128</code> до <code class="text-nowrap">127</code>):</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> i = 500;
+<span style="color: blue">if</span> (i <span style="color: blue">instanceof byte</span> b) {
+    <span style="color: green">// Не будет выполнено</span>
+    ...
+}</pre>
+<p>А в данном примере условие выполнится, потому что <code class="text-nowrap">500</code> попадает в диапазон <code class="text-nowrap">short</code> (от <code class="text-nowrap">-32678</code> до <code class="text-nowrap">32677</code>):</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> i = 500;
+<span style="color: blue">if</span> (i <span style="color: blue">instanceof short</span> s) {
+    <span style="color: green">// Выполнится</span>
+    ...
+}</pre>
 
-<p class="pt-2">&bull; Вышел <a href="https://quarkus.io/blog/quarkus-2-0-0-final-released/">Quarkus 2.0</a>. В новой версии был осуществлён переход на JDK 11, Vert.x 4, Eclipse MicroProfile 4, GraalVM 21.1, а также внесено множество других изменений. Также пока готовился этот недельный выпуск, вышли багфикс-релизы <a href="https://quarkus.io/blog/quarkus-2-0-1-final-released/">2.0.1</a> и <a href="https://quarkus.io/blog/quarkus-2-0-2-final-released/">2.0.2</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://spring.io/blog/2022/11/16/spring-framework-6-0-goes-ga">Spring 6.0</a>. Новая версия фреймворка требует Java 17 и использует пространство имён Jakarta EE 9+ (<code class="text-nowrap">jakarta.*</code>). При этом есть поддержка API Jakarta EE 10, например, <a href="https://jakarta.ee/specifications/servlet/6.0/">Jakarta Servlet 6.0</a> и <a href="https://jakarta.ee/specifications/persistence/3.1/">Jakarta Persistence 3.1</a>. Это позволяет использовать последние веб-контейнеры, такие как Tomcat 10.1.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://www.sonarqube.org/sonarqube-9-0/">SonarQube 9.0</a> с поддержкой Bitbucket Cloud, GitHub Actions, C++ 20, Java 16, более точно анализа и многого другого.</p>
+<p class="pt-2">&bull; Вышел <a href="https://www.wildfly.org/news/2022/11/09/WildFly27-Final-Released/">WildFly 27</a> с поддержкой Jakarta EE 10.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/blog/2021/07/15/new-tool-pages-improved-performance-refreshed-ui-and-more-in-toolbox-app-1-21/">JetBrains ToolBox 1.21</a>. Это первый релиз ToolBox, который написан полностью на чистом Kotlin, с использованием фреймворка <a href="https://www.jetbrains.com/lp/compose/">Compose for Desktop</a>.</p>
-
-<p class="pt-2">&bull; Вышли новые версии Spring:</p>
-<ul>
-  <li><a href="https://spring.io/blog/2021/07/14/spring-framework-5-3-9-and-5-2-16-available-now">Spring Framework 5.3.9 и 5.2.16</a>.</li>
-  <li>Spring Boot <a href="https://spring.io/blog/2021/06/24/spring-boot-2-5-2-is-now-available">2.5.2</a> и <a href="https://spring.io/blog/2021/06/24/spring-boot-2-4-8-is-now-available">2.4.8</a>.</li>
-  <li><a href="https://spring.io/blog/2021/06/22/spring-security-5-5-1-5-4-7-5-3-10-and-5-2-11-released">Spring Security 5.5.1, 5.4.7, 5.3.10 и 5.2.11</a>.</li>
-  <li><a href="https://spring.io/blog/2021/06/14/spring-native-0-10-0-available-now">Spring Native 0.10.0</a>.</li>
-  <li><a href="https://spring.io/blog/2021/06/22/spring-data-2021-0-2-and-2020-0-10-released">Spring Data 2021.0.2 и 2020.0.10</a>.</li>
-  <li><a href="https://spring.io/blog/2021/06/25/spring-integration-zip-2-0-0-available">Spring Integration Zip 2.0.0</a>.</li>
-  <li><a href="https://spring.io/blog/2021/07/09/spring-authorization-server-0-1-2-available-now">Spring Authorization Server 0.1.2</a>.</li>
-</ul>
-
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/nashorn-dev/2021-July/007639.html">Nashorn 15.3</a> с поддержкой Java 17.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-November/003553.html">JMH 1.36</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
-  <ul class="collapse" id="year2022">
-<li class="text-secondary"><a href="java_news_49.html" class="text-secondary">Новости Java #49</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
+  <ul class="collapse show" id="year2022">
+<li>Новости Java #49</li>
 <li class="text-secondary"><a href="java_news_48.html" class="text-secondary">Новости Java #48</a></li>
 <li class="text-secondary"><a href="java_news_47.html" class="text-secondary">Новости Java #47</a></li>
 <li class="text-secondary"><a href="java_news_46.html" class="text-secondary">Новости Java #46</a></li>
@@ -91,8 +88,8 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
-  <ul class="collapse show" id="year2021">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
+  <ul class="collapse" id="year2021">
 <li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
 <li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
@@ -105,7 +102,7 @@
 <li class="text-secondary"><a href="java_news_26.html" class="text-secondary">Новости Java #26</a></li>
 <li class="text-secondary"><a href="java_news_25.html" class="text-secondary">Новости Java #25</a></li>
 <li class="text-secondary"><a href="java_news_24.html" class="text-secondary">Новости Java #24</a></li>
-<li>Новости Java #23</li>
+<li class="text-secondary"><a href="java_news_23.html" class="text-secondary">Новости Java #23</a></li>
 <li class="text-secondary"><a href="java_news_22.html" class="text-secondary">Новости Java #22</a></li>
 <li class="text-secondary"><a href="java_news_21.html" class="text-secondary">Новости Java #21</a></li>
 <li class="text-secondary"><a href="java_news_20.html" class="text-secondary">Новости Java #20</a></li>

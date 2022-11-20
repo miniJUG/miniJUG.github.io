@@ -4,7 +4,44 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-11-06T18:00:00Z</updated>
+  <updated>2022-11-20T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #49</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_49.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_49.html</id>
+    <updated>2022-11-20T18:00:00Z</updated>
+    <published>2022-11-20T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Первые два JEP'а предложены к выходу в &lt;a href="https://openjdk.org/projects/jdk/20/"&gt;JDK 20&lt;/a&gt;. Это &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007198.html"&gt;432: Record Patterns (Second Preview)&lt;/a&gt; и &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007199.html"&gt;433: Pattern Matching for switch (Fourth Preview)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышли два новых JEP'а. Это &lt;a href="https://openjdk.org/jeps/436"&gt;JEP 436: Virtual Threads (Second Preview)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/437"&gt;JEP 437: Structured Concurrency (Second Incubator)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел черновик JEP: &lt;a href="https://openjdk.org/jeps/8288476"&gt;Support for primitive types in &lt;code&gt;instanceof&lt;/code&gt; and type patterns&lt;/a&gt;. В нём предлагается расширить возможности оператора &lt;code&gt;instanceof&lt;/code&gt; и паттернов типов, позволив делать проверки не только для ссылочных, но и для примитивных типов:&lt;/p&gt;
+&lt;pre&gt;Object obj = 42;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof int&lt;/span&gt; i) {
+    ...
+}&lt;/pre&gt;
+&lt;p&gt;В случае сужающей конверсии такие тесты будут дополнительно проверять, проходит ли конверсия без потери точности. Например, в данном случае условие не выполнится, потому что &lt;code&gt;500&lt;/code&gt; не попадает в диапазон &lt;code&gt;byte&lt;/code&gt; (от &lt;code&gt;-128&lt;/code&gt; до &lt;code&gt;127&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 500;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof byte&lt;/span&gt; b) {
+    &lt;span style="color: green"&gt;// Не будет выполнено&lt;/span&gt;
+    ...
+}&lt;/pre&gt;
+&lt;p&gt;А в данном примере условие выполнится, потому что &lt;code&gt;500&lt;/code&gt; попадает в диапазон &lt;code&gt;short&lt;/code&gt; (от &lt;code&gt;-32678&lt;/code&gt; до &lt;code&gt;32677&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 500;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof short&lt;/span&gt; s) {
+    &lt;span style="color: green"&gt;// Выполнится&lt;/span&gt;
+    ...
+}&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2022/11/16/spring-framework-6-0-goes-ga"&gt;Spring 6.0&lt;/a&gt;. Новая версия фреймворка требует Java 17 и использует пространство имён Jakarta EE 9+ (&lt;code&gt;jakarta.*&lt;/code&gt;). При этом есть поддержка API Jakarta EE 10, например, &lt;a href="https://jakarta.ee/specifications/servlet/6.0/"&gt;Jakarta Servlet 6.0&lt;/a&gt; и &lt;a href="https://jakarta.ee/specifications/persistence/3.1/"&gt;Jakarta Persistence 3.1&lt;/a&gt;. Это позволяет использовать последние веб-контейнеры, такие как Tomcat 10.1.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2022/11/09/WildFly27-Final-Released/"&gt;WildFly 27&lt;/a&gt; с поддержкой Jakarta EE 10.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-November/003553.html"&gt;JMH 1.36&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #48</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_48.html" />
@@ -533,34 +570,5 @@ $1 ==&gt; "1.0E23"&lt;/pre&gt;
 &lt;p&gt;Помимо возвращения корректного результата новая реализация также значительно быстрее (в 17.7 раз по &lt;a href="https://mail.openjdk.org/pipermail/core-libs-dev/2020-April/065921.html"&gt;замерам автора&lt;/a&gt;), поскольку не выделяет промежуточных объектов, не содержит циклов и использует только целочисленную арифметику.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; В блоге IntelliJ IDEA вышел новый выпуск &lt;a href="https://blog.jetbrains.com/idea/2022/06/java-annotated-monthly-june-2022/"&gt;Java Annotated Monthly&lt;/a&gt; за июнь.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #40</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_40.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_40.html</id>
-    <updated>2022-05-29T18:00:00Z</updated>
-    <published>2022-05-29T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java18"&gt;JDK 18.0.1.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java17"&gt;JDK 17.0.3.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java11"&gt;JDK 11.0.15.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/#java8"&gt;JDK 8u333&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Такое внеплановое обновление пришлось выпустить из-за &lt;a href="https://bugs.openjdk.org/browse/JDK-8285468?jql=project%20%3D%20JDK%20AND%20fixVersion%20%3D%2018.0.1.1"&gt;нескольких критических багов&lt;/a&gt; в OpenJDK.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Ещё один JEP предложен к JDK 19. Это &lt;a href="https://openjdk.org/jeps/428"&gt;JEP 428: Structured Concurrency (Incubator)&lt;/a&gt;. Это седьмой и, вероятно, последний JEP, который попадёт в этот релиз, поскольку до первой фазы Rampdown остаётся &lt;a href="https://openjdk.org/projects/jdk/19/"&gt;меньше двух недель&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Марк Рейнолд &lt;a href="https://mail.openjdk.org/pipermail/discuss/2022-May/006110.html"&gt;заявил&lt;/a&gt; о начале работы над проектом Leyden. У проекта появилась &lt;a href="https://openjdk.org/projects/leyden/"&gt;своя страница&lt;/a&gt; на сайте OpenJDK и &lt;a href="https://mail.openjdk.org/mailman/listinfo/leyden-dev"&gt;почтовая рассылка&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Напомним, что целью проекта Leyden является решение проблемы медленного старта JVM и большого размера образа. Призыв к обсуждению проекта был ещё &lt;a href="https://mail.openjdk.org/pipermail/discuss/2020-April/005429.html"&gt;в апреле 2020 года&lt;/a&gt;, а голосование по нему завершилось &lt;a href="https://mail.openjdk.org/pipermail/announce/2020-June/000290.html"&gt;в июне того же года&lt;/a&gt;. Тогда предлагалось, что упомянутые проблемы будут решаться через концепцию статического образа &amp;ndash; автономной программы, которая выполняет целевое приложение и ничего больше.&lt;/p&gt;
-&lt;p&gt;В текущем предложении подход будет &lt;a href="https://openjdk.org/projects/leyden/notes/01-beginnings"&gt;несколько иным&lt;/a&gt;: движение к "закрытому миру" будет постепенным и инкрементальным. Полностью статические образы будут самой конечной целью, а в промежутке в JDK будут внедряться улучшения, которые разработчики смогут начать использовать раньше.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JetBrains планирует полностью поменять интерфейс IntelliJ IDEA и других своих IDE. Как &lt;a href="https://blog.jetbrains.com/idea/2022/05/take-part-in-the-new-ui-preview-for-your-jetbrains-ide/"&gt;утверждается&lt;/a&gt; в блоге JetBrains, "тренды графического интерфейса эволюционировали, и многие из наших пользователей говорят нам, что текущий интерфейс кажется тяжеловесным и устаревшим". Поэтому в компании было принято решение разработать абсолютно новый look-and-feel, который будет чистым, современным и мощным.&lt;/p&gt;
-&lt;p&gt;Новый графический интерфейс будет внедряться постепенно. Сначала ограниченный круг пользователей сможет принять участие в &lt;a href="https://www.jetbrains.com/lp/intellij-new-ui-preview/"&gt;программе раннего доступа&lt;/a&gt;, где сможет попробовать новый интерфейс и поделиться обратной связью с командой JetBrains. Позже в этом году новый интерфейс станет общедоступным, а в следующем году он станет интерфейсом по умолчанию, сначала для новых пользователей, а потом для всех остальных. После этого старый интерфейс будет всё ещё доступен как минимум в течение года.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2022/05/19/spring-boot-2-7-0-available-now"&gt;Spring Boot 2.7.0&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
