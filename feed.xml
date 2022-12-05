@@ -4,7 +4,58 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-11-20T18:00:00Z</updated>
+  <updated>2022-12-04T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #50</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_50.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_50.html</id>
+    <updated>2022-12-04T18:00:00Z</updated>
+    <published>2022-12-04T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; JDK 20 пополнился ещё четырьмя JEP'ами:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007215.html"&gt;JEP 434: Foreign Function &amp; Memory API (Second Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007223.html"&gt;JEP 436: Virtual Threads (Second Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007225.html"&gt;JEP 429: Scoped Values (Incubator)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007224.html"&gt;JEP 437: Structured Concurrency (Second Incubator)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Таким образом, на текущий момент у Java 20 шесть JEP'ов, и только один из них &amp;ndash; это полностью новая фича (Scoped Values), а не следующая итерация уже существующей. До первый фазы Rampdown &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-October/007108.html"&gt;остаётся 3 дня&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/11/intellij-idea-2022-3/"&gt;IntelliJ IDEA 2022.3&lt;/a&gt;. Перечислим некоторые нововведения и улучшения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Новый полностью переработанный Look &amp; Feel, который можно включить в настройках (галочка &lt;i&gt;Enable new UI&lt;/i&gt; во вкладке &lt;i&gt;New UI Preview&lt;/i&gt;).&lt;/li&gt;
+  &lt;li&gt;Возможность синхронизации настроек между устройствами (Settings Sync).&lt;/li&gt;
+  &lt;li&gt;Новый способ автоподстановки бинов Spring, Micronaut и Jakarta EE CDI (только Ultimate).&lt;/li&gt;
+  &lt;li&gt;Автогенерация схемы OpenAPI из контроллера Spring или ресурса JAX-RS (только Ultimate).&lt;/li&gt;
+  &lt;li&gt;Поддержка Redis (только Ultimate).&lt;/li&gt;
+  &lt;li&gt;Возможность пристыковывать окна инструментов к плавающим вкладкам редакторов.&lt;/li&gt;
+  &lt;li&gt;Предпросмотр результата Intention action теперь включён по умолчанию.&lt;/li&gt;
+  &lt;li&gt;Улучшенный UX в Search Everywhere.&lt;/li&gt;
+  &lt;li&gt;Категоризация результатов в Find Usages по сходству использований.&lt;/li&gt;
+  &lt;li&gt;Улучшенные Tips of the Day.&lt;/li&gt;
+  &lt;li&gt;Улучшенные Bookmarks&lt;/li&gt;
+  &lt;li&gt;Возможность просмотра кода библиотек в предпочитаемом стиле с переформатированием.&lt;/li&gt;
+  &lt;li&gt;Улучшения производительности (старт и отзывчивость UI).&lt;/li&gt;
+  &lt;li&gt;Новые инспекции Java (похожие инструкции в &lt;code&gt;switch&lt;/code&gt;, лишние проверки на длины массивов, ненужный &lt;code&gt;stream.parallel()&lt;/code&gt; и т.д.).&lt;/li&gt;
+  &lt;li&gt;Поддержка синтаксических возможностей Java 19 (паттерны записей и изменения в паттерн-матчинге &lt;code&gt;switch&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;В режиме отладки: если анализатор может предсказать, что ветка не будет исполнена, то она окрашивается в серый цвет.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2022/12/java-annotated-monthly-december-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за декабрь.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2022/11/24/spring-boot-3-0-goes-ga"&gt;Spring Boot 3.0&lt;/a&gt;. Главные изменения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Требуется Spring 6.0.&lt;/li&gt;
+  &lt;li&gt;Java 17 &amp;ndash; минимальная версия.&lt;/li&gt;
+  &lt;li&gt;Генерация нативных образов GraalVM.&lt;/li&gt;
+  &lt;li&gt;Улучшения в observability через Micrometer и Micrometer Tracing.&lt;/li&gt;
+  &lt;li&gt;Полный переход от Java EE к Jakarta EE. Jakarta EE 9 &amp;ndash; минимальная версия. Есть поддержка Jakarta EE 10.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/jvm-profiling-tools/async-profiler/releases/tag/v2.9"&gt;Async Profiler 2.9&lt;/a&gt; с новым профайлером утечек в куче.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #49</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_49.html" />
@@ -471,7 +522,7 @@ Connection connectDatabase() {
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.slf4j.org/news.html"&gt;SLF4J 2.0&lt;/a&gt;. Это первое мажорное обновление фасада логирования спустя 17 лет после выхода первой версии. Новая версия теперь требует Java 8 и содержит новый &lt;a href="https://www.slf4j.org/manual.html#fluent"&gt;Fluent Logging API&lt;/a&gt;. Кроме того, SLF4J API теперь использует механизм &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html"&gt;&lt;code&gt;ServiceLoader&lt;/code&gt;&lt;/a&gt; для нахождения соответствующего логирующего провайдера. SLF4J 2.0 полностью обратно совместим с SLF4J 1.x, т.е. весь существующий код, использующий SLF4J API, не требует перекомпиляции. Однако при обновлении до второй версии потребуется соответствующее обновление бэкенда, иначе SLF4J API не сможет найти бэкенд и выдаст предупреждение.&lt;/p&gt;
 &lt;p&gt;Вместе с выходом второй версии SLF4J вышли &lt;a href="https://logback.qos.ch/news.html"&gt;Logback 1.3.0 и 1.4.0&lt;/a&gt;, которые поддерживают SLF4J 2.0. Различие между 1.3.0 и 1.4.0 состоит в том, Logback 1.4.0 требует Java 11 и использует пространство имён Jakarta EE (&lt;code&gt;jakarta.*&lt;/code&gt;), в то время как Logback 1.3.0 работает на Java 8 и использует Java EE (&lt;code&gt;javax.*&lt;/code&gt;).&lt;/p&gt;
 
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://www.jetbrains.com/idea/whatsnew/"&gt;IntelliJ IDEA 2022.2&lt;/a&gt;. Теперь среда разработки использует JetBrains Runtime 17 вместо 11.&lt;/p&gt;
+&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/07/intellij-idea-2022-2/"&gt;IntelliJ IDEA 2022.2&lt;/a&gt;. Теперь среда разработки использует JetBrains Runtime 17 вместо 11.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/08/java-annotated-monthly-august-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за август.&lt;/p&gt;
 
@@ -539,36 +590,5 @@ Connection connectDatabase() {
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0"&gt;GWT 2.10.0&lt;/a&gt;. Это первое обновление библиотеки спустя два года.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2022/06/14/orm-61-final/"&gt;Hibernate 6.1&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #41</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_41.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_41.html</id>
-    <updated>2022-06-12T18:00:00Z</updated>
-    <published>2022-06-12T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; JDK 19 перешёл в &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-June/006735.html"&gt;первую фазу Rampdown&lt;/a&gt;. Список JEP'ов &lt;a href="https://openjdk.org/projects/jdk/19/"&gt;заморожен&lt;/a&gt;, а исходный код ответвлён в &lt;a href="https://github.com/openjdk/jdk19"&gt;стабилизационный репозиторий&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Примечательно, что из всех семи JEP'ов Java 19 только один будет иметь стабильный характер (&lt;a href="https://openjdk.java.net/jeps/422"&gt;Linux/RISC-V Port&lt;/a&gt;). Все остальные будут иметь статус Preview, либо Incubator.&lt;/p&gt;
-&lt;p&gt;Тем временем, уже &lt;a href="https://github.com/openjdk/jdk/pull/8236"&gt;началась&lt;/a&gt; разработка Java 20. У нового релиза появилась &lt;a href="https://jdk.java.net/20/"&gt;своя страница&lt;/a&gt;, где можно скачать первую сборку JDK 20-ea+1.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В Java 19 попал интересный &lt;a href="https://github.com/openjdk/jdk/pull/3402"&gt;патч&lt;/a&gt;, который исправляет &lt;a href="https://bugs.openjdk.org/browse/JDK-4511638"&gt;баг 20-летней давности&lt;/a&gt;. Баг этот заключается в том, что метод &lt;code&gt;Double.toString()&lt;/code&gt; иногда возвращает некорректный результат, например:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; jshell
-&lt;span style="color: grey"&gt;|  Welcome to JShell -- Version 18.0.1.1
-|  For an introduction type: /help intro&lt;/span&gt;
-
-jshell&amp;gt; Double.toString(1e23)
-$1 ==&gt; "9.999999999999999E22"&lt;/pre&gt;
-&lt;p&gt;В Java 19 это исправлено:&lt;/p&gt;
-&lt;pre&gt;&amp;gt; jshell
-&lt;span style="color: grey"&gt;|  Welcome to JShell -- Version 19-ea
-|  For an introduction type: /help intro&lt;/span&gt;
-
-jshell&amp;gt; Double.toString(1e23)
-$1 ==&gt; "1.0E23"&lt;/pre&gt;
-&lt;p&gt;Помимо возвращения корректного результата новая реализация также значительно быстрее (в 17.7 раз по &lt;a href="https://mail.openjdk.org/pipermail/core-libs-dev/2020-April/065921.html"&gt;замерам автора&lt;/a&gt;), поскольку не выделяет промежуточных объектов, не содержит циклов и использует только целочисленную арифметику.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В блоге IntelliJ IDEA вышел новый выпуск &lt;a href="https://blog.jetbrains.com/idea/2022/06/java-annotated-monthly-june-2022/"&gt;Java Annotated Monthly&lt;/a&gt; за июнь.&lt;/p&gt;</content>
   </entry>
 </feed>
