@@ -4,7 +4,46 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-12-04T18:00:00Z</updated>
+  <updated>2022-12-25T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #51</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_51.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_51.html</id>
+    <updated>2022-12-25T18:00:00Z</updated>
+    <published>2022-12-25T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; JDK 20 перешёл в &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-December/007233.html"&gt;первую фазу Rampdown&lt;/a&gt;. Окончательный список JEP'ов, которые попадут в релиз, следующий:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.org/jeps/429"&gt;JEP 429: Scoped Values (Incubator)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.org/jeps/432"&gt;JEP 432: Record Patterns (Second Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.org/jeps/433"&gt;JEP 433: Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (Fourth Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.org/jeps/434"&gt;JEP 434: Foreign Function &amp; Memory API (Second Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.org/jeps/436"&gt;JEP 436: Virtual Threads (Second Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://openjdk.org/jeps/437"&gt;JEP 437: Structured Concurrency (Second Incubator)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; В рассылке OpenJDK предложен &lt;a href="https://mail.openjdk.org/pipermail/discuss/2022-December/006164.html"&gt;новый проект Galahad&lt;/a&gt;, целью которого будет внедрение в OpenJDK технологий GraalVM, связанных с Java, а именно JIT-компилятора GraalVM (полностью написанного на Java) в качестве альтернативы существующему JIT-компилятору HotSpot. Затем, следующим шагом будет использование AOT-компилятора GraalVM для компиляции JIT-компилятора, а позднее &amp;ndash; портирование Native Image в качестве общего решения для любых Java-приложений.&lt;/p&gt;
+&lt;p&gt;Напомним, что GraalVM уже однажды был частью OpenJDK (с &lt;a href="https://openjdk.org/jeps/317"&gt;Java 10&lt;/a&gt; по &lt;a href="https://openjdk.org/jeps/410"&gt;Java 16&lt;/a&gt;) в качестве экспериментальной технологии, но был убран из-за сложности поддержки и малой используемости. Новой целью будет превращение GraalVM в downstream-репозиторий (GraalVM EE и CE будут полностью основаны на исходном коде OpenJDK), а значит, не будет проблемы дублирования усилий.&lt;/p&gt;
+&lt;p class="pt-1"&gt;Также стали известны &lt;a href="https://medium.com/graalvm/graalvm-galahad-and-a-new-release-schedule-d081d1031bba"&gt;подробности&lt;/a&gt; относительно согласования релизных циклов GraalVM и OpenJDK: начиная с JDK 20, GraalVM будет выходить 2 раза в год (а не 4, как раньше). Следующая версия GraalVM выйдет одновременно с JDK 20 в марте и будет называться &lt;i&gt;GraalVM for JDK 20&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=jJau4kUoLrA"&gt;Eclipse 2022-12&lt;/a&gt;. Что нового появилось в новой версии:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Поддержка Java 19, включая экспериментальные возможности (паттерны записей и паттер-матчинг для &lt;code&gt;switch&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Более умный &lt;i&gt;Extract Local Variable&lt;/i&gt;, учитывающий проверки на &lt;code&gt;null&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Три новых quick fixes для классов: &lt;i&gt;Create getters and setters&lt;/i&gt;, &lt;i&gt;Create &lt;code&gt;hashCode()&lt;/code&gt; and &lt;code&gt;equals()&lt;/code&gt;&lt;/i&gt; и &lt;i&gt;Create &lt;code&gt;toString()&lt;/code&gt;&lt;/i&gt;.&lt;/li&gt;
+  &lt;li&gt;Галочка &lt;i&gt;Automatically update Maven projects configuration&lt;/i&gt; больше не является экспериментальной и включена по умолчанию.&lt;/li&gt;
+  &lt;li&gt;Улучшение редактора XML: автоматическая вставка закрывающего XML-элемента и удаление закрывающего XML-элемента, если вставляется символ &lt;code&gt;/&lt;/code&gt; в конец открывающего элемента.&lt;/li&gt;
+  &lt;li&gt;Поддержка RelaxNG в качестве языка схемы XML (в дополнение к существующим DTD и XSD).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/eclipse/microprofile/releases/tag/6.0"&gt;MicroProfile 6.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/eclipse-ee4j/glassfish/releases/tag/7.0.0"&gt;GlassFish 7&lt;/a&gt;, поддерживающий спецификацию Jakarta EE 10.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.infoq.com/news/2022/12/resilience4j-2-0-0"&gt;Resilience4j 2.0&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #50</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_50.html" />
@@ -556,39 +595,5 @@ Connection connectDatabase() {
 &lt;p&gt;&lt;a href="https://maven.apache.org/wrapper/"&gt;Maven Wrapper&lt;/a&gt;. Надоело держать зоопарк Maven'ов для своих проектов? Хорошая новость: скачивать Maven теперь вообще не нужно. Просто запускаете один раз &lt;code&gt;mvn wrapper:wrapper&lt;/code&gt; на проекте и дальше вместо &lt;code&gt;mvn command&lt;/code&gt; просто вызываете &lt;code&gt;mvnw command&lt;/code&gt;. Maven Wrapper сам скачает и запустит нужную версию Maven.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/sho7a/Decompiler"&gt;Decompiler&lt;/a&gt; &amp;ndash; простой декомпилятор байткода Java с графическим интерфейсом. В качестве движка декомпиляции использует недавно анонсированный &lt;a href="https://github.com/QuiltMC/quiltflower"&gt;Quiltflower&lt;/a&gt;, который хорошо поддерживает современные синтаксические конструкции Java.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/weisJ/jsvg"&gt;JSVG&lt;/a&gt; &amp;ndash; очень лёгкая и быстрая Java-библиотека для рисования SVG. Потребляет на ~98% меньше памяти, чем Apache Batik. Находится в стадии ранней разработки.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #42</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_42.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_42.html</id>
-    <updated>2022-07-03T18:00:00Z</updated>
-    <published>2022-07-03T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик &lt;a href="https://openjdk.org/jeps/8280389"&gt;JEP: Classfile API&lt;/a&gt;. Цель этого JEP &amp;ndash; создать API для парсинга, генерации и трансформации class-файлов.&lt;/p&gt;
-&lt;p&gt;В данный момент наиболее распространена библиотека для работы с байткодом ASM, форк которой используется, в том числе, в самой JDK. Основная проблема с ASM заключается в том, что она всегда отстаёт на один релиз от JDK. Когда выходит новая версия JDK, последняя версия ASM поддерживает только предпоследнюю версию байткода. Из-за этого инструменты и библиотеки, которые корректно работали на предпоследней версии байткода, могут неожиданно ломаться, когда сталкиваются с новыми class-файлами. Раньше это не было большой проблемой, так как релизы Java выходили раз в 3-5 лет. С переходом на &lt;a href="java_18_3.html"&gt;новую частоту&lt;/a&gt; релизов это стало создавать неприятности как для пользователей, так и для разработчиков библиотек.&lt;/p&gt;
-&lt;p&gt;Решение этой проблемы очевидное: библиотека для работы с class-файлами должна быть частью JDK. Тогда пользователи такого classfile API не будут иметь проблем с только что вышедшей новой версией Java, поскольку поддержка новой версии байткода будет идти сразу "из коробки".&lt;/p&gt;
-&lt;p&gt;Новое API будет учитывать и ряд других проблем ASM. Например, ASM имеет старую кодовую базу с большим количеством багажа, доставшегося по наследству от первых версий. Также в ASM используется подход, основанный на Visitor. Было бы глупо в 2022-м году использовать этот же шаблон при наличии современных языковых конструкций: лямбд, записей и паттерн-матчинга.&lt;/p&gt;
-&lt;p&gt;Планируется, что API сначала заменит ASM внутри самой JDK, а позже станет частью публичного API.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=zDJtVYAJwyY"&gt;Eclipse 2022-06&lt;/a&gt;. Перечислим самые заметные нововведения и улучшения в среде разработки:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Поддержка Java 18.&lt;/li&gt;
-  &lt;li&gt;Улучшена производительность автодополнения в редакторе.&lt;/li&gt;
-  &lt;li&gt;Несколько новых &lt;i&gt;Quick Fix&lt;/i&gt; и &lt;i&gt;Cleanup Action&lt;/i&gt; для Java.&lt;/li&gt;
-  &lt;li&gt;Улучшена производительность печати в консоль.&lt;/li&gt;
-  &lt;li&gt;&lt;i&gt;Find Actions&lt;/i&gt; (&lt;code&gt;Ctrl+3&lt;/code&gt;) теперь может искать файлы.&lt;/li&gt;
-  &lt;li&gt;Несколько новых команд, связанных с режимом multi-selection.&lt;/li&gt;
-  &lt;li&gt;Кодировка по умолчанию для workspace теперь UTF-8.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/apache/netbeans/releases/tag/14"&gt;Apache NetBeans 14&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/kotlin/2022/06/kotlin-1-7-0-released/"&gt;Kotlin 1.7.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.gwtproject.org/release-notes.html#Release_Notes_2_10_0"&gt;GWT 2.10.0&lt;/a&gt;. Это первое обновление библиотеки спустя два года.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://in.relation.to/2022/06/14/orm-61-final/"&gt;Hibernate 6.1&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
