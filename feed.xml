@@ -4,7 +4,32 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2022-12-25T18:00:00Z</updated>
+  <updated>2023-01-17T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #52</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_52.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_52.html</id>
+    <updated>2023-01-17T18:00:00Z</updated>
+    <published>2023-01-17T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://kotlinlang.org/docs/whatsnew18.html"&gt;Kotlin 1.8.0&lt;/a&gt;. Некоторые заметные нововведения и изменения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Новые экспериментальные функции &lt;code&gt;copyToRecursively()&lt;/code&gt; and &lt;code&gt;deleteRecursively()&lt;/code&gt; для директорий.&lt;/li&gt;
+  &lt;li&gt;Улучшенная производительность kotlin-reflect.&lt;/li&gt;
+  &lt;li&gt;Новая опция &lt;code&gt;-Xdebug&lt;/code&gt;, подавляющая оптимизации, для более удобной отладки.&lt;/li&gt;
+  &lt;li&gt;Больше не поддерживается таргетирование в байткод 1.6 и 1.7. Вследствие этого, стандартные библиотеки скомпилированы только в 1.8, и более нет разделения на &lt;code&gt;kotlin-stdlib-jdk7&lt;/code&gt; и &lt;code&gt;kotlin-stdlib-jdk8&lt;/code&gt;, а есть единый &lt;code&gt;kotlin-stdlib&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Улучшена интероперабельность с Objective-C/Swift.&lt;/li&gt;
+  &lt;li&gt;Совместимость с Gradle 7.3.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2023/01/java-annotated-monthly-january-2023/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за январь.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/apache/maven/releases/tag/maven-3.8.7"&gt;Apache Maven 3.8.7&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/mockito/mockito/releases/tag/v5.0.0"&gt;Mockito 5.0.0&lt;/a&gt;. Новая версия библиотеки требует Java 11 в качестве минимальной версии.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #51</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_51.html" />
@@ -566,34 +591,5 @@ Connection connectDatabase() {
 &lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/08/java-annotated-monthly-august-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за август.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://medium.com/helidon/helidon-3-0-is-released-1bd2df1f999b"&gt;Helidon 3.0&lt;/a&gt;. Теперь фреймворк требует Java 17 и поддерживает спецификации MicroProfile 5.0 и Jakarta EE 9.1.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #43</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_43.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_43.html</id>
-    <updated>2022-07-24T18:00:00Z</updated>
-    <published>2022-07-24T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/18-0-2-relnotes.html"&gt;JDK 18.0.2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-4-relnotes.html"&gt;JDK 17.0.4&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2022-July/015833.html"&gt;JDK 15.0.8 и 13.0.12&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/11-0-16-relnotes.html"&gt;JDK 11.0.16&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2022-July/015254.html"&gt;JDK 8u342&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JDK 19 перешёл &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-July/006803.html"&gt;во вторую фазу Rampdown&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; В Visual Studio Code появилась &lt;a href="https://devblogs.microsoft.com/java/java-on-visual-studio-code-update-july-2022/"&gt;поддержка Lombok&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/07/java-annotated-monthly-july-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за июль.&lt;/p&gt;
-
-&lt;p class="pt-3"&gt;Возвращаем рубрику &amp;laquo;Полезняшки&amp;raquo;:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://maven.apache.org/wrapper/"&gt;Maven Wrapper&lt;/a&gt;. Надоело держать зоопарк Maven'ов для своих проектов? Хорошая новость: скачивать Maven теперь вообще не нужно. Просто запускаете один раз &lt;code&gt;mvn wrapper:wrapper&lt;/code&gt; на проекте и дальше вместо &lt;code&gt;mvn command&lt;/code&gt; просто вызываете &lt;code&gt;mvnw command&lt;/code&gt;. Maven Wrapper сам скачает и запустит нужную версию Maven.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/sho7a/Decompiler"&gt;Decompiler&lt;/a&gt; &amp;ndash; простой декомпилятор байткода Java с графическим интерфейсом. В качестве движка декомпиляции использует недавно анонсированный &lt;a href="https://github.com/QuiltMC/quiltflower"&gt;Quiltflower&lt;/a&gt;, который хорошо поддерживает современные синтаксические конструкции Java.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/weisJ/jsvg"&gt;JSVG&lt;/a&gt; &amp;ndash; очень лёгкая и быстрая Java-библиотека для рисования SVG. Потребляет на ~98% меньше памяти, чем Apache Batik. Находится в стадии ранней разработки.&lt;/p&gt;</content>
   </entry>
 </feed>
