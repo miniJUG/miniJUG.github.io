@@ -4,7 +4,68 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2023-01-17T18:00:00Z</updated>
+  <updated>2023-01-29T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #53</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_53.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_53.html</id>
+    <updated>2023-01-29T18:00:00Z</updated>
+    <published>2023-01-29T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/19-0-2-relnotes.html"&gt;JDK 19.0.2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-6-relnotes.html"&gt;JDK 17.0.6&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2023-January/020011.html"&gt;JDK 13.0.14&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2023-January/020012.html"&gt;JDK 15.0.10&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/11-0-18-relnotes.html"&gt;JDK 11.0.18&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2023-January/016479.html"&gt;JDK 8u362&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8300786"&gt;No longer require &lt;code&gt;super()&lt;/code&gt; and &lt;code&gt;this()&lt;/code&gt; to appear first in a constructor&lt;/a&gt;. В нём предлагается разрешить писать инструкции кода до вызова &lt;code&gt;super()&lt;/code&gt; и &lt;code&gt;this()&lt;/code&gt; в конструкторах.&lt;/p&gt;
+&lt;p&gt;Напомним, что сейчас эти вызовы всегда должны быть первыми вызовами в конструкторах, иначе код не скомпилируется:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; PositiveBigInteger &lt;span style="color: blue"&gt;extends&lt;/span&gt; BigInteger {
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; PositiveBigInteger(&lt;span style="color: blue"&gt;long&lt;/span&gt; value) {
+        &lt;span style="color: blue"&gt;if&lt;/span&gt; (value &lt;= 0)
+            &lt;span style="color: blue"&gt;throw new&lt;/span&gt; IllegalArgumentException(&lt;span style="color: darkred"&gt;"non-positive value"&lt;/span&gt;);
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;(value); &lt;span style="color: red"&gt;// error: call to super must be first statement in constructor&lt;/span&gt;
+    }
+}&lt;/pre&gt;
+&lt;p&gt;Такое ограничение иногда создаёт неудобства, например, при необходимости проверять входные аргументы до вызова суперконструктора (как в примере выше), при передаче одного и того же вычисляемого параметра в суперконструктор несколько раз или при нетривиальной подготовке параметра перед передачей его в суперконструктор.&lt;/p&gt;
+&lt;p&gt;JEP предлагает это ограничение снять и позволить писать инструкции до вызова &lt;code&gt;super()&lt;/code&gt; / &lt;code&gt;this()&lt;/code&gt;. Однако для кода до вызова остаётся ограничение, что он должен быть в статическом контексте, то есть не должен ссылаться на текущий объект явно или неявно (использовать &lt;code&gt;this&lt;/code&gt;, вызывать нестатические методы и так далее).&lt;/p&gt;
+&lt;p&gt;Любопытно, что в спецификации JVM подобного ограничения нет, и она разрешает произвольный код до вызова &lt;code&gt;super()&lt;/code&gt; / &lt;code&gt;this()&lt;/code&gt;, если он не ссылается на конструируемый объект. Таким образом, предлагаемое изменение будет чисто языковым изменением, без необходимости менять что-то в виртуальной машине.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Черновик JEP "Support for primitive types in &lt;code&gt;instanceof&lt;/code&gt; and type patterns", о котором мы писали в &lt;a href="java_news_49.html"&gt;выпуске #49&lt;/a&gt;, был переименован в &lt;a href="https://openjdk.org/jeps/8288476"&gt;"Primitive types in patterns, &lt;code&gt;instanceof&lt;/code&gt;, and &lt;code&gt;switch&lt;/code&gt;"&lt;/a&gt;. Добавилось важное дополнение, что примитивные типы смогут появляться в ветках &lt;code&gt;switch&lt;/code&gt;. Например:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (i) {
+    &lt;span style="color: blue"&gt;case byte&lt;/span&gt; b -&gt; ... ;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; f -&gt; ... ;
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
+}&lt;/pre&gt;
+&lt;p&gt;Кроме того, список типов константных выражений в ветках будет расширен до всех примитивных типов, включая &lt;code&gt;long&lt;/code&gt;, &lt;code&gt;float&lt;/code&gt;, &lt;code&gt;double&lt;/code&gt; и &lt;code&gt;boolean&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;float&lt;/span&gt; f = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (f) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 1.0f -&gt; ...
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 1.5f -&gt; ...
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; g -&gt; ...
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;long&lt;/span&gt; x = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (x) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 10_000_000_000L -&gt; ...
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 20_000_000_000L -&gt; ...
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...
+}&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;boolean&lt;/span&gt; b = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (b) {
+    &lt;span style="color: blue"&gt;case true&lt;/span&gt; -&gt; ...
+    &lt;span style="color: blue"&gt;case false&lt;/span&gt; -&gt; ...
+}&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Oracle &lt;a href="https://houseofbrick.com/blog/oracle-java-pricing/"&gt;изменила правила&lt;/a&gt; платной подписки на Java SE. Теперь единицей, по которой рассчитывается стоимость, становится сотрудник компании, а не процессор. Таким образом, теперь на цену подписки влияет только количество сотрудников, а не количество серверов и настольных компьютеров, на которых запущена Java (если только у вас не больше 50000 процессоров на серверах). Это приведёт к подорожанию подписки для большинства случаев. В некоторых случаях такой рост будет на порядок.&lt;/p&gt;
+&lt;p&gt;Напомним, что Java была и остаётся свободным ПО, и вышеупомянутое изменение ценовой политики Oracle никак не повлияет на пользователей &lt;a href="https://openjdk.org/"&gt;OpenJDK&lt;/a&gt;, которая продолжает оставаться бесплатной. Останется бесплатной и &lt;a href="https://blogs.oracle.com/java/post/free-java-license"&gt;Oracle JDK 17&lt;/a&gt;, в том числе и для коммерческого использования. Повышение тарифных планов коснётся только компаний, имеющих &lt;a href="https://www.oracle.com/java/java-se-subscription/#rc30p3"&gt;Oracle Java SE Universal Subscription&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #52</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_52.html" />
@@ -540,56 +601,5 @@ Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
 
 &lt;h5 class="pt-2"&gt;Заключение&lt;/h5&gt;
 &lt;p class="pt-3"&gt;Java 19 не является LTS-релизом и будет получать обновления от Oracle только в течение полугода (до марта 2023 года). Однако Azul обещает выпускать обновления Zulu как минимум &lt;a href="https://www.azul.com/products/azul-support-roadmap/"&gt;до марта 2025 года&lt;/a&gt; (2.5 года).&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #44</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_44.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_44.html</id>
-    <updated>2022-08-28T18:00:00Z</updated>
-    <published>2022-08-28T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/18-0-2-relnotes.html#R18_0_2_1"&gt;JDK 18.0.2.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-4-relnotes.html#R17_0_4_1"&gt;JDK 17.0.4.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2022-August/016645.html"&gt;JDK 11.0.16.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2022-August/015329.html"&gt;JDK 8u345&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;18.0.2.1, 17.0.4.1, 11.0.6.1 &amp;ndash; вынужденные обновления, которые пришлось выпустить из-за &lt;a href="https://bugs.openjdk.org/browse/JDK-8292260"&gt;критической регрессии&lt;/a&gt; в JIT-компиляторе C2, вызывающей креш JVM.&lt;/p&gt;
-&lt;p&gt;8u345 пришлось выпустить из-за другого &lt;a href="https://bugs.openjdk.org/browse/JDK-8290832"&gt;критического бага&lt;/a&gt; в 8u342.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел первый &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-August/006861.html"&gt;релиз-кандидат Java 19&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/429"&gt;JEP 429: Extent-Local Variables (Incubator)&lt;/a&gt;. В нём предлагается ввести новый класс &lt;a href="https://download.java.net/java/early_access/loom/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/ExtentLocal.html"&gt;&lt;code&gt;ExtentLocal&lt;/code&gt;&lt;/a&gt; в качестве альтернативы существующему классу &lt;code&gt;ThreadLocal&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Классы &lt;code&gt;ThreadLocal&lt;/code&gt; и &lt;code&gt;ExtentLocal&lt;/code&gt; похожи тем, что решают одну и ту же задачу: передать значение переменной в рамках одной нити (или дерева нитей) из одного места в другое без использования явного параметра. В случае &lt;code&gt;ThreadLocal&lt;/code&gt; для этого вызывается метод &lt;code&gt;set()&lt;/code&gt;, который кладёт значение переменной для данной нити, а потом метод &lt;code&gt;get()&lt;/code&gt; вызывается из другого места для получения значения переменной. У данного подхода есть ряд проблем, например, неконтролируемая мутабельность (&lt;code&gt;set()&lt;/code&gt; можно вызвать когда угодно и откуда угодно), неограниченное время жизни (переменная очистится, только когда исполнение всей нити завершится или когда будет вызван remove(), но про него часто забывают), высокая цена наследования (дочерние нити всегда вынуждены делать полную копию переменной, даже если родительская нить никогда не будет её изменять).&lt;/p&gt;
-&lt;p&gt;В отличие от &lt;code&gt;ThreadLocal&lt;/code&gt;, &lt;code&gt;ExtentLocal&lt;/code&gt; не имеет метода &lt;code&gt;set()&lt;/code&gt;. Однажды ассоциированное с объектом &lt;code&gt;ExtentLocal&lt;/code&gt; значение остаётся иммутабельным. Для этого используется метод &lt;code&gt;where()&lt;/code&gt;. Кроме того, значение ассоциируется на ограниченный срок, который определяется длительностью метода &lt;code&gt;run()&lt;/code&gt;. Как только исполнение метода &lt;code&gt;run()&lt;/code&gt; заканчивается, значение отвязывается от объекта &lt;code&gt;ExtentLocal&lt;/code&gt;. Поскольку значение не меняется, решается и проблема дорогого наследования: дочерним нитям не надо копировать значение, которое остаётся постоянным в течение периода жизни.
-&lt;p&gt;Пример использования &lt;code&gt;ExtentLocal&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;private static final&lt;/span&gt; ExtentLocal&amp;lt;Credentials&amp;gt; CREDENTIALS =
-    ExtentLocal.newInstance();
-
-Credentials creds = ...
-ExtentLocal.where(CREDENTIALS, creds).run(() -&gt; {
-   ...
-   Connection connection = connectDatabase();
-   ...
-});
-
-Connection connectDatabase() {
-   Credentials credentials = CREDENTIALS.get();
-   ...
-}
-&lt;/pre&gt;
-&lt;p&gt;Во многих случаях &lt;code&gt;ExtentLocal&lt;/code&gt; будет являться предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;. Однако когда иммутабельный подход неприменим для решения задачи, &lt;code&gt;ThreadLocal&lt;/code&gt; может остаться предпочтительным.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.slf4j.org/news.html"&gt;SLF4J 2.0&lt;/a&gt;. Это первое мажорное обновление фасада логирования спустя 17 лет после выхода первой версии. Новая версия теперь требует Java 8 и содержит новый &lt;a href="https://www.slf4j.org/manual.html#fluent"&gt;Fluent Logging API&lt;/a&gt;. Кроме того, SLF4J API теперь использует механизм &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html"&gt;&lt;code&gt;ServiceLoader&lt;/code&gt;&lt;/a&gt; для нахождения соответствующего логирующего провайдера. SLF4J 2.0 полностью обратно совместим с SLF4J 1.x, т.е. весь существующий код, использующий SLF4J API, не требует перекомпиляции. Однако при обновлении до второй версии потребуется соответствующее обновление бэкенда, иначе SLF4J API не сможет найти бэкенд и выдаст предупреждение.&lt;/p&gt;
-&lt;p&gt;Вместе с выходом второй версии SLF4J вышли &lt;a href="https://logback.qos.ch/news.html"&gt;Logback 1.3.0 и 1.4.0&lt;/a&gt;, которые поддерживают SLF4J 2.0. Различие между 1.3.0 и 1.4.0 состоит в том, Logback 1.4.0 требует Java 11 и использует пространство имён Jakarta EE (&lt;code&gt;jakarta.*&lt;/code&gt;), в то время как Logback 1.3.0 работает на Java 8 и использует Java EE (&lt;code&gt;javax.*&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/07/intellij-idea-2022-2/"&gt;IntelliJ IDEA 2022.2&lt;/a&gt;. Теперь среда разработки использует JetBrains Runtime 17 вместо 11.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2022/08/java-annotated-monthly-august-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за август.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://medium.com/helidon/helidon-3-0-is-released-1bd2df1f999b"&gt;Helidon 3.0&lt;/a&gt;. Теперь фреймворк требует Java 17 и поддерживает спецификации MicroProfile 5.0 и Jakarta EE 9.1.&lt;/p&gt;</content>
   </entry>
 </feed>

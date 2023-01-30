@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2023-01-18">
+    <meta property="article:published_time" content="2023-01-30">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,24 +31,60 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #52</h3>
-<p class="text-secondary"><time datetime="2023-01-18">18 января, 2023</time></p>
+<h3 id="title">Новости Java #53</h3>
+<p class="text-secondary"><time datetime="2023-01-30">30 января, 2023</time></p>
 <article>
-<p>&bull; Вышел <a href="https://kotlinlang.org/docs/whatsnew18.html">Kotlin 1.8.0</a>. Некоторые заметные нововведения и изменения:</p>
+<p>&bull; Вышли обновления Java:</p>
 <ul>
-  <li>Новые экспериментальные функции <code class="text-nowrap">copyToRecursively()</code> and <code class="text-nowrap">deleteRecursively()</code> для директорий.</li>
-  <li>Улучшенная производительность kotlin-reflect.</li>
-  <li>Новая опция <code class="text-nowrap">-Xdebug</code>, подавляющая оптимизации, для более удобной отладки.</li>
-  <li>Больше не поддерживается таргетирование в байткод 1.6 и 1.7. Вследствие этого, стандартные библиотеки скомпилированы только в 1.8, и более нет разделения на <code class="text-nowrap">kotlin-stdlib-jdk7</code> и <code class="text-nowrap">kotlin-stdlib-jdk8</code>, а есть единый <code class="text-nowrap">kotlin-stdlib</code>.</li>
-  <li>Улучшена интероперабельность с Objective-C/Swift.</li>
-  <li>Совместимость с Gradle 7.3.</li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/19-0-2-relnotes.html">JDK 19.0.2</a></li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/17-0-6-relnotes.html">JDK 17.0.6</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2023-January/020011.html">JDK 13.0.14</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2023-January/020012.html">JDK 15.0.10</a></li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/11-0-18-relnotes.html">JDK 11.0.18</a></li>
+  <li><a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2023-January/016479.html">JDK 8u362</a></li>
 </ul>
 
-<p class="pt-2">&bull; Вышел выпуск <a href="https://blog.jetbrains.com/idea/2023/01/java-annotated-monthly-january-2023/">Java Annotated Monthly</a> от JetBrains за январь.</p>
+<p class="pt-2">&bull; Вышел новый черновик JEP: <a href="https://openjdk.org/jeps/8300786">No longer require <code class="text-nowrap">super()</code> and <code class="text-nowrap">this()</code> to appear first in a constructor</a>. В нём предлагается разрешить писать инструкции кода до вызова <code class="text-nowrap">super()</code> и <code class="text-nowrap">this()</code> в конструкторах.</p>
+<p>Напомним, что сейчас эти вызовы всегда должны быть первыми вызовами в конструкторах, иначе код не скомпилируется:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> PositiveBigInteger <span style="color: blue">extends</span> BigInteger {
+    <span style="color: blue">public</span> PositiveBigInteger(<span style="color: blue">long</span> value) {
+        <span style="color: blue">if</span> (value <= 0)
+            <span style="color: blue">throw new</span> IllegalArgumentException(<span style="color: darkred">"non-positive value"</span>);
+        <span style="color: blue">super</span>(value); <span style="color: red">// error: call to super must be first statement in constructor</span>
+    }
+}</pre>
+<p>Такое ограничение иногда создаёт неудобства, например, при необходимости проверять входные аргументы до вызова суперконструктора (как в примере выше), при передаче одного и того же вычисляемого параметра в суперконструктор несколько раз или при нетривиальной подготовке параметра перед передачей его в суперконструктор.</p>
+<p>JEP предлагает это ограничение снять и позволить писать инструкции до вызова <code class="text-nowrap">super()</code> / <code class="text-nowrap">this()</code>. Однако для кода до вызова остаётся ограничение, что он должен быть в статическом контексте, то есть не должен ссылаться на текущий объект явно или неявно (использовать <code class="text-nowrap">this</code>, вызывать нестатические методы и так далее).</p>
+<p>Любопытно, что в спецификации JVM подобного ограничения нет, и она разрешает произвольный код до вызова <code class="text-nowrap">super()</code> / <code class="text-nowrap">this()</code>, если он не ссылается на конструируемый объект. Таким образом, предлагаемое изменение будет чисто языковым изменением, без необходимости менять что-то в виртуальной машине.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://github.com/apache/maven/releases/tag/maven-3.8.7">Apache Maven 3.8.7</a>.</p>
+<p class="pt-2">&bull; Черновик JEP "Support for primitive types in <code class="text-nowrap">instanceof</code> and type patterns", о котором мы писали в <a href="java_news_49.html">выпуске #49</a>, был переименован в <a href="https://openjdk.org/jeps/8288476">"Primitive types in patterns, <code class="text-nowrap">instanceof</code>, and <code class="text-nowrap">switch</code>"</a>. Добавилось важное дополнение, что примитивные типы смогут появляться в ветках <code class="text-nowrap">switch</code>. Например:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> i = ...;
+<span style="color: blue">switch</span> (i) {
+    <span style="color: blue">case byte</span> b -> ... ;
+    <span style="color: blue">case float</span> f -> ... ;
+    <span style="color: blue">default</span> -> ...;
+}</pre>
+<p>Кроме того, список типов константных выражений в ветках будет расширен до всех примитивных типов, включая <code class="text-nowrap">long</code>, <code class="text-nowrap">float</code>, <code class="text-nowrap">double</code> и <code class="text-nowrap">boolean</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">float</span> f = ...;
+<span style="color: blue">switch</span> (f) {
+    <span style="color: blue">case</span> 1.0f -> ...
+    <span style="color: blue">case</span> 1.5f -> ...
+    <span style="color: blue">case float</span> g -> ...
+}</pre>
+<pre class="border p-lg-2 p-1"><span style="color: blue">long</span> x = ...;
+<span style="color: blue">switch</span> (x) {
+    <span style="color: blue">case</span> 10_000_000_000L -> ...
+    <span style="color: blue">case</span> 20_000_000_000L -> ...
+    <span style="color: blue">default</span> -> ...
+}</pre>
+<pre class="border p-lg-2 p-1"><span style="color: blue">boolean</span> b = ...;
+<span style="color: blue">switch</span> (b) {
+    <span style="color: blue">case true</span> -> ...
+    <span style="color: blue">case false</span> -> ...
+}</pre>
 
-<p class="pt-2">&bull; Вышел <a href="https://github.com/mockito/mockito/releases/tag/v5.0.0">Mockito 5.0.0</a>. Новая версия библиотеки требует Java 11 в качестве минимальной версии.</p>
+<p class="pt-2">&bull; Oracle <a href="https://houseofbrick.com/blog/oracle-java-pricing/">изменила правила</a> платной подписки на Java SE. Теперь единицей, по которой рассчитывается стоимость, становится сотрудник компании, а не процессор. Таким образом, теперь на цену подписки влияет только количество сотрудников, а не количество серверов и настольных компьютеров, на которых запущена Java (если только у вас не больше 50000 процессоров на серверах). Это приведёт к подорожанию подписки для большинства случаев. В некоторых случаях такой рост будет на порядок.</p>
+<p>Напомним, что Java была и остаётся свободным ПО, и вышеупомянутое изменение ценовой политики Oracle никак не повлияет на пользователей <a href="https://openjdk.org/">OpenJDK</a>, которая продолжает оставаться бесплатной. Останется бесплатной и <a href="https://blogs.oracle.com/java/post/free-java-license">Oracle JDK 17</a>, в том числе и для коммерческого использования. Повышение тарифных планов коснётся только компаний, имеющих <a href="https://www.oracle.com/java/java-se-subscription/#rc30p3">Oracle Java SE Universal Subscription</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -56,6 +92,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
   <ul class="collapse show" id="year2023">
+<li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
 <li class="text-secondary"><a href="java_news_52.html" class="text-secondary">Новости Java #52</a></li>
   </ul>
 </div>
@@ -198,7 +235,7 @@
     </div>
     <div class="container d-md-flex flex-row">
       <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
-      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2022</div>
+      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
       <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
     </div>
     <script src="jquery-3.3.1.slim.min.js"></script>
