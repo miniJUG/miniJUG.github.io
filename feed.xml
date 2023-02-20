@@ -4,7 +4,88 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2023-01-29T18:00:00Z</updated>
+  <updated>2023-02-19T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #54</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_54.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_54.html</id>
+    <updated>2023-02-19T18:00:00Z</updated>
+    <published>2023-02-19T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8302326"&gt;Implicit Classes and Enhanced Main Methods (Preview)&lt;/a&gt;. В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в особенности новичку) опускать ненужные конструкции при написании простых программ, что поможет упростить вхождение в язык.&lt;/p&gt;
+&lt;p&gt;Во-первых, модификатор &lt;code&gt;public&lt;/code&gt; и параметр &lt;code&gt;String[] args&lt;/code&gt; для метода &lt;code&gt;main()&lt;/code&gt; будут опциональными:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
+    &lt;span style="color: blue"&gt;static void&lt;/span&gt; main() {
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Во-вторых, метод &lt;code&gt;main()&lt;/code&gt; не будет обязан быть статическим. Тогда JVM сама инстанцирует класс (для этого у него должен иметься не-private конструктор без аргументов) и вызовет метод &lt;code&gt;main()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;В-третьих, само объявление класса будет опциональным. В таком случае JVM сама создаст экземпляр безымянного неявного класса и вызовет &lt;code&gt;main()&lt;/code&gt; на нём:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p&gt;Эти три упрощения помогут новичкам сфокусировать своё изучение языка на простых концепциях вроде объявлений переменных и циклов, а затем постепенно переходить к более сложным (классам, модификаторам доступа и статическим методам).&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел ещё один черновик JEP: &lt;a href="https://openjdk.org/jeps/8299906"&gt;Support Markdown in Documentation Comments&lt;/a&gt;. В этом JEP'е предлагается добавить возможность писать JavaDoc на языке &lt;a href="https://commonmark.org/"&gt;Markdown&lt;/a&gt; вместо HTML. Markdown на сегодняшний день является очень популярным форматом написания документации, отличительной особенностью которого является простота синтаксиса и лёгкость чтения. Markdown трансформируется в HTML, но достаточно легко читаем и в сыром виде.&lt;/p&gt;
+&lt;p&gt;Пример возможной документации на Markdown для &lt;code&gt;Object.hashCode()&lt;/code&gt; с использованием Markdown:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;/**md&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;Returns a hash code value for the object. This method is
+&lt;span style="color: green"&gt; * &lt;/span&gt;supported for the benefit of hash tables such as those provided by
+&lt;span style="color: green"&gt; * &lt;/span&gt;{&lt;span style="color: gray"&gt;&lt;b&gt;@link&lt;/b&gt;&lt;/span&gt; java.util.HashMap}.
+&lt;span style="color: green"&gt; *&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;The general contract of &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; is:
+&lt;span style="color: green"&gt; *&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;-   Whenever it is invoked on the same object more than once during
+&lt;span style="color: green"&gt; * &lt;/span&gt;    an execution of a Java application, the &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method
+&lt;span style="color: green"&gt; * &lt;/span&gt;    must consistently return the same integer, provided no information
+&lt;span style="color: green"&gt; * &lt;/span&gt;    used in &lt;span style="color: darkgreen"&gt;`equals`&lt;/span&gt; comparisons on the object is modified.
+&lt;span style="color: green"&gt; * &lt;/span&gt;    This integer need not remain consistent from one execution of an
+&lt;span style="color: green"&gt; * &lt;/span&gt;    application to another execution of the same application.
+&lt;span style="color: green"&gt; * &lt;/span&gt;-   If two objects are equal according to the {&lt;span style="color: gray"&gt;&lt;b&gt;@link&lt;/b&gt;&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;    #equals(Object) equals} method, then calling the
+&lt;span style="color: green"&gt; * &lt;/span&gt;    &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method on each of the two objects must produce the
+&lt;span style="color: green"&gt; * &lt;/span&gt;    same integer result.
+&lt;span style="color: green"&gt; * &lt;/span&gt;-   It is _not_ required that if two objects are unequal
+&lt;span style="color: green"&gt; * &lt;/span&gt;    according to the {&lt;span style="color: gray"&gt;&lt;b&gt;@link&lt;/b&gt;&lt;/span&gt; #equals(Object) equals} method, then
+&lt;span style="color: green"&gt; * &lt;/span&gt;    calling the &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method on each of the two objects
+&lt;span style="color: green"&gt; * &lt;/span&gt;    must produce distinct integer results.  However, the programmer
+&lt;span style="color: green"&gt; * &lt;/span&gt;    should be aware that producing distinct integer results for
+&lt;span style="color: green"&gt; * &lt;/span&gt;    unequal objects may improve the performance of hash tables.
+&lt;span style="color: green"&gt; *&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@implSpec&lt;/b&gt;&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;As far as is reasonably practical, the &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method defined
+&lt;span style="color: green"&gt; * &lt;/span&gt;by class &lt;span style="color: darkgreen"&gt;`Object`&lt;/span&gt; returns distinct integers for distinct objects.
+&lt;span style="color: green"&gt; *&lt;/span&gt;
+&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@return&lt;/b&gt;&lt;/span&gt;  a hash code value for this object.
+&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@see&lt;/b&gt;&lt;/span&gt;     java.lang.Object#equals(java.lang.Object)
+&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@see&lt;/b&gt;&lt;/span&gt;     java.lang.System#identityHashCode
+&lt;span style="color: green"&gt; */&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://maven.apache.org/docs/3.9.0/release-notes.html"&gt;Apache Maven 3.9.0&lt;/a&gt;. Самые заметные изменения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Минимальная версия Java теперь 8. Это первое увеличение минимальной версии Java спустя 8 лет. В прошлый раз это был Maven &lt;a href="https://maven.apache.org/docs/3.3.1/release-notes.html"&gt;3.3.1&lt;/a&gt;, где минимальной версией стала Java 7.&lt;/li&gt;
+  &lt;li&gt;Обратная совместимость с Maven 2.x окончательно убрана.&lt;/li&gt;
+  &lt;li&gt;Теперь выдаются &lt;a href="https://issues.apache.org/jira/browse/MNG-7457"&gt;предупреждения&lt;/a&gt; об использовании deprecated плагинов, целей, параметров и т.д.&lt;/li&gt;
+  &lt;li&gt;В консоли теперь пишутся префиксы плагинов вместо их &lt;code&gt;artifactId&lt;/code&gt; (например, &lt;code&gt;compiler:3.10.1:compile&lt;/code&gt; вместо &lt;code&gt;maven-compiler-plugin:3.10.1:compile&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Теперь можно вызывать цели через &lt;a href="https://issues.apache.org/jira/browse/MNG-7353"&gt;&lt;code&gt;mvn pluginPrefix:version:goal&lt;/code&gt;&lt;/a&gt;. Раньше это можно было делать либо через &lt;code&gt;mvn:pluginPrefix:goal&lt;/code&gt;, либо через &lt;code&gt;groupId:artifactId[:version]:goal&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Стала возможной активация профиля по типу &lt;code&gt;packaging&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Полный список изменений и нововведений &lt;a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&amp;version=12350913"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/8.0/release-notes.html"&gt;Gradle 8.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел JetBrains &lt;a href="https://blog.jetbrains.com/idea/2023/02/java-annotated-monthly-february-2023/"&gt;Java Annotated Monthly за февраль&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #53</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_53.html" />
@@ -440,166 +521,5 @@
   &lt;li&gt;Новая галочка "Enable word wrap when opening an editor".&lt;/li&gt;
   &lt;li&gt;Улучшения в Clean Up Actions "Convert to switch expression" и "Convert to enhanced 'for' loops".&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Вышла Java 19</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_19.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_19.html</id>
-    <updated>2022-09-19T18:00:00Z</updated>
-    <published>2022-09-19T18:00:00Z</published>
-    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/19/"&gt;Java 19&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-19.html"&gt;двух тысяч закрытых задач и 7 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/19/release-notes"&gt;здесь&lt;/a&gt;. Изменения API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/19/apidiff/18/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- cut --&gt;
-&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://jdk.java.net/19/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Вот список JEP'ов, которые попали в Java 19.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/427"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Third Preview) (JEP 427)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt;, который &lt;a href="https://openjdk.org/jeps/406"&gt;появился в Java 17&lt;/a&gt; в режиме preview и остался на &lt;a href="https://openjdk.org/jeps/420"&gt;второе preview в Java 18&lt;/a&gt;, всё ещё остаётся в этом статусе. Это первый случай в Java, когда языковой конструкции не хватило двух релизов, чтобы стать стабильной: ранее все конструкции укладывались в два preview.&lt;/p&gt;
-&lt;p&gt;В этом релизе в паттерн-матчинг было внесено два главных изменения.&lt;/p&gt;
-
-&lt;p&gt;Во-первых, охранные паттерны &lt;code&gt;&amp;&amp;&lt;/code&gt; были заменены на условия &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 18:&lt;/span&gt;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &amp;&amp; x &gt; 0 -&gt; ...;
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer x &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 -&gt; ...;
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; ...;
-}&lt;/pre&gt;
-
-&lt;p&gt;О мотивации такого изменения можно прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html"&gt;в рассылке проекта Amber&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-1"&gt;Во-вторых, было изменено поведение матчинга &lt;code&gt;null&lt;/code&gt;. Теперь &lt;code&gt;null&lt;/code&gt; матчится только в ветке &lt;code&gt;case null&lt;/code&gt; и большие ни в каких других, включая тотальных:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 18:&lt;/span&gt;
-Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: green"&gt;// matches because total pattern&lt;/span&gt;
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
-Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: red"&gt;// NPE&lt;/span&gt;
-}&lt;/pre&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --release 19:&lt;/span&gt;
-Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case null&lt;/span&gt; -&gt; ...; &lt;span style="color: green"&gt;// OK&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Object x -&gt; ...; &lt;span style="color: red"&gt;&lt;/span&gt;
-}&lt;/pre&gt;
-
-&lt;p&gt;Про причины такого изменения можно также прочитать &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html"&gt;в рассылке&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/405"&gt;Паттерны записей (Preview) (JEP 405)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Паттерн-матчинг дополнился новым видом паттерна: паттерн записей.&lt;/p&gt;
-&lt;p&gt;Раньше для паттерн-матчинга записей был доступен только паттерн по типу с дальнейшим ручным извлечением компонентов:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
-
-&lt;span style="color: blue"&gt;static void&lt;/span&gt; printSum(Object o) {
-    &lt;span style="color: blue"&gt;if&lt;/span&gt; (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point p) {
-        &lt;span style="color: blue"&gt;int&lt;/span&gt; x = p.x();
-        &lt;span style="color: blue"&gt;int&lt;/span&gt; y = p.y();
-        System.out.println(x + y);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;С паттернами записей код становится существенно компактнее:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printSum(Object o) {
-    &lt;span style="color: blue"&gt;if&lt;/span&gt; (o &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y)) {
-        System.out.println(x + y);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;Паттерны записей могут быть вложенными:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
-&lt;span style="color: blue"&gt;enum&lt;/span&gt; Color { RED, GREEN, BLUE }
-&lt;span style="color: blue"&gt;record&lt;/span&gt; ColoredPoint(Point p, Color c) {}
-
-&lt;span style="color: blue"&gt;static void&lt;/span&gt; printCoordinatesAndColor(ColoredPoint cp) {
-    &lt;span style="color: blue"&gt;if&lt;/span&gt; (cp &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; ColoredPoint(Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y), &lt;span style="color: blue"&gt;var&lt;/span&gt; c)) {
-        System.out.println(&lt;span style="color: darkred"&gt;"x = "&lt;/span&gt; + x);
-        System.out.println(&lt;span style="color: darkred"&gt;"y = "&lt;/span&gt; + y);
-        System.out.println(&lt;span style="color: darkred"&gt;"color = "&lt;/span&gt; + c);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;Также паттерны записей могут быть именованными:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printObject(Object obj) {
-    &lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) p) {
-        System.out.println(&lt;span style="color: darkred"&gt;"point = "&lt;/span&gt; + p);
-        System.out.println(&lt;span style="color: darkred"&gt;"x = "&lt;/span&gt; + x);
-        System.out.println(&lt;span style="color: darkred"&gt;"y = "&lt;/span&gt; + y);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;Кроме того, паттерны записей хорошо сочетаются со &lt;code&gt;switch&lt;/code&gt; из предыдущего JEP'а:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printObject(Object obj) {
-    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) &lt;span style="color: blue"&gt;when&lt;/span&gt; x &gt; 0 &amp;&amp; y &gt; 0 -&gt;
-            System.out.println(&lt;span style="color: darkred"&gt;"Positive point: x = "&lt;/span&gt; + x + &lt;span style="color: darkred"&gt;", y = "&lt;/span&gt; + y);
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) -&gt;
-            System.out.println(&lt;span style="color: darkred"&gt;"Point: x = "&lt;/span&gt; + x + &lt;span style="color: darkred"&gt;", y = "&lt;/span&gt; + y);
-        &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Other"&lt;/span&gt;);
-    }
-}&lt;/pre&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/425"&gt;Virtual Threads (Preview) (JEP 425)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;В Java появились виртуальные потоки в режиме preview.&lt;/p&gt;
-&lt;p&gt;Виртуальные потоки, в отличие от потоков операционной системы, являются легковесными и могут создаваться в огромном количестве (миллионы экземпляров). Это свойство должно значительно облегчить написание конкурентных программ, поскольку позволит применять простой подход "один запрос &amp;ndash; один поток" и не прибегать к более сложному асинхронному программированию. При этом миграция на виртуальные потоки уже существующего кода должна быть максимально простой, потому что виртуальные потоки являются экземплярами существующего класса &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html"&gt;&lt;code&gt;java.lang.Thread&lt;/code&gt;&lt;/a&gt;, а значит, большую часть существующего кода не придётся переписывать.&lt;/p&gt;
-&lt;p&gt;Виртуальные потоки реализованы поверх обычных потоков и существуют только для JVM, но не для операционной системы (отсюда и название "виртуальные"). Поток, на котором в данный момент работает виртуальный поток, называется потоком-носителем. Если потоки платформы полагаются на планировщик операционной системы, то планировщиком для виртуальных потоков является &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/ForkJoinPool.html"&gt;&lt;code&gt;ForkJoinPool&lt;/code&gt;&lt;/a&gt;. Когда виртуальный поток блокируется на некоторой блокирующей операции, то он размонтируется от своего потока-носителя, что позволяет потоку-носителю примонтировать другой виртуальный поток и продолжить работу. Такой режим работы и малый размер виртуальных потоков позволяет им очень хорошо масштабироваться. Однако на данный момент есть два исключения: &lt;code&gt;synchronized&lt;/code&gt; блоки и JNI. При их выполнении виртуальный поток не может быть размонтирован, поскольку он привязан к своему потоку-носителю. Такое ограничение может препятствовать масштабированию. Поэтому при желании максимально использовать потенциал виртуальных потоков рекомендуется избегать &lt;code&gt;synchronized&lt;/code&gt; блоки и операции JNI, которые выполняются часто или занимают длительное время.&lt;/p&gt;
-&lt;p&gt;Для создания виртуальных потоков и работы с ними появилось следующее API:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.Builder.html"&gt;&lt;code&gt;Thread.Builder&lt;/code&gt;&lt;/a&gt; &amp;ndash; билдер потоков. Например, виртуальный поток можно создать путём вызова &lt;code&gt;Thread.ofVirtual().name("name").unstarted(runnable)&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html#startVirtualThread(java.lang.Runnable)"&gt;&lt;code&gt;Thread.startVirtualThread(Runnable)&lt;/code&gt;&lt;/a&gt; &amp;ndash; создаёт и сразу же запускает виртуальный поток.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Thread.html#isVirtual()"&gt;&lt;code&gt;Thread.isVirtual()&lt;/code&gt;&lt;/a&gt; &amp;ndash; проверяет, является ли поток виртуальным.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/Executors.html#newVirtualThreadPerTaskExecutor()"&gt;&lt;code&gt;Executors.newVirtualThreadPerTaskExecutor()&lt;/code&gt;&lt;/a&gt; &amp;ndash; возвращает исполнитель, который создаёт новый виртуальный поток на каждую задачу.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Для виртуальных потоков также добавилась поддержка в дебаггере, JVM TI и Java Flight Recorder.&lt;/p&gt;
-&lt;p&gt;Виртуальные потоки разрабатываются &lt;a href="https://mail.openjdk.org/pipermail/announce/2017-October/000238.html"&gt;с 2017 года&lt;/a&gt; в рамках проекта &lt;a href="https://openjdk.org/projects/loom/"&gt;Loom&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/428"&gt;Structured Concurrency (Incubator) (JEP 428)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Ещё одним результатом работы над проектом Loom стало добавление в Java нового API для Structured Concurrency.&lt;/p&gt;
-&lt;p&gt;Structured Concurrency &amp;ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.&lt;/p&gt;
-&lt;p&gt;В центре нового API класс &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/StructuredTaskScope.html"&gt;&lt;code&gt;StructuredTaskScope&lt;/code&gt;&lt;/a&gt;. Пример использования &lt;code&gt;StructuredTaskScope&lt;/code&gt;, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; scope = &lt;span style="color: blue"&gt;new&lt;/span&gt; StructuredTaskScope.ShutdownOnFailure()) {
-    Future&amp;lt;String&gt; user = scope.fork(() -&gt; findUser());
-    Future&amp;lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
-
-    scope.join();           &lt;span style="color: green"&gt;// Join both forks&lt;/span&gt;
-    scope.throwIfFailed();  &lt;span style="color: green"&gt;// ... and propagate errors&lt;/span&gt;
-
-    &lt;span style="color: blue"&gt;return new&lt;/span&gt; Response(user.resultNow(), order.resultNow());
-}&lt;/pre&gt;
-
-&lt;p&gt;Может показаться, что в точности аналогичный код можно было бы написать с использованием &lt;code&gt;ExecutorService&lt;/code&gt; и &lt;code&gt;submit()&lt;/code&gt;, но у &lt;code&gt;StructuredTaskScope&lt;/code&gt; есть несколько принципиальных отличий, которые делают код безопаснее:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Время жизни всех потоков подзадач ограничено областью видимости блока &lt;code&gt;try-with-resources&lt;/code&gt;. Метод &lt;code&gt;close()&lt;/code&gt; гарантированно не завершится, пока не завершатся все подзадачи.&lt;/li&gt;
-  &lt;li&gt;Если одна из операций &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае политики &lt;code&gt;ShutdownOnFailure&lt;/code&gt;, возможны другие).&lt;/li&gt;
-  &lt;li&gt;Если главный поток прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; отменяются.&lt;/li&gt;
-  &lt;li&gt;В дампе потоков будет видна иерархия: потоки, выполняющие &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt;, будут отображаться как дочерние для главного потока.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Новое API должно облегчить написание многопоточных программ благодаря знакомому структурному подходу. Пока API имеет инкубационный статус, оно будет находиться в модуле &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.concurrent/module-summary.html"&gt;&lt;code&gt;jdk.incubator.concurrent&lt;/code&gt;&lt;/a&gt; и одноимённом пакете.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/424"&gt;Foreign Function &amp; Memory API (Preview) (JEP 424)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Foreign Function &amp; Memory API, которое было в инкубационном статусе &lt;a href="https://openjdk.org/jeps/412"&gt;в Java 17&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/419"&gt;Java 18&lt;/a&gt;, теперь стало Preview API. Оно находится в пакете &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/foreign/package-summary.html"&gt;&lt;code&gt;java.lang.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/426"&gt;Vector API (Fourth Incubator) (JEP 426)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;Векторное API, которое уже было в инкубационном статусе три релиза (&lt;a href="https://openjdk.org/jeps/338"&gt;Java 16&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/414"&gt;Java 17&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/417"&gt;Java 18&lt;/a&gt;), продолжает в нём находиться. Пока API не выйдет из инкубационного статуса, оно будет находиться в модуле &lt;a href="https://docs.oracle.com/en/java/javase/19/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/422"&gt;Linux/RISC-V Port (JEP 422)&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;JDK теперь официально портирован под архитектуру Linux/RISC-V.&lt;/p&gt;
-
-&lt;h5 class="pt-2"&gt;Заключение&lt;/h5&gt;
-&lt;p class="pt-3"&gt;Java 19 не является LTS-релизом и будет получать обновления от Oracle только в течение полугода (до марта 2023 года). Однако Azul обещает выпускать обновления Zulu как минимум &lt;a href="https://www.azul.com/products/azul-support-roadmap/"&gt;до марта 2025 года&lt;/a&gt; (2.5 года).&lt;/p&gt;</content>
   </entry>
 </feed>

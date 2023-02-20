@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2023-01-30">
+    <meta property="article:published_time" content="2023-02-20">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,60 +31,80 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #53</h3>
-<p class="text-secondary"><time datetime="2023-01-30">30 января, 2023</time></p>
+<h3 id="title">Новости Java #54</h3>
+<p class="text-secondary"><time datetime="2023-02-20">20 февраля, 2023</time></p>
 <article>
-<p>&bull; Вышли обновления Java:</p>
-<ul>
-  <li><a href="https://www.oracle.com/java/technologies/javase/19-0-2-relnotes.html">JDK 19.0.2</a></li>
-  <li><a href="https://www.oracle.com/java/technologies/javase/17-0-6-relnotes.html">JDK 17.0.6</a></li>
-  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2023-January/020011.html">JDK 13.0.14</a></li>
-  <li><a href="https://mail.openjdk.org/pipermail/jdk-updates-dev/2023-January/020012.html">JDK 15.0.10</a></li>
-  <li><a href="https://www.oracle.com/java/technologies/javase/11-0-18-relnotes.html">JDK 11.0.18</a></li>
-  <li><a href="https://mail.openjdk.org/pipermail/jdk8u-dev/2023-January/016479.html">JDK 8u362</a></li>
-</ul>
-
-<p class="pt-2">&bull; Вышел новый черновик JEP: <a href="https://openjdk.org/jeps/8300786">No longer require <code class="text-nowrap">super()</code> and <code class="text-nowrap">this()</code> to appear first in a constructor</a>. В нём предлагается разрешить писать инструкции кода до вызова <code class="text-nowrap">super()</code> и <code class="text-nowrap">this()</code> в конструкторах.</p>
-<p>Напомним, что сейчас эти вызовы всегда должны быть первыми вызовами в конструкторах, иначе код не скомпилируется:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> PositiveBigInteger <span style="color: blue">extends</span> BigInteger {
-    <span style="color: blue">public</span> PositiveBigInteger(<span style="color: blue">long</span> value) {
-        <span style="color: blue">if</span> (value <= 0)
-            <span style="color: blue">throw new</span> IllegalArgumentException(<span style="color: darkred">"non-positive value"</span>);
-        <span style="color: blue">super</span>(value); <span style="color: red">// error: call to super must be first statement in constructor</span>
+<p>&bull; Вышел новый черновик JEP: <a href="https://openjdk.org/jeps/8302326">Implicit Classes and Enhanced Main Methods (Preview)</a>. В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в особенности новичку) опускать ненужные конструкции при написании простых программ, что поможет упростить вхождение в язык.</p>
+<p>Во-первых, модификатор <code class="text-nowrap">public</code> и параметр <code class="text-nowrap">String[] args</code> для метода <code class="text-nowrap">main()</code> будут опциональными:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
+    <span style="color: blue">static void</span> main() {
+        System.out.println(<span style="color: darkred">"Hello World"</span>);
     }
 }</pre>
-<p>Такое ограничение иногда создаёт неудобства, например, при необходимости проверять входные аргументы до вызова суперконструктора (как в примере выше), при передаче одного и того же вычисляемого параметра в суперконструктор несколько раз или при нетривиальной подготовке параметра перед передачей его в суперконструктор.</p>
-<p>JEP предлагает это ограничение снять и позволить писать инструкции до вызова <code class="text-nowrap">super()</code> / <code class="text-nowrap">this()</code>. Однако для кода до вызова остаётся ограничение, что он должен быть в статическом контексте, то есть не должен ссылаться на текущий объект явно или неявно (использовать <code class="text-nowrap">this</code>, вызывать нестатические методы и так далее).</p>
-<p>Любопытно, что в спецификации JVM подобного ограничения нет, и она разрешает произвольный код до вызова <code class="text-nowrap">super()</code> / <code class="text-nowrap">this()</code>, если он не ссылается на конструируемый объект. Таким образом, предлагаемое изменение будет чисто языковым изменением, без необходимости менять что-то в виртуальной машине.</p>
 
-<p class="pt-2">&bull; Черновик JEP "Support for primitive types in <code class="text-nowrap">instanceof</code> and type patterns", о котором мы писали в <a href="java_news_49.html">выпуске #49</a>, был переименован в <a href="https://openjdk.org/jeps/8288476">"Primitive types in patterns, <code class="text-nowrap">instanceof</code>, and <code class="text-nowrap">switch</code>"</a>. Добавилось важное дополнение, что примитивные типы смогут появляться в ветках <code class="text-nowrap">switch</code>. Например:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">int</span> i = ...;
-<span style="color: blue">switch</span> (i) {
-    <span style="color: blue">case byte</span> b -> ... ;
-    <span style="color: blue">case float</span> f -> ... ;
-    <span style="color: blue">default</span> -> ...;
-}</pre>
-<p>Кроме того, список типов константных выражений в ветках будет расширен до всех примитивных типов, включая <code class="text-nowrap">long</code>, <code class="text-nowrap">float</code>, <code class="text-nowrap">double</code> и <code class="text-nowrap">boolean</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">float</span> f = ...;
-<span style="color: blue">switch</span> (f) {
-    <span style="color: blue">case</span> 1.0f -> ...
-    <span style="color: blue">case</span> 1.5f -> ...
-    <span style="color: blue">case float</span> g -> ...
-}</pre>
-<pre class="border p-lg-2 p-1"><span style="color: blue">long</span> x = ...;
-<span style="color: blue">switch</span> (x) {
-    <span style="color: blue">case</span> 10_000_000_000L -> ...
-    <span style="color: blue">case</span> 20_000_000_000L -> ...
-    <span style="color: blue">default</span> -> ...
-}</pre>
-<pre class="border p-lg-2 p-1"><span style="color: blue">boolean</span> b = ...;
-<span style="color: blue">switch</span> (b) {
-    <span style="color: blue">case true</span> -> ...
-    <span style="color: blue">case false</span> -> ...
+<p>Во-вторых, метод <code class="text-nowrap">main()</code> не будет обязан быть статическим. Тогда JVM сама инстанцирует класс (для этого у него должен иметься не-private конструктор без аргументов) и вызовет метод <code class="text-nowrap">main()</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
+    <span style="color: blue">void</span> main() {
+        System.out.println(<span style="color: darkred">"Hello World"</span>);
+    }
 }</pre>
 
-<p class="pt-2">&bull; Oracle <a href="https://houseofbrick.com/blog/oracle-java-pricing/">изменила правила</a> платной подписки на Java SE. Теперь единицей, по которой рассчитывается стоимость, становится сотрудник компании, а не процессор. Таким образом, теперь на цену подписки влияет только количество сотрудников, а не количество серверов и настольных компьютеров, на которых запущена Java (если только у вас не больше 50000 процессоров на серверах). Это приведёт к подорожанию подписки для большинства случаев. В некоторых случаях такой рост будет на порядок.</p>
-<p>Напомним, что Java была и остаётся свободным ПО, и вышеупомянутое изменение ценовой политики Oracle никак не повлияет на пользователей <a href="https://openjdk.org/">OpenJDK</a>, которая продолжает оставаться бесплатной. Останется бесплатной и <a href="https://blogs.oracle.com/java/post/free-java-license">Oracle JDK 17</a>, в том числе и для коммерческого использования. Повышение тарифных планов коснётся только компаний, имеющих <a href="https://www.oracle.com/java/java-se-subscription/#rc30p3">Oracle Java SE Universal Subscription</a>.</p>
+<p>В-третьих, само объявление класса будет опциональным. В таком случае JVM сама создаст экземпляр безымянного неявного класса и вызовет <code class="text-nowrap">main()</code> на нём:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> main() {
+    System.out.println(<span style="color: darkred">"Hello World"</span>);
+}</pre>
+
+<p>Эти три упрощения помогут новичкам сфокусировать своё изучение языка на простых концепциях вроде объявлений переменных и циклов, а затем постепенно переходить к более сложным (классам, модификаторам доступа и статическим методам).</p>
+
+<p class="pt-2">&bull; Вышел ещё один черновик JEP: <a href="https://openjdk.org/jeps/8299906">Support Markdown in Documentation Comments</a>. В этом JEP'е предлагается добавить возможность писать JavaDoc на языке <a href="https://commonmark.org/">Markdown</a> вместо HTML. Markdown на сегодняшний день является очень популярным форматом написания документации, отличительной особенностью которого является простота синтаксиса и лёгкость чтения. Markdown трансформируется в HTML, но достаточно легко читаем и в сыром виде.</p>
+<p>Пример возможной документации на Markdown для <code class="text-nowrap">Object.hashCode()</code> с использованием Markdown:</p>
+<pre class="border p-lg-2 p-1"><span style="color: green">/**md</span>
+<span style="color: green"> * </span>Returns a hash code value for the object. This method is
+<span style="color: green"> * </span>supported for the benefit of hash tables such as those provided by
+<span style="color: green"> * </span>{<span style="color: gray"><b>@link</b></span> java.util.HashMap}.
+<span style="color: green"> *</span>
+<span style="color: green"> * </span>The general contract of <span style="color: darkgreen">`hashCode`</span> is:
+<span style="color: green"> *</span>
+<span style="color: green"> * </span>-   Whenever it is invoked on the same object more than once during
+<span style="color: green"> * </span>    an execution of a Java application, the <span style="color: darkgreen">`hashCode`</span> method
+<span style="color: green"> * </span>    must consistently return the same integer, provided no information
+<span style="color: green"> * </span>    used in <span style="color: darkgreen">`equals`</span> comparisons on the object is modified.
+<span style="color: green"> * </span>    This integer need not remain consistent from one execution of an
+<span style="color: green"> * </span>    application to another execution of the same application.
+<span style="color: green"> * </span>-   If two objects are equal according to the {<span style="color: gray"><b>@link</b></span>
+<span style="color: green"> * </span>    #equals(Object) equals} method, then calling the
+<span style="color: green"> * </span>    <span style="color: darkgreen">`hashCode`</span> method on each of the two objects must produce the
+<span style="color: green"> * </span>    same integer result.
+<span style="color: green"> * </span>-   It is _not_ required that if two objects are unequal
+<span style="color: green"> * </span>    according to the {<span style="color: gray"><b>@link</b></span> #equals(Object) equals} method, then
+<span style="color: green"> * </span>    calling the <span style="color: darkgreen">`hashCode`</span> method on each of the two objects
+<span style="color: green"> * </span>    must produce distinct integer results.  However, the programmer
+<span style="color: green"> * </span>    should be aware that producing distinct integer results for
+<span style="color: green"> * </span>    unequal objects may improve the performance of hash tables.
+<span style="color: green"> *</span>
+<span style="color: green"> * </span><span style="color: gray"><b>@implSpec</b></span>
+<span style="color: green"> * </span>As far as is reasonably practical, the <span style="color: darkgreen">`hashCode`</span> method defined
+<span style="color: green"> * </span>by class <span style="color: darkgreen">`Object`</span> returns distinct integers for distinct objects.
+<span style="color: green"> *</span>
+<span style="color: green"> * </span><span style="color: gray"><b>@return</b></span>  a hash code value for this object.
+<span style="color: green"> * </span><span style="color: gray"><b>@see</b></span>     java.lang.Object#equals(java.lang.Object)
+<span style="color: green"> * </span><span style="color: gray"><b>@see</b></span>     java.lang.System#identityHashCode
+<span style="color: green"> */</span></pre>
+
+<p class="pt-2">&bull; Вышел <a href="https://maven.apache.org/docs/3.9.0/release-notes.html">Apache Maven 3.9.0</a>. Самые заметные изменения:</p>
+<ul>
+  <li>Минимальная версия Java теперь 8. Это первое увеличение минимальной версии Java спустя 8 лет. В прошлый раз это был Maven <a href="https://maven.apache.org/docs/3.3.1/release-notes.html">3.3.1</a>, где минимальной версией стала Java 7.</li>
+  <li>Обратная совместимость с Maven 2.x окончательно убрана.</li>
+  <li>Теперь выдаются <a href="https://issues.apache.org/jira/browse/MNG-7457">предупреждения</a> об использовании deprecated плагинов, целей, параметров и т.д.</li>
+  <li>В консоли теперь пишутся префиксы плагинов вместо их <code class="text-nowrap">artifactId</code> (например, <code class="text-nowrap">compiler:3.10.1:compile</code> вместо <code class="text-nowrap">maven-compiler-plugin:3.10.1:compile</code>).</li>
+  <li>Теперь можно вызывать цели через <a href="https://issues.apache.org/jira/browse/MNG-7353"><code class="text-nowrap">mvn pluginPrefix:version:goal</code></a>. Раньше это можно было делать либо через <code class="text-nowrap">mvn:pluginPrefix:goal</code>, либо через <code class="text-nowrap">groupId:artifactId[:version]:goal</code>.</li>
+  <li>Стала возможной активация профиля по типу <code class="text-nowrap">packaging</code>.</li>
+</ul>
+<p>Полный список изменений и нововведений <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&version=12350913">тут</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/8.0/release-notes.html">Gradle 8.0</a>.</p>
+
+<p class="pt-2">&bull; Вышел JetBrains <a href="https://blog.jetbrains.com/idea/2023/02/java-annotated-monthly-february-2023/">Java Annotated Monthly за февраль</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -92,6 +112,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
   <ul class="collapse show" id="year2023">
+<li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
 <li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
 <li class="text-secondary"><a href="java_news_52.html" class="text-secondary">Новости Java #52</a></li>
   </ul>

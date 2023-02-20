@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>В Java может появиться новая сериализация</title>
+    <title>Новости Java #54</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="В Java может появиться новая сериализация">
-    <meta property="og:description" content="На сайте OpenJDK появился новый исследовательский документ, в котором описывается идея введения в язык новой улучшенной сериализации взамен старой&hellip;">
+    <meta property="og:title" content="Новости Java #54">
+    <meta property="og:description" content="&bull; Вышел новый черновик JEP: Implicit Classes and Enhanced Main Methods (Preview). В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2019-06-12">
+    <meta property="article:published_time" content="2023-02-20">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="В Java может появиться новая сериализация">
-    <meta name="twitter:description" content="На сайте OpenJDK появился новый исследовательский документ, в котором описывается идея введения в язык новой улучшенной сериализации взамен старой&hellip;">
+    <meta name="twitter:title" content="Новости Java #54">
+    <meta name="twitter:description" content="&bull; Вышел новый черновик JEP: Implicit Classes and Enhanced Main Methods (Preview). В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/minijug.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_54.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/minijug.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_54.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,109 +31,88 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">В Java может появиться новая сериализация</h3>
-<p class="text-secondary"><time datetime="2019-06-12">12 июня, 2019</time></p>
+<h3 id="title">Новости Java #54</h3>
+<p class="text-secondary"><time datetime="2023-02-20">20 февраля, 2023</time></p>
 <article>
-<p>На сайте OpenJDK появился новый <a href="http://cr.openjdk.java.net/~briangoetz/amber/serialization.html">исследовательский документ</a>, в котором описывается идея введения в язык новой улучшенной сериализации взамен старой.</p>
-<p>Сериализация в Java существует с версии 1.1, то есть практически с момента её рождения. С одной стороны, сериализация является очень удобным механизмом, который позволяет быстро и просто сделать любой класс сериализуемым посредством наследования этого класса от интерфейса <code class="text-nowrap">java.io.Serializable</code>. Возможно даже, эта простота стала одной из ключевых причин, почему Java набрала такую огромную популярность в мире, ведь она позволила быстро и эффективно писать сетевые приложения.</p>
-<p>С другой стороны, с тем, как сериализация реализована в Java, связано огромное количество проблем, которые увеличивают цену поддержки приложений, снижают их безопасность и замедляют эволюцию платформы.</p>
-<p>Что не так с сериализацией в Java? Перечислим наиболее серьёзные проблемы:</p>
+<p>&bull; Вышел новый черновик JEP: <a href="https://openjdk.org/jeps/8302326">Implicit Classes and Enhanced Main Methods (Preview)</a>. В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в особенности новичку) опускать ненужные конструкции при написании простых программ, что поможет упростить вхождение в язык.</p>
+<p>Во-первых, модификатор <code class="text-nowrap">public</code> и параметр <code class="text-nowrap">String[] args</code> для метода <code class="text-nowrap">main()</code> будут опциональными:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
+    <span style="color: blue">static void</span> main() {
+        System.out.println(<span style="color: darkred">"Hello World"</span>);
+    }
+}</pre>
+
+<p>Во-вторых, метод <code class="text-nowrap">main()</code> не будет обязан быть статическим. Тогда JVM сама инстанцирует класс (для этого у него должен иметься не-private конструктор без аргументов) и вызовет метод <code class="text-nowrap">main()</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
+    <span style="color: blue">void</span> main() {
+        System.out.println(<span style="color: darkred">"Hello World"</span>);
+    }
+}</pre>
+
+<p>В-третьих, само объявление класса будет опциональным. В таком случае JVM сама создаст экземпляр безымянного неявного класса и вызовет <code class="text-nowrap">main()</code> на нём:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> main() {
+    System.out.println(<span style="color: darkred">"Hello World"</span>);
+}</pre>
+
+<p>Эти три упрощения помогут новичкам сфокусировать своё изучение языка на простых концепциях вроде объявлений переменных и циклов, а затем постепенно переходить к более сложным (классам, модификаторам доступа и статическим методам).</p>
+
+<p class="pt-2">&bull; Вышел ещё один черновик JEP: <a href="https://openjdk.org/jeps/8299906">Support Markdown in Documentation Comments</a>. В этом JEP'е предлагается добавить возможность писать JavaDoc на языке <a href="https://commonmark.org/">Markdown</a> вместо HTML. Markdown на сегодняшний день является очень популярным форматом написания документации, отличительной особенностью которого является простота синтаксиса и лёгкость чтения. Markdown трансформируется в HTML, но достаточно легко читаем и в сыром виде.</p>
+<p>Пример возможной документации на Markdown для <code class="text-nowrap">Object.hashCode()</code> с использованием Markdown:</p>
+<pre class="border p-lg-2 p-1"><span style="color: green">/**md</span>
+<span style="color: green"> * </span>Returns a hash code value for the object. This method is
+<span style="color: green"> * </span>supported for the benefit of hash tables such as those provided by
+<span style="color: green"> * </span>{<span style="color: gray"><b>@link</b></span> java.util.HashMap}.
+<span style="color: green"> *</span>
+<span style="color: green"> * </span>The general contract of <span style="color: darkgreen">`hashCode`</span> is:
+<span style="color: green"> *</span>
+<span style="color: green"> * </span>-   Whenever it is invoked on the same object more than once during
+<span style="color: green"> * </span>    an execution of a Java application, the <span style="color: darkgreen">`hashCode`</span> method
+<span style="color: green"> * </span>    must consistently return the same integer, provided no information
+<span style="color: green"> * </span>    used in <span style="color: darkgreen">`equals`</span> comparisons on the object is modified.
+<span style="color: green"> * </span>    This integer need not remain consistent from one execution of an
+<span style="color: green"> * </span>    application to another execution of the same application.
+<span style="color: green"> * </span>-   If two objects are equal according to the {<span style="color: gray"><b>@link</b></span>
+<span style="color: green"> * </span>    #equals(Object) equals} method, then calling the
+<span style="color: green"> * </span>    <span style="color: darkgreen">`hashCode`</span> method on each of the two objects must produce the
+<span style="color: green"> * </span>    same integer result.
+<span style="color: green"> * </span>-   It is _not_ required that if two objects are unequal
+<span style="color: green"> * </span>    according to the {<span style="color: gray"><b>@link</b></span> #equals(Object) equals} method, then
+<span style="color: green"> * </span>    calling the <span style="color: darkgreen">`hashCode`</span> method on each of the two objects
+<span style="color: green"> * </span>    must produce distinct integer results.  However, the programmer
+<span style="color: green"> * </span>    should be aware that producing distinct integer results for
+<span style="color: green"> * </span>    unequal objects may improve the performance of hash tables.
+<span style="color: green"> *</span>
+<span style="color: green"> * </span><span style="color: gray"><b>@implSpec</b></span>
+<span style="color: green"> * </span>As far as is reasonably practical, the <span style="color: darkgreen">`hashCode`</span> method defined
+<span style="color: green"> * </span>by class <span style="color: darkgreen">`Object`</span> returns distinct integers for distinct objects.
+<span style="color: green"> *</span>
+<span style="color: green"> * </span><span style="color: gray"><b>@return</b></span>  a hash code value for this object.
+<span style="color: green"> * </span><span style="color: gray"><b>@see</b></span>     java.lang.Object#equals(java.lang.Object)
+<span style="color: green"> * </span><span style="color: gray"><b>@see</b></span>     java.lang.System#identityHashCode
+<span style="color: green"> */</span></pre>
+
+<p class="pt-2">&bull; Вышел <a href="https://maven.apache.org/docs/3.9.0/release-notes.html">Apache Maven 3.9.0</a>. Самые заметные изменения:</p>
 <ul>
-  <li>Сериализация (и десериализация) происходит в обход языковых механизмов. Она игнорирует модификаторы доступа полей (<code class="text-nowrap">private</code>, <code class="text-nowrap">protected</code>) и создаёт объекты, не используя конструкторы, а значит игнорирует инварианты, которые могут присутствовать в этих конструкторах. Такую уязвимость может использовать злоумышленник, подменив данные на невалидные, и они успешно &laquo;проглотятся&raquo; при десериализации.</li>
-  <li>При написании сериализуемых классов никак не помогает компилятор и не обнаруживает ошибки. Например, вы не можете статически гарантировать, что все поля сериализуемого класса сами являются сериализуемыми. Или можете опечататься в имени методов <code class="text-nowrap">readObject</code>, <code class="text-nowrap">writeObject</code>, <code class="text-nowrap">readResolve</code> и т.д., и тогда эти методы просто не будут использоваться во время сериализации.</li>
-  <li>Сериализация не поддерживает нормального механизма версионирования, поэтому очень сложно изменять сериализуемые классы так, чтобы они оставались совместимыми с их старыми версиями.</li>
-  <li>Сериализация сильно завязана на потоковое кодирование/декодирование, а значит поменять формат кодирования на отличный от стандартного очень сложно. Кроме того, стандартный формат не является ни компактным, ни эффективным и ни человекочитаемым.</li>
+  <li>Минимальная версия Java теперь 8. Это первое увеличение минимальной версии Java спустя 8 лет. В прошлый раз это был Maven <a href="https://maven.apache.org/docs/3.3.1/release-notes.html">3.3.1</a>, где минимальной версией стала Java 7.</li>
+  <li>Обратная совместимость с Maven 2.x окончательно убрана.</li>
+  <li>Теперь выдаются <a href="https://issues.apache.org/jira/browse/MNG-7457">предупреждения</a> об использовании deprecated плагинов, целей, параметров и т.д.</li>
+  <li>В консоли теперь пишутся префиксы плагинов вместо их <code class="text-nowrap">artifactId</code> (например, <code class="text-nowrap">compiler:3.10.1:compile</code> вместо <code class="text-nowrap">maven-compiler-plugin:3.10.1:compile</code>).</li>
+  <li>Теперь можно вызывать цели через <a href="https://issues.apache.org/jira/browse/MNG-7353"><code class="text-nowrap">mvn pluginPrefix:version:goal</code></a>. Раньше это можно было делать либо через <code class="text-nowrap">mvn:pluginPrefix:goal</code>, либо через <code class="text-nowrap">groupId:artifactId[:version]:goal</code>.</li>
+  <li>Стала возможной активация профиля по типу <code class="text-nowrap">packaging</code>.</li>
 </ul>
-<p>Фундаментальная ошибка существующей сериализации в Java заключается в том, что она пытается быть слишком &laquo;невидимой&raquo; для программиста. Он просто наследуется от <code class="text-nowrap">java.io.Serializable</code> и получает некую неявную магию, которая выполняется виртуальной машиной.</p>
-<p>Наоборот, программист должен явно писать конструкции, отвечающие за конструирование и деконструирование объектов. Эти конструкции должны быть на уровне языка и должны быть написаны посредством статического доступа к полям, а не рефлексии.</p>
-<p>Другая ошибка сериализации в том, что она пытается делать слишком много. Она ставит себе задачу уметь сериализовать любой произвольный граф объектов (который может содержать циклы) и десериализовать его обратно, не ломая его состояние.</p>
-<p>Это ошибку можно исправить, если упростить задачу и делать сериализацию не графа объектов, а дерева данных, в котором не будет понятия identity (как в JSON).</p>
-<p>Как сделать сериализацию, которая бы естественно вписывалась в объектную модель, использовала конструкторы при десериализации, была отделена от формата кодирования и поддерживала версионирование? Для этого на помощь приходят аннотации и ещё не вошедшая в Java возможность языка: <a href="pattern_matching.html">паттерн-матчинг</a>. Например:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">public class</span> Range {
-    <span style="color: blue">int</span> lo;
-    <span style="color: blue">int</span> hi;
+<p>Полный список изменений и нововведений <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&version=12350913">тут</a>.</p>
 
-    <span style="color: blue">private</span> Range(<span style="color: blue">int</span> lo, <span style="color: blue">int</span> hi) {
-        <span style="color: blue">if</span> (lo > hi)
-            <span style="color: blue">throw new</span> IllegalArgumentException(
-                String.format(<span style="color: darkred">"(%d,%d)"</span>, lo, hi));
-        <span style="color: blue">this</span>.lo = lo;
-        <span style="color: blue">this</span>.hi = hi;
-    }
+<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/8.0/release-notes.html">Gradle 8.0</a>.</p>
 
-    @Serializer
-    <span style="color: blue">public pattern</span> Range(<span style="color: blue">int</span> lo, <span style="color: blue">int</span> hi) {
-        lo = <span style="color: blue">this</span>.lo;
-        hi = <span style="color: blue">this</span>.hi;
-    }
-
-    @Deserializer
-    <span style="color: blue">public static</span> Range make(<span style="color: blue">int</span> lo, <span style="color: blue">int</span> hi) {
-        <span style="color: blue">return new</span> Range(lo, hi);
-    }
-}</pre>
-<p>В этом примере объявлен класс Range, который готов к сериализации посредством двух специальных членов класса: сериализатора и десериализатора помеченных аннотациями <code class="text-nowrap">@Serializer</code> и <code class="text-nowrap">@Deserializer</code>. Сериализатор реализован через деконструктор паттерна, а десериализатор – через статический метод, в котором вызывается конструктор. Таким образом, при десериализации неминуемо проверяется инвариант <code class="text-nowrap">hi >= lo</code>, указанный в конструкторе.</p>
-<p>В таком подходе нет никакой магии, и используются обычные аннотации, поэтому сериализацию может делать любой фреймворк, а не только сама платформа Java. Это значит, что формат кодирования может быть также абсолютно любым (бинарный, XML, JSON, YAML и т.д.).</p>
-<p>Так как сериализаторы и десериализаторы – это обычные методы, то программист имеет большую свободу в их реализации. Например, он может выбрать репрезентацию объекта, отличной от той, как представлен объект в памяти. К примеру, <code class="text-nowrap">LinkedList</code> можно будет сериализовать не в цепочку ссылок, а в один непрерывный массив, что сделает представление более простым, эффективным и компактным.</p>
-<p>Версионирование в таком подходе реализуется с помощью специального поля <code class="text-nowrap">version</code> у аннотаций <code class="text-nowrap">@Serializer</code> и <code class="text-nowrap">@Deserializer</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> C {
-    <span style="color: blue">int</span> a;
-    <span style="color: blue">int</span> b;
-    <span style="color: blue">int</span> c;
-
-    @Deserializer(version = 3)
-    <span style="color: blue">public</span> C(<span style="color: blue">int</span> a, <span style="color: blue">int</span> b, <span style="color: blue">int</span> c) {
-        <span style="color: blue">this</span>.a = a;
-        <span style="color: blue">this</span>.b = b;
-        <span style="color: blue">this</span>.c = c;
-    }
-
-    @Deserializer(version = 2)
-    <span style="color: blue">public</span> C(<span style="color: blue">int</span> a, <span style="color: blue">int</span> b) {
-        <span style="color: blue">this</span>(a, b, 0);
-    }
-
-    @Deserializer(version = 1)
-    <span style="color: blue">public</span> C(<span style="color: blue">int</span> a) {
-        <span style="color: blue">this</span>(a, 0, 0);
-    }
-
-    @Serializer(version = 3)
-    <span style="color: blue">public pattern</span> C(<span style="color: blue">int</span> a, <span style="color: blue">int</span> b, <span style="color: blue">int</span> c) {
-        a = <span style="color: blue">this</span>.a;
-        b = <span style="color: blue">this</span>.b;
-        c = <span style="color: blue">this</span>.c;
-    }
-}</pre>
-<p>В этом примере будет вызван один из трёх десериализаторов в зависимости от версии.</p>
-<p>Что делать, если мы не хотим, чтобы сериализаторы и десериализаторы были доступны кому-то кроме как для целей сериализации? Для этого мы можем сделать их приватными. Однако в таком случае конкретный фреймворк сериализации не сможет получить к ним доступ через рефлексию, если такой код находится внутри модуля, в котором пакет не открыт для глубокого рефлективного доступа. Для такого случая предлагается ввести в язык ещё одну новую конструкцию: открытые члены классов. Например:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> Foo {
-    <span style="color: blue">private final</span> InternalState is;
-
-    <span style="color: blue">public</span> Foo(ExternalState es) {
-        <span style="color: blue">this</span>(<span style="color: blue">new</span> InternalState(es));
-    }
-
-    @Deserializer
-    <span style="color: blue">private open</span> Foo(InternalState is) {
-        <span style="color: blue">this</span>.is = is;
-    }
-
-    @Serializer
-    <span style="color: blue">private open pattern</span> serialize(InternalState is) {
-        is = <span style="color: blue">this</span>.is;
-    }
-}</pre>
-<p>Здесь сериализаторы и десериализаторы помечены ключевым словом <code class="text-nowrap">open</code>, что делает их открытыми для <code class="text-nowrap">setAccessible()</code>.</p>
-<p>Таким образом, новый подход фундаментально отличается от старого: в нём классы проектируются как сериализуемые, а не отдаются платформе как есть. Это требует дополнительных усилий, но делает сериализацию более предсказуемой, безопасной и независимой от формата кодирования и фреймворка сериализации.</p>
+<p class="pt-2">&bull; Вышел JetBrains <a href="https://blog.jetbrains.com/idea/2023/02/java-annotated-monthly-february-2023/">Java Annotated Monthly за февраль</a>.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
-  <ul class="collapse" id="year2023">
-<li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
+  <ul class="collapse show" id="year2023">
+<li>Новости Java #54</li>
 <li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
 <li class="text-secondary"><a href="java_news_52.html" class="text-secondary">Новости Java #52</a></li>
   </ul>
@@ -221,13 +200,13 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="true" aria-controls="year2019">2019</a>
-  <ul class="collapse show" id="year2019">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <ul class="collapse" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
 <li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
 <li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
 <li class="text-secondary"><a href="escape_sequences_for_line_continuation_and_whitespace.html" class="text-secondary">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</a></li>
-<li>В Java может появиться новая сериализация</li>
+<li class="text-secondary"><a href="towards_better_serialization.html" class="text-secondary">В Java может появиться новая сериализация</a></li>
 <li class="text-secondary"><a href="scala_2_13_is_out.html" class="text-secondary">Вышла Scala 2.13</a></li>
 <li class="text-secondary"><a href="yield_in_switch.html" class="text-secondary">В <code>switch</code>-выражениях <code>break</code> будет заменён на <code>yield</code></a></li>
 <li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
