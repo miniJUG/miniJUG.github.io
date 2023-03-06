@@ -28,9 +28,9 @@
     <link rel="stylesheet" href="bootstrap.min.css">
   </head>
   <body class="bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
+<div class="container">
+  <div class="row">
+    <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
 <h3 id="title">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</h3>
 <p class="text-secondary"><time datetime="2017-11-07">7 ноября, 2017</time></p>
 <article>
@@ -41,7 +41,7 @@ intList.remove(<span style="color: blue">new</span> Integer(6)); <span style="co
 intList.add(5); <span style="color: green">// Good</span>
 intList.remove(Integer.valueOf(6)); <span style="color: green">// Good</span></pre>
 <p>Однако до недавнего времени такая рекомендация никак не подкреплялась компилятором. И, наконец, в Java 9 конструкторы <code class="text-nowrap">Integer</code> пометили аннотацией <code class="text-nowrap">@Deprecated</code>, а также конструкторы всех остальных обёрнутых примитивных типов: <code class="text-nowrap">Long</code>, <code class="text-nowrap">Float</code>, <code class="text-nowrap">Double</code>, <code class="text-nowrap">Boolean</code>, <code class="text-nowrap">Byte</code>, <code class="text-nowrap">Short</code>, <code class="text-nowrap">Character</code>. В список deprecated конструкторов также вошли конструкторы, принимающие <code class="text-nowrap">String</code>: вместо них рекомендуется использовать методы <code class="text-nowrap">valueOf(String)</code> или <code class="text-nowrap">parseInt()</code> / <code class="text-nowrap">parseLong()</code> и т.д.</p>
-</article>
+  </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
@@ -188,14 +188,14 @@ intList.remove(Integer.valueOf(6)); <span style="color: green">// Good</span></p
 <li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
 </div>
+    </div>
+  </div>
 </div>
-      </div>
-    </div>
-    <div class="container d-md-flex flex-row">
-      <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
-      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
-      <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
-    </div>
+<div class="container d-md-flex flex-row">
+  <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+  <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
+  <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
+</div>
     <script src="jquery-3.3.1.slim.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>

@@ -28,9 +28,9 @@
     <link rel="stylesheet" href="bootstrap.min.css">
   </head>
   <body class="bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
+<div class="container">
+  <div class="row">
+    <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
 <h3 id="title">Исследуем <code class="text-nowrap">sealed</code> классы в Java 15</h3>
 <p class="text-secondary"><time datetime="2020-06-07">7 июня, 2020</time></p>
 <article>
@@ -276,7 +276,7 @@ false</pre>
 <p>Далеко не всегда иерархии классов должны быть открыты для расширения неограниченным кругом лиц. Часто встречается необходимость смоделировать такую иерархию, которая будет открыта для использования, но закрыта для расширения. &laquo;Запечатанные&raquo; классы и интерфейсы в Java 15, наконец, сделают такое возможным. Особенно хорошо <code class="text-nowrap">sealed</code> классы будут взаимодействовать с записями, позволив легко моделировать алгебраические типы данных.</p>
 <p>Но ещё более эффектной эта возможность будет, когда реализуют полноценный <a href="https://openjdk.org/jeps/8213076">паттерн-матчинг для оператора <code class="text-nowrap">switch</code></a>, и компилятор, работая с <code class="text-nowrap">sealed</code> иерархией, сможет делать проверки исчерпываемости (exhaustiveness). Это поможет разработчику сделать код ещё более безопасным.</p>
 <p>Сейчас <code class="text-nowrap">sealed</code> классы некоторое время будут находиться в режиме preview, но к следующему LTS релизу Java 17 они, скорее всего, станут стабильными. Это даст неплохую мотивацию перейти на последнюю версию Java.</p>
-</article>
+  </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
@@ -423,14 +423,14 @@ false</pre>
 <li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
 </div>
+    </div>
+  </div>
 </div>
-      </div>
-    </div>
-    <div class="container d-md-flex flex-row">
-      <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
-      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
-      <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
-    </div>
+<div class="container d-md-flex flex-row">
+  <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+  <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
+  <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
+</div>
     <script src="jquery-3.3.1.slim.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>

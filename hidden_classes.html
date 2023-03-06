@@ -28,9 +28,9 @@
     <link rel="stylesheet" href="bootstrap.min.css">
   </head>
   <body class="bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
+<div class="container">
+  <div class="row">
+    <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
 <h3 id="title">В Java появятся скрытые классы</h3>
 <p class="text-secondary"><time datetime="2020-01-25">25 января, 2020</time></p>
 <article>
@@ -44,7 +44,7 @@
 </ul>
 <p>Основной мотиватор введения в язык скрытых классов &ndash; предоставить надёжный и гибкий инструмент для фреймворков, динамически генерирующих классы во время выполнения. Скрытые классы смогут генерироваться фреймворком в любом количестве, а детали генерации будут надёжно скрыты от пользователя. За примером далеко ходить не надо: сама Java генерирует множество классов во время выполнения, которые было бы неплохо сделать скрытыми (<a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/reflect/Proxy.html">прокси-классы</a>, <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/invoke/LambdaMetafactory.html">тела лямбд</a>, классы после трансляции из JavaScript и т.д.)</p>
 <p><code class="text-nowrap">Lookup.defineHiddenClass()</code> также будет поддерживать агрессивную выгрузку посредством <i>слабых</i> скрытых классов, которые можно будет создавать, указав опцию <code class="text-nowrap">WEAK</code>. На такие классы не будет сильной ссылки со стороны загрузчика класса, а значит, он не будет мешать его утилизации сборщиком мусора. Это предотвратит неконтролируемый рост скрытых классов в памяти.</p>
-</article>
+  </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
@@ -191,14 +191,14 @@
 <li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
 </div>
+    </div>
+  </div>
 </div>
-      </div>
-    </div>
-    <div class="container d-md-flex flex-row">
-      <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
-      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
-      <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
-    </div>
+<div class="container d-md-flex flex-row">
+  <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+  <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
+  <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
+</div>
     <script src="jquery-3.3.1.slim.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>

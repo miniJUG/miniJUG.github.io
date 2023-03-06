@@ -28,9 +28,9 @@
     <link rel="stylesheet" href="bootstrap.min.css">
   </head>
   <body class="bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
+<div class="container">
+  <div class="row">
+    <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
 <h3 id="title">В <code class="text-nowrap">switch</code>-выражениях <code class="text-nowrap">break</code> будет заменён на <code class="text-nowrap">yield</code></h3>
 <p class="text-secondary"><time datetime="2019-06-01">1 июня, 2019</time></p>
 <article>
@@ -45,7 +45,7 @@
     }
 };</pre>
 <p>Проблема с оператором <code class="text-nowrap">break</code> заключается в том, что конструкция <code class="text-nowrap">break value;</code> выглядит как выход из цикла по метке <code class="text-nowrap">value</code>. Чтобы избежать этой неоднозначности, изначально было предложено заменить оператор <code class="text-nowrap">break</code> на <code class="text-nowrap">break-with</code>, чтобы было бы первым в истории языка ключевым словом, <a href="https://openjdk.org/jeps/8223002">содержащим дефис</a>. Такое ключевое слово решило бы проблему, при этом не ломая обратную совместимость, однако позже <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2019-May/001303.html">было предложено</a> заменить <code class="text-nowrap">break-with</code> на более короткое <code class="text-nowrap">yield</code>. Так как <code class="text-nowrap">yield</code> никогда не было зарезервированным ключевым словом в Java, то единственный способ его введения – сделать его контекстно-зависимым, то есть оно будет восприниматься как ключевое слово только в определённом строго специфицированном контексте. Например, последовательность <code class="text-nowrap">yield = 1</code> не пострадает и будет продолжать интерпретироваться как присваивание переменной <code class="text-nowrap">yield</code>. Аналогичная стратегия уже применялась в Java 9, где символы <code class="text-nowrap">module</code>, <code class="text-nowrap">exports</code>, <code class="text-nowrap">requires</code> и т.д. интерпретировались как ключевые слова только в контексте декларации модулей, при этом во всех остальных местах программы эти слова можно было свободно использовать в качестве идентификаторов.</p>
-</article>
+  </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
@@ -192,14 +192,14 @@
 <li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
   </ul>
 </div>
+    </div>
+  </div>
 </div>
-      </div>
-    </div>
-    <div class="container d-md-flex flex-row">
-      <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
-      <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
-      <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
-    </div>
+<div class="container d-md-flex flex-row">
+  <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+  <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2023</div>
+  <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
+</div>
     <script src="jquery-3.3.1.slim.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>
