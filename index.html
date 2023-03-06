@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2023-02-20">
+    <meta property="article:published_time" content="2023-03-06">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -31,80 +31,32 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #54</h3>
-<p class="text-secondary"><time datetime="2023-02-20">20 февраля, 2023</time></p>
+<h3 id="title">Новости Java #55</h3>
+<p class="text-secondary"><time datetime="2023-03-06">6 марта, 2023</time></p>
 <article>
-<p>&bull; Вышел новый черновик JEP: <a href="https://openjdk.org/jeps/8302326">Implicit Classes and Enhanced Main Methods (Preview)</a>. В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в особенности новичку) опускать ненужные конструкции при написании простых программ, что поможет упростить вхождение в язык.</p>
-<p>Во-первых, модификатор <code class="text-nowrap">public</code> и параметр <code class="text-nowrap">String[] args</code> для метода <code class="text-nowrap">main()</code> будут опциональными:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
-    <span style="color: blue">static void</span> main() {
-        System.out.println(<span style="color: darkred">"Hello World"</span>);
-    }
-}</pre>
+<p>&bull; Первые два JEP'а были предложены к попаданию в Java 21. Это <a href="https://openjdk.org/jeps/430">JEP 430: String Templates (Preview)</a> и <a href="https://openjdk.org/jeps/431">JEP 431: Sequenced Collections</a>. Java 21 &ndash; это <a href="https://openjdk.org/projects/jdk/21/">следующий LTS-релиз</a> после Java 17, который должен выйти в сентябре 2023 года.</p>
 
-<p>Во-вторых, метод <code class="text-nowrap">main()</code> не будет обязан быть статическим. Тогда JVM сама инстанцирует класс (для этого у него должен иметься не-private конструктор без аргументов) и вызовет метод <code class="text-nowrap">main()</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
-    <span style="color: blue">void</span> main() {
-        System.out.println(<span style="color: darkred">"Hello World"</span>);
-    }
-}</pre>
+<p class="pt-2">&bull; Вышел новый <a href="https://openjdk.org/jeps/438">JEP 438: Vector API (Fifth Incubator)</a>, который сразу же <a href="https://mail.openjdk.org/pipermail/jdk-dev/2023-March/007404.html">был предложен</a> к попаданию в Java 20. JEP появился с большим опозданием перед самым релизом из-за <a href="https://mail.openjdk.org/pipermail/jdk-dev/2023-February/007389.html">недопонимания</a> со стороны владельца JEP'а. Сейчас эта ошибка была исправлена. Напомним, что общедоступная версия Java 20 выходит уже <a href="https://openjdk.org/projects/jdk/20/">через две недели</a>.</p>
 
-<p>В-третьих, само объявление класса будет опциональным. В таком случае JVM сама создаст экземпляр безымянного неявного класса и вызовет <code class="text-nowrap">main()</code> на нём:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">void</span> main() {
-    System.out.println(<span style="color: darkred">"Hello World"</span>);
-}</pre>
-
-<p>Эти три упрощения помогут новичкам сфокусировать своё изучение языка на простых концепциях вроде объявлений переменных и циклов, а затем постепенно переходить к более сложным (классам, модификаторам доступа и статическим методам).</p>
-
-<p class="pt-2">&bull; Вышел ещё один черновик JEP: <a href="https://openjdk.org/jeps/8299906">Support Markdown in Documentation Comments</a>. В этом JEP'е предлагается добавить возможность писать JavaDoc на языке <a href="https://commonmark.org/">Markdown</a> вместо HTML. Markdown на сегодняшний день является очень популярным форматом написания документации, отличительной особенностью которого является простота синтаксиса и лёгкость чтения. Markdown трансформируется в HTML, но достаточно легко читаем и в сыром виде.</p>
-<p>Пример возможной документации на Markdown для <code class="text-nowrap">Object.hashCode()</code> с использованием Markdown:</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">/**md</span>
-<span style="color: green"> * </span>Returns a hash code value for the object. This method is
-<span style="color: green"> * </span>supported for the benefit of hash tables such as those provided by
-<span style="color: green"> * </span>{<span style="color: gray"><b>@link</b></span> java.util.HashMap}.
-<span style="color: green"> *</span>
-<span style="color: green"> * </span>The general contract of <span style="color: darkgreen">`hashCode`</span> is:
-<span style="color: green"> *</span>
-<span style="color: green"> * </span>-   Whenever it is invoked on the same object more than once during
-<span style="color: green"> * </span>    an execution of a Java application, the <span style="color: darkgreen">`hashCode`</span> method
-<span style="color: green"> * </span>    must consistently return the same integer, provided no information
-<span style="color: green"> * </span>    used in <span style="color: darkgreen">`equals`</span> comparisons on the object is modified.
-<span style="color: green"> * </span>    This integer need not remain consistent from one execution of an
-<span style="color: green"> * </span>    application to another execution of the same application.
-<span style="color: green"> * </span>-   If two objects are equal according to the {<span style="color: gray"><b>@link</b></span>
-<span style="color: green"> * </span>    #equals(Object) equals} method, then calling the
-<span style="color: green"> * </span>    <span style="color: darkgreen">`hashCode`</span> method on each of the two objects must produce the
-<span style="color: green"> * </span>    same integer result.
-<span style="color: green"> * </span>-   It is _not_ required that if two objects are unequal
-<span style="color: green"> * </span>    according to the {<span style="color: gray"><b>@link</b></span> #equals(Object) equals} method, then
-<span style="color: green"> * </span>    calling the <span style="color: darkgreen">`hashCode`</span> method on each of the two objects
-<span style="color: green"> * </span>    must produce distinct integer results.  However, the programmer
-<span style="color: green"> * </span>    should be aware that producing distinct integer results for
-<span style="color: green"> * </span>    unequal objects may improve the performance of hash tables.
-<span style="color: green"> *</span>
-<span style="color: green"> * </span><span style="color: gray"><b>@implSpec</b></span>
-<span style="color: green"> * </span>As far as is reasonably practical, the <span style="color: darkgreen">`hashCode`</span> method defined
-<span style="color: green"> * </span>by class <span style="color: darkgreen">`Object`</span> returns distinct integers for distinct objects.
-<span style="color: green"> *</span>
-<span style="color: green"> * </span><span style="color: gray"><b>@return</b></span>  a hash code value for this object.
-<span style="color: green"> * </span><span style="color: gray"><b>@see</b></span>     java.lang.Object#equals(java.lang.Object)
-<span style="color: green"> * </span><span style="color: gray"><b>@see</b></span>     java.lang.System#identityHashCode
-<span style="color: green"> */</span></pre>
-
-<p class="pt-2">&bull; Вышел <a href="https://maven.apache.org/docs/3.9.0/release-notes.html">Apache Maven 3.9.0</a>. Самые заметные изменения:</p>
+<p class="pt-2">&bull; Вышло несколько новых черновиков JEP.</p>
+<p>Самые главные &ndash; это <a href="https://openjdk.org/jeps/8300541">Record Patterns</a> и <a href="https://openjdk.org/jeps/8300542">Pattern Matching for <code class="text-nowrap">switch</code></a>. В них предлагается сделать паттерны записей и паттерн-матчинг для <code class="text-nowrap">switch</code> постоянными языковыми конструкциями. Напомним, что в Java 20 они будут всё ещё в статусе preview (<a href="https://openjdk.java.net/jeps/432">JEP 432</a> и <a href="https://openjdk.java.net/jeps/433">JEP 433</a>). Таким образом, в следующем LTS-релизе Java 21 планируется их <a href="https://mail.openjdk.org/pipermail/amber-dev/2023-February/007841.html">финализировать</a>.</p>
+<p>В финальные версии конструкций предлагается внести следующие небольшие изменения:</p>
 <ul>
-  <li>Минимальная версия Java теперь 8. Это первое увеличение минимальной версии Java спустя 8 лет. В прошлый раз это был Maven <a href="https://maven.apache.org/docs/3.3.1/release-notes.html">3.3.1</a>, где минимальной версией стала Java 7.</li>
-  <li>Обратная совместимость с Maven 2.x окончательно убрана.</li>
-  <li>Теперь выдаются <a href="https://issues.apache.org/jira/browse/MNG-7457">предупреждения</a> об использовании deprecated плагинов, целей, параметров и т.д.</li>
-  <li>В консоли теперь пишутся префиксы плагинов вместо их <code class="text-nowrap">artifactId</code> (например, <code class="text-nowrap">compiler:3.10.1:compile</code> вместо <code class="text-nowrap">maven-compiler-plugin:3.10.1:compile</code>).</li>
-  <li>Теперь можно вызывать цели через <a href="https://issues.apache.org/jira/browse/MNG-7353"><code class="text-nowrap">mvn pluginPrefix:version:goal</code></a>. Раньше это можно было делать либо через <code class="text-nowrap">mvn:pluginPrefix:goal</code>, либо через <code class="text-nowrap">groupId:artifactId[:version]:goal</code>.</li>
-  <li>Стала возможной активация профиля по типу <code class="text-nowrap">packaging</code>.</li>
+  <li>Паттерны, заключённые в скобки, поддерживаться не будут.</li>
+  <li>В <code class="text-nowrap">case</code>-ветках будут разрешены квалифицированные константы перечислений (при условии, что эти константы совместимы по присваиванию с целевым типом).</li>
+  <li>Паттерны записей в заголовках цикла <code class="text-nowrap">for</code> поддерживаться не будут. Однако они снова появятся в отдельном JEP'е.</li>
 </ul>
-<p>Полный список изменений и нововведений <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&version=12350913">тут</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/8.0/release-notes.html">Gradle 8.0</a>.</p>
+<p class="pt-1">Следующий черновик JEP &ndash; <a href="https://openjdk.org/jeps/8303167">Deprecate the Windows x86-32 Port</a>. Пометить как deprecated 32-битный порт JDK предлагается ради ускорения разработки платформы. Одной из мотиваций также является отсутствие нативной реализации <a href="https://openjdk.org/jeps/436">виртуальных потоков</a> на 32-битной Windows JDK. Также Windows 10 (последняя версия Windows, поддерживающая 32 бит) достигнет своей End of Life в <a href="https://learn.microsoft.com/lifecycle/products/windows-10-home-and-pro">октябре 2025 года</a>.</p>
 
-<p class="pt-2">&bull; Вышел JetBrains <a href="https://blog.jetbrains.com/idea/2023/02/java-annotated-monthly-february-2023/">Java Annotated Monthly за февраль</a>.</p>
+<p class="pt-1">Ещё один черновик JEP &ndash; <a href="https://openjdk.org/jeps/8303358">Scoped Values (Preview)</a>. Таким образом, Scoped Values в Java 21 могут выйти из <a href="https://openjdk.org/jeps/429">инкубационного статуса</a> и стать preview. Про Scoped Values мы писали в <a href="java_news_44.html">выпуске #44</a>, когда они ещё назывались Extent-Local Variables.</p>
+
+<p class="pt-2">&bull; Сайт поиска артефактов в Maven Central <a href="https://search.maven.org">https://search.maven.org</a> теперь стал перенаправлять на <a href="https://central.sonatype.com">https://central.sonatype.com</a>. На сайте Sonatype <a href="https://central.sonatype.org/faq/what-happened-to-search-maven-org/">это объясняется</a> тем, что central.sonatype.com уже покрывает главную функциональность search.maven.org, а также предоставляет больше деталей о компонентах, например, рейтинг безопасности. Кроме того, индекс поиска там обновляется гораздо чаще, чем на search.maven.org, а значит там более свежая и надёжная информация.</p>
+<p>Вернуться к старому сайту пока всё ещё можно, если нажать по <a href="https://search.maven.org/?eh">соответствующей ссылке</a> во всплывающем сообщении. Полное закрытие старого сайта планируется в конце 2023 - начале 2024 года.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://blogs.apache.org/netbeans/#announce-apache-netbeans-17-released">Apache NetBeans 17</a>.</p>
+
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jol-dev/2023-February/000509.html">JOL 0.17</a>. Из основных изменений: минимальная версия Java теперь 8, добавлена поддержка Lilliput.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -112,6 +64,7 @@
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
   <ul class="collapse show" id="year2023">
+<li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
 <li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
 <li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
 <li class="text-secondary"><a href="java_news_52.html" class="text-secondary">Новости Java #52</a></li>

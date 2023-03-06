@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
   <head>
-    <title>Новости Java #37</title>
+    <title>Новости Java #55</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #37">
-    <meta property="og:description" content="&bull; Вышел JEP 425: Virtual Threads (Preview). Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны&hellip;">
+    <meta property="og:title" content="Новости Java #55">
+    <meta property="og:description" content="&bull; Первые два JEP'а были предложены к попаданию в Java 21. Это JEP 430: String Templates (Preview) и JEP 431: Sequenced Collections. Java 21 &ndash; это следующий LTS-релиз после Java 17, который должен&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2022-04-11">
+    <meta property="article:published_time" content="2023-03-06">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Новости Java #37">
-    <meta name="twitter:description" content="&bull; Вышел JEP 425: Virtual Threads (Preview). Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны&hellip;">
+    <meta name="twitter:title" content="Новости Java #55">
+    <meta name="twitter:description" content="&bull; Первые два JEP'а были предложены к попаданию в Java 21. Это JEP 430: String Templates (Preview) и JEP 431: Sequenced Collections. Java 21 &ndash; это следующий LTS-релиз после Java 17, который должен&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_37.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_55.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_37.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_55.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -31,89 +31,48 @@
     <div class="container">
       <div class="row">
         <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #37</h3>
-<p class="text-secondary"><time datetime="2022-04-11">11 апреля, 2022</time></p>
+<h3 id="title">Новости Java #55</h3>
+<p class="text-secondary"><time datetime="2023-03-06">6 марта, 2023</time></p>
 <article>
-<p>&bull; Вышел <a href="https://openjdk.org/jeps/425">JEP 425: Virtual Threads (Preview)</a>. Это значит, что проект Loom перешёл в свою финальную стадию и результаты многолетней работы над виртуальными нитями в скором времени станут доступны широкой публике.</p>
-<p>Напомним, что о старте проекта Loom было заявлено <a href="project_loom.html">в ноябре 2017 года</a> вскоре после выхода Java 9, а первый черновик JEP по виртуальным нитям по нему появился лишь спустя 4 года, о чём мы писали в <a href="java_news_32.html">выпуске #32</a>.</p>
-<p>Вместе с выходом JEP 425 также вышла новая Early-Access сборка Loom <a href="https://jdk.java.net/loom/">19-loom+5</a> с большим количеством изменений по сравнению с предыдущей версией.</p>
+<p>&bull; Первые два JEP'а были предложены к попаданию в Java 21. Это <a href="https://openjdk.org/jeps/430">JEP 430: String Templates (Preview)</a> и <a href="https://openjdk.org/jeps/431">JEP 431: Sequenced Collections</a>. Java 21 &ndash; это <a href="https://openjdk.org/projects/jdk/21/">следующий LTS-релиз</a> после Java 17, который должен выйти в сентябре 2023 года.</p>
 
-<p class="pt-2">&bull; Вышел черновик <a href="https://openjdk.org/jeps/8282272">JEP Pattern matching for switch (Third Preview)</a>. Это значит, что паттерн-матчинг для <code class="text-nowrap">switch</code> стал первой языковой конструкцией, которой не хватило два preview, чтобы стать стабильной.</p>
-<p>В этой итерации предлагается внести два изменения относительно предыдущей.</p>
-<p>Во-первых, заменить охранные паттерны на условия <code class="text-nowrap">when</code>:</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">// Java 18:</span>
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Integer x && x > 0 -> ...;
-    <span style="color: blue">default</span> -> ...;
-}
+<p class="pt-2">&bull; Вышел новый <a href="https://openjdk.org/jeps/438">JEP 438: Vector API (Fifth Incubator)</a>, который сразу же <a href="https://mail.openjdk.org/pipermail/jdk-dev/2023-March/007404.html">был предложен</a> к попаданию в Java 20. JEP появился с большим опозданием перед самым релизом из-за <a href="https://mail.openjdk.org/pipermail/jdk-dev/2023-February/007389.html">недопонимания</a> со стороны владельца JEP'а. Сейчас эта ошибка была исправлена. Напомним, что общедоступная версия Java 20 выходит уже <a href="https://openjdk.org/projects/jdk/20/">через две недели</a>.</p>
 
-<span style="color: green">// Java 19:</span>
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Integer x <span style="color: blue">when</span> x > 0 -> ...;
-    <span style="color: blue">default</span> -> ...;
-}</pre>
-<p>О мотивации заменить <code class="text-nowrap">&&</code> на <code class="text-nowrap">when</code> можно прочитать <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003195.html">тут</a>.</p>
-<p>Во-вторых, предлагается изменить поведения матчинга <code class="text-nowrap">null</code> таким образом, чтобы он матчился только в ветках <code class="text-nowrap">case null</code> и ни в каких других (даже тотальных):</p>
-<pre class="border p-lg-2 p-1"><span style="color: green">// Java 18:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: green">// matches</span>
-}
-
-<span style="color: green">// Java 19:</span>
-Object obj = <span style="color: blue">null</span>;
-<span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case</span> Object x -> ...; <span style="color: red">// NPE</span>
-}</pre>
-<p>Про причины такого изменения можно прочитать <a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-January/003194.html">тут</a>.</p>
-
-<p class="pt-1">Также вышло ещё два новых черновика JEP: <a href="https://openjdk.org/jeps/8284289">Improved way of obtaining call traces asynchronously for profiling</a> и <a href="https://openjdk.org/jeps/8284453">Optionally Record Thread Context in JFR</a>.</p>
-
-
-<p class="pt-2">&bull; Вышел <a href="https://in.relation.to/2022/03/31/orm-60-final/">Hibernate 6.0 Final</a>. Новая версия фреймворка не является полностью совместимой с предыдущей версией 5.x, но в значительной степени совместимость удалось сохранить. Для тех, кто использует Hibernate исключительно через <a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html#_jakarta_persistence">Jakarta Persistence API</a>, переход должен быть полностью совместимым. Для остальных был написан <a href="https://docs.jboss.org/hibernate/orm/6.0/migration-guide/migration-guide.html">подробный гид по миграции</a>.</p>
-<p>Перечислим некоторые существенные изменения Hibernate 6.0:</p>
+<p class="pt-2">&bull; Вышло несколько новых черновиков JEP.</p>
+<p>Самые главные &ndash; это <a href="https://openjdk.org/jeps/8300541">Record Patterns</a> и <a href="https://openjdk.org/jeps/8300542">Pattern Matching for <code class="text-nowrap">switch</code></a>. В них предлагается сделать паттерны записей и паттерн-матчинг для <code class="text-nowrap">switch</code> постоянными языковыми конструкциями. Напомним, что в Java 20 они будут всё ещё в статусе preview (<a href="https://openjdk.java.net/jeps/432">JEP 432</a> и <a href="https://openjdk.java.net/jeps/433">JEP 433</a>). Таким образом, в следующем LTS-релизе Java 21 планируется их <a href="https://mail.openjdk.org/pipermail/amber-dev/2023-February/007841.html">финализировать</a>.</p>
+<p>В финальные версии конструкций предлагается внести следующие небольшие изменения:</p>
 <ul>
-  <li>Базовая версия Java теперь 11.</li>
-  <li>Java Persistence больше не поддерживается. Hibernate 6.0 можно использовать только с пространством имён <code class="text-nowrap">jakarta.persistence</code>, но не <code class="text-nowrap">javax.persistence</code>.</li>
-  <li>Теперь используется Read-by-position вместо Read-by-name при чтении из JDBC <code class="text-nowrap">ResultSet</code>. Это приводит к улучшению производительности, а также к более компактным и читаемым сгенерированным SQL-запросам.</li>
+  <li>Паттерны, заключённые в скобки, поддерживаться не будут.</li>
+  <li>В <code class="text-nowrap">case</code>-ветках будут разрешены квалифицированные константы перечислений (при условии, что эти константы совместимы по присваиванию с целевым типом).</li>
+  <li>Паттерны записей в заголовках цикла <code class="text-nowrap">for</code> поддерживаться не будут. Однако они снова появятся в отдельном JEP'е.</li>
 </ul>
 
-<p class="pt-2">&bull; Вышла <a href="https://newsroom.eclipse.org/eclipse-newsletter/2022/march/what%E2%80%99s-new-jakarta-persistence-31">Jakarta Persistence 3.1</a>.</p>
+<p class="pt-1">Следующий черновик JEP &ndash; <a href="https://openjdk.org/jeps/8303167">Deprecate the Windows x86-32 Port</a>. Пометить как deprecated 32-битный порт JDK предлагается ради ускорения разработки платформы. Одной из мотиваций также является отсутствие нативной реализации <a href="https://openjdk.org/jeps/436">виртуальных потоков</a> на 32-битной Windows JDK. Также Windows 10 (последняя версия Windows, поддерживающая 32 бит) достигнет своей End of Life в <a href="https://learn.microsoft.com/lifecycle/products/windows-10-home-and-pro">октябре 2025 года</a>.</p>
 
-<p class="pt-2">&bull; В Spring обнаружена <a href="https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement">критическая уязвимость</a>, позволяющая злоумышленнику выполнить произвольный код. Уязвимости подвержены приложения при следующих условиях:</p>
-<ul>
-  <li>Приложение запускается на JDK 9 или выше.</li>
-  <li>Используется Apache Tomcat в качестве контейнера сервлетов.</li>
-  <li>Приложение пакуется в WAR, а не JAR.</li>
-  <li>Используются зависимости <code class="text-nowrap">spring-webmvc</code> или <code class="text-nowrap">spring-webflux</code>.</li>
-</ul>
-<p>К моменту публикации уязвимости уже были выпущены новые версии Spring 5.3.18 и 5.2.20, в которых уязвимость была исправлена. На следующий день Apache Tomcat исправил уязвимость на своей стороне, выпустив версии 10.0.20, 9.0.62 и 8.5.78.</p>
+<p class="pt-1">Ещё один черновик JEP &ndash; <a href="https://openjdk.org/jeps/8303358">Scoped Values (Preview)</a>. Таким образом, Scoped Values в Java 21 могут выйти из <a href="https://openjdk.org/jeps/429">инкубационного статуса</a> и стать preview. Про Scoped Values мы писали в <a href="java_news_44.html">выпуске #44</a>, когда они ещё назывались Extent-Local Variables.</p>
 
-<p class="pt-2">&bull; Eclipse начал <a href="https://blogs.eclipse.org/post/denis-roy/moving-eclipse-projects-github-and-gitlab">переезд на GitHub</a>. Многие проекты на данный момент уже переехали (<a href="https://github.com/eclipse-platform/eclipse.platform">Platform</a>, <a href="https://github.com/eclipse-equinox">Equinox</a>, <a href="https://github.com/eclipse-platform/eclipse.platform.swt">SWT</a>, <a href="https://github.com/eclipse-jdt">JDT</a> и т.д).</p>
+<p class="pt-2">&bull; Сайт поиска артефактов в Maven Central <a href="https://search.maven.org">https://search.maven.org</a> теперь стал перенаправлять на <a href="https://central.sonatype.com">https://central.sonatype.com</a>. На сайте Sonatype <a href="https://central.sonatype.org/faq/what-happened-to-search-maven-org/">это объясняется</a> тем, что central.sonatype.com уже покрывает главную функциональность search.maven.org, а также предоставляет больше деталей о компонентах, например, рейтинг безопасности. Кроме того, индекс поиска там обновляется гораздо чаще, чем на search.maven.org, а значит там более свежая и надёжная информация.</p>
+<p>Вернуться к старому сайту пока всё ещё можно, если нажать по <a href="https://search.maven.org/?eh">соответствующей ссылке</a> во всплывающем сообщении. Полное закрытие старого сайта планируется в конце 2023 - начале 2024 года.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://blog.jetbrains.com/idea/2022/04/java-annotated-monthly-april-2022/">Java Annotated Monthly</a> за апрель 2022.</p>
+<p class="pt-2">&bull; Вышел <a href="https://blogs.apache.org/netbeans/#announce-apache-netbeans-17-released">Apache NetBeans 17</a>.</p>
 
-<p class="pt-2">&bull; Вышел <a href="https://github.com/oracle/helidon/releases/tag/2.5.0">Helidon 2.5.0</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://andresalmiray.com/jreleaser-1-0-0-is-here/">JReleaser 1.0.0</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-March/003422.html">JMH 1.35</a>.</p>
+<p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jol-dev/2023-February/000509.html">JOL 0.17</a>. Из основных изменений: минимальная версия Java теперь 8, добавлена поддержка Lilliput.</p>
 </article>
   <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
-  <ul class="collapse" id="year2023">
-<li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
+  <ul class="collapse show" id="year2023">
+<li>Новости Java #55</li>
 <li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
 <li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
 <li class="text-secondary"><a href="java_news_52.html" class="text-secondary">Новости Java #52</a></li>
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
-  <ul class="collapse show" id="year2022">
+  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
+  <ul class="collapse" id="year2022">
 <li class="text-secondary"><a href="java_news_51.html" class="text-secondary">Новости Java #51</a></li>
 <li class="text-secondary"><a href="java_news_50.html" class="text-secondary">Новости Java #50</a></li>
 <li class="text-secondary"><a href="java_news_49.html" class="text-secondary">Новости Java #49</a></li>
@@ -129,7 +88,7 @@ Object obj = <span style="color: blue">null</span>;
 <li class="text-secondary"><a href="java_news_40.html" class="text-secondary">Новости Java #40</a></li>
 <li class="text-secondary"><a href="java_news_39.html" class="text-secondary">Новости Java #39</a></li>
 <li class="text-secondary"><a href="java_news_38.html" class="text-secondary">Новости Java #38</a></li>
-<li>Новости Java #37</li>
+<li class="text-secondary"><a href="java_news_37.html" class="text-secondary">Новости Java #37</a></li>
 <li class="text-secondary"><a href="java_18.html" class="text-secondary">Вышла Java 18</a></li>
 <li class="text-secondary"><a href="java_news_36.html" class="text-secondary">Новости Java #36</a></li>
 <li class="text-secondary"><a href="java_news_35.html" class="text-secondary">Новости Java #35</a></li>

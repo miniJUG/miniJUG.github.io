@@ -4,7 +4,40 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2023-02-19T18:00:00Z</updated>
+  <updated>2023-03-05T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #55</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_55.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_55.html</id>
+    <updated>2023-03-05T18:00:00Z</updated>
+    <published>2023-03-05T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Первые два JEP'а были предложены к попаданию в Java 21. Это &lt;a href="https://openjdk.org/jeps/430"&gt;JEP 430: String Templates (Preview)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/431"&gt;JEP 431: Sequenced Collections&lt;/a&gt;. Java 21 &amp;ndash; это &lt;a href="https://openjdk.org/projects/jdk/21/"&gt;следующий LTS-релиз&lt;/a&gt; после Java 17, который должен выйти в сентябре 2023 года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/438"&gt;JEP 438: Vector API (Fifth Incubator)&lt;/a&gt;, который сразу же &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2023-March/007404.html"&gt;был предложен&lt;/a&gt; к попаданию в Java 20. JEP появился с большим опозданием перед самым релизом из-за &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2023-February/007389.html"&gt;недопонимания&lt;/a&gt; со стороны владельца JEP'а. Сейчас эта ошибка была исправлена. Напомним, что общедоступная версия Java 20 выходит уже &lt;a href="https://openjdk.org/projects/jdk/20/"&gt;через две недели&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышло несколько новых черновиков JEP.&lt;/p&gt;
+&lt;p&gt;Самые главные &amp;ndash; это &lt;a href="https://openjdk.org/jeps/8300541"&gt;Record Patterns&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/8300542"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt;&lt;/a&gt;. В них предлагается сделать паттерны записей и паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; постоянными языковыми конструкциями. Напомним, что в Java 20 они будут всё ещё в статусе preview (&lt;a href="https://openjdk.java.net/jeps/432"&gt;JEP 432&lt;/a&gt; и &lt;a href="https://openjdk.java.net/jeps/433"&gt;JEP 433&lt;/a&gt;). Таким образом, в следующем LTS-релизе Java 21 планируется их &lt;a href="https://mail.openjdk.org/pipermail/amber-dev/2023-February/007841.html"&gt;финализировать&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В финальные версии конструкций предлагается внести следующие небольшие изменения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Паттерны, заключённые в скобки, поддерживаться не будут.&lt;/li&gt;
+  &lt;li&gt;В &lt;code&gt;case&lt;/code&gt;-ветках будут разрешены квалифицированные константы перечислений (при условии, что эти константы совместимы по присваиванию с целевым типом).&lt;/li&gt;
+  &lt;li&gt;Паттерны записей в заголовках цикла &lt;code&gt;for&lt;/code&gt; поддерживаться не будут. Однако они снова появятся в отдельном JEP'е.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-1"&gt;Следующий черновик JEP &amp;ndash; &lt;a href="https://openjdk.org/jeps/8303167"&gt;Deprecate the Windows x86-32 Port&lt;/a&gt;. Пометить как deprecated 32-битный порт JDK предлагается ради ускорения разработки платформы. Одной из мотиваций также является отсутствие нативной реализации &lt;a href="https://openjdk.org/jeps/436"&gt;виртуальных потоков&lt;/a&gt; на 32-битной Windows JDK. Также Windows 10 (последняя версия Windows, поддерживающая 32 бит) достигнет своей End of Life в &lt;a href="https://learn.microsoft.com/lifecycle/products/windows-10-home-and-pro"&gt;октябре 2025 года&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;Ещё один черновик JEP &amp;ndash; &lt;a href="https://openjdk.org/jeps/8303358"&gt;Scoped Values (Preview)&lt;/a&gt;. Таким образом, Scoped Values в Java 21 могут выйти из &lt;a href="https://openjdk.org/jeps/429"&gt;инкубационного статуса&lt;/a&gt; и стать preview. Про Scoped Values мы писали в &lt;a href="java_news_44.html"&gt;выпуске #44&lt;/a&gt;, когда они ещё назывались Extent-Local Variables.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Сайт поиска артефактов в Maven Central &lt;a href="https://search.maven.org"&gt;https://search.maven.org&lt;/a&gt; теперь стал перенаправлять на &lt;a href="https://central.sonatype.com"&gt;https://central.sonatype.com&lt;/a&gt;. На сайте Sonatype &lt;a href="https://central.sonatype.org/faq/what-happened-to-search-maven-org/"&gt;это объясняется&lt;/a&gt; тем, что central.sonatype.com уже покрывает главную функциональность search.maven.org, а также предоставляет больше деталей о компонентах, например, рейтинг безопасности. Кроме того, индекс поиска там обновляется гораздо чаще, чем на search.maven.org, а значит там более свежая и надёжная информация.&lt;/p&gt;
+&lt;p&gt;Вернуться к старому сайту пока всё ещё можно, если нажать по &lt;a href="https://search.maven.org/?eh"&gt;соответствующей ссылке&lt;/a&gt; во всплывающем сообщении. Полное закрытие старого сайта планируется в конце 2023 - начале 2024 года.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blogs.apache.org/netbeans/#announce-apache-netbeans-17-released"&gt;Apache NetBeans 17&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jol-dev/2023-February/000509.html"&gt;JOL 0.17&lt;/a&gt;. Из основных изменений: минимальная версия Java теперь 8, добавлена поддержка Lilliput.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #54</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_54.html" />
@@ -495,31 +528,5 @@
 &lt;p class="pt-1"&gt;Сейчас всё это существует исключительно на уровне концепции, которая активно обсуждается в рассылке, но возможно что-то из предложенных идей будет в будущем реализовано в языке.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2022/10/java-annotated-monthly-october-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за октябрь.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #45</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_45.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_45.html</id>
-    <updated>2022-09-25T18:00:00Z</updated>
-    <published>2022-09-25T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел новый &lt;a href="https://openjdk.org/jeps/430"&gt;JEP 430: String Templates (Preview)&lt;/a&gt;. Про шаблонные строки мы писали в &lt;a href="java_news_28.html"&gt;выпуске #28&lt;/a&gt;, когда они были предложены в рассылке проекта Amber. С тех пор концепция шаблонных строк дозрела до JEP-кандидата, и возможно, они попадут в следующий релиз &lt;a href="https://jdk.java.net/20/"&gt;Java 20&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышла &lt;a href="https://jakarta.ee/release/10/"&gt;Jakarta EE 10&lt;/a&gt;. В этом релизе теперь требуется Java 11 в качестве минимальной версии, а также есть поддержка Java 17. В Jakarta EE 10 более 20 спецификаций получили обновления, а также появилась новая спецификация CDI Lite 4.0. Из принципиальных нововведений также стало появление &lt;a href="https://jakarta.ee/specifications/coreprofile/10/"&gt;Core Profile&lt;/a&gt;, минимального набора спецификаций, созданного специально для микросервисов.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Lightbend &lt;a href="https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka"&gt;объявила&lt;/a&gt; об изменении лицензии у Akka, инструментария, реализующего программную модель на основе акторов.&lt;/p&gt;
-&lt;p&gt;Начиная с версии 2.7, которая выйдет в октябре, Akka будет иметь коммерческую лицензию BSL 1.1. Это значит, что Akka будет иметь не open-source, а так называемую source-available модель, при которой исходные коды будут всё ещё доступны, но Akka можно будет использовать бесплатно только для разработки и других непроизводственных целей. Для производственных целей придётся приобретать коммерческую лицензию, которая, однако, будет бесплатной для компаний с годовым оборотом меньше 25 миллионов долларов. Кроме того, через 3 года после выхода код Akka становится полностью свободным под лицензией Apache 2.0. Также исключением является Play Framework, который внутри себя использует Akka: его также можно использовать бесплатно. Akka 2.6 &lt;a href="https://www.lightbend.com/akka/license-faq"&gt;будет оставаться&lt;/a&gt; под лицензией Apache 2.0 и будет получать критические обновления до сентября 2023 года.&lt;/p&gt;
-&lt;p&gt;Йонас Бонер, создатель Akka, объяснил такое решение тем, что большое количество крупных компаний, таких как Apple, Disney и GM, используют Akka совершенно бесплатно, но все усилия и затраты несёт на себе небольшая компания Lightbend. Новая лицензия позволит сдвинуть баланс в сторону других участников, которые будут обязаны платить и тем самым вносить вклад в будущее Akka.&lt;/p&gt;
-&lt;p&gt;Цены на Akka уже &lt;a href="https://www.lightbend.com/akka#pricing"&gt;опубликованы&lt;/a&gt; и составляют от 1995 до 2995 долларов в год за одно ядро в зависимости от лицензии.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.youtube.com/watch?v=eEXvOjtauxI"&gt;Eclipse 2022-09&lt;/a&gt;. Вот некоторые улучшения и изменения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Более быстрый поиск по подстроке в workspace.&lt;/li&gt;
-  &lt;li&gt;Поддержка цветного вывода в консоли.&lt;/li&gt;
-  &lt;li&gt;Новая галочка "Enable word wrap when opening an editor".&lt;/li&gt;
-  &lt;li&gt;Улучшения в Clean Up Actions "Convert to switch expression" и "Convert to enhanced 'for' loops".&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
