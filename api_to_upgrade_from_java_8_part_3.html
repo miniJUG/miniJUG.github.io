@@ -26,10 +26,15 @@
     <link rel="icon" href="/favicon32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="/favicon192.png" type="image/png" sizes="192x192">
     <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+      a { text-decoration: none }
+      a:hover { text-decoration: underline }
+      code { color:var(--bs-body-color) }
+    </style>
   </head>
   <body class="bg-light">
 <div class="container">
-  <div class="row">
+  <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
 <h3 id="title">API, ради которых наконец-то стоит обновиться с Java 8. Часть 3</h3>
 <p class="text-secondary"><time datetime="2021-04-24">24 апреля, 2021</time></p>
@@ -850,11 +855,11 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
 <p>Сегодня я рассказал про 10 интересных API, некоторые из которых появились в буквально только что <a href="java_16.html">вышедшей Java 16</a>, а некоторые уже присутствуют довольно давно ещё с 9-й версии. Надеюсь, что после прочтения данной статьи вы стали более заинтересованными в миграции на последнюю версию Java. Помните, что в новых версиях Java появляются не только новые возможности, но и изменения, ломающие обратную совместимость (<a href="https://openjdk.org/jeps/260">1</a>, <a href="https://openjdk.org/jeps/322">2</a>, <a href="https://openjdk.org/jeps/320">3</a>, <a href="https://openjdk.org/jeps/372">4</a>, <a href="https://openjdk.org/jeps/396">5</a>, <a href="https://openjdk.org/jeps/363">6</a>, <a href="https://openjdk.org/jeps/367">7</a>, <a href="https://openjdk.org/jeps/403">8</a>). И чем больше вы тянете с переходом с Java 8 на последнюю версию, тем сложнее вам будет осуществить этот переход.</p>
 <p>Продолжение следует...</p>
   </article>
-  <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
+  <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
   <ul class="collapse" id="year2023">
 <li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
 <li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
@@ -863,7 +868,7 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
   <ul class="collapse" id="year2022">
 <li class="text-secondary"><a href="java_news_51.html" class="text-secondary">Новости Java #51</a></li>
 <li class="text-secondary"><a href="java_news_50.html" class="text-secondary">Новости Java #50</a></li>
@@ -887,7 +892,7 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
 <li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
@@ -929,7 +934,7 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
   <ul class="collapse" id="year2020">
 <li class="text-secondary"><a href="java_15_is_out.html" class="text-secondary">Вышла Java 15</a></li>
 <li class="text-secondary"><a href="trying_sealed_classes_in_java_15.html" class="text-secondary">Исследуем <code>sealed</code> классы в Java 15</a></li>
@@ -945,7 +950,7 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
   <ul class="collapse" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
 <li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
@@ -962,7 +967,7 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
   <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
 <li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
@@ -976,7 +981,7 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
   <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
@@ -1005,8 +1010,6 @@ Point.java:6: warning: [serial] serialVersionUID must be of type long in class P
   <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
   <div class="p-lg-4 p-3 text-secondary"><a href="jeps.html">Table of JEPs</a></div>
 </div>
-    <script src="jquery-3.3.1.slim.min.js"></script>
-    <script src="popper.min.js"></script>
-    <script src="bootstrap.min.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
   </body>
 </html>

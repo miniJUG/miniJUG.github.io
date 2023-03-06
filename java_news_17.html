@@ -26,10 +26,15 @@
     <link rel="icon" href="/favicon32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="/favicon192.png" type="image/png" sizes="192x192">
     <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+      a { text-decoration: none }
+      a:hover { text-decoration: underline }
+      code { color:var(--bs-body-color) }
+    </style>
   </head>
   <body class="bg-light">
 <div class="container">
-  <div class="row">
+  <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
 <h3 id="title">Новости Java #17</h3>
 <p class="text-secondary"><time datetime="2021-05-10">10 мая, 2021</time></p>
@@ -57,11 +62,11 @@
 
 <p class="pt-2">&bull; Вышел <a href="https://mail.openjdk.org/pipermail/jmh-dev/2021-May/003237.html">JMH 1.30</a>.</p>
   </article>
-  <p class="pt-4 font-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
+  <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
   <ul class="collapse" id="year2023">
 <li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
 <li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
@@ -70,7 +75,7 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
   <ul class="collapse" id="year2022">
 <li class="text-secondary"><a href="java_news_51.html" class="text-secondary">Новости Java #51</a></li>
 <li class="text-secondary"><a href="java_news_50.html" class="text-secondary">Новости Java #50</a></li>
@@ -94,7 +99,7 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
   <ul class="collapse show" id="year2021">
 <li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
@@ -136,7 +141,7 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
   <ul class="collapse" id="year2020">
 <li class="text-secondary"><a href="java_15_is_out.html" class="text-secondary">Вышла Java 15</a></li>
 <li class="text-secondary"><a href="trying_sealed_classes_in_java_15.html" class="text-secondary">Исследуем <code>sealed</code> классы в Java 15</a></li>
@@ -152,7 +157,7 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
   <ul class="collapse" id="year2019">
 <li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
 <li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
@@ -169,7 +174,7 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
   <ul class="collapse" id="year2018">
 <li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
 <li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
@@ -183,7 +188,7 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
   <ul class="collapse" id="year2017">
 <li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
 <li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
@@ -212,8 +217,6 @@
   <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.ru/feed.xml">Feed</a></div>
   <div class="p-lg-4 p-3 text-secondary"><a href="jeps.html">Table of JEPs</a></div>
 </div>
-    <script src="jquery-3.3.1.slim.min.js"></script>
-    <script src="popper.min.js"></script>
-    <script src="bootstrap.min.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
   </body>
 </html>
