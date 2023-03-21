@@ -4,7 +4,128 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2023-03-05T18:00:00Z</updated>
+  <updated>2023-03-20T18:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 20</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_20.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_20.html</id>
+    <updated>2023-03-20T18:00:00Z</updated>
+    <published>2023-03-20T18:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/20/"&gt;Java 20&lt;/a&gt;. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-20.html"&gt;1500 закрытых задач и 7 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/20/release-notes"&gt;здесь&lt;/a&gt;. Изменения API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/20/apidiff/19/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Ссылки на скачивание:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/20/"&gt;OpenJDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-1"&gt;Вот список JEP'ов, которые попали в Java 20.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/432"&gt;Паттерны записей (Second Preview) (JEP 432)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В паттерны записей, которые появились &lt;a href="https://openjdk.org/jeps/405"&gt;в Java 19&lt;/a&gt; в режиме &lt;a href="https://openjdk.org/jeps/12"&gt;preview&lt;/a&gt; (и остающиеся в этом статусе в Java 20), было внесено три главные изменения.&lt;/p&gt;
+
+&lt;p&gt;Во-первых, добавилась поддержка вывода типов в записях-дженериках:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Box&amp;lt;T&gt;(T t) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Box&amp;lt;String&gt; box) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (box &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Box(&lt;span style="color: blue"&gt;var&lt;/span&gt; s)) { &lt;span style="color: green"&gt;// Выводится Box&amp;lt;String&gt;(var s)&lt;/span&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"String "&lt;/span&gt; + s);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Во-вторых, паттерны записей теперь могут присутствовать в заголовке улучшенного цикла &lt;code&gt;for&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; dump(Point[] pointArray) {
+    &lt;span style="color: blue"&gt;for&lt;/span&gt; (Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) : pointArray) {
+        System.out.println(&lt;span style="color: darkred"&gt;"("&lt;/span&gt; + x + &lt;span style="color: darkred"&gt;", "&lt;/span&gt; + y + &lt;span style="color: darkred"&gt;")"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+&lt;p&gt;Примечание: эту возможность было решено удалить &lt;a href="https://openjdk.org/jeps/440"&gt;в Java 21&lt;/a&gt;, но она снова может появиться в будущем в другом JEP'е.&lt;/p&gt;
+
+&lt;p class="pt-1"&gt;В-третьих, исчезла поддержка именованных паттернов записей. Это значит, что такой код, который компилировался в Java 19, в Java 20 уже не будет компилироваться:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) p) { &lt;span style="color: red"&gt;// Syntax error&lt;/span&gt;
+    ...
+}&lt;/pre&gt;
+
+&lt;p&gt;Хотя именованные паттерны и исчезли в этом релизе, это не значит, что они исчезли насовсем. Возможно они появятся в одном из будущих релизов, когда будут более тщательно продуманы.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/433"&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; (Fourth Preview) (JEP 433)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Это уже четвёртая итерация preview паттерн-матчинга в Java. Напомним, что предыдущие три попали в Java &lt;a href="https://openjdk.org/jeps/406"&gt;17&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/420"&gt;18&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/427"&gt;19&lt;/a&gt;. В новой версии три главных изменения.&lt;/p&gt;
+
+&lt;p&gt;Во-первых, исчерпывающий &lt;code&gt;switch&lt;/code&gt; по перечислениям теперь выбрасывает &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/MatchException.html"&gt;&lt;code&gt;MatchException&lt;/code&gt;&lt;/a&gt;, а не &lt;code&gt;IncompatibleClassChangeError&lt;/code&gt;, если ни одна из меток &lt;code&gt;switch&lt;/code&gt; не сматчилась.&lt;/p&gt;
+
+&lt;p&gt;Во-вторых, упростилась грамматика меток &lt;code&gt;switch&lt;/code&gt; в JLS.&lt;/p&gt;
+
+&lt;p&gt;В-третьих, добавилась поддержка вывода типов в записях-дженериках, если они являются паттернами в &lt;code&gt;switch&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Pair&amp;lt;S, T&gt;(S first, T second) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; recordInference(Pair&amp;lt;String, Integer&gt; pair) {
+    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (pair) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Pair(&lt;span style="color: blue"&gt;var&lt;/span&gt; fst, &lt;span style="color: blue"&gt;var&lt;/span&gt; snd) -&gt; ... &lt;span style="color: green"&gt;// Выводится Pair&amp;lt;String, Integer&gt;&lt;/span&gt;
+        ...
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Как видите, здесь JEP 433 полностью согласуется с JEP 432.&lt;/p&gt;
+
+&lt;p&gt;Паттерны записей и паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; предлагается финализировать в Java 21 (&lt;a href="https://openjdk.org/jeps/440"&gt;JEP 440&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/441"&gt;JEP 441&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/436"&gt;Virtual Threads (Second Preview) (JEP 436)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Виртуальные потоки, которые появились &lt;a href="https://openjdk.org/jeps/425"&gt;в Java 19&lt;/a&gt;, продолжают оставаться в статусе Preview API (предлагается финализировать их &lt;a href="https://openjdk.org/jeps/8303683"&gt;в Java 21&lt;/a&gt;). Изменений API, связанных с проектом &lt;a href="https://openjdk.org/projects/loom/"&gt;Loom&lt;/a&gt;, в этом релизе нет (если не считать scoped values и structured concurrency, которые имеют &lt;a href="https://openjdk.org/jeps/11"&gt;инкубационный статус&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/429"&gt;Scoped Values (Incubator) (JEP 429)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появился новый класс &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/ScopedValue.html"&gt;&lt;code&gt;ScopedValue&lt;/code&gt;&lt;/a&gt;, который позволяет обмениваться иммутабельными данными без их передачи через аргументы методов. Он является альтернативой существующему классу &lt;code&gt;ThreadLocal&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Классы &lt;code&gt;ThreadLocal&lt;/code&gt; и &lt;code&gt;ScopedValue&lt;/code&gt; похожи тем, что решают одну и ту же задачу: передать значение переменной в рамках одного потока (или дерева потоков) из одного места в другое без использования явного параметра. В случае &lt;code&gt;ThreadLocal&lt;/code&gt; для этого вызывается метод &lt;code&gt;set()&lt;/code&gt;, который кладёт значение переменной для данного потока, а потом метод &lt;code&gt;get()&lt;/code&gt; вызывается из другого места для получения значения переменной. У данного подхода есть ряд недостатков:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Неконтролируемая мутабельность (&lt;code&gt;set()&lt;/code&gt; можно вызвать когда угодно и откуда угодно).&lt;/li&gt;
+    &lt;li&gt;Неограниченное время жизни (переменная очистится, только когда завершится исполнение потока или когда будет вызван &lt;code&gt;ThreadLocal.remove()&lt;/code&gt;, но про него часто забывают).&lt;/li&gt;
+    &lt;li&gt;Высокая цена наследования (дочерние потоки всегда вынуждены делать полную копию переменной, даже если родительский поток никогда не будет её изменять).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Эти проблемы усугубляются с появлением виртуальных потоков, которые могут создаваться в гораздо больше количестве, чем обычные.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ScopedValue&lt;/code&gt; лишён вышеперечисленных недостатков. В отличие от &lt;code&gt;ThreadLocal&lt;/code&gt;, &lt;code&gt;ScopedValue&lt;/code&gt; не имеет метода &lt;code&gt;set()&lt;/code&gt;. Значение ассоциируется с объектом &lt;code&gt;ScopedValue&lt;/code&gt; путём вызова другого метода &lt;code&gt;where()&lt;/code&gt;. Далее вызывается метод &lt;code&gt;run()&lt;/code&gt;, на протяжении которого это значение можно получить (через метод &lt;code&gt;get()&lt;/code&gt;), но нельзя изменить. Как только исполнение метода &lt;code&gt;run()&lt;/code&gt; заканчивается, значение отвязывается от объекта &lt;code&gt;ScopedValue&lt;/code&gt;. Поскольку значение не меняется, решается и проблема дорогого наследования: дочерним потоком не надо копировать значение, которое остаётся постоянным в течение периода жизни.
+&lt;/p&gt;&lt;p&gt;Пример использования &lt;code&gt;ScopedValue&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static final&lt;/span&gt; ScopedValue&amp;lt;Credentials&amp;gt; CREDENTIALS = new ScopedValue&lt;&gt;();
+
+Credentials creds = ...
+ScopedValue.where(CREDENTIALS, creds).run(() -&gt; {
+   ...
+   Connection connection = connectDatabase();
+   ...
+});
+
+Connection connectDatabase() {
+   Credentials credentials = CREDENTIALS.get();
+   ...
+}
+&lt;/pre&gt;
+&lt;p&gt;Во многих случаях &lt;code&gt;ScopedValue&lt;/code&gt; будет являться предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;. Однако когда иммутабельный подход неприменим для решения задачи, &lt;code&gt;ThreadLocal&lt;/code&gt; может остаться предпочтительным.&lt;/p&gt;
+&lt;p&gt;На период инкубации новое API будет находиться в модуле &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/module-summary.html"&gt;&lt;code&gt;jdk.incubator.concurrent&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;В Java 21 scoped values, скорее всего, &lt;a href="https://openjdk.org/jeps/8304357"&gt;станут preview&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/437"&gt;Structured Concurrency (Second Incubator) (JEP 437)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Structured concurrency, которое появилось &lt;a href="https://openjdk.org/jeps/428"&gt;в Java 19&lt;/a&gt;, остаётся в инкубационном статусе в модуле &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/module-summary.html"&gt;&lt;code&gt;jdk.incubator.concurrent&lt;/code&gt;&lt;/a&gt; (вместе со &lt;code&gt;ScopedValue&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Единственное отличие от предыдущей версии API &amp;ndash; это то, что &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/StructuredTaskScope.html"&gt;StructuredTaskScope&lt;/a&gt; теперь поддерживает наследование scoped values потоками, созданными внутри области видимости задачи.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/434"&gt;Foreign Function &amp; Memory API (Second Preview) (JEP 434)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Foreign Function &amp; Memory API, ставшее preview &lt;a href="https://openjdk.org/jeps/424"&gt;в Java 19&lt;/a&gt;, продолжает находиться в этом статусе. API находится в пакете &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/package-summary.html"&gt;&lt;code&gt;java.lang.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Основные изменения в этом релизе:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Исчез интерфейс &lt;code&gt;MemoryAddress&lt;/code&gt;. Теперь адреса моделируются через &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/MemorySegment.html"&gt;&lt;code&gt;MemorySegment&lt;/code&gt;&lt;/a&gt; с нулевой длиной.&lt;/li&gt;
+  &lt;li&gt;Улучшена иерархия &lt;code&gt;sealed&lt;/code&gt; интерфейса &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/MemoryLayout.html"&gt;&lt;code&gt;MemoryLayout&lt;/code&gt;&lt;/a&gt;, чтобы лучше соответствовать паттерн-матчингу для &lt;code&gt;switch&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Исчез интерфейс &lt;code&gt;MemorySession&lt;/code&gt;. Он разделён на два интерфейса &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/Arena.html"&gt;&lt;code&gt;Arena&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/SegmentScope.html"&gt;&lt;code&gt;SegmentScope&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В Java 21 Foreign Function &amp; Memory API останется на &lt;a href="https://openjdk.org/jeps/442"&gt;третье preview&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/438"&gt;Vector API (Fifth Incubator) (JEP 438)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API всё никак не хочет становиться стабильным и остаётся в инкубационном статусе уже в пятый раз (модуль &lt;a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;). В этом релизе лишь небольшие исправления багов и улучшения производительности. Скорее всего, инкубационный статус будет оставаться до тех пор, пока необходимые фичи проекта &lt;a href="https://openjdk.org/projects/valhalla/"&gt;Valhalla&lt;/a&gt; не появятся в режиме preview (проект &lt;a href="https://openjdk.org/projects/panama/"&gt;Panama&lt;/a&gt; сильно зависит от проекта Valhalla).&lt;/p&gt;
+
+&lt;h5 class="pt-2"&gt;Заключение&lt;/h5&gt;
+&lt;p class="pt-3"&gt;Java 20 не является LTS-релизом и будет получать обновления от Oracle только в течение полугода (до сентября 2023 года). LTS-релизом станет следующая версия, &lt;a href="https://openjdk.org/projects/jdk/21/"&gt;Java 21&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #55</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_55.html" />
@@ -397,136 +518,5 @@
 &lt;p&gt;Как &lt;a href="https://twitter.com/AndreiPangin/status/1581383155822776320"&gt;утверждает&lt;/a&gt; Андрей, он написал библиотеку за две ночи.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/eclipse-ee4j/eclipselink/releases/tag/4.0.0"&gt;EclipseLink 4&lt;/a&gt;. Он полностью поддерживает спецификацию &lt;a href="https://newsroom.eclipse.org/eclipse-newsletter/2022/march/what%E2%80%99s-new-jakarta-persistence-31"&gt;Jakarta Persistence API 3.1&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #46</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_46.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_46.html</id>
-    <updated>2022-10-09T18:00:00Z</updated>
-    <published>2022-10-09T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышло несколько новых черновиков JEP. Рассмотрим каждый из них.&lt;/p&gt;
-&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294349"&gt;Unnamed local variables and patterns&lt;/a&gt;. В этом JEP предлагается добавить в язык безымянные переменные и паттерны, которые будут обозначаться символом &lt;code&gt;_&lt;/code&gt; (подчёркивание).&lt;/p&gt;
-&lt;p&gt;Это очень полезное улучшение: оно позволит не давать имя переменной, которая в дальнейшем не будет использоваться. Такая ситуация возникает довольно часто, например, в блоке &lt;code&gt;try-catch&lt;/code&gt;, когда важен только тип исключения:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;try&lt;/span&gt; {
-    &lt;span style="color: blue"&gt;int&lt;/span&gt; i = Integer.parseInt(s);
-    ...
-} &lt;span style="color: blue"&gt;catch&lt;/span&gt; (NumberFormatException _) {
-    System.out.println(&lt;span style="color: darkred"&gt;"Bad number: "&lt;/span&gt; + s);
-}&lt;/pre&gt;
-&lt;p&gt;Другой частый случай &amp;ndash; лямбда-выражения:&lt;/p&gt;
-&lt;pre&gt;map.computeIfAbsent(k, _ -&gt; &lt;span style="color: blue"&gt;new&lt;/span&gt; ArrayList&lt;&gt;());&lt;/pre&gt;
-&lt;p&gt;Ещё один пример &amp;ndash; паттерн-матчинг:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; pingDevice(Device d) {
-    String ip = &lt;span style="color: blue"&gt;switch&lt;/span&gt; (d) {
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; Printer(_, _, _, String ipp) -&gt; ipp;
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; Server(_, String ips) -&gt; ips;
-    };
-
-    ping(ip);
-}&lt;/pre&gt;
-&lt;p&gt;Полный список случаев, когда можно будет использовать подчёркивание:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Объявление локальной переменной в блоке.&lt;/li&gt;
-  &lt;li&gt;Спецификация ресурса в &lt;code&gt;try-with-resources&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Объявление базового цикла &lt;code&gt;for&lt;/code&gt; или улучшенного цикла &lt;code&gt;for&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Переменная паттерна.&lt;/li&gt;
-  &lt;li&gt;Параметр &lt;code&gt;catch&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Параметр лямбда-выражения.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Заметим, что в данный список не входят параметры методов классов и интерфейсов. В них по прежнему придётся давать имена всем параметрам. Почему такое решение было принято, можно почитать в &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-September/003485.html"&gt;этой ветке&lt;/a&gt; рассылки проекта Amber.&lt;/p&gt;
-
-&lt;p class="pt-1" id="record_patterns"&gt;&lt;a href="https://openjdk.org/jeps/8294078"&gt;Record Patterns (Second Preview)&lt;/a&gt;. Это второе preview паттернов записей (первое попало в &lt;a href="https://openjdk.org/jeps/405"&gt;Java 19&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;В этой итерации три главных изменения.&lt;/p&gt;
-&lt;p&gt;Во-первых, добавляется поддержка вывода типов в записях-дженериках:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Box&amp;lt;T&gt;(T t) {}
-
-&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Box&amp;lt;String&gt; box) {
-    &lt;span style="color: blue"&gt;if&lt;/span&gt; (box &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Box(&lt;span style="color: blue"&gt;var&lt;/span&gt; s)) { &lt;span style="color: green"&gt;// Выводится Box&amp;lt;String&gt;(var s)&lt;/span&gt;
-        System.out.println(&lt;span style="color: darkred"&gt;"String "&lt;/span&gt; + s);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;Во-вторых, паттерны записей смогут присутствовать в объявлениях улучшенного цикла &lt;code&gt;for&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Pair&amp;lt;T, U&gt;(T first, U second) {}
-
-&lt;span style="color: blue"&gt;static void&lt;/span&gt; loop(List&amp;lt;Pair&amp;lt;String, Integer&gt;&gt; pairs) {
-    &lt;span style="color: blue"&gt;for&lt;/span&gt; (Pair(&lt;span style="color: blue"&gt;var&lt;/span&gt; first, &lt;span style="color: blue"&gt;var&lt;/span&gt; second) : pairs) {
-        System.out.println(first + &lt;span style="color: darkred"&gt;", "&lt;/span&gt; + second);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;В-третьих, исчезает поддержка именованных паттернов записей. Это значит, что такой код уже не будет компилироваться:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) p) {
-    ...
-}&lt;/pre&gt;
-&lt;p&gt;Однако по этому пункту возникла &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-October/thread.html#3582"&gt;дискуссия в рассылке&lt;/a&gt;, и пока непонятно, действительно ли примут решение убрать такую полезную возможность языка. Брайн Гетц &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-October/003587.html"&gt;считает&lt;/a&gt;, что с введением такой возможности поспешили и что если её откатить, то это позволит более тщательно её продумать и вернуть обратно в будущем в этой или иной форме.&lt;/p&gt;
-
-&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294285"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (Fourth Preview)&lt;/a&gt;. Это уже четвёртая итерация паттерн-матчинга (предыдущие три попали в Java &lt;a href="https://openjdk.org/jeps/406"&gt;17&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/420"&gt;18&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/427"&gt;19&lt;/a&gt;). В новой версии два главных изменения: упрощённая грамматика switch labels и поддержка вывода типов для паттернов дженериков.&lt;/p&gt;
-&lt;p&gt;Упрощённая грамматика большее значение представляет для разработчиков компиляторов и IDE. А вывод типов в &lt;code&gt;switch&lt;/code&gt; выглядит следующим образом:&lt;/p&gt;
-&lt;pre&gt;Collection&amp;lt;String&gt; collection = ...;
-
-&lt;span style="color: blue"&gt;switch&lt;/span&gt; (collection) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; List&amp;lt;&gt; l -&gt; ... &lt;span style="color: green"&gt;// Выводится List&amp;lt;String&gt;&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Set&amp;lt;&gt; s  -&gt; ... &lt;span style="color: green"&gt;// Выводится Set&amp;lt;String&gt;&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; Queue q  -&gt; ... &lt;span style="color: green"&gt;// Ничего не выводится, сырой тип Queue&lt;/span&gt;
-    ...
-}&lt;/pre&gt;
-&lt;p&gt;Однако для записей diamond-оператор необязателен:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Pair&amp;lt;T, U&gt;(T first, U second) {}
-
-&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Pair&amp;lt;String, Integer&gt; pair) {
-    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (pair) {
-        &lt;span style="color: blue"&gt;case&lt;/span&gt; Pair(var fst, var snd) -&gt; ... &lt;span style="color: green"&gt;// Выводится Pair&amp;lt;String, Integer&gt;&lt;/span&gt;
-        ...
-    }
-}&lt;/pre&gt;
-&lt;p&gt;То же самое касается и паттерн-матчинга через &lt;code&gt;instanceof&lt;/code&gt;, пример которого уже был приведён выше (см. пример с &lt;code&gt;Box&amp;lt;T&gt;&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p class="pt-1"&gt;&lt;a href="https://openjdk.org/jeps/8294992"&gt;64 bit object headers&lt;/a&gt;. Цель этого JEP &amp;ndash; уменьшение размера заголовков с 96/128 до 64 бит. Это позволит уменьшить потребление памяти кучей приблизительно на 6-12%, что, в свою очередь, уменьшит нагрузку на GC и CPU.&lt;/p&gt;
-&lt;p&gt;Работа по сжатию заголовков ведётся в проекте &lt;a href="https://openjdk.org/projects/lilliput/"&gt;Lilliput&lt;/a&gt;, который был &lt;a href="https://mail.openjdk.org/pipermail/discuss/2021-March/005720.html"&gt;предложен&lt;/a&gt; в марте 2021 года Романом Кеннке, впоследствии и ставшим лидером проекта. Ранее Роман &lt;a href="https://mail.openjdk.org/pipermail/lilliput-dev/2022-May/000457.html"&gt;сообщил&lt;/a&gt;, что в проекте удалось добиться значительных успехов и что уже ведётся работа над следующим этапом: сжатием заголовка до 32 бит.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Брайан Гетц &lt;a href="https://mail.openjdk.org/pipermail/amber-spec-experts/2022-September/003552.html"&gt;предложил&lt;/a&gt; внести изменения в Java, облегчающие вхождение новичков в язык. Он выложил документ с заголовком &lt;a href="https://openjdk.org/projects/amber/design-notes/on-ramp"&gt;"Paving the on-ramp"&lt;/a&gt; ("прокладывая заезд на автостраду"), где изложил свои мысли относительно возможных упрощений, которые сделают кривую изучения языка более пологой.&lt;/p&gt;
-&lt;p&gt;Когда новичок впервые изучает Java, он сразу же сталкивается с большим числом незнакомых концепций, которых нельзя избежать при написании даже самой простой программы:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; HelloWorld {
-    &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
-        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-    }
-}&lt;/pre&gt;
-&lt;p&gt;Для полного понимания этого кода придётся разобраться чуть ли не со всеми основными аспектами языка:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Уровни видимости (&lt;code&gt;public&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Классы.&lt;/li&gt;
-  &lt;li&gt;Методы.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;static&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;main&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Строки.&lt;/li&gt;
-  &lt;li&gt;Массивы (&lt;code&gt;String[]&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Поля (&lt;code&gt;out&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Константы (&lt;code&gt;out&lt;/code&gt;).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Брайан Гетц предлагает три упрощения, которые помогут изучающим язык начать с минимально короткой программы и постепенно переходить к более сложным концепциям.&lt;/p&gt;
-&lt;p&gt;Во-первых, можно сделать &lt;code&gt;public&lt;/code&gt;, &lt;code&gt;static&lt;/code&gt; и параметр &lt;code&gt;args&lt;/code&gt; опциональными. Тогда код упростится до следующего:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
-    &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
-        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;Во-вторых, можно ввести концепцию безымянных классов, что позволит объявлять поля и методы без объявления класса. Это позволит упростить код ещё сильнее:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
-    System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-}&lt;/pre&gt;
-
-&lt;p&gt;Наконец, можно сделать некоторые наиболее часто используемые методы статическими (&lt;code&gt;println&lt;/code&gt;, &lt;code&gt;readln&lt;/code&gt;) и импортировать их автоматически (как автоматически импортируются все классы в &lt;code&gt;java.lang&lt;/code&gt;). В итоге код сократится до самого минимума:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
-    println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-}&lt;/pre&gt;
-
-&lt;p class="pt-1"&gt;Сейчас всё это существует исключительно на уровне концепции, которая активно обсуждается в рассылке, но возможно что-то из предложенных идей будет в будущем реализовано в языке.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blog.jetbrains.com/idea/2022/10/java-annotated-monthly-october-2022/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за октябрь.&lt;/p&gt;</content>
   </entry>
 </feed>

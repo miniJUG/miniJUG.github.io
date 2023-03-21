@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="ru">
   <head>
-    <title>Новости Java #41</title>
+    <title>Вышла Java 20</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #41">
-    <meta property="og:description" content="&bull; JDK 19 перешёл в первую фазу Rampdown. Список JEP'ов заморожен, а исходный код ответвлён в стабилизационный репозиторий&hellip;">
+    <meta property="og:title" content="Вышла Java 20">
+    <meta property="og:description" content="Вышла общедоступная версия Java 20. В этот релиз попало около 1500 закрытых задач и 7 JEP'ов. Release Notes можно посмотреть здесь. Изменения API &ndash; здесь&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2022-06-13">
+    <meta property="article:published_time" content="2023-03-21">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Новости Java #41">
-    <meta name="twitter:description" content="&bull; JDK 19 перешёл в первую фазу Rampdown. Список JEP'ов заморожен, а исходный код ответвлён в стабилизационный репозиторий&hellip;">
+    <meta name="twitter:title" content="Вышла Java 20">
+    <meta name="twitter:description" content="Вышла общедоступная версия Java 20. В этот релиз попало около 1500 закрытых задач и 7 JEP'ов. Release Notes можно посмотреть здесь. Изменения API &ndash; здесь&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_41.png">
-    <meta property="og:image:width" content="1269">
-    <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_41.png">
+    <meta property="og:image" content="https://minijug.ru/java_20.png">
+    <meta property="og:image:width" content="1337">
+    <meta property="og:image:height" content="749">
+    <meta name="twitter:image" content="https://minijug.ru/java_20.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -36,38 +36,128 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #41</h3>
-<p class="text-secondary"><time datetime="2022-06-13">13 июня, 2022</time></p>
+<h3 id="title">Вышла Java 20</h3>
+<p class="text-secondary"><time datetime="2023-03-21">21 марта, 2023</time></p>
 <article>
-<p>&bull; JDK 19 перешёл в <a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-June/006735.html">первую фазу Rampdown</a>. Список JEP'ов <a href="https://openjdk.org/projects/jdk/19/">заморожен</a>, а исходный код ответвлён в <a href="https://github.com/openjdk/jdk19">стабилизационный репозиторий</a>.</p>
-<p>Примечательно, что из всех семи JEP'ов Java 19 только один будет иметь стабильный характер (<a href="https://openjdk.java.net/jeps/422">Linux/RISC-V Port</a>). Все остальные будут иметь статус Preview, либо Incubator.</p>
-<p>Тем временем, уже <a href="https://github.com/openjdk/jdk/pull/8236">началась</a> разработка Java 20. У нового релиза появилась <a href="https://jdk.java.net/20/">своя страница</a>, где можно скачать первую сборку JDK 20-ea+1.</p>
+<p>Вышла общедоступная версия <a href="https://openjdk.org/projects/jdk/20/">Java 20</a>. В этот релиз попало около <a href="https://builds.shipilev.net/backports-monitor/release-notes-20.html">1500 закрытых задач и 7 JEP'ов</a>. Release Notes можно посмотреть <a href="http://jdk.java.net/20/release-notes">здесь</a>. Изменения API &ndash; <a href="https://javaalmanac.io/jdk/20/apidiff/19/">здесь</a>.</p>
+<!-- cut -->
+<p>Ссылки на скачивание:</p>
+<ul>
+  <li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle JDK</a></li>
+  <li><a href="http://jdk.java.net/20/">OpenJDK</a></li>
+</ul>
 
-<p class="pt-2">&bull; В Java 19 попал интересный <a href="https://github.com/openjdk/jdk/pull/3402">патч</a>, который исправляет <a href="https://bugs.openjdk.org/browse/JDK-4511638">баг 20-летней давности</a>. Баг этот заключается в том, что метод <code class="text-nowrap">Double.toString()</code> иногда возвращает некорректный результат, например:</p>
-<pre class="border p-lg-2 p-1">&gt; jshell
-<span style="color: grey">|  Welcome to JShell -- Version 18.0.1.1
-|  For an introduction type: /help intro</span>
+<p class="pt-1">Вот список JEP'ов, которые попали в Java 20.</p>
 
-jshell&gt; Double.toString(1e23)
-$1 ==> "9.999999999999999E22"</pre>
-<p>В Java 19 это исправлено:</p>
-<pre class="border p-lg-2 p-1">&gt; jshell
-<span style="color: grey">|  Welcome to JShell -- Version 19-ea
-|  For an introduction type: /help intro</span>
+<h5><a href="https://openjdk.org/jeps/432">Паттерны записей (Second Preview) (JEP 432)</a></h5>
+<p>В паттерны записей, которые появились <a href="https://openjdk.org/jeps/405">в Java 19</a> в режиме <a href="https://openjdk.org/jeps/12">preview</a> (и остающиеся в этом статусе в Java 20), было внесено три главные изменения.</p>
 
-jshell&gt; Double.toString(1e23)
-$1 ==> "1.0E23"</pre>
-<p>Помимо возвращения корректного результата новая реализация также значительно быстрее (в 17.7 раз по <a href="https://mail.openjdk.org/pipermail/core-libs-dev/2020-April/065921.html">замерам автора</a>), поскольку не выделяет промежуточных объектов, не содержит циклов и использует только целочисленную арифметику.</p>
+<p>Во-первых, добавилась поддержка вывода типов в записях-дженериках:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Box&lt;T>(T t) {}
 
-<p class="pt-2">&bull; В блоге IntelliJ IDEA вышел новый выпуск <a href="https://blog.jetbrains.com/idea/2022/06/java-annotated-monthly-june-2022/">Java Annotated Monthly</a> за июнь.</p>
+<span style="color: blue">static void</span> test(Box&lt;String> box) {
+    <span style="color: blue">if</span> (box <span style="color: blue">instanceof</span> Box(<span style="color: blue">var</span> s)) { <span style="color: green">// Выводится Box&lt;String>(var s)</span>
+        System.out.println(<span style="color: darkred">"String "</span> + s);
+    }
+}</pre>
+
+<p>Во-вторых, паттерны записей теперь могут присутствовать в заголовке улучшенного цикла <code class="text-nowrap">for</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Point(<span style="color: blue">int</span> x, <span style="color: blue">int</span> y) {}
+
+<span style="color: blue">static void</span> dump(Point[] pointArray) {
+    <span style="color: blue">for</span> (Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y) : pointArray) {
+        System.out.println(<span style="color: darkred">"("</span> + x + <span style="color: darkred">", "</span> + y + <span style="color: darkred">")"</span>);
+    }
+}</pre>
+<p>Примечание: эту возможность было решено удалить <a href="https://openjdk.org/jeps/440">в Java 21</a>, но она снова может появиться в будущем в другом JEP'е.</p>
+
+<p class="pt-1">В-третьих, исчезла поддержка именованных паттернов записей. Это значит, что такой код, который компилировался в Java 19, в Java 20 уже не будет компилироваться:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">if</span> (obj <span style="color: blue">instanceof</span> Point(<span style="color: blue">var</span> x, <span style="color: blue">var</span> y) p) { <span style="color: red">// Syntax error</span>
+    ...
+}</pre>
+
+<p>Хотя именованные паттерны и исчезли в этом релизе, это не значит, что они исчезли насовсем. Возможно они появятся в одном из будущих релизов, когда будут более тщательно продуманы.</p>
+
+<h5><a href="https://openjdk.org/jeps/433">Паттерн-матчинг для <code class="text-nowrap">switch</code> (Fourth Preview) (JEP 433)</a></h5>
+<p>Это уже четвёртая итерация preview паттерн-матчинга в Java. Напомним, что предыдущие три попали в Java <a href="https://openjdk.org/jeps/406">17</a>, <a href="https://openjdk.org/jeps/420">18</a> и <a href="https://openjdk.org/jeps/427">19</a>. В новой версии три главных изменения.</p>
+
+<p>Во-первых, исчерпывающий <code class="text-nowrap">switch</code> по перечислениям теперь выбрасывает <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/MatchException.html"><code class="text-nowrap">MatchException</code></a>, а не <code class="text-nowrap">IncompatibleClassChangeError</code>, если ни одна из меток <code class="text-nowrap">switch</code> не сматчилась.</p>
+
+<p>Во-вторых, упростилась грамматика меток <code class="text-nowrap">switch</code> в JLS.</p>
+
+<p>В-третьих, добавилась поддержка вывода типов в записях-дженериках, если они являются паттернами в <code class="text-nowrap">switch</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">record</span> Pair&lt;S, T>(S first, T second) {}
+
+<span style="color: blue">static void</span> recordInference(Pair&lt;String, Integer> pair) {
+    <span style="color: blue">switch</span> (pair) {
+        <span style="color: blue">case</span> Pair(<span style="color: blue">var</span> fst, <span style="color: blue">var</span> snd) -> ... <span style="color: green">// Выводится Pair&lt;String, Integer></span>
+        ...
+    }
+}</pre>
+
+<p>Как видите, здесь JEP 433 полностью согласуется с JEP 432.</p>
+
+<p>Паттерны записей и паттерн-матчинг для <code class="text-nowrap">switch</code> предлагается финализировать в Java 21 (<a href="https://openjdk.org/jeps/440">JEP 440</a> и <a href="https://openjdk.org/jeps/441">JEP 441</a>).</p>
+
+<h5><a href="https://openjdk.org/jeps/436">Virtual Threads (Second Preview) (JEP 436)</a></h5>
+<p>Виртуальные потоки, которые появились <a href="https://openjdk.org/jeps/425">в Java 19</a>, продолжают оставаться в статусе Preview API (предлагается финализировать их <a href="https://openjdk.org/jeps/8303683">в Java 21</a>). Изменений API, связанных с проектом <a href="https://openjdk.org/projects/loom/">Loom</a>, в этом релизе нет (если не считать scoped values и structured concurrency, которые имеют <a href="https://openjdk.org/jeps/11">инкубационный статус</a>).</p>
+
+<h5><a href="https://openjdk.org/jeps/429">Scoped Values (Incubator) (JEP 429)</a></h5>
+<p>Появился новый класс <a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/ScopedValue.html"><code class="text-nowrap">ScopedValue</code></a>, который позволяет обмениваться иммутабельными данными без их передачи через аргументы методов. Он является альтернативой существующему классу <code class="text-nowrap">ThreadLocal</code>.</p>
+<p>Классы <code class="text-nowrap">ThreadLocal</code> и <code class="text-nowrap">ScopedValue</code> похожи тем, что решают одну и ту же задачу: передать значение переменной в рамках одного потока (или дерева потоков) из одного места в другое без использования явного параметра. В случае <code class="text-nowrap">ThreadLocal</code> для этого вызывается метод <code class="text-nowrap">set()</code>, который кладёт значение переменной для данного потока, а потом метод <code class="text-nowrap">get()</code> вызывается из другого места для получения значения переменной. У данного подхода есть ряд недостатков:</p>
+<ul>
+    <li>Неконтролируемая мутабельность (<code class="text-nowrap">set()</code> можно вызвать когда угодно и откуда угодно).</li>
+    <li>Неограниченное время жизни (переменная очистится, только когда завершится исполнение потока или когда будет вызван <code class="text-nowrap">ThreadLocal.remove()</code>, но про него часто забывают).</li>
+    <li>Высокая цена наследования (дочерние потоки всегда вынуждены делать полную копию переменной, даже если родительский поток никогда не будет её изменять).</li>
+</ul>
+<p>Эти проблемы усугубляются с появлением виртуальных потоков, которые могут создаваться в гораздо больше количестве, чем обычные.</p>
+<p><code class="text-nowrap">ScopedValue</code> лишён вышеперечисленных недостатков. В отличие от <code class="text-nowrap">ThreadLocal</code>, <code class="text-nowrap">ScopedValue</code> не имеет метода <code class="text-nowrap">set()</code>. Значение ассоциируется с объектом <code class="text-nowrap">ScopedValue</code> путём вызова другого метода <code class="text-nowrap">where()</code>. Далее вызывается метод <code class="text-nowrap">run()</code>, на протяжении которого это значение можно получить (через метод <code class="text-nowrap">get()</code>), но нельзя изменить. Как только исполнение метода <code class="text-nowrap">run()</code> заканчивается, значение отвязывается от объекта <code class="text-nowrap">ScopedValue</code>. Поскольку значение не меняется, решается и проблема дорогого наследования: дочерним потоком не надо копировать значение, которое остаётся постоянным в течение периода жизни.
+</p><p>Пример использования <code class="text-nowrap">ScopedValue</code>:</p>
+<pre class="border p-lg-2 p-1"><span style="color: blue">static final</span> ScopedValue&lt;Credentials&gt; CREDENTIALS = new ScopedValue<>();
+
+Credentials creds = ...
+ScopedValue.where(CREDENTIALS, creds).run(() -> {
+   ...
+   Connection connection = connectDatabase();
+   ...
+});
+
+Connection connectDatabase() {
+   Credentials credentials = CREDENTIALS.get();
+   ...
+}
+</pre>
+<p>Во многих случаях <code class="text-nowrap">ScopedValue</code> будет являться предпочтительной заменой <code class="text-nowrap">ThreadLocal</code>. Однако когда иммутабельный подход неприменим для решения задачи, <code class="text-nowrap">ThreadLocal</code> может остаться предпочтительным.</p>
+<p>На период инкубации новое API будет находиться в модуле <a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/module-summary.html"><code class="text-nowrap">jdk.incubator.concurrent</code></a>.</p>
+<p>В Java 21 scoped values, скорее всего, <a href="https://openjdk.org/jeps/8304357">станут preview</a>.</p>
+
+<h5><a href="https://openjdk.org/jeps/437">Structured Concurrency (Second Incubator) (JEP 437)</a></h5>
+<p>Structured concurrency, которое появилось <a href="https://openjdk.org/jeps/428">в Java 19</a>, остаётся в инкубационном статусе в модуле <a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/module-summary.html"><code class="text-nowrap">jdk.incubator.concurrent</code></a> (вместе со <code class="text-nowrap">ScopedValue</code>).</p>
+<p>Единственное отличие от предыдущей версии API &ndash; это то, что <a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.concurrent/jdk/incubator/concurrent/StructuredTaskScope.html">StructuredTaskScope</a> теперь поддерживает наследование scoped values потоками, созданными внутри области видимости задачи.</p>
+
+<h5><a href="https://openjdk.org/jeps/434">Foreign Function & Memory API (Second Preview) (JEP 434)</a></h5>
+<p>Foreign Function & Memory API, ставшее preview <a href="https://openjdk.org/jeps/424">в Java 19</a>, продолжает находиться в этом статусе. API находится в пакете <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/package-summary.html"><code class="text-nowrap">java.lang.foreign</code></a>.</p>
+<p>Основные изменения в этом релизе:</p>
+<ul>
+  <li>Исчез интерфейс <code class="text-nowrap">MemoryAddress</code>. Теперь адреса моделируются через <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/MemorySegment.html"><code class="text-nowrap">MemorySegment</code></a> с нулевой длиной.</li>
+  <li>Улучшена иерархия <code class="text-nowrap">sealed</code> интерфейса <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/MemoryLayout.html"><code class="text-nowrap">MemoryLayout</code></a>, чтобы лучше соответствовать паттерн-матчингу для <code class="text-nowrap">switch</code>.</li>
+  <li>Исчез интерфейс <code class="text-nowrap">MemorySession</code>. Он разделён на два интерфейса <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/Arena.html"><code class="text-nowrap">Arena</code></a> и <a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/foreign/SegmentScope.html"><code class="text-nowrap">SegmentScope</code></a>.</li>
+</ul>
+<p>В Java 21 Foreign Function & Memory API останется на <a href="https://openjdk.org/jeps/442">третье preview</a>.</p>
+
+<h5><a href="https://openjdk.org/jeps/438">Vector API (Fifth Incubator) (JEP 438)</a></h5>
+<p>Векторное API всё никак не хочет становиться стабильным и остаётся в инкубационном статусе уже в пятый раз (модуль <a href="https://docs.oracle.com/en/java/javase/20/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>). В этом релизе лишь небольшие исправления багов и улучшения производительности. Скорее всего, инкубационный статус будет оставаться до тех пор, пока необходимые фичи проекта <a href="https://openjdk.org/projects/valhalla/">Valhalla</a> не появятся в режиме preview (проект <a href="https://openjdk.org/projects/panama/">Panama</a> сильно зависит от проекта Valhalla).</p>
+
+<h5 class="pt-2">Заключение</h5>
+<p class="pt-3">Java 20 не является LTS-релизом и будет получать обновления от Oracle только в течение полугода (до сентября 2023 года). LTS-релизом станет следующая версия, <a href="https://openjdk.org/projects/jdk/21/">Java 21</a>.</p>
   </article>
   <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
-  <ul class="collapse" id="year2023">
-<li class="text-secondary"><a href="java_20.html" class="text-secondary">Вышла Java 20</a></li>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
+  <ul class="collapse show" id="year2023">
+<li>Вышла Java 20</li>
 <li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
 <li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
 <li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
@@ -75,8 +165,8 @@ $1 ==> "1.0E23"</pre>
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2022" role="button" aria-expanded="true" aria-controls="year2022">2022</a>
-  <ul class="collapse show" id="year2022">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
+  <ul class="collapse" id="year2022">
 <li class="text-secondary"><a href="java_news_51.html" class="text-secondary">Новости Java #51</a></li>
 <li class="text-secondary"><a href="java_news_50.html" class="text-secondary">Новости Java #50</a></li>
 <li class="text-secondary"><a href="java_news_49.html" class="text-secondary">Новости Java #49</a></li>
@@ -88,7 +178,7 @@ $1 ==> "1.0E23"</pre>
 <li class="text-secondary"><a href="java_news_44.html" class="text-secondary">Новости Java #44</a></li>
 <li class="text-secondary"><a href="java_news_43.html" class="text-secondary">Новости Java #43</a></li>
 <li class="text-secondary"><a href="java_news_42.html" class="text-secondary">Новости Java #42</a></li>
-<li>Новости Java #41</li>
+<li class="text-secondary"><a href="java_news_41.html" class="text-secondary">Новости Java #41</a></li>
 <li class="text-secondary"><a href="java_news_40.html" class="text-secondary">Новости Java #40</a></li>
 <li class="text-secondary"><a href="java_news_39.html" class="text-secondary">Новости Java #39</a></li>
 <li class="text-secondary"><a href="java_news_38.html" class="text-secondary">Новости Java #38</a></li>
