@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="ru">
   <head>
-    <title>Новости Java #31</title>
+    <title>Новости Java #57</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Новости Java #31">
-    <meta property="og:description" content="&bull; Появилось расписание выхода JDK 18. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года&hellip;">
+    <meta property="og:title" content="Новости Java #57">
+    <meta property="og:description" content="&bull; Вышли обновления Java&hellip;">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2021-11-15">
+    <meta property="article:published_time" content="2023-04-24">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@mini_JUG">
-    <meta name="twitter:title" content="Новости Java #31">
-    <meta name="twitter:description" content="&bull; Появилось расписание выхода JDK 18. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года&hellip;">
+    <meta name="twitter:title" content="Новости Java #57">
+    <meta name="twitter:description" content="&bull; Вышли обновления Java&hellip;">
     <meta name="telegram:channel" content="@miniJUG">
-    <meta property="og:image" content="https://minijug.ru/java_news_31.png">
+    <meta property="og:image" content="https://minijug.ru/java_news_57.png">
     <meta property="og:image:width" content="1269">
     <meta property="og:image:height" content="664">
-    <meta name="twitter:image" content="https://minijug.ru/java_news_31.png">
+    <meta name="twitter:image" content="https://minijug.ru/java_news_57.png">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
@@ -36,33 +36,47 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #31</h3>
-<p class="text-secondary"><time datetime="2021-11-15">15 ноября, 2021</time></p>
+<h3 id="title">Новости Java #57</h3>
+<p class="text-secondary"><time datetime="2023-04-24">24 апреля, 2023</time></p>
 <article>
-<p>&bull; Появилось <a href="https://mail.openjdk.org/pipermail/jdk-dev/2021-November/006199.html">расписание выхода JDK 18</a>. По плану общедоступная версия Java 18 должна выйти 22 марта 2022 года.</p>
+<p>&bull; Вышли обновления Java:</p>
+<ul>
+  <li><a href="https://www.oracle.com/java/technologies/javase/20-0-1-relnotes.html">JDK 20.0.1</a></li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/17-0-7-relnotes.html">JDK 17.0.7</a></li>
+  <li><a href="https://www.oracle.com/java/technologies/javase/11-0-19-relnotes.html">JDK 11.0.19</a></li>
+  <li>JDK 8u372</li>
+</ul>
 
-<p class="pt-2">&bull; Вышел новый <a href="https://openjdk.org/jeps/421">JEP 421: Deprecate Finalization for Removal</a>. В нём предлагается пометить все методы, относящиеся к финализации, как deprecated for removal, а также добавить опцию командной строки, позволяющую отключить финализацию во время выполнения. Кроме того, в будущих версиях JDK предлагается отключить финализацию по умолчанию с возможностью включения, затем отключить полностью, а потом удалить, наконец, весь API финализации.</p>
-<p>Финализация &ndash; это механизм, который присутствовал в Java с момента её появления. Со временем стало понятно, что у <code class="text-nowrap">finalize()</code> есть серьёзные недостатки: проблемы безопасности (возможность утечки и возрождения финализируемого объекта, возможность &laquo;сломать&raquo; объект и привести его в неконсистентное состояние), проблемы производительности (замедление работы сборщика мусора, увеличение потребляемой памяти из-за дополнительных объектов и вспомогательных структур данных GC), отсутствие гибкости (невозможность отмены финализации, отсутствие контроля потоков, которые будут вызывать финализацию), сложная программная модель (риск забыть вызвать <code class="text-nowrap">super.finalize()</code> в подклассе) и т.д. Это привело к тому, что в Java 9 метод <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize--">Object.finalize()</a> стал помечен как deprecated. Теперь настало время идти дальше в сторону полного отказа от финализации.</p>
+<p>&bull; Вышло несколько новых JEP'ов.</p>
+<p><a href="https://openjdk.org/jeps/444">JEP 444: Virtual Threads</a>. Виртуальные потоки уже интегрированы в <a href="https://jdk.java.net/21/">ранние сборки JDK 21</a>.</p>
+<p><a href="https://openjdk.org/jeps/445">JEP 445: Flexible Main Methods and Anonymous Main Classes (Preview)</a>. Про него мы подробно писали в <a href="java_news_54.html">выпуске #54</a>, когда он был черновиком и имел другое название (Implicit Classes and Enhanced Main Methods).</p>
+<p><a href="https://openjdk.org/jeps/446">JEP 446: Scoped Values (Preview)</a>. Scoped Values переходят из инкубационного статуса <a href="https://openjdk.org/jeps/429">в Java 20</a> в статус Preview в Java 21.</p>
+<p><a href="https://openjdk.org/jeps/447">JEP 447: Statements before <code class="text-nowrap">super()</code></a>. Про этот JEP мы писали в <a href="java_news_53.html">выпуске #53</a>.</p>
+<p><a href="https://openjdk.org/jeps/448">JEP 448: Vector API (Sixth Incubator)</a>. Таким образом, векторное API остаётся в инкубационном статусе уже в шестой раз.</p>
+<p><a href="https://openjdk.org/jeps/449">JEP 449: Deprecate the Windows 32-bit x86 Port for Removal</a>. Про причины удаления 32-битного порта JDK на Windows мы писали в <a href="java_news_55.html">выпуске #55</a>. 32-битные версии JDK под Linux остаются нетронутыми.</p>
 
-<p class="pt-2">&bull; В Java 18 был интегрирован <a href="https://openjdk.org/jeps/418">JEP 418: Internet-Address Resolution SPI</a>. Про него мы писали в <a href="java_news_24.html">выпуске #24</a>.</p>
-
-<p class="pt-2">&bull; Появилось два новых черновика JEP: <a href="https://openjdk.org/jeps/8276094">Region Pinning in G1</a> и <a href="https://openjdk.org/jeps/8276797">Linux/RISC-V Port</a>.</p>
-
-<p class="pt-2">&bull; JUG.ru выложил <a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b-weU5FB9NslU-dmOJnsLW2">видео с JPoint 2021</a>.</p>
-
-<p class="pt-2">&bull; JetBrains выпустил <a href="https://blog.jetbrains.com/idea/2021/11/java-annotated-monthly-november-2021/">Java Annotated Monthly за ноябрь 2021</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://docs.gradle.org/7.3/release-notes.html">Gradle 7.3</a>.</p>
-
-<p class="pt-2">&bull; Вышел <a href="https://github.com/amaembo/streamex/releases/tag/streamex-0.8.0">StreamEx 0.8.0</a>.</p>
+<p>&bull; Вышла <a href="https://blog.jetbrains.com/idea/2023/03/intellij-idea-2023-1/">IntelliJ IDEA 2023.1</a>. Перечислим некоторые улучшения и нововведения:</p>
+<ul>
+  <li>Изменение масштаба всей IDE (View > Appearance > Zoom IDE).</li>
+  <li>Появился компактный режим (только для нового UI).</li>
+  <li>Вкладки проектов на macOS.</li>
+  <li>Ускоренный доступ к функциональности IDE при открытии проекта (функции IDE становятся доступными гораздо раньше).</li>
+  <li>Ускоренный импорт Maven-проектов.</li>
+  <li>Фоновые проверки коммитов (чтобы ускорить выполнение коммитов).</li>
+  <li>Возможность сохранять варианты расположения окон (Window > Layouts).</li>
+  <li>Отображение знаков пробела только в выделенном коде.</li>
+  <li>Поддержка Java 20.</li>
+  <li>Улучшенный рефакторинг Extract Method, поддерживающий ситуацию, когда фрагмент кода содержит несколько переменных, которые необходимо вернуть.</li>
+  <li>Автодополнение опций VM в Run/Debug Configurations.</li>
+</ul>
   </article>
   <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
 <div class="pl-4 pt-5 col-lg-4">
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
-  <ul class="collapse" id="year2023">
-<li class="text-secondary"><a href="java_news_57.html" class="text-secondary">Новости Java #57</a></li>
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="true" aria-controls="year2023">2023</a>
+  <ul class="collapse show" id="year2023">
+<li>Новости Java #57</li>
 <li class="text-secondary"><a href="java_news_56.html" class="text-secondary">Новости Java #56</a></li>
 <li class="text-secondary"><a href="java_20.html" class="text-secondary">Вышла Java 20</a></li>
 <li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
@@ -96,12 +110,12 @@
   </ul>
 </div>
 <div class="mt-3">
-  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2021" role="button" aria-expanded="true" aria-controls="year2021">2021</a>
-  <ul class="collapse show" id="year2021">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
+  <ul class="collapse" id="year2021">
 <li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
 <li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
 <li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
-<li>Новости Java #31</li>
+<li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>
 <li class="text-secondary"><a href="java_news_30.html" class="text-secondary">Новости Java #30</a></li>
 <li class="text-secondary"><a href="java_news_29.html" class="text-secondary">Новости Java #29</a></li>
 <li class="text-secondary"><a href="java_news_28.html" class="text-secondary">Новости Java #28</a></li>

@@ -4,7 +4,47 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2023-03-26T18:00:00Z</updated>
+  <updated>2023-04-23T18:00:00Z</updated>
+  <entry>
+    <title>Новости Java #57</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_57.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_news_57.html</id>
+    <updated>2023-04-23T18:00:00Z</updated>
+    <published>2023-04-23T18:00:00Z</published>
+    <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/20-0-1-relnotes.html"&gt;JDK 20.0.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/17-0-7-relnotes.html"&gt;JDK 17.0.7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/javase/11-0-19-relnotes.html"&gt;JDK 11.0.19&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;JDK 8u372&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;bull; Вышло несколько новых JEP'ов.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/444"&gt;JEP 444: Virtual Threads&lt;/a&gt;. Виртуальные потоки уже интегрированы в &lt;a href="https://jdk.java.net/21/"&gt;ранние сборки JDK 21&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/445"&gt;JEP 445: Flexible Main Methods and Anonymous Main Classes (Preview)&lt;/a&gt;. Про него мы подробно писали в &lt;a href="java_news_54.html"&gt;выпуске #54&lt;/a&gt;, когда он был черновиком и имел другое название (Implicit Classes and Enhanced Main Methods).&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/446"&gt;JEP 446: Scoped Values (Preview)&lt;/a&gt;. Scoped Values переходят из инкубационного статуса &lt;a href="https://openjdk.org/jeps/429"&gt;в Java 20&lt;/a&gt; в статус Preview в Java 21.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/447"&gt;JEP 447: Statements before &lt;code&gt;super()&lt;/code&gt;&lt;/a&gt;. Про этот JEP мы писали в &lt;a href="java_news_53.html"&gt;выпуске #53&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/448"&gt;JEP 448: Vector API (Sixth Incubator)&lt;/a&gt;. Таким образом, векторное API остаётся в инкубационном статусе уже в шестой раз.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://openjdk.org/jeps/449"&gt;JEP 449: Deprecate the Windows 32-bit x86 Port for Removal&lt;/a&gt;. Про причины удаления 32-битного порта JDK на Windows мы писали в &lt;a href="java_news_55.html"&gt;выпуске #55&lt;/a&gt;. 32-битные версии JDK под Linux остаются нетронутыми.&lt;/p&gt;
+
+&lt;p&gt;&amp;bull; Вышла &lt;a href="https://blog.jetbrains.com/idea/2023/03/intellij-idea-2023-1/"&gt;IntelliJ IDEA 2023.1&lt;/a&gt;. Перечислим некоторые улучшения и нововведения:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Изменение масштаба всей IDE (View &gt; Appearance &gt; Zoom IDE).&lt;/li&gt;
+  &lt;li&gt;Появился компактный режим (только для нового UI).&lt;/li&gt;
+  &lt;li&gt;Вкладки проектов на macOS.&lt;/li&gt;
+  &lt;li&gt;Ускоренный доступ к функциональности IDE при открытии проекта (функции IDE становятся доступными гораздо раньше).&lt;/li&gt;
+  &lt;li&gt;Ускоренный импорт Maven-проектов.&lt;/li&gt;
+  &lt;li&gt;Фоновые проверки коммитов (чтобы ускорить выполнение коммитов).&lt;/li&gt;
+  &lt;li&gt;Возможность сохранять варианты расположения окон (Window &gt; Layouts).&lt;/li&gt;
+  &lt;li&gt;Отображение знаков пробела только в выделенном коде.&lt;/li&gt;
+  &lt;li&gt;Поддержка Java 20.&lt;/li&gt;
+  &lt;li&gt;Улучшенный рефакторинг Extract Method, поддерживающий ситуацию, когда фрагмент кода содержит несколько переменных, которые необходимо вернуть.&lt;/li&gt;
+  &lt;li&gt;Автодополнение опций VM в Run/Debug Configurations.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #56</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_56.html" />
@@ -491,25 +531,5 @@ Connection connectDatabase() {
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2022/11/09/WildFly27-Final-Released/"&gt;WildFly 27&lt;/a&gt; с поддержкой Jakarta EE 10.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-November/003553.html"&gt;JMH 1.36&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #48</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_48.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_48.html</id>
-    <updated>2022-11-06T18:00:00Z</updated>
-    <published>2022-11-06T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышли два новых JEP.&lt;/p&gt;
-&lt;p&gt;Первый &amp;ndash; &lt;a href="https://openjdk.org/jeps/434"&gt;JEP 434: Foreign Function &amp; Memory API (Second Preview)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Второй &amp;ndash; &lt;a href="https://openjdk.org/jeps/435"&gt;JEP 435: Asynchronous Stack Trace VM API&lt;/a&gt;. В нём предлагается добавить в JDK публичное и хорошо протестированное нативное API для получения стек-трейсов с возможностью асинхронного использования. В OpenJDK уже существует API &lt;code&gt;AsyncGetCallTrace&lt;/code&gt;, которое широко используется во многих профилировщиках (например, &lt;a href="https://github.com/jvm-profiling-tools/async-profiler"&gt;async-profiler&lt;/a&gt;), но это API является внутренним и не поддерживает нативные фреймы. JEP 435 предлагает ввести новый метод &lt;code&gt;AsyncGetStackTrace&lt;/code&gt;, который будет экспортирован в заголовке &lt;code&gt;include/profile.h&lt;/code&gt; и будет иметь возможность включать фреймы C/C++ в результат.&lt;/p&gt;
-&lt;p class="pt-1"&gt;Кроме того, ещё вышло два новых черновика JEP: &lt;a href="https://openjdk.org/jeps/8295817"&gt;Virtual Threads (Second Preview)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/8296037"&gt;Structured Concurrency (Second Incubator)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; На сайте Oracle стали публиковаться &lt;a href="https://jdk.java.net/javafx20/"&gt;ранние сборки JavaFX 20&lt;/a&gt;. Скачать можно как JavaFX SDK, так и файлы JMOD.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; JUG.ru &lt;a href="https://www.youtube.com/playlist?list=PLVe-2wcL84b8OCdXV_tqP8YrMIlgB_BER"&gt;выложил&lt;/a&gt; доклады с конференции JPoint 2022.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.14"&gt;Jackson 2.14&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
