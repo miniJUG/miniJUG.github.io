@@ -4,7 +4,464 @@
   <link rel="alternate" type="text/html" href="https://minijug.ru" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.ru/feed.xml</id>
-  <updated>2023-04-23T18:00:00Z</updated>
+  <updated>2023-09-18T18:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 21</title>
+    <link rel="alternate" type="text/html" href="https://minijug.ru/java_21.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.ru/java_21.html</id>
+    <updated>2023-09-18T18:00:00Z</updated>
+    <published>2023-09-18T18:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/21/"&gt;Java 21&lt;/a&gt;. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-21.html"&gt;2500 закрытых задач и 15 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/21/release-notes"&gt;здесь&lt;/a&gt;. Изменения API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/21/apidiff/20/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Java 21 является LTS-релизом, а значит у него будут выходить обновления &lt;a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html"&gt;как минимум 5 лет&lt;/a&gt; с момента выхода.&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Скачать JDK 21 можно по этим ссылкам:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt; (лицензия &lt;a href="https://www.oracle.com/downloads/licenses/no-fee-license.html"&gt;NFTC&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/21/"&gt;OpenJDK&lt;/a&gt; (лицензия &lt;a href="https://openjdk.org/legal/gplv2+ce.html"&gt;GPLv2 with Classpath Exception&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="pt-1"&gt;Вот список JEP'ов, которые попали в Java 21.&lt;/p&gt;
+&lt;h4&gt;Язык&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/441"&gt;Pattern Matching for &lt;code&gt;switch&lt;/code&gt; (JEP 441)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Паттерн-матчинг для &lt;code&gt;switch&lt;/code&gt; наконец-то был финализирован и стал стабильной конструкцией языка. Напомним, что он появился в &lt;a href="https://habr.com/ru/articles/577924/"&gt;Java 17&lt;/a&gt; и был в состоянии &lt;a href="https://openjdk.org/jeps/12"&gt;preview&lt;/a&gt; четыре релиза: &lt;a href="https://openjdk.org/jeps/406"&gt;17&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/420"&gt;18&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/427"&gt;19&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/433"&gt;20&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Новый паттерн-матчинг существенно расширяет возможности оператора &lt;code&gt;switch&lt;/code&gt;. Начиная с Java 1.0, &lt;code&gt;switch&lt;/code&gt; поддерживал только сравнение с примитивными константами. Позже список типов был расширен (Java 5 &amp;ndash; перечисления, Java 7 &amp;ndash; строки), но в ветках &lt;code&gt;case&lt;/code&gt; всё ещё могли быть только константы.&lt;/p&gt;
+&lt;p&gt;Теперь же &lt;code&gt;switch&lt;/code&gt; поддерживает в ветках &lt;code&gt;case&lt;/code&gt; так называемые &lt;i&gt;паттерны&lt;/i&gt;:&lt;/p&gt;
+&lt;pre&gt;Object obj = …
+&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; String.format(&lt;span style="color: darkred"&gt;"int %d"&lt;/span&gt;, i);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Long l -&gt; String.format(&lt;span style="color: darkred"&gt;"long %d"&lt;/span&gt;, l);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Double d -&gt; String.format(&lt;span style="color: darkred"&gt;"double %f"&lt;/span&gt;, d);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; String.format(&lt;span style="color: darkred"&gt;"String %s"&lt;/span&gt;, s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; obj.toString();
+};&lt;/pre&gt;
+&lt;p&gt;Паттерны могут снабжаться условиями с использованием нового ключевого слова &lt;code&gt;when&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;Object obj = …
+&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i &lt;span style="color: blue"&gt;when&lt;/span&gt; i &gt; 0 -&gt; String.format(&lt;span style="color: darkred"&gt;"positive int %d"&lt;/span&gt;, i);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; String.format(&lt;span style="color: darkred"&gt;"int %d"&lt;/span&gt;, i);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; String.format(&lt;span style="color: darkred"&gt;"String %s"&lt;/span&gt;, s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; obj.toString();
+};&lt;/pre&gt;
+&lt;p&gt;Также добавлена поддержка матчинга &lt;code&gt;null&lt;/code&gt;. Сделать это можно с помощью явной отдельной ветки &lt;code&gt;case null&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;Object obj = …
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case null&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Other"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Если ветка &lt;code&gt;case null&lt;/code&gt; отсутствует, то &lt;code&gt;switch&lt;/code&gt; с переданным в него &lt;code&gt;null&lt;/code&gt; всегда будет выбрасывать &lt;code&gt;NullPointerException&lt;/code&gt; (даже если есть ветка &lt;code&gt;default&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;Object obj = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) { &lt;span style="color: red"&gt;// NullPointerException&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(&lt;span style="color: darkred"&gt;"String: "&lt;/span&gt; + s);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Other"&lt;/span&gt;);
+}&lt;/pre&gt;
+&lt;p&gt;Ветки &lt;code&gt;null&lt;/code&gt; и &lt;code&gt;default&lt;/code&gt; можно объединять друг с другом:&lt;/p&gt;
+&lt;pre&gt;String str = …
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (str) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; &lt;span style="color: darkred"&gt;"Foo"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Bar"&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Foo or Bar"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case null, default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Null or other"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;Новый паттерн-матчинг обладает рядом ограничений.&lt;/p&gt;
+&lt;p&gt;Во-первых, все &lt;code&gt;switch&lt;/code&gt; (кроме тех, что были корректными до Java 21) должны быть &lt;i&gt;исчерпывающими&lt;/i&gt;. Т.е. в ветках должны покрываться все возможные случаи:&lt;/p&gt;
+&lt;pre&gt;Object obj = …
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) { &lt;span style="color: red"&gt;// error: the switch statement does not cover all possible input values&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; System.out.println(s.length());
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Integer i -&gt; System.out.println(i);
+};&lt;/pre&gt;
+&lt;p&gt;Пример выше можно исправить, добавив ветку &lt;code&gt;Object o&lt;/code&gt; или &lt;code&gt;default&lt;/code&gt;.&lt;/p&gt;
+&lt;p class="mt-2"&gt;Во-вторых, все ветки &lt;code&gt;case&lt;/code&gt; должны располагаться в таком порядке, что ни перед одной веткой нет &lt;i&gt;доминирующей&lt;/i&gt; ветки:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; CharSequence cs -&gt;
+        &lt;span style="color: darkred"&gt;"sequence of length "&lt;/span&gt; + cs.length();
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s -&gt; &lt;span style="color: red"&gt;// error: this case label is dominated by a preceding case label&lt;/span&gt;
+        &lt;span style="color: darkred"&gt;"string of length "&lt;/span&gt; + s.length();
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; &lt;span style="color: darkred"&gt;"other"&lt;/span&gt;;
+ };&lt;/pre&gt;
+&lt;p&gt;Так как &lt;code&gt;CharSequence&lt;/code&gt; это более широкий тип, чем &lt;code&gt;String&lt;/code&gt;, то его ветка должна быть расположена ниже.&lt;/p&gt;
+
+&lt;p class="mt-2"&gt;В-третьих, несколько паттернов в одной ветке работать не будут:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;return switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; String s, Integer i -&gt; &lt;span style="color: darkred"&gt;"string or integer"&lt;/span&gt;; &lt;span style="color: red"&gt;// error: illegal fall-through from a pattern&lt;/span&gt;
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; &lt;span style="color: darkred"&gt;"other"&lt;/span&gt;;
+ };&lt;/pre&gt;
+&lt;p&gt;Т.е. сделать тест по нескольким типам в одной ветке пока что нельзя (хотя грамматика языка это позволяет). Это можно обойти, только включив режим preview и заменив &lt;code&gt;s&lt;/code&gt; и &lt;code&gt;i&lt;/code&gt; на символы подчёркивания (см. JEP про безымянные переменные ниже).&lt;/p&gt;
+
+&lt;p class="mt-2"&gt;В целом новый паттерн-матчинг значительно увеличивает выразительность языка. Особенно хорошо он сочетается с записями. Паттерны записей мы рассмотрим отдельно, поскольку про них есть свой собственный JEP (см. следующий раздел).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/440"&gt;Record Patterns (JEP 440)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Отдельным видом паттернов являются &lt;i&gt;паттерны записей&lt;/i&gt;. Они появились в &lt;a href="https://openjdk.org/jeps/405"&gt;Java 19&lt;/a&gt; в режиме preview и стали стабильными в Java 21.&lt;/p&gt;
+&lt;p&gt;Паттерны записей позволяют осуществлять деконструкцию значений записей чрезвычайно компактно:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; printSum(Object obj) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y)) {
+        System.out.println(x + y);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Или через оператор &lt;code&gt;switch&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printSum(Object obj) {
+    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) -&gt; System.out.println(x + y);
+        &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"Not a point"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Особая мощь паттернов записей состоит в том, что они могут быть вложенными:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y) {}
+&lt;span style="color: blue"&gt;enum&lt;/span&gt; Color { RED, GREEN, BLUE }
+&lt;span style="color: blue"&gt;record&lt;/span&gt; ColoredPoint(Point p, Color c) {}
+&lt;span style="color: blue"&gt;record&lt;/span&gt; Rectangle(ColoredPoint upperLeft, ColoredPoint lowerRight) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; printColorOfUpperLeftPoint(Rectangle r) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (r &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Rectangle(ColoredPoint(Point p, Color c), ColoredPoint lr)) {
+        System.out.println(c);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Используя &lt;code&gt;var&lt;/code&gt;, можно сократить код ещё сильнее:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; printColorOfUpperLeftPoint(Rectangle r) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (r &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Rectangle(ColoredPoint(&lt;span style="color: blue"&gt;var&lt;/span&gt; p, &lt;span style="color: blue"&gt;var&lt;/span&gt; c), &lt;span style="color: blue"&gt;var&lt;/span&gt; lr)) {
+        System.out.println(c);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Паттерны записей отлично сочетаются с паттернами по типу:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Box(Object obj) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Box box) {
+    &lt;span style="color: blue"&gt;switch&lt;/span&gt; (box) {
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Box(String s) -&gt; System.out.println(&lt;span style="color: darkred"&gt;"string: "&lt;/span&gt; + s);
+        &lt;span style="color: blue"&gt;case&lt;/span&gt; Box(Object o) -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other: "&lt;/span&gt; + o);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Поддерживается вывод типов записей-дженериков:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; Box&amp;lt;T&gt;(T t) {}
+
+&lt;span style="color: blue"&gt;static void&lt;/span&gt; test(Box&amp;lt;Box&amp;lt;String&gt;&gt; box) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (box &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; Box(Box(&lt;span style="color: blue"&gt;var&lt;/span&gt; s))) { &lt;span style="color: green"&gt;// Infers Box&amp;lt;Box&amp;lt;String&gt;&gt;(Box&amp;lt;String&gt;(String s))&lt;/span&gt;
+        System.out.println(&lt;span style="color: darkred"&gt;"String "&lt;/span&gt; + s);
+    }
+}&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;К сожалению, паттерны записей могут использоваться только в &lt;code&gt;instanceof&lt;/code&gt; и &lt;code&gt;switch&lt;/code&gt;, но не могут использоваться сами по себе:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;static void&lt;/span&gt; usePoint(Point p) {
+    Point(&lt;span style="color: blue"&gt;var&lt;/span&gt; x, &lt;span style="color: blue"&gt;var&lt;/span&gt; y) = p; &lt;span style="color: red"&gt;// Не сработает&lt;/span&gt;
+    &lt;span style="color: green"&gt;// Use x and y&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;p&gt;Будем надеяться, что когда-нибудь добавят и такую возможность.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/430"&gt;String Templates (Preview) (JEP 430)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Строковые шаблоны &amp;ndash; новая синтаксическая возможность, позволяющая встраивать в строки выражения:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; x = 10;
+&lt;span style="color: blue"&gt;int&lt;/span&gt; y = 20;
+String str = STR.&lt;span style="color: darkred"&gt;"&lt;/span&gt;\{x} &lt;span style="color: darkred"&gt;plus&lt;/span&gt; \{y} &lt;span style="color: darkred"&gt;equals&lt;/span&gt; \{x + y}&lt;span style="color: darkred"&gt;"&lt;/span&gt;;
+&lt;span style="color: green"&gt;// В str будет лежать "10 + 20 equals 30"&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Таким образом, в Java появилась строковая интерполяция, которая уже давно есть во многих других известных языках программирования. Однако в Java она работает только в режиме &lt;a href="https://openjdk.org/jeps/12"&gt;preview&lt;/a&gt;, т.е. использовать в Java 21 её можно только с включенным флагом &lt;code&gt;--enable-preview&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Реализация строковых шаблонов в Java отличается от большинства реализаций в других языках: в Java строковый шаблон на самом деле сначала превращается в объект &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringTemplate.html"&gt;&lt;code&gt;java.lang.StringTemplate&lt;/code&gt;&lt;/a&gt;, а затем &lt;i&gt;процессор&lt;/i&gt;, реализующий &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringTemplate.Processor.html"&gt;&lt;code&gt;java.lang.StringTemplate.Processor&lt;/code&gt;&lt;/a&gt;, конвертирует этот объект в строку (или объект другого класса). В примере выше &lt;code&gt;STR."…"&lt;/code&gt; есть ничто иное, как сокращённый вариант следующего кода:&lt;/p&gt;
+&lt;pre&gt;StringTemplate template = RAW.&lt;span style="color: darkred"&gt;"&lt;/span&gt;\{x} &lt;span style="color: darkred"&gt;plus&lt;/span&gt; \{y} &lt;span style="color: darkred"&gt;equals&lt;/span&gt; \{x + y}&lt;span style="color: darkred"&gt;"&lt;/span&gt;;
+String str = STR.process(template);&lt;/pre&gt;
+&lt;p&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringTemplate.html#STR"&gt;&lt;code&gt;STR&lt;/code&gt;&lt;/a&gt; &amp;ndash; это стандартный и наиболее часто используемый процессор, который выполняет простую подстановку значений в шаблон и возвращает сконкатенированную строку. &lt;code&gt;STR&lt;/code&gt; неявно импортируется в любой исходный файл, поэтому его можно использовать без &lt;code&gt;import&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringTemplate.html#RAW"&gt;&lt;code&gt;RAW&lt;/code&gt;&lt;/a&gt; &amp;ndash; это процессор, который ничего не делает со &lt;code&gt;StringTemplate&lt;/code&gt; и просто возвращает его. Обычно он не используется, т.к. на практике мало кому нужны сырые представления шаблонов, а нужны результаты интерполяции в виде готовых объектов.&lt;/p&gt;
+&lt;p&gt;Процессоры были введены для того, чтобы была возможность кастомизировать процесс интерполяции. Например, ещё один стандартный процессор &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/FormatProcessor.html#FMT"&gt;&lt;code&gt;FMT&lt;/code&gt;&lt;/a&gt; поддерживает форматирование с использованием спецификаторов, определённых в &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Formatter.html"&gt;&lt;code&gt;java.util.Formatter&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;double&lt;/span&gt; length = 46;
+System.out.println(FMT.&lt;span style="color: darkred"&gt;"The length is %.2f&lt;/span&gt;\{height} &lt;span style="color: darkred"&gt;cm"&lt;/span&gt;);
+&lt;span style="color: green"&gt;// The length is 46.00 cm&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Процессоры необязательно должны возвращать &lt;code&gt;String&lt;/code&gt;. Вот общая сигнатура метода &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringTemplate.Processor.html#process(java.lang.StringTemplate)"&gt;&lt;code&gt;process()&lt;/code&gt;&lt;/a&gt; интерфейса &lt;code&gt;Processor&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public interface&lt;/span&gt; Processor&amp;lt;R, E &lt;span style="color: blue"&gt;extends&lt;/span&gt; Throwable&gt; {
+    R process(StringTemplate stringTemplate) &lt;span style="color: blue"&gt;throws&lt;/span&gt; E;
+}&lt;/pre&gt;
+&lt;p&gt;Это значит, что можно реализовать процессор, который будет делать практически всё что угодно и возвращать что угодно. Например, гипотетический процессор &lt;code&gt;JSON&lt;/code&gt; будет создавать напрямую объекты JSON (без промежуточного объекта &lt;code&gt;String&lt;/code&gt;) и при этом поддерживать экранирование кавычек:&lt;/p&gt;
+&lt;pre&gt;JSONObject doc = JSON.&lt;span style="color: darkred"&gt;"""&lt;/span&gt;
+    &lt;span style="color: darkred"&gt;{&lt;/span&gt;
+        &lt;span style="color: darkred"&gt;"name":    "&lt;/span&gt;\{name}&lt;span style="color: darkred"&gt;",&lt;/span&gt;
+        &lt;span style="color: darkred"&gt;"phone":   "&lt;/span&gt;\{phone}&lt;span style="color: darkred"&gt;",&lt;/span&gt;
+        &lt;span style="color: darkred"&gt;"address": "&lt;/span&gt;\{address}&lt;span style="color: darkred"&gt;"&lt;/span&gt;
+    };
+    &lt;span style="color: darkred"&gt;"""&lt;/span&gt;;&lt;/pre&gt;
+&lt;p&gt;Если в &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;phone&lt;/code&gt; или &lt;code&gt;address&lt;/code&gt; будут содержаться кавычки, то они не испортят объект, т.к. процессор заменит &lt;code&gt;&amp;quot;&lt;/code&gt; на &lt;code&gt;\&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Или, например, процессор &lt;code&gt;SQL&lt;/code&gt; будет создавать PreparedStatement'ы, защищая от атак SQL Injection:&lt;/p&gt;
+&lt;pre&gt;PreparedStatement ps = SQL.&lt;span style="color: darkred"&gt;"SELECT * FROM Person p WHERE p.name = &lt;/span&gt;\{name}&lt;span style="color: darkred"&gt;"&lt;/span&gt;;&lt;/pre&gt;
+&lt;p&gt;Таким образом, строковые шаблоны гораздо более мощный инструмент, нежели простая конкатенирующая строковая интерполяция. Они решают не только проблему простого внедрения выражений в строки и увеличивают читабельность, но и улучшают безопасность и гибкость программ.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/443"&gt;Unnamed Patterns and Variables (Preview) (JEP 443)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Ещё одно новшество в режиме preview: теперь можно объявлять так называемые безымянные переменные и паттерны. Делается это с помощью символа подчеркивания (&lt;code&gt;_&lt;/code&gt;). Это часто необходимо, когда переменная или паттерн не используются:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; acc = 0;
+&lt;span style="color: blue"&gt;for&lt;/span&gt; (Order _ : orders) {
+    &lt;span style="color: blue"&gt;if&lt;/span&gt; (acc &lt; LIMIT) {
+        … acc++ …
+    }
+}&lt;/pre&gt;
+&lt;p&gt;В примере выше важен факт наличия элемента, но сама переменная не нужна. Поэтому, чтобы не придумывать этой переменной название, было использовано подчеркивание вместо имени.&lt;/p&gt;
+&lt;p&gt;Довольно частый пример нужности безымянных переменных &amp;ndash; блок &lt;code&gt;catch&lt;/code&gt; с неиспользуемым исключением:&lt;/p&gt;
+&lt;pre&gt;String s = …
+try {
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; i = Integer.parseInt(s);
+    …
+} &lt;span style="color: blue"&gt;catch&lt;/span&gt; (NumberFormatException _) {
+    System.out.println(&lt;span style="color: darkred"&gt;"Bad number: "&lt;/span&gt; + s);
+}&lt;/pre&gt;
+&lt;p&gt;Полный список случаев, в которых можно использовать безымянные переменные:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Локальная переменная в блоке,&lt;/li&gt;
+  &lt;li&gt;Объявление ресурса в &lt;code&gt;try-with-resources&lt;/code&gt;,&lt;/li&gt;
+  &lt;li&gt;Заголовок &lt;code&gt;for&lt;/code&gt; statement,&lt;/li&gt;
+  &lt;li&gt;Заголовок улучшенного цикла &lt;code&gt;for&lt;/code&gt;,&lt;/li&gt;
+  &lt;li&gt;Исключение в блоке &lt;code&gt;catch&lt;/code&gt;,&lt;/li&gt;
+  &lt;li&gt;Параметр лямбда-выражения,&lt;/li&gt;
+  &lt;li&gt;Переменная паттерна (см. ниже).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Внимательный читатель заметит, что в списке выше отсутствуют параметры методов. Действительно, они не могут быть безымянными, и для любых методов (как интерфейсов, так и классов) по-прежнему всегда нужно указывать имена параметров.&lt;/p&gt;
+
+&lt;p class="mt-2"&gt;Символы подчёркивания также можно использовать для указания &lt;i&gt;безымянных паттернов&lt;/i&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (r &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; ColoredPoint(Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y), _)) {
+    &lt;span style="color: green"&gt;// Используются только x и y&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;p&gt;Здесь разработчику понадобились только координаты точки, но не её цвет. Без безымянного паттерна ему пришлось бы объявлять неиспользуемую переменную типа &lt;code&gt;Color&lt;/code&gt; и придумывать ей имя:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (r &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; ColoredPoint(Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y), Color c)) { &lt;span style="color: orange"&gt;// Warning: unused c&lt;/span&gt;
+    &lt;span style="color: green"&gt;// Используются только x и y&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;p&gt;Такой код менее читабелен и хуже позволяет сфокусироваться на главном (координатах). Кроме того, некоторые IDE подсветили бы неиспользуемую переменную &lt;code&gt;c&lt;/code&gt;, что ещё одно дополнительное неудобство.&lt;/p&gt;
+&lt;p&gt;Есть также возможность объявлять &lt;i&gt;безымянные переменные паттернов&lt;/i&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;if&lt;/span&gt; (r &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; ColoredPoint(Point(&lt;span style="color: blue"&gt;int&lt;/span&gt; x, &lt;span style="color: blue"&gt;int&lt;/span&gt; y), Color _)) {
+    …
+}&lt;/pre&gt;
+&lt;p&gt;Безымянные паттерны и переменные паттернов прекрасно сочетаются и со &lt;code&gt;switch&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;switch&lt;/span&gt; (box) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Box(RedBall _), Box(BlueBall _) -&gt; processBox(box);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Box(GreenBall _)                -&gt; stopProcessing();
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; Box(_)                          -&gt; pickAnotherBox();
+}&lt;/pre&gt;
+&lt;p&gt;В целом, паттерн-матчинг и безымянные паттерны вместе обладают большой синергией и позволяют писать действительно мощные, компактные и выразительные конструкции.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/445"&gt;Unnamed Classes and Instance Main Methods (Preview) (JEP 445)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Теперь в режиме preview можно запускать программы с методами &lt;code&gt;main()&lt;/code&gt;, которые не являются &lt;code&gt;public static&lt;/code&gt; и у которых нет параметра &lt;code&gt;String[] args&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+&lt;p&gt;В таком случае JVM сама создаст экземпляр класса (у него должен быть не-&lt;code&gt;private&lt;/code&gt; конструктор без параметров) и вызовет у него метод &lt;code&gt;main()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Протокол запуска будет выбирать метод &lt;code&gt;main()&lt;/code&gt; согласно следующему приоритету:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;&lt;code&gt;static void main(String[] args)&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;static void main()&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;void main(String[] args)&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;void main()&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class="mt-2"&gt;Кроме того, можно писать программы и без объявления класса вовсе:&lt;/p&gt;
+&lt;pre&gt;String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;;
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    System.out.println(greeting);
+}&lt;/pre&gt;
+&lt;p&gt;В таком случае будет создан неявный безымянный класс (не путать с анонимным классом), которому будут принадлежать метод &lt;code&gt;main()&lt;/code&gt; и другие верхнеуровневые объявления в файле:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// class &amp;lt;some name&gt; { ← неявно&lt;/span&gt;
+String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;;
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    System.out.println(greeting);
+}
+&lt;span style="color: green"&gt;// }&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Безымянный класс является &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#isSynthetic()"&gt;синтетическим&lt;/a&gt; и &lt;code&gt;final&lt;/code&gt;. Его &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#getSimpleName()"&gt;simple name&lt;/a&gt; является пустой строкой:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    System.out.println(getClass().isUnnamed()); &lt;span style="color: green"&gt;// true&lt;/span&gt;
+    System.out.println(getClass().isSynthetic()); &lt;span style="color: green"&gt;// true&lt;/span&gt;
+    System.out.println(getClass().getSimpleName()); &lt;span style="color: green"&gt;// ""&lt;/span&gt;
+    System.out.println(getClass().getCanonicalName()); &lt;span style="color: green"&gt;// null&lt;/span&gt;
+}&lt;/pre&gt;
+&lt;p&gt;При этом &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html#getName()"&gt;имя&lt;/a&gt; класса совпадает с именем файла, но такое поведение не гарантируется.
+&lt;p class="mt-2"&gt;Такое упрощение запуска Java-программ было сделано с двумя целями:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;Облегчить процесс обучения языку. На новичка, только что начавшего изучение Java, не должно сваливаться всё сразу, а концепции должны вводятся постепенно, начиная с базовых (переменные, циклы, процедуры) и постепенно переходя к более продвинутым (классы, области видимости).&lt;/li&gt;
+    &lt;li&gt;Облегчить написание коротких программ и скриптов. Количество церемоний для них должно быть сведено к минимуму.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/444"&gt;Virtual Threads (JEP 444)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Виртуальные потоки, которые много лет разрабатывались в рамках проекта &lt;a href="https://openjdk.org/projects/loom/"&gt;Loom&lt;/a&gt; и появились в &lt;a href="https://openjdk.org/jeps/425"&gt;Java 19&lt;/a&gt; в режиме preview, теперь наконец-то стали стабильными.&lt;/p&gt;
+&lt;p&gt;Виртуальные потоки, в отличие от потоков операционной системы, являются легковесными и могут создаваться в огромном количестве (миллионы экземпляров). Это свойство должно значительно облегчить написание конкурентных программ, поскольку позволит применять простой подход "один запрос &amp;ndash; один поток" (или "одна задача &amp;ndash; один поток") и не прибегать к более сложным асинхронному или реактивному программированию. При этом миграция на виртуальные потоки уже существующего кода должна быть максимально простой, потому что виртуальные потоки являются экземплярами существующего класса &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html"&gt;&lt;code&gt;java.lang.Thread&lt;/code&gt;&lt;/a&gt; и практически полностью совместимы с классическими потоками: поддерживают стек-трейсы, &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html#interrupt()"&gt;&lt;code&gt;interrupt()&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ThreadLocal.html"&gt;&lt;code&gt;ThreadLocal&lt;/code&gt;&lt;/a&gt; и т.д.&lt;/p&gt;
+&lt;p&gt;Виртуальные потоки реализованы поверх обычных потоков и существуют только для JVM, но не для операционной системы (отсюда и название "виртуальные"). Поток, на котором в данный момент выполняется виртуальный поток, называется потоком-носителем. Если потоки платформы полагаются на планировщик операционной системы, то планировщиком для виртуальных потоков является &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ForkJoinPool.html"&gt;&lt;code&gt;ForkJoinPool&lt;/code&gt;&lt;/a&gt;. Когда виртуальный поток блокируется на некоторой блокирующей операции, то он размонтируется от своего потока-носителя, что позволяет потоку-носителю примонтировать другой виртуальный поток и продолжить работу. Такой режим работы и дешевизна виртуальных потоков позволяет им очень хорошо масштабироваться. Однако на данный момент есть два исключения: &lt;code&gt;synchronized&lt;/code&gt; блоки и JNI. При их выполнении виртуальный поток не может быть размонтирован, поскольку он привязан к своему потоку-носителю. Такое ограничение может препятствовать масштабированию. Поэтому при желании максимально использовать потенциал виртуальных потоков рекомендуется избегать &lt;code&gt;synchronized&lt;/code&gt; блоков и операции JNI, которые выполняются часто или занимают длительное время.&lt;/p&gt;
+&lt;p&gt;Несмотря на привлекательность виртуальных потоков, вовсе необязательно предпочитать только их и всегда избегать классических потоков. Например, для задач, интенсивно и долго использующих CPU, лучше подойдут обычные потоки. Или если нужен поток, не являющийся &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html#setDaemon(boolean)"&gt;демоном&lt;/a&gt;, то также придётся использовать обычный поток, потому что виртуальный поток всегда является демоном.&lt;/p&gt;
+&lt;p&gt;Для создания виртуальных потоков и работы с ними появилось следующее API:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.Builder.html"&gt;&lt;code&gt;Thread.Builder&lt;/code&gt;&lt;/a&gt; &amp;ndash; билдер потоков. Например, виртуальный поток можно создать путём вызова &lt;code&gt;Thread.ofVirtual().name("name").unstarted(runnable)&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html#startVirtualThread(java.lang.Runnable)"&gt;&lt;code&gt;Thread.startVirtualThread(Runnable)&lt;/code&gt;&lt;/a&gt; &amp;ndash; создаёт и сразу же запускает виртуальный поток.&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html#isVirtual()"&gt;&lt;code&gt;Thread.isVirtual()&lt;/code&gt;&lt;/a&gt; &amp;ndash; проверяет, является ли поток виртуальным.&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/Executors.html#newVirtualThreadPerTaskExecutor()"&gt;&lt;code&gt;Executors.newVirtualThreadPerTaskExecutor()&lt;/code&gt;&lt;/a&gt; &amp;ndash; возвращает исполнитель, который создаёт новый виртуальный поток на каждую задачу.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Для виртуальных потоков также добавилась поддержка в инструментарии JDK (дебаггер, JVM TI, Java Flight Recorder).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/431"&gt;Sequenced Collections (JEP 431)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появились три новых интерфейса &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedCollection.html"&gt;&lt;code&gt;SequencedCollection&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedSet.html"&gt;&lt;code&gt;SequencedSet&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedMap.html"&gt;&lt;code&gt;SequencedMap&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SequencedCollection&lt;/code&gt; является наследником &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html"&gt;&lt;code&gt;Collection&lt;/code&gt;&lt;/a&gt; и представляет собой коллекцию с установленным порядком элементов. Такими коллекциями являются &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashSet.html"&gt;&lt;code&gt;LinkedHashSet&lt;/code&gt;&lt;/a&gt; и все реализации &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html"&gt;&lt;code&gt;List&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SortedSet.html"&gt;&lt;code&gt;SortedSet&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Deque.html"&gt;&lt;code&gt;Deque&lt;/code&gt;&lt;/a&gt;. У этих коллекций есть общее свойство последовательности элементов, но до Java 21 их общим родителем был &lt;code&gt;Collection&lt;/code&gt;, который является слишком общим интерфейсом и не содержит многих методов, характерных для последовательностей (&lt;code&gt;getFirst()&lt;/code&gt;, &lt;code&gt;getLast()&lt;/code&gt;, &lt;code&gt;addFirst()&lt;/code&gt;, &lt;code&gt;addLast()&lt;/code&gt;, &lt;code&gt;reversed()&lt;/code&gt; и т.д). При этом у самих вышеописанных коллекций такие методы были несогласованны друг с другом (например, &lt;code&gt;list.get(0)&lt;/code&gt; против &lt;code&gt;sortedSet.first()&lt;/code&gt; против &lt;code&gt;deque.getFirst()&lt;/code&gt;), либо вовсе отсутствовали (например, &lt;code&gt;linkedHashSet.getLast()&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SequencedCollection&lt;/code&gt; закрыла эту дыру в иерархии и привела API к общему знаменателю:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;interface&lt;/span&gt; SequencedCollection&amp;lt;E&gt; &lt;span style="color: blue"&gt;extends&lt;/span&gt; Collection&amp;lt;E&gt; {
+    E getFirst();
+    E getLast();
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; addFirst(E);
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; addLast(E);
+    E removeFirst();
+    E removeLast();
+    SequencedCollection&amp;lt;E&gt; reversed();
+}&lt;/pre&gt;
+&lt;p&gt;Теперь больше не надо думать, как для конкретной коллекции получить последний элемент, потому что есть универсальный метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedCollection.html#getLast()"&gt;&lt;code&gt;getLast()&lt;/code&gt;&lt;/a&gt;, который есть и у &lt;code&gt;ArrayList&lt;/code&gt;, и у &lt;code&gt;TreeSet&lt;/code&gt;, и у &lt;code&gt;ArrayDeque&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Особый интерес представляет метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedCollection.html#reversed()"&gt;&lt;code&gt;reversed()&lt;/code&gt;&lt;/a&gt;, который возвращает view коллекции с обратным порядком. Это делает обратный обход коллекции гораздо более лаконичным:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; linkedList = new LinkedList&lt;&gt;(…);
+
+&lt;span style="color: green"&gt;// До Java 21&lt;/span&gt;
+&lt;span style="color: blue"&gt;for&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; it = linkedList.descendingIterator(); it.hasNext();) {
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; e = it.next();
+    …
+}
+
+&lt;span style="color: green"&gt;// С Java 21&lt;/span&gt;
+&lt;span style="color: blue"&gt;for&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; element : linkedList.reversed()) {
+    …
+}&lt;/pre&gt;
+&lt;p&gt;Для &lt;code&gt;LinkedHashSet&lt;/code&gt; эффективного способа обратного обхода и вовсе не было.&lt;/p&gt;
+&lt;p class="mt-2"&gt;Для последовательных множеств ввели интерфейс &lt;code&gt;SequencedSet&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;interface&lt;/span&gt; SequencedSet&amp;lt;E&gt; &lt;span style="color: blue"&gt;extends&lt;/span&gt; Set&amp;lt;E&gt;, SequencedCollection&amp;lt;E&gt; {
+    SequencedSet&amp;lt;E&gt; reversed();
+}&lt;/pre&gt;
+&lt;p&gt;Его реализациями являются &lt;code&gt;LinkedHashSet&lt;/code&gt; и наследники &lt;code&gt;SortedSet&lt;/code&gt;.&lt;/p&gt;
+&lt;p class="mt-2"&gt;Также ввели интерфейс &lt;code&gt;SequencedMap&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;interface&lt;/span&gt; SequencedMap&amp;lt;K,V&gt; &lt;span style="color: blue"&gt;extends&lt;/span&gt; Map&amp;lt;K,V&gt; {
+    Entry&amp;lt;K, V&gt; firstEntry();
+    Entry&amp;lt;K, V&gt; lastEntry();
+    Entry&amp;lt;K, V&gt; pollFirstEntry();
+    Entry&amp;lt;K, V&gt; pollLastEntry();
+    V putFirst(K, V);
+    V putLast(K, V);
+    SequencedSet&amp;lt;K&gt; sequencedKeySet();
+    SequencedCollection&amp;lt;V&gt; sequencedValues();
+    SequencedSet&amp;lt;Entry&amp;lt;K,V&gt;&gt; sequencedEntrySet();
+    SequencedMap&amp;lt;K,V&gt; reversed();
+}&lt;/pre&gt;
+&lt;p&gt;Его реализациями являются &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashMap.html"&gt;&lt;code&gt;LinkedHashMap&lt;/code&gt;&lt;/a&gt; и наследники &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SortedMap.html"&gt;&lt;code&gt;SortedMap&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/446"&gt;Scoped Values (Preview) (JEP 446)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Scoped Values, которые появились в &lt;a href="https://openjdk.org/jeps/429"&gt;Java 20&lt;/a&gt; в &lt;a href="https://openjdk.org/jeps/11"&gt;инкубационном статусе&lt;/a&gt;, теперь стали Preview API.&lt;/p&gt;
+&lt;p&gt;Новый класс &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ScopedValue.html"&gt;&lt;code&gt;ScopedValue&lt;/code&gt;&lt;/a&gt; позволяет обмениваться иммутабельными данными без их передачи через аргументы методов. Он является альтернативой существующему классу &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ThreadLocal.html"&gt;&lt;code&gt;ThreadLocal&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Классы &lt;code&gt;ThreadLocal&lt;/code&gt; и &lt;code&gt;ScopedValue&lt;/code&gt; похожи тем, что решают одну и ту же задачу: передать значение переменной в рамках одного потока (или дерева потоков) из одного места в другое без использования явного параметра. В случае &lt;code&gt;ThreadLocal&lt;/code&gt; для этого вызывается метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ThreadLocal.html#set(T)"&gt;&lt;code&gt;set()&lt;/code&gt;&lt;/a&gt;, который кладёт значение переменной для данного потока, а потом метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ThreadLocal.html#get()"&gt;&lt;code&gt;get()&lt;/code&gt;&lt;/a&gt; вызывается из другого места для получения значения переменной. У данного подхода есть ряд недостатков:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Неконтролируемая мутабельность (&lt;code&gt;set()&lt;/code&gt; можно вызвать когда угодно и откуда угодно).&lt;/li&gt;
+    &lt;li&gt;Неограниченное время жизни (переменная очистится, только когда завершится исполнение потока или когда будет вызван &lt;code&gt;ThreadLocal.remove()&lt;/code&gt;, но про него часто забывают).&lt;/li&gt;
+    &lt;li&gt;Высокая цена наследования (дочерние потоки всегда вынуждены делать полную копию переменной, даже если родительский поток никогда не будет её изменять).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Эти проблемы усугубляются с появлением виртуальных потоков, которые могут создаваться в гораздо больше количестве, чем обычные.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ScopedValue&lt;/code&gt; лишён вышеперечисленных недостатков. В отличие от &lt;code&gt;ThreadLocal&lt;/code&gt;, &lt;code&gt;ScopedValue&lt;/code&gt; не имеет метода &lt;code&gt;set()&lt;/code&gt;. Значение ассоциируется с объектом &lt;code&gt;ScopedValue&lt;/code&gt; путём вызова другого метода &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ScopedValue.html#where(java.lang.ScopedValue,T)"&gt;&lt;code&gt;where()&lt;/code&gt;&lt;/a&gt;. Далее вызывается метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ScopedValue.Carrier.html#run(java.lang.Runnable)"&gt;&lt;code&gt;run()&lt;/code&gt;&lt;/a&gt;, на протяжении которого это значение можно получить (через метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ScopedValue.html#get()"&gt;&lt;code&gt;get()&lt;/code&gt;&lt;/a&gt;), но нельзя изменить. Как только исполнение метода &lt;code&gt;run()&lt;/code&gt; заканчивается, значение отвязывается от объекта &lt;code&gt;ScopedValue&lt;/code&gt;. Поскольку значение не меняется, решается и проблема дорогого наследования: дочерним потокам не надо копировать значение, которое остаётся постоянным в течение периода жизни.&lt;/p&gt;
+&lt;p&gt;Пример использования &lt;code&gt;ScopedValue&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;private static final&lt;/span&gt; ScopedValue&amp;lt;FrameworkContext&gt; CONTEXT = ScopedValue.newInstance();
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; serve(Request request, Response response) {
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; context = createContext(request);
+    ScopedValue.where(CONTEXT, context)
+               .run(() -&gt; Application.handle(request, response));
+}
+
+&lt;span style="color: blue"&gt;public&lt;/span&gt; PersistedObject readKey(String key) {
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; context = CONTEXT.get();
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; db = getDBConnection(context);
+    db.readKey(key);
+}&lt;/pre&gt;
+&lt;p&gt;В целом &lt;code&gt;ScopedValue&lt;/code&gt; является предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;, т.к. навязывает разработчику безопасную однонаправленную модель работы с неизменяемыми данными. Однако такой подход не всегда неприменим для некоторых задач, и для них &lt;code&gt;ThreadLocal&lt;/code&gt; может быть единственно возможным решением.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/453"&gt;Structured Concurrency (Preview) (JEP 453)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Ещё одно API, которое ранее было в инкубационном статусе (Java &lt;a href="https://openjdk.org/jeps/428"&gt;19&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/437"&gt;20&lt;/a&gt;), а теперь стало Preview API &amp;ndash; это Structured Concurrency.&lt;/p&gt;
+&lt;p&gt;Structured Concurrency &amp;ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.&lt;/p&gt;
+&lt;p&gt;В центре нового API класс &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"&gt;&lt;code&gt;StructuredTaskScope&lt;/code&gt;&lt;/a&gt;, у которого есть два главных метода:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#fork(java.util.concurrent.Callable)"&gt;&lt;code&gt;fork()&lt;/code&gt;&lt;/a&gt; &amp;ndash; создаёт подзадачу и запускает её в новом виртуальном потоке,&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"&gt;&lt;code&gt;join()&lt;/code&gt;&lt;/a&gt; &amp;ndash; ждёт, пока не завершатся все подзадачи или пока scope не будет &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#shutdown()"&gt;остановлен&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Пример использования &lt;code&gt;StructuredTaskScope&lt;/code&gt;, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; scope = &lt;span style="color: blue"&gt;new&lt;/span&gt; StructuredTaskScope.ShutdownOnFailure()) {
+    Supplier&amp;lt;String&gt; user = scope.fork(() -&gt; findUser());
+    Supplier&amp;lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+
+    scope.join()            &lt;span style="color: green"&gt;// Join both forks&lt;/span&gt;
+         .throwIfFailed();  &lt;span style="color: green"&gt;// ... and propagate errors&lt;/span&gt;
+
+    &lt;span style="color: blue"&gt;return new&lt;/span&gt; Response(user.get(), order.get());
+}&lt;/pre&gt;
+&lt;p&gt;Может показаться, что в точности аналогичный код можно было бы написать с использованием классического &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ExecutorService.html"&gt;&lt;code&gt;ExecutorService&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)"&gt;&lt;code&gt;submit()&lt;/code&gt;&lt;/a&gt;, но у &lt;code&gt;StructuredTaskScope&lt;/code&gt; есть несколько принципиальных отличий, которые делают код безопаснее:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Время жизни всех потоков подзадач ограничено областью видимости блока &lt;code&gt;try-with-resources&lt;/code&gt;. Метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"&gt;&lt;code&gt;close()&lt;/code&gt;&lt;/a&gt; гарантированно не завершится, пока не завершатся все подзадачи.&lt;/li&gt;
+    &lt;li&gt;Если одна из операций &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае политики &lt;code&gt;ShutdownOnFailure&lt;/code&gt;, возможны другие).&lt;/li&gt;
+    &lt;li&gt;Если главный поток прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; отменяются при выходе из блока.&lt;/li&gt;
+    &lt;li&gt;В дампе потоков будет видна иерархия: потоки, выполняющие &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt;, будут отображаться как дочерние для главного потока.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="mt-2"&gt;Structured Concurrency должно облегчить написание безопасных многопоточных программ благодаря знакомому структурному подходу.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/442"&gt;Foreign Function &amp; Memory API (Third Preview) (JEP 442)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Foreign Function &amp; Memory API, ставшее preview &lt;a href="https://openjdk.org/jeps/424"&gt;в Java 19&lt;/a&gt;, продолжает находиться в этом статусе. API находится в пакете &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/package-summary.html"&gt;&lt;code&gt;java.lang.foreign&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Напомним, что FFM API много лет разрабатывается в проекте &lt;a href="https://openjdk.org/projects/panama/"&gt;Panama&lt;/a&gt; с целью заменить JNI. В &lt;a href="https://openjdk.org/jeps/454"&gt;Java 22&lt;/a&gt; API выйдет из состояния preview.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/448"&gt;Vector API (Sixth Incubator) (JEP 448)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API в модуле &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;, которое появилось ещё аж &lt;a href="https://openjdk.org/jeps/338"&gt;в Java 16&lt;/a&gt;, остаётся в инкубационном статусе в шестой раз. В этом релизе лишь небольшие изменения API, исправления багов и улучшения производительности.&lt;/p&gt;
+&lt;p&gt;Векторное API останется в инкубаторе, пока необходимые фичи проекта &lt;a href="https://openjdk.org/projects/valhalla/"&gt;Valhalla&lt;/a&gt; не станут preview.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/452"&gt;Key Encapsulation Mechanism API (JEP 452)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В пакете &lt;code&gt;javax.crypto&lt;/code&gt; появилось новое API, реализующее &lt;a href="https://en.wikipedia.org/wiki/Key_encapsulation_mechanism"&gt;механизм инкапсуляции ключей&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Механизм инкапсуляции ключей (KEM) &amp;ndash; это современная криптографическая техника, позволяющая обмениваться симметричными ключами, используя асимметричное шифрование. Если в традиционной технике симметричный ключ генерируется случайным образом и шифруется с помощью открытого ключа (что требует паддинга), то в KEM симметричный ключ выводится из самого открытого ключа.&lt;/p&gt;
+&lt;p&gt;В Java KEM API состоит из трёх главных классов.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEM.html"&gt;&lt;code&gt;KEM&lt;/code&gt;&lt;/a&gt; &amp;ndash; входная точка API. У него есть метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEM.html#getInstance(java.lang.String)"&gt;&lt;code&gt;getInstance()&lt;/code&gt;&lt;/a&gt;, возвращающий объект &lt;code&gt;KEM&lt;/code&gt; для указанного алгоритма.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEM.Encapsulator.html"&gt;&lt;code&gt;Encapsulator&lt;/code&gt;&lt;/a&gt; &amp;ndash; представляет собой функцию инкапсуляции, которая вызывается отправителем. У этого класса есть метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEM.Encapsulator.html#encapsulate()"&gt;&lt;code&gt;encapsulate()&lt;/code&gt;&lt;/a&gt;, который принимает открытый ключ и возвращает секретный ключ, а также key encapsulation message (которое шлётся принимающей стороне).&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEM.Decapsulator.html"&gt;&lt;code&gt;Decapsulator&lt;/code&gt;&lt;/a&gt; &amp;ndash; функция декапсуляции, которая вызывается принимающей стороной. У класса есть метод &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEM.Decapsulator.html#decapsulate(byte%5B%5D)"&gt;&lt;code&gt;decapsulate()&lt;/code&gt;&lt;/a&gt;, который принимает key encapsulation message и возвращает секретный ключ. Таким образом, у обеих сторон теперь есть одинаковый симметричный ключ, с помощью которого можно дальше обмениваться данными с помощью обычного симметричного шифрования.&lt;/p&gt;
+&lt;p&gt;Пример генерации симметричного ключа и его передачи:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Receiver side&lt;/span&gt;
+&lt;span style="color: blue"&gt;var&lt;/span&gt; kpg = KeyPairGenerator.getInstance(&lt;span style="color: darkred"&gt;"X25519"&lt;/span&gt;);
+&lt;span style="color: blue"&gt;var&lt;/span&gt; kp = kpg.generateKeyPair();
+
+&lt;span style="color: green"&gt;// Sender side&lt;/span&gt;
+&lt;span style="color: blue"&gt;var&lt;/span&gt; kem1 = KEM.getInstance(&lt;span style="color: darkred"&gt;"DHKEM"&lt;/span&gt;);
+&lt;span style="color: blue"&gt;var&lt;/span&gt; sender = kem1.newEncapsulator(kp.getPublic());
+&lt;span style="color: blue"&gt;var&lt;/span&gt; encapsulated = sender.encapsulate();
+&lt;span style="color: blue"&gt;var&lt;/span&gt; k1 = encapsulated.key();
+
+&lt;span style="color: green"&gt;// Receiver side&lt;/span&gt;
+&lt;span style="color: blue"&gt;var&lt;/span&gt; kem2 = KEM.getInstance(&lt;span style="color: darkred"&gt;"DHKEM"&lt;/span&gt;);
+&lt;span style="color: blue"&gt;var&lt;/span&gt; receiver = kem2.newDecapsulator(kp.getPrivate());
+&lt;span style="color: blue"&gt;var&lt;/span&gt; k2 = receiver.decapsulate(encapsulated.encapsulation());
+
+&lt;span style="color: blue"&gt;assert&lt;/span&gt; Arrays.equals(k1.getEncoded(), k2.getEncoded());&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;Для KEM также добавлен интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/KEMSpi.html"&gt;&lt;code&gt;KEMSpi&lt;/code&gt;&lt;/a&gt;, позволяющий предоставлять пользовательские реализации алгоритмов KEM.&lt;/p&gt;
+
+&lt;h4&gt;JVM&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/439"&gt;Generational ZGC (JEP 439)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В сборщик мусора ZGC, который появился в &lt;a href="https://openjdk.org/jeps/377"&gt;Java 15&lt;/a&gt;, добавили поддержку поколений. Поколения в ZGC пока что отключены по умолчанию, и для их включения требуется ключ &lt;code&gt;-XX:+ZGenerational&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;java -XX:+UseZGC -XX:+ZGenerational ...&lt;/pre&gt;
+&lt;p&gt;В будущих версиях Java режим работы с поколениями будет по умолчанию, и ключ &lt;code&gt;-XX:+ZGenerational&lt;/code&gt; уже требоваться не будет.&lt;/p&gt;
+&lt;p&gt;Поколения в ZGC должны улучшить производительность Java-программ, т.к. молодые объекты, которые склонны умирать рано согласно слабой гипотезе о поколениях, будут собираться чаще, а старые объекты &amp;ndash; более редко. При этом характеристики ZGC не должны от этого пострадать: время отклика по-прежнему должно быть сверхнизким (&lt; 1ms) и кучи гигантских размеров (несколько терабайт) должны продолжать поддерживаться.&lt;/p&gt;
+&lt;p&gt;Напомним, что также &lt;a href="https://openjdk.org/jeps/404"&gt;ведётся работа&lt;/a&gt; над поддержкой поколений в другом сборщике мусора &lt;a href="https://openjdk.org/jeps/379"&gt;Shenandoah&lt;/a&gt;, похожем по характеристикам на ZGC. Однако в Java 21 Generational Shenandoah попасть не успел.&lt;/p&gt;
+&lt;p&gt;Сборщиком мусора по умолчанию по-прежнему остаётся G1. Он стал дефолтным сборщиком мусора в &lt;a href="https://openjdk.org/jeps/248"&gt;Java 9&lt;/a&gt; (до него дефолтным был Parallel GC)&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/451"&gt;Prepare to Disallow the Dynamic Loading of Agents (JEP 451)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;При динамической загрузке агентов теперь выдаётся предупреждение:&lt;/p&gt;
+&lt;pre&gt;WARNING: A {Java,JVM TI} agent has been loaded dynamically (file:/u/bob/agent.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release&lt;/pre&gt;
+&lt;p&gt;Агент &amp;ndash; это компонент, который может изменять (инструментировать) код Java-приложения во время работы. Поддержка агентов появилась в Java 5, чтобы была возможность писать продвинутые инструменты вроде профилировщиков, которым необходимо добавлять эмиссию событий в классы, или AOP-библиотек. Для включения агентов требовались опции командной строки &lt;code&gt;-javaagent&lt;/code&gt; или &lt;code&gt;-agentlib&lt;/code&gt;, поэтому все агенты тогда могли включаться только явно при старте приложения.&lt;/p&gt;
+&lt;p&gt;Однако в Java 6 появился &lt;a href="https://docs.oracle.com/en/java/javase/21/docs/api/jdk.attach/com/sun/tools/attach/package-summary.html"&gt;Attach API&lt;/a&gt;, который, кроме всего прочего, позволил загружать агенты динамически прямо в работающий JVM. Благодаря этому библиотеки получили возможность подключаться к приложению и по-тихому изменять классы, не имея на то согласия от владельца приложения. Причём изменяться могут не только классы приложения, но и классы JDK. Таким образом, подвергается риску строгая инкапсуляция, которая является одним из краеугольных камней Java.&lt;/p&gt;
+&lt;p&gt;Чтобы закрыть такую потенциально опасную дыру, в Java 9 вместе с появлением модулей было предложено запретить динамическую загрузку агентов по умолчанию. Однако тогда было решено отложить на неопределённое время такое радикальное решение, чтобы дать авторам инструментов время подготовиться. В итоге, изменение дожило до наших дней, и было реализовано лишь в Java 21, но в &lt;i&gt;виде предупреждения&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;Чтобы подавить предупреждение, необходимо запускать JVM с опцией &lt;code&gt;-XX:+EnableDynamicAgentLoading&lt;/code&gt;, либо загружать агенты при старте JVM, явно перечисляя их с помощью опций &lt;code&gt;-javaagent&lt;/code&gt; или &lt;code&gt;-agentlib&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;В будущих версиях Java планируется полностью отключить динамическую загрузку по умолчанию, и она уже не будет работать без &lt;code&gt;-XX:+EnableDynamicAgentLoading&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/449"&gt;Deprecate the Windows 32-bit x86 Port for Removal (JEP 449)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;32-битный порт OpenJDK под Windows стал deprecated for removal. В будущем планируется избавиться от него полностью.&lt;/p&gt;
+&lt;p&gt;Удаление порта позволит ускорить разработку платформы. Также причиной стало отсутствие нативной реализации виртуальных потоков на 32-битной версии JDK 21 под Windows: виртуальные потоки в этой версии реализованы через платформенные потоки.&lt;/p&gt;
+
+&lt;p class="mt-4"&gt;Полный список JEP'ов, попавших в JDK 21, начиная с JDK 17: &lt;a href="https://openjdk.org/projects/jdk/21/jeps-since-jdk-17"&gt;ссылка&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Новости Java #57</title>
     <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_57.html" />
@@ -494,42 +951,5 @@ Connection connectDatabase() {
 &lt;/ul&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/jvm-profiling-tools/async-profiler/releases/tag/v2.9"&gt;Async Profiler 2.9&lt;/a&gt; с новым профайлером утечек в куче.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #49</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_49.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.ru/java_news_49.html</id>
-    <updated>2022-11-20T18:00:00Z</updated>
-    <published>2022-11-20T18:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Первые два JEP'а предложены к выходу в &lt;a href="https://openjdk.org/projects/jdk/20/"&gt;JDK 20&lt;/a&gt;. Это &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007198.html"&gt;432: Record Patterns (Second Preview)&lt;/a&gt; и &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-November/007199.html"&gt;433: Pattern Matching for switch (Fourth Preview)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышли два новых JEP'а. Это &lt;a href="https://openjdk.org/jeps/436"&gt;JEP 436: Virtual Threads (Second Preview)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/437"&gt;JEP 437: Structured Concurrency (Second Incubator)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел черновик JEP: &lt;a href="https://openjdk.org/jeps/8288476"&gt;Support for primitive types in &lt;code&gt;instanceof&lt;/code&gt; and type patterns&lt;/a&gt;. В нём предлагается расширить возможности оператора &lt;code&gt;instanceof&lt;/code&gt; и паттернов типов, позволив делать проверки не только для ссылочных, но и для примитивных типов:&lt;/p&gt;
-&lt;pre&gt;Object obj = 42;
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof int&lt;/span&gt; i) {
-    ...
-}&lt;/pre&gt;
-&lt;p&gt;В случае сужающей конверсии такие тесты будут дополнительно проверять, проходит ли конверсия без потери точности. Например, в данном случае условие не выполнится, потому что &lt;code&gt;500&lt;/code&gt; не попадает в диапазон &lt;code&gt;byte&lt;/code&gt; (от &lt;code&gt;-128&lt;/code&gt; до &lt;code&gt;127&lt;/code&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 500;
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof byte&lt;/span&gt; b) {
-    &lt;span style="color: green"&gt;// Не будет выполнено&lt;/span&gt;
-    ...
-}&lt;/pre&gt;
-&lt;p&gt;А в данном примере условие выполнится, потому что &lt;code&gt;500&lt;/code&gt; попадает в диапазон &lt;code&gt;short&lt;/code&gt; (от &lt;code&gt;-32678&lt;/code&gt; до &lt;code&gt;32677&lt;/code&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 500;
-&lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof short&lt;/span&gt; s) {
-    &lt;span style="color: green"&gt;// Выполнится&lt;/span&gt;
-    ...
-}&lt;/pre&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://spring.io/blog/2022/11/16/spring-framework-6-0-goes-ga"&gt;Spring 6.0&lt;/a&gt;. Новая версия фреймворка требует Java 17 и использует пространство имён Jakarta EE 9+ (&lt;code&gt;jakarta.*&lt;/code&gt;). При этом есть поддержка API Jakarta EE 10, например, &lt;a href="https://jakarta.ee/specifications/servlet/6.0/"&gt;Jakarta Servlet 6.0&lt;/a&gt; и &lt;a href="https://jakarta.ee/specifications/persistence/3.1/"&gt;Jakarta Persistence 3.1&lt;/a&gt;. Это позволяет использовать последние веб-контейнеры, такие как Tomcat 10.1.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://www.wildfly.org/news/2022/11/09/WildFly27-Final-Released/"&gt;WildFly 27&lt;/a&gt; с поддержкой Jakarta EE 10.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jmh-dev/2022-November/003553.html"&gt;JMH 1.36&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
