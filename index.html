@@ -51,7 +51,7 @@
 <p class="pt-1">Вот список JEP'ов, которые попали в Java 21.</p>
 <h4>Язык</h4>
 <h5><a href="https://openjdk.org/jeps/441">Pattern Matching for <code class="text-nowrap">switch</code> (JEP 441)</a></h5>
-<p>Паттерн-матчинг для <code class="text-nowrap">switch</code> наконец-то был финализирован и стал стабильной конструкцией языка. Напомним, что он появился в <a href="https://habr.com/ru/articles/577924/">Java 17</a> и был в состоянии <a href="https://openjdk.org/jeps/12">preview</a> четыре релиза: <a href="https://openjdk.org/jeps/406">17</a>, <a href="https://openjdk.org/jeps/420">18</a>, <a href="https://openjdk.org/jeps/427">19</a> и <a href="https://openjdk.org/jeps/433">20</a>.</p>
+<p>Паттерн-матчинг для <code class="text-nowrap">switch</code> наконец-то был финализирован и стал стабильной конструкцией языка. Напомним, что он появился в <a href="java_17.html">Java 17</a> и был в состоянии <a href="https://openjdk.org/jeps/12">preview</a> четыре релиза: <a href="https://openjdk.org/jeps/406">17</a>, <a href="https://openjdk.org/jeps/420">18</a>, <a href="https://openjdk.org/jeps/427">19</a> и <a href="https://openjdk.org/jeps/433">20</a>.</p>
 <p>Новый паттерн-матчинг существенно расширяет возможности оператора <code class="text-nowrap">switch</code>. Начиная с Java 1.0, <code class="text-nowrap">switch</code> поддерживал только сравнение с примитивными константами. Позже список типов был расширен (Java 5 &ndash; перечисления, Java 7 &ndash; строки), но в ветках <code class="text-nowrap">case</code> всё ещё могли быть только константы.</p>
 <p>Теперь же <code class="text-nowrap">switch</code> поддерживает в ветках <code class="text-nowrap">case</code> так называемые <i>паттерны</i>:</p>
 <pre class="border p-lg-2 p-1">Object obj = …
