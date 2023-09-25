@@ -371,7 +371,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
     &lt;span style="color: blue"&gt;var&lt;/span&gt; db = getDBConnection(context);
     db.readKey(key);
 }&lt;/pre&gt;
-&lt;p&gt;В целом &lt;code&gt;ScopedValue&lt;/code&gt; является предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;, т.к. навязывает разработчику безопасную однонаправленную модель работы с неизменяемыми данными. Однако такой подход не всегда неприменим для некоторых задач, и для них &lt;code&gt;ThreadLocal&lt;/code&gt; может быть единственно возможным решением.&lt;/p&gt;
+&lt;p&gt;В целом &lt;code&gt;ScopedValue&lt;/code&gt; является предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;, т.к. навязывает разработчику безопасную однонаправленную модель работы с неизменяемыми данными. Однако такой подход не всегда применим для некоторых задач, и для них &lt;code&gt;ThreadLocal&lt;/code&gt; может быть единственно возможным решением.&lt;/p&gt;
 
 &lt;h5&gt;&lt;a href="https://openjdk.org/jeps/453"&gt;Structured Concurrency (Preview) (JEP 453)&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;Ещё одно API, которое ранее было в инкубационном статусе (Java &lt;a href="https://openjdk.org/jeps/428"&gt;19&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/437"&gt;20&lt;/a&gt;), а теперь стало Preview API &amp;ndash; это Structured Concurrency.&lt;/p&gt;

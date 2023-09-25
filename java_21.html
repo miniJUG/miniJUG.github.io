@@ -396,7 +396,7 @@ String greeting = <span style="color: darkred">"Hello, World!"</span>;
     <span style="color: blue">var</span> db = getDBConnection(context);
     db.readKey(key);
 }</pre>
-<p>В целом <code class="text-nowrap">ScopedValue</code> является предпочтительной заменой <code class="text-nowrap">ThreadLocal</code>, т.к. навязывает разработчику безопасную однонаправленную модель работы с неизменяемыми данными. Однако такой подход не всегда неприменим для некоторых задач, и для них <code class="text-nowrap">ThreadLocal</code> может быть единственно возможным решением.</p>
+<p>В целом <code class="text-nowrap">ScopedValue</code> является предпочтительной заменой <code class="text-nowrap">ThreadLocal</code>, т.к. навязывает разработчику безопасную однонаправленную модель работы с неизменяемыми данными. Однако такой подход не всегда применим для некоторых задач, и для них <code class="text-nowrap">ThreadLocal</code> может быть единственно возможным решением.</p>
 
 <h5><a href="https://openjdk.org/jeps/453">Structured Concurrency (Preview) (JEP 453)</a></h5>
 <p>Ещё одно API, которое ранее было в инкубационном статусе (Java <a href="https://openjdk.org/jeps/428">19</a> и <a href="https://openjdk.org/jeps/437">20</a>), а теперь стало Preview API &ndash; это Structured Concurrency.</p>
