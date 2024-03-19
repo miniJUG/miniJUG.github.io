@@ -141,7 +141,8 @@
 }
 </pre>
 <p>Такой файл можно было запустить, просто написав:</p>
-<pre class="border p-lg-2 p-1">$ java Prog.java</pre>
+<pre class="border p-lg-2 p-1">$ java Prog.java
+Hello!</pre>
 
 <p>А сейчас эта возможность была расширена до произвольного количества файлов:</p>
 <pre class="border p-lg-2 p-1"><span style="color: green">// Prog.java</span>
@@ -221,7 +222,7 @@ System.out.println(FMT.<span style="color: darkred">"The length is %.2f</span>\{
         <span style="color: blue">super</span>(verifyPositive(value));
     }
 
-    <span style="color: blue">private static long</span> verifyPositive(long value) {
+    <span style="color: blue">private static long</span> verifyPositive(<span style="color: blue">long</span> value) {
         <span style="color: blue">if</span> (<span style="color: blue">value</span> <= 0)
             <span style="color: blue">throw new</span> IllegalArgumentException(<span style="color: darkred">"non-positive value"</span>);
     }
@@ -485,7 +486,6 @@ WARNING: Restricted methods will be blocked in a future release unless native ac
 <p>Критический регион &ndash; это код, который выполняется в промежутке между двумя событиями: захват указателя на Java-объект и его освобождение. В этом промежутке сборщик мусора не имеет права двигать Java-объект, чтобы не сломать нативный код, который полагается на то, что он будет находиться по одному и тому же адресу в течение всего времени захвата.</p>
 <p>До Java 22 G1 имел простейшую стратегию: если хотя бы один из потоков находился в критическом регионе, то он просто отключал сборку мусора. Это могло приводить к различным проблемам, начиная с длительных пауз и заканчивая нехваткой памяти при её фактическом избытке.</p>
 <p>Для закрепления критических объектов вовсе необязательно полностью отключать сборщик мусора: достаточно закрепить только тот регион сборщика, в котором находится объект. Это и было реализовано в JEP 423. Это было сделано путём использования счётчика, который увеличивается при захвате критического объекта и уменьшается при освобождении. Если счётчик равен нулю, то регион собирается в нормальном режиме. Если счётчик больше нуля, то регион сборщика закрепляется. Это должно решить вышеописанные проблемы.</p>
-<p></p>
   </article>
   <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
