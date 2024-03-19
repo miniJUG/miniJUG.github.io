@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>miniJUG</title>
-  <link rel="alternate" type="text/html" href="https://minijug.ru" />
+  <link rel="alternate" type="text/html" href="https://minijug.org" />
   <subtitle type="text">Новости Java</subtitle>
-  <id>https://minijug.ru/feed.xml</id>
+  <id>https://minijug.org/feed.xml</id>
   <updated>2024-03-18T19:00:00Z</updated>
   <entry>
     <title>Вышла Java 22</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_22.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_22.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_22.html</id>
+    <id>https://minijug.org/java_22.html</id>
     <updated>2024-03-18T19:00:00Z</updated>
     <published>2024-03-18T19:00:00Z</published>
     <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/22/"&gt;Java 22&lt;/a&gt;. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-22.html"&gt;2300 закрытых задач и 12 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/22/release-notes"&gt;здесь&lt;/a&gt;. Полный список изменений API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/22/apidiff/21/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
@@ -464,11 +464,11 @@ WARNING: Restricted methods will be blocked in a future release unless native ac
   </entry>
   <entry>
     <title>Вышла Java 21</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_21.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_21.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_21.html</id>
+    <id>https://minijug.org/java_21.html</id>
     <updated>2023-09-18T19:00:00Z</updated>
     <published>2023-09-18T19:00:00Z</published>
     <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/21/"&gt;Java 21&lt;/a&gt;. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-21.html"&gt;2500 закрытых задач и 15 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/21/release-notes"&gt;здесь&lt;/a&gt;. Изменения API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/21/apidiff/20/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
@@ -921,11 +921,11 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
   </entry>
   <entry>
     <title>Новости Java #57</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_57.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_57.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_57.html</id>
+    <id>https://minijug.org/java_news_57.html</id>
     <updated>2023-04-23T19:00:00Z</updated>
     <published>2023-04-23T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
@@ -961,11 +961,11 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
   </entry>
   <entry>
     <title>Новости Java #56</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_56.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_56.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_56.html</id>
+    <id>https://minijug.org/java_news_56.html</id>
     <updated>2023-03-26T19:00:00Z</updated>
     <published>2023-03-26T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик &lt;a href="https://openjdk.org/jeps/8303683"&gt;JEP: Virtual Threads&lt;/a&gt;. В нём предлагается финализировать виртуальные потоки в Java 21, то есть они больше не будут Preview API. Единственным изменением относительно Java 20 будет поддержка &lt;code&gt;ThreadLocal&lt;/code&gt; переменных в виртуальных потоках. Это гарантирует, что многие существующие библиотеки, использующие &lt;code&gt;ThreadLocal&lt;/code&gt;, продолжат корректно работать при переходе на виртуальные потоки.&lt;/p&gt;
@@ -1000,11 +1000,11 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
   </entry>
   <entry>
     <title>Вышла Java 20</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_20.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_20.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_20.html</id>
+    <id>https://minijug.org/java_20.html</id>
     <updated>2023-03-20T19:00:00Z</updated>
     <published>2023-03-20T19:00:00Z</published>
     <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/20/"&gt;Java 20&lt;/a&gt;. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-20.html"&gt;1500 закрытых задач и 7 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/20/release-notes"&gt;здесь&lt;/a&gt;. Изменения API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/20/apidiff/19/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
@@ -1121,11 +1121,11 @@ Connection connectDatabase() {
   </entry>
   <entry>
     <title>Новости Java #55</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_55.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_55.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_55.html</id>
+    <id>https://minijug.org/java_news_55.html</id>
     <updated>2023-03-05T19:00:00Z</updated>
     <published>2023-03-05T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Первые два JEP'а были предложены к попаданию в Java 21. Это &lt;a href="https://openjdk.org/jeps/430"&gt;JEP 430: String Templates (Preview)&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/431"&gt;JEP 431: Sequenced Collections&lt;/a&gt;. Java 21 &amp;ndash; это &lt;a href="https://openjdk.org/projects/jdk/21/"&gt;следующий LTS-релиз&lt;/a&gt; после Java 17, который должен выйти в сентябре 2023 года.&lt;/p&gt;
@@ -1154,11 +1154,11 @@ Connection connectDatabase() {
   </entry>
   <entry>
     <title>Новости Java #54</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_54.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_54.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_54.html</id>
+    <id>https://minijug.org/java_news_54.html</id>
     <updated>2023-02-19T19:00:00Z</updated>
     <published>2023-02-19T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8302326"&gt;Implicit Classes and Enhanced Main Methods (Preview)&lt;/a&gt;. В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в особенности новичку) опускать ненужные конструкции при написании простых программ, что поможет упростить вхождение в язык.&lt;/p&gt;
@@ -1235,11 +1235,11 @@ Connection connectDatabase() {
   </entry>
   <entry>
     <title>Новости Java #53</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_53.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_53.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_53.html</id>
+    <id>https://minijug.org/java_news_53.html</id>
     <updated>2023-01-29T19:00:00Z</updated>
     <published>2023-01-29T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышли обновления Java:&lt;/p&gt;
@@ -1296,11 +1296,11 @@ Connection connectDatabase() {
   </entry>
   <entry>
     <title>Новости Java #52</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_52.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_52.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_52.html</id>
+    <id>https://minijug.org/java_news_52.html</id>
     <updated>2023-01-17T19:00:00Z</updated>
     <published>2023-01-17T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://kotlinlang.org/docs/whatsnew18.html"&gt;Kotlin 1.8.0&lt;/a&gt;. Некоторые заметные нововведения и изменения:&lt;/p&gt;
@@ -1321,11 +1321,11 @@ Connection connectDatabase() {
   </entry>
   <entry>
     <title>Новости Java #51</title>
-    <link rel="alternate" type="text/html" href="https://minijug.ru/java_news_51.html" />
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_51.html" />
     <author>
       <name>Евгений Козлов</name>
     </author>
-    <id>https://minijug.ru/java_news_51.html</id>
+    <id>https://minijug.org/java_news_51.html</id>
     <updated>2022-12-25T19:00:00Z</updated>
     <published>2022-12-25T19:00:00Z</published>
     <content type="html">&lt;p&gt;&amp;bull; JDK 20 перешёл в &lt;a href="https://mail.openjdk.org/pipermail/jdk-dev/2022-December/007233.html"&gt;первую фазу Rampdown&lt;/a&gt;. Окончательный список JEP'ов, которые попадут в релиз, следующий:&lt;/p&gt;
