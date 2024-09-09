@@ -287,7 +287,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
 &lt;pre&gt;$ java --enable-preview --source 22 HelloWorld.java
 Hello, World!&lt;/pre&gt;
 
-&lt;p&gt;В таком случае виртуальная машина сама объявит неявный класс, в который помести метод &lt;code&gt;main()&lt;/code&gt; и другие верхнеуровневые объявления в файле:&lt;/p&gt;
+&lt;p&gt;В таком случае виртуальная машина сама объявит неявный класс, в который поместит метод &lt;code&gt;main()&lt;/code&gt; и другие верхнеуровневые объявления в файле:&lt;/p&gt;
 &lt;pre&gt;&lt;span style="color: green"&gt;// class &amp;lt;some name&gt; { ← неявно&lt;/span&gt;
 String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;;
 
