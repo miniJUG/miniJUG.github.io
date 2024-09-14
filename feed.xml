@@ -246,7 +246,7 @@ System.out.println(FMT.&lt;span style="color: darkred"&gt;"The length is %.2f&lt
     &lt;span style="color: blue"&gt;int&lt;/span&gt; i;
 
     A() {
-        i++; &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;.i++; &lt;span style="color: red"&gt;// Error&lt;/span&gt;
         &lt;span style="color: blue"&gt;super&lt;/span&gt;();
     }
 }&lt;/pre&gt;
