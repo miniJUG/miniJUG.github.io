@@ -378,7 +378,7 @@ String greeting = <span style="color: darkred">"Hello, World!"</span>;
 <p>Новое API также спроектировано с учётом новых возможностей Java, таких, как лямбды, записи, sealed-классы и паттерн-матчинг. ASM же &ndash; очень старая библиотека, основанная на визиторах, что совершенно неуместно в 2024 году.</p>
 
 <h5><a href="https://openjdk.org/jeps/462">Structured Concurrency (Second Preview) (JEP 462)</a></h5>
-<p>Structured Concurrency, которое перешло в режиме preview <a href="https://openjdk.org/jeps/453">в Java 21</a>, уходит на второй раунд preview без изменений. Ранее оно было в инкубаторе в <a href="https://openjdk.org/jeps/428">Java 19</a> и <a href="https://openjdk.org/jeps/437">Java 20</a></p>
+<p>Structured Concurrency, которое перешло в режим preview <a href="https://openjdk.org/jeps/453">в Java 21</a>, уходит на второй раунд preview без изменений. Ранее оно было в инкубаторе в <a href="https://openjdk.org/jeps/428">Java 19</a> и <a href="https://openjdk.org/jeps/437">Java 20</a></p>
 
 <p>Structured Concurrency &ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.</p>
 <p>В центре нового API класс <a href="https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a>, у которого есть два главных метода:</p>

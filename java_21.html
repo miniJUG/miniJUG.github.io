@@ -464,7 +464,7 @@ String greeting = <span style="color: darkred">"Hello, World!"</span>;
 <h5><a href="https://openjdk.org/jeps/439">Generational ZGC (JEP 439)</a></h5>
 <p>В сборщик мусора ZGC, который появился в <a href="https://openjdk.org/jeps/377">Java 15</a>, добавили поддержку поколений. Поколения в ZGC пока что отключены по умолчанию, и для их включения требуется ключ <code class="text-nowrap">-XX:+ZGenerational</code>:</p>
 <pre class="border p-lg-2 p-1">java -XX:+UseZGC -XX:+ZGenerational ...</pre>
-<p>В будущих версиях Java режим работы с поколениями будет по умолчанию, и ключ <code class="text-nowrap">-XX:+ZGenerational</code> уже требоваться не будет.</p>
+<p><a href="https://openjdk.org/jeps/474">В будущих версиях Java</a> режим работы с поколениями будет по умолчанию, и ключ <code class="text-nowrap">-XX:+ZGenerational</code> уже требоваться не будет.</p>
 <p>Поколения в ZGC должны улучшить производительность Java-программ, т.к. молодые объекты, которые склонны умирать рано согласно слабой гипотезе о поколениях, будут собираться чаще, а старые объекты &ndash; более редко. При этом характеристики ZGC не должны от этого пострадать: время отклика по-прежнему должно быть сверхнизким (< 1ms) и кучи гигантских размеров (несколько терабайт) должны продолжать поддерживаться.</p>
 <p>Напомним, что также <a href="https://openjdk.org/jeps/404">ведётся работа</a> над поддержкой поколений в другом сборщике мусора <a href="https://openjdk.org/jeps/379">Shenandoah</a>, похожем по характеристикам на ZGC. Однако в Java 21 Generational Shenandoah попасть не успел.</p>
 <p>Сборщиком мусора по умолчанию по-прежнему остаётся G1. Он стал дефолтным сборщиком мусора в <a href="https://openjdk.org/jeps/248">Java 9</a> (до него дефолтным был Parallel GC)</p>
