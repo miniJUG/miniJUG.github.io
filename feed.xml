@@ -353,7 +353,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
     }
 
     @Override
-    &lt;span style="color: blue"&gt;void&lt;/span&gt;() {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; overriddenMethod() {
         System.out.println(x); &lt;span style="color: red"&gt;// new Sub(42) will print 0&lt;/span&gt;
     }
 }&lt;/pre&gt;
@@ -376,7 +376,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
     }
 
     @Override
-    &lt;span style="color: blue"&gt;void&lt;/span&gt;() {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; overriddenMethod() {
         System.out.println(x); &lt;span style="color: green"&gt;// new Sub(42) will print 42&lt;/span&gt;
     }
 }&lt;/pre&gt;
