@@ -330,7 +330,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
 &lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; A {
     &lt;span style="color: blue"&gt;int&lt;/span&gt; i;
 
-    A(&lt;span style="color: blue"&gt;this&lt;/span&gt; i) {
+    A(&lt;span style="color: blue"&gt;int&lt;/span&gt; i) {
         &lt;span style="color: blue"&gt;this&lt;/span&gt;.i = i; &lt;span style="color: green"&gt;// OK&lt;/span&gt;
         &lt;span style="color: blue"&gt;super&lt;/span&gt;();
     }
