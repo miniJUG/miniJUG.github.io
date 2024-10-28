@@ -208,7 +208,7 @@ System.out.println(FMT.<span style="color: darkred">"The length is %.2f</span>\{
         <span style="color: darkred">"name":    "</span>\{name}<span style="color: darkred">",</span>
         <span style="color: darkred">"phone":   "</span>\{phone}<span style="color: darkred">",</span>
         <span style="color: darkred">"address": "</span>\{address}<span style="color: darkred">"</span>
-    };
+    }
     <span style="color: darkred">"""</span>;</pre>
 <p>Если в <code class="text-nowrap">name</code>, <code class="text-nowrap">phone</code> или <code class="text-nowrap">address</code> будут содержаться кавычки, то они не испортят объект, т.к. процессор заменит <code class="text-nowrap">&quot;</code> на <code class="text-nowrap">\&quot;</code>.</p>
 <p>Или, например, процессор <code class="text-nowrap">SQL</code> будет создавать PreparedStatement'ы, защищая от атак SQL Injection:</p>

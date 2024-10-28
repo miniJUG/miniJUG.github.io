@@ -1156,7 +1156,7 @@ System.out.println(FMT.&lt;span style="color: darkred"&gt;"The length is %.2f&lt
         &lt;span style="color: darkred"&gt;"name":    "&lt;/span&gt;\{name}&lt;span style="color: darkred"&gt;",&lt;/span&gt;
         &lt;span style="color: darkred"&gt;"phone":   "&lt;/span&gt;\{phone}&lt;span style="color: darkred"&gt;",&lt;/span&gt;
         &lt;span style="color: darkred"&gt;"address": "&lt;/span&gt;\{address}&lt;span style="color: darkred"&gt;"&lt;/span&gt;
-    };
+    }
     &lt;span style="color: darkred"&gt;"""&lt;/span&gt;;&lt;/pre&gt;
 &lt;p&gt;Если в &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;phone&lt;/code&gt; или &lt;code&gt;address&lt;/code&gt; будут содержаться кавычки, то они не испортят объект, т.к. процессор заменит &lt;code&gt;&amp;quot;&lt;/code&gt; на &lt;code&gt;\&amp;quot;&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Или, например, процессор &lt;code&gt;SQL&lt;/code&gt; будет создавать PreparedStatement'ы, защищая от атак SQL Injection:&lt;/p&gt;
