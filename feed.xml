@@ -4,7 +4,713 @@
   <link rel="alternate" type="text/html" href="https://minijug.org" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.org/feed.xml</id>
-  <updated>2024-09-16T19:00:00Z</updated>
+  <updated>2025-03-17T19:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 24</title>
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_24.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.org/java_24.html</id>
+    <updated>2025-03-17T19:00:00Z</updated>
+    <published>2025-03-17T19:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/24/"&gt;Java 24&lt;/a&gt;. В этот релиз попало около &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-24.html"&gt;2700 закрытых задач и 24 JEP'а&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="http://jdk.java.net/24/release-notes"&gt;здесь&lt;/a&gt;. Полный список изменений API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/24/apidiff/23/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Java 24 не является LTS-релизом, и у неё будут выходить обновления &lt;a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html"&gt;только полгода&lt;/a&gt; (до сентября 2025 года).&lt;/p&gt;
+&lt;!-- cut --&gt;
+&lt;p&gt;Скачать JDK 24 можно по этим ссылкам:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt; (лицензия &lt;a href="https://www.oracle.com/downloads/licenses/no-fee-license.html"&gt;NFTC&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/24/"&gt;OpenJDK&lt;/a&gt; (лицензия &lt;a href="https://openjdk.org/legal/gplv2+ce.html"&gt;GPLv2 with Classpath Exception&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="mt-2"&gt;Рассмотрим все JEP'ы, которые попали в Java 24.&lt;/p&gt;
+
+&lt;h4&gt;Язык&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/488"&gt;Primitive Types in Patterns, instanceof, and switch (Second Preview) (JEP 488)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Примитивные типы в паттернах, &lt;code&gt;instanceof&lt;/code&gt; и &lt;code&gt;switch&lt;/code&gt;, которые появились &lt;a href="https://openjdk.org/jeps/455"&gt;в Java 23&lt;/a&gt; в режиме preview, остаются на второе preview без изменений:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+
+Object obj = 42;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof int&lt;/span&gt; i) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i);
+}
+
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case double&lt;/span&gt; d -&gt; System.out.println(&lt;span style="color: darkred"&gt;"double: "&lt;/span&gt; + d);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p&gt;Проверять можно также и то, попадают ли значения в диапазон типа:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 42;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof byte&lt;/span&gt; b) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    System.out.println(&lt;span style="color: darkred"&gt;"byte: "&lt;/span&gt; + b);
+}
+
+&lt;span style="color: blue"&gt;double&lt;/span&gt; d = 3.0;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (d) {
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"float: "&lt;/span&gt; + f);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p&gt;В примерах выше &lt;code&gt;42&lt;/code&gt; попадает в диапазон byte (&lt;code&gt;[-128; 127]&lt;/code&gt;), а &lt;code&gt;3.0&lt;/code&gt; без потери точности приводится к &lt;code&gt;int&lt;/code&gt;. Таким образом, это позволит более безопасно приводить одни числовые типы к другим, не прибегая к ручным проверкам диапазонов.&lt;/p&gt;
+&lt;p&gt;Подобные проверки могут быть полезны и в паттернах записей:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; JsonNumber(&lt;span style="color: blue"&gt;double&lt;/span&gt; d) {}
+
+&lt;span style="color: blue"&gt;var&lt;/span&gt; json = &lt;span style="color: blue"&gt;new&lt;/span&gt; JsonNumber(3.0);
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (json &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; JsonNumber(&lt;span style="color: blue"&gt;int&lt;/span&gt; i)) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: green"&gt;// ...&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;p&gt;Если до Java 23/24 типы выражений-селекторов в &lt;code&gt;switch&lt;/code&gt; могли быть только &lt;code&gt;int&lt;/code&gt;, &lt;code&gt;short&lt;/code&gt;, &lt;code&gt;byte&lt;/code&gt; и &lt;code&gt;char&lt;/code&gt; и для них поддерживались только константные ветки (&lt;code&gt;case 3&lt;/code&gt; и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;float&lt;/span&gt; f = 1.0f;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (f) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 0f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"0"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x &lt;span style="color: blue"&gt;when&lt;/span&gt; x == 1f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"1"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+}
+
+&lt;span style="color: blue"&gt;boolean&lt;/span&gt; b = &lt;span style="color: darkred"&gt;"hello"&lt;/span&gt;.isEmpty();
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (b) {
+    &lt;span style="color: blue"&gt;case true&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"empty"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case false&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"non-empty"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;p&gt;В Java 25 возможно будет &lt;a href="https://openjdk.org/jeps/8349215"&gt;третье preview&lt;/a&gt; этой фичи.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/494"&gt;Module Import Declarations (Second Preview) (JEP 494)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Module Import Declarations, которые появились &lt;a href="https://openjdk.org/jeps/476"&gt;в Java 23&lt;/a&gt; в режиме preview, перешли во второе превью со следующими двумя изменениями.&lt;/p&gt;
+
+&lt;p&gt;Во-первых, при импорте модуля-агрегатора &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.se/module-summary.html"&gt;&lt;code&gt;java.se&lt;/code&gt;&lt;/a&gt;, теперь импортируются и классы &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/module-summary.html"&gt;&lt;code&gt;java.base&lt;/code&gt;&lt;/a&gt;. В Java 23 при импорте &lt;code&gt;java.se&lt;/code&gt; приходилось отдельно импортировать &lt;code&gt;java.base&lt;/code&gt;, чтобы пользоваться базовыми классами Java, что выглядело странно:&lt;/p&gt;
+
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 23&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;import module&lt;/span&gt; java.se;
+
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+  &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+    &lt;span style="color: red"&gt;// Нужен import module java.base, иначе будет error: cannot find symbol&lt;/span&gt;
+    System.out.println(Set.of());
+  }
+}&lt;/pre&gt;
+
+&lt;p&gt;В Java 24 теперь же это не нужно:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;import module&lt;/span&gt; java.se;
+
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+  &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+    &lt;span style="color: green"&gt;// Работает:&lt;/span&gt;
+    System.out.println(Set.of());
+  }
+}&lt;/pre&gt;
+
+&lt;p&gt;Такое стало возможно благодаря тому, что в Java 24 разрешили модулям делать &lt;code&gt;requires transitive java.base&lt;/code&gt; (раньше было нельзя, поскольку считалось, что любой модуль всегда и так зависит от &lt;code&gt;java.base&lt;/code&gt; неявно):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;module&lt;/span&gt; M {
+  &lt;span style="color: blue"&gt;requires transitive&lt;/span&gt; java.base; &lt;span style="color: green"&gt;// С Java 24 можно&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;p&gt;В декларацию &lt;code&gt;java.se&lt;/code&gt; строчка &lt;code&gt;requires transitive java.base&lt;/code&gt; была соответственно и добавлена.&lt;/p&gt;
+
+&lt;p&gt;Во-вторых, импорты со звёздочкой теперь могут перекрывать импорты модулей. До этого перекрывать могли только одиночные импорты:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 23&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;import module&lt;/span&gt; java.desktop;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.util.List; &lt;span style="color: green"&gt;// Только так можно перекрыть java.awt.List из java.desktop (import java.util.* не сработает)&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+  &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+    System.out.println(List.of()); &lt;span style="color: green"&gt;// Резолвится java.util.List&lt;/span&gt;
+  }
+}&lt;/pre&gt;
+
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;import module&lt;/span&gt; java.desktop;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.util.*; &lt;span style="color: green"&gt;// Теперь можно и так&lt;/span&gt;
+
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Main {
+  &lt;span style="color: blue"&gt;public static void&lt;/span&gt; main(String[] args) {
+    System.out.println(List.of()); &lt;span style="color: green"&gt;// Резолвится java.util.List&lt;/span&gt;
+  }
+}&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;Напомним, что такое вообще импорт модулей. Декларация &lt;code&gt;import module M&lt;/code&gt; эквивалентна импорту всех экспортированных пакетов из модуля &lt;code&gt;M&lt;/code&gt; и его транзитивных зависимостей в текущий модуль.&lt;/p&gt;
+&lt;p&gt;Например, импорт модуля &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/module-summary.html"&gt;&lt;code&gt;java.base&lt;/code&gt;&lt;/a&gt; имеет тот же эффект, как если бы мы вручную импортировались все его 54 экспортированных пакета:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;import&lt;/span&gt; java.io.*;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.lang.*;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; java.lang.annotation.*;
+&lt;span style="color: green"&gt;// ... 49 packages ...&lt;/span&gt;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; javax.security.auth.x500.*;
+&lt;span style="color: blue"&gt;import&lt;/span&gt; javax.security.cert.*;&lt;/pre&gt;
+
+&lt;p&gt;Таким образом, написав всего лишь один импорт, можно будет получить доступ до таких неотъемлемых классов и интерфейсов как &lt;code&gt;List&lt;/code&gt;, &lt;code&gt;Map&lt;/code&gt;, &lt;code&gt;Stream&lt;/code&gt;, &lt;code&gt;Path&lt;/code&gt;, &lt;code&gt;Function&lt;/code&gt; и др. без необходимости отдельного импорта их соответствующих пакетов.&lt;/p&gt;
+&lt;p&gt;Такое нововведение может быть полезным при прототипировании, изучении языка и новых фич, а также для написания коротких скриптов, которые запускаются напрямую &lt;a href="https://openjdk.org/jeps/458"&gt;без предварительной компиляции&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;При использовании &lt;i&gt;простых исходных файлов&lt;/i&gt; модуль &lt;code&gt;java.base&lt;/code&gt; импортируется автоматически. Об этом следующий JEP 495.&lt;/p&gt;
+
+&lt;p&gt;Планируется, что фича выйдет из preview &lt;a href="https://openjdk.org/jeps/8344700"&gt;в Java 25&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/495"&gt;Simple Source Files and Instance Main Methods (Fourth Preview) (JEP 495)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Простые исходные файлы и инстанс-методы &lt;code&gt;main()&lt;/code&gt; остаются в режиме preview в четвёртый раз. Эта фича появилась &lt;a href="https://openjdk.org/jeps/445"&gt;в Java 21&lt;/a&gt; и дважды менялась: сначала &lt;a href="https://openjdk.org/jeps/463"&gt;в Java 22&lt;/a&gt;, а потом &lt;a href="https://openjdk.org/jeps/477"&gt;в Java 23&lt;/a&gt;. На этот раз изменений нет кроме новой терминологии и названия JEP'а (в Java 25 фича возможно &lt;a href="https://mail.openjdk.org/pipermail/amber-dev/2025-January/009198.html"&gt;опять поменяется&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Новый протокол запуска Java-программ позволяет запускать классы, у которых метод &lt;code&gt;main()&lt;/code&gt; не является &lt;code&gt;public static&lt;/code&gt; (т.е. является instance-методом) и у которого нет параметра &lt;code&gt;String[] args&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+        System.out.println(&lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+&lt;p&gt;В таком случае во время запуска JVM сама создаст экземпляр класса &lt;code&gt;HelloWorld&lt;/code&gt; и вызовет у него метод &lt;code&gt;main()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;$ java --enable-preview --source 24 HelloWorld.java
+Hello, World!&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;Кроме того, можно запускать файлы и без объявленного класса вовсе. Такие файлы называются простыми исходными файлами:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// HelloWorld.java&lt;/span&gt;
+
+String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;;
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    System.out.println(greeting);
+}&lt;/pre&gt;
+&lt;pre&gt;$ java --enable-preview --source 24 HelloWorld.java
+Hello, World!&lt;/pre&gt;
+
+&lt;p&gt;В таком случае виртуальная машина сама объявит неявный класс, в который поместит метод &lt;code&gt;main()&lt;/code&gt; и другие верхнеуровневые объявления в файле:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// class &amp;lt;some name&gt; { ← неявно&lt;/span&gt;
+String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;;
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    println(greeting);
+}
+&lt;span style="color: green"&gt;// }&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Неявный класс обладает практически всеми возможностями явного класса (возможность содержать методы, поля), но есть несколько отличий:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Неявный класс может находиться только в безымянном пакете.&lt;/li&gt;
+  &lt;li&gt;Код в неявном классе не может ссылаться на него по имени.&lt;/li&gt;
+  &lt;li&gt;Неявный класс всегда имеет один дефолтный конструктор без аргументов.&lt;/li&gt;
+  &lt;li&gt;Неявный класс всегда является final и наследуется от &lt;code&gt;java.lang.Object&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;При этом неявный класс не является безымянным: у него есть &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/Class.html#getName()"&gt;имя&lt;/a&gt;, совпадающее с именем файла (но это является деталью реализации, на которую не стоит полагаться).&lt;/p&gt;
+
+&lt;p&gt;В простых исходных файлах также можно обращаться напрямую к следующим 5 методам для работы с консолью:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;public static void println(Object obj);&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static void println();&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static void print(Object obj);&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String readln(String prompt);&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;public static String readln();&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;То есть пример выше можно написать ещё короче:&lt;/p&gt;
+&lt;pre&gt;String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;;
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    println(greeting);
+}&lt;/pre&gt;
+
+&lt;p&gt;Эти методы определены в новом классе &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/io/IO.html"&gt;&lt;code&gt;java.io.IO&lt;/code&gt;&lt;/a&gt; (каждый простой исходный файл неявно статически импортирует все его методы).&lt;/p&gt;
+
+&lt;p&gt;Также каждый простой исходный файл неявно импортирует модуль &lt;code&gt;java.base&lt;/code&gt; (фича из предыдущего JEP 494). Это значит, что ко всем базовым классам Java можно обращаться без необходимости импортов:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
+    println(List.of(&lt;span style="color: darkred"&gt;"James"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Bill"&lt;/span&gt;, &lt;span style="color: darkred"&gt;"Guy"&lt;/span&gt;));
+}&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;Простые исходные файлы и instance методы &lt;code&gt;main()&lt;/code&gt; вводятся в Java с двумя целями:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Облегчить процесс обучения языку. На новичка, только что начавшего изучение Java, не должно сваливаться всё сразу, а концепции должны вводятся постепенно, начиная с базовых (переменные, циклы, процедуры) и постепенно переходя к более продвинутым (классы, области видимости).&lt;/li&gt;
+  &lt;li&gt;Облегчить написание коротких программ и скриптов. Количество церемоний для них должно быть сведено к минимуму.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Планируется, что фича выйдет из preview &lt;a href="https://openjdk.org/jeps/8344699"&gt;в Java 25&lt;/a&gt; (и Simple Source Files будут переименованы в Compact Source Files).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/492"&gt;Flexible Constructor Bodies (Third Preview) (JEP 492)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Statements before &lt;code&gt;super()&lt;/code&gt;, которые появились &lt;a href="https://openjdk.org/jeps/447"&gt;в Java 22&lt;/a&gt; в режиме preview и были переименованы во Flexible Constructor Bodies &lt;a href="https://openjdk.org/jeps/482"&gt;в Java 23&lt;/a&gt;, остаются на третье preview без значительных изменений.&lt;/p&gt;
+
+&lt;p&gt;Flexible Constructor Bodies разрешают писать инструкции кода в конструкторе перед явным вызовом конструктора (&lt;code&gt;super()&lt;/code&gt; или &lt;code&gt;this()&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; PositiveBigInteger &lt;span style="color: blue"&gt;extends&lt;/span&gt; BigInteger {
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; PositiveBigInteger(&lt;span style="color: blue"&gt;long&lt;/span&gt; value) {
+        &lt;span style="color: blue"&gt;if&lt;/span&gt; (&lt;span style="color: blue"&gt;value&lt;/span&gt; &lt;= 0)
+            &lt;span style="color: blue"&gt;throw new&lt;/span&gt; IllegalArgumentException(&lt;span style="color: darkred"&gt;"non-positive value"&lt;/span&gt;);
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;(value);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Напомним, что с самого первого релиза Java 1.0 это было запрещено, поэтому в случаях, когда необходимо выполнить код перед вызовом конструктора, приходилось использовать обходные пути, например, прибегать к вспомогательным статическим методам:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; PositiveBigInteger &lt;span style="color: blue"&gt;extends&lt;/span&gt; BigInteger {
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; PositiveBigInteger(&lt;span style="color: blue"&gt;long&lt;/span&gt; value) {
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;(verifyPositive(value));
+    }
+
+    &lt;span style="color: blue"&gt;private static long&lt;/span&gt; verifyPositive(&lt;span style="color: blue"&gt;long&lt;/span&gt; value) {
+        &lt;span style="color: blue"&gt;if&lt;/span&gt; (&lt;span style="color: blue"&gt;value&lt;/span&gt; &lt;= 0)
+            &lt;span style="color: blue"&gt;throw new&lt;/span&gt; IllegalArgumentException(&lt;span style="color: darkred"&gt;"non-positive value"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Или к вспомогательным конструкторам, если нужно передать одно и то же значение для нескольких параметров:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;public class&lt;/span&gt; Super {
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; Super(C x, C y) { ... }
+}
+
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Sub &lt;span style="color: blue"&gt;extends&lt;/span&gt; Super {
+    &lt;span style="color: blue"&gt;private&lt;/span&gt; Sub(C x) { &lt;span style="color: green"&gt;// Auxiliary constructor&lt;/span&gt;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;(x, x); &lt;span style="color: green"&gt;// x is shared here&lt;/span&gt;
+    }
+
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; Sub(&lt;span style="color: blue"&gt;int&lt;/span&gt; i) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;(&lt;span style="color: blue"&gt;new&lt;/span&gt; C(i));
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;В Java 24, включив режим preview, то же самое можно реализовать гораздо короче:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 24&lt;/span&gt;
+&lt;span style="color: blue"&gt;public class&lt;/span&gt; Sub &lt;span style="color: blue"&gt;extends&lt;/span&gt; Super {
+    &lt;span style="color: blue"&gt;public&lt;/span&gt; Sub(&lt;span style="color: blue"&gt;int&lt;/span&gt; i) {
+        &lt;span style="color: blue"&gt;var&lt;/span&gt; x = &lt;span style="color: blue"&gt;new&lt;/span&gt; C(i);
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;(x, x);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Не всякий код можно поместить перед вызовом конструктора: код в прологе не должен ссылаться на конструируемый объект (читать поля, вызывать инстанс-методы). Рассмотрим несколько примеров некорректного кода:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; A {
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; i;
+
+    A() {
+        System.out.print(&lt;span style="color: blue"&gt;this&lt;/span&gt;); &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        var x = i;              &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        hashCode();             &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;();
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Ссылаться на родительский объект также нельзя (ведь это тоже часть текущего объекта):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; B {
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; i;
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; m() {}
+}
+
+&lt;span style="color: blue"&gt;class&lt;/span&gt; C &lt;span style="color: blue"&gt;extends&lt;/span&gt; B {
+    C() {
+        &lt;span style="color: blue"&gt;var&lt;/span&gt; x = i; &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        m();       &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;();
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Также запрещены ситуации, когда есть неявная ссылка на объект, например, через экземпляр внутреннего класса:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; Outer {
+    &lt;span style="color: blue"&gt;class&lt;/span&gt; Inner {
+    }
+
+    Outer() {
+        &lt;span style="color: blue"&gt;new&lt;/span&gt; Inner(); &lt;span style="color: red"&gt;// Error&lt;/span&gt;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;();
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Однако если читать поля конструируемого класса до вызова &lt;code&gt;super()&lt;/code&gt; нельзя, то инициализировать их можно:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; A {
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; i;
+
+    A(&lt;span style="color: blue"&gt;int&lt;/span&gt; i) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.i = i; &lt;span style="color: green"&gt;// OK&lt;/span&gt;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;();
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Это может быть полезным для ситуаций, когда в конструкторе суперкласса может случайно прочитаться нежелательное дефолтное значение поля при вызове виртуального метода:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; Super {
+    Super() { overriddenMethod(); }
+
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; overriddenMethod() {
+        System.out.println(&lt;span style="color: darkred"&gt;"hello"&lt;/span&gt;);
+    }
+}
+
+&lt;span style="color: blue"&gt;class&lt;/span&gt; Sub &lt;span style="color: blue"&gt;extends&lt;/span&gt; Super {
+    &lt;span style="color: blue"&gt;final int&lt;/span&gt; x;
+
+    Sub(&lt;span style="color: blue"&gt;int&lt;/span&gt; x) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.x = x;
+    }
+
+    @Override
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; overriddenMethod() {
+        System.out.println(x); &lt;span style="color: red"&gt;// new Sub(42) will print 0&lt;/span&gt;
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Чтобы предотвратить такую ситуацию, нужно поместить инициализацию поле выше вызова &lt;code&gt;super()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; Super {
+    Super() { overriddenMethod(); }
+
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; overriddenMethod() {
+        System.out.println(&lt;span style="color: darkred"&gt;"hello"&lt;/span&gt;);
+    }
+}
+
+&lt;span style="color: blue"&gt;class&lt;/span&gt; Sub &lt;span style="color: blue"&gt;extends&lt;/span&gt; Super {
+    &lt;span style="color: blue"&gt;final int&lt;/span&gt; x;
+
+    Sub(&lt;span style="color: blue"&gt;int&lt;/span&gt; x) {
+        &lt;span style="color: blue"&gt;this&lt;/span&gt;.x = x;
+        &lt;span style="color: blue"&gt;super&lt;/span&gt;();
+    }
+
+    @Override
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; overriddenMethod() {
+        System.out.println(x); &lt;span style="color: green"&gt;// new Sub(42) will print 42&lt;/span&gt;
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Также инициализация полей до &lt;code&gt;super()&lt;/code&gt; можно пригодиться в проекте Valhalla для &lt;a href="https://youtu.be/IF9l8fYfSnI?t=2006"&gt;definite assignment полей&lt;/a&gt; null-restricted value-классов.&lt;/p&gt;
+
+&lt;p&gt;Интересно, что новая возможность затрагивает исключительно компилятор Java &amp;ndash; JVM уже и так давно поддерживает байткод, в котором присутствуют инструкции перед вызовом &lt;code&gt;super()&lt;/code&gt; или &lt;code&gt;this()&lt;/code&gt;, если эти инструкции не трогают конструируемый объект (JVM даже ещё более либеральна, например, она разрешает несколько вызовов конструкторов, если любой путь обязательно завершается одним вызовом конструктора).&lt;/p&gt;
+
+&lt;p&gt;Планируется, что фича выйдет из preview &lt;a href="https://openjdk.org/jeps/8344702"&gt;в Java 25&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/485"&gt;Stream Gatherers (JEP 485)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Stream gatherers, которые &lt;a href="https://openjdk.org/jeps/461"&gt;в Java 22&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/473"&gt;в Java 23&lt;/a&gt; были в режиме preview, стали постоянным API.&lt;/p&gt;
+
+&lt;p&gt;Gatherers &amp;ndash; это усовершенствование Stream API для поддержки произвольных промежуточных операций.&lt;/p&gt;
+&lt;p&gt;Напомним, что стримы с появления в Java 8 имели фиксированный набор промежуточных операций (&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#map(java.util.function.Function)"&gt;&lt;code&gt;map&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#flatMap(java.util.function.Function)"&gt;&lt;code&gt;flatMap&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#filter(java.util.function.Predicate)"&gt;&lt;code&gt;filter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#reduce(java.util.function.BinaryOperator)"&gt;&lt;code&gt;reduce&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#limit(long)"&gt;&lt;code&gt;limit&lt;/code&gt;&lt;/a&gt;,
+  &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#skip(long)"&gt;&lt;code&gt;skip&lt;/code&gt;&lt;/a&gt; и т.д). В Java 9 были добавлены &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#takeWhile(java.util.function.Predicate)"&gt;&lt;code&gt;takeWhile&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#dropWhile(java.util.function.Predicate)"&gt;&lt;code&gt;dropWhile&lt;/code&gt;&lt;/a&gt;. Хотя этот стандартный набор операций довольно богатый и покрывает большинство случаев, иногда бывают необходимы более изощрённые промежуточные операции для более сложных задач. Чтобы решить эту проблему, было предложено создать точку расширения для стримов, которая позволит кому угодно создать свои промежуточные операции.&lt;/p&gt;
+&lt;p&gt;Новая точка расширения &amp;ndash; это новый метод &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#gather(java.util.stream.Gatherer)"&gt;&lt;code&gt;Stream::gather(Gatherer)&lt;/code&gt;&lt;/a&gt;, который обрабатывает элементы стрима путём применения объекта, реализующего интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherer.html"&gt;&lt;code&gt;Gatherer&lt;/code&gt;&lt;/a&gt;, предоставляемого пользователем. Операция &lt;code&gt;gather()&lt;/code&gt; аналогична уже имеющейся операции &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Stream.html#collect(java.util.stream.Collector)"&gt;&lt;code&gt;Stream::collect(Collector)&lt;/code&gt;&lt;/a&gt;: если &lt;code&gt;collect()&lt;/code&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Collector.html"&gt;&lt;code&gt;Collector&lt;/code&gt;&lt;/a&gt; определяют точку расширения для терминальных операций, то &lt;code&gt;gather()&lt;/code&gt; и &lt;code&gt;Gatherer&lt;/code&gt; определяют точку расширения для промежуточных.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Gatherer&lt;/code&gt; представляет собой трансформацию элементов стрима. Манера трансформации может быть совершенно произвольной: one-to-one, one-to-many, many-to-one или many-to-many. Поддерживается короткое замыкание, если надо в какой-то момент остановить обработку и отбросить все дальнейшие элементы. Бесконечные стримы могут преобразовываться в конечные, и наоборот, конечные могут преобразовываться в бесконечные. Поддерживается параллельное исполнение. Всё это возможно благодаря максимально обобщённой форме интерфейса &lt;code&gt;Gatherer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gather()&lt;/code&gt; также является промежуточной операцией, поэтому может быть несколько &lt;code&gt;gather()&lt;/code&gt; в одной цепочке:&lt;/p&gt;
+&lt;pre&gt;source.gather(a).gather(b).gather(c).collect(...)&lt;/pre&gt;
+
+&lt;p&gt;Вместе с самим &lt;code&gt;Gatherer&lt;/code&gt; было добавлено несколько готовых gatherer'ов, определённых в новом классе &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherers.html"&gt;&lt;code&gt;Gatherers&lt;/code&gt;&lt;/a&gt;. Это &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherers.html#fold(java.util.function.Supplier,java.util.function.BiFunction)"&gt;&lt;code&gt;fold&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherers.html#mapConcurrent(int,java.util.function.Function)"&gt;&lt;code&gt;mapConcurrent&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherers.html#scan(java.util.function.Supplier,java.util.function.BiFunction)"&gt;&lt;code&gt;scan&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherers.html#windowFixed(int)"&gt;&lt;code&gt;windowFixed&lt;/code&gt;&lt;/a&gt; и
+  &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherers.html#windowSliding(int)"&gt;&lt;code&gt;windowSliding&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Давайте рассмотрим несколько примеров:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: grey"&gt;jshell&gt;&lt;/span&gt; Stream.of(1,2,3,4,5,6,7,8,9)
+   &lt;span style="color: grey"&gt;...&gt;&lt;/span&gt;       .gather(Gatherers.fold(() -&gt; "", (str, n) -&gt; str + n))
+   &lt;span style="color: grey"&gt;...&gt;&lt;/span&gt;       .findFirst()
+   &lt;span style="color: grey"&gt;...&gt;&lt;/span&gt;       .get();
+&lt;span style="color: grey"&gt;$1 ==&gt;&lt;/span&gt; "123456789"&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: grey"&gt;jshell&gt;&lt;/span&gt; Stream.of(1,2,3,4,5,6,7,8,9)
+   &lt;span style="color: grey"&gt;...&gt;&lt;/span&gt;       .gather(Gatherers.scan(() -&gt; "", (str, n) -&gt; str + n))
+   &lt;span style="color: grey"&gt;...&gt;&lt;/span&gt;       .toList()
+&lt;span style="color: grey"&gt;$2 ==&gt;&lt;/span&gt; [1, 12, 123, 1234, 12345, 123456, 1234567, 12345678, 123456789]&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: grey"&gt;jshell&gt;&lt;/span&gt; Stream.of(1,2,3,4,5,6,7,8).gather(Gatherers.windowFixed(3)).toList()
+&lt;span style="color: grey"&gt;$3 ==&gt;&lt;/span&gt; [[1, 2, 3], [4, 5, 6], [7, 8]]&lt;/pre&gt;
+&lt;pre&gt;&lt;span style="color: grey"&gt;jshell&gt;&lt;/span&gt; Stream.of(1,2,3,4,5,6).gather(Gatherers.windowSliding(3)).toList()
+&lt;span style="color: grey"&gt;$4 ==&gt;&lt;/span&gt; [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6]]&lt;/pre&gt;
+
+&lt;p&gt;Дизайн интерфейса &lt;code&gt;Gatherer&lt;/code&gt; был создан под влиянием интерфейса &lt;code&gt;Collector&lt;/code&gt;. Вот основная часть его сигнатуры:&lt;/p&gt;
+&lt;pre&gt;public interface Gatherer&amp;lt;T, A, R&gt; {
+    Supplier&amp;lt;A&gt; initializer();
+    Integrator&amp;lt;A, T, R&gt; integrator();
+    BinaryOperator&amp;lt;A&gt; combiner();
+    BiConsumer&amp;lt;A, Downstream&amp;lt;? super R&gt;&gt; finisher();
+}&lt;/pre&gt;
+&lt;p&gt;Если взглянуть на &lt;code&gt;Collector&lt;/code&gt;, то он также имеет три параметра &lt;code&gt;T&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;R&lt;/code&gt; и содержит 4 основных метода: &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Collector.html#supplier()"&gt;&lt;code&gt;supplier&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Collector.html#accumulator()"&gt;&lt;code&gt;accumulator&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Collector.html#combiner()"&gt;&lt;code&gt;combiner&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Collector.html#finisher()"&gt;&lt;code&gt;finisher&lt;/code&gt;&lt;/a&gt;. Однако &lt;code&gt;Gatherer&lt;/code&gt; использует два вспомогательных интерфейса &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherer.Integrator.html"&gt;&lt;code&gt;Integrator&lt;/code&gt;&lt;/a&gt; и
+  &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherer.Downstream.html"&gt;&lt;code&gt;Downstream&lt;/code&gt;&lt;/a&gt;, так как поддержка произвольных промежуточных операций требует немного более сложного устройства, чем терминальных.&lt;/p&gt;
+&lt;p&gt;Для написания собственных gatherer'ов, как правило, не приходится с нуля реализовывать интерфейс &lt;code&gt;Gatherer&lt;/code&gt; и можно воспользоваться готовыми методами-фабриками: &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherer.html#of(java.util.stream.Gatherer.Integrator)"&gt;&lt;code&gt;Gatherer::of(Integrator)&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/stream/Gatherer.html#ofSequential(java.util.stream.Gatherer.Integrator)"&gt;&lt;code&gt;Gatherer::ofSequential(Integrator)&lt;/code&gt;&lt;/a&gt; или другими вариациями.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/484"&gt;Class-File API (JEP 484)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Стандартное API для парсинга, генерации и трансформации class-файлов, которое было &lt;a href="https://openjdk.org/jeps/457"&gt;в Java 22&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/466"&gt;в Java 23&lt;/a&gt; в режиме preview, стало постоянным API.&lt;/p&gt;
+&lt;p&gt;Новое API находится в пакете &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/classfile/package-summary.html"&gt;&lt;code&gt;java.lang.classfile&lt;/code&gt;&lt;/a&gt;. Оно должно заменить копию библиотеки &lt;a href="https://asm.ow2.io/"&gt;ASM&lt;/a&gt; внутри JDK, которую планируется удалить, как только все компоненты JDK перейдут с неё на новое API.&lt;/p&gt;
+&lt;p&gt;Основная проблема ASM (и других библиотек для работы с class-файлами) &amp;ndash; это то, что она не успевает за ускорившимся в последнее время темпом выхода релизов JDK (два раза в год), а соответственно, и за изменениями в формате class-файлов. Кроме того, ASM &amp;ndash; это сторонняя библиотека, а значит её поддержка возможностей class-файлов всегда отстаёт от JDK, что создаёт проблемы как в экосистеме, так и в самой JDK. Стандартное API же эволюционирует одновременно с форматом class-файлов. Как только выходит новая версия Java, фреймворки и инструменты, использующие API, немедленно и автоматически получают поддержку нового формата.&lt;/p&gt;
+&lt;p&gt;Новое API также спроектировано с учётом новых возможностей Java, таких, как лямбды, записи, sealed-классы и паттерн-матчинг. ASM же &amp;ndash; очень старая библиотека, основанная на визиторах, что совершенно неуместно в 2025 году.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/498"&gt;Warn upon Use of Memory-Access Methods in sun.misc.Unsafe (JEP 498)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;При вызове методов доступа к памяти в классе &lt;code&gt;sun.misc.Unsafe&lt;/code&gt; теперь выдаётся предупреждение в консоль (при первом вызове к соответствующему методу):&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: orange"&gt;WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::setMemory has been called by com.foo.bar.Server (file:/tmp/foobarserver/thing.jar)
+WARNING: Please consider reporting this to the maintainers of com.foo.bar.Server
+WARNING: sun.misc.Unsafe::setMemory will be removed in a future release&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;До этого все эти методы стали deprecated for removal. Это произошло &lt;a href="https://openjdk.org/jeps/471"&gt;в Java 23&lt;/a&gt; и в &lt;a href="https://bugs.openjdk.org/browse/JDK-8278223"&gt;Java 18&lt;/a&gt;. Это почти все методы класса: 77 из 87 методов.&lt;/p&gt;
+&lt;p&gt;Также &lt;a href="https://bugs.openjdk.org/browse/JDK-8315953"&gt;в Java 22&lt;/a&gt; стали deprecated for removal 6 методов, не относящиеся к памяти, но в Java 24 при их вызове пока не будет предупреждения.&lt;/p&gt;
+
+&lt;p&gt;Вместо методов доступа к памяти необходимо использовать стандартное API в Java:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/invoke/VarHandle.html"&gt;&lt;code&gt;java.lang.invoke.VarHandle&lt;/code&gt;&lt;/a&gt; &amp;ndash; API для манипуляций с памятью внутри кучи, появилось &lt;a href="https://openjdk.org/jeps/193"&gt;в Java 9&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/foreign/MemorySegment.html"&gt;&lt;code&gt;java.lang.foreign.MemorySegment&lt;/code&gt;&lt;/a&gt; &amp;ndash; API для доступа к памяти вне кучи (часто в кооперации с &lt;code&gt;VarHandle&lt;/code&gt;), появилось &lt;a href="https://openjdk.org/jeps/454"&gt;в Java 22&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;В Java 23 появилась новая опция командной строки &lt;code&gt;--sun-misc-unsafe-memory-access={allow|warn|debug|deny}&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;--sun-misc-unsafe-memory-access=allow&lt;/code&gt; &amp;ndash; при вызове методов предупреждения нет (дефолтное значение в Java 23).&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--sun-misc-unsafe-memory-access=warn&lt;/code&gt; &amp;ndash; выдаётся предупреждение при первом вызове (стало дефолтным значением в Java 24).&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--sun-misc-unsafe-memory-access=debug&lt;/code&gt; &amp;ndash; выдаётся предупреждение при каждом вызове.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--sun-misc-unsafe-memory-access=deny&lt;/code&gt; &amp;ndash; выбрасывается &lt;code&gt;UnsupportedOperationException&lt;/code&gt; (станет дефолтным значением в Java 26 или позже; &lt;code&gt;allow&lt;/code&gt; использовать будет нельзя).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В конце концов методы доступа к памяти будут удалены совсем (опция &lt;code&gt;--sun-misc-unsafe-memory-access&lt;/code&gt; будет игнорироваться какое-то время, а потом удалится).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/472"&gt;Prepare to Restrict the Use of JNI (JEP 472)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;С Java 24 началась подготовка к ограничению JNI (Java Native Interface). Первым шагом стало то, что при загрузке нативных библиотек через JNI и линковке теперь будут выдаваться предупреждения в консоль:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: orange"&gt;WARNING: A restricted method in java.lang.System has been called
+WARNING: System::load has been called by com.foo.Server in module com.foo (file:/path/to/com.foo.jar)
+WARNING: Use --enable-native-access=com.foo to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Разработчик может подавить такие предупреждения с помощью опции командной строки &lt;code&gt;--enable-native-access&lt;/code&gt;, в которой необходимо будет явно перечислить модули, которым даётся разрешение на использование нативных библиотек:&lt;/p&gt;
+&lt;pre&gt;java --enable-native-access=M1,M2 ...&lt;/pre&gt;
+&lt;p&gt;Если ваш код находится в class path, то в качестве модуля надо указать &lt;code&gt;ALL-UNNAMED&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;java --enable-native-access=ALL-UNNAMED ...&lt;/pre&gt;
+
+&lt;p&gt;Опция &lt;code&gt;--enable-native-access&lt;/code&gt; не нова &amp;ndash; она появилась в Java 22 с появлением &lt;a href="https://openjdk.org/jeps/454"&gt;Foreign Function &amp; Memory API&lt;/a&gt;. Но если до Java 24 она контролировала только ограничение на использование FFM API, то теперь распространяется и на JNI.&lt;/p&gt;
+
+&lt;p&gt;В Java 24 также появилась новая опция &lt;code&gt;--illegal-native-access={allow,warn,deny}&lt;/code&gt;. Она может пригодиться, если не хочется явно перечислять модули через &lt;code&gt;--enable-native-access&lt;/code&gt;. Её значение по умолчанию &amp;ndash; &lt;code&gt;warn&lt;/code&gt;, но если указать &lt;code&gt;allow&lt;/code&gt;, то все предупреждения о нелегальном нативном доступе в консоли будут подавлены. Если же указать &lt;code&gt;deny&lt;/code&gt;, то при каждом нелегальном доступе, наоборот, будет выбрасываться исключение &lt;code&gt;IllegalCallerException&lt;/code&gt;. &lt;code&gt;deny&lt;/code&gt; станет значением по умолчанию в одной из будующих версий Java. Когда это случится, можно будет переключиться только на &lt;code&gt;warn&lt;/code&gt; (&lt;code&gt;allow&lt;/code&gt; будет удалён). Ещё позже будет недоступен уже и &lt;code&gt;warn&lt;/code&gt;, и &lt;code&gt;--enable-native-access&lt;/code&gt; будет единственным способом разрешения JNI.&lt;/p&gt;
+
+&lt;p&gt;Ограничение JNI &amp;ndash; это один из этапов перехода на философию &lt;a href="https://openjdk.org/jeps/8305968"&gt;Integrity by Default&lt;/a&gt; в Java. Смысл её в том, что по умолчанию код, который запускает пользователь, не должен делать ничего кроме использования безопасного API. Если же нужно использовать что-то небезопасное, что потенциально может нарушить целостность, то это возможно только при условии явного разрешения со стороны пользователя.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/486"&gt;Permanently Disable the Security Manager (JEP 486)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Security Manager, который стал &lt;a href="https://openjdk.org/jeps/411"&gt;deprecated for removal&lt;/a&gt; в Java 17, теперь полностью отключён. При попытке его включить через командную строку виртуальная машина откажется стартовать, выдав ошибку:&lt;/p&gt;
+&lt;pre&gt;$ java -Djava.security.manager -jar app.jar
+&lt;span style="color: red"&gt;Error occurred during initialization of VM
+java.lang.Error: A command line option has attempted to allow or enable the Security Manager. Enabling a Security Manager is not supported.
+        at java.lang.System.initPhase3(java.base@24/System.java:2067)&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;С любыми другими значениями свойства &lt;code&gt;java.security.manager&lt;/code&gt; (кроме &lt;code&gt;disallow&lt;/code&gt;) будет происходить то же самое:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;-Djava.security.manager=""&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;-Djava.security.manager=allow&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;-Djava.security.manager=default&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;-Djava.security.manager=com.foo.CustomM&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Также при попытке установки Security Manager'а в рантайме через &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/System.html#setSecurityManager(java.lang.SecurityManager)"&gt;&lt;code&gt;System::setSecurityManager&lt;/code&gt;&lt;/a&gt; будет всегда выбрасываться &lt;code&gt;UnsupportedOperationException&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: red"&gt;Exception in thread "main" java.lang.UnsupportedOperationException: Setting a Security Manager is not supported.
+        at java.base/java.lang.System.setSecurityManager(System.java:286)
+        ...&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Другие изменения в поведении:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/System.html#getSecurityManager()"&gt;&lt;code&gt;System::getSecurityManager&lt;/code&gt;&lt;/a&gt; всегда возвращает &lt;code&gt;null&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Методы &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/security/AccessController.html#doPrivileged(java.security.PrivilegedAction)"&gt;&lt;code&gt;AccessController::doPrivileged&lt;/code&gt;&lt;/a&gt; просто выполняют действие немедленно.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/security/AccessController.html#checkPermission(java.security.Permission)"&gt;&lt;code&gt;AccessController::checkPermission&lt;/code&gt;&lt;/a&gt; всегда выбрасывает &lt;code&gt;AccessControlException&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/security/Policy.html#setPolicy(java.security.Policy)"&gt;&lt;code&gt;Policy::setPolicy&lt;/code&gt;&lt;/a&gt; всегда выбрасывает &lt;code&gt;UnsupportedOperationException&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Методы &lt;code&gt;SecurityManager::check*&lt;/code&gt; всегда выбрасывают &lt;code&gt;SecurityException&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Игнорируются некоторые свойства, связанные с Security Manager (&lt;code&gt;java.security.policy&lt;/code&gt;, &lt;code&gt;jdk.security.filePermCompat&lt;/code&gt; и другие).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Сами классы, связанные с Security Manager API, пока что остаются. Окончательное их удаление планируется в будущем.&lt;/p&gt;
+
+&lt;p class="mt-2"&gt;Отказаться от Security Manager было решено по причине того, что он почти не имел спроса среди разработчиков и при этом слабо отвечал современным требованиям безопасности. Сейчас существуют гораздо более эффективные способы обеспечения безопасности приложений: контейнеры, гипервизоры, песочницы на уровне OS и т.д. Цена же поддержки Security Manager'а оставалось крайне высокой из-за сложной программной модели. Избавившись от необходимости поддерживать Security Manager, разработчики OpenJDK смогут лучше сфокусироваться на других более важных частях JDK, связанных с безопасностью.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/499"&gt;Structured Concurrency (Fourth Preview) (JEP 499)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Structured Concurrency, которое было в режиме preview в &lt;a href="https://openjdk.org/jeps/453"&gt;Java 21&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/462"&gt;Java 22&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/480"&gt;Java 23&lt;/a&gt;, остаётся на четвёртый раунд preview без изменений.&lt;/p&gt;
+
+&lt;p&gt;Structured Concurrency &amp;ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.&lt;/p&gt;
+&lt;p&gt;В центре нового API класс &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"&gt;&lt;code&gt;StructuredTaskScope&lt;/code&gt;&lt;/a&gt;, у которого есть два главных метода:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#fork(java.util.concurrent.Callable)"&gt;&lt;code&gt;fork()&lt;/code&gt;&lt;/a&gt; &amp;ndash; создаёт подзадачу и запускает её в новом виртуальном потоке,&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"&gt;&lt;code&gt;join()&lt;/code&gt;&lt;/a&gt; &amp;ndash; ждёт, пока не завершатся все подзадачи или пока scope не будет &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#shutdown()"&gt;остановлен&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Пример использования &lt;code&gt;StructuredTaskScope&lt;/code&gt;, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; scope = &lt;span style="color: blue"&gt;new&lt;/span&gt; StructuredTaskScope.ShutdownOnFailure()) {
+    Supplier&amp;lt;String&gt; user = scope.fork(() -&gt; findUser());
+    Supplier&amp;lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+
+    scope.join()            &lt;span style="color: green"&gt;// Join both subtasks&lt;/span&gt;
+         .throwIfFailed();  &lt;span style="color: green"&gt;// ... and propagate errors&lt;/span&gt;
+
+    &lt;span style="color: green"&gt;// Here, both subtasks have succeeded, so compose their results&lt;/span&gt;
+    &lt;span style="color: blue"&gt;return new&lt;/span&gt; Response(user.get(), order.get());
+}&lt;/pre&gt;
+&lt;p&gt;Может показаться, что в точности аналогичный код можно было бы написать с использованием классического &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/ExecutorService.html"&gt;&lt;code&gt;ExecutorService&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)"&gt;&lt;code&gt;submit()&lt;/code&gt;&lt;/a&gt;, но у &lt;code&gt;StructuredTaskScope&lt;/code&gt; есть несколько принципиальных отличий, которые делают код безопаснее:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Время жизни всех потоков подзадач ограничено областью видимости блока &lt;code&gt;try-with-resources&lt;/code&gt;. Метод &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"&gt;&lt;code&gt;close()&lt;/code&gt;&lt;/a&gt; гарантированно не завершится, пока не завершатся все подзадачи.&lt;/li&gt;
+  &lt;li&gt;Если одна из операций &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае политики &lt;code&gt;ShutdownOnFailure&lt;/code&gt;, возможны другие).&lt;/li&gt;
+  &lt;li&gt;Если главный поток прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; отменяются при выходе из блока.&lt;/li&gt;
+  &lt;li&gt;В дампе потоков будет видна иерархия: потоки, выполняющие &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt;, будут отображаться как дочерние для главного потока.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="mt-2"&gt;Structured Concurrency должно облегчить написание безопасных многопоточных программ благодаря знакомому структурному подходу.&lt;/p&gt;
+&lt;p&gt;В Java 25 возможно будет &lt;a href="https://openjdk.org/jeps/8340343"&gt;пятое preview&lt;/a&gt; Structured Concurrency с изменениями в API.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/487"&gt;Scoped Values (Fourth Preview) (JEP 487)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Scoped Values, которые были в preview в &lt;a href="https://openjdk.org/jeps/446"&gt;Java 21&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/464"&gt;Java 22&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/481"&gt;Java 23&lt;/a&gt;, остаётся на четвёртый раунд preview.&lt;/p&gt;
+&lt;p&gt;В четвёртом preview в классе &lt;code&gt;ScopedValue&lt;/code&gt; были удалены методы &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/ScopedValue.html#callWhere(java.lang.ScopedValue,T,java.lang.ScopedValue.CallableOp)"&gt;&lt;code&gt;callWhere()&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/ScopedValue.html#runWhere(java.lang.ScopedValue,java.lang.Object,java.lang.Runnable)"&gt;&lt;code&gt;runWhere()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Класс &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ScopedValue.html"&gt;&lt;code&gt;ScopedValue&lt;/code&gt;&lt;/a&gt; позволяет обмениваться иммутабельными данными без их передачи через аргументы методов. Он является альтернативой существующему классу &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ThreadLocal.html"&gt;&lt;code&gt;ThreadLocal&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Классы &lt;code&gt;ThreadLocal&lt;/code&gt; и &lt;code&gt;ScopedValue&lt;/code&gt; похожи тем, что решают одну и ту же задачу: передать значение переменной в рамках одного потока (или дерева потоков) из одного места в другое без использования явного параметра. В случае &lt;code&gt;ThreadLocal&lt;/code&gt; для этого вызывается метод &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ThreadLocal.html#set(T)"&gt;&lt;code&gt;set()&lt;/code&gt;&lt;/a&gt;, который кладёт значение переменной для данного потока, а потом метод &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ThreadLocal.html#get()"&gt;&lt;code&gt;get()&lt;/code&gt;&lt;/a&gt; вызывается из другого места для получения значения переменной. У данного подхода есть ряд недостатков:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Неконтролируемая мутабельность (&lt;code&gt;set()&lt;/code&gt; можно вызвать когда угодно и откуда угодно).&lt;/li&gt;
+  &lt;li&gt;Неограниченное время жизни (переменная очистится, только когда завершится исполнение потока или когда будет вызван &lt;code&gt;ThreadLocal.remove()&lt;/code&gt;, но про него часто забывают).&lt;/li&gt;
+  &lt;li&gt;Высокая цена наследования (дочерние потоки всегда вынуждены делать полную копию переменной, даже если родительский поток никогда не будет её изменять).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Эти проблемы усугубляются с появлением виртуальных потоков, которые могут создаваться в гораздо большем количестве, чем обычные.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ScopedValue&lt;/code&gt; лишён вышеперечисленных недостатков. В отличие от &lt;code&gt;ThreadLocal&lt;/code&gt;, &lt;code&gt;ScopedValue&lt;/code&gt; не имеет метода &lt;code&gt;set()&lt;/code&gt;. Значение ассоциируется с объектом &lt;code&gt;ScopedValue&lt;/code&gt; путём вызова другого метода &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ScopedValue.html#where(java.lang.ScopedValue,T)"&gt;&lt;code&gt;where()&lt;/code&gt;&lt;/a&gt;. Далее вызывается метод &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ScopedValue.Carrier.html#run(java.lang.Runnable)"&gt;&lt;code&gt;run()&lt;/code&gt;&lt;/a&gt;, на протяжении которого это значение можно получить (через метод &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/ScopedValue.html#get()"&gt;&lt;code&gt;get()&lt;/code&gt;&lt;/a&gt;), но нельзя изменить. Как только исполнение метода &lt;code&gt;run()&lt;/code&gt; заканчивается, значение отвязывается от объекта &lt;code&gt;ScopedValue&lt;/code&gt;. Поскольку значение не меняется, решается и проблема дорогого наследования: дочерним потокам не надо копировать значение, которое остаётся постоянным в течение периода жизни.&lt;/p&gt;
+&lt;p&gt;Пример использования &lt;code&gt;ScopedValue&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;private static final&lt;/span&gt; ScopedValue&amp;lt;FrameworkContext&gt; CONTEXT = ScopedValue.newInstance();
+
+&lt;span style="color: blue"&gt;void&lt;/span&gt; serve(Request request, Response response) {
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; context = createContext(request);
+    ScopedValue.where(CONTEXT, context)
+               .run(() -&gt; Application.handle(request, response));
+}
+
+&lt;span style="color: blue"&gt;public&lt;/span&gt; PersistedObject readKey(String key) {
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; context = CONTEXT.get();
+    &lt;span style="color: blue"&gt;var&lt;/span&gt; db = getDBConnection(context);
+    db.readKey(key);
+}&lt;/pre&gt;
+&lt;p&gt;В целом &lt;code&gt;ScopedValue&lt;/code&gt; является предпочтительной заменой &lt;code&gt;ThreadLocal&lt;/code&gt;, т.к. навязывает разработчику безопасную однонаправленную модель работы с неизменяемыми данными. Однако такой подход не всегда применим для некоторых задач, и для них &lt;code&gt;ThreadLocal&lt;/code&gt; может быть единственно возможным решением.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/478"&gt;Key Derivation Function API (Preview) (JEP 478)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В пакете &lt;code&gt;javax.crypto&lt;/code&gt; в режиме preview появилось новое API для &lt;a href="https://en.wikipedia.org/wiki/Key_derivation_function"&gt;функций выведения ключа&lt;/a&gt; (KDF - Key Derivation Functions). Такие функции могут использоваться для вывода криптографически сильных секретных ключей (например, AES) на основе материала ключа (например, пароля) и других данных (например, соли).&lt;/p&gt;
+&lt;p&gt;Новое KDF API является гораздо более подходящим для задач выведения ключей, чем старое API на основе классов &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/crypto/KeyGenerator.html"&gt;KeyGenerator&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/crypto/SecretKeyFactory.html"&gt;SecretKeyFactory&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Пока что единственной реализацией KDF API в JDK является HKDF (HMAC-based Extract-and-Expand Key Derivation Function), но в будущем планируется реализовать и другие KDF, например, &lt;a href="https://www.rfc-editor.org/rfc/rfc9106.html"&gt;Argon2&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Пример выведения секретного AES-ключа с использованием HKDF:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Create a KDF object for the specified algorithm&lt;/span&gt;
+KDF hkdf = KDF.getInstance(&lt;span style="color: darkred"&gt;"HKDF-SHA256"&lt;/span&gt;);
+
+&lt;span style="color: green"&gt;// Create an ExtractExpand parameter specification&lt;/span&gt;
+AlgorithmParameterSpec params =
+    HKDFParameterSpec.ofExtract()
+                     .addIKM(initialKeyMaterial)
+                     .addSalt(salt).thenExpand(info, 32);
+
+&lt;span style="color: green"&gt;// Derive a 32-byte AES key&lt;/span&gt;
+SecretKey key = hkdf.deriveKey(&lt;span style="color: darkred"&gt;"AES"&lt;/span&gt;, params);
+
+&lt;span style="color: green"&gt;// Additional deriveKey calls can be made with the same KDF object&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ранее в Java 21 появилось API для &lt;a href="https://openjdk.org/jeps/452"&gt;механизма инкапсуляции ключей&lt;/a&gt; (KEM). Вместе с KDF эти два API являются важными шагами для поддержки в Java &lt;a href="https://www.rfc-editor.org/rfc/rfc9180.html"&gt;Hybrid Public Key Encryption&lt;/a&gt; (HPKE), криптографической схемы, устойчивой к &lt;a href="https://en.wikipedia.org/wiki/Post-quantum_cryptography"&gt;квантовым атакам&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/496"&gt;Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism (JEP 496)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В Java появилась реализация механизма инкапсуляции ключей &lt;a href="https://csrc.nist.gov/pubs/fips/203/final"&gt;ML-KEM&lt;/a&gt;. Это современный криптографический алгоритм обмена ключей, устойчивый к квантовым атакам.&lt;/p&gt;
+&lt;p&gt;Реализация ML-KEM использует &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/javax/crypto/KEM.html"&gt;KEM API&lt;/a&gt;, появившееся &lt;a href="https://openjdk.org/jeps/452"&gt;в Java 21&lt;/a&gt;. Поддерживается три набора параметров: ML-KEM-512, ML-KEM-768 и ML-KEM-1024.&lt;/p&gt;
+&lt;p&gt;Пример генерации симметричного ключа и его передачи:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: green"&gt;// Receiver side&lt;/span&gt;
+KeyPairGenerator g = KeyPairGenerator.getInstance(&lt;span style="color: darkred"&gt;"ML-KEM"&lt;/span&gt;);
+KeyPair kp = g.generateKeyPair(); &lt;span style="color: green"&gt;// По умолчанию создаёт пару ML-KEM-768&lt;/span&gt;
+
+&lt;span style="color: green"&gt;// Sender side&lt;/span&gt;
+KEM kem1 = KEM.getInstance(&lt;span style="color: darkred"&gt;"ML-KEM"&lt;/span&gt;);
+KEM.Encapsulator enc = kem1.newEncapsulator(kp.getPublic());
+KEM.Encapsulated encapsulated = enc.encapsulate();
+&lt;span style="color: blue"&gt;byte&lt;/span&gt;[] msg = encapsulated.encapsulation(); &lt;span style="color: green"&gt;// Send this to receiver&lt;/span&gt;
+SecretKey k1 = encapsulated.key(); &lt;span style="color: green"&gt;// Generated symmetric key&lt;/span&gt;
+
+&lt;span style="color: green"&gt;// Receiver side&lt;/span&gt;
+KEM kem2 = KEM.getInstance(&lt;span style="color: darkred"&gt;"ML-KEM"&lt;/span&gt;);
+KEM.Decapsulator dec = kem2.newDecapsulator(kp.getPrivate());
+SecretKey k2 = dec.decapsulate(msg);
+
+&lt;span style="color: green"&gt;// k1 и k2 должны быть равны&lt;/span&gt;&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/497"&gt;Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm (JEP 497)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В Java появилась реализация механизма цифровой подписи &lt;a href="https://csrc.nist.gov/pubs/fips/204/final"&gt;ML-DSA&lt;/a&gt;. Это современный алгоритм цифровой подписи, устойчивый к квантовым атакам.&lt;/p&gt;
+&lt;p&gt;Поддерживается три набора параметров: ML-DSA-44, ML-DSA-65 и ML-DSA-87.&lt;/p&gt;
+&lt;p&gt;Пример подписи сообщения и её верификации:&lt;/p&gt;
+&lt;pre&gt;KeyPairGenerator g = KeyPairGenerator.getInstance(&lt;span style="color: darkred"&gt;"ML-DSA"&lt;/span&gt;);
+KeyPair kp = g.generateKeyPair(); &lt;span style="color: green"&gt;// По умолчанию создаёт пару ML-DSA-65&lt;/span&gt;
+
+&lt;span style="color: green"&gt;// Подпись&lt;/span&gt;
+&lt;span style="color: blue"&gt;byte&lt;/span&gt;[] msg = ...;
+Signature ss = Signature.getInstance(&lt;span style="color: darkred"&gt;"ML-DSA"&lt;/span&gt;);
+ss.initSign(kp.getPrivate());
+ss.update(msg);
+&lt;span style="color: blue"&gt;byte&lt;/span&gt;[] sig = ss.sign();
+
+&lt;span style="color: green"&gt;// Верификация&lt;/span&gt;
+&lt;span style="color: blue"&gt;byte&lt;/span&gt;[] msg = ...;
+&lt;span style="color: blue"&gt;byte&lt;/span&gt;[] sig = ...;
+Signature sv = Signature.getInstance(&lt;span style="color: darkred"&gt;"ML-DSA"&lt;/span&gt;);
+sv.initVerify(kp.getPublic());
+sv.update(msg);
+&lt;span style="color: blue"&gt;boolean&lt;/span&gt; verified = sv.verify(sig);&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/489"&gt;Vector API (Ninth Incubator) (JEP 489)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API в модуле &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;, которое появилось ещё аж &lt;a href="https://openjdk.org/jeps/338"&gt;в Java 16&lt;/a&gt;, остаётся в инкубационном статусе в девятый раз с некоторыми изменениями.&lt;/p&gt;
+&lt;p&gt;Векторное API остаётся так долго в инкубаторе, потому что зависит от некоторых фич проекта &lt;a href="https://openjdk.org/projects/valhalla/"&gt;Valhalla&lt;/a&gt; (главным образом, от &lt;a href="https://openjdk.org/jeps/401"&gt;value-классов&lt;/a&gt;), который пока что находится в разработке. Как только эти фичи станут доступны в виде preview, векторное API сразу же перейдёт из инкубатора в статус preview.&lt;/p&gt;
+
+&lt;h4&gt;JVM&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/491"&gt;Synchronize Virtual Threads without Pinning (JEP 491)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Виртуальные потоки больше не пинятся на свои потоки-носители внутри блоков &lt;code&gt;synchronized&lt;/code&gt;. Такое ограничение существовало с Java 21 по Java 23, где виртуальный поток, захватив монитор, не мог размонтироваться и освободить платформенный поток для другой работы. Особенно плохо это проявлялось в ситуации, в которой код внутри блока &lt;code&gt;synchronized&lt;/code&gt; вызывает долгую блокирующую операцию:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;synchronized byte&lt;/span&gt;[] getData() {
+    &lt;span style="color: blue"&gt;byte&lt;/span&gt;[] buf = ...;
+    &lt;span style="color: blue"&gt;int&lt;/span&gt; nread = socket.getInputStream().read(buf); &lt;span style="color: red"&gt;// Can block here&lt;/span&gt;
+    ...
+}&lt;/pre&gt;
+&lt;p&gt;Когда платформенный поток пинится на всё время выполнения блока synchronized, он не может быть использован для других виртуальных потоков. Это может сильно навредить масштабируемости приложений, а иногда даже приводить к дедлокам.&lt;/p&gt;
+&lt;p&gt;Ещё одним случаем пиннинга было ожидание освобождения монитора при входе в блок synchronized виртуальным потоком. Здесь тоже поток-носитель не мог размонтироваться, до тех пор пока поток не захватит монитор.&lt;/p&gt;
+&lt;p&gt;Чтобы предотвратить пиннинг, пользователям и авторам библиотек приходилось переписывать код с &lt;code&gt;synchronized&lt;/code&gt; на классы из пакета &lt;a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/concurrent/locks/package-summary.html"&gt;&lt;code&gt;java.util.concurrent.locks&lt;/code&gt;&lt;/a&gt;, которые не имеют вышеописанных проблем (но код становится более громоздким). С Java 24 это больше не требуется.&lt;/p&gt;
+&lt;p class="mt-2"&gt;Виртуальные потоки появились &lt;a href="https://openjdk.org/jeps/444  "&gt;в Java 21&lt;/a&gt;. Они являются легковесной заменой потоков операционной системы, и их можно создавать в огромном количестве (миллионы экземпляров), что облегчает написание конкурентных программ. Их разработка ведётся в проекте &lt;a href="https://openjdk.org/projects/loom/"&gt;Loom&lt;/a&gt;, который был инициирован &lt;a href="https://mail.openjdk.org/pipermail/discuss/2017-September/004390.html"&gt;в сентябре 2017 года&lt;/a&gt;. &lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/450"&gt;Compact Object Headers (Experimental) (JEP 450)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В экспериментальном режиме появилась опция, уменьшающая размер заголовков объектов в JVM с 96/128 бит до 64 бит на 64-битных платформах:&lt;/p&gt;
+&lt;pre&gt;-XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders&lt;/pre&gt;
+&lt;p&gt;Заголовки объектов занимают достаточно большой процент памяти, потребляемой JVM. Эксперименты показывают, что в большинстве случаев объекты занимают от 256 до 512 бит. То есть уменьшив заголовки до 64 бит, можно уменьшить потребление памяти на 6-12%. Кроме уменьшения кучи это может улучшить и производительность благодаря более высокой скорости выделения новых объектов, более низкой нагрузки на GC и лучшей локальности данных.&lt;/p&gt;
+&lt;p&gt;Сжатие заголовков достигается за счёт объединения mark-слова (64 бит) и class-слова (64 или 32 бит, если включены сжатые указатели на классы) в одно 64-битное слово. В новой схеме указатели на классы всегда являются сжатыми, и количество бит для них уменьшается с 32 до 22. Identity хеш-код остаётся неизменным: 31 бит. Количество тег-битов становится на один больше (для GC self forwarding). Битов для возраста GC остаётся 4, как и было. Также 4 бита резервируются на будущее для &lt;a href="https://openjdk.org/projects/valhalla/"&gt;Valhalla&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Работа по сжатию заголовков в OpenJDK ведётся в проекте &lt;a href="https://openjdk.org/projects/lilliput/"&gt;Lilliput&lt;/a&gt;, инициированным &lt;a href="https://mail.openjdk.org/pipermail/discuss/2021-March/005720.html"&gt;в марте 2021 года&lt;/a&gt;. JEP 450 является первым результатом работы, попавшим в мейнстрим. В дальнейшем возможно ещё большое сжатие заголовков до 32 бит, что уменьшит потребление памяти ещё сильнее.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/483"&gt;Ahead-of-Time Class Loading &amp; Linking (JEP 483)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Появилась возможность запускать приложения с уже загруженными и слинкованными классами, вследствие чего время старта может заметно снизиться. Для этого необходим тренировочный запуск приложения со следующими ключами:&lt;/p&gt;
+&lt;pre&gt;$ java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
+       -cp app.jar com.example.App ...&lt;/pre&gt;
+&lt;p&gt;После такого запуска генерируется AOT-конфигурация в файле &lt;code&gt;app.aotconf&lt;/code&gt;, которую нужно преобразовать в AOT-кэш:&lt;/p&gt;
+&lt;pre&gt;$ java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf \
+       -XX:AOTCache=app.aot -cp app.jar&lt;/pre&gt;
+&lt;p&gt;(второй шаг не запускает приложение, а только создаёт кэш)&lt;/p&gt;
+&lt;p&gt;Далее все последующие запуски приложения с использованием кэша &lt;code&gt;app.aot&lt;/code&gt; должны быть быстрее:&lt;/p&gt;
+&lt;pre&gt;$ java -XX:AOTCache=app.aot -cp app.jar com.example.App ...&lt;/pre&gt;
+&lt;p&gt;Запуск приложения становится быстрее благодаря тому, что вся работа по чтению, парсингу, загрузке и линковке классов была сделана ahead-of-time, и JVM уже можно её не делать just-in-time.&lt;/p&gt;
+&lt;p&gt;Замеры показывают, что простое приложение, использующее Stream API, выполняется на 42% быстрее, если его запустить с использованием AOT-кэша. Другое серверное приложение Spring PetClinic стартует также на 42% быстрее с использованием кэша.&lt;/p&gt;
+&lt;p&gt;У технологии есть ряд ограничений:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Все последующие запуски должны выполняться на том же релизе JDK и той же архитектуре.&lt;/li&gt;
+  &lt;li&gt;Class path должен быть консистентен тому, что использовался для тренировки.&lt;/li&gt;
+  &lt;li&gt;Граф модулей должен быть идентичен. Аргументы &lt;code&gt;-m&lt;/code&gt;, &lt;code&gt;--module&lt;/code&gt;, &lt;code&gt;-p&lt;/code&gt;, &lt;code&gt;--module-path&lt;/code&gt;, &lt;code&gt;--add-modules&lt;/code&gt; и &lt;code&gt;--enable-native-access&lt;/code&gt; должны быть одинаковы. Аргументы &lt;code&gt;--add-exports&lt;/code&gt;, &lt;code&gt;--add-opens&lt;/code&gt;, &lt;code&gt;--add-reads&lt;/code&gt;, &lt;code&gt;--illegal-native-access&lt;/code&gt;, &lt;code&gt;--limit-modules&lt;/code&gt;, &lt;code&gt;--patch-module&lt;/code&gt; и  &lt;code&gt;--upgrade-module-path&lt;/code&gt; не должны использоваться.&lt;/li&gt;
+  &lt;li&gt;Сборщик мусора ZGC пока не поддерживается.&lt;/li&gt;
+  &lt;li&gt;Могут быть закэшированы только классы, загруженные встроенными загрузчиками классов (пользовательские загрузчики пока не поддерживаются).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="mt-2"&gt;Ahead-of-Time Class Loading &amp; Linking &amp;ndash; это дальнейшее развитие технологии &lt;a href="https://dev.java/learn/jvm/cds-appcds/"&gt;CDS&lt;/a&gt; (Class Data Sharing), которая уже давно есть в Java. До этого CDS могла использоваться только для чтения и парсинга class-файлов. Сейчас же поддерживается их загрузка и линковка.&lt;/p&gt;
+&lt;p&gt;Работа над ускорением запуска JVM ведётся в проекте &lt;a href="https://openjdk.org/projects/leyden/"&gt;Leyden&lt;/a&gt;. Он был инициирован &lt;a href="https://mail.openjdk.org/pipermail/discuss/2020-April/005429.html"&gt;в апреле 2020 года&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/490"&gt;ZGC: Remove the Non-Generational Mode (JEP 490)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Режим работы с поколениями в сборщике мусора ZGC (&lt;code&gt;-XX:+UseZGC&lt;/code&gt;), который появился &lt;a href="https://openjdk.org/jeps/439"&gt;в Java 21&lt;/a&gt; и стал включённым по умолчанию &lt;a href="https://openjdk.org/jeps/474"&gt;в Java 23&lt;/a&gt;, теперь стал единственным режимом работы. Режим работы без поколений был удалён, и опция &lt;code&gt;-XX:&amp;pm;ZGenerational&lt;/code&gt; более не имеет эффекта. В будущем при использовании этой опции JVM будет выбрасывать ошибку и будет отказываться стартовать.&lt;/p&gt;
+&lt;p&gt;Сборщиком мусора по умолчанию по-прежнему остаётся G1. Он стал дефолтным сборщиком мусора &lt;a href="https://openjdk.org/jeps/248"&gt;в Java 9&lt;/a&gt; (до него дефолтным был Parallel GC).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/404"&gt;Generational Shenandoah (Experimental) (JEP 404)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Сборщик мусора Shenandoah стал поддерживать поколения в экспериментальном режиме:&lt;/p&gt;
+&lt;pre&gt;java -XX:+UseShenandoahGC -XX:+UnlockExperimentalVMOptions -XX:ShenandoahGCMode=generational&lt;/pre&gt;
+&lt;p&gt;Режим работы без поколений остаётся режимом по умолчанию в Shenandoah. Планируется, что режим с поколениями станет дефолтным в будущем.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/479"&gt;Remove the Windows 32-bit x86 Port (JEP 479)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;32-битный порт OpenJDK под Windows был полностью удалён. Это означает, что из кодовой базы OpenJDK были удалены части кода, отвечающие за Windows 32-бит. Собрать JDK под эту платформу больше нельзя.&lt;/p&gt;
+&lt;p&gt;32-битный порт под Windows был помечен как &lt;a href="https://openjdk.org/jeps/449"&gt;deprecated for removal&lt;/a&gt; в Java 21. Главной причиной удаления порта стало желание упростить и ускорить разработку платформы. Также в 32-битной версии нет эффективной реализации виртуальных потоков: в ней они мапятся 1:1 на платформенные потоки. Кроме того, 32-битная версия Windows сама доживает свои последние дни: Microsoft прекращает поддержку Windows 10 &lt;a href="https://learn.microsoft.com/lifecycle/products/windows-10-home-and-pro"&gt;в октябре&lt;/a&gt; (последняя версия Windows, поддерживающая 32 бит).&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/501"&gt;Deprecate the 32-bit x86 Port for Removal (JEP 501)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Вместе с полным удалением 32-битного порта под Windows вся 32-битная x86 архитектура стала deprecated for removal. Практически это означает, что подлежит удалению порт OpenJDK под Linux 32-бит x86, так как это единственная оставшаяся операционная система, для которой есть 32-битный x86 порт.&lt;/p&gt;
+&lt;p&gt;Причины такого решения те же самые, что и у удаления 32-битного порта Windows: сложность поддержки, отсутствие эффективной реализации виртуальных потоков и скорое &lt;a href="https://lists.debian.org/debian-devel-announce/2023/12/msg00003.html"&gt;прекращение поддержки 32-бит x86 в Debian&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Полностью удалить 32-битный x86 порт планируется в Java 25. После полного удаления единственным способом запуска Java на 32-бит x86 процессорах будет использование &lt;a href="https://openjdk.org/projects/zero/"&gt;порта Zero&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/493"&gt;Linking Run-Time Images without JMODs (JEP 493)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;JDK теперь может иметь примерно на 25% меньший размер, если в нём будет включена опция, позволяющая собирать кастомные образы с помощью утилиты &lt;code&gt;jlink&lt;/code&gt; без использования JMOD-файлов. Такая опция указывается при сборке JDK, и она выключена по умолчанию, но вендоры JDK могут ей воспользоваться, если захотят предоставлять более лёгкие образы JDK.&lt;/p&gt;
+&lt;p&gt;В некоторых случаях размер JDK является критичным параметром, например, в облачных окружениях, где JDK часто передаётся по сети. Уменьшение размера JDK может улучшить эффективность этих операций. JMOD-файлы, находящиеся в директории &lt;code&gt;jmods&lt;/code&gt; &amp;ndash; это одна из причин слишком большой "раздутости" JDK, так как в них содержатся копии всех class-файлов, нативных библиотек и прочих ресурсов, которые уже и так есть внутри образа. Избавиться от JMOD-файлов можно добавив возможность линковать кастомные образы, вытаскивая эти файлы из самого образа, а не из JMOD-файлов. Что и было сделано в JEP 493.&lt;/p&gt;
+&lt;p&gt;Проверить, поддерживает ли ваш образ JDK создание кастомных образов без использования JMOD-файлов, можно запустив команду &lt;code&gt;jlink --help&lt;/code&gt; и посмотреть, что написано в Capabilities:&lt;/p&gt;
+&lt;pre&gt;$ jlink --help
+Usage: jlink &amp;lt;options&gt; --module-path &amp;lt;modulepath&gt; --add-modules &amp;lt;module&gt;[,&amp;lt;module&gt;...]
+...
+Capabilities:
+      &lt;b&gt;Linking from run-time image enabled&lt;/b&gt;&lt;/pre&gt;
+
+&lt;p class="mt-2"&gt;Образы JDK с включённой опцией имеют ряд ограничений:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Сама утилита &lt;code&gt;jlink&lt;/code&gt; не может быть в сгенерированном образе после запуска &lt;code&gt;jlink&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;jlink&lt;/code&gt; выдаст ошибку, если были изменения в конфигурационных файлах.&lt;/li&gt;
+  &lt;li&gt;Кросс-линковка (например, запуск &lt;code&gt;jlink&lt;/code&gt; на Linux/x64 для создания образа под Windows/x64) не поддерживается.&lt;/li&gt;
+  &lt;li&gt;Линковка не будет работать, если образ использует опцию &lt;code&gt;--patch-module&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Линковка с извлечением модулей из другого образа не поддерживается.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="mt-2"&gt;Опция может быть включена по умолчанию в будущем.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/475"&gt;Late Barrier Expansion for G1 (JEP 475)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Реализация барьеров в сборщике мусора G1 была упрощена путём перемещения экспансии барьеров с ранней фазы JIT-компилятора C2 на позднюю.&lt;/p&gt;
+&lt;p&gt;Ранняя экспансия барьеров требует от разработчика глубокого знания внутренностей C2, что может замедлить эволюцию и оптимизацию G1. Кроме того, ранняя экспансия увеличивает накладные расходы C2 на 10-20% из-за сложности промежуточного представления (IR) барьеров.&lt;/p&gt;
+&lt;p&gt;В Java 24 экспансия барьеров перемещена с самой первой фазы (парсинга байткода в IR) на самую последнюю (эмиссия машинного кода). Такая схема существует в другом сборщике мусора ZGC c Java 14 и доказала свою успешность: экспансия барьеров в самый последний момент не требует никаких специфичных для C2 знаний и не имеет практически никаких накладных расходов на JIT-компиляцию.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Вышла Java 23</title>
     <link rel="alternate" type="text/html" href="https://minijug.org/java_23.html" />
@@ -391,7 +1097,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
 &lt;p&gt;Gatherers &amp;ndash; это усовершенствование Stream API для поддержки произвольных промежуточных операций.&lt;/p&gt;
 &lt;p&gt;Напомним, что стримы с появления в Java 8 имели фиксированный набор промежуточных операций (&lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#map(java.util.function.Function)"&gt;&lt;code&gt;map&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#flatMap(java.util.function.Function)"&gt;&lt;code&gt;flatMap&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#filter(java.util.function.Predicate)"&gt;&lt;code&gt;filter&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#reduce(java.util.function.BinaryOperator)"&gt;&lt;code&gt;reduce&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#limit(long)"&gt;&lt;code&gt;limit&lt;/code&gt;&lt;/a&gt;,
   &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#skip(long)"&gt;&lt;code&gt;skip&lt;/code&gt;&lt;/a&gt; и т.д). В Java 9 были добавлены &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#takeWhile(java.util.function.Predicate)"&gt;&lt;code&gt;takeWhile&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#dropWhile(java.util.function.Predicate)"&gt;&lt;code&gt;dropWhile&lt;/code&gt;&lt;/a&gt;. Хотя этот стандартный набор операций довольно богатый и покрывает большинство случаев, иногда бывают необходимы более изощрённые промежуточные операции для более сложных задач. Чтобы решить эту проблему, было предложено создать точку расширения для стримов, которая позволит кому угодно создать свои промежуточные операции.&lt;/p&gt;
-&lt;p&gt;Новая точка расширения &amp;ndash; это новый метод &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#gather(java.util.stream.Gatherer)"&gt;&lt;code&gt;Stream::gather(Gatherer)&lt;/code&gt;&lt;/a&gt;, который обрабатывает элементы стрима путём применения объекта, реализующего интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Gatherer.html"&gt;&lt;code&gt;Gatherer&lt;/code&gt;&lt;/a&gt;, предоставляемого пользователем. Операция &lt;code&gt;gather()&lt;/code&gt; аналогична уже имеющейся операции &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#collect(java.util.stream.Collector)"&gt;&lt;code&gt;Stream::collect(Collector)&lt;/code&gt;&lt;/a&gt;: если &lt;code&gt;collect()&lt;/code&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Collector.html"&gt;&lt;code&gt;Collector&lt;/code&gt;&lt;/a&gt; определяют точку расширения для терминальных операций, то &lt;code&gt;gather()&lt;/code&gt; и &lt;code&gt;Gatherer&lt;/code&gt; определяют точкой расширения для промежуточных.&lt;/p&gt;
+&lt;p&gt;Новая точка расширения &amp;ndash; это новый метод &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#gather(java.util.stream.Gatherer)"&gt;&lt;code&gt;Stream::gather(Gatherer)&lt;/code&gt;&lt;/a&gt;, который обрабатывает элементы стрима путём применения объекта, реализующего интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Gatherer.html"&gt;&lt;code&gt;Gatherer&lt;/code&gt;&lt;/a&gt;, предоставляемого пользователем. Операция &lt;code&gt;gather()&lt;/code&gt; аналогична уже имеющейся операции &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Stream.html#collect(java.util.stream.Collector)"&gt;&lt;code&gt;Stream::collect(Collector)&lt;/code&gt;&lt;/a&gt;: если &lt;code&gt;collect()&lt;/code&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/stream/Collector.html"&gt;&lt;code&gt;Collector&lt;/code&gt;&lt;/a&gt; определяют точку расширения для терминальных операций, то &lt;code&gt;gather()&lt;/code&gt; и &lt;code&gt;Gatherer&lt;/code&gt; определяют точку расширения для промежуточных.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Gatherer&lt;/code&gt; представляет собой трансформацию элементов стрима. Манера трансформации может быть совершенно произвольной: one-to-one, one-to-many, many-to-one или many-to-many. Поддерживается короткое замыкание, если надо в какой-то момент остановить обработку и отбросить все дальнейшие элементы. Бесконечные стримы могут преобразовываться в конечные, и наоборот, конечные могут преобразовываться в бесконечные. Поддерживается параллельное исполнение. Всё это возможно благодаря максимально обобщённой форме интерфейса &lt;code&gt;Gatherer&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;gather()&lt;/code&gt; также является промежуточной операцией, поэтому может быть несколько &lt;code&gt;gather()&lt;/code&gt; в одной цепочке:&lt;/p&gt;
 &lt;pre&gt;source.gather(a).gather(b).gather(c).collect(...)&lt;/pre&gt;
@@ -1809,30 +2515,5 @@ Connection connectDatabase() {
 
 &lt;p class="pt-2"&gt;&amp;bull; Oracle &lt;a href="https://houseofbrick.com/blog/oracle-java-pricing/"&gt;изменила правила&lt;/a&gt; платной подписки на Java SE. Теперь единицей, по которой рассчитывается стоимость, становится сотрудник компании, а не процессор. Таким образом, теперь на цену подписки влияет только количество сотрудников, а не количество серверов и настольных компьютеров, на которых запущена Java (если только у вас не больше 50000 процессоров на серверах). Это приведёт к подорожанию подписки для большинства случаев. В некоторых случаях такой рост будет на порядок.&lt;/p&gt;
 &lt;p&gt;Напомним, что Java была и остаётся свободным ПО, и вышеупомянутое изменение ценовой политики Oracle никак не повлияет на пользователей &lt;a href="https://openjdk.org/"&gt;OpenJDK&lt;/a&gt;, которая продолжает оставаться бесплатной. Останется бесплатной и &lt;a href="https://blogs.oracle.com/java/post/free-java-license"&gt;Oracle JDK 17&lt;/a&gt;, в том числе и для коммерческого использования. Повышение тарифных планов коснётся только компаний, имеющих &lt;a href="https://www.oracle.com/java/java-se-subscription/#rc30p3"&gt;Oracle Java SE Universal Subscription&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #52</title>
-    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_52.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.org/java_news_52.html</id>
-    <updated>2023-01-17T19:00:00Z</updated>
-    <published>2023-01-17T19:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел &lt;a href="https://kotlinlang.org/docs/whatsnew18.html"&gt;Kotlin 1.8.0&lt;/a&gt;. Некоторые заметные нововведения и изменения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Новые экспериментальные функции &lt;code&gt;copyToRecursively()&lt;/code&gt; and &lt;code&gt;deleteRecursively()&lt;/code&gt; для директорий.&lt;/li&gt;
-  &lt;li&gt;Улучшенная производительность kotlin-reflect.&lt;/li&gt;
-  &lt;li&gt;Новая опция &lt;code&gt;-Xdebug&lt;/code&gt;, подавляющая оптимизации, для более удобной отладки.&lt;/li&gt;
-  &lt;li&gt;Больше не поддерживается таргетирование в байткод 1.6 и 1.7. Вследствие этого, стандартные библиотеки скомпилированы только в 1.8, и более нет разделения на &lt;code&gt;kotlin-stdlib-jdk7&lt;/code&gt; и &lt;code&gt;kotlin-stdlib-jdk8&lt;/code&gt;, а есть единый &lt;code&gt;kotlin-stdlib&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Улучшена интероперабельность с Objective-C/Swift.&lt;/li&gt;
-  &lt;li&gt;Совместимость с Gradle 7.3.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел выпуск &lt;a href="https://blog.jetbrains.com/idea/2023/01/java-annotated-monthly-january-2023/"&gt;Java Annotated Monthly&lt;/a&gt; от JetBrains за январь.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/apache/maven/releases/tag/maven-3.8.7"&gt;Apache Maven 3.8.7&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://github.com/mockito/mockito/releases/tag/v5.0.0"&gt;Mockito 5.0.0&lt;/a&gt;. Новая версия библиотеки требует Java 11 в качестве минимальной версии.&lt;/p&gt;</content>
   </entry>
 </feed>
