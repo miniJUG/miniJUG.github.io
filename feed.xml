@@ -251,6 +251,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
     &lt;span style="color: blue"&gt;private static long&lt;/span&gt; verifyPositive(&lt;span style="color: blue"&gt;long&lt;/span&gt; value) {
         &lt;span style="color: blue"&gt;if&lt;/span&gt; (&lt;span style="color: blue"&gt;value&lt;/span&gt; &lt;= 0)
             &lt;span style="color: blue"&gt;throw new&lt;/span&gt; IllegalArgumentException(&lt;span style="color: darkred"&gt;"non-positive value"&lt;/span&gt;);
+        &lt;span style="color: blue"&gt;return&lt;/span&gt; value;
     }
 }&lt;/pre&gt;
 
