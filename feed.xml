@@ -60,14 +60,13 @@
 &lt;p&gt;Какие возможности даёт JEP 512?&lt;/p&gt;
 
 &lt;p&gt;Теперь можно запускать классы, у которых метод &lt;code&gt;main()&lt;/code&gt; не является &lt;code&gt;public static&lt;/code&gt; (т.е. является instance-методом) и у которого нет параметра &lt;code&gt;String[] args&lt;/code&gt;:&lt;/p&gt;
-&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 25&lt;/span&gt;
-&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
     &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
         System.out.println(&lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt;);
     }
 }&lt;/pre&gt;
 &lt;p&gt;В таком случае во время запуска JVM сама создаст экземпляр класса &lt;code&gt;HelloWorld&lt;/code&gt; и вызовет у него метод &lt;code&gt;main()&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;$ java --enable-preview --source 25 HelloWorld.java
+&lt;pre&gt;$ java HelloWorld.java
 Hello, World!&lt;/pre&gt;
 
 &lt;p class="mt-2"&gt;Кроме того, можно запускать файлы и без объявленного класса вовсе. Такие файлы называются &lt;i&gt;компактными исходными файлами&lt;/i&gt;:&lt;/p&gt;
@@ -78,7 +77,7 @@ String greeting = &lt;span style="color: darkred"&gt;"Hello, World!"&lt;/span&gt
 &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
     System.out.println(greeting);
 }&lt;/pre&gt;
-&lt;pre&gt;$ java --enable-preview --source 25 HelloWorld.java
+&lt;pre&gt;$ java HelloWorld.java
 Hello, World!&lt;/pre&gt;
 
 &lt;p&gt;В таком случае виртуальная машина сама объявит неявный класс, в который поместит метод &lt;code&gt;main()&lt;/code&gt; и другие верхнеуровневые объявления в файле:&lt;/p&gt;

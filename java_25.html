@@ -85,14 +85,13 @@
 <p>Какие возможности даёт JEP 512?</p>
 
 <p>Теперь можно запускать классы, у которых метод <code class="text-nowrap">main()</code> не является <code class="text-nowrap">public static</code> (т.е. является instance-методом) и у которого нет параметра <code class="text-nowrap">String[] args</code>:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 25</span>
-<span style="color: blue">class</span> HelloWorld {
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">class</span> HelloWorld {
     <span style="color: blue">void</span> main() {
         System.out.println(<span style="color: darkred">"Hello, World!"</span>);
     }
 }</pre>
 <p>В таком случае во время запуска JVM сама создаст экземпляр класса <code class="text-nowrap">HelloWorld</code> и вызовет у него метод <code class="text-nowrap">main()</code>:</p>
-<pre class="border p-lg-2 p-1">$ java --enable-preview --source 25 HelloWorld.java
+<pre class="border p-lg-2 p-1">$ java HelloWorld.java
 Hello, World!</pre>
 
 <p class="mt-2">Кроме того, можно запускать файлы и без объявленного класса вовсе. Такие файлы называются <i>компактными исходными файлами</i>:</p>
@@ -103,7 +102,7 @@ String greeting = <span style="color: darkred">"Hello, World!"</span>;
 <span style="color: blue">void</span> main() {
     System.out.println(greeting);
 }</pre>
-<pre class="border p-lg-2 p-1">$ java --enable-preview --source 25 HelloWorld.java
+<pre class="border p-lg-2 p-1">$ java HelloWorld.java
 Hello, World!</pre>
 
 <p>В таком случае виртуальная машина сама объявит неявный класс, в который поместит метод <code class="text-nowrap">main()</code> и другие верхнеуровневые объявления в файле:</p>
