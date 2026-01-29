@@ -36,7 +36,7 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #2</h3>
+    <h3 id="title">Новости Java #2</h3>
 <p class="text-secondary"><time datetime="2021-01-11">11 января, 2021</time></p>
 <article>
 <p>&bull; Стал известен первый JEP, который попадёт в Java 17. Это <a href="https://openjdk.org/jeps/356">JEP 356: Enhanced Pseudo-Random Number Generators</a>. В рамках этого JEP'а будет добавлен интерфейс <code class="text-nowrap">RandomGenerator</code> с четырьмя его специализациями: <code class="text-nowrap">SplittableRandomGenerator</code>, <code class="text-nowrap">JumpableRandomGenerator</code>, <code class="text-nowrap">LeapableRandomGenerator</code> и <code class="text-nowrap">ArbitrarilyJumpableRandomGenerator</code>. Кроме того, будет добавлен класс <code class="text-nowrap">RandomGeneratorFactory</code>, который будет возвращать конкретные реализации <code class="text-nowrap">RandomGenerator</code>. Старые классы <code class="text-nowrap">Random</code>, <code class="text-nowrap">ThreadLocalRandom</code> и <code class="text-nowrap">SplittableRandom</code> будут отрефакторены и станут одними из реализаций <code class="text-nowrap">RandomGenerator</code>. Также будут реализованы новые алгоритмы генерации псевдослучайных чисел.</p>

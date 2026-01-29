@@ -36,7 +36,7 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</h3>
+    <h3 id="title">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</h3>
 <p class="text-secondary"><time datetime="2017-11-07">7 ноября, 2017</time></p>
 <article>
 <p>Пожалуй, большинство людей хотя бы раз в жизни использовало конструктор <code class="text-nowrap">new Integer(int)</code>. Это могло случиться либо по незнанию, либо по той причине, что до Java 1.5 это было единственным способом оборачивания <code class="text-nowrap">int</code> в <code class="text-nowrap">Integer</code>. Однако, начиная с Java 1.5, этот вызов стал в большинстве случаев необязательным, и вместо него рекомендованным и более эффективным способом обёртки стали метод <code class="text-nowrap">Integer.valueOf()</code> и автобоксинг:</p>

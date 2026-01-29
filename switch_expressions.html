@@ -36,7 +36,7 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title"><code class="text-nowrap">switch</code> в Java сможет возвращать значения</h3>
+    <h3 id="title"><code class="text-nowrap">switch</code> в Java сможет возвращать значения</h3>
 <p class="text-secondary"><time datetime="2018-01-20">20 января, 2018</time></p>
 <article>
 <p>Вчера на сайте OpenJDK появился <a href="https://openjdk.org/jeps/325">новый JEP 325</a>, в котором предлагается ввести в язык улучшенный оператор <code class="text-nowrap">switch</code>. Мотивацией для введения является то, что старый <code class="text-nowrap">switch</code> имеет несколько фундаментальных изъянов, которые нельзя исправить, не нарушив обратную совместимость. Во-первых, старый <code class="text-nowrap">switch</code> является императивной конструкцией, которая не может возвращать выражения и заставляет писать большое количество повторяющегося кода. Во-вторых, старый <code class="text-nowrap">switch</code> всегда являлся большим источником ошибок из-за своей необходимости явно завершать ветви оператором <code class="text-nowrap">break</code>, отсутствие которого приводит к &laquo;проваливанию&raquo; (fall-through). Кроме того, старый <code class="text-nowrap">switch</code> не имеет возможности обработать случай, когда аргумент является <code class="text-nowrap">null</code>.</p>

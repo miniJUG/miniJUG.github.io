@@ -36,7 +36,7 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-<h3 id="title">Новости Java #7</h3>
+    <h3 id="title">Новости Java #7</h3>
 <p class="text-secondary"><time datetime="2021-02-15">15 февраля, 2021</time></p>
 <article>
 <p>&bull; Вышел ещё один JEP по проекту Valhalla: <a href="https://openjdk.org/jeps/8259731">Unify the Basic Primitives with Objects (Preview)</a>. В нём предлагается мигрировать 8 примитивных типов Java (<code class="text-nowrap">int</code>, <code class="text-nowrap">long</code>, <code class="text-nowrap">double</code>, <code class="text-nowrap">float</code>, <code class="text-nowrap">short</code>, <code class="text-nowrap">byte</code>, <code class="text-nowrap">char</code>, <code class="text-nowrap">boolean</code>) таким образом, чтобы они стали экземплярами соответствующих классов-обёрток (<code class="text-nowrap">Integer</code>, <code class="text-nowrap">Long</code>, <code class="text-nowrap">Double</code>, <code class="text-nowrap">Float</code>, <code class="text-nowrap">Short</code>, <code class="text-nowrap">Byte</code>, <code class="text-nowrap">Character</code>, <code class="text-nowrap">Boolean</code>), которые сами станут примитивными классами. В такой схеме, например, тип <code class="text-nowrap">int</code> станет алиасом для <code class="text-nowrap">Integer.val,</code> а <code class="text-nowrap">Integer</code> &ndash; к <code class="text-nowrap">int.ref</code>.</p>
