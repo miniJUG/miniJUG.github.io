@@ -4,7 +4,336 @@
   <link rel="alternate" type="text/html" href="https://minijug.org" />
   <subtitle type="text">Новости Java</subtitle>
   <id>https://minijug.org/feed.xml</id>
-  <updated>2025-09-15T19:00:00Z</updated>
+  <updated>2026-03-16T19:00:00Z</updated>
+  <entry>
+    <title>Вышла Java 26</title>
+    <link rel="alternate" type="text/html" href="https://minijug.org/java_26.html" />
+    <author>
+      <name>Евгений Козлов</name>
+    </author>
+    <id>https://minijug.org/java_26.html</id>
+    <updated>2026-03-16T19:00:00Z</updated>
+    <published>2026-03-16T19:00:00Z</published>
+    <content type="html">&lt;p&gt;Вышла общедоступная версия &lt;a href="https://openjdk.org/projects/jdk/26/"&gt;Java 26&lt;/a&gt;. В этот релиз попало более &lt;a href="https://builds.shipilev.net/backports-monitor/release-notes-26.html"&gt;2700 закрытых задач и 10 JEP'ов&lt;/a&gt;. Release Notes можно посмотреть &lt;a href="https://www.oracle.com/java/technologies/javase/26-relnote-issues.html"&gt;здесь&lt;/a&gt;. Полный список изменений API &amp;ndash; &lt;a href="https://javaalmanac.io/jdk/26/apidiff/25/"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Java 26 не является LTS-релизом, и у него будут выходить обновления &lt;a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html"&gt;только полгода&lt;/a&gt; (до сентября 2026 года).&lt;/p&gt;
+
+&lt;p&gt;Скачать JDK 26 можно по этим ссылкам:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.oracle.com/java/technologies/downloads/"&gt;Oracle JDK&lt;/a&gt; (лицензия &lt;a href="https://www.oracle.com/downloads/licenses/no-fee-license.html"&gt;NFTC&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jdk.java.net/26/"&gt;OpenJDK&lt;/a&gt; (лицензия &lt;a href="https://openjdk.org/legal/gplv2+ce.html"&gt;GPLv2 with Classpath Exception&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class="mt-2"&gt;Рассмотрим все JEP'ы, которые попали в Java 26.&lt;/p&gt;
+
+&lt;h4&gt;Язык&lt;/h4&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/500"&gt;Prepare to Make Final Mean Final (JEP 500)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;При использовании глубокой рефлексии для изменения final полей (с помощью методов Field::setAccessible и Field::set) теперь выдаются предупреждения в консоль:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: orange"&gt;WARNING: Final field f in class p.C has been mutated reflectively by class com.foo.Bar.caller in module N (file:/path/to/foo.jar)
+WARNING: Use --enable-final-field-mutation=N to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Чтобы подавить такие предупреждения, теперь нужно будет использовать новую опцию командной строки &lt;code&gt;--enable-final-field-mutation&lt;/code&gt;. С её помощью перечисляются модули, которым разрешено изменение final полей:&lt;/p&gt;
+&lt;pre&gt;$ java --enable-final-field-mutation=ALL-UNNAMED ...&lt;/pre&gt;
+
+&lt;p&gt;Одной лишь опции &lt;code&gt;--enable-final-field-mutation&lt;/code&gt; может быть недостаточно для подавления предупреждений. Если класс, в котором находится final поле, находится в другом модуле, то также необходима гарантия того, что пакет класса &lt;i&gt;открыт&lt;/i&gt; для глубокой рефлексии модулю (&lt;code&gt;--add-opens&lt;/code&gt;), который собирается изменить поле.&lt;/p&gt;
+
+&lt;p&gt;Также можно контролировать поведение Java при несанкционированном изменении final полей. Для этого появилась ещё одна опция &lt;code&gt;--illegal-final-field-mutation&lt;/code&gt;, которая может принимать одно из четырёх значений:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;--illegal-final-field-mutation=allow&lt;/code&gt; разрешает изменений final полей без всяких предупреждений. Это означает откат к старому поведению (как в Java 25 и более старых релизах).&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--illegal-final-field-mutation=warn&lt;/code&gt; разрешает изменений final полей, но выдаётся предупреждение при первом выполнении модуля такой нелегальной операции. Это значение по умолчанию в Java 26.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--illegal-final-field-mutation=debug&lt;/code&gt; &amp;ndash; это то же, что и &lt;code&gt;warn&lt;/code&gt;, но только предупреждение выдаётся при каждой нелегальной операции.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;--illegal-final-field-mutation=deny&lt;/code&gt; запрещает изменений final полей. При выполнении нелегальной операции выбрасывается &lt;code&gt;IllegalAccessException&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;--illegal-final-field-mutation&lt;/code&gt; &amp;ndash; это временная опция, которая необходима для более безболезненного перехода к ситуации, когда разрешать изменение final полей придётся только через перечисление модулей с помощью &lt;code&gt;--enable-final-field-mutation&lt;/code&gt; (подобно тому, как с Java 9 по 16 существовала опция &lt;a href="https://openjdk.org/jeps/261#Relaxed-strong-encapsulation"&gt;&lt;code&gt;--illegal-access&lt;/code&gt;&lt;/a&gt;). В одном из будущих релизов значением по умолчанию станет &lt;code&gt;deny&lt;/code&gt;, а &lt;code&gt;allow&lt;/code&gt; перестанет поддерживаться. В конечном счёте опция исчезнет полностью.&lt;/p&gt;
+
+&lt;p&gt;Возможность изменения final полей долгое время была костью в горле для разработчиков JVM. Если final поле в любой момент может измениться, то значит его значению нельзя доверять, а значит к нему сложно применить оптимизации, например, constant folding. Когда изменение final полей станет невозможным, это развяжет руки разработчикам JVM и они смогут применить к final полям те же оптимизации, что и к полям &lt;a href="https://openjdk.org/jeps/395"&gt;записей&lt;/a&gt; (в которых изначально был запрет на изменение полей).&lt;/p&gt;
+
+&lt;p&gt;JEP 500 &amp;ndash; это очередной шаг постепенного перехода Java к философии &lt;a href="https://openjdk.org/jeps/8305968"&gt;integrity by default&lt;/a&gt; (целостность по умолчанию). JVM по умолчанию не должна делать ничего кроме безопасных вещей. Если требуется что-то опасное, то это должно быть возможно только при явном разрешении от пользователя. Изменение final полей &amp;ndash; это небезопасная операция, поэтому она должна быть по умолчанию запрещена.&lt;/p&gt;
+
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/530"&gt;Primitive Types in Patterns, instanceof, and switch (Fourth Preview) (JEP 530)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Примитивные типы в паттернах, &lt;code&gt;instanceof&lt;/code&gt; и &lt;code&gt;switch&lt;/code&gt;, которые были в режиме preview в &lt;a href="https://openjdk.org/jeps/455"&gt;Java 23&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/488"&gt;Java 24&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/507"&gt;Java 25&lt;/a&gt;, остаются на четвёртое preview.&lt;/p&gt;
+&lt;p&gt;В Java 26 есть два изменения.&lt;/p&gt;
+&lt;p&gt;Во-первых, введено понятие &lt;i&gt;безусловно точного приведения, основанного на значениях&lt;/i&gt; (value-based unconditionally exact conversion). Оно противопоставляется &lt;i&gt;безусловно точному приведению, основанного на типах&lt;/i&gt; (type-based unconditionally exact conversion). Например, приведение int'ового константного значения &lt;code&gt;42&lt;/code&gt; в &lt;code&gt;short&lt;/code&gt; &amp;ndash; это безусловно точное приведение, основанное на значениях, потому что &lt;code&gt;42&lt;/code&gt; приводится к &lt;code&gt;short&lt;/code&gt; во время компиляции без потерь.&lt;/p&gt;
+&lt;p&gt;Во-вторых, в ветках &lt;code&gt;switch&lt;/code&gt; усиливаются проверки доминирования, и ранее корректные для компилятора Java 25 ветки &lt;code&gt;switch&lt;/code&gt; могут перестать компилироваться в Java 26. Это включает в себя новые проверки, основанные на вышеупомянутой безусловной точности, основанной на значениях:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+&lt;span style="color: blue"&gt;byte&lt;/span&gt; x = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (x) {
+    &lt;span style="color: blue"&gt;case short&lt;/span&gt; s -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 42      -&gt; {} &lt;span style="color: red"&gt;// error: dominated since 42 can be
+                       // converted unconditionally exactly to short&lt;/span&gt;
+}
+&lt;/pre&gt;
+&lt;p&gt;В Java 25 этот код компилировался:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 25&lt;/span&gt;
+&lt;span style="color: blue"&gt;byte&lt;/span&gt; x = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (x) {
+    &lt;span style="color: blue"&gt;case short&lt;/span&gt; s -&gt; {}
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 42      -&gt; {} &lt;span style="color: green"&gt;// ok, no error&lt;/span&gt;
+}
+&lt;/pre&gt;
+&lt;p&gt;Также теперь безусловный паттерн всегда доминирует над любыми другими следующими паттернами:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+&lt;span style="color: blue"&gt;int&lt;/span&gt; x = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (x) {
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; _ -&gt; {} &lt;span style="color: green"&gt;// unconditional pattern&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; _ -&gt; {} &lt;span style="color: red"&gt;// error: dominated&lt;/span&gt;
+}
+&lt;/pre&gt;
+&lt;p&gt;В Java 25 этот код также компилировался:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 25&lt;/span&gt;
+&lt;span style="color: blue"&gt;int&lt;/span&gt; x = ...;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (x) {
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; _ -&gt; {} &lt;span style="color: green"&gt;// unconditional pattern&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; _ -&gt; {} &lt;span style="color: green"&gt;// ok, no error&lt;/span&gt;
+}
+&lt;/pre&gt;
+
+&lt;p&gt;Напомним, что смысл всей фичи &amp;ndash; это поддержка примитивных типов в паттернах и операторах &lt;code&gt;instanceof&lt;/code&gt; / &lt;code&gt;switch&lt;/code&gt;:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+
+Object obj = 42;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof int&lt;/span&gt; i) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i);
+}
+
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case double&lt;/span&gt; d -&gt; System.out.println(&lt;span style="color: darkred"&gt;"double: "&lt;/span&gt; + d);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p&gt;Проверять можно также и то, попадают ли значения в диапазон типа:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 42;
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof byte&lt;/span&gt; b) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    System.out.println(&lt;span style="color: darkred"&gt;"byte: "&lt;/span&gt; + b);
+}&lt;/pre&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;double&lt;/span&gt; d = 3.0;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (d) {
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"float: "&lt;/span&gt; + f);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+}&lt;/pre&gt;
+
+&lt;p&gt;В примерах выше &lt;code&gt;42&lt;/code&gt; попадает в диапазон byte (&lt;code&gt;[-128; 127]&lt;/code&gt;), а &lt;code&gt;3.0&lt;/code&gt; без потери точности приводится к &lt;code&gt;int&lt;/code&gt;. Таким образом, это позволит более безопасно приводить одни числовые типы к другим, не прибегая к ручным проверкам диапазонов.&lt;/p&gt;
+
+&lt;p&gt;Подобные проверки могут быть полезны и в паттернах записей:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;record&lt;/span&gt; JsonNumber(&lt;span style="color: blue"&gt;double&lt;/span&gt; d) {}
+
+&lt;span style="color: blue"&gt;var&lt;/span&gt; json = &lt;span style="color: blue"&gt;new&lt;/span&gt; JsonNumber(3.0);
+&lt;span style="color: blue"&gt;if&lt;/span&gt; (json &lt;span style="color: blue"&gt;instanceof&lt;/span&gt; JsonNumber(&lt;span style="color: blue"&gt;int&lt;/span&gt; i)) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: green"&gt;// ...&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;p&gt;Если до Java 23-26 типы выражений-селекторов в &lt;code&gt;switch&lt;/code&gt; могли быть только &lt;code&gt;int&lt;/code&gt;, &lt;code&gt;short&lt;/code&gt;, &lt;code&gt;byte&lt;/code&gt; и &lt;code&gt;char&lt;/code&gt; и для них поддерживались только константные ветки (&lt;code&gt;case 3&lt;/code&gt; и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;float&lt;/span&gt; f = 1.0f;
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (f) {
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 0f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"0"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x &lt;span style="color: blue"&gt;when&lt;/span&gt; x == 1f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"1"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+}
+
+&lt;span style="color: blue"&gt;boolean&lt;/span&gt; b = &lt;span style="color: darkred"&gt;"hello"&lt;/span&gt;.isEmpty();
+&lt;span style="color: blue"&gt;switch&lt;/span&gt; (b) {
+    &lt;span style="color: blue"&gt;case true&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"empty"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case false&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"non-empty"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+}&lt;/pre&gt;
+
+&lt;h4&gt;API&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/526"&gt;Lazy Constants (Second Preview) (JEP 526)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;API для ленивых констант, которые &lt;a href="https://openjdk.org/jeps/502"&gt;в Java 25&lt;/a&gt; назывались стабильными значениями, переходит во второе preview со следующими изменениями:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Интерфейс &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html"&gt;&lt;code&gt;java.lang.StableValue&lt;/code&gt;&lt;/a&gt; переименован в &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html"&gt;&lt;code&gt;java.lang.LazyConstant&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Удалены методы &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#orElseSet(java.util.function.Supplier)"&gt;&lt;code&gt;orElseSet(Supplier)&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#isSet()"&gt;&lt;code&gt;isSet()&lt;/code&gt;&lt;/a&gt;, &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#setOrThrow(T)"&gt;&lt;code&gt;setOrThrow(T)&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#trySet(T)"&gt;&lt;code&gt;trySet(T)&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Удалены методы &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#of()"&gt;&lt;code&gt;of()&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#of(T)"&gt;&lt;code&gt;of(T)&lt;/code&gt;&lt;/a&gt;, а метод &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#supplier(java.util.function.Supplier)"&gt;&lt;code&gt;supplier(Supplier)&lt;/code&gt;&lt;/a&gt; переименован в &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html#of(java.util.function.Supplier)"&gt;&lt;code&gt;of(Supplier)&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Методы &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#list(int,java.util.function.IntFunction)"&gt;&lt;code&gt;list(int,IntFunction)&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#map(java.util.Set,java.util.function.Function)"&gt;&lt;code&gt;map(Set,Function)&lt;/code&gt;&lt;/a&gt; перенесены в интерфейсы &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/List.html#ofLazy(int,java.util.function.IntFunction)"&gt;&lt;code&gt;java.util.List&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/Map.html#ofLazy(java.util.Set,java.util.function.Function)"&gt;&lt;code&gt;java.util.Map&lt;/code&gt;&lt;/a&gt; соответственно.&lt;/li&gt;
+  &lt;li&gt;Удалены методы &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#function(java.util.Set,java.util.function.Function)"&gt;&lt;code&gt;function(Set,IntFunction)&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#intFunction(int,java.util.function.IntFunction)"&gt;&lt;code&gt;intFunction(int,IntFunction)&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;null&lt;/code&gt; теперь не может быть вычисляемым значением.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Напомним смысл новой фичи. Для начала вспомним, как в Java можно реализовать отложенную инициализацию классическими средствами:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; OrderController {
+    &lt;span style="color: blue"&gt;private&lt;/span&gt; Logger logger = &lt;span style="color: blue"&gt;null&lt;/span&gt;;
+
+    Logger getLogger() {
+        &lt;span style="color: blue"&gt;if&lt;/span&gt; (logger == &lt;span style="color: blue"&gt;null&lt;/span&gt;) {
+            logger = Logger.create(OrderController.&lt;span style="color: blue"&gt;class&lt;/span&gt;);
+        }
+        &lt;span style="color: blue"&gt;return&lt;/span&gt; logger;
+    }
+
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; submitOrder(User user, List&amp;lt;Product&gt; products) {
+        getLogger().info(&lt;span style="color: darkred"&gt;"order started"&lt;/span&gt;);
+        ...
+        getLogger().info(&lt;span style="color: darkred"&gt;"order submitted"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+&lt;p&gt;В примере выше объект &lt;code&gt;logger&lt;/code&gt; инициализируется в момент первого обращения. У такого подхода есть несколько проблем:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Любой доступ к полю &lt;code&gt;logger&lt;/code&gt; должен происходить через метод &lt;code&gt;getLogger()&lt;/code&gt;. Это можно забыть сделать.&lt;/li&gt;
+  &lt;li&gt;Код не является потокобезопасным: объект &lt;code&gt;logger&lt;/code&gt; может инициализироваться несколько раз.&lt;/li&gt;
+  &lt;li&gt;Компилятор не может применить оптимизацию constant folding, так как поле &lt;code&gt;logger&lt;/code&gt; не является final.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Частично проблем выше можно избежать, прибегнув к другим более сложным идиомам, например, double-checked locking или class holder. Однако с double-checked locking код становится невероятно громоздким и хрупким (например, можно забыть вставить ключевое слово &lt;code&gt;volatile&lt;/code&gt;), а так же отсутствует constant folding. С class holder код становится более-менее простым и надёжным (и есть constant folding), но у этой идиомы есть серьёзные ограничения: она применима только к статическим полям и для каждого поля приходится объявлять свой собственный класс. Также можно использовать &lt;code&gt;ConcurrentHashMap&lt;/code&gt;, однако и у неё есть недостатки: отсутствует constant folding и есть проблемы, если функция возвращает &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Теперь посмотрим, как код будет выглядеть с новым интерфейсом &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html"&gt;&lt;code&gt;LazyConstant&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+&lt;span style="color: blue"&gt;class&lt;/span&gt; OrderController {
+    &lt;span style="color: blue"&gt;private final&lt;/span&gt; LazyConstant&amp;lt;Logger&gt; logger
+            = LazyConstant.of(() -&gt; Logger.create(OrderController.&lt;span style="color: blue"&gt;class&lt;/span&gt;));
+
+    &lt;span style="color: blue"&gt;void&lt;/span&gt; submitOrder(User user, List&amp;lt;Product&gt; products) {
+        logger.get().info(&lt;span style="color: darkred"&gt;"order started"&lt;/span&gt;);
+        ...
+        logger.get().info(&lt;span style="color: darkred"&gt;"order submitted"&lt;/span&gt;);
+    }
+}&lt;/pre&gt;
+
+&lt;p&gt;Теперь для получения логгера нужно использовать объект &lt;code&gt;LazyConstant&lt;/code&gt;, который инкапсулирует в себе ленивую логику вычисления логгера. При первом вызове метода &lt;code&gt;get()&lt;/code&gt; содержимое вычисляется путём вызова переданного &lt;code&gt;Supplier&lt;/code&gt;'а. Если же содержимое уже вычислено, то оно просто возвращается. &lt;code&gt;LazyConstant&lt;/code&gt; гарантирует, что &lt;code&gt;Supplier&lt;/code&gt; вызовется не более одного раза, тем самым обеспечивая потокобезопасность.&lt;/p&gt;
+
+&lt;p&gt;Под капотом &lt;code&gt;LazyConstant&lt;/code&gt; реализован таким образом, что использует внутреннюю для JDK аннотацию &lt;code&gt;@Stable&lt;/code&gt; для хранения содержимого в поле, не являющегося final. Эта аннотация даёт сигнал виртуальной машине, что поле не будет меняться более одного раза, а значит виртуальная машина после установки может считать его константным значением, что открывает возможность для constant folding. Таким образом, &lt;code&gt;LazyConstant&lt;/code&gt; позволяет добиваться одновременно гибкости инициализации и хорошей производительности.&lt;/p&gt;
+
+&lt;p&gt;API также позволяет создавать не только значения с единичным содержимым, но и ленивые списки и словари. Приведём пример ленивого списка:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+&lt;span style="color: blue"&gt;class&lt;/span&gt; Application {
+    &lt;span style="color: blue"&gt;private static final&lt;/span&gt; List&amp;lt;OrderController&gt; ORDERS
+        = List.ofLazy(POOL_SIZE, _ -&gt; &lt;span style="color: blue"&gt;new&lt;/span&gt; OrderController());
+
+    &lt;span style="color: blue"&gt;public static&lt;/span&gt; OrderController orders() {
+        &lt;span style="color: blue"&gt;long&lt;/span&gt; index = Thread.currentThread().threadId() % POOL_SIZE;
+        &lt;span style="color: blue"&gt;return&lt;/span&gt; ORDERS.get((&lt;span style="color: blue"&gt;int&lt;/span&gt;)index);
+    }
+}&lt;/pre&gt;
+&lt;p&gt;В примере выше список &lt;code&gt;ORDERS&lt;/code&gt; &amp;ndash; это список, который для каждого индекса вычисляет значение в момент обращения и не более одного раза. Таким образом, &lt;code&gt;LazyConstant&lt;/code&gt; &amp;ndash; это ещё и хороший вариант для написания кэшей.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/504"&gt;Remove the Applet API (JEP 504)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;API аплетов, которое стало deprecated &lt;a href="https://openjdk.org/jeps/289"&gt;в Java 9&lt;/a&gt; и стало deprecated for removal &lt;a href="https://openjdk.org/jeps/398"&gt;в Java 17&lt;/a&gt;, было окончательно удалено. Удалению подлежал весь пакет &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/applet/package-summary.html"&gt;&lt;code&gt;java.applet&lt;/code&gt;&lt;/a&gt;, а также классы &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/beans/AppletInitializer.html"&gt;&lt;code&gt;java.beans.AppletInitializer&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JApplet.html"&gt;&lt;code&gt;javax.swing.JApplet&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Окончательное удаление Applet API вряд ли на что-то негативно повлияет, так как современные браузеры уже давно не поддерживают аплеты, а инструмент appletviewer был удалён ещё &lt;a href="https://bugs.openjdk.org/browse/JDK-8200549"&gt;в Java 11&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/517"&gt;HTTP/3 for the HTTP Client API (JEP 517)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;&lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.net.http/java/net/http/HttpClient.html"&gt;HTTP-клиент&lt;/a&gt; теперь поддерживает &lt;a href="https://en.wikipedia.org/wiki/HTTP/3"&gt;третью версию протокола HTTP&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;HTTP/3 &amp;ndash; это последняя версия протокола HTTP, которая использует протокол &lt;a href="https://en.wikipedia.org/wiki/QUIC"&gt;QUIC&lt;/a&gt; в качестве транспорта вместо TCP. У HTTP/3 потенциального более быстрые рукопожатия, чем в предыдущих версиях, меньше проблем с застоями и более надёжный транспорт, особенно в окружениях с большими потерями пакетов. HTTP/3 был стандартизован в 2022 году.&lt;/p&gt;
+&lt;p&gt;Чтобы переключиться на HTTP/3 в HTTP-клиенте, нужно явно указать версию протокола:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; client = HttpClient.newBuilder()
+                       &lt;b&gt;.version(HttpClient.Version.HTTP_3)&lt;/b&gt;
+                       .build();&lt;/pre&gt;
+
+&lt;p&gt;Также можно указать версию конкретно для запроса:&lt;/p&gt;
+&lt;pre&gt;&lt;span style="color: blue"&gt;var&lt;/span&gt; request = HttpRequest.newBuilder(URI.create(&lt;span style="color: darkred"&gt;"https://openjdk.org/"&lt;/span&gt;))
+                         &lt;b&gt;.version(HttpClient.Version.HTTP_3)&lt;/b&gt;
+                         .GET().build();&lt;/pre&gt;
+
+&lt;p&gt;Метод &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.net.http/java/net/http/HttpClient.Builder.html#version(java.net.http.HttpClient.Version)"&gt;&lt;code&gt;version()&lt;/code&gt;&lt;/a&gt; указывает на предпочитаемую версию протокола. Если сервер не поддерживает HTTP/3, то запросы не падают с ошибкой, а незаметно переключаются на HTTP/2 или HTTP/1.1.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/525"&gt;Structured Concurrency (Sixth Preview) (JEP 525)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Structured Concurrency, которое было в режиме preview в &lt;a href="https://openjdk.org/jeps/453"&gt;Java 21&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/462"&gt;Java 22&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/480"&gt;Java 23&lt;/a&gt;, &lt;a href="https://openjdk.org/jeps/499"&gt;Java 24&lt;/a&gt; и &lt;a href="https://openjdk.org/jeps/505"&gt;Java 25&lt;/a&gt;, остаётся в режиме preview в шестой раз.&lt;/p&gt;
+&lt;p&gt;В этом релизе есть небольшие изменения API:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Появился новый метод &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#onTimeout()"&gt;&lt;code&gt;Joiner::onTimeout()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Метод &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#allSuccessfulOrThrow()"&gt;&lt;code&gt;Joiner::allSuccessfulOrThrow()&lt;/code&gt;&lt;/a&gt; теперь возвращает &lt;code&gt;Joiner&lt;/code&gt;, результатом которого является список значений, а не &lt;code&gt;Stream&lt;/code&gt; подзадач.&lt;/li&gt;
+  &lt;li&gt;Метод &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#anySuccessfulResultOrThrow()"&gt;&lt;code&gt;Joiner::anySuccessfulResultOrThrow()&lt;/code&gt;&lt;/a&gt; переименован в &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#anySuccessfulOrThrow()"&gt;&lt;code&gt;anySuccessfulOrThrow()&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Вместо метода &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#open(java.util.concurrent.StructuredTaskScope.Joiner,java.util.function.Function)"&gt;&lt;code&gt;StructuredTaskScope::open(StructuredTaskScope.Joiner, Function)&lt;/code&gt;&lt;/a&gt; теперь &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#open(java.util.concurrent.StructuredTaskScope.Joiner,java.util.function.UnaryOperator)"&gt;&lt;code&gt;StructuredTaskScope::open(StructuredTaskScope.Joiner, UnaryOperator)&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Напомним, что Structured Concurrency &amp;ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.&lt;/p&gt;
+
+&lt;p&gt;В центре нового API класс &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"&gt;&lt;code&gt;StructuredTaskScope&lt;/code&gt;&lt;/a&gt;, у которого есть два главных метода:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#fork(java.util.concurrent.Callable)"&gt;&lt;code&gt;fork()&lt;/code&gt;&lt;/a&gt; &amp;ndash; создаёт подзадачу и запускает её в новом виртуальном потоке,&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"&gt;&lt;code&gt;join()&lt;/code&gt;&lt;/a&gt; &amp;ndash; ждёт, пока не завершатся все подзадачи или пока scope не будет &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"&gt;закрыт&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Пример использования &lt;code&gt;StructuredTaskScope&lt;/code&gt;, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+&lt;span style="color: blue"&gt;try&lt;/span&gt; (&lt;span style="color: blue"&gt;var&lt;/span&gt; scope = StructuredTaskScope.open()) {
+    Subtask&amp;lt;String&gt; user = scope.fork(() -&gt; findUser());
+    Subtask&amp;lt;Integer&gt; order = scope.fork(() -&gt; fetchOrder());
+
+    scope.join(); &lt;span style="color: green"&gt;// Join subtasks, propagating exceptions&lt;/span&gt;
+
+    &lt;span style="color: green"&gt;// Both subtasks have succeeded, so compose their results&lt;/span&gt;
+    &lt;span style="color: blue"&gt;return new&lt;/span&gt; Response(user.get(), order.get());
+}&lt;/pre&gt;
+
+&lt;p&gt;Может показаться, что в точности аналогичный код можно было бы написать с использованием классического &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/ExecutorService.html"&gt;&lt;code&gt;ExecutorService&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)"&gt;&lt;code&gt;submit()&lt;/code&gt;&lt;/a&gt;, но у &lt;code&gt;StructuredTaskScope&lt;/code&gt; есть несколько принципиальных отличий, которые делают код безопаснее:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Время жизни всех потоков подзадач ограничено областью видимости блока &lt;code&gt;try-with-resources&lt;/code&gt;. Метод &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"&gt;&lt;code&gt;close()&lt;/code&gt;&lt;/a&gt; гарантированно не завершится, пока не завершатся все подзадачи.&lt;/li&gt;
+  &lt;li&gt;Если одна из операций &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае использования дефолтного &lt;code&gt;Joiner&lt;/code&gt;'а &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAllSuccessfulOrThrow()"&gt;&lt;code&gt;awaitAllSuccessfulOrThrow()&lt;/code&gt;&lt;/a&gt;, но возможны другие с другим поведением).&lt;/li&gt;
+  &lt;li&gt;Если главный поток прерывается в процессе ожидания &lt;code&gt;join()&lt;/code&gt;, то обе операции &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt; отменяются при выходе из блока.&lt;/li&gt;
+  &lt;li&gt;В дампе потоков будет видна иерархия: потоки, выполняющие &lt;code&gt;findUser()&lt;/code&gt; и &lt;code&gt;fetchOrder()&lt;/code&gt;, будут отображаться как дочерние для главного потока.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class="mt-2"&gt;Structured Concurrency должно облегчить написание безопасных многопоточных программ благодаря знакомому структурному подходу.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/524"&gt;PEM Encodings of Cryptographic Objects (Second Preview) (JEP 524)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;API для кодирования криптографических объектов в &lt;a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%87%D1%82%D0%B0_%D1%81_%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%D1%8E"&gt;формат PEM&lt;/a&gt; и декодирования обратно, которое появилось &lt;a href="https://openjdk.org/jeps/470"&gt;в Java 25&lt;/a&gt;, остаётся на второе preview.&lt;/p&gt;
+&lt;p&gt;Есть несколько изменений в API:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Класс &lt;a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/PEMRecord.html"&gt;&lt;code&gt;PEMRecord&lt;/code&gt;&lt;/a&gt; переименован в &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html"&gt;&lt;code&gt;PEM&lt;/code&gt;&lt;/a&gt;, и теперь в нём содержится метод &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html#decode()"&gt;&lt;code&gt;decode()&lt;/code&gt;&lt;/a&gt;, который возвращает содержимое в формате Base64.&lt;/li&gt;
+  &lt;li&gt;Методы &lt;code&gt;encryptKey()&lt;/code&gt; в классе &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html"&gt;&lt;code&gt;EncryptedPrivateKeyInfo&lt;/code&gt;&lt;/a&gt; переименованы в &lt;code&gt;encrypt()&lt;/code&gt; и теперь принимают объекты &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/DEREncodable.html"&gt;&lt;code&gt;DEREncodable&lt;/code&gt;&lt;/a&gt;, а не &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PrivateKey.html"&gt;&lt;code&gt;PrivateKey&lt;/code&gt;&lt;/a&gt;. Это позволяет шифровать объекты &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/KeyPair.html
+"&gt;&lt;code&gt;KeyPair&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/spec/PKCS8EncodedKeySpec.html"&gt;&lt;code&gt;PKCS8EncodedKeySpec&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Класс &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html"&gt;&lt;code&gt;EncryptedPrivateKeyInfo&lt;/code&gt;&lt;/a&gt; теперь содержит методы &lt;code&gt;getKeyPair()&lt;/code&gt;, которые расшифровывают текст в формате PKCS#8, содержащий &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PublicKey.html"&gt;&lt;code&gt;PublicKey&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Исключения, которые выбрасываются методами &lt;code&gt;getKey()&lt;/code&gt; в классе &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html"&gt;&lt;code&gt;EncryptedPrivateKeyInfo&lt;/code&gt;&lt;/a&gt;, теперь согласуются с исключениями, которые выбрасываются методами &lt;code&gt;getKeySpec()&lt;/code&gt; в том же классе.&lt;/li&gt;
+  &lt;li&gt;Классы &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMEncoder.html"&gt;&lt;code&gt;PEMEncoder&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMDecoder.html"&gt;&lt;code&gt;PEMDecoder&lt;/code&gt;&lt;/a&gt; теперь поддерживают шифрофание и расшифровку объектов &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/KeyPair.html
+"&gt;&lt;code&gt;KeyPair&lt;/code&gt;&lt;/a&gt; и &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/spec/PKCS8EncodedKeySpec.html"&gt;&lt;code&gt;PKCS8EncodedKeySpec&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Напомним, что новое API для кодирования в формат PEM позволяет кодировать самые разные криптографические сущности: открытые ключи, закрытые ключи, сертификаты и т.д.&lt;/p&gt;
+
+&lt;p&gt;Вот пример открытого ключа, закодированного в формате PEM:&lt;/p&gt;
+&lt;pre&gt;-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
+cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
+-----END PUBLIC KEY-----&lt;/pre&gt;
+&lt;p&gt;Такой ключ можно декодировать с помощью нового класса &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMDecoder.html"&gt;&lt;code&gt;java.security.PEMDecoder&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+PEMDecoder decoder = PEMDecoder.of();
+PublicKey key = (PublicKey) decoder.decode(data);
+System.out.println(key);&lt;/pre&gt;
+&lt;p&gt;Кодирование происходит с помощью класса &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMEncoder.html"&gt;&lt;code&gt;java.security.PEMEncoder&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: green"&gt;// --enable-preview --source 26&lt;/span&gt;
+PEMEncoder encoder = PEMEncoder.of();
+String data = encoder.encodeToString(key);
+System.out.println(data);&lt;/pre&gt;
+
+&lt;p&gt;Список всех криптографических объектов, которые можно кодировать/декодировать, лимитирован наследниками нового &lt;code&gt;sealed&lt;/code&gt; интерфейса &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/DEREncodable.html"&gt;&lt;code&gt;java.security.DEREncodable&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;public sealed interface&lt;/span&gt; DEREncodable &lt;span style="color: blue"&gt;permits&lt;/span&gt; AsymmetricKey, KeyPair,
+    PKCS8EncodedKeySpec, X509EncodedKeySpec, EncryptedPrivateKeyInfo,
+    X509Certificate, X509CRL, PEM {
+}&lt;/pre&gt;
+
+&lt;p&gt;Среди наследников выделяется особенный класс &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html"&gt;&lt;code&gt;java.security.PEM&lt;/code&gt;&lt;/a&gt;. Этот класс может содержать в себе любые PEM-данные. Он может пригодиться, когда для криптографического объекта в Java нет соответствующего API (например, &lt;a href="https://www.rfc-editor.org/rfc/rfc7468#section-7"&gt;запрос сертификата PKCS #10&lt;/a&gt;):&lt;/p&gt;
+&lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;public record&lt;/span&gt; PEM(String type, String content, &lt;span style="color: blue"&gt;byte&lt;/span&gt;[] leadingData) &lt;span style="color: blue"&gt;implements&lt;/span&gt; DEREncodable {
+    ...
+}&lt;/pre&gt;
+&lt;!--java--&gt;&lt;pre&gt;PEM pr = PEMDecoder.of().decode(pem, PEM.&lt;span style="color: blue"&gt;class&lt;/span&gt;);&lt;/pre&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/529"&gt;Vector API (Eleventh Incubator) (JEP 529)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Векторное API в модуле &lt;a href="https://docs.oracle.com/en/java/javase/26/docs/api/jdk.incubator.vector/module-summary.html"&gt;&lt;code&gt;jdk.incubator.vector&lt;/code&gt;&lt;/a&gt;, которое появилось ещё аж &lt;a href="https://openjdk.org/jeps/338"&gt;в Java 16&lt;/a&gt;, остаётся в инкубационном статусе в одиннадцатый раз.&lt;/p&gt;
+
+&lt;p&gt;Векторное API остаётся так долго в инкубаторе, потому что зависит от некоторых фич проекта &lt;a href="https://openjdk.org/projects/valhalla/"&gt;Valhalla&lt;/a&gt; (главным образом, от &lt;a href="https://openjdk.org/jeps/401"&gt;value-классов&lt;/a&gt;), который пока что находится в разработке. Как только эти фичи станут доступны в виде preview, векторное API перейдёт из инкубатора в статус preview.&lt;/p&gt;
+
+&lt;h4&gt;JVM&lt;/h4&gt;
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/516"&gt;Ahead-of-Time Object Caching with Any GC (JEP 516)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;Ahead-of-time кэш, который появился &lt;a href="https://openjdk.org/jeps/483"&gt;в Java 24&lt;/a&gt;, теперь поддерживает все сборщики мусора, включая ZGC.&lt;/p&gt;
+&lt;p&gt;Ранее ZGC не поддерживался из-за того, что в нём использовался GC-specific формат, совместимый только со сборщиками мусора Serial, Parallel и G1. Сейчас же реализован новый GC-agnostic формат, который не зависит от сборщика мусора.&lt;/p&gt;
+&lt;p&gt;GC-agnostic формат имеет важное отличие: он является потоковым, то есть JVM не отображает его целиком в память (как в случае с GC-specific), а подгружает объекты последовательно в фоновом потоке.&lt;/p&gt;
+&lt;p&gt;Новый формат является опциональным и включается во время тренировочного запуска в следующих случаях:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Если использовать GC-agnostic формат указано явно через опцию &lt;code&gt;-XX:+AOTStreamableObjects&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;При использовании сборщика мусора ZGC (&lt;code&gt;-XX:+UseZGC&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Если отключены сжатые указатели (&lt;code&gt;-XX:-CompressedOops&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Если размер кучи больше чем 32 GB.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В остальным случаях используется старый отображаемый в память формат.&lt;/p&gt;
+
+&lt;h5&gt;&lt;a href="https://openjdk.org/jeps/522"&gt;G1 GC: Improve Throughput by Reducing Synchronization (JEP 522)&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;В сборщике мусора G1 было уменьшено количество синхронизации между потоками приложения и потоками сборщика мусора. Благодаря этому производительность приложений, в которых интенсивно модифицируются ссылки в объектах, выросла на 5-15%. Кроме того, были упрощены барьеры записи (write barriers): фрагменты кода, которые внедряет GC и JIT в инструкции присвоения ссылок в объектах. Это упрощение привело к тому, что барьеры стали быстрее и стали меньше по размеру, в результате чего производительность выросла до 5% и в приложениях, в которых ссылки в объектах модифицируются не так интенсивно.&lt;/p&gt;
+&lt;p&gt;Достичь уменьшения синхронизации (и упрощения барьеров) удалось с помощью введения второй таблицы карт (card table), которую модифицирует только поток-оптимизатор G1, но не трогают потоки приложения, т.к. они обновляют в это время первую таблицу. Как только G1 понимает, что сканирование первой таблицы карт превышает по времени целевое значение пауз, он атомарно переключает таблицы. После этого приложение начинает обновлять вторую таблицу, а поток-оптимизатор начинает оптимизировать первую (заполненную) таблицу.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Вышла Java 25</title>
     <link rel="alternate" type="text/html" href="https://minijug.org/java_25.html" />
@@ -3028,86 +3357,5 @@ Connection connectDatabase() {
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://blogs.apache.org/netbeans/#announce-apache-netbeans-17-released"&gt;Apache NetBeans 17&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://mail.openjdk.org/pipermail/jol-dev/2023-February/000509.html"&gt;JOL 0.17&lt;/a&gt;. Из основных изменений: минимальная версия Java теперь 8, добавлена поддержка Lilliput.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Новости Java #54</title>
-    <link rel="alternate" type="text/html" href="https://minijug.org/java_news_54.html" />
-    <author>
-      <name>Евгений Козлов</name>
-    </author>
-    <id>https://minijug.org/java_news_54.html</id>
-    <updated>2023-02-19T19:00:00Z</updated>
-    <published>2023-02-19T19:00:00Z</published>
-    <content type="html">&lt;p&gt;&amp;bull; Вышел новый черновик JEP: &lt;a href="https://openjdk.org/jeps/8302326"&gt;Implicit Classes and Enhanced Main Methods (Preview)&lt;/a&gt;. В нём предлагается сделать протокол запуска программ на Java более гибким, дав возможность программисту (в особенности новичку) опускать ненужные конструкции при написании простых программ, что поможет упростить вхождение в язык.&lt;/p&gt;
-&lt;p&gt;Во-первых, модификатор &lt;code&gt;public&lt;/code&gt; и параметр &lt;code&gt;String[] args&lt;/code&gt; для метода &lt;code&gt;main()&lt;/code&gt; будут опциональными:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
-    &lt;span style="color: blue"&gt;static void&lt;/span&gt; main() {
-        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;Во-вторых, метод &lt;code&gt;main()&lt;/code&gt; не будет обязан быть статическим. Тогда JVM сама инстанцирует класс (для этого у него должен иметься не-private конструктор без аргументов) и вызовет метод &lt;code&gt;main()&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;class&lt;/span&gt; HelloWorld {
-    &lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
-        System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-    }
-}&lt;/pre&gt;
-
-&lt;p&gt;В-третьих, само объявление класса будет опциональным. В таком случае JVM сама создаст экземпляр безымянного неявного класса и вызовет &lt;code&gt;main()&lt;/code&gt; на нём:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: blue"&gt;void&lt;/span&gt; main() {
-    System.out.println(&lt;span style="color: darkred"&gt;"Hello World"&lt;/span&gt;);
-}&lt;/pre&gt;
-
-&lt;p&gt;Эти три упрощения помогут новичкам сфокусировать своё изучение языка на простых концепциях вроде объявлений переменных и циклов, а затем постепенно переходить к более сложным (классам, модификаторам доступа и статическим методам).&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел ещё один черновик JEP: &lt;a href="https://openjdk.org/jeps/8299906"&gt;Support Markdown in Documentation Comments&lt;/a&gt;. В этом JEP'е предлагается добавить возможность писать JavaDoc на языке &lt;a href="https://commonmark.org/"&gt;Markdown&lt;/a&gt; вместо HTML. Markdown на сегодняшний день является очень популярным форматом написания документации, отличительной особенностью которого является простота синтаксиса и лёгкость чтения. Markdown трансформируется в HTML, но достаточно легко читаем и в сыром виде.&lt;/p&gt;
-&lt;p&gt;Пример возможной документации на Markdown для &lt;code&gt;Object.hashCode()&lt;/code&gt; с использованием Markdown:&lt;/p&gt;
-&lt;pre&gt;&lt;span style="color: green"&gt;/**md&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;Returns a hash code value for the object. This method is
-&lt;span style="color: green"&gt; * &lt;/span&gt;supported for the benefit of hash tables such as those provided by
-&lt;span style="color: green"&gt; * &lt;/span&gt;{&lt;span style="color: gray"&gt;&lt;b&gt;@link&lt;/b&gt;&lt;/span&gt; java.util.HashMap}.
-&lt;span style="color: green"&gt; *&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;The general contract of &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; is:
-&lt;span style="color: green"&gt; *&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;-   Whenever it is invoked on the same object more than once during
-&lt;span style="color: green"&gt; * &lt;/span&gt;    an execution of a Java application, the &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method
-&lt;span style="color: green"&gt; * &lt;/span&gt;    must consistently return the same integer, provided no information
-&lt;span style="color: green"&gt; * &lt;/span&gt;    used in &lt;span style="color: darkgreen"&gt;`equals`&lt;/span&gt; comparisons on the object is modified.
-&lt;span style="color: green"&gt; * &lt;/span&gt;    This integer need not remain consistent from one execution of an
-&lt;span style="color: green"&gt; * &lt;/span&gt;    application to another execution of the same application.
-&lt;span style="color: green"&gt; * &lt;/span&gt;-   If two objects are equal according to the {&lt;span style="color: gray"&gt;&lt;b&gt;@link&lt;/b&gt;&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;    #equals(Object) equals} method, then calling the
-&lt;span style="color: green"&gt; * &lt;/span&gt;    &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method on each of the two objects must produce the
-&lt;span style="color: green"&gt; * &lt;/span&gt;    same integer result.
-&lt;span style="color: green"&gt; * &lt;/span&gt;-   It is _not_ required that if two objects are unequal
-&lt;span style="color: green"&gt; * &lt;/span&gt;    according to the {&lt;span style="color: gray"&gt;&lt;b&gt;@link&lt;/b&gt;&lt;/span&gt; #equals(Object) equals} method, then
-&lt;span style="color: green"&gt; * &lt;/span&gt;    calling the &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method on each of the two objects
-&lt;span style="color: green"&gt; * &lt;/span&gt;    must produce distinct integer results.  However, the programmer
-&lt;span style="color: green"&gt; * &lt;/span&gt;    should be aware that producing distinct integer results for
-&lt;span style="color: green"&gt; * &lt;/span&gt;    unequal objects may improve the performance of hash tables.
-&lt;span style="color: green"&gt; *&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@implSpec&lt;/b&gt;&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;As far as is reasonably practical, the &lt;span style="color: darkgreen"&gt;`hashCode`&lt;/span&gt; method defined
-&lt;span style="color: green"&gt; * &lt;/span&gt;by class &lt;span style="color: darkgreen"&gt;`Object`&lt;/span&gt; returns distinct integers for distinct objects.
-&lt;span style="color: green"&gt; *&lt;/span&gt;
-&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@return&lt;/b&gt;&lt;/span&gt;  a hash code value for this object.
-&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@see&lt;/b&gt;&lt;/span&gt;     java.lang.Object#equals(java.lang.Object)
-&lt;span style="color: green"&gt; * &lt;/span&gt;&lt;span style="color: gray"&gt;&lt;b&gt;@see&lt;/b&gt;&lt;/span&gt;     java.lang.System#identityHashCode
-&lt;span style="color: green"&gt; */&lt;/span&gt;&lt;/pre&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://maven.apache.org/docs/3.9.0/release-notes.html"&gt;Apache Maven 3.9.0&lt;/a&gt;. Самые заметные изменения:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Минимальная версия Java теперь 8. Это первое увеличение минимальной версии Java спустя 8 лет. В прошлый раз это был Maven &lt;a href="https://maven.apache.org/docs/3.3.1/release-notes.html"&gt;3.3.1&lt;/a&gt;, где минимальной версией стала Java 7.&lt;/li&gt;
-  &lt;li&gt;Обратная совместимость с Maven 2.x окончательно убрана.&lt;/li&gt;
-  &lt;li&gt;Теперь выдаются &lt;a href="https://issues.apache.org/jira/browse/MNG-7457"&gt;предупреждения&lt;/a&gt; об использовании deprecated плагинов, целей, параметров и т.д.&lt;/li&gt;
-  &lt;li&gt;В консоли теперь пишутся префиксы плагинов вместо их &lt;code&gt;artifactId&lt;/code&gt; (например, &lt;code&gt;compiler:3.10.1:compile&lt;/code&gt; вместо &lt;code&gt;maven-compiler-plugin:3.10.1:compile&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;Теперь можно вызывать цели через &lt;a href="https://issues.apache.org/jira/browse/MNG-7353"&gt;&lt;code&gt;mvn pluginPrefix:version:goal&lt;/code&gt;&lt;/a&gt;. Раньше это можно было делать либо через &lt;code&gt;mvn:pluginPrefix:goal&lt;/code&gt;, либо через &lt;code&gt;groupId:artifactId[:version]:goal&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Стала возможной активация профиля по типу &lt;code&gt;packaging&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Полный список изменений и нововведений &lt;a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12316922&amp;version=12350913"&gt;тут&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел &lt;a href="https://docs.gradle.org/8.0/release-notes.html"&gt;Gradle 8.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p class="pt-2"&gt;&amp;bull; Вышел JetBrains &lt;a href="https://blog.jetbrains.com/idea/2023/02/java-annotated-monthly-february-2023/"&gt;Java Annotated Monthly за февраль&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
