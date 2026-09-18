@@ -8,7 +8,7 @@
     <meta property="og:title" content="miniJUG">
     <meta property="og:description" content="Новости Java">
     <meta property="og:site_name" content="miniJUG">
-    <meta property="article:published_time" content="2026-03-17">
+    <meta property="article:published_time" content="2026-09-15">
     <meta property="article:author" content="miniJUG">
     <meta property="article:author_url" content="https://twitter.com/mini_JUG">
     <meta name="twitter:card" content="summary_large_image">
@@ -36,89 +36,26 @@
 <div class="container">
   <div class="row gx-5">
     <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
-    <h3 id="title">Вышла Java 26</h3>
-<p class="text-secondary"><time datetime="2026-03-17">17 марта, 2026</time></p>
+    <h3 id="title">Вышла Java 27</h3>
+<p class="text-secondary"><time datetime="2026-09-15">15 сентября, 2026</time></p>
 <article>
-<p>Вышла общедоступная версия <a href="https://openjdk.org/projects/jdk/26/">Java 26</a>. В этот релиз попало более <a href="https://builds.shipilev.net/backports-monitor/release-notes-26.html">2700 закрытых задач и 10 JEP'ов</a>. Release Notes можно посмотреть <a href="https://www.oracle.com/java/technologies/javase/26-relnote-issues.html">здесь</a>. Полный список изменений API &ndash; <a href="https://javaalmanac.io/jdk/26/apidiff/25/">здесь</a>.</p>
+<p>Вышла общедоступная версия <a href="https://openjdk.org/projects/jdk/27/">Java 27</a>. В этот релиз попало около <a href="https://builds.shipilev.net/backports-monitor/release-notes-27.html">2500 закрытых задач и 9 JEP'ов</a>. Release Notes можно посмотреть <a href="https://www.oracle.com/java/technologies/javase/27-relnote-issues.html">здесь</a>. Полный список изменений API &ndash; <a href="https://javaalmanac.io/jdk/27/apidiff/26/">здесь</a>.</p>
 
-<p>Java 26 не является LTS-релизом, и у него будут выходить обновления <a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html">только полгода</a> (до сентября 2026 года).</p>
+<p>Java 27 не является LTS-релизом, и у него будут выходить обновления <a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html">только полгода</a> (до марта 2027 года).</p>
 
-<p>Скачать JDK 26 можно по этим ссылкам:</p>
+<p>Скачать JDK 27 можно по этим ссылкам:</p>
 <ul>
   <li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle JDK</a> (лицензия <a href="https://www.oracle.com/downloads/licenses/no-fee-license.html">NFTC</a>)</li>
-  <li><a href="http://jdk.java.net/26/">OpenJDK</a> (лицензия <a href="https://openjdk.org/legal/gplv2+ce.html">GPLv2 with Classpath Exception</a>)</li>
+  <li><a href="http://jdk.java.net/27/">OpenJDK</a> (лицензия <a href="https://openjdk.org/legal/gplv2+ce.html">GPLv2 with Classpath Exception</a>)</li>
 </ul>
 
-<p class="mt-2">Рассмотрим все JEP'ы, которые попали в Java 26.</p>
+<p class="mt-2">Рассмотрим все JEP'ы, которые попали в Java 27.</p>
 
-<h4>Язык</h4>
+<h5><a href="https://openjdk.org/jeps/532">Primitive Types in Patterns, instanceof, and switch (Fifth Preview) (JEP 532)</a></h5>
+<p>Примитивные типы в паттернах, <code class="text-nowrap">instanceof</code> и <code class="text-nowrap">switch</code>, которые были в preview в <a href="https://openjdk.org/jeps/455">Java 23</a>, <a href="https://openjdk.org/jeps/488">Java 24</a>, <a href="https://openjdk.org/jeps/507">Java 25</a> и <a href="https://openjdk.org/jeps/530">Java 26</a>, остаются на пятое preview без изменений.</p>
 
-<h5><a href="https://openjdk.org/jeps/500">Prepare to Make Final Mean Final (JEP 500)</a></h5>
-<p>При использовании глубокой рефлексии для изменения final полей (с помощью методов Field::setAccessible и Field::set) теперь выдаются предупреждения в консоль:</p>
-<pre class="border p-lg-2 p-1"><span style="color: orange">WARNING: Final field f in class p.C has been mutated reflectively by class com.foo.Bar.caller in module N (file:/path/to/foo.jar)
-WARNING: Use --enable-final-field-mutation=N to avoid a warning
-WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled</span></pre>
-
-<p>Чтобы подавить такие предупреждения, теперь нужно будет использовать новую опцию командной строки <code class="text-nowrap">--enable-final-field-mutation</code>. С её помощью перечисляются модули, которым разрешено изменение final полей:</p>
-<pre class="border p-lg-2 p-1">$ java --enable-final-field-mutation=ALL-UNNAMED ...</pre>
-
-<p>Одной лишь опции <code class="text-nowrap">--enable-final-field-mutation</code> может быть недостаточно для подавления предупреждений. Если класс, в котором находится final поле, находится в другом модуле, то также необходима гарантия того, что пакет класса <i>открыт</i> для глубокой рефлексии модулю (<code class="text-nowrap">--add-opens</code>), который собирается изменить поле.</p>
-
-<p>Также можно контролировать поведение Java при несанкционированном изменении final полей. Для этого появилась ещё одна опция <code class="text-nowrap">--illegal-final-field-mutation</code>, которая может принимать одно из четырёх значений:</p>
-<ul>
-  <li><code class="text-nowrap">--illegal-final-field-mutation=allow</code> разрешает изменений final полей без всяких предупреждений. Это означает откат к старому поведению (как в Java 25 и более старых релизах).</li>
-  <li><code class="text-nowrap">--illegal-final-field-mutation=warn</code> разрешает изменений final полей, но выдаётся предупреждение при первом выполнении модуля такой нелегальной операции. Это значение по умолчанию в Java 26.</li>
-  <li><code class="text-nowrap">--illegal-final-field-mutation=debug</code> &ndash; это то же, что и <code class="text-nowrap">warn</code>, но только предупреждение выдаётся при каждой нелегальной операции.</li>
-  <li><code class="text-nowrap">--illegal-final-field-mutation=deny</code> запрещает изменений final полей. При выполнении нелегальной операции выбрасывается <code class="text-nowrap">IllegalAccessException</code>.</li>
-</ul>
-
-<p><code class="text-nowrap">--illegal-final-field-mutation</code> &ndash; это временная опция, которая необходима для более безболезненного перехода к ситуации, когда разрешать изменение final полей придётся только через перечисление модулей с помощью <code class="text-nowrap">--enable-final-field-mutation</code> (подобно тому, как с Java 9 по 16 существовала опция <a href="https://openjdk.org/jeps/261#Relaxed-strong-encapsulation"><code class="text-nowrap">--illegal-access</code></a>). В одном из будущих релизов значением по умолчанию станет <code class="text-nowrap">deny</code>, а <code class="text-nowrap">allow</code> перестанет поддерживаться. В конечном счёте опция исчезнет полностью.</p>
-
-<p>Возможность изменения final полей долгое время была костью в горле для разработчиков JVM. Если final поле в любой момент может измениться, то значит его значению нельзя доверять, а значит к нему сложно применить оптимизации, например, constant folding. Когда изменение final полей станет невозможным, это развяжет руки разработчикам JVM и они смогут применить к final полям те же оптимизации, что и к полям <a href="https://openjdk.org/jeps/395">записей</a> (в которых изначально был запрет на изменение полей).</p>
-
-<p>JEP 500 &ndash; это очередной шаг постепенного перехода Java к философии <a href="https://openjdk.org/jeps/8305968">integrity by default</a> (целостность по умолчанию). JVM по умолчанию не должна делать ничего кроме безопасных вещей. Если требуется что-то опасное, то это должно быть возможно только при явном разрешении от пользователя. Изменение final полей &ndash; это небезопасная операция, поэтому она должна быть по умолчанию запрещена.</p>
-
-
-<h5><a href="https://openjdk.org/jeps/530">Primitive Types in Patterns, instanceof, and switch (Fourth Preview) (JEP 530)</a></h5>
-<p>Примитивные типы в паттернах, <code class="text-nowrap">instanceof</code> и <code class="text-nowrap">switch</code>, которые были в режиме preview в <a href="https://openjdk.org/jeps/455">Java 23</a>, <a href="https://openjdk.org/jeps/488">Java 24</a> и <a href="https://openjdk.org/jeps/507">Java 25</a>, остаются на четвёртое preview.</p>
-<p>В Java 26 есть два изменения.</p>
-<p>Во-первых, введено понятие <i>безусловно точного приведения, основанного на значениях</i> (value-based unconditionally exact conversion). Оно противопоставляется <i>безусловно точному приведению, основанного на типах</i> (type-based unconditionally exact conversion). Например, приведение int'ового константного значения <code class="text-nowrap">42</code> в <code class="text-nowrap">short</code> &ndash; это безусловно точное приведение, основанное на значениях, потому что <code class="text-nowrap">42</code> приводится к <code class="text-nowrap">short</code> во время компиляции без потерь.</p>
-<p>Во-вторых, в ветках <code class="text-nowrap">switch</code> усиливаются проверки доминирования, и ранее корректные для компилятора Java 25 ветки <code class="text-nowrap">switch</code> могут перестать компилироваться в Java 26. Это включает в себя новые проверки, основанные на вышеупомянутой безусловной точности, основанной на значениях:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
-<span style="color: blue">byte</span> x = ...;
-<span style="color: blue">switch</span> (x) {
-    <span style="color: blue">case short</span> s -> {}
-    <span style="color: blue">case</span> 42      -> {} <span style="color: red">// error: dominated since 42 can be
-                       // converted unconditionally exactly to short</span>
-}
-</pre>
-<p>В Java 25 этот код компилировался:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 25</span>
-<span style="color: blue">byte</span> x = ...;
-<span style="color: blue">switch</span> (x) {
-    <span style="color: blue">case short</span> s -> {}
-    <span style="color: blue">case</span> 42      -> {} <span style="color: green">// ok, no error</span>
-}
-</pre>
-<p>Также теперь безусловный паттерн всегда доминирует над любыми другими следующими паттернами:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
-<span style="color: blue">int</span> x = ...;
-<span style="color: blue">switch</span> (x) {
-    <span style="color: blue">case int</span> _ -> {} <span style="color: green">// unconditional pattern</span>
-    <span style="color: blue">case float</span> _ -> {} <span style="color: red">// error: dominated</span>
-}
-</pre>
-<p>В Java 25 этот код также компилировался:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 25</span>
-<span style="color: blue">int</span> x = ...;
-<span style="color: blue">switch</span> (x) {
-    <span style="color: blue">case int</span> _ -> {} <span style="color: green">// unconditional pattern</span>
-    <span style="color: blue">case float</span> _ -> {} <span style="color: green">// ok, no error</span>
-}
-</pre>
-
-<p>Напомним, что смысл всей фичи &ndash; это поддержка примитивных типов в паттернах и операторах <code class="text-nowrap">instanceof</code> / <code class="text-nowrap">switch</code>:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
+<p>Смысл новой фичи &ndash; это поддержка примитивных типов в паттернах и операторах <code class="text-nowrap">instanceof</code> / <code class="text-nowrap">switch</code>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
 
 Object obj = 42;
 <span style="color: blue">if</span> (obj <span style="color: blue">instanceof int</span> i) { <span style="color: green">// matches</span>
@@ -153,7 +90,7 @@ Object obj = 42;
     <span style="color: green">// ...</span>
 }</pre>
 
-<p>Если до Java 23-26 типы выражений-селекторов в <code class="text-nowrap">switch</code> могли быть только <code class="text-nowrap">int</code>, <code class="text-nowrap">short</code>, <code class="text-nowrap">byte</code> и <code class="text-nowrap">char</code> и для них поддерживались только константные ветки (<code class="text-nowrap">case 3</code> и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:</p>
+<p>Если до Java 23-27 типы выражений-селекторов в <code class="text-nowrap">switch</code> могли быть только <code class="text-nowrap">int</code>, <code class="text-nowrap">short</code>, <code class="text-nowrap">byte</code> и <code class="text-nowrap">char</code> и для них поддерживались только константные ветки (<code class="text-nowrap">case 3</code> и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:</p>
 <!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">float</span> f = 1.0f;
 <span style="color: blue">switch</span> (f) {
     <span style="color: blue">case</span> 0f -> System.out.println(<span style="color: darkred">"0"</span>);
@@ -167,16 +104,11 @@ Object obj = 42;
     <span style="color: blue">case false</span> -> System.out.println(<span style="color: darkred">"non-empty"</span>); <span style="color: green">// matches</span>
 }</pre>
 
-<h4>API</h4>
-<h5><a href="https://openjdk.org/jeps/526">Lazy Constants (Second Preview) (JEP 526)</a></h5>
-<p>API для ленивых констант, которые <a href="https://openjdk.org/jeps/502">в Java 25</a> назывались стабильными значениями, переходит во второе preview со следующими изменениями:</p>
+<h5><a href="https://openjdk.org/jeps/531">Lazy Constants (Third Preview) (JEP 531)</a></h5>
+<p>API для <i>ленивых констант</i>, которое было в preview в <a href="https://openjdk.org/jeps/502">Java 25</a> и <a href="https://openjdk.org/jeps/526">Java 26</a>, остаётся в preview в третий раз. В этом релизе были сделаны следующие изменения:</p>
 <ul>
-  <li>Интерфейс <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html"><code class="text-nowrap">java.lang.StableValue</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html"><code class="text-nowrap">java.lang.LazyConstant</code></a>.</li>
-  <li>Удалены методы <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#orElseSet(java.util.function.Supplier)"><code class="text-nowrap">orElseSet(Supplier)</code></a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#isSet()"><code class="text-nowrap">isSet()</code></a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#setOrThrow(T)"><code class="text-nowrap">setOrThrow(T)</code></a> и <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#trySet(T)"><code class="text-nowrap">trySet(T)</code></a>.</li>
-  <li>Удалены методы <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#of()"><code class="text-nowrap">of()</code></a> и <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#of(T)"><code class="text-nowrap">of(T)</code></a>, а метод <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#supplier(java.util.function.Supplier)"><code class="text-nowrap">supplier(Supplier)</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html#of(java.util.function.Supplier)"><code class="text-nowrap">of(Supplier)</code></a>.</li>
-  <li>Методы <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#list(int,java.util.function.IntFunction)"><code class="text-nowrap">list(int,IntFunction)</code></a> и <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#map(java.util.Set,java.util.function.Function)"><code class="text-nowrap">map(Set,Function)</code></a> перенесены в интерфейсы <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/List.html#ofLazy(int,java.util.function.IntFunction)"><code class="text-nowrap">java.util.List</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/Map.html#ofLazy(java.util.Set,java.util.function.Function)"><code class="text-nowrap">java.util.Map</code></a> соответственно.</li>
-  <li>Удалены методы <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#function(java.util.Set,java.util.function.Function)"><code class="text-nowrap">function(Set,IntFunction)</code></a> и <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/StableValue.html#intFunction(int,java.util.function.IntFunction)"><code class="text-nowrap">intFunction(int,IntFunction)</code></a>.</li>
-  <li><code class="text-nowrap">null</code> теперь не может быть вычисляемым значением.</li>
+  <li>Удалены методы <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html#isInitialized()"><code class="text-nowrap">LazyConstant::isInitialized</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html#orElse(T)"><code class="text-nowrap">LazyConstant::orElse</code></a>.</li>
+  <li>Добавлен статический метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/Set.html#ofLazy(java.util.Set,java.util.function.Predicate)"><code class="text-nowrap">Set::ofLazy</code></a>.</li>
 </ul>
 
 <p>Напомним смысл новой фичи. Для начала вспомним, как в Java можно реализовать отложенную инициализацию классическими средствами:</p>
@@ -203,10 +135,10 @@ Object obj = 42;
   <li>Компилятор не может применить оптимизацию constant folding, так как поле <code class="text-nowrap">logger</code> не является final.</li>
 </ul>
 
-<p>Частично проблем выше можно избежать, прибегнув к другим более сложным идиомам, например, double-checked locking или class holder. Однако с double-checked locking код становится невероятно громоздким и хрупким (например, можно забыть вставить ключевое слово <code class="text-nowrap">volatile</code>), а так же отсутствует constant folding. С class holder код становится более-менее простым и надёжным (и есть constant folding), но у этой идиомы есть серьёзные ограничения: она применима только к статическим полям и для каждого поля приходится объявлять свой собственный класс. Также можно использовать <code class="text-nowrap">ConcurrentHashMap</code>, однако и у неё есть недостатки: отсутствует constant folding и есть проблемы, если функция возвращает <code class="text-nowrap">null</code>.</p>
+<p>Частично проблем выше можно избежать, прибегнув к другим более сложным идиомам, например, double-checked locking или class holder. Однако с double-checked locking код становится невероятно громоздким и хрупким (например, можно забыть вставить ключевое слово <code class="text-nowrap">volatile</code>), а также отсутствует constant folding. С class holder код становится более-менее простым и надёжным (и есть constant folding), но у этой идиомы есть серьёзные ограничения: она применима только к статическим полям и для каждого поля приходится объявлять свой собственный класс. Также можно использовать <code class="text-nowrap">ConcurrentHashMap</code>, однако и у неё есть недостатки: отсутствует constant folding и есть проблемы, если функция возвращает <code class="text-nowrap">null</code>.</p>
 
-<p>Теперь посмотрим, как код будет выглядеть с новым интерфейсом <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html"><code class="text-nowrap">LazyConstant</code></a>:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
+<p>Теперь посмотрим, как код будет выглядеть с новым интерфейсом <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/LazyConstant.html"><code class="text-nowrap">LazyConstant</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
 <span style="color: blue">class</span> OrderController {
     <span style="color: blue">private final</span> LazyConstant&lt;Logger> logger
             = LazyConstant.of(() -> Logger.create(OrderController.<span style="color: blue">class</span>));
@@ -223,7 +155,7 @@ Object obj = 42;
 <p>Под капотом <code class="text-nowrap">LazyConstant</code> реализован таким образом, что использует внутреннюю для JDK аннотацию <code class="text-nowrap">@Stable</code> для хранения содержимого в поле, не являющегося final. Эта аннотация даёт сигнал виртуальной машине, что поле не будет меняться более одного раза, а значит виртуальная машина после установки может считать его константным значением, что открывает возможность для constant folding. Таким образом, <code class="text-nowrap">LazyConstant</code> позволяет добиваться одновременно гибкости инициализации и хорошей производительности.</p>
 
 <p>API также позволяет создавать не только значения с единичным содержимым, но и ленивые списки и словари. Приведём пример ленивого списка:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
 <span style="color: blue">class</span> Application {
     <span style="color: blue">private static final</span> List&lt;OrderController> ORDERS
         = List.ofLazy(POOL_SIZE, _ -> <span style="color: blue">new</span> OrderController());
@@ -235,45 +167,30 @@ Object obj = 42;
 }</pre>
 <p>В примере выше список <code class="text-nowrap">ORDERS</code> &ndash; это список, который для каждого индекса вычисляет значение в момент обращения и не более одного раза. Таким образом, <code class="text-nowrap">LazyConstant</code> &ndash; это ещё и хороший вариант для написания кэшей.</p>
 
-<h5><a href="https://openjdk.org/jeps/504">Remove the Applet API (JEP 504)</a></h5>
-<p>API аплетов, которое стало deprecated <a href="https://openjdk.org/jeps/289">в Java 9</a> и стало deprecated for removal <a href="https://openjdk.org/jeps/398">в Java 17</a>, было окончательно удалено. Удалению подлежал весь пакет <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/applet/package-summary.html"><code class="text-nowrap">java.applet</code></a>, а также классы <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/beans/AppletInitializer.html"><code class="text-nowrap">java.beans.AppletInitializer</code></a> и <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/javax/swing/JApplet.html"><code class="text-nowrap">javax.swing.JApplet</code></a>.</p>
-<p>Окончательное удаление Applet API вряд ли на что-то негативно повлияет, так как современные браузеры уже давно не поддерживают аплеты, а инструмент appletviewer был удалён ещё <a href="https://bugs.openjdk.org/browse/JDK-8200549">в Java 11</a>.</p>
+<p class="mt-2">В Java 28 выйдет <a href="https://openjdk.org/jeps/8389764">четвёртое preview</a> ленивых констант.</p>
 
-<h5><a href="https://openjdk.org/jeps/517">HTTP/3 for the HTTP Client API (JEP 517)</a></h5>
-<p><a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.net.http/java/net/http/HttpClient.html">HTTP-клиент</a> теперь поддерживает <a href="https://en.wikipedia.org/wiki/HTTP/3">третью версию протокола HTTP</a>.</p>
-<p>HTTP/3 &ndash; это последняя версия протокола HTTP, которая использует протокол <a href="https://en.wikipedia.org/wiki/QUIC">QUIC</a> в качестве транспорта вместо TCP. У HTTP/3 потенциального более быстрые рукопожатия, чем в предыдущих версиях, меньше проблем с застоями и более надёжный транспорт, особенно в окружениях с большими потерями пакетов. HTTP/3 был стандартизован в 2022 году.</p>
-<p>Чтобы переключиться на HTTP/3 в HTTP-клиенте, нужно явно указать версию протокола:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">var</span> client = HttpClient.newBuilder()
-                       <b>.version(HttpClient.Version.HTTP_3)</b>
-                       .build();</pre>
-
-<p>Также можно указать версию конкретно для запроса:</p>
-<pre class="border p-lg-2 p-1"><span style="color: blue">var</span> request = HttpRequest.newBuilder(URI.create(<span style="color: darkred">"https://openjdk.org/"</span>))
-                         <b>.version(HttpClient.Version.HTTP_3)</b>
-                         .GET().build();</pre>
-
-<p>Метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.net.http/java/net/http/HttpClient.Builder.html#version(java.net.http.HttpClient.Version)"><code class="text-nowrap">version()</code></a> указывает на предпочитаемую версию протокола. Если сервер не поддерживает HTTP/3, то запросы не падают с ошибкой, а незаметно переключаются на HTTP/2 или HTTP/1.1.</p>
-
-<h5><a href="https://openjdk.org/jeps/525">Structured Concurrency (Sixth Preview) (JEP 525)</a></h5>
-<p>Structured Concurrency, которое было в режиме preview в <a href="https://openjdk.org/jeps/453">Java 21</a>, <a href="https://openjdk.org/jeps/462">Java 22</a>, <a href="https://openjdk.org/jeps/480">Java 23</a>, <a href="https://openjdk.org/jeps/499">Java 24</a> и <a href="https://openjdk.org/jeps/505">Java 25</a>, остаётся в режиме preview в шестой раз.</p>
-<p>В этом релизе есть небольшие изменения API:</p>
+<h5><a href="https://openjdk.org/jeps/533">Structured Concurrency (Seventh Preview) (JEP 533)</a></h5>
+<p>Structured Concurrency, которое было в режиме preview в <a href="https://openjdk.org/jeps/453">Java 21</a>, <a href="https://openjdk.org/jeps/462">Java 22</a>, <a href="https://openjdk.org/jeps/480">Java 23</a>, <a href="https://openjdk.org/jeps/499">Java 24</a>, <a href="https://openjdk.org/jeps/505">Java 25</a> и <a href="https://openjdk.org/jeps/525">Java 26</a>, остаётся в режиме preview в седьмой раз.</p>
+<p>В этом релизе есть изменения API:</p>
 <ul>
-  <li>Появился новый метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#onTimeout()"><code class="text-nowrap">Joiner::onTimeout()</code></a>.</li>
-  <li>Метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#allSuccessfulOrThrow()"><code class="text-nowrap">Joiner::allSuccessfulOrThrow()</code></a> теперь возвращает <code class="text-nowrap">Joiner</code>, результатом которого является список значений, а не <code class="text-nowrap">Stream</code> подзадач.</li>
-  <li>Метод <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#anySuccessfulResultOrThrow()"><code class="text-nowrap">Joiner::anySuccessfulResultOrThrow()</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#anySuccessfulOrThrow()"><code class="text-nowrap">anySuccessfulOrThrow()</code></a>.</li>
-  <li>Вместо метода <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#open(java.util.concurrent.StructuredTaskScope.Joiner,java.util.function.Function)"><code class="text-nowrap">StructuredTaskScope::open(StructuredTaskScope.Joiner, Function)</code></a> теперь <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#open(java.util.concurrent.StructuredTaskScope.Joiner,java.util.function.UnaryOperator)"><code class="text-nowrap">StructuredTaskScope::open(StructuredTaskScope.Joiner, UnaryOperator)</code></a>.</li>
+  <li>У интерфейсов <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html"><code class="text-nowrap">Joiner</code></a> появился ещё один параметр <code class="text-nowrap">R_X</code> для типа исключения, который метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"><code class="text-nowrap">join()</code></a> может выбросить.</li>
+  <li>Появилась новая перегрузка статического метода <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#open(java.util.function.UnaryOperator)"><code class="text-nowrap">StructuredTaskScope::open</code></a> с одним параметром <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/function/UnaryOperator.html"><code class="text-nowrap">UnaryOperator</code></a> (до этого была только версия метода с двумя параметрами: <code class="text-nowrap">Joiner</code> и <code class="text-nowrap">UnaryOperator</code>).</li>
+  <li>Методы <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#allSuccessfulOrThrow()"><code class="text-nowrap">Joiner::allSuccessfulOrThrow</code></a>, <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#anySuccessfulOrThrow()"><code class="text-nowrap">Joiner::anySuccessfulOrThrow</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAllSuccessfulOrThrow()"><code class="text-nowrap">Joiner::awaitAllSuccessfulOrThrow</code></a> теперь создают <code class="text-nowrap">Joiner</code>'ы, которые выбрасывают <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/ExecutionException.html"><code class="text-nowrap">ExecutionException</code></a> в случае исключения. Также к ним добавились перегрузки, принимающие
+    <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/function/Function.html"><code class="text-nowrap">Function</code></a>, которые позволяют указать другой тип исключения.</li>
+  <li>Статический метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAll()"><code class="text-nowrap">Joiner::awaitAll</code></a> был удалён.</li>
+  <li><code class="text-nowrap">void</code> метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#onTimeout()"><code class="text-nowrap">Joiner::onTimeout</code></a> был заменён на метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#timeout()"><code class="text-nowrap">Joiner:timeout</code></a>, который позволяет указать результат в случае таймаута.</li>
 </ul>
 
 <p>Напомним, что Structured Concurrency &ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.</p>
 
-<p>В центре нового API класс <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a>, у которого есть два главных метода:</p>
+<p>В центре нового API класс <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a>, у которого есть два главных метода:</p>
 <ul>
-  <li><a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#fork(java.util.concurrent.Callable)"><code class="text-nowrap">fork()</code></a> &ndash; создаёт подзадачу и запускает её в новом виртуальном потоке,</li>
-  <li><a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"><code class="text-nowrap">join()</code></a> &ndash; ждёт, пока не завершатся все подзадачи или пока scope не будет <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()">закрыт</a>.</li>
+  <li><a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#fork(java.util.concurrent.Callable)"><code class="text-nowrap">fork()</code></a> &ndash; создаёт подзадачу и запускает её в новом виртуальном потоке,</li>
+  <li><a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"><code class="text-nowrap">join()</code></a> &ndash; ждёт, пока не завершатся все подзадачи или пока scope не будет <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()">закрыт</a>.</li>
 </ul>
 
 <p>Пример использования <code class="text-nowrap">StructuredTaskScope</code>, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
 <span style="color: blue">try</span> (<span style="color: blue">var</span> scope = StructuredTaskScope.open()) {
     Subtask&lt;String> user = scope.fork(() -> findUser());
     Subtask&lt;Integer> order = scope.fork(() -> fetchOrder());
@@ -284,26 +201,65 @@ Object obj = 42;
     <span style="color: blue">return new</span> Response(user.get(), order.get());
 }</pre>
 
-<p>Может показаться, что в точности аналогичный код можно было бы написать с использованием классического <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/ExecutorService.html"><code class="text-nowrap">ExecutorService</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)"><code class="text-nowrap">submit()</code></a>, но у <code class="text-nowrap">StructuredTaskScope</code> есть несколько принципиальных отличий, которые делают код безопаснее:</p>
+<p>Может показаться, что в точности аналогичный код можно было бы написать с использованием классического <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/ExecutorService.html"><code class="text-nowrap">ExecutorService</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)"><code class="text-nowrap">submit()</code></a>, но у <code class="text-nowrap">StructuredTaskScope</code> есть несколько принципиальных отличий, которые делают код безопаснее:</p>
 <ul>
-  <li>Время жизни всех потоков подзадач ограничено областью видимости блока <code class="text-nowrap">try-with-resources</code>. Метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"><code class="text-nowrap">close()</code></a> гарантированно не завершится, пока не завершатся все подзадачи.</li>
-  <li>Если одна из операций <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае использования дефолтного <code class="text-nowrap">Joiner</code>'а <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAllSuccessfulOrThrow()"><code class="text-nowrap">awaitAllSuccessfulOrThrow()</code></a>, но возможны другие с другим поведением).</li>
+  <li>Время жизни всех потоков подзадач ограничено областью видимости блока <code class="text-nowrap">try-with-resources</code>. Метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"><code class="text-nowrap">close()</code></a> гарантированно не завершится, пока не завершатся все подзадачи.</li>
+  <li>Если одна из операций <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае использования дефолтного <code class="text-nowrap">Joiner</code>'а <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAllSuccessfulOrThrow()"><code class="text-nowrap">awaitAllSuccessfulOrThrow()</code></a>, но возможны другие с другим поведением).</li>
   <li>Если главный поток прерывается в процессе ожидания <code class="text-nowrap">join()</code>, то обе операции <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> отменяются при выходе из блока.</li>
   <li>В дампе потоков будет видна иерархия: потоки, выполняющие <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code>, будут отображаться как дочерние для главного потока.</li>
 </ul>
 <p class="mt-2">Structured Concurrency должно облегчить написание безопасных многопоточных программ благодаря знакомому структурному подходу.</p>
 
-<h5><a href="https://openjdk.org/jeps/524">PEM Encodings of Cryptographic Objects (Second Preview) (JEP 524)</a></h5>
-<p>API для кодирования криптографических объектов в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%87%D1%82%D0%B0_%D1%81_%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%D1%8E">формат PEM</a> и декодирования обратно, которое появилось <a href="https://openjdk.org/jeps/470">в Java 25</a>, остаётся на второе preview.</p>
-<p>Есть несколько изменений в API:</p>
+<p>В Java 28 Structured Concurrency <a href="https://openjdk.org/jeps/543">станет</a> постоянным API.</p>
+
+<h5><a href="https://openjdk.org/jeps/534">Compact Object Headers by Default (JEP 534)</a></h5>
+<p>Компактные заголовки объектов, которые <a href="https://openjdk.org/jeps/519">появились в Java 25</a> (в Java 24 &ndash; <a href="https://openjdk.org/jeps/450">в экспериментальном режиме</a>), теперь включены по умолчанию. Таким образом, опция <code class="text-nowrap">-XX:+UseCompactObjectHeaders</code> больше не нужна. Также компактные заголовки можно выключить, если запустить Java с противоположным ключом:</p>
+<pre class="border p-lg-2 p-1">$ java -XX:-UseCompactObjectHeaders ...</pre>
+
+<p>Компактные заголовки являются результатом работы в проекте <a href="https://openjdk.org/projects/lilliput/">Lilliput</a>. Теперь размер заголовков объектов в JVM уменьшился с 96/128 бит до 64 бит на 64-битных платформах. Компактные заголовки не только уменьшают размер кучи, но и могут улучшить производительность благодаря более высокой скорости выделения новых объектов, более низкой нагрузки на GC и лучшей локальности данных.</p>
+
+<p>Сжатие заголовков достигается за счёт объединения mark-слова (64 бит) и class-слова (64 или 32 бит, если включены сжатые указатели на классы) в одно 64-битное слово. В новой схеме указатели на классы всегда являются сжатыми, и количество бит для них уменьшается с 32 до 22. Identity хеш-код остаётся неизменным: 31 бит. Количество тег-битов становится на один больше (для GC self forwarding). Битов для возраста GC остаётся 4, как и было. Также 4 бита резервируются для <a href="https://openjdk.org/projects/valhalla/">Valhalla</a>.</p>
+
+<p>Работа в проекте Lilliput не закончена. В дальнейшем возможно ещё большое сжатие заголовков до 32 бит, что сократит потребление памяти ещё больше.</p>
+
+<h5><a href="https://openjdk.org/jeps/523">Make G1 the Default Garbage Collector in All Environments (JEP 523)</a></h5>
+<p>Сборщик мусора G1 стал включен по умолчанию во всех окружениях.</p>
+<p>Ранее в окружениях с одним процессором или небольшим количеством оперативной памяти (< 1792 MB) автоматически включался Serial GC. Так было потому, что в таких условиях Serial GC имел преимущества в пропускной способности и количеству потребляемой памяти. Однако за последние годы G1 достиг хорошего уровня производительности, поэтому такое переключение уже практически не имеет смысла.</p>
+<p>Если в вашем конкретном случае сборщик мусора Serial GC всё ещё имеет лучшую производительность, то его можно включить с помощью ключа <code class="text-nowrap">-XX:+UseSerialGC</code>.</p>
+
+<h5><a href="https://openjdk.org/jeps/536">JFR In-Process Data Redaction (JEP 536)</a></h5>
+<p>В JDK Flight Recorder появилась возможность редактирования чувствительных данных, чтобы они не попадали в итоговые файлы записи в открытом виде. К таким данным относятся пароли, токены, секретные ключи и прочие подобные конфиденциальные данные.</p>
+<p>Редактировать можно три вида атрибутов: аргументы командной строки, переменные окружения и системные свойства. Для возможности указания конкретных атрибутов для редактирования, появились две новые подопции у опции <code class="text-nowrap">-XX:FlightRecorderOptions</code>: <code class="text-nowrap">redact-argument</code> (для аргументов командной строки) и <code class="text-nowrap">redact-key</code> (для переменных окружения и системных свойств).</p>
+<p>Например, вот так может выглядеть запуск JFR, если нужно отредактировать переменные и свойства с именем <code class="text-nowrap">confidential</code> или <code class="text-nowrap">CONFIDENTIAL</code>, а также URL, содержащие имя пользователя и пароль:</p>
+<pre class="border p-lg-2 p-1">$ export CONFIDENTIAL=SOME_SECRET
+$ java -XX:FlightRecorderOptions:'redact-key=confidential,redact-argument=https://*:*@*' \
+       -XX:StartFlightRecording:filename=dump.jfr \
+       -Dconfidential=ANOTHER_SECRET \
+       -jar application.jar https://john:YET_ANOTHER_SECRET@example.com/login --verbose</pre>
+<p>После запуска в файле JFR чувствительные данные будут заменяться на <code class="text-nowrap">[REDACTED]</code>, например, событие <code class="text-nowrap">jdk.JVMInformation</code> будет выглядеть так:</p>
+<pre class="border p-lg-2 p-1">jdk.JVMInformation {
+  startTime = 17:39:02.196 (2026-02-15)
+  jvmVersion = "Java HotSpot(TM) 64-Bit Server VM"
+  jvmArguments = "-Dconfidential=[REDACTED]
+   -XX:FlightRecorderOptions:redact-key=confidential,redact-argument=[REDACTED]
+   -XX:StartFlightRecording:filename=dump.jfr"
+  jvmFlags = "N/A"
+  javaArguments = "-jar application.jar [REDACTED] --verbose"
+  jvmStartTime = 17:39:02.050 (2026-02-15)
+  pid = 43671
+}</pre>
+
+<p>Если явно не указать <code class="text-nowrap">redact-argument</code> или <code class="text-nowrap">redact-argument</code>, то используются фильтры по умолчанию. В их список входят распространённые паттерны вроде <code class="text-nowrap">*passwd*</code>, <code class="text-nowrap">*password*</code>, <code class="text-nowrap">*credential*</code>, <code class="text-nowrap">*secret*</code>, <code class="text-nowrap">*token*</code> и другие.</p>
+
+<h5><a href="https://openjdk.org/jeps/538">PEM Encodings of Cryptographic Objects (Third Preview) (JEP 538)</a></h5>
+<p>API для кодирования криптографических объектов в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%87%D1%82%D0%B0_%D1%81_%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%D1%8E">формат PEM</a> и декодирования обратно, которое было в preview в <a href="https://openjdk.org/jeps/470">Java 25</a> и <a href="https://openjdk.org/jeps/524">Java 26</a>, остаётся на третье preview.</p>
+<p>В этом релизе есть несколько изменений API</p>
 <ul>
-  <li>Класс <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/security/PEMRecord.html"><code class="text-nowrap">PEMRecord</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html"><code class="text-nowrap">PEM</code></a>, и теперь в нём содержится метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html#decode()"><code class="text-nowrap">decode()</code></a>, который возвращает содержимое в формате Base64.</li>
-  <li>Методы <code class="text-nowrap">encryptKey()</code> в классе <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html"><code class="text-nowrap">EncryptedPrivateKeyInfo</code></a> переименованы в <code class="text-nowrap">encrypt()</code> и теперь принимают объекты <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/DEREncodable.html"><code class="text-nowrap">DEREncodable</code></a>, а не <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PrivateKey.html"><code class="text-nowrap">PrivateKey</code></a>. Это позволяет шифровать объекты <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/KeyPair.html
-"><code class="text-nowrap">KeyPair</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/spec/PKCS8EncodedKeySpec.html"><code class="text-nowrap">PKCS8EncodedKeySpec</code></a>.</li>
-  <li>Класс <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html"><code class="text-nowrap">EncryptedPrivateKeyInfo</code></a> теперь содержит методы <code class="text-nowrap">getKeyPair()</code>, которые расшифровывают текст в формате PKCS#8, содержащий <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PublicKey.html"><code class="text-nowrap">PublicKey</code></a>.</li>
-  <li>Исключения, которые выбрасываются методами <code class="text-nowrap">getKey()</code> в классе <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html"><code class="text-nowrap">EncryptedPrivateKeyInfo</code></a>, теперь согласуются с исключениями, которые выбрасываются методами <code class="text-nowrap">getKeySpec()</code> в том же классе.</li>
-  <li>Классы <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMEncoder.html"><code class="text-nowrap">PEMEncoder</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMDecoder.html"><code class="text-nowrap">PEMDecoder</code></a> теперь поддерживают шифрофание и расшифровку объектов <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/KeyPair.html
-"><code class="text-nowrap">KeyPair</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/spec/PKCS8EncodedKeySpec.html"><code class="text-nowrap">PKCS8EncodedKeySpec</code></a>.</li>
+  <li><a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEM.html"><code class="text-nowrap">PEM</code></a> теперь является обычным классом, а не <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html">записью</a>, и у него появились конструкторы, принимающие Base64 в виде массивов байт.</li>
+  <li>Интерфейс <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/DEREncodable.html"><code class="text-nowrap">DEREncodable</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/BinaryEncodable.html"><code class="text-nowrap">BinaryEncodable</code></a>.</li>
+  <li>Методы <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html#getKey(java.security.Key)"><code class="text-nowrap">EncryptedPrivateKeyInfo::getKey</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html#getKeyPair(java.security.Key)"><code class="text-nowrap">EncryptedPrivateKeyInfo::getKeyPair</code></a>, которые принимали <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/Provider.html"><code class="text-nowrap">Provider</code></a> вторым аргументом, теперь принимают только один аргумент <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/Key.html"><code class="text-nowrap">Key</code></a>.</li>
+  <li>Метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMDecoder.html#withFactory(java.security.Provider)"><code class="text-nowrap">PEMDecoder::withFactory</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEMDecoder.html#withFactoriesOf(java.security.Provider)"><code class="text-nowrap">PEMDecoder::withFactoriesOf</code></a>.</li>
+  <li>Появился новый тип исключения <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/javax/crypto/CryptoException.html"><code class="text-nowrap">CryptoException</code></a>.</li>
 </ul>
 
 <p>Напомним, что новое API для кодирования в формат PEM позволяет кодировать самые разные криптографические сущности: открытые ключи, закрытые ключи, сертификаты и т.д.</p>
@@ -313,51 +269,53 @@ Object obj = 42;
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
 cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
 -----END PUBLIC KEY-----</pre>
-<p>Такой ключ можно декодировать с помощью нового класса <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMDecoder.html"><code class="text-nowrap">java.security.PEMDecoder</code></a>:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
+<p>Такой ключ можно декодировать с помощью нового класса <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEMDecoder.html"><code class="text-nowrap">java.security.PEMDecoder</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
 PEMDecoder decoder = PEMDecoder.of();
 PublicKey key = (PublicKey) decoder.decode(data);
-System.out.println(key);</pre>
-<p>Кодирование происходит с помощью класса <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMEncoder.html"><code class="text-nowrap">java.security.PEMEncoder</code></a>:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 26</span>
+IO.println(key);</pre>
+<p>Кодирование происходит с помощью класса <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEMEncoder.html"><code class="text-nowrap">java.security.PEMEncoder</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
 PEMEncoder encoder = PEMEncoder.of();
 String data = encoder.encodeToString(key);
-System.out.println(data);</pre>
+IO.println(data);</pre>
 
-<p>Список всех криптографических объектов, которые можно кодировать/декодировать, лимитирован наследниками нового <code class="text-nowrap">sealed</code> интерфейса <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/DEREncodable.html"><code class="text-nowrap">java.security.DEREncodable</code></a>:</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">public sealed interface</span> DEREncodable <span style="color: blue">permits</span> AsymmetricKey, KeyPair,
+<p>Список всех криптографических объектов, которые можно кодировать/декодировать, лимитирован наследниками нового <code class="text-nowrap">sealed</code> интерфейса <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/BinaryEncodable.html"><code class="text-nowrap">java.security.BinaryEncodable</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">public sealed interface</span> BinaryEncodable <span style="color: blue">permits</span> AsymmetricKey, KeyPair,
     PKCS8EncodedKeySpec, X509EncodedKeySpec, EncryptedPrivateKeyInfo,
-    X509Certificate, X509CRL, PEM {
+    X509Certificate, X509CRL, PEM, InternalBinaryEncodable {
 }</pre>
 
-<p>Среди наследников выделяется особенный класс <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html"><code class="text-nowrap">java.security.PEM</code></a>. Этот класс может содержать в себе любые PEM-данные. Он может пригодиться, когда для криптографического объекта в Java нет соответствующего API (например, <a href="https://www.rfc-editor.org/rfc/rfc7468#section-7">запрос сертификата PKCS #10</a>):</p>
-<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">public record</span> PEM(String type, String content, <span style="color: blue">byte</span>[] leadingData) <span style="color: blue">implements</span> DEREncodable {
+<p>Среди наследников выделяется особенный класс <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEM.html"><code class="text-nowrap">java.security.PEM</code></a>. Этот класс может содержать в себе любые PEM-данные. Он может пригодиться, когда для криптографического объекта в Java нет соответствующего API (например, <a href="https://www.rfc-editor.org/rfc/rfc7468#section-7">запрос сертификата PKCS #10</a>):</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">public final class</span> PEM <span style="color: blue">implements</span> BinaryEncodable {
+    String type();           <span style="color: green">// Cryptographic object type, from the header text</span>
+                             <span style="color: green">// (e.g., "PRIVATE KEY")</span>
+    <span style="color: blue">byte</span>[] content();        <span style="color: green">// Base64-encoded PEM content</span>
+    <span style="color: blue">byte</span>[] leadingData();    <span style="color: green">// Any content preceding the PEM header</span>
+    <span style="color: blue">byte</span>[] decode();         <span style="color: green">// Decode Base64 content</span>
     ...
 }</pre>
 <!--java--><pre class="border p-lg-2 p-1">PEM pr = PEMDecoder.of().decode(pem, PEM.<span style="color: blue">class</span>);</pre>
 
-<h5><a href="https://openjdk.org/jeps/529">Vector API (Eleventh Incubator) (JEP 529)</a></h5>
-<p>Векторное API в модуле <a href="https://docs.oracle.com/en/java/javase/26/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>, которое появилось ещё аж <a href="https://openjdk.org/jeps/338">в Java 16</a>, остаётся в инкубационном статусе в одиннадцатый раз.</p>
+<p class="mt-2">В Java 28 PEM Encodings <a href="https://openjdk.org/jeps/542">станут</a> постоянным API.</p>
 
-<p>Векторное API остаётся так долго в инкубаторе, потому что зависит от некоторых фич проекта <a href="https://openjdk.org/projects/valhalla/">Valhalla</a> (главным образом, от <a href="https://openjdk.org/jeps/401">value-классов</a>), который пока что находится в разработке. Как только эти фичи станут доступны в виде preview, векторное API перейдёт из инкубатора в статус preview.</p>
-
-<h4>JVM</h4>
-<h5><a href="https://openjdk.org/jeps/516">Ahead-of-Time Object Caching with Any GC (JEP 516)</a></h5>
-<p>Ahead-of-time кэш, который появился <a href="https://openjdk.org/jeps/483">в Java 24</a>, теперь поддерживает все сборщики мусора, включая ZGC.</p>
-<p>Ранее ZGC не поддерживался из-за того, что в нём использовался GC-specific формат, совместимый только со сборщиками мусора Serial, Parallel и G1. Сейчас же реализован новый GC-agnostic формат, который не зависит от сборщика мусора.</p>
-<p>GC-agnostic формат имеет важное отличие: он является потоковым, то есть JVM не отображает его целиком в память (как в случае с GC-specific), а подгружает объекты последовательно в фоновом потоке.</p>
-<p>Новый формат является опциональным и включается во время тренировочного запуска в следующих случаях:</p>
+<h5><a href="https://openjdk.org/jeps/527">Post-Quantum Hybrid Key Exchange for TLS 1.3 (JEP 527)</a></h5>
+<p>В реализации TLS 1.3 в JDK появилась поддержка пост-квантовых <a href="https://www.rfc-editor.org/info/rfc9954/">гибридных схем обмена ключей</a>. Эти схемы комбинируют <a href="https://openjdk.org/jeps/496">ML-KEM</a> с традиционным ECDHE (Ephemeral Elliptic-Curve Diffie-Hellman).</p>
+<p>Всего появилось 3 гибридных схемы:</p>
 <ul>
-  <li>Если использовать GC-agnostic формат указано явно через опцию <code class="text-nowrap">-XX:+AOTStreamableObjects</code>.</li>
-  <li>При использовании сборщика мусора ZGC (<code class="text-nowrap">-XX:+UseZGC</code>).</li>
-  <li>Если отключены сжатые указатели (<code class="text-nowrap">-XX:-CompressedOops</code>).</li>
-  <li>Если размер кучи больше чем 32 GB.</li>
+  <li>X25519MLKEM768 (комбинация ECDHE c X25519 и ML-KEM-768)</li>
+  <li>SecP256r1MLKEM768 (комбинация ECDHE c кривой secp256r1 и ML-KEM-768)</li>
+  <li>SecP384r1MLKEM1024 (комбинация ECDHE c кривой secp384r1 и ML-KEM-1024)</li>
 </ul>
-<p>В остальным случаях используется старый отображаемый в память формат.</p>
 
-<h5><a href="https://openjdk.org/jeps/522">G1 GC: Improve Throughput by Reducing Synchronization (JEP 522)</a></h5>
-<p>В сборщике мусора G1 было уменьшено количество синхронизации между потоками приложения и потоками сборщика мусора. Благодаря этому производительность приложений, в которых интенсивно модифицируются ссылки в объектах, выросла на 5-15%. Кроме того, были упрощены барьеры записи (write barriers): фрагменты кода, которые внедряет GC и JIT в инструкции присвоения ссылок в объектах. Это упрощение привело к тому, что барьеры стали быстрее и стали меньше по размеру, в результате чего производительность выросла до 5% и в приложениях, в которых ссылки в объектах модифицируются не так интенсивно.</p>
-<p>Достичь уменьшения синхронизации (и упрощения барьеров) удалось с помощью введения второй таблицы карт (card table), которую модифицирует только поток-оптимизатор G1, но не трогают потоки приложения, т.к. они обновляют в это время первую таблицу. Как только G1 понимает, что сканирование первой таблицы карт превышает по времени целевое значение пауз, он атомарно переключает таблицы. После этого приложение начинает обновлять вторую таблицу, а поток-оптимизатор начинает оптимизировать первую (заполненную) таблицу.</p>
+<p>Для включения новых схем от разработчика ничего не требуется: во время рукопожатия X25519MLKEM768 будет иметь наивысший приоритет и будет использоваться TLS-клиентом, если сервер его поддерживает.</p>
+
+<p>Появление новых пост-квантовых гибридных схем является очередным шагом в поддержке в JDK алгоритмов, устойчивых к потенциальным будущим атакам с помощью квантовых компьютеров. Ранее в Java 24 появилась поддержка <a href="https://openjdk.org/jeps/496">ML-KEM</a> и <a href="https://openjdk.org/jeps/497">ML-DSA</a>.</p>
+
+<h5><a href="https://openjdk.org/jeps/537">Vector API (Twelfth  Incubator) (JEP 537)</a></h5>
+<p>Векторное API в модуле <a href="https://docs.oracle.com/en/java/javase/27/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>, которое появилось ещё аж <a href="https://openjdk.org/jeps/338">в Java 16</a>, остаётся в инкубационном статусе в двенадцатый раз.</p>
+
+<p>Векторное API остаётся так долго в инкубаторе, потому что зависит от некоторых фич проекта <a href="https://openjdk.org/projects/valhalla/">Valhalla</a> (главным образом, от <a href="https://openjdk.org/jeps/401">value-классов</a>), который появится только в Java 28. Поэтому вероятно в Java 28 векторное API перейдёт из инкубатора в статус preview.</p>
   </article>
   <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
 </div>
@@ -365,6 +323,7 @@ System.out.println(data);</pre>
 <div class="mt-3">
   <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2026" role="button" aria-expanded="true" aria-controls="year2026">2026</a>
   <ul class="collapse show" id="year2026">
+<li class="text-secondary"><a href="java_27.html" class="text-secondary">Вышла Java 27</a></li>
 <li class="text-secondary"><a href="java_26.html" class="text-secondary">Вышла Java 26</a></li>
   </ul>
 </div>

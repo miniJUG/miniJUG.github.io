@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <title>Вышла Java 27</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Вышла Java 27">
+    <meta property="og:description" content="Вышла общедоступная версия Java 27. В этот релиз попало около 2500 закрытых задач и 9 JEP'ов. Release Notes можно посмотреть здесь. Полный список изменений API &ndash; здесь&hellip;">
+    <meta property="og:site_name" content="miniJUG">
+    <meta property="article:published_time" content="2026-09-15">
+    <meta property="article:author" content="miniJUG">
+    <meta property="article:author_url" content="https://twitter.com/mini_JUG">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@mini_JUG">
+    <meta name="twitter:title" content="Вышла Java 27">
+    <meta name="twitter:description" content="Вышла общедоступная версия Java 27. В этот релиз попало около 2500 закрытых задач и 9 JEP'ов. Release Notes можно посмотреть здесь. Полный список изменений API &ndash; здесь&hellip;">
+    <meta name="telegram:channel" content="@miniJUG">
+    <meta property="og:image" content="https://minijug.org/java_27.png">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="720">
+    <meta name="twitter:image" content="https://minijug.org/java_27.png">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="/favicon32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="/favicon192.png" type="image/png" sizes="192x192">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+      a { text-decoration: none }
+      a:hover { text-decoration: underline }
+      code { color:var(--bs-body-color) }
+    </style>
+  </head>
+  <body class="bg-light">
+<div class="container">
+  <div class="row gx-5">
+    <div class="p-lg-4 p-3 bg-white rounded col-lg-8" style="font-size: 1.15rem">
+    <h3 id="title">Вышла Java 27</h3>
+<p class="text-secondary"><time datetime="2026-09-15">15 сентября, 2026</time></p>
+<article>
+<p>Вышла общедоступная версия <a href="https://openjdk.org/projects/jdk/27/">Java 27</a>. В этот релиз попало около <a href="https://builds.shipilev.net/backports-monitor/release-notes-27.html">2500 закрытых задач и 9 JEP'ов</a>. Release Notes можно посмотреть <a href="https://www.oracle.com/java/technologies/javase/27-relnote-issues.html">здесь</a>. Полный список изменений API &ndash; <a href="https://javaalmanac.io/jdk/27/apidiff/26/">здесь</a>.</p>
+
+<p>Java 27 не является LTS-релизом, и у него будут выходить обновления <a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html">только полгода</a> (до марта 2027 года).</p>
+
+<p>Скачать JDK 27 можно по этим ссылкам:</p>
+<ul>
+  <li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle JDK</a> (лицензия <a href="https://www.oracle.com/downloads/licenses/no-fee-license.html">NFTC</a>)</li>
+  <li><a href="http://jdk.java.net/27/">OpenJDK</a> (лицензия <a href="https://openjdk.org/legal/gplv2+ce.html">GPLv2 with Classpath Exception</a>)</li>
+</ul>
+
+<p class="mt-2">Рассмотрим все JEP'ы, которые попали в Java 27.</p>
+
+<h5><a href="https://openjdk.org/jeps/532">Primitive Types in Patterns, instanceof, and switch (Fifth Preview) (JEP 532)</a></h5>
+<p>Примитивные типы в паттернах, <code class="text-nowrap">instanceof</code> и <code class="text-nowrap">switch</code>, которые были в preview в <a href="https://openjdk.org/jeps/455">Java 23</a>, <a href="https://openjdk.org/jeps/488">Java 24</a>, <a href="https://openjdk.org/jeps/507">Java 25</a> и <a href="https://openjdk.org/jeps/530">Java 26</a>, остаются на пятое preview без изменений.</p>
+
+<p>Смысл новой фичи &ndash; это поддержка примитивных типов в паттернах и операторах <code class="text-nowrap">instanceof</code> / <code class="text-nowrap">switch</code>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
+
+Object obj = 42;
+<span style="color: blue">if</span> (obj <span style="color: blue">instanceof int</span> i) { <span style="color: green">// matches</span>
+    System.out.println(<span style="color: darkred">"int: "</span> + i);
+}
+
+<span style="color: blue">switch</span> (obj) {
+    <span style="color: blue">case int</span> i -> System.out.println(<span style="color: darkred">"int: "</span> + i); <span style="color: green">// matches</span>
+    <span style="color: blue">case double</span> d -> System.out.println(<span style="color: darkred">"double: "</span> + d);
+    <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"other"</span>);
+}</pre>
+
+<p>Проверять можно также и то, попадают ли значения в диапазон типа:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">int</span> i = 42;
+<span style="color: blue">if</span> (i <span style="color: blue">instanceof byte</span> b) { <span style="color: green">// matches</span>
+    System.out.println(<span style="color: darkred">"byte: "</span> + b);
+}</pre>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">double</span> d = 3.0;
+<span style="color: blue">switch</span> (d) {
+    <span style="color: blue">case int</span> i -> System.out.println(<span style="color: darkred">"int: "</span> + i); <span style="color: green">// matches</span>
+    <span style="color: blue">case float</span> f -> System.out.println(<span style="color: darkred">"float: "</span> + f);
+    <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"other"</span>);
+}</pre>
+
+<p>В примерах выше <code class="text-nowrap">42</code> попадает в диапазон byte (<code class="text-nowrap">[-128; 127]</code>), а <code class="text-nowrap">3.0</code> без потери точности приводится к <code class="text-nowrap">int</code>. Таким образом, это позволит более безопасно приводить одни числовые типы к другим, не прибегая к ручным проверкам диапазонов.</p>
+
+<p>Подобные проверки могут быть полезны и в паттернах записей:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">record</span> JsonNumber(<span style="color: blue">double</span> d) {}
+
+<span style="color: blue">var</span> json = <span style="color: blue">new</span> JsonNumber(3.0);
+<span style="color: blue">if</span> (json <span style="color: blue">instanceof</span> JsonNumber(<span style="color: blue">int</span> i)) { <span style="color: green">// matches</span>
+    <span style="color: green">// ...</span>
+}</pre>
+
+<p>Если до Java 23-27 типы выражений-селекторов в <code class="text-nowrap">switch</code> могли быть только <code class="text-nowrap">int</code>, <code class="text-nowrap">short</code>, <code class="text-nowrap">byte</code> и <code class="text-nowrap">char</code> и для них поддерживались только константные ветки (<code class="text-nowrap">case 3</code> и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">float</span> f = 1.0f;
+<span style="color: blue">switch</span> (f) {
+    <span style="color: blue">case</span> 0f -> System.out.println(<span style="color: darkred">"0"</span>);
+    <span style="color: blue">case float</span> x <span style="color: blue">when</span> x == 1f -> System.out.println(<span style="color: darkred">"1"</span>); <span style="color: green">// matches</span>
+    <span style="color: blue">case float</span> x -> System.out.println(<span style="color: darkred">"other"</span>);
+}
+
+<span style="color: blue">boolean</span> b = <span style="color: darkred">"hello"</span>.isEmpty();
+<span style="color: blue">switch</span> (b) {
+    <span style="color: blue">case true</span> -> System.out.println(<span style="color: darkred">"empty"</span>);
+    <span style="color: blue">case false</span> -> System.out.println(<span style="color: darkred">"non-empty"</span>); <span style="color: green">// matches</span>
+}</pre>
+
+<h5><a href="https://openjdk.org/jeps/531">Lazy Constants (Third Preview) (JEP 531)</a></h5>
+<p>API для <i>ленивых констант</i>, которое было в preview в <a href="https://openjdk.org/jeps/502">Java 25</a> и <a href="https://openjdk.org/jeps/526">Java 26</a>, остаётся в preview в третий раз. В этом релизе были сделаны следующие изменения:</p>
+<ul>
+  <li>Удалены методы <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html#isInitialized()"><code class="text-nowrap">LazyConstant::isInitialized</code></a> и <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/lang/LazyConstant.html#orElse(T)"><code class="text-nowrap">LazyConstant::orElse</code></a>.</li>
+  <li>Добавлен статический метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/Set.html#ofLazy(java.util.Set,java.util.function.Predicate)"><code class="text-nowrap">Set::ofLazy</code></a>.</li>
+</ul>
+
+<p>Напомним смысл новой фичи. Для начала вспомним, как в Java можно реализовать отложенную инициализацию классическими средствами:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">class</span> OrderController {
+    <span style="color: blue">private</span> Logger logger = <span style="color: blue">null</span>;
+
+    Logger getLogger() {
+        <span style="color: blue">if</span> (logger == <span style="color: blue">null</span>) {
+            logger = Logger.create(OrderController.<span style="color: blue">class</span>);
+        }
+        <span style="color: blue">return</span> logger;
+    }
+
+    <span style="color: blue">void</span> submitOrder(User user, List&lt;Product> products) {
+        getLogger().info(<span style="color: darkred">"order started"</span>);
+        ...
+        getLogger().info(<span style="color: darkred">"order submitted"</span>);
+    }
+}</pre>
+<p>В примере выше объект <code class="text-nowrap">logger</code> инициализируется в момент первого обращения. У такого подхода есть несколько проблем:</p>
+<ul>
+  <li>Любой доступ к полю <code class="text-nowrap">logger</code> должен происходить через метод <code class="text-nowrap">getLogger()</code>. Это можно забыть сделать.</li>
+  <li>Код не является потокобезопасным: объект <code class="text-nowrap">logger</code> может инициализироваться несколько раз.</li>
+  <li>Компилятор не может применить оптимизацию constant folding, так как поле <code class="text-nowrap">logger</code> не является final.</li>
+</ul>
+
+<p>Частично проблем выше можно избежать, прибегнув к другим более сложным идиомам, например, double-checked locking или class holder. Однако с double-checked locking код становится невероятно громоздким и хрупким (например, можно забыть вставить ключевое слово <code class="text-nowrap">volatile</code>), а также отсутствует constant folding. С class holder код становится более-менее простым и надёжным (и есть constant folding), но у этой идиомы есть серьёзные ограничения: она применима только к статическим полям и для каждого поля приходится объявлять свой собственный класс. Также можно использовать <code class="text-nowrap">ConcurrentHashMap</code>, однако и у неё есть недостатки: отсутствует constant folding и есть проблемы, если функция возвращает <code class="text-nowrap">null</code>.</p>
+
+<p>Теперь посмотрим, как код будет выглядеть с новым интерфейсом <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/LazyConstant.html"><code class="text-nowrap">LazyConstant</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
+<span style="color: blue">class</span> OrderController {
+    <span style="color: blue">private final</span> LazyConstant&lt;Logger> logger
+            = LazyConstant.of(() -> Logger.create(OrderController.<span style="color: blue">class</span>));
+
+    <span style="color: blue">void</span> submitOrder(User user, List&lt;Product> products) {
+        logger.get().info(<span style="color: darkred">"order started"</span>);
+        ...
+        logger.get().info(<span style="color: darkred">"order submitted"</span>);
+    }
+}</pre>
+
+<p>Теперь для получения логгера нужно использовать объект <code class="text-nowrap">LazyConstant</code>, который инкапсулирует в себе ленивую логику вычисления логгера. При первом вызове метода <code class="text-nowrap">get()</code> содержимое вычисляется путём вызова переданного <code class="text-nowrap">Supplier</code>'а. Если же содержимое уже вычислено, то оно просто возвращается. <code class="text-nowrap">LazyConstant</code> гарантирует, что <code class="text-nowrap">Supplier</code> вызовется не более одного раза, тем самым обеспечивая потокобезопасность.</p>
+
+<p>Под капотом <code class="text-nowrap">LazyConstant</code> реализован таким образом, что использует внутреннюю для JDK аннотацию <code class="text-nowrap">@Stable</code> для хранения содержимого в поле, не являющегося final. Эта аннотация даёт сигнал виртуальной машине, что поле не будет меняться более одного раза, а значит виртуальная машина после установки может считать его константным значением, что открывает возможность для constant folding. Таким образом, <code class="text-nowrap">LazyConstant</code> позволяет добиваться одновременно гибкости инициализации и хорошей производительности.</p>
+
+<p>API также позволяет создавать не только значения с единичным содержимым, но и ленивые списки и словари. Приведём пример ленивого списка:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
+<span style="color: blue">class</span> Application {
+    <span style="color: blue">private static final</span> List&lt;OrderController> ORDERS
+        = List.ofLazy(POOL_SIZE, _ -> <span style="color: blue">new</span> OrderController());
+
+    <span style="color: blue">public static</span> OrderController orders() {
+        <span style="color: blue">long</span> index = Thread.currentThread().threadId() % POOL_SIZE;
+        <span style="color: blue">return</span> ORDERS.get((<span style="color: blue">int</span>)index);
+    }
+}</pre>
+<p>В примере выше список <code class="text-nowrap">ORDERS</code> &ndash; это список, который для каждого индекса вычисляет значение в момент обращения и не более одного раза. Таким образом, <code class="text-nowrap">LazyConstant</code> &ndash; это ещё и хороший вариант для написания кэшей.</p>
+
+<p class="mt-2">В Java 28 выйдет <a href="https://openjdk.org/jeps/8389764">четвёртое preview</a> ленивых констант.</p>
+
+<h5><a href="https://openjdk.org/jeps/533">Structured Concurrency (Seventh Preview) (JEP 533)</a></h5>
+<p>Structured Concurrency, которое было в режиме preview в <a href="https://openjdk.org/jeps/453">Java 21</a>, <a href="https://openjdk.org/jeps/462">Java 22</a>, <a href="https://openjdk.org/jeps/480">Java 23</a>, <a href="https://openjdk.org/jeps/499">Java 24</a>, <a href="https://openjdk.org/jeps/505">Java 25</a> и <a href="https://openjdk.org/jeps/525">Java 26</a>, остаётся в режиме preview в седьмой раз.</p>
+<p>В этом релизе есть изменения API:</p>
+<ul>
+  <li>У интерфейсов <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html"><code class="text-nowrap">Joiner</code></a> появился ещё один параметр <code class="text-nowrap">R_X</code> для типа исключения, который метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"><code class="text-nowrap">join()</code></a> может выбросить.</li>
+  <li>Появилась новая перегрузка статического метода <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#open(java.util.function.UnaryOperator)"><code class="text-nowrap">StructuredTaskScope::open</code></a> с одним параметром <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/function/UnaryOperator.html"><code class="text-nowrap">UnaryOperator</code></a> (до этого была только версия метода с двумя параметрами: <code class="text-nowrap">Joiner</code> и <code class="text-nowrap">UnaryOperator</code>).</li>
+  <li>Методы <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#allSuccessfulOrThrow()"><code class="text-nowrap">Joiner::allSuccessfulOrThrow</code></a>, <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#anySuccessfulOrThrow()"><code class="text-nowrap">Joiner::anySuccessfulOrThrow</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAllSuccessfulOrThrow()"><code class="text-nowrap">Joiner::awaitAllSuccessfulOrThrow</code></a> теперь создают <code class="text-nowrap">Joiner</code>'ы, которые выбрасывают <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/ExecutionException.html"><code class="text-nowrap">ExecutionException</code></a> в случае исключения. Также к ним добавились перегрузки, принимающие
+    <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/function/Function.html"><code class="text-nowrap">Function</code></a>, которые позволяют указать другой тип исключения.</li>
+  <li>Статический метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAll()"><code class="text-nowrap">Joiner::awaitAll</code></a> был удалён.</li>
+  <li><code class="text-nowrap">void</code> метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#onTimeout()"><code class="text-nowrap">Joiner::onTimeout</code></a> был заменён на метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#timeout()"><code class="text-nowrap">Joiner:timeout</code></a>, который позволяет указать результат в случае таймаута.</li>
+</ul>
+
+<p>Напомним, что Structured Concurrency &ndash; это подход многопоточного программирования, который заимствует принципы из однопоточного структурного программирования. Главная идея такого подхода заключается в следующем: если задача расщепляется на несколько конкурентных подзадач, то эти подзадачи воссоединяются в блоке кода главной задачи. Все подзадачи логически сгруппированы и организованы в иерархию. Каждая подзадача ограничена по времени жизни областью видимости блока кода главной задачи.</p>
+
+<p>В центре нового API класс <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html"><code class="text-nowrap">StructuredTaskScope</code></a>, у которого есть два главных метода:</p>
+<ul>
+  <li><a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#fork(java.util.concurrent.Callable)"><code class="text-nowrap">fork()</code></a> &ndash; создаёт подзадачу и запускает её в новом виртуальном потоке,</li>
+  <li><a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#join()"><code class="text-nowrap">join()</code></a> &ndash; ждёт, пока не завершатся все подзадачи или пока scope не будет <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()">закрыт</a>.</li>
+</ul>
+
+<p>Пример использования <code class="text-nowrap">StructuredTaskScope</code>, где показана задача, которая параллельно запускает две подзадачи и дожидается результата их выполнения:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
+<span style="color: blue">try</span> (<span style="color: blue">var</span> scope = StructuredTaskScope.open()) {
+    Subtask&lt;String> user = scope.fork(() -> findUser());
+    Subtask&lt;Integer> order = scope.fork(() -> fetchOrder());
+
+    scope.join(); <span style="color: green">// Join subtasks, propagating exceptions</span>
+
+    <span style="color: green">// Both subtasks have succeeded, so compose their results</span>
+    <span style="color: blue">return new</span> Response(user.get(), order.get());
+}</pre>
+
+<p>Может показаться, что в точности аналогичный код можно было бы написать с использованием классического <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/ExecutorService.html"><code class="text-nowrap">ExecutorService</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)"><code class="text-nowrap">submit()</code></a>, но у <code class="text-nowrap">StructuredTaskScope</code> есть несколько принципиальных отличий, которые делают код безопаснее:</p>
+<ul>
+  <li>Время жизни всех потоков подзадач ограничено областью видимости блока <code class="text-nowrap">try-with-resources</code>. Метод <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html#close()"><code class="text-nowrap">close()</code></a> гарантированно не завершится, пока не завершатся все подзадачи.</li>
+  <li>Если одна из операций <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> завершается ошибкой, то другая операция отменяется автоматически, если ещё не завершена (в случае использования дефолтного <code class="text-nowrap">Joiner</code>'а <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/concurrent/StructuredTaskScope.Joiner.html#awaitAllSuccessfulOrThrow()"><code class="text-nowrap">awaitAllSuccessfulOrThrow()</code></a>, но возможны другие с другим поведением).</li>
+  <li>Если главный поток прерывается в процессе ожидания <code class="text-nowrap">join()</code>, то обе операции <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code> отменяются при выходе из блока.</li>
+  <li>В дампе потоков будет видна иерархия: потоки, выполняющие <code class="text-nowrap">findUser()</code> и <code class="text-nowrap">fetchOrder()</code>, будут отображаться как дочерние для главного потока.</li>
+</ul>
+<p class="mt-2">Structured Concurrency должно облегчить написание безопасных многопоточных программ благодаря знакомому структурному подходу.</p>
+
+<p>В Java 28 Structured Concurrency <a href="https://openjdk.org/jeps/543">станет</a> постоянным API.</p>
+
+<h5><a href="https://openjdk.org/jeps/534">Compact Object Headers by Default (JEP 534)</a></h5>
+<p>Компактные заголовки объектов, которые <a href="https://openjdk.org/jeps/519">появились в Java 25</a> (в Java 24 &ndash; <a href="https://openjdk.org/jeps/450">в экспериментальном режиме</a>), теперь включены по умолчанию. Таким образом, опция <code class="text-nowrap">-XX:+UseCompactObjectHeaders</code> больше не нужна. Также компактные заголовки можно выключить, если запустить Java с противоположным ключом:</p>
+<pre class="border p-lg-2 p-1">$ java -XX:-UseCompactObjectHeaders ...</pre>
+
+<p>Компактные заголовки являются результатом работы в проекте <a href="https://openjdk.org/projects/lilliput/">Lilliput</a>. Теперь размер заголовков объектов в JVM уменьшился с 96/128 бит до 64 бит на 64-битных платформах. Компактные заголовки не только уменьшают размер кучи, но и могут улучшить производительность благодаря более высокой скорости выделения новых объектов, более низкой нагрузки на GC и лучшей локальности данных.</p>
+
+<p>Сжатие заголовков достигается за счёт объединения mark-слова (64 бит) и class-слова (64 или 32 бит, если включены сжатые указатели на классы) в одно 64-битное слово. В новой схеме указатели на классы всегда являются сжатыми, и количество бит для них уменьшается с 32 до 22. Identity хеш-код остаётся неизменным: 31 бит. Количество тег-битов становится на один больше (для GC self forwarding). Битов для возраста GC остаётся 4, как и было. Также 4 бита резервируются для <a href="https://openjdk.org/projects/valhalla/">Valhalla</a>.</p>
+
+<p>Работа в проекте Lilliput не закончена. В дальнейшем возможно ещё большое сжатие заголовков до 32 бит, что сократит потребление памяти ещё больше.</p>
+
+<h5><a href="https://openjdk.org/jeps/523">Make G1 the Default Garbage Collector in All Environments (JEP 523)</a></h5>
+<p>Сборщик мусора G1 стал включен по умолчанию во всех окружениях.</p>
+<p>Ранее в окружениях с одним процессором или небольшим количеством оперативной памяти (< 1792 MB) автоматически включался Serial GC. Так было потому, что в таких условиях Serial GC имел преимущества в пропускной способности и количеству потребляемой памяти. Однако за последние годы G1 достиг хорошего уровня производительности, поэтому такое переключение уже практически не имеет смысла.</p>
+<p>Если в вашем конкретном случае сборщик мусора Serial GC всё ещё имеет лучшую производительность, то его можно включить с помощью ключа <code class="text-nowrap">-XX:+UseSerialGC</code>.</p>
+
+<h5><a href="https://openjdk.org/jeps/536">JFR In-Process Data Redaction (JEP 536)</a></h5>
+<p>В JDK Flight Recorder появилась возможность редактирования чувствительных данных, чтобы они не попадали в итоговые файлы записи в открытом виде. К таким данным относятся пароли, токены, секретные ключи и прочие подобные конфиденциальные данные.</p>
+<p>Редактировать можно три вида атрибутов: аргументы командной строки, переменные окружения и системные свойства. Для возможности указания конкретных атрибутов для редактирования, появились две новые подопции у опции <code class="text-nowrap">-XX:FlightRecorderOptions</code>: <code class="text-nowrap">redact-argument</code> (для аргументов командной строки) и <code class="text-nowrap">redact-key</code> (для переменных окружения и системных свойств).</p>
+<p>Например, вот так может выглядеть запуск JFR, если нужно отредактировать переменные и свойства с именем <code class="text-nowrap">confidential</code> или <code class="text-nowrap">CONFIDENTIAL</code>, а также URL, содержащие имя пользователя и пароль:</p>
+<pre class="border p-lg-2 p-1">$ export CONFIDENTIAL=SOME_SECRET
+$ java -XX:FlightRecorderOptions:'redact-key=confidential,redact-argument=https://*:*@*' \
+       -XX:StartFlightRecording:filename=dump.jfr \
+       -Dconfidential=ANOTHER_SECRET \
+       -jar application.jar https://john:YET_ANOTHER_SECRET@example.com/login --verbose</pre>
+<p>После запуска в файле JFR чувствительные данные будут заменяться на <code class="text-nowrap">[REDACTED]</code>, например, событие <code class="text-nowrap">jdk.JVMInformation</code> будет выглядеть так:</p>
+<pre class="border p-lg-2 p-1">jdk.JVMInformation {
+  startTime = 17:39:02.196 (2026-02-15)
+  jvmVersion = "Java HotSpot(TM) 64-Bit Server VM"
+  jvmArguments = "-Dconfidential=[REDACTED]
+   -XX:FlightRecorderOptions:redact-key=confidential,redact-argument=[REDACTED]
+   -XX:StartFlightRecording:filename=dump.jfr"
+  jvmFlags = "N/A"
+  javaArguments = "-jar application.jar [REDACTED] --verbose"
+  jvmStartTime = 17:39:02.050 (2026-02-15)
+  pid = 43671
+}</pre>
+
+<p>Если явно не указать <code class="text-nowrap">redact-argument</code> или <code class="text-nowrap">redact-argument</code>, то используются фильтры по умолчанию. В их список входят распространённые паттерны вроде <code class="text-nowrap">*passwd*</code>, <code class="text-nowrap">*password*</code>, <code class="text-nowrap">*credential*</code>, <code class="text-nowrap">*secret*</code>, <code class="text-nowrap">*token*</code> и другие.</p>
+
+<h5><a href="https://openjdk.org/jeps/538">PEM Encodings of Cryptographic Objects (Third Preview) (JEP 538)</a></h5>
+<p>API для кодирования криптографических объектов в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%87%D1%82%D0%B0_%D1%81_%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D1%81%D0%B5%D0%BA%D1%80%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%D1%8E">формат PEM</a> и декодирования обратно, которое было в preview в <a href="https://openjdk.org/jeps/470">Java 25</a> и <a href="https://openjdk.org/jeps/524">Java 26</a>, остаётся на третье preview.</p>
+<p>В этом релизе есть несколько изменений API</p>
+<ul>
+  <li><a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEM.html"><code class="text-nowrap">PEM</code></a> теперь является обычным классом, а не <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEM.html">записью</a>, и у него появились конструкторы, принимающие Base64 в виде массивов байт.</li>
+  <li>Интерфейс <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/DEREncodable.html"><code class="text-nowrap">DEREncodable</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/BinaryEncodable.html"><code class="text-nowrap">BinaryEncodable</code></a>.</li>
+  <li>Методы <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html#getKey(java.security.Key)"><code class="text-nowrap">EncryptedPrivateKeyInfo::getKey</code></a> и <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/javax/crypto/EncryptedPrivateKeyInfo.html#getKeyPair(java.security.Key)"><code class="text-nowrap">EncryptedPrivateKeyInfo::getKeyPair</code></a>, которые принимали <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/Provider.html"><code class="text-nowrap">Provider</code></a> вторым аргументом, теперь принимают только один аргумент <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/Key.html"><code class="text-nowrap">Key</code></a>.</li>
+  <li>Метод <a href="https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/security/PEMDecoder.html#withFactory(java.security.Provider)"><code class="text-nowrap">PEMDecoder::withFactory</code></a> переименован в <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEMDecoder.html#withFactoriesOf(java.security.Provider)"><code class="text-nowrap">PEMDecoder::withFactoriesOf</code></a>.</li>
+  <li>Появился новый тип исключения <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/javax/crypto/CryptoException.html"><code class="text-nowrap">CryptoException</code></a>.</li>
+</ul>
+
+<p>Напомним, что новое API для кодирования в формат PEM позволяет кодировать самые разные криптографические сущности: открытые ключи, закрытые ключи, сертификаты и т.д.</p>
+
+<p>Вот пример открытого ключа, закодированного в формате PEM:</p>
+<pre class="border p-lg-2 p-1">-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
+cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
+-----END PUBLIC KEY-----</pre>
+<p>Такой ключ можно декодировать с помощью нового класса <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEMDecoder.html"><code class="text-nowrap">java.security.PEMDecoder</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
+PEMDecoder decoder = PEMDecoder.of();
+PublicKey key = (PublicKey) decoder.decode(data);
+IO.println(key);</pre>
+<p>Кодирование происходит с помощью класса <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEMEncoder.html"><code class="text-nowrap">java.security.PEMEncoder</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: green">// --enable-preview --source 27</span>
+PEMEncoder encoder = PEMEncoder.of();
+String data = encoder.encodeToString(key);
+IO.println(data);</pre>
+
+<p>Список всех криптографических объектов, которые можно кодировать/декодировать, лимитирован наследниками нового <code class="text-nowrap">sealed</code> интерфейса <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/BinaryEncodable.html"><code class="text-nowrap">java.security.BinaryEncodable</code></a>:</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">public sealed interface</span> BinaryEncodable <span style="color: blue">permits</span> AsymmetricKey, KeyPair,
+    PKCS8EncodedKeySpec, X509EncodedKeySpec, EncryptedPrivateKeyInfo,
+    X509Certificate, X509CRL, PEM, InternalBinaryEncodable {
+}</pre>
+
+<p>Среди наследников выделяется особенный класс <a href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/security/PEM.html"><code class="text-nowrap">java.security.PEM</code></a>. Этот класс может содержать в себе любые PEM-данные. Он может пригодиться, когда для криптографического объекта в Java нет соответствующего API (например, <a href="https://www.rfc-editor.org/rfc/rfc7468#section-7">запрос сертификата PKCS #10</a>):</p>
+<!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">public final class</span> PEM <span style="color: blue">implements</span> BinaryEncodable {
+    String type();           <span style="color: green">// Cryptographic object type, from the header text</span>
+                             <span style="color: green">// (e.g., "PRIVATE KEY")</span>
+    <span style="color: blue">byte</span>[] content();        <span style="color: green">// Base64-encoded PEM content</span>
+    <span style="color: blue">byte</span>[] leadingData();    <span style="color: green">// Any content preceding the PEM header</span>
+    <span style="color: blue">byte</span>[] decode();         <span style="color: green">// Decode Base64 content</span>
+    ...
+}</pre>
+<!--java--><pre class="border p-lg-2 p-1">PEM pr = PEMDecoder.of().decode(pem, PEM.<span style="color: blue">class</span>);</pre>
+
+<p class="mt-2">В Java 28 PEM Encodings <a href="https://openjdk.org/jeps/542">станут</a> постоянным API.</p>
+
+<h5><a href="https://openjdk.org/jeps/527">Post-Quantum Hybrid Key Exchange for TLS 1.3 (JEP 527)</a></h5>
+<p>В реализации TLS 1.3 в JDK появилась поддержка пост-квантовых <a href="https://www.rfc-editor.org/info/rfc9954/">гибридных схем обмена ключей</a>. Эти схемы комбинируют <a href="https://openjdk.org/jeps/496">ML-KEM</a> с традиционным ECDHE (Ephemeral Elliptic-Curve Diffie-Hellman).</p>
+<p>Всего появилось 3 гибридных схемы:</p>
+<ul>
+  <li>X25519MLKEM768 (комбинация ECDHE c X25519 и ML-KEM-768)</li>
+  <li>SecP256r1MLKEM768 (комбинация ECDHE c кривой secp256r1 и ML-KEM-768)</li>
+  <li>SecP384r1MLKEM1024 (комбинация ECDHE c кривой secp384r1 и ML-KEM-1024)</li>
+</ul>
+
+<p>Для включения новых схем от разработчика ничего не требуется: во время рукопожатия X25519MLKEM768 будет иметь наивысший приоритет и будет использоваться TLS-клиентом, если сервер его поддерживает.</p>
+
+<p>Появление новых пост-квантовых гибридных схем является очередным шагом в поддержке в JDK алгоритмов, устойчивых к потенциальным будущим атакам с помощью квантовых компьютеров. Ранее в Java 24 появилась поддержка <a href="https://openjdk.org/jeps/496">ML-KEM</a> и <a href="https://openjdk.org/jeps/497">ML-DSA</a>.</p>
+
+<h5><a href="https://openjdk.org/jeps/537">Vector API (Twelfth  Incubator) (JEP 537)</a></h5>
+<p>Векторное API в модуле <a href="https://docs.oracle.com/en/java/javase/27/docs/api/jdk.incubator.vector/module-summary.html"><code class="text-nowrap">jdk.incubator.vector</code></a>, которое появилось ещё аж <a href="https://openjdk.org/jeps/338">в Java 16</a>, остаётся в инкубационном статусе в двенадцатый раз.</p>
+
+<p>Векторное API остаётся так долго в инкубаторе, потому что зависит от некоторых фич проекта <a href="https://openjdk.org/projects/valhalla/">Valhalla</a> (главным образом, от <a href="https://openjdk.org/jeps/401">value-классов</a>), который появится только в Java 28. Поэтому вероятно в Java 28 векторное API перейдёт из инкубатора в статус preview.</p>
+  </article>
+  <p class="pt-4 fst-italic">Подписывайтесь на <a href="https://t.me/miniJUG">канал в Telegram</a>, чтобы не пропускать новости.</p>
+</div>
+<div class="pl-4 pt-5 col-lg-4">
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2026" role="button" aria-expanded="true" aria-controls="year2026">2026</a>
+  <ul class="collapse show" id="year2026">
+<li>Вышла Java 27</li>
+<li class="text-secondary"><a href="java_26.html" class="text-secondary">Вышла Java 26</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2025" role="button" aria-expanded="false" aria-controls="year2025">2025</a>
+  <ul class="collapse" id="year2025">
+<li class="text-secondary"><a href="java_25.html" class="text-secondary">Вышла Java 25</a></li>
+<li class="text-secondary"><a href="java_24.html" class="text-secondary">Вышла Java 24</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2024" role="button" aria-expanded="false" aria-controls="year2024">2024</a>
+  <ul class="collapse" id="year2024">
+<li class="text-secondary"><a href="java_23.html" class="text-secondary">Вышла Java 23</a></li>
+<li class="text-secondary"><a href="java_22.html" class="text-secondary">Вышла Java 22</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2023" role="button" aria-expanded="false" aria-controls="year2023">2023</a>
+  <ul class="collapse" id="year2023">
+<li class="text-secondary"><a href="java_21.html" class="text-secondary">Вышла Java 21</a></li>
+<li class="text-secondary"><a href="java_news_57.html" class="text-secondary">Новости Java #57</a></li>
+<li class="text-secondary"><a href="java_news_56.html" class="text-secondary">Новости Java #56</a></li>
+<li class="text-secondary"><a href="java_20.html" class="text-secondary">Вышла Java 20</a></li>
+<li class="text-secondary"><a href="java_news_55.html" class="text-secondary">Новости Java #55</a></li>
+<li class="text-secondary"><a href="java_news_54.html" class="text-secondary">Новости Java #54</a></li>
+<li class="text-secondary"><a href="java_news_53.html" class="text-secondary">Новости Java #53</a></li>
+<li class="text-secondary"><a href="java_news_52.html" class="text-secondary">Новости Java #52</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2022" role="button" aria-expanded="false" aria-controls="year2022">2022</a>
+  <ul class="collapse" id="year2022">
+<li class="text-secondary"><a href="java_news_51.html" class="text-secondary">Новости Java #51</a></li>
+<li class="text-secondary"><a href="java_news_50.html" class="text-secondary">Новости Java #50</a></li>
+<li class="text-secondary"><a href="java_news_49.html" class="text-secondary">Новости Java #49</a></li>
+<li class="text-secondary"><a href="java_news_48.html" class="text-secondary">Новости Java #48</a></li>
+<li class="text-secondary"><a href="java_news_47.html" class="text-secondary">Новости Java #47</a></li>
+<li class="text-secondary"><a href="java_news_46.html" class="text-secondary">Новости Java #46</a></li>
+<li class="text-secondary"><a href="java_news_45.html" class="text-secondary">Новости Java #45</a></li>
+<li class="text-secondary"><a href="java_19.html" class="text-secondary">Вышла Java 19</a></li>
+<li class="text-secondary"><a href="java_news_44.html" class="text-secondary">Новости Java #44</a></li>
+<li class="text-secondary"><a href="java_news_43.html" class="text-secondary">Новости Java #43</a></li>
+<li class="text-secondary"><a href="java_news_42.html" class="text-secondary">Новости Java #42</a></li>
+<li class="text-secondary"><a href="java_news_41.html" class="text-secondary">Новости Java #41</a></li>
+<li class="text-secondary"><a href="java_news_40.html" class="text-secondary">Новости Java #40</a></li>
+<li class="text-secondary"><a href="java_news_39.html" class="text-secondary">Новости Java #39</a></li>
+<li class="text-secondary"><a href="java_news_38.html" class="text-secondary">Новости Java #38</a></li>
+<li class="text-secondary"><a href="java_news_37.html" class="text-secondary">Новости Java #37</a></li>
+<li class="text-secondary"><a href="java_18.html" class="text-secondary">Вышла Java 18</a></li>
+<li class="text-secondary"><a href="java_news_36.html" class="text-secondary">Новости Java #36</a></li>
+<li class="text-secondary"><a href="java_news_35.html" class="text-secondary">Новости Java #35</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2021" role="button" aria-expanded="false" aria-controls="year2021">2021</a>
+  <ul class="collapse" id="year2021">
+<li class="text-secondary"><a href="java_news_34.html" class="text-secondary">Новости Java #34</a></li>
+<li class="text-secondary"><a href="java_news_33.html" class="text-secondary">Новости Java #33</a></li>
+<li class="text-secondary"><a href="java_news_32.html" class="text-secondary">Новости Java #32</a></li>
+<li class="text-secondary"><a href="java_news_31.html" class="text-secondary">Новости Java #31</a></li>
+<li class="text-secondary"><a href="java_news_30.html" class="text-secondary">Новости Java #30</a></li>
+<li class="text-secondary"><a href="java_news_29.html" class="text-secondary">Новости Java #29</a></li>
+<li class="text-secondary"><a href="java_news_28.html" class="text-secondary">Новости Java #28</a></li>
+<li class="text-secondary"><a href="java_17.html" class="text-secondary">Вышла Java 17</a></li>
+<li class="text-secondary"><a href="java_news_27.html" class="text-secondary">Новости Java #27</a></li>
+<li class="text-secondary"><a href="java_news_26.html" class="text-secondary">Новости Java #26</a></li>
+<li class="text-secondary"><a href="java_news_25.html" class="text-secondary">Новости Java #25</a></li>
+<li class="text-secondary"><a href="java_news_24.html" class="text-secondary">Новости Java #24</a></li>
+<li class="text-secondary"><a href="java_news_23.html" class="text-secondary">Новости Java #23</a></li>
+<li class="text-secondary"><a href="java_news_22.html" class="text-secondary">Новости Java #22</a></li>
+<li class="text-secondary"><a href="java_news_21.html" class="text-secondary">Новости Java #21</a></li>
+<li class="text-secondary"><a href="java_news_20.html" class="text-secondary">Новости Java #20</a></li>
+<li class="text-secondary"><a href="java_news_19.html" class="text-secondary">Новости Java #19</a></li>
+<li class="text-secondary"><a href="java_news_18.html" class="text-secondary">Новости Java #18</a></li>
+<li class="text-secondary"><a href="java_news_17.html" class="text-secondary">Новости Java #17</a></li>
+<li class="text-secondary"><a href="java_news_16.html" class="text-secondary">Новости Java #16</a></li>
+<li class="text-secondary"><a href="java_news_15.html" class="text-secondary">Новости Java #15</a></li>
+<li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_3.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 3</a></li>
+<li class="text-secondary"><a href="java_news_14.html" class="text-secondary">Новости Java #14</a></li>
+<li class="text-secondary"><a href="java_news_13.html" class="text-secondary">Новости Java #13</a></li>
+<li class="text-secondary"><a href="java_news_12.html" class="text-secondary">Новости Java #12</a></li>
+<li class="text-secondary"><a href="java_news_11.html" class="text-secondary">Новости Java #11</a></li>
+<li class="text-secondary"><a href="java_16.html" class="text-secondary">Вышла Java 16</a></li>
+<li class="text-secondary"><a href="java_news_10.html" class="text-secondary">Новости Java #10</a></li>
+<li class="text-secondary"><a href="java_news_9.html" class="text-secondary">Новости Java #9</a></li>
+<li class="text-secondary"><a href="java_news_8.html" class="text-secondary">Новости Java #8</a></li>
+<li class="text-secondary"><a href="java_news_7.html" class="text-secondary">Новости Java #7</a></li>
+<li class="text-secondary"><a href="java_news_6.html" class="text-secondary">Новости Java #6</a></li>
+<li class="text-secondary"><a href="java_news_5.html" class="text-secondary">Новости Java #5</a></li>
+<li class="text-secondary"><a href="java_news_4.html" class="text-secondary">Новости Java #4</a></li>
+<li class="text-secondary"><a href="java_news_3.html" class="text-secondary">Новости Java #3</a></li>
+<li class="text-secondary"><a href="java_news_2.html" class="text-secondary">Новости Java #2</a></li>
+<li class="text-secondary"><a href="java_news_1.html" class="text-secondary">Новости Java #1</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2020" role="button" aria-expanded="false" aria-controls="year2020">2020</a>
+  <ul class="collapse" id="year2020">
+<li class="text-secondary"><a href="java_15_is_out.html" class="text-secondary">Вышла Java 15</a></li>
+<li class="text-secondary"><a href="trying_sealed_classes_in_java_15.html" class="text-secondary">Исследуем <code>sealed</code> классы в Java 15</a></li>
+<li class="text-secondary"><a href="java_celebrates_25_years.html" class="text-secondary">Java исполняется 25 лет</a></li>
+<li class="text-secondary"><a href="local_interfaces_and_enums.html" class="text-secondary">В Java можно будет объявлять локальные интерфейсы и перечисления</a></li>
+<li class="text-secondary"><a href="deconstruction_patterns.html" class="text-secondary">В Java появятся паттерны деконструкции</a></li>
+<li class="text-secondary"><a href="java_14_is_out.html" class="text-secondary">Вышла Java 14</a></li>
+<li class="text-secondary"><a href="remove_nashorn.html" class="text-secondary">Из Java исчезнет Nashorn</a></li>
+<li class="text-secondary"><a href="api_to_upgrade_from_java_8_part_2.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 2</a></li>
+<li class="text-secondary"><a href="api_to_upgrade_from_java_8.html" class="text-secondary">API, ради которых наконец-то стоит обновиться с Java 8. Часть 1</a></li>
+<li class="text-secondary"><a href="hidden_classes.html" class="text-secondary">В Java появятся скрытые классы</a></li>
+<li class="text-secondary"><a href="introducing_minijug_website.html" class="text-secondary">У miniJUG появился сайт</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2019" role="button" aria-expanded="false" aria-controls="year2019">2019</a>
+  <ul class="collapse" id="year2019">
+<li class="text-secondary"><a href="trying_records_in_java14.html" class="text-secondary">Исследуем записи в Java 14</a></li>
+<li class="text-secondary"><a href="trying_new_instanceof_in_java_14.html" class="text-secondary">Пробуем улучшенный оператор <code>instanceof</code> в Java 14</a></li>
+<li class="text-secondary"><a href="java_13_is_out.html" class="text-secondary">Вышла Java 13</a></li>
+<li class="text-secondary"><a href="escape_sequences_for_line_continuation_and_whitespace.html" class="text-secondary">В Java появятся две новые экранирующие последовательности для продолжения строки и пробела</a></li>
+<li class="text-secondary"><a href="towards_better_serialization.html" class="text-secondary">В Java может появиться новая сериализация</a></li>
+<li class="text-secondary"><a href="scala_2_13_is_out.html" class="text-secondary">Вышла Scala 2.13</a></li>
+<li class="text-secondary"><a href="yield_in_switch.html" class="text-secondary">В <code>switch</code>-выражениях <code>break</code> будет заменён на <code>yield</code></a></li>
+<li class="text-secondary"><a href="text_blocks.html" class="text-secondary">В Java появятся блоки текста</a></li>
+<li class="text-secondary"><a href="records_and_sealed_types.html" class="text-secondary">В Java появятся записи и запечатанные типы</a></li>
+<li class="text-secondary"><a href="java_is_dead.html" class="text-secondary">Oracle прекращает поддержку Java</a></li>
+<li class="text-secondary"><a href="npe_detailed_messages.html" class="text-secondary">В Java у <code>NullPointerException</code> могут появиться детальные сообщения</a></li>
+<li class="text-secondary"><a href="java_12_is_out.html" class="text-secondary">Вышла Java 12</a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2018" role="button" aria-expanded="false" aria-controls="year2018">2018</a>
+  <ul class="collapse" id="year2018">
+<li class="text-secondary"><a href="java_11_is_out.html" class="text-secondary">Вышла Java 11</a></li>
+<li class="text-secondary"><a href="concise_method_bodies.html" class="text-secondary">В Java появятся компактные тела методов</a></li>
+<li class="text-secondary"><a href="java_10_is_out.html" class="text-secondary">Вышла Java 10</a></li>
+<li class="text-secondary"><a href="no_more_free_oracle_jdk.html" class="text-secondary">Oracle JDK станет платным</a></li>
+<li class="text-secondary"><a href="launch_single_file_source_code_programs.html" class="text-secondary">В Java можно будет исполнять исходные файлы напрямую</a></li>
+<li class="text-secondary"><a href="raw_string_literals.html" class="text-secondary">В Java могут появиться сырые строковые литералы, и какие проблемы это может принести</a></li>
+<li class="text-secondary"><a href="unmodifiable_collections_enhancements_in_java_10.html" class="text-secondary">В Java 10 будет улучшена поддержка неизменяемых коллекций</a></li>
+<li class="text-secondary"><a href="switch_expressions.html" class="text-secondary"><code>switch</code> в Java сможет возвращать значения</a></li>
+<li class="text-secondary"><a href="code_before_this_super.html" class="text-secondary">В конструкторах классов можно будет писать код перед <code>this()</code> и <code>super()</code></a></li>
+  </ul>
+</div>
+<div class="mt-3">
+  <a class="dropdown-toggle text-body" data-bs-toggle="collapse" href="#year2017" role="button" aria-expanded="false" aria-controls="year2017">2017</a>
+  <ul class="collapse" id="year2017">
+<li class="text-secondary"><a href="var_in_lambdas.html" class="text-secondary">В лямбдах можно будет использовать <code>var</code></a></li>
+<li class="text-secondary"><a href="http_client.html" class="text-secondary">В Java появится стандартный HTTP-клиент</a></li>
+<li class="text-secondary"><a href="nestmates.html" class="text-secondary">В Java исчезнет необходимость в генерации синтетических методов доступа между вложенными типами</a></li>
+<li class="text-secondary"><a href="remove_java_ee_and_corba_modules.html" class="text-secondary">Модули Java EE и CORBA исчезнут из Java</a></li>
+<li class="text-secondary"><a href="kotlin_1_2_is_out.html" class="text-secondary">Вышел Kotlin 1.2</a></li>
+<li class="text-secondary"><a href="epsilon_gc.html" class="text-secondary">В Java появится сборщик мусора, который не будет собирать мусор</a></li>
+<li class="text-secondary"><a href="java_10_release_date.html" class="text-secondary">Стала известна дата выхода Java 10</a></li>
+<li class="text-secondary"><a href="pattern_matching.html" class="text-secondary">В Java появится паттерн-матчинг</a></li>
+<li class="text-secondary"><a href="yegor256_data_classes.html" class="text-secondary">Егор Бугаенко раскритиковал идею введения data-классов в Java</a></li>
+<li class="text-secondary"><a href="new_integer_is_deprecated.html" class="text-secondary">Конструкторы Integer, Long, Float, Double, Boolean, Byte, Short, Character стали deprecated в Java 9</a></li>
+<li class="text-secondary"><a href="jdk_10_early_access.html" class="text-secondary">Ранние сборки JDK 10 уже доступны для скачивания</a></li>
+<li class="text-secondary"><a href="data_classes.html" class="text-secondary">В Java появятся data-классы</a></li>
+<li class="text-secondary"><a href="new_java_version_proposal.html" class="text-secondary">Java всё-таки не будет версионироваться годом и месяцем выхода релизов</a></li>
+<li class="text-secondary"><a href="java_18_3.html" class="text-secondary">Java переходит на 6-месячный релизный цикл и меняет схему версионирования</a></li>
+<li class="text-secondary"><a href="project_loom.html" class="text-secondary">В Java появятся легковесные нити и корутины</a></li>
+<li class="text-secondary"><a href="zgc.html" class="text-secondary">В Oracle разрабатывают новый сборщик мусора ZGC</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+</div>
+<div class="container d-md-flex flex-row">
+  <div class="p-lg-4 p-3 text-secondary">Все материалы на этом сайте выложены под лицензией <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+  <div class="p-lg-4 p-3 text-secondary">&copy; <a href="https://twitter.com/mini_JUG">Евгений Козлов</a>, 2017-2026</div>
+  <div class="p-lg-4 p-3 text-secondary"><img src="feed.svg" style="height: 1em"/> <a href="https://minijug.org/feed.xml">Feed</a></div>
+  <div class="p-lg-4 p-3 text-secondary"><a href="jeps.html">Table of JEPs</a></div>
+</div>
+    <script src="bootstrap.bundle.min.js"></script>
+    <script></script>
+  </body>
+</html>
