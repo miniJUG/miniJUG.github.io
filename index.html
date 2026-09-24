@@ -59,25 +59,25 @@
 
 Object obj = 42;
 <span style="color: blue">if</span> (obj <span style="color: blue">instanceof int</span> i) { <span style="color: green">// matches</span>
-    System.out.println(<span style="color: darkred">"int: "</span> + i);
+    IO.println(<span style="color: darkred">"int: "</span> + i);
 }
 
 <span style="color: blue">switch</span> (obj) {
-    <span style="color: blue">case int</span> i -> System.out.println(<span style="color: darkred">"int: "</span> + i); <span style="color: green">// matches</span>
-    <span style="color: blue">case double</span> d -> System.out.println(<span style="color: darkred">"double: "</span> + d);
-    <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"other"</span>);
+    <span style="color: blue">case int</span> i -> IO.println(<span style="color: darkred">"int: "</span> + i); <span style="color: green">// matches</span>
+    <span style="color: blue">case double</span> d -> IO.println(<span style="color: darkred">"double: "</span> + d);
+    <span style="color: blue">default</span> -> IO.println(<span style="color: darkred">"other"</span>);
 }</pre>
 
 <p>Проверять можно также и то, попадают ли значения в диапазон типа:</p>
 <!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">int</span> i = 42;
 <span style="color: blue">if</span> (i <span style="color: blue">instanceof byte</span> b) { <span style="color: green">// matches</span>
-    System.out.println(<span style="color: darkred">"byte: "</span> + b);
+    IO.println(<span style="color: darkred">"byte: "</span> + b);
 }</pre>
 <!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">double</span> d = 3.0;
 <span style="color: blue">switch</span> (d) {
-    <span style="color: blue">case int</span> i -> System.out.println(<span style="color: darkred">"int: "</span> + i); <span style="color: green">// matches</span>
-    <span style="color: blue">case float</span> f -> System.out.println(<span style="color: darkred">"float: "</span> + f);
-    <span style="color: blue">default</span> -> System.out.println(<span style="color: darkred">"other"</span>);
+    <span style="color: blue">case int</span> i -> IO.println(<span style="color: darkred">"int: "</span> + i); <span style="color: green">// matches</span>
+    <span style="color: blue">case float</span> f -> IO.println(<span style="color: darkred">"float: "</span> + f);
+    <span style="color: blue">default</span> -> IO.println(<span style="color: darkred">"other"</span>);
 }</pre>
 
 <p>В примерах выше <code class="text-nowrap">42</code> попадает в диапазон byte (<code class="text-nowrap">[-128; 127]</code>), а <code class="text-nowrap">3.0</code> без потери точности приводится к <code class="text-nowrap">int</code>. Таким образом, это позволит более безопасно приводить одни числовые типы к другим, не прибегая к ручным проверкам диапазонов.</p>
@@ -93,15 +93,15 @@ Object obj = 42;
 <p>Если до Java 23-27 типы выражений-селекторов в <code class="text-nowrap">switch</code> могли быть только <code class="text-nowrap">int</code>, <code class="text-nowrap">short</code>, <code class="text-nowrap">byte</code> и <code class="text-nowrap">char</code> и для них поддерживались только константные ветки (<code class="text-nowrap">case 3</code> и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:</p>
 <!--java--><pre class="border p-lg-2 p-1"><span style="color: blue">float</span> f = 1.0f;
 <span style="color: blue">switch</span> (f) {
-    <span style="color: blue">case</span> 0f -> System.out.println(<span style="color: darkred">"0"</span>);
-    <span style="color: blue">case float</span> x <span style="color: blue">when</span> x == 1f -> System.out.println(<span style="color: darkred">"1"</span>); <span style="color: green">// matches</span>
-    <span style="color: blue">case float</span> x -> System.out.println(<span style="color: darkred">"other"</span>);
+    <span style="color: blue">case</span> 0f -> IO.println(<span style="color: darkred">"0"</span>);
+    <span style="color: blue">case float</span> x <span style="color: blue">when</span> x == 1f -> IO.println(<span style="color: darkred">"1"</span>); <span style="color: green">// matches</span>
+    <span style="color: blue">case float</span> x -> IO.println(<span style="color: darkred">"other"</span>);
 }
 
 <span style="color: blue">boolean</span> b = <span style="color: darkred">"hello"</span>.isEmpty();
 <span style="color: blue">switch</span> (b) {
-    <span style="color: blue">case true</span> -> System.out.println(<span style="color: darkred">"empty"</span>);
-    <span style="color: blue">case false</span> -> System.out.println(<span style="color: darkred">"non-empty"</span>); <span style="color: green">// matches</span>
+    <span style="color: blue">case true</span> -> IO.println(<span style="color: darkred">"empty"</span>);
+    <span style="color: blue">case false</span> -> IO.println(<span style="color: darkred">"non-empty"</span>); <span style="color: green">// matches</span>
 }</pre>
 
 <h5><a href="https://openjdk.org/jeps/531">Lazy Constants (Third Preview) (JEP 531)</a></h5>

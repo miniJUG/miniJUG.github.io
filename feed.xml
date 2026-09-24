@@ -34,25 +34,25 @@
 
 Object obj = 42;
 &lt;span style="color: blue"&gt;if&lt;/span&gt; (obj &lt;span style="color: blue"&gt;instanceof int&lt;/span&gt; i) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
-    System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i);
+    IO.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i);
 }
 
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (obj) {
-    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case double&lt;/span&gt; d -&gt; System.out.println(&lt;span style="color: darkred"&gt;"double: "&lt;/span&gt; + d);
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; IO.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case double&lt;/span&gt; d -&gt; IO.println(&lt;span style="color: darkred"&gt;"double: "&lt;/span&gt; + d);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; IO.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
 }&lt;/pre&gt;
 
 &lt;p&gt;Проверять можно также и то, попадают ли значения в диапазон типа:&lt;/p&gt;
 &lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;int&lt;/span&gt; i = 42;
 &lt;span style="color: blue"&gt;if&lt;/span&gt; (i &lt;span style="color: blue"&gt;instanceof byte&lt;/span&gt; b) { &lt;span style="color: green"&gt;// matches&lt;/span&gt;
-    System.out.println(&lt;span style="color: darkred"&gt;"byte: "&lt;/span&gt; + b);
+    IO.println(&lt;span style="color: darkred"&gt;"byte: "&lt;/span&gt; + b);
 }&lt;/pre&gt;
 &lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;double&lt;/span&gt; d = 3.0;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (d) {
-    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; System.out.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case float&lt;/span&gt; f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"float: "&lt;/span&gt; + f);
-    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case int&lt;/span&gt; i -&gt; IO.println(&lt;span style="color: darkred"&gt;"int: "&lt;/span&gt; + i); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; f -&gt; IO.println(&lt;span style="color: darkred"&gt;"float: "&lt;/span&gt; + f);
+    &lt;span style="color: blue"&gt;default&lt;/span&gt; -&gt; IO.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
 }&lt;/pre&gt;
 
 &lt;p&gt;В примерах выше &lt;code&gt;42&lt;/code&gt; попадает в диапазон byte (&lt;code&gt;[-128; 127]&lt;/code&gt;), а &lt;code&gt;3.0&lt;/code&gt; без потери точности приводится к &lt;code&gt;int&lt;/code&gt;. Таким образом, это позволит более безопасно приводить одни числовые типы к другим, не прибегая к ручным проверкам диапазонов.&lt;/p&gt;
@@ -68,15 +68,15 @@ Object obj = 42;
 &lt;p&gt;Если до Java 23-27 типы выражений-селекторов в &lt;code&gt;switch&lt;/code&gt; могли быть только &lt;code&gt;int&lt;/code&gt;, &lt;code&gt;short&lt;/code&gt;, &lt;code&gt;byte&lt;/code&gt; и &lt;code&gt;char&lt;/code&gt; и для них поддерживались только константные ветки (&lt;code&gt;case 3&lt;/code&gt; и т.п.), то сейчас поддерживаются все примитивные типы и ветки могут быть паттернами:&lt;/p&gt;
 &lt;!--java--&gt;&lt;pre&gt;&lt;span style="color: blue"&gt;float&lt;/span&gt; f = 1.0f;
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (f) {
-    &lt;span style="color: blue"&gt;case&lt;/span&gt; 0f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"0"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x &lt;span style="color: blue"&gt;when&lt;/span&gt; x == 1f -&gt; System.out.println(&lt;span style="color: darkred"&gt;"1"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
-    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x -&gt; System.out.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case&lt;/span&gt; 0f -&gt; IO.println(&lt;span style="color: darkred"&gt;"0"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x &lt;span style="color: blue"&gt;when&lt;/span&gt; x == 1f -&gt; IO.println(&lt;span style="color: darkred"&gt;"1"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case float&lt;/span&gt; x -&gt; IO.println(&lt;span style="color: darkred"&gt;"other"&lt;/span&gt;);
 }
 
 &lt;span style="color: blue"&gt;boolean&lt;/span&gt; b = &lt;span style="color: darkred"&gt;"hello"&lt;/span&gt;.isEmpty();
 &lt;span style="color: blue"&gt;switch&lt;/span&gt; (b) {
-    &lt;span style="color: blue"&gt;case true&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"empty"&lt;/span&gt;);
-    &lt;span style="color: blue"&gt;case false&lt;/span&gt; -&gt; System.out.println(&lt;span style="color: darkred"&gt;"non-empty"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
+    &lt;span style="color: blue"&gt;case true&lt;/span&gt; -&gt; IO.println(&lt;span style="color: darkred"&gt;"empty"&lt;/span&gt;);
+    &lt;span style="color: blue"&gt;case false&lt;/span&gt; -&gt; IO.println(&lt;span style="color: darkred"&gt;"non-empty"&lt;/span&gt;); &lt;span style="color: green"&gt;// matches&lt;/span&gt;
 }&lt;/pre&gt;
 
 &lt;h5&gt;&lt;a href="https://openjdk.org/jeps/531"&gt;Lazy Constants (Third Preview) (JEP 531)&lt;/a&gt;&lt;/h5&gt;
